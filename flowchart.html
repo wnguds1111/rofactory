@@ -81,11 +81,95 @@
             <a href="index.html" class="btn-home">🏠 포털 홈으로</a>
         </div>
 
-
-
-        <!-- FLOW 1: Transaction -->
+        <!-- FLOW 1: Registration -->
         <div class="section">
-            <div class="section-title">FLOW 1 — 마켓 거래 및 정산 <span class="tag">Transaction</span></div>
+            <div class="section-title">FLOW 1 — 작품 등록</div>
+            <div class="flow-row">
+                <div class="node">
+                    <div class="label">STEP 01</div>
+                    <div class="text">UGC 편집툴</div>
+                    <div class="sub">.foot 파일 제작 · 추출</div>
+                </div>
+                <div class="arrow"><span class="lbl"></span>→</div>
+                <div class="node">
+                    <div class="label">STEP 02</div>
+                    <div class="text">웹 로그인</div>
+                    <div class="sub">GNJOY 계정 접속</div>
+                </div>
+                <div class="arrow"><span class="lbl"></span>→</div>
+                <div class="node">
+                    <div class="label">STEP 03</div>
+                    <div class="text">작품 등록 (4-Step)</div>
+                    <div class="sub">에셋 + 정보 + 약관동의</div>
+                </div>
+                <div class="arrow"><span class="lbl">POST</span>→</div>
+                <div class="node">
+                    <div class="label">STEP 04</div>
+                    <div class="text">DB · 파일 저장</div>
+                    <div class="sub">메타데이터 + 에셋 업로드</div>
+                </div>
+                <div class="arrow"><span class="lbl"></span>→</div>
+                <div class="node dashed">
+                    <div class="label">STEP 05</div>
+                    <div class="text">변환 대기</div>
+                    <div class="sub">대기열 자동 진입</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLOW 2: Conversion -->
+        <div class="section">
+            <div class="section-title">FLOW 2 — 어드민 변환 처리</div>
+            <div style="display:flex; flex-direction:column; align-items:center;">
+                <div class="node" style="min-width:220px;">
+                    <div class="label">STEP 01</div>
+                    <div class="text">변환 대기열</div>
+                    <div class="sub">작품 관리 리스트</div>
+                </div>
+                <div class="arrow-down">↓ <span class="lbl">어드민 검수</span></div>
+                <div class="node" style="min-width:220px;">
+                    <div class="label">STEP 02</div>
+                    <div class="text">변환 판정</div>
+                    <div class="sub">승인 또는 거절 결정</div>
+                </div>
+                <div class="arrow-down">↓</div>
+
+                <div class="branch">
+                    <div class="branch-col">
+                        <div class="branch-label">승인</div>
+                        <div class="node" style="min-width:180px;">
+                            <div class="label">A1</div>
+                            <div class="text">변환 완료</div>
+                            <div class="sub">출시일 설정 · 서버 배포</div>
+                        </div>
+                        <div class="arrow-down">↓</div>
+                        <div class="node" style="min-width:180px;">
+                            <div class="label">A2</div>
+                            <div class="text">판매 진행</div>
+                            <div class="sub">마켓 즉각 노출</div>
+                        </div>
+                    </div>
+                    <div class="branch-col">
+                        <div class="branch-label">거절</div>
+                        <div class="node dashed" style="min-width:180px;">
+                            <div class="label">B1</div>
+                            <div class="text">변환 실패</div>
+                            <div class="sub">거절 사유 유저 노출</div>
+                        </div>
+                        <div class="arrow-down">↓</div>
+                        <div class="node" style="min-width:180px;">
+                            <div class="label">B2</div>
+                            <div class="text">유저 수정 후 재등록</div>
+                            <div class="sub">마이스튜디오에서 수정</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLOW 3: Transaction -->
+        <div class="section">
+            <div class="section-title">FLOW 3 — 마켓 거래 및 정산 <span class="tag">Transaction</span></div>
             <div class="flow-row">
                 <div class="node">
                     <div class="label">STEP 01</div>
@@ -135,9 +219,9 @@
             </div>
         </div>
 
-        <!-- FLOW 2: Lifecycle -->
+        <!-- FLOW 4: Lifecycle -->
         <div class="section">
-            <div class="section-title">FLOW 2 — 만료 및 페널티 <span class="tag">Lifecycle</span></div>
+            <div class="section-title">FLOW 4 — 만료 및 페널티 <span class="tag">Lifecycle</span></div>
             <div class="flow-row">
                 <div class="node">
                     <div class="label">STEP 01</div>
