@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RO FACTORY 웹기획Unit 이주형 작성 - 작품 변환 대기열 관리, 만료, 판매 작품 상태 변경을 관리하는 통합 백오피스입니다.">
+    <title>RO Factory Admin | 작품 관리</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <!-- Outer Nav (Blue) -->
+    <nav class="nav-outer">
+        <a href="#" class="nav-outer-btn"><span class="icon">👤</span>MEM</a>
+        <a href="#" class="nav-outer-btn active"><span class="icon">🌐</span>WEB</a>
+        <a href="#" class="nav-outer-btn"><span class="icon">⚙️</span>SET</a>
+    </nav>
+    
+    <!-- Inner Nav (Light Grey) -->
+    <nav class="nav-inner">
+        <div class="brand-header">
+            <span class="brand-logo">GRAVITY<span>Admin Tools</span></span> 
+            <span class="brand-lang">| 🌐 KO ▾</span>
+        </div>
+        
+        <div class="user-section">
+            TEST <button class="btn-logout">로그아웃</button>
+        </div>
+        
+        <div class="menu-list">
+            <div class="menu-group" style="box-shadow: 0 4px 10px rgba(0,0,0,0.05); border:none;">
+                <div class="menu-group-title" style="color:#0ea5e9;">라그나로크 제로 <span style="font-size:12px;">▲</span></div>
+                <div class="menu-sub-list">
+                    <a href="admin.html" class="menu-sub-item active">RO FACTORY</a>
+                </div>
+            </div>
+            
+            <a href="index.html" class="btn-logout" style="display:block; text-align:center; background:#fee2e2; color:#ef4444; margin-top:20px; text-decoration:none;">사이트 메인으로 이동</a>
+        </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <main class="main-workspace">
+        <div class="workspace-header">
+            <div class="breadcrumb-title">라그나로크 제로 > RO FACTORY > 작품 관리</div>
+            <div class="tabs-primary">
+                <div class="tab-p active" onclick="switchTab('tab-item')" id="btn-tab-item">작품관리</div>
+                <div class="tab-p" onclick="switchTab('tab-type')" id="btn-tab-type">타입 관리</div>
+            </div>
+        </div>
+        
+        <div class="workspace-body" id="view-item">
+            <!-- 5 Stats Cards -->
+            <div class="dash-cards">
+                <div class="dash-card" onclick="filterList('변환 대기')" style="cursor:pointer; background:#fff;" id="card-변환대기">
+                    <div class="card-num olive">3</div>
+                    <div class="card-text" style="color:#555;">변환 대기</div>
+                </div>
+                <div class="dash-card" onclick="filterList('변환 완료')" style="cursor:pointer;" id="card-변환완료">
+                    <div class="card-num olive">2</div>
+                    <div class="card-text">변환 완료</div>
+                </div>
+                <div class="dash-card" onclick="filterList('판매 진행')" style="cursor:pointer; background:#fff;" id="card-판매진행">
+                    <div class="card-num" style="color:#111;">3</div>
+                    <div class="card-text" style="color:#555;">판매 진행 작품</div>
+                </div>
+                <div class="dash-card" onclick="filterList('변환 실패')" style="cursor:pointer;" id="card-변환실패">
+                    <div class="card-num red">1</div>
+                    <div class="card-text">변환 실패</div>
+                </div>
+                <div class="dash-card" onclick="filterList('만료')" style="cursor:pointer;" id="card-만료">
+                    <div class="card-num red">1</div>
+                    <div class="card-text">만료</div>
+                </div>
+            </div>
+
+            <!-- Search Box -->
+            <div class="search-box">
+                <div class="search-box-title">검색조건</div>
+                
+                <div class="search-row">
+                    <div class="search-label">날짜 검색</div>
+                    <select class="search-select">
+                        <option>구분</option>
+                        <option>등록일</option>
+                        <option>유효기간</option>
+                        <option>판매 시작일</option>
+                    </select>
+                    <input type="datetime-local" class="search-input" style="width:190px;">
+                    <span style="font-weight:800; color:#555;">~</span>
+                    <input type="datetime-local" class="search-input" style="width:190px;">
+                    
+                    <button class="filter-btn">오늘</button>
+                    <button class="filter-btn">1주일</button>
+                    <button class="filter-btn">1개월</button>
+                    <button class="filter-btn">3개월</button>
+                    <button class="filter-btn">6개월</button>
+                </div>
+
+                <div class="search-row" id="searchSaleStatusRow">
+                    <div class="search-label">판매 상태</div>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="sale" checked> Y</label>
+                        <label class="radio-item"><input type="radio" name="sale"> N</label>
+                    </div>
+                </div>
+
+                <div class="search-row">
+                    <div class="search-label">검색 키워드</div>
+                    <select class="search-select">
+                        <option>구분</option>
+                        <option>작품 이름</option>
+                        <option>작품 ID</option>
+                        <option>작품 카테고리</option>
+                    </select>
+                    <input type="text" class="search-input wide" placeholder="검색어를 입력해주세요.">
+                    <button class="btn-search">조회하기</button>
+                </div>
+            </div>
+
+            <div class="table-header-info" id="tableHeaderInfo">조회 결과 : 10개</div>
+            
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead id="item-thead">
+                        <!-- Populated by JS -->
+                    </thead>
+                    <tbody id="item-tbody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <div class="page-link">&lt;</div>
+                <div class="page-link active">1</div>
+                <div class="page-link">2</div>
+                <div class="page-link">3</div>
+                <div class="page-link">&gt;</div>
+            </div>
+        </div>
+
+        <div class="workspace-body" id="view-type" style="display:none;">
+            <div class="tabs-primary" style="margin-bottom: 20px;">
+                <div class="tab-p active" onclick="switchTypeTab('tag')" id="btn-type-tag">작품 타입 (해시태그) 관리</div>
+                <div class="tab-p" onclick="switchTypeTab('color')" id="btn-type-color">메인 색상 (배경색) 관리</div>
+            </div>
+
+            <div id="type-content-tag" style="background:#fff; padding:30px; border-radius:8px; min-height:500px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:15px;">
+                    <h2 style="font-size:18px; color:#1e293b; border-left:4px solid #2563eb; padding-left:12px; margin:0;">작품 타입 리스트</h2>
+                </div>
+                <div style="display:flex; gap:10px; margin-bottom:25px; background:#f8fafc; padding:20px; border-radius:8px;">
+                    <input type="text" id="newTagInput" class="search-input" placeholder="새로운 타입 입력 (예: #초보자용)" style="flex:1; border-color:#cbd5e1;" onkeypress="if(event.key==='Enter') addTypeTag()">
+                    <button class="btn-navy" style="width:120px; padding:12px; font-weight:800;" onclick="addTypeTag()">등록하기</button>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:10%;">번호</th>
+                                <th style="width:70%;">타입명</th>
+                                <th style="width:20%;">관리</th>
+                            </tr>
+                        </thead>
+                        <tbody id="type-tag-tbody">
+                            <!-- JS Generated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="type-content-color" style="display:none; background:#fff; padding:30px; border-radius:8px; min-height:500px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:15px;">
+                    <h2 style="font-size:18px; color:#1e293b; border-left:4px solid #ec4899; padding-left:12px; margin:0;">메인 색상 리스트</h2>
+                </div>
+                <div style="display:flex; gap:10px; margin-bottom:25px; background:#f8fafc; padding:20px; border-radius:8px;">
+                    <input type="text" id="newColorNameInput" class="search-input" placeholder="색상명칭 입력 (예: 핑크)" style="width:40%; border-color:#cbd5e1;" onkeypress="if(event.key==='Enter') addTypeColor()">
+                    <div style="width:30%; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; display:flex; align-items:center; gap:10px; background:#fff;">
+                        <span style="font-size:13px; color:#555; font-weight:700;">색상코드:</span>
+                        <input type="color" id="newColorHexInput" value="#ec4899" style="width:100%; height:30px; padding:0; border:none; cursor:pointer;">
+                    </div>
+                    <button class="btn-navy" style="background:#ec4899; width:120px; padding:12px; border-color:#ec4899; font-weight:800;" onclick="addTypeColor()">등록하기</button>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:10%;">번호</th>
+                                <th style="width:30%;">미리보기</th>
+                                <th style="width:40%;">색상명칭</th>
+                                <th style="width:20%;">관리</th>
+                            </tr>
+                        </thead>
+                        <tbody id="type-color-tbody">
+                            <!-- JS Generated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Upload Modal -->
+    <div class="modal-overlay" id="uploadModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>대량 변환 처리 업데이트 (Excel/CSV)</h2>
+                <button class="modal-close" onclick="closeUploadModal()">&times;</button>
+            </div>
+            <div class="modal-body" style="background:#f8fafc; padding:20px; border-radius:8px;">
+                <p style="font-size:13px; color:#475569; margin-bottom:15px; line-height:1.5;">
+                    엑셀 양식에 맞추어 <strong>작품 ID, 판매 상태(Y/N), 인게임 업로드 기간</strong> 데이터를 입력 후 업로드해주세요.<br>
+                    (주의: 업로드가 완료되면 목록의 상태가 즉각 갱신되며, 유저의 상태 정보도 동기화됩니다.)
+                </p>
+                <div style="display:flex; justify-content:center; margin-bottom:20px;">
+                    <button class="filter-btn" style="background:#fff; border:1px solid #10b981; color:#10b981; font-weight:800;" onclick="downloadSample()">↓ 업로드용 샘플 파일(.csv) 다운로드</button>
+                </div>
+                
+                <div style="border:2px dashed #cbd5e1; background:#fff; padding:30px; text-align:center; border-radius:8px;">
+                    <input type="file" id="excelFile" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="margin-bottom:10px;">
+                    <div style="font-size:12px; color:#888;">엑셀(.xls, .xlsx) 또는 CSV 파일을 선택해주세요.</div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-gray" onclick="closeUploadModal()">취소</button>
+                <button class="btn-navy" onclick="executeUpload()">업데이트 실행</button>
+            </div>
+        </div>
+    <!-- Type Delete Alternative Modal -->
+    <div class="modal-overlay" id="deleteTypeModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>항목 삭제 및 대체 지정</h2>
+                <button class="modal-close" onclick="closeDeleteTypeModal()">&times;</button>
+            </div>
+            <div class="modal-body" style="background:#f8fafc; padding:20px; border-radius:8px;">
+                <p style="font-size:14px; color:#333; margin-bottom:15px; line-height:1.5;">
+                    선택하신 항목을 영구 삭제하시겠습니까?<br>
+                    <span style="color:#ef4444; font-size:13px; font-weight:700;">이 항목을 이미 적용한 유저 작품 데이터가 존재할 수 있습니다. <br>대체할 항목을 지정하면 관련 작품들의 속성이 일괄 변경됩니다.</span>
+                </p>
+                <div style="margin-bottom:20px;">
+                    <div style="font-weight:700; margin-bottom:8px; font-size:13px; color:#475569;">삭제 대상</div>
+                    <input type="text" id="deleteTargetName" value="" class="search-input" readonly style="width:100%; background:#e2e8f0; color:#64748b; font-weight:700;">
+                </div>
+                <div>
+                    <div style="font-weight:700; margin-bottom:8px; font-size:13px; color:#475569;">대체할 항목 선택 (필수) <span style="color:#ef4444;">*</span></div>
+                    <select id="deleteSubstituteSelect" class="search-select" style="width:100%; height:45px; border-color:#94a3b8; font-weight:700;">
+                        <option value="">선택해주세요</option>
+                        <option>#기본 (또는 기본 색상)</option>
+                        <option>#귀여운</option>
+                        <option>#화려한</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-gray" onclick="closeDeleteTypeModal()">취소</button>
+                <button class="btn-navy" style="background:#ef4444; border-color:#ef4444;" onclick="executeDeleteType()">삭제 및 대체 적용</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock DB Data matching Frontend My Studio realistic mock data (DD.MM.YYYY HH:MM:SS format)
+        const mockList = [
+            { id: 10, rid: 'RF00010', cat: '발자국', name: '다크메이지 잿빛흔적', price: '1,500', reg: '20.03.2026 14:05:12', exp: '20.03.2027 23:59:59', start: '-', statusText: '변환 대기' },
+            { id: 9, rid: 'RF00009', cat: '발자국', name: '골든 소드오라 발자국', price: '2,000', reg: '19.03.2026 10:20:00', exp: '무제한', start: '20.03.2026 22:00:00', statusText: '판매 진행' },
+            { id: 8, rid: 'RF00008', cat: '발자국', name: '포링 벚꽃길', price: '무료', reg: '18.03.2026 09:12:30', exp: '무제한', start: '19.03.2026 15:30:00', statusText: '판매 진행' },
+            { id: 7, rid: 'RF00007', cat: '발자국', name: '얼음 수정 발자국', price: '500', reg: '18.03.2026 08:30:15', exp: '18.03.2027 23:59:59', start: '18.03.2026 12:00:00', statusText: '판매 진행' },
+            { id: 6, rid: 'RF00006', cat: '발자국', name: '천사의 새하얀 깃털', price: '3,500', reg: '17.03.2026 16:45:00', exp: '무제한', start: '-', statusText: '변환 실패' },
+            { id: 5, rid: 'RF00005', cat: '발자국', name: '마녀의 뾰족 모자 길', price: '1,000', reg: '16.03.2026 11:22:33', exp: '무제한', start: '17.03.2026 10:00:00', statusText: '변환 완료' },
+            { id: 4, rid: 'RF00004', cat: '발자국', name: '반짝이는 요정 가루', price: '무료', reg: '15.03.2026 18:05:00', exp: '15.03.2027 23:59:59', start: '16.03.2026 18:00:00', statusText: '변환 완료' },
+            { id: 3, rid: 'RF00003', cat: '발자국', name: '우주 은하수 길', price: '2,000', reg: '10.02.2026 14:00:00', exp: '10.03.2026 23:59:59', start: '11.02.2026 10:00:00', statusText: '만료' },
+            { id: 2, rid: 'RF00002', cat: '발자국', name: '불타는 용암 조각', price: '800', reg: '13.03.2026 09:30:00', exp: '13.03.2027 23:59:59', start: '-', statusText: '변환 대기' },
+            { id: 1, rid: 'RF00001', cat: '발자국', name: '기사단의 제복 발자국', price: '5,000', reg: '12.03.2026 10:10:10', exp: '무제한', start: '-', statusText: '변환 대기' }
+        ];
+
+        let typeTags = [
+            { id: 5, name: '#화이트' },
+            { id: 4, name: '#크리스탈' },
+            { id: 3, name: '#핑크' },
+            { id: 2, name: '#빛나는' },
+            { id: 1, name: '#멋있는' }
+        ];
+
+        let typeColors = [
+            { id: 5, name: '슬레이트', hex: '#64748b' },
+            { id: 4, name: '블루', hex: '#3b82f6' },
+            { id: 3, name: '레드', hex: '#ef4444' },
+            { id: 2, name: '올리브', hex: '#84cc16' },
+            { id: 1, name: '다크', hex: '#1e293b' }
+        ];
+
+        let tagIdCounter = 6;
+        let colorIdCounter = 6;
+        let pendingDelete = null; // { id, name, category }
+
+        let currentFilter = '변환 대기'; // Default to "변환 대기" based on user instruction
+
+        function initDashboard() {
+            const counts = { '변환 대기': 0, '변환 완료': 0, '판매 진행': 0, '변환 실패': 0, '만료': 0 };
+            mockList.forEach(item => {
+                if(counts[item.statusText] !== undefined) {
+                    counts[item.statusText]++;
+                }
+            });
+            document.querySelector('#card-변환대기 .card-num').innerText = counts['변환 대기'];
+            document.querySelector('#card-변환완료 .card-num').innerText = counts['변환 완료'];
+            document.querySelector('#card-판매진행 .card-num').innerText = counts['판매 진행'];
+            document.querySelector('#card-변환실패 .card-num').innerText = counts['변환 실패'];
+            document.querySelector('#card-만료 .card-num').innerText = counts['만료'];
+        }
+
+        function filterList(status) {
+            if(currentFilter === status) {
+                currentFilter = 'All'; // Toggle off
+            } else {
+                currentFilter = status;
+            }
+            
+            // Adjust card visual state (Blue fill on active, default on others)
+            document.querySelectorAll('.dash-card').forEach(card => {
+                card.style.background = '#fff';
+                card.style.borderColor = '#e2e8f0'; // original var(--border-color)
+                
+                // reset text colors to default based on internal classes
+                let num = card.querySelector('.card-num');
+                let txt = card.querySelector('.card-text');
+                if (num.classList.contains('olive')) num.style.color = '#84cc16';
+                else if (num.classList.contains('red')) num.style.color = '#ef4444';
+                else num.style.color = '#111'; // original default
+                
+                txt.style.color = '#555'; // original default
+            });
+            
+            if(currentFilter !== 'All') {
+                let cardId = 'card-' + currentFilter.replace(' ', '');
+                let activeCard = document.getElementById(cardId);
+                if(activeCard) {
+                    activeCard.style.background = '#2563eb'; // blue fill
+                    activeCard.style.borderColor = '#2563eb';
+                    activeCard.querySelector('.card-num').style.color = '#fff';
+                    activeCard.querySelector('.card-text').style.color = '#fff';
+                }
+            }
+
+            renderTable();
+        }
+
+        function renderTable() {
+            const thead = document.getElementById('item-thead');
+            const tbody = document.getElementById('item-tbody');
+            
+            let htmlBody = '';
+            
+            let filteredList = currentFilter === 'All' ? mockList : mockList.filter(item => item.statusText === currentFilter);
+            
+            // Header Info & Action Buttons
+            document.getElementById('tableHeaderInfo').innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+                    <span>조회 결과 : ${filteredList.length}개</span>
+                    <div style="display:flex; gap:8px;">
+                        <button class="filter-btn" onclick="downloadCSV()">↓ 리스트 다운로드</button>
+                        <button class="filter-btn" style="background:#f8fafc; color:#1e293b; border-color:#cbd5e1; font-weight:800;" onclick="downloadAssets()">📦 작품 내려받기</button>
+                        <button class="btn-navy" onclick="openUploadModal()">⬆ 변환 업데이트 (Excel)</button>
+                    </div>
+                </div>
+            `;
+
+            // Dynamic Table Header (Hide columns if '변환 대기')
+            let isConverting = (currentFilter === '변환 대기');
+            let isExpired = (currentFilter === '만료');
+            
+            // 유저 요청: 만료 페이지에서는 검색 판매 상태 없애줌
+            document.getElementById('searchSaleStatusRow').style.display = (isConverting || isExpired) ? 'none' : 'flex';
+            
+            let htmlHead = `
+                <tr>
+                    <th style="width: 5%;">번호</th>
+                    <th style="width: 15%;">작품 ID</th>
+                    <th style="width: 10%;">작품 카테고리</th>
+                    <th style="width: ${isConverting ? '38%' : '20%'};">작품 이름</th>
+                    <th style="width: 5%;">가격</th>
+                    <th style="width: 12%;">등록일</th>
+                    <th style="width: 12%;">유효기간</th>
+                    ${!isConverting ? '<th style="width: 12%;">판매 시작일</th>' : ''}
+                    ${!isConverting ? '<th style="width: 9%;">판매상태</th>' : ''}
+                </tr>
+            `;
+            thead.innerHTML = htmlHead;
+            
+            // Dynamic Table Body (Index per page, conditionally hide columns)
+            let pageIndex = 1;
+            filteredList.forEach(item => {
+                let statusStr = (item.statusText === '판매 진행') ? 'Y' : 'N';
+                let weight = (statusStr === 'Y') ? '800' : '800; color:#ef4444';
+                
+                htmlBody += `
+                <tr>
+                    <td style="font-weight:700;">${pageIndex++}</td>
+                    <td>${item.rid}</td>
+                    <td>${item.cat}</td>
+                    <td>
+                        <div class="item-link-wrap">
+                            <span style="font-size:16px;">🌸</span>
+                            <a href="admin_detail.html?id=${item.id}&status=${item.statusText}" class="text-blue" style="text-decoration:none;">${item.name} <span style="font-size:12px; color:#64748b;">(${item.statusText})</span></a>
+                        </div>
+                    </td>
+                    <td>${item.price}</td>
+                    <td>${item.reg}</td>
+                    <td>${item.exp}</td>
+                    ${!isConverting ? `<td>${item.start}</td>` : ''}
+                    ${!isConverting ? `<td style="font-weight:${weight};">${statusStr}</td>` : ''}
+                </tr>`;
+            });
+            if(filteredList.length === 0) {
+                let colSpan = isConverting ? 7 : 9;
+                htmlBody = `<tr><td colspan="${colSpan}" style="padding:40px; color:#888;">조회된 내역이 없습니다. (현재 필터: ${currentFilter})</td></tr>`;
+            }
+            tbody.innerHTML = htmlBody;
+        }
+
+        // ==========================================
+        // Download & Modal Logic 
+        // ==========================================
+        function _downloadFileTemplate(content, filename, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('hidden', '');
+            a.setAttribute('href', url);
+            a.setAttribute('download', filename);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function downloadCSV() {
+            let filteredList = currentFilter === 'All' ? mockList : mockList.filter(item => item.statusText === currentFilter);
+            let csvContent = "작품 ID,카테고리,작품 이름,가격,등록일,유효기간,판매상태\n"; // Header
+            
+            filteredList.forEach(item => {
+                let statusYn = (item.statusText === '판매 진행') ? 'Y' : 'N';
+                csvContent += `${item.rid},${item.cat},${item.name},${item.price.replace(',','')},${item.reg},${item.exp},${statusYn}\n`;
+            });
+            
+            _downloadFileTemplate("\uFEFF" + csvContent, 'ro_factory_list.csv', 'text/csv;charset=utf-8;');
+            alert('목록 다운로드가 완료되었습니다.');
+        }
+
+        function downloadAssets() {
+            let content = "RO FACTORY 에셋 아카이브 정보\n============================\n";
+            let filteredList = currentFilter === 'All' ? mockList : mockList.filter(item => item.statusText === currentFilter);
+            filteredList.forEach(item => {
+                content += `파일: ${item.rid}_${item.name}.foot (작품이름: ${item.name})\n`;
+            });
+            _downloadFileTemplate(content, 'ro_factory_assets.txt', 'text/plain;charset=utf-8;');
+            alert('작품 이름 및 foot 파일 압축 다운로드(샘플)가 실행되었습니다.');
+        }
+
+        function downloadSample() {
+            let csvContent = "\uFEFF작품 ID,판매 상태(Y/N),인게임 업로드 기간\nRF00010,Y,2026-05-15\nRF00009,N,2026-05-20\n";
+            _downloadFileTemplate(csvContent, 'upload_sample.csv', 'text/csv;charset=utf-8;');
+        }
+
+        function openUploadModal() {
+            document.getElementById('uploadModal').classList.add('active');
+        }
+
+        function closeUploadModal() {
+            document.getElementById('uploadModal').classList.remove('active');
+            document.getElementById('excelFile').value = '';
+        }
+
+        function executeUpload() {
+            let fileInput = document.getElementById('excelFile');
+            if(!fileInput.files.length) {
+                alert('업로드할 파일을 선택해주세요.');
+                return;
+            }
+            alert(`[${fileInput.files[0].name}] 대량 변환 및 DB 업데이트가 완료되었습니다.`);
+            closeUploadModal();
+        }
+
+        function switchTab(tabId) {
+            // Update Tab Classes
+            document.getElementById('btn-tab-item').classList.remove('active');
+            document.getElementById('btn-tab-type').classList.remove('active');
+            document.getElementById('btn-' + tabId).classList.add('active');
+
+            // Hide all views
+            document.getElementById('view-item').style.display = 'none';
+            document.getElementById('view-type').style.display = 'none';
+            
+            // Show target view
+            document.getElementById('view-' + tabId.split('-')[1]).style.display = 'block';
+        }
+
+        function switchTypeTab(type) {
+            document.getElementById('btn-type-tag').classList.remove('active');
+            document.getElementById('btn-type-color').classList.remove('active');
+            document.getElementById('btn-type-' + type).classList.add('active');
+
+            document.getElementById('type-content-tag').style.display = 'none';
+            document.getElementById('type-content-color').style.display = 'none';
+            document.getElementById('type-content-' + type).style.display = 'block';
+        }
+
+        // --- Types DOM Logic ---
+        function renderTypeTables() {
+            const tagTbody = document.getElementById('type-tag-tbody');
+            let tagHtml = '';
+            typeTags.forEach((t, i) => {
+                tagHtml += `<tr><td>${typeTags.length - i}</td><td style="font-weight:700; color:#2563eb;">${t.name}</td><td><button class="filter-btn" style="padding:6px 15px; font-size:12px; border-color:#ef4444; color:#ef4444;" onclick="openDeleteTypeModal(${t.id}, '${t.name}', 'tag')">삭제</button></td></tr>`;
+            });
+            if(typeTags.length === 0) tagHtml = '<tr><td colspan="3" style="text-align:center; padding:40px; color:#888;">등록된 타입이 없습니다.</td></tr>';
+            tagTbody.innerHTML = tagHtml;
+
+            const colorTbody = document.getElementById('type-color-tbody');
+            let colorHtml = '';
+            typeColors.forEach((c, i) => {
+                colorHtml += `<tr><td>${typeColors.length - i}</td><td><div style="width:24px; height:24px; background:${c.hex}; border-radius:4px; margin:0 auto; box-shadow:0 2px 4px rgba(0,0,0,0.1);"></div></td><td style="font-weight:700;">${c.name}</td><td><button class="filter-btn" style="padding:6px 15px; font-size:12px; border-color:#ef4444; color:#ef4444;" onclick="openDeleteTypeModal(${c.id}, '${c.name}', 'color')">삭제</button></td></tr>`;
+            });
+            if(typeColors.length === 0) colorHtml = '<tr><td colspan="4" style="text-align:center; padding:40px; color:#888;">등록된 색상이 없습니다.</td></tr>';
+            colorTbody.innerHTML = colorHtml;
+        }
+
+        function addTypeTag() {
+            let input = document.getElementById('newTagInput');
+            let val = input.value.trim();
+            if(!val) return alert('타입명을 입력해주세요.\n예: #초보자용');
+            if(!val.startsWith('#')) val = '#' + val;
+            
+            typeTags.unshift({ id: tagIdCounter++, name: val });
+            input.value = '';
+            renderTypeTables();
+        }
+
+        function addTypeColor() {
+            let nameInput = document.getElementById('newColorNameInput');
+            let hexInput = document.getElementById('newColorHexInput');
+            let name = nameInput.value.trim();
+            if(!name) return alert('색상명칭을 입력해주세요.\n예: 핑크 혹은 커스텀색상');
+            
+            typeColors.unshift({ id: colorIdCounter++, name: name, hex: hexInput.value });
+            nameInput.value = '';
+            renderTypeTables();
+        }
+
+        function openDeleteTypeModal(id, name, typeCategory) {
+            pendingDelete = { id, name, category: typeCategory };
+            document.getElementById('deleteTargetName').value = name;
+            
+            let select = document.getElementById('deleteSubstituteSelect');
+            let optionsHtml = '<option value="">선택해주세요</option>';
+            
+            if(typeCategory === 'tag') {
+                typeTags.filter(t => t.id !== id).forEach(t => {
+                    optionsHtml += `<option value="${t.id}">${t.name}</option>`;
+                });
+            } else {
+                typeColors.filter(c => c.id !== id).forEach(c => {
+                    optionsHtml += `<option value="${c.id}">${c.name}</option>`;
+                });
+            }
+            select.innerHTML = optionsHtml;
+            document.getElementById('deleteTypeModal').classList.add('active');
+        }
+
+        function closeDeleteTypeModal() {
+            document.getElementById('deleteTypeModal').classList.remove('active');
+            document.getElementById('deleteSubstituteSelect').value = '';
+            pendingDelete = null;
+        }
+
+        function executeDeleteType() {
+            let select = document.getElementById('deleteSubstituteSelect');
+            if(!select.value) {
+                alert('삭제를 위해 대체할 항목을 반드시 선택해야 합니다.');
+                return;
+            }
+            
+            let altName = select.options[select.selectedIndex].text;
+            let targetName = pendingDelete.name;
+            
+            if(pendingDelete.category === 'tag') {
+                typeTags = typeTags.filter(t => t.id !== pendingDelete.id);
+            } else {
+                typeColors = typeColors.filter(c => c.id !== pendingDelete.id);
+            }
+            
+            alert(`[${targetName}] 항목이 삭제되고, 과거 등록된 기능 및 작품들의 속성이 모두 [${altName}](으)로 일괄 변경 처리되었습니다.`);
+            closeDeleteTypeModal();
+            renderTypeTables();
+        }
+
+        window.onload = () => {
+            initDashboard();
+            renderTypeTables(); // Initialize Type Tables
+            
+            // Auto click '변환 대기' on load to enforce the "우선 변환대기 단계 부터 하자" rule visually
+            let cardId = 'card-변환대기';
+            let activeCard = document.getElementById(cardId);
+            if(activeCard) {
+                activeCard.style.background = '#2563eb'; 
+                activeCard.style.borderColor = '#2563eb';
+                activeCard.querySelector('.card-num').style.color = '#fff';
+                activeCard.querySelector('.card-text').style.color = '#fff';
+            }
+            renderTable();
+        };
+    </script>
+</body>
+</html>

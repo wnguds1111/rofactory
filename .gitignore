@@ -1,0 +1,27 @@
+# ===== RO Factory .gitignore =====
+
+# 임시 파일
+temp.txt
+studio_docs.txt
+
+# PPTX 추출 스크립트 (개발 유틸)
+extract.ps1
+extract_pptx.py
+
+# 피그마 스크린샷 참고 자료 (용량 큼)
+Screen_figma/
+
+# 기획 문서 (소스와 분리 관리)
+RO_Factory_PRD.md
+RO_Factory_Detailed_Features.md
+
+# 시스템 파일
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / 에디터
+.vscode/
+.idea/
+*.swp
+*.swo

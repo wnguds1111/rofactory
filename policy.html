@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RO FACTORY 웹기획Unit 이주형 작성 - 서비스 운영 정책 및 가이드라인입니다.">
+    <title>RO FACTORY 정책 가이드</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background: #f8fafc; color: #333; margin: 0; padding: 40px; }
+        .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 50px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .header { border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .title { font-size: 32px; font-weight: 900; color: #0f172a; margin: 0; }
+        .btn-back { display: inline-block; text-decoration: none; color: #0ea5e9; font-weight: 800; font-size: 14px; background: #f0f9ff; padding: 8px 16px; border-radius: 8px; transition: 0.2s; }
+        .btn-back:hover { background: #e0f2fe; }
+        
+        .section { margin-bottom: 40px; }
+        .section-title { font-size: 20px; font-weight: 800; color: #1e293b; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-left: 4px solid #3b82f6; padding-left: 12px; }
+        
+        .policy-list { list-style: none; padding: 0; margin: 0; }
+        .policy-list li { background: #f1f5f9; padding: 20px; border-radius: 8px; margin-bottom: 12px; font-size: 15px; color: #475569; line-height: 1.6; border-left: 3px solid transparent; transition: 0.2s; }
+        .policy-list li:hover { background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-left-color: #3b82f6; }
+        .policy-list li strong { color: #1e293b; font-weight: 800; display: block; margin-bottom: 6px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">📄 RO FACTORY 운영 정책 가이드</h1>
+            <a href="index.html" class="btn-back">← 포털 홈으로 이동</a>
+        </div>
+
+        <div class="section">
+            <div class="section-title">1. 에셋 작품 등록 정책</div>
+            <ul class="policy-list">
+                <li>
+                    <strong>파일 업로드 규격</strong>
+                    크리에이터는 편집툴에서 정상 추출된 무결성의 .foot (메인 데이터) 파일과 미리보기용 mp4 썸네일을 반드시 함께 업로드해야 합니다.
+                </li>
+                <li>
+                    <strong>가격 책정 시스템</strong>
+                    작품 가격은 "0 KP (무료 배포)" 부터 자유롭게 기입이 가능합니다. 단, 한 번 변환이 통과되어 배포된 이후에는 크리에이터가 임의로 가격을 수정할 수 없습니다.
+                </li>
+                <li>
+                    <strong>최소 유지기간 (유효기간) 의무</strong>
+                    마켓 생태계 교란을 방지하기 위해 등록 시 지정하는 '유효 만료일'은 최소 30일 이상 보장되어야만 서버 등록이 승인됩니다.
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">2. 거래 및 변환(Admin) 상태 정책</div>
+            <ul class="policy-list">
+                <li>
+                    <strong>수정 가능 권한 (Lock Policy)</strong>
+                    작품의 상세 변경안(가격/태그 등) 수정은 관리자 변환 대기 상태인 '변환 대기' 에서만 유저가 자유롭게 편집 가능합니다. '변환 완료' 단계 진입 즉시 수정 권한은 박탈 및 잠금 처리됩니다.
+                </li>
+                <li>
+                    <strong>판매 중지 및 만료 처리</strong>
+                    설정된 유효기간이 도래하면 상품의 상태표기는 즉각 '만료'로 내려가며, 더 이상 마켓 검색에서 노출되지 않습니다.
+                </li>
+                <li>
+                    <strong>타입(태그) 백오피스 종속성</strong>
+                    운영자가 백오피스(Admin)에서 특정 타입이나 색상 분류 옵션을 영구 삭제하는 경우, 기존에 해당 옵션을 고른 유저 보호를 위해 반드시 '대체 옵션'으로 일괄 자동 이전 처리됩니다.
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">3. 저작권 (UGC) 서약 동의</div>
+            <ul class="policy-list">
+                <li>
+                    <strong>제3자 권리 침해 방지 조항</strong>
+                    업로드되는 에셋에 타사 IP 텍스처 삽입 등 위반 사항이 적발될 경우 즉강 영구 판매 정지 제재 (Admin -> 변환 실패 강제 처리) 됩니다.
+                </li>
+                <li>
+                    <strong>책임의 1차성 귀속</strong>
+                    발생한 모든 저작권 지적재산 분쟁 시 모든 법적 책임은 업로드를 진행한 유저 본인과 약관 동의자에게 귀속되며, 저희 플랫폼 (Gravity) 은 2차 피해에 관한 보증을 하지 않습니다.
+                </li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px; font-size: 13px; color: #94a3b8; font-weight: 700;">
+            최종 업데이트 날짜 : 20.03.2026 11:30:00 | 웹기획Unit
+        </div>
+    </div>
+</body>
+</html>

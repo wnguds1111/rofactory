@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO Factory Admin | 정산 현황</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <nav class="nav-outer">
+        <a href="#" class="nav-outer-btn"><span class="icon">👤</span>MEM</a>
+        <a href="#" class="nav-outer-btn active"><span class="icon">🌐</span>WEB</a>
+        <a href="#" class="nav-outer-btn"><span class="icon">⚙️</span>SET</a>
+    </nav>
+    
+    <nav class="nav-inner">
+        <div class="brand-header">
+            <span class="brand-logo" style="color:#0ea5e9;">GRAVITY <span>Admin Tools</span></span> 
+            <span class="brand-lang">| <span style="color:#aaa;">🌐</span> KO ⌄</span>
+        </div>
+        
+        <div class="user-section">
+            TEST <button class="btn-logout" onclick="location.href='index.html'">로그아웃</button>
+        </div>
+        
+        <div class="menu-list">
+            <div class="menu-group">
+                <div class="menu-group-title">라그나로크 제로 <span style="color:#a0aec0;font-size:12px;">▼</span></div>
+                <div class="menu-sub-list">
+                    <a href="admin.html" class="menu-sub-item">변환 대기열</a>
+                    <a href="admin_db.html" class="menu-sub-item">RO FACTORY (항목 관리)</a>
+                    <a href="admin_penalty.html" class="menu-sub-item">제재 관리</a>
+                    <a href="admin_settle.html" class="menu-sub-item active">정산 현황</a>
+                </div>
+            </div>
+            <a href="index.html" class="btn-logout" style="display:block; text-align:center; background:#fee2e2; color:#ef4444; margin-top:20px;">RO Factory 체험 나가기</a>
+        </div>
+    </nav>
+
+    <main class="main-workspace">
+        <div class="workspace-header">
+            <div class="breadcrumb-title">라그나로크 제로 > RO FACTORY > 정산 처리</div>
+            <div class="tabs-primary">
+                <div class="tab-p">재무 관리</div>
+                <div class="tab-p active">RO FACTORY (외주/UGC)</div>
+            </div>
+            <div class="tabs-secondary">
+                <div class="tab-s active">지급 대기리스트</div>
+            </div>
+        </div>
+        
+        <div class="workspace-body">
+            
+            <div class="search-box">
+                <div class="search-box-title">검색조건</div>
+                <div class="search-controls">
+                    <div class="search-label">필터링</div>
+                    <select class="search-select">
+                        <option>전체 미정산 내역</option>
+                        <option>입금 대기 (송금 전)</option>
+                    </select>
+                    <input type="text" class="search-input" placeholder="크리에이터 계정이나 이름을 검색해주세요.">
+                    <button class="btn-search">조회하기</button>
+                    <button class="btn-outline" style="margin-left:auto;">엑셀 다운로드</button>
+                </div>
+            </div>
+
+            <div class="table-header-info">총 : 14건 대기 (₩11,400,000)</div>
+            
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">유저 계정</th>
+                            <th style="width: 20%; text-align:right;">상세보기 및 판매(KP)</th>
+                            <th style="width: 25%; text-align:right;">원화 변환 실지급액</th>
+                            <th style="width: 15%; text-align:center;">상태</th>
+                            <th style="width: 15%; text-align:center;">신청일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>MakerJo</strong> <span style="font-size:12px;color:#64748b;">(jo@gnjoy.com)</span></td>
+                            <td style="text-align:right;"><span class="text-blue" onclick="openSettleModal('MakerJo (jo@gnjoy.com)', '₩ 1,250,000')">2,500,000 KP (보기)</span></td>
+                            <td style="text-align:right; font-weight:900; color:var(--text-dark);">₩ 1,250,000</td>
+                            <td style="text-align:center;"><span class="badge pending">승인 대기</span></td>
+                            <td style="text-align:center;">10.03.2026</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PoringDesign</strong> <span style="font-size:12px;color:#64748b;">(pde@gnjoy.com)</span></td>
+                            <td style="text-align:right;"><span class="text-blue" onclick="openSettleModal('PoringDesign (pde@gnjoy.com)', '₩ 225,000')">450,000 KP (보기)</span></td>
+                            <td style="text-align:right; font-weight:900; color:var(--text-dark);">₩ 225,000</td>
+                            <td style="text-align:center;"><span class="badge done">입금 완료</span></td>
+                            <td style="text-align:center;">10.03.2026</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-bottom-actions">
+                <button class="btn-navy" style="background:#10b981;">체크 목록 일괄 송금처리</button>
+            </div>
+
+            <div class="pagination">
+                <div class="page-link">&lt;</div>
+                <div class="page-link active">1</div>
+                <div class="page-link">&gt;</div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Settle Modal -->
+    <div class="modal-overlay" id="settleModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>외주 정산 상세 명세서</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" style="flex-direction:column;">
+                
+                <div class="info-grid">
+                    <div class="info-label">대금 청구자</div>
+                    <div class="info-val" id="revTitle" style="font-size:16px; font-weight:800; color:var(--primary-blue);">유저 계정</div>
+                    
+                    <div class="info-label">계좌 정보</div>
+                    <div class="info-val" style="font-weight:900;">기업은행 111-222-3333333<br>예금주: 홍길동</div>
+                    
+                    <div class="info-label">총 판매 / 비율</div>
+                    <div class="info-val">2,500,000 KP / 현금화 가능 (50%)</div>
+                </div>
+
+                <div style="background:#f1f5f9; border-radius:8px; padding:25px; border:1px solid #cbd5e1; text-align:center;">
+                    <span style="font-size:14px; font-weight:800; display:block; margin-bottom:10px; color:#64748b;">최종 입금 송금액 (세금 공제 전)</span>
+                    <div id="revAmount" style="font-size:32px; font-weight:900; color:#1e293b; letter-spacing:-1px;">₩ 0</div>
+                </div>
+
+            </div>
+            <div class="modal-actions">
+                <button class="btn-outline" onclick="closeModal()">나중에</button>
+                <button class="btn-navy" style="background:#10b981;" onclick="alert('입금이 완료 처리되었습니다. [입금 완료] 마크로 변환됩니다.'); closeModal()">승인 즉시 송금</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openSettleModal(name, amount) {
+            document.getElementById('revTitle').innerText = name;
+            document.getElementById('revAmount').innerText = amount;
+            document.getElementById('settleModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('settleModal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

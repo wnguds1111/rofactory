@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO Factory Admin | 제재 관리</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <nav class="nav-outer">
+        <a href="#" class="nav-outer-btn"><span class="icon">👤</span>MEM</a>
+        <a href="#" class="nav-outer-btn active"><span class="icon">🌐</span>WEB</a>
+        <a href="#" class="nav-outer-btn"><span class="icon">⚙️</span>SET</a>
+    </nav>
+    
+    <nav class="nav-inner">
+        <div class="brand-header">
+            <span class="brand-logo" style="color:#0ea5e9;">GRAVITY <span>Admin Tools</span></span> 
+            <span class="brand-lang">| <span style="color:#aaa;">🌐</span> KO ⌄</span>
+        </div>
+        
+        <div class="user-section">
+            TEST <button class="btn-logout" onclick="location.href='index.html'">로그아웃</button>
+        </div>
+        
+        <div class="menu-list">
+            <div class="menu-group">
+                <div class="menu-group-title">라그나로크 제로 <span style="color:#a0aec0;font-size:12px;">▼</span></div>
+                <div class="menu-sub-list">
+                    <a href="admin.html" class="menu-sub-item">변환 대기열</a>
+                    <a href="admin_db.html" class="menu-sub-item">RO FACTORY (항목 관리)</a>
+                    <a href="admin_penalty.html" class="menu-sub-item active">제재 관리</a>
+                    <a href="admin_settle.html" class="menu-sub-item">정산 현황</a>
+                </div>
+            </div>
+            <a href="index.html" class="btn-logout" style="display:block; text-align:center; background:#fee2e2; color:#ef4444; margin-top:20px;">RO Factory 체험 나가기</a>
+        </div>
+    </nav>
+
+    <main class="main-workspace">
+        <div class="workspace-header">
+            <div class="breadcrumb-title">라그나로크 제로 > RO FACTORY > 제재 관리</div>
+            <div class="tabs-primary">
+                <div class="tab-p">유저 신고 관리</div>
+                <div class="tab-p active">계정 제재 현황</div>
+            </div>
+            <div class="tabs-secondary">
+                <div class="tab-s active">제재 대상 리스트</div>
+            </div>
+        </div>
+        
+        <div class="workspace-body">
+            
+            <div class="search-box">
+                <div class="search-box-title">검색조건</div>
+                <div class="search-controls">
+                    <div class="search-label">회원 분류</div>
+                    <select class="search-select">
+                        <option>전체 제재</option>
+                        <option>영구 정지</option>
+                        <option>경고 누적</option>
+                    </select>
+                    <input type="text" class="search-input" placeholder="계정 아이디를 입력해주세요.">
+                    <button class="btn-search">조회하기</button>
+                </div>
+            </div>
+
+            <div class="table-header-info">총 : 24명</div>
+            
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%; text-align:center;">누적 신고</th>
+                            <th style="width: 35%; text-align:left;">상세보기 및 유저명</th>
+                            <th style="width: 30%; text-align:left;">마지막 제재 사유</th>
+                            <th style="width: 20%; text-align:center;">제재일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-red" style="text-align:center;">12 회</td>
+                            <td><span class="text-blue" onclick="openPenaltyModal('BadBoy22')">BadBoy22</span> <span style="font-size:12px;color:#64748b;">(bad@gnjoy.com)</span></td>
+                            <td>불건전 텍스처 업로드 의심</td>
+                            <td style="text-align:center; font-weight:700;">04.02.2026</td>
+                        </tr>
+                        <tr>
+                            <td class="text-red" style="text-align:center;">25 회</td>
+                            <td><span class="text-blue" onclick="openPenaltyModal('CopyrightTroll')">CopyrightTroll</span> <span style="font-size:12px;color:#64748b;">(copy@gnjoy.com)</span></td>
+                            <td>외주 애셋 및 타 게임 무단도용</td>
+                            <td style="text-align:center; font-weight:700;">01.02.2026</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-bottom-actions">
+                <button class="btn-navy" style="background:#e11d48;" onclick="alert('제재 유저 일괄 처리 기능을 불러옵니다.')">신규 제재 일괄 처리</button>
+            </div>
+
+            <div class="pagination">
+                <div class="page-link">&lt;</div>
+                <div class="page-link active">1</div>
+                <div class="page-link">2</div>
+                <div class="page-link">&gt;</div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Penalty Modal -->
+    <div class="modal-overlay" id="penaltyModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>유저 제재 상세 관리</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" style="flex-direction:column;">
+                
+                <div class="info-grid">
+                    <div class="info-label">대상 계정</div>
+                    <div class="info-val" id="revTitle" style="font-size:18px; font-weight:800; color:#ef4444;">유저명</div>
+                    
+                    <div class="info-label">등록/누적 처벌</div>
+                    <div class="info-val"><span style="background:#fee2e2; color:#ef4444; padding:4px 8px; border-radius:4px; font-size:13px; font-weight:900;">경고 12회 이상</span></div>
+                    
+                    <div class="info-label">처리 이력 로그</div>
+                    <div class="info-val" style="min-height:80px; font-size:13px;">
+                        - [03.01.2026] 욕설 이미지 등록 (경고)<br>
+                        - [04.02.2026] 저작권 무단 제출 2건 반려 (판매 정지 30일)
+                    </div>
+                </div>
+
+                <div style="background:#f8fafc; border-radius:8px; padding:20px; border:1px solid #cbd5e1; margin-top:10px;">
+                    <span style="font-size:14px; font-weight:800; display:block; margin-bottom:10px;">신규 제재 조치</span>
+                    <select class="search-select" style="width:100%; margin-bottom:15px;">
+                        <option>경고 1회 추가 발송 (푸시)</option>
+                        <option>에셋 30일 등록 정지</option>
+                        <option>계정 영구 정지</option>
+                    </select>
+                    <textarea class="search-input" placeholder="로그 기록용 코멘트" style="width:100%; min-height:80px; resize:none;"></textarea>
+                </div>
+
+            </div>
+            <div class="modal-actions">
+                <button class="btn-outline" onclick="closeModal()">취소</button>
+                <button class="btn-navy" style="background:#ef4444;" onclick="alert('제재가 반영되었습니다.'); closeModal()">제재 확정</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPenaltyModal(name) {
+            document.getElementById('revTitle').innerText = name;
+            document.getElementById('penaltyModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('penaltyModal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

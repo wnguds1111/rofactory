@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO FACTORY IA (정보구조도)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background: #f8fafc; color: #333; margin: 0; padding: 40px; }
+        .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 50px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 40px; }
+        .title { font-size: 28px; font-weight: 900; color: #0f172a; margin: 0; }
+        .btn-back { text-decoration: none; color: #0ea5e9; font-weight: 800; font-size: 14px; background: #f0f9ff; padding: 10px 20px; border-radius: 8px; transition: 0.2s; }
+        .btn-back:hover { background: #bae6fd; color: #0284c7; }
+        
+        /* Table Styles */
+        .ia-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 15px; }
+        .ia-table th, .ia-table td { padding: 20px 25px; border: 1px solid #e2e8f0; text-align: left; vertical-align: middle; }
+        .ia-table th { background-color: #f8fafc; color: #475569; font-weight: 800; font-size: 15px; text-align: center; white-space: nowrap; border-bottom: 2px solid #cbd5e1; }
+        
+        .ia-table tbody tr:hover { background-color: #f8fafc; transition: 0.2s; }
+        .ia-table td { color: #0f172a; font-weight: 600; }
+        
+        .ia-table ul { margin: 0; padding-left: 20px; color: #475569; font-weight: 600; }
+        .ia-table li { margin-bottom: 8px; line-height: 1.5; }
+        .ia-table li:last-child { margin-bottom: 0; }
+        .ia-table li::marker { color: #94a3b8; }
+        
+        .depth1 { background-color: #eff6ff !important; font-weight: 900 !important; color: #1e3a8a !important; text-align: center; border-right: 2px solid #e2e8f0;}
+        .depth2 { font-weight: 800 !important; color: #0f172a !important; background-color: #fff; font-size: 16px; }
+        .desc-cell { color: #475569; font-weight: 500; font-size: 15px;}
+        .note-cell { font-size: 13px; color: #64748b; background-color: #f8fafc; font-weight: 500; text-align: center;}
+        
+        .badge { display: inline-block; font-size: 12px; padding: 4px 10px; border-radius: 6px; color: #fff; font-weight: 800; margin-bottom: 8px; letter-spacing: 1px;}
+        .bg-front { background: #3b82f6; box-shadow: 0 4px 10px rgba(59,130,246,0.2); }
+        .bg-admin { background: #10b981; box-shadow: 0 4px 10px rgba(16,185,129,0.2); }
+        /* Table Edit Styles */
+        .editable-cell { transition: background 0.2s, box-shadow 0.2s; outline: none; }
+        .editable-cell[contenteditable="true"]:focus { background-color: #fff; box-shadow: inset 0 0 0 2px #3b82f6; border-radius: 4px; z-index: 10; position: relative; }
+        .btn-edit { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 800; cursor: pointer; color: #475569; transition: 0.2s; margin-right: 15px;}
+        .btn-edit.active { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+        .btn-edit:hover:not(.active) { background: #e2e8f0; }
+        .header-actions { display: flex; align-items: center; }
+        .btn-micro { background: #fff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 8px; font-size: 13px; font-weight: 800; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); white-space: nowrap; }
+        .btn-micro:hover { background: #f8fafc; border-color: #94a3b8; transform: translateY(-1px); }
+        .btn-del { color: #ef4444; background: #fef2f2; border-color: #fca5a5; }
+        .btn-del:hover { background: #fee2e2; }
+
+        /* Custom Modal Styles */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(4px); opacity: 0; transition: opacity 0.3s; }
+        .modal-overlay.show { display: flex; opacity: 1; }
+        .modal-content { background: #fff; border-radius: 24px; padding: 40px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.15); transform: translateY(20px); transition: transform 0.3s; }
+        .modal-overlay.show .modal-content { transform: translateY(0); }
+        .modal-content h2 { font-size: 24px; font-weight: 900; color: #0f172a; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;}
+        .modal-content p { color: #475569; font-weight: 600; font-size: 15px; margin-bottom: 25px; line-height: 1.5; }
+        .modal-input { box-sizing: border-box; width: 100%; padding: 16px 20px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 18px; margin-bottom: 30px; outline: none; transition: 0.2s; font-family: inherit; font-weight: 800; text-align: center; letter-spacing: 5px; }
+        .modal-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59,130,246,0.15); }
+        .modal-btns { display: flex; gap: 10px; }
+        .modal-btns button { flex: 1; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer; border: none; transition: 0.2s; }
+        .btn-cancel { background: #f1f5f9; color: #475569; }
+        .btn-cancel:hover { background: #e2e8f0; }
+        .btn-confirm { background: #3b82f6; color: #fff; box-shadow: 0 4px 15px rgba(59,130,246,0.3); }
+        .btn-confirm:hover { background: #2563eb; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(59,130,246,0.4); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🗺️ RO FACTORY 정보구조도 (IA)</h1>
+            <div class="header-actions">
+                <button class="btn-edit" id="editToggleBtn" onclick="toggleEditMode()">✏️ 표 편집 켜기</button>
+                <a href="index.html" class="btn-back">← 포털 홈으로 돌아가기</a>
+            </div>
+        </div>
+        
+        <table class="ia-table" id="iaTable">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">1 Depth</th>
+                    <th style="width: 20%;">2 Depth (주요 화면)</th>
+                    <th style="width: 45%;">3 Depth (기능 및 특징)</th>
+                    <th style="width: 20%;">비고</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- FRONT PART -->
+                <tr>
+                    <td rowspan="4" class="depth1">
+                        <span class="badge bg-front">FRONT</span><br>
+                        사용자 플랫폼
+                    </td>
+                    <td class="depth2 editable-cell">메인 페이지</td>
+                    <td class="desc-cell editable-cell">
+                        <ul>
+                            <li>상단 GNB 메뉴 및 Hero 슬라이드 배너</li>
+                            <li>발자국 등록을 위한 3-Step 가이드 섹션</li>
+                        </ul>
+                    </td>
+                    <td class="note-cell editable-cell">포털 진입 거점</td>
+                </tr>
+                <tr>
+                    <td class="depth2 editable-cell">마켓 쇼핑몰</td>
+                    <td class="desc-cell editable-cell">
+                        <ul>
+                            <li>다중 조건(태그, 컬러, 듀얼 슬라이더 가격) 실시간 옵션 필터</li>
+                            <li>상품 상세 모달 오버레이 (영상 미리보기, 찜하기 등)</li>
+                            <li>Kafra Point 결제 및 완료 애니메이션 플로우</li>
+                        </ul>
+                    </td>
+                    <td class="note-cell editable-cell">상세 화면<br>오버레이 복합 구조</td>
+                </tr>
+                <tr>
+                    <td class="depth2 editable-cell">마이 스튜디오</td>
+                    <td class="desc-cell editable-cell">
+                        <ul>
+                            <li>유저 제작(등록) 및 구매(소장) 에셋 탭 분리 관리</li>
+                            <li>다운로드 내역 무제한 열람 제공</li>
+                            <li>"변환 대기" 상태인 경우 상품 정보 수정 모달 진입 창구</li>
+                        </ul>
+                    </td>
+                    <td class="note-cell editable-cell">수정 페이지<br>오버레이 통합</td>
+                </tr>
+                <tr>
+                    <td class="depth2 editable-cell">등록 프로세스</td>
+                    <td class="desc-cell editable-cell">
+                        <ul>
+                            <li>단계별 인디케이터 진척율 제공 (Wizard 구조)</li>
+                            <li>약관 동의 강제 스크롤 최하단 열람 로직 포함</li>
+                        </ul>
+                    </td>
+                    <td class="note-cell editable-cell"><strong style="color:#ef4444;">PC 브라우저 전용</strong></td>
+                </tr>
+
+                <!-- ADMIN PART -->
+                <tr>
+                    <td rowspan="3" class="depth1">
+                        <span class="badge bg-admin">ADMIN</span><br>
+                        운영 백오피스
+                    </td>
+                    <td class="depth2 editable-cell">작품 관리 대시보드</td>
+                    <td class="desc-cell editable-cell">
+                        <ul>
+                            <li>상품 상태값 별 분류 대시보드 및 JS 필터</li>
+                            <li>데이터 대량 변환 관리 (CSV/Excel 다운로드 통합)</li>
+                        </ul>
+                    </td>
+                    <td class="note-cell editable-cell">-</td>
+                </tr>
+                <tr>
+                    <td class="depth2 editable-cell">결재/상태 관리</td>
+                    <td class="desc-cell editable-cell">
+                        <ul>
+                            <li>상품 상태 직접 핸들링 관리</li>
+                            <li>완료로 변경 시 인게임 출시일 강제 부여 로직 적용</li>
+                        </ul>
+                    </td>
+                    <td class="note-cell editable-cell">어드민 내부 모달 연동</td>
+                </tr>
+                <tr>
+                    <td class="depth2 editable-cell">타입 환경 관리</td>
+                    <td class="desc-cell editable-cell">
+                        <ul>
+                            <li>동적으로 추가/삭제 가능한 해시태그 및 컬러 관리</li>
+                            <li>종속 데이터 계단식 삭제 시 '대체 적용' 안전장치 모달 포함</li>
+                        </ul>
+                    </td>
+                    <td class="note-cell editable-cell">환경 설정 단일 오버레이</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+
+    <!-- Password Modal -->
+    <div class="modal-overlay" id="passwordModal">
+        <div class="modal-content">
+            <h2>🔒 관리자 권한 인증</h2>
+            <p>표 편집을 위한 비밀번호를 입력해주세요.</p>
+            <input type="password" id="authPasswordInput" class="modal-input" placeholder="••••">
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closePasswordModal()">취소</button>
+                <button class="btn-confirm" onclick="submitPassword()">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to toggle editing, manage rows, and save to localStorage -->
+    <script>
+        const table = document.getElementById('iaTable');
+        const btn = document.getElementById('editToggleBtn');
+        let isEditing = false;
+
+        window.onload = () => {
+            const savedHtml = localStorage.getItem('iaTableBackup');
+            if (savedHtml) {
+                table.querySelector('tbody').innerHTML = savedHtml;
+            }
+        };
+
+        function toggleEditMode() {
+            if (!isEditing) {
+                // Show Custom Modal instead of Browser Prompt
+                const pwdModal = document.getElementById('passwordModal');
+                pwdModal.classList.add('show');
+                setTimeout(() => document.getElementById('authPasswordInput').focus(), 100);
+                return;
+            }
+
+            // If it's currently editing, save and turn off
+            executeEditToggle();
+        }
+
+        function closePasswordModal() {
+            document.getElementById('passwordModal').classList.remove('show');
+            document.getElementById('authPasswordInput').value = '';
+        }
+
+        function submitPassword() {
+            const pwdInput = document.getElementById('authPasswordInput');
+            const pwd = pwdInput.value;
+            
+            if (pwd !== "1111") {
+                alert("비밀번호가 일치하지 않습니다.");
+                pwdInput.value = '';
+                pwdInput.focus();
+                return;
+            }
+            
+            closePasswordModal();
+            executeEditToggle();
+        }
+
+        // Handle Enter key inside password modal
+        document.getElementById('authPasswordInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') submitPassword();
+        });
+
+        function executeEditToggle() {
+            isEditing = !isEditing;
+            
+            if (isEditing) {
+                document.querySelectorAll('.editable-cell').forEach(c => c.setAttribute('contenteditable', 'true'));
+                setupManageTools(true);
+                btn.innerHTML = '💾 저장 및 종료';
+                btn.classList.add('active');
+            } else {
+                setupManageTools(false);
+                document.querySelectorAll('.editable-cell').forEach(c => c.removeAttribute('contenteditable'));
+                btn.innerHTML = '✏️ 표 편집 켜기';
+                btn.classList.remove('active');
+                saveTemporaryState(); // Safe save
+                alert('정보구조도 수정 사항이 성공적으로 저장 및 보호되었습니다!');
+            }
+        }
+
+        function setupManageTools(show) {
+            const theadTr = table.querySelector('thead tr');
+            let th = theadTr.querySelector('.col-manage');
+            
+            if (show) {
+                if (!th) {
+                    th = document.createElement('th');
+                    th.className = 'col-manage';
+                    th.innerHTML = '🛡️ 행 관리';
+                    th.style.width = '12%';
+                    theadTr.appendChild(th);
+                }
+                
+                const rows = table.querySelectorAll('tbody tr');
+                rows.forEach(row => {
+                    if (!row.querySelector('.col-manage')) {
+                        const td = document.createElement('td');
+                        td.className = 'col-manage';
+                        const hasDepth1 = row.querySelector('.depth1') !== null;
+                        
+                        // Root rows containing the grouped 1Depth span shouldn't be deleted easily via standard button.
+                        td.innerHTML = `<div style="display:flex; gap:5px; justify-content:center;">` +
+                                       `<button title="아래에 행 추가" class="btn-micro" onclick="addRowBelow(this)">⬇️ 추가</button>` +
+                                       (hasDepth1 ? `<button class="btn-micro" onclick="alert('해당 메인 카테고리(1Depth) 기준 행은 전체 레이아웃 보호를 위해 삭제할 수 없습니다.\\n내용을 수정하시거나 아래에 있는 세부 항목 행을 삭제해주세요.')" style="opacity:0.4;cursor:not-allowed;">❌ 기준</button>` : `<button title="이 행 삭제" class="btn-micro btn-del" onclick="deleteRow(this)">❌ 삭제</button>`) +
+                                       `</div>`;
+                        row.appendChild(td);
+                    }
+                });
+            } else {
+                if (th) th.remove();
+                table.querySelectorAll('.col-manage').forEach(el => el.remove());
+            }
+        }
+
+        window.addRowBelow = function(btnAction) {
+            const currentRow = btnAction.closest('tr');
+            let parentDepthTd = null;
+            let iterRow = currentRow;
+            while(iterRow) {
+                const depth1 = iterRow.querySelector('.depth1');
+                if (depth1) {
+                    parentDepthTd = depth1;
+                    break;
+                }
+                iterRow = iterRow.previousElementSibling;
+            }
+            
+            if (parentDepthTd) {
+                const currentSpan = parseInt(parentDepthTd.getAttribute('rowspan')) || 1;
+                parentDepthTd.setAttribute('rowspan', currentSpan + 1);
+            }
+            
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td class="depth2 editable-cell" contenteditable="true">신규 화면명</td>
+                <td class="desc-cell editable-cell" contenteditable="true"><ul><li>상세 기능을 작성하세요.</li></ul></td>
+                <td class="note-cell editable-cell" contenteditable="true">비고</td>
+                <td class="col-manage">
+                    <div style="display:flex; gap:5px; justify-content:center;">
+                        <button title="아래에 행 추가" class="btn-micro" onclick="addRowBelow(this)">⬇️ 추가</button>
+                        <button title="이 행 삭제" class="btn-micro btn-del" onclick="deleteRow(this)">❌ 삭제</button>
+                    </div>
+                </td>
+            `;
+            currentRow.parentNode.insertBefore(newRow, currentRow.nextSibling);
+            saveTemporaryState();
+        };
+
+        window.deleteRow = function(btnAction) {
+            if (!confirm("이 항목 행을 정말 삭제하시겠습니까?")) return;
+            const currentRow = btnAction.closest('tr');
+            
+            let parentDepthTd = null;
+            let iterRow = currentRow;
+            while(iterRow) {
+                const depth1 = iterRow.querySelector('.depth1');
+                if (depth1) {
+                    parentDepthTd = depth1;
+                    break;
+                }
+                iterRow = iterRow.previousElementSibling;
+            }
+            
+            if (parentDepthTd) {
+                const currentSpan = parseInt(parentDepthTd.getAttribute('rowspan')) || 1;
+                if (currentSpan > 1) {
+                    parentDepthTd.setAttribute('rowspan', currentSpan - 1);
+                }
+            }
+            
+            currentRow.remove();
+            saveTemporaryState();
+        };
+
+        // Real-time background save without disturbing cursor focus
+        function saveTemporaryState() {
+            // 1) Clone tbody so we don't mess with the live DOM the user is typing in
+            const cloneTbody = table.querySelector('tbody').cloneNode(true);
+            
+            // 2) Strip 'contenteditable' and 'col-manage' from the clone
+            cloneTbody.querySelectorAll('.editable-cell').forEach(c => c.removeAttribute('contenteditable'));
+            cloneTbody.querySelectorAll('.col-manage').forEach(el => el.remove());
+            
+            // 3) Save the pristine HTML clone to localStorage
+            localStorage.setItem('iaTableBackup', cloneTbody.innerHTML);
+        }
+        
+        document.addEventListener('input', function(event) {
+            if(isEditing && event.target.classList.contains('editable-cell')) {
+                 saveTemporaryState();
+            }
+        });
+    </script>
+</body>
+</html>

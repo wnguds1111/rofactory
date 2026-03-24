@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO Factory Admin | 항목 관리</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <nav class="nav-outer">
+        <a href="#" class="nav-outer-btn"><span class="icon">👤</span>MEM</a>
+        <a href="#" class="nav-outer-btn active"><span class="icon">🌐</span>WEB</a>
+        <a href="#" class="nav-outer-btn"><span class="icon">⚙️</span>SET</a>
+    </nav>
+    
+    <nav class="nav-inner">
+        <div class="brand-header">
+            <span class="brand-logo" style="color:#0ea5e9;">GRAVITY <span>Admin Tools</span></span> 
+            <span class="brand-lang">| <span style="color:#aaa;">🌐</span> KO ⌄</span>
+        </div>
+        
+        <div class="user-section">
+            TEST <button class="btn-logout" onclick="location.href='index.html'">로그아웃</button>
+        </div>
+        
+        <div class="menu-list">
+            <div class="menu-group">
+                <div class="menu-group-title">라그나로크 제로 <span style="color:#a0aec0;font-size:12px;">▼</span></div>
+                <div class="menu-sub-list">
+                    <a href="admin.html" class="menu-sub-item">변환 대기열</a>
+                    <a href="admin_db.html" class="menu-sub-item active">RO FACTORY (항목 관리)</a>
+                    <a href="admin_penalty.html" class="menu-sub-item">제재 관리</a>
+                    <a href="admin_settle.html" class="menu-sub-item">정산 현황</a>
+                </div>
+            </div>
+            <a href="index.html" class="btn-logout" style="display:block; text-align:center; background:#fee2e2; color:#ef4444; margin-top:20px;">RO Factory 체험 나가기</a>
+        </div>
+    </nav>
+
+    <main class="main-workspace">
+        <div class="workspace-header">
+            <div class="breadcrumb-title">라그나로크 제로 > RO FACTORY > 항목 관리</div>
+            <div class="tabs-primary">
+                <div class="tab-p">작품관리</div>
+                <div class="tab-p active">항목 관리</div>
+            </div>
+            <div class="tabs-secondary">
+                <div class="tab-s active">타입</div>
+                <div class="tab-s">색상</div>
+            </div>
+        </div>
+        
+        <div class="workspace-body">
+            <div class="search-box">
+                <div class="search-box-title">검색조건</div>
+                <div class="search-controls">
+                    <div class="search-label">검색 키워드</div>
+                    <select class="search-select">
+                        <option>타입명</option>
+                        <option>색상옵션</option>
+                    </select>
+                    <input type="text" class="search-input" placeholder="검색어를 입력해주세요.">
+                    <button class="btn-search">조회하기</button>
+                </div>
+            </div>
+
+            <div class="table-header-info">총 : 30개</div>
+            
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%; text-align:center;">번호</th>
+                            <th style="width: 45%; text-align:center;">타입 명</th>
+                            <th style="width: 40%; text-align:center;">등록일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align:center;">10</td>
+                            <td style="text-align:center;"><span class="text-blue" onclick="openDetailModal('귀여운')">귀여운</span></td>
+                            <td style="text-align:center;">05.02.2026 12:00:00</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">9</td>
+                            <td style="text-align:center;"><span class="text-blue" onclick="openDetailModal('이쁜')">이쁜</span></td>
+                            <td style="text-align:center;">05.02.2026 12:00:00</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">8</td>
+                            <td style="text-align:center;"><span class="text-blue" onclick="openDetailModal('재치있는')">재치있는</span></td>
+                            <td style="text-align:center;">05.02.2026 12:00:00</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">7</td>
+                            <td style="text-align:center;"><span class="text-blue" onclick="openDetailModal('화려한')">화려한</span></td>
+                            <td style="text-align:center;">05.02.2026 12:00:00</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">6</td>
+                            <td style="text-align:center;"><span class="text-blue" onclick="openDetailModal('다크')">다크</span></td>
+                            <td style="text-align:center;">05.02.2026 12:00:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-bottom-actions">
+                <button class="btn-navy" onclick="openDetailModal('신규 등록')">등록하기</button>
+            </div>
+
+            <div class="pagination">
+                <div class="page-link">&lt;</div>
+                <div class="page-link">1</div>
+                <div class="page-link active">2</div>
+                <div class="page-link">3</div>
+                <div class="page-link">4</div>
+                <div class="page-link">5</div>
+                <div class="page-link">&gt;</div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Detail Modal -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>항목 상세보기 및 관리</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="info-grid">
+                    <div class="info-label">타입 명</div>
+                    <div class="info-val"><input type="text" class="search-input" style="width:100%;" id="modalInput" value=""></div>
+                    
+                    <div class="info-label">사용 상태</div>
+                    <div class="info-val">
+                        <select class="search-select">
+                            <option>사용 중</option>
+                            <option>숨김 처리</option>
+                        </select>
+                    </div>
+
+                    <div class="info-label">등록일</div>
+                    <div class="info-val" style="color:#64748b;">05.02.2026 12:00:00</div>
+                </div>
+                <!-- 텍스트 안내 추가 -->
+                <div style="font-size:13px; color:#ef4444; font-weight:800; background:#fee2e2; padding:15px; border-radius:8px;">
+                    ※ 항목 삭제 시 연관된 아이템 카테고리가 꼬일 수 있으므로 숨김(미사용) 처리를 권장합니다.
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-outline" onclick="closeModal()">닫기</button>
+                <button class="btn-navy" onclick="alert('저장되었습니다.'); closeModal()">정보 저장</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openDetailModal(name) {
+            document.getElementById('modalInput').value = name;
+            document.getElementById('detailModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('detailModal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

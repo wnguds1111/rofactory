@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RO FACTORY 웹기획Unit 이주형 작성 - 사용자들이 게임 에셋(발자국)을 등록할 수 있는 My Studio 사용자 프론트 페이지 프로토타입입니다.">
+    <title>작품 등록 | RO Factory</title>
+    <!-- Use Pretendard for clean, premium typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="wizard-layout">
+    <!-- Global GNJOY Bar -->
+    <div class="gnjoy-topbar">
+        <div class="container">
+            <div class="gnjoy-logo">
+                <img src="images/gnjoy_logo.png" alt="GNJOY" style="height: 18px;">
+            </div>
+            <div class="gnjoy-links">
+                <div class="lang-wrap">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    EN
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:2px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <a href="#" class="btn-signup">Sign Up</a>
+                <a href="#" class="btn-login">Login</a>
+            </div>
+        </div>
+    </div>
+    <header class="wizard-header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/roz_logo.png" alt="ROZ Logo" class="roz-logo-img" onerror="this.outerHTML='<span class=\'logo-text\' style=\'font-weight:900; font-size:24px;\'>RO FACTORY</span>'">
+            </a>
+        </div>
+        <a href="index.html" id="exitBtn" class="wizard-exit-btn">나가기 / 취소</a>
+    </header>
+
+    <main class="wizard-main">
+        <div class="w-full">
+            
+            <!-- STEP 0: INTRO OVERVIEW -->
+            <div class="step-panel active text-center" id="step0">
+                <h2 class="step-title">환영합니다!<br>나만의 발자국 등록을 시작해볼까요?</h2>
+                <p class="step-desc">단 4개의 과정만 거치면 나만의 발자국이 탄생합니다.</p>
+                
+                <div class="intro-steps-list">
+                    <div class="intro-card">
+                        <div class="step-icon">📁</div>
+                        <span class="step-tag">STEP 1</span>
+                        <h4 style="font-size: 18px;">파일 준비</h4>
+                        <p style="font-size:13px;">전용 편집툴에서 .foot 원본과 클립을 PC로 추출합니다.</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="step-icon">📤</div>
+                        <span class="step-tag">STEP 2</span>
+                        <h4 style="font-size: 18px;">에셋 업로드</h4>
+                        <p style="font-size:13px;">추출하신 파일들과 썸네일을 안전하게 서버에 등록합니다.</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="step-icon">✨</div>
+                        <span class="step-tag">STEP 3</span>
+                        <h4 style="font-size: 18px;">마켓 정보 입력</h4>
+                        <p style="font-size:13px;">작품명과 가격, 태그 등 상세 데이터를 결정하고 기입합니다.</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="step-icon">🎉</div>
+                        <span class="step-tag">STEP 4</span>
+                        <h4 style="font-size: 18px;">파일 변환 완료</h4>
+                        <p style="font-size:13px;">업로드 데이터가 실제 게임 내 아이템으로 변환되어 출시!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 1: TOOL INSTRUCTION -->
+            <div class="step-panel text-center" id="step1">
+                <div class="step-sub">STEP 1</div>
+                <h2 class="step-title">편집툴에서 파일을 먼저 준비해주세요.</h2>
+                <p class="step-desc mb-30">RO Factory 공식 편집툴을 실행한 뒤,<br>제작하신 작품의 <strong>원본 파일(.foot)</strong>과 <strong>동영상 미리보기 파일</strong>을 미리 저장해주세요.</p>
+                
+                <div class="tool-guide-box">
+                    <div class="icon-wrap">🛠️</div>
+                    <h3>아직 파일 준비가 안되셨나요?</h3>
+                    <p>편집툴을 다운하여 나만의 발자국을 만들어보세요.</p>
+                    <button class="btn-tool-download">UGC 편집 툴 다운로드 🚀</button>
+                </div>
+            </div>
+
+            <!-- STEP 2: FILE UPLOAD ONLY -->
+            <div class="step-panel" id="step2">
+                <div class="step-sub text-center">STEP 2</div>
+                <h2 class="step-title text-center">발자국 파일 등록</h2>
+                <p class="step-desc text-center mb-30">편집툴에서 추출해둔 에셋 파일들을 업로드하고 약관에 동의합니다.</p>
+                
+                <div class="form-container-clean">
+                    <div class="file-grid">
+                        <div class="file-box" onclick="document.getElementById('f1').click()">
+                            <div class="icon">📁</div>
+                            <h4>발자국 원본 데이터</h4><span>(.foot 확장자 필수)</span>
+                            <input type="file" id="f1" style="display:none" accept=".foot" onchange="handleFileSelect(this, 'f1_name')">
+                            <span id="f1_name" style="display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;"></span>
+                        </div>
+                        <div class="file-box" onclick="document.getElementById('f2').click()">
+                            <div class="icon">🎬</div>
+                            <h4>동영상 미리보기 파일</h4><span>(.mp4 / .mov 권장)</span>
+                            <input type="file" id="f2" style="display:none" accept="video/*" onchange="handleFileSelect(this, 'f2_name')">
+                            <span id="f2_name" style="display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;"></span>
+                        </div>
+                        <div class="file-box" id="f3_box" onclick="document.getElementById('f3').click()">
+                            <div class="icon" style="color: #6366f1;">💎</div>
+                            <h4>콜렉션 썸네일</h4><span>(마켓 노출용 누끼 .png)</span>
+                            <input type="file" id="f3" style="display:none" accept=".png" onchange="handleImageSelect(this, 'f3_box', 'f3_name')">
+                        </div>
+                        <div class="file-box" id="f4_box" onclick="document.getElementById('f4').click()">
+                            <div class="icon" style="color: #d97706;">🎒</div>
+                            <h4>아이템 썸네일</h4><span>(인게임 아이템 적용 가능 이미지)</span>
+                            <input type="file" id="f4" style="display:none" accept=".png, .jpg" onchange="handleImageSelect(this, 'f4_box', 'f4_name')">
+                        </div>
+                    </div>
+                    
+                    <div class="section-divider">약관 동의 <span style="color:#ef4444">*필수</span></div>
+                    <label class="custom-chk mt-30" style="margin-bottom: 20px;" onclick="forceOpenTerms(event)">
+                        <input type="checkbox" id="termsChk" disabled>
+                        <div class="chk-box"></div>
+                        <span class="chk-text">제3자의 저작권, 초상권 등 제반 권리를 침해하지 않으며 분쟁 시 당사자가 법적 책임을 지는 것에 동의합니다. <br><a href="#" onclick="forceOpenTerms(event)" style="font-weight:900;">(약관 보기)</a></span>
+                    </label>
+
+                </div>
+            </div>
+
+            <!-- STEP 3: DETAILS (FORM) -->
+            <div class="step-panel" id="step3">
+                <div class="step-sub text-center">STEP 3</div>
+                <h2 class="step-title text-center">마켓 정보 입력</h2>
+                <p class="step-desc text-center mb-30">글로벌 마켓에 노출될 기초 데이터를 자세히 기입해주세요.</p>
+                
+                <div class="form-container-clean">
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label>작품 카테고리</label>
+                            <input type="text" class="form-control" value="발자국" readonly>
+                        </div>
+                        <div class="form-group half">
+                            <label>판매 금액 설정 <span>(숫자만 입력, 무료 배포 시 0 KP)</span></label>
+                            <div style="position:relative;">
+                                <input type="number" class="form-control" placeholder="0" style="padding-right: 40px;" min="0">
+                                <span style="position:absolute; right:15px; top:12px; font-weight:700; color:#64748b;">KP</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label>작품 게시기간 <span class="required" style="color:#ef4444">*필수</span> <span>(게시 만료일 선택, 최소 30일 이상)</span></label>
+                            <input type="date" class="form-control" id="postDate">
+                        </div>
+                        <div class="form-group half">
+                            <label>작품명 <span class="required">*</span></label>
+                            <input type="text" class="form-control" placeholder="작품 이름을 20자 내로 입력하세요">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>작품 타입 <span>최대 2개 다중 선택 가능</span></label>
+                        <div class="tag-group" id="typeTags">
+                            <label class="tag-pill"><input type="checkbox" value="c1"> 귀여운</label>
+                            <label class="tag-pill"><input type="checkbox" value="c2"> 화려한</label>
+                            <label class="tag-pill"><input type="checkbox" value="c3"> 시크한</label>
+                            <label class="tag-pill"><input type="checkbox" value="c4"> 다크</label>
+                            <label class="tag-pill"><input type="checkbox" value="c5"> 신비한</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>메인 색상 <span>아이템의 주 색상을 1개만 선택해주세요</span></label>
+                        <div class="tag-group">
+                            <label class="tag-pill color-pill"><input type="radio" name="mainColor"> <span class="color-dot" style="background:#ef4444;"></span>빨강</label>
+                            <label class="tag-pill color-pill"><input type="radio" name="mainColor"> <span class="color-dot" style="background:#3b82f6;"></span>파랑</label>
+                            <label class="tag-pill color-pill"><input type="radio" name="mainColor"> <span class="color-dot" style="background:#22c55e;"></span>초록</label>
+                            <label class="tag-pill color-pill"><input type="radio" name="mainColor"> <span class="color-dot" style="background:#eab308;"></span>노랑</label>
+                            <label class="tag-pill color-pill"><input type="radio" name="mainColor"> <span class="color-dot" style="background:#1e293b;"></span>블랙</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4: COMPLETION (SUCCESS) -->
+            <div class="step-panel text-center" id="step4">
+                <div class="step-sub">STEP 4</div>
+                <h2 class="step-title">성공적으로 마무리되었습니다!</h2>
+                <div class="completion-box">
+                    <div class="anim-icon">🎉</div>
+                    <p class="step-desc">업로드하신 데이터가 파일 변환을 거치고 있으며, 완료 시 글로벌 마켓에 출시됩니다.</p>
+                    
+                    <div class="limit-box mt-30">
+                        <span>오늘 남은 등록 잔여 횟수</span>
+                        <strong>2 / 3회 남음</strong>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Floating bottom controller for progressive forms -->
+    <footer class="wizard-footer">
+        <div class="progress-track">
+            <div class="progress-fill" id="progressBar" style="width: 20%;"></div>
+        </div>
+        <button class="btn-back" id="btnBack" onclick="prevStep()">이전으로</button>
+        <button class="btn-next" id="btnNext" onclick="nextStep()">다음 단계 이동</button>
+    </footer>
+
+    <!-- Terms Modal -->
+    <div id="termsModal" class="terms-modal-overlay" onclick="closeTerms(event)">
+        <div class="terms-modal" onclick="event.stopPropagation()">
+            <h2>RO Factory 이용 약관</h2>
+            <div class="terms-content" id="termsContent" onscroll="checkTermsScroll()">
+                제 1장 총칙<br><br>
+                제 1조 목적<br>
+                이 약관은 사용자가 RO Factory 스튜디오를 통해 에셋(UGC)을 시장에 등록함에 있어 지적재산권 및 타인의 권리를 침해하지 않았음을 보증하며, 분쟁 발생 시 모든 1차적 법적 책임이 사용자 본인에게 있음을 명시합니다.<br><br>
+                제 2조 권리 보증<br>
+                등록하는 작품 내 포함된 모든 이미지, 모델링, 효과음 등은 제3자의 저작권을 침해하지 아니한 순수 창작물이거나 합법적으로 사용 권한을 획득한 에셋 포맷이어야 합니다.<br><br>
+                제 3조 법적 책임의 귀속<br>
+                만일 본인이 등록한 콘텐츠로 인하여 제 3자가 이의를 제기하거나 저작권법, 상표법 위반 등의 법적 분쟁이 발생할 경우, 업로더는 전적으로 당사자 간의 책임 아래 해결해야 하며 Gravity는 이로 인한 2차적 피해에 연루되지 않음을 원칙으로 합니다.<br><br>
+                해당 조항에 서명(체크박스 활성화)함으로써 사용자는 모든 규칙을 준수할 것을 인증하며 동의 절차를 갈음합니다.<br><br>
+                (본 약관의 동의 버튼 활성화를 위해 스크롤을 최하단으로 내려주세요)
+            </div>
+            <button type="button" class="btn-close-modal" id="btnAgree" onclick="agreeTerms(event)" disabled style="opacity:0.5; cursor:not-allowed;">스크롤을 끝까지 내려주세요</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function forceOpenTerms(e) { 
+            e.preventDefault(); 
+            document.getElementById('termsModal').classList.add('show'); 
+            checkTermsScroll(); 
+        }
+        function closeTerms(e) { document.getElementById('termsModal').classList.remove('show'); }
+        function checkTermsScroll() {
+            var el = document.getElementById('termsContent');
+            if (el.scrollHeight - el.scrollTop <= el.clientHeight + 50) {
+                var btn = document.getElementById('btnAgree');
+                btn.disabled = false;
+                btn.style.opacity = 1;
+                btn.style.cursor = 'pointer';
+                btn.innerText = '확인 및 약관 동의하기';
+            }
+        }
+        function agreeTerms(e) {
+            document.getElementById('termsChk').checked = true;
+            closeTerms(e);
+        }
+
+        function handleFileSelect(input, labelId) {
+            if(input.files && input.files[0]) {
+                document.getElementById(labelId).innerText = "파일명: " + input.files[0].name;
+            }
+        }
+        function handleImageSelect(input, boxId, nameId) {
+            if(input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var box = document.getElementById(boxId);
+                    
+                    var preview = box.querySelector('.preview-img');
+                    if (!preview) {
+                        preview = document.createElement('div');
+                        preview.className = 'preview-img';
+                        preview.style.cssText = 'width: 80px; height: 80px; margin: 10px auto; border-radius: 8px; border: 1px dashed #cbd5e1;';
+                        box.insertBefore(preview, box.querySelector('input'));
+                    }
+                    preview.style.backgroundImage = 'url(' + e.target.result + ')';
+                    preview.style.backgroundSize = 'contain';
+                    preview.style.backgroundPosition = 'center';
+                    preview.style.backgroundRepeat = 'no-repeat';
+
+                    var nameSpan = document.getElementById(nameId);
+                    if (!nameSpan) {
+                        nameSpan = document.createElement('span');
+                        nameSpan.id = nameId;
+                        nameSpan.style.cssText = 'display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;';
+                        box.insertBefore(nameSpan, box.querySelector('input'));
+                    }
+                    nameSpan.innerText = "파일명: " + input.files[0].name;
+                    
+                    // Only hide the default icon
+                    var icon = box.querySelector('.icon');
+                    if(icon) icon.style.display = 'none';
+                    
+                    // Clear previous styles if any
+                    box.style.backgroundImage = 'none'; 
+                    var children = box.children;
+                    for(var i=0; i<children.length; i++) {
+                        if(children[i].tagName !== 'INPUT') { children[i].style.opacity = '1'; }
+                    }
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Custom Wizard UI Logic execution (DOM Isolation)
+        let currentStep = 0; 
+        const totalSteps = 4; // Intro(0) + Form(1,2,3) + Finish(4)
+        
+        function updateWizard() {
+            document.querySelectorAll('.step-panel').forEach((el, idx) => {
+                el.classList.remove('active');
+                if (idx === currentStep) { el.classList.add('active'); }
+            });
+            
+            // Advanced progress bar tracking width calculation
+            const progress = ((currentStep + 1) / (totalSteps + 1)) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            
+            // Controller states
+            const btnBack = document.getElementById('btnBack');
+            const exitBtns = document.querySelectorAll('.wizard-exit-btn'); // handles potential multiple exit btns
+
+            if(currentStep === 0) { 
+                btnBack.style.visibility = 'hidden'; 
+                exitBtns.forEach(btn => btn.style.display = 'inline-block');
+            } 
+            else if (currentStep === totalSteps) { 
+                btnBack.style.visibility = 'hidden'; 
+                exitBtns.forEach(btn => btn.style.display = 'none'); // Hide exit btn on finish!
+            }
+            else { 
+                btnBack.style.visibility = 'visible'; 
+                exitBtns.forEach(btn => btn.style.display = 'inline-block');
+            }
+            
+            // Update confirmation states naturally matching the form sequence architecture
+            const btnNext = document.getElementById('btnNext');
+            if (currentStep === totalSteps - 1) {
+                btnNext.innerText = "데이터 최종 등록하기";
+                btnNext.style.background = "#06b6d4";
+                btnNext.style.color = "#000";
+            } else if (currentStep === totalSteps) {
+                btnNext.innerText = "MY STUDIO 이동 ↗";
+                btnNext.style.background = "#fff"; 
+                btnNext.style.color = "#1e3a8a";
+            } else {
+                btnNext.innerText = "확인 후 다음 단계";
+                btnNext.style.background = "var(--primary-bright)";
+                btnNext.style.color = "#fff";
+            }
+        }
+
+        function nextStep() {
+            // Validations
+            if (currentStep === 2 && !document.getElementById('termsChk').checked) {
+                alert('약관에 반드시 동의해야 다음 단계로 진행할 수 있습니다.');
+                return;
+            }
+            if (currentStep === 3) {
+                var dateInput = document.getElementById('postDate');
+                if (!dateInput.value) {
+                    alert('작품 게시기간 만료일을 필수로 선택해주세요.');
+                    return;
+                }
+            }
+
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateWizard();
+            } else {
+                // Final Redirection Event Output Trigger 
+                window.location.href = "studio.html"; 
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                updateWizard();
+            }
+        }
+
+        // Tag Max Queue Logic for (Type Tags) constraint max 2 checkboxes
+        const typeTags = document.querySelectorAll('#typeTags input[type="checkbox"]');
+        let typeTagQueue = [];
+
+        typeTags.forEach(param => {
+            param.addEventListener('change', function(e) {
+                if(this.checked) {
+                    typeTagQueue.push(this);
+                    if(typeTagQueue.length > 2) {
+                        // Uncheck the oldest one and remove from arr
+                        const oldest = typeTagQueue.shift();
+                        oldest.checked = false;
+                    }
+                } else {
+                    // Remove from queue manually
+                    typeTagQueue = typeTagQueue.filter(item => item !== this);
+                }
+            });
+        });
+
+        // Initialize view safely 
+        updateWizard();
+    </script>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- PRD DESCRIPTION MODULE REMOVED - See description_module/ folder for reusable code -->
+</body>

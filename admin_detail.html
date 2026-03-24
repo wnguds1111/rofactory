@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RO FACTORY 웹기획Unit 이주형 작성 - 관리자(Admin) 전용 작품 상태 변경 상세 관리(결재) 페이지 프로토타입입니다.">
+    <title>RO Factory Admin | 작품 상세 정보</title>
+    <link rel="stylesheet" href="admin.css">
+    <style>
+        .detail-card {
+            background:#fff; border:1px solid var(--border-color); border-radius:8px; padding:30px;
+            display:flex; gap:30px; box-shadow:0 2px 10px rgba(0,0,0,0.02);
+            margin-bottom: 30px;
+        }
+        .detail-img-box {
+            width:240px; height:240px; flex-shrink:0; background:#f8fafc; border-radius:8px; display:flex; 
+            align-items:center; justify-content:center; font-size:100px;
+        }
+        .detail-info { flex:1; display:flex; flex-direction:column; gap:15px; }
+        .detail-row { display:flex; border-bottom:1px solid #eee; padding-bottom:12px; }
+        .detail-row .label { width:120px; font-weight:800; color:#555; }
+        .detail-row .val { flex:1; font-weight:700; color:#111; }
+        
+        .action-card {
+            background:#f8fafc; border:1px solid var(--border-color); border-radius:8px; padding:25px;
+        }
+        .action-title { font-size:15px; font-weight:900; margin-bottom:15px; color:#111; }
+        .action-form { display:grid; grid-template-columns:120px 1fr; gap:15px; align-items:start; }
+    </style>
+</head>
+<body>
+
+    <!-- Outer Nav (Blue) -->
+    <nav class="nav-outer">
+        <a href="#" class="nav-outer-btn"><span class="icon">👤</span>MEM</a>
+        <a href="#" class="nav-outer-btn active"><span class="icon">🌐</span>WEB</a>
+        <a href="#" class="nav-outer-btn"><span class="icon">⚙️</span>SET</a>
+    </nav>
+    
+    <!-- Inner Nav (Light Grey) -->
+    <nav class="nav-inner">
+        <div class="brand-header">
+            <span class="brand-logo">GRAVITY<span>Admin Tools</span></span> 
+            <span class="brand-lang">| 🌐 KO ▾</span>
+        </div>
+        
+        <div class="user-section">
+            TEST <button class="btn-logout">로그아웃</button>
+        </div>
+        
+        <div class="menu-list">
+            <div class="menu-group" style="box-shadow: 0 4px 10px rgba(0,0,0,0.05); border:none;">
+                <div class="menu-group-title" style="color:#0ea5e9;">라그나로크 제로 <span style="font-size:12px;">▲</span></div>
+                <div class="menu-sub-list">
+                    <a href="admin.html" class="menu-sub-item active">RO FACTORY</a>
+                </div>
+            </div>
+            <a href="index.html" class="btn-logout" style="display:block; text-align:center; background:#fee2e2; color:#ef4444; margin-top:20px; text-decoration:none;">사이트 메인으로 이동</a>
+        </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <main class="main-workspace">
+        <div class="workspace-header">
+            <div class="breadcrumb-title">라그나로크 제로 > RO FACTORY > 작품 상세 관리</div>
+            <div class="tabs-primary">
+                <a href="admin.html" class="tab-p active" style="text-decoration:none;">← 목록으로 돌아가기</a>
+            </div>
+        </div>
+        
+        <div class="workspace-body">
+            
+            <div class="detail-card">
+                <div class="detail-img-box">🌸</div>
+                <div class="detail-info">
+                    <h2 style="font-size:22px; font-weight:900; color:var(--primary-blue); margin-bottom:10px;">다크메이지 잿빛흔적</h2>
+                    
+                    <div class="detail-row"><div class="label">작품 ID</div><div class="val">RF00015</div></div>
+                    <div class="detail-row"><div class="label">카테고리 (태그)</div><div class="val">발자국 <span style="margin-left:8px; font-size:12px; background:#e2e8f0; padding:2px 6px; border-radius:4px; color:#475569;">#다크</span> <span style="font-size:12px; background:#e2e8f0; padding:2px 6px; border-radius:4px; color:#475569;">#멋있는</span></div></div>
+                    <div class="detail-row"><div class="label">제작자 계정</div><div class="val">MakerJo <span style="color:#64748b; font-size:12px;">(jo@gnjoy.com)</span></div></div>
+                    <div class="detail-row"><div class="label">가격 정보</div><div class="val">1,500 KP</div></div>
+                    <div class="detail-row"><div class="label">등록일</div><div class="val">20.03.2026 14:00:00</div></div>
+                    <div class="detail-row" style="border:none;"><div class="label">유효기간</div><div class="val">무제한</div></div>
+                </div>
+            </div>
+
+            <div class="action-card">
+                <div class="action-title">작품 상태 변경 설정</div>
+                <div class="action-form">
+                    <div class="label" style="font-weight:800; color:#555; padding-top:10px;">현재 상태설정</div>
+                    <div>
+                        <select class="search-select" id="statusSelect" style="width:250px; background:#fff;" onchange="toggleDateRow()">
+                            <option value="변환 대기">변환 대기</option>
+                            <option value="변환 완료">변환 완료</option>
+                            <option value="판매 진행">판매 진행</option>
+                            <option value="변환 실패">변환 실패</option>
+                        </select>
+                        
+                        <div id="ingameDateRow" style="display:none; margin-top:15px; padding:15px; background:#f1f5f9; border:1px solid #e2e8f0; border-radius:6px; width:250px;">
+                            <div style="font-size:12px; font-weight:800; color:#555; margin-bottom:8px;">인게임 배포 예정일 추가</div>
+                            <input type="date" class="search-input" style="width:100%; box-sizing:border-box;">
+                        </div>
+                        
+                        <ul style="margin-top:15px; font-size:12px; color:#64748b; margin-left:15px; line-height:1.4;">
+                            <li><strong style="color:#ef4444;">판매 대기 / 진행</strong> 상태로 즉각 변경 시 마이 스튜디오 정책에 의해 유저의 '수정하기' 권한이 박탈됩니다.</li>
+                            <li>실제 마이 스튜디오 프론트엔드와 실시간 동기화로 반영됩니다.</li>
+                        </ul>
+                    </div>
+
+                    <div></div>
+                    <div style="display:flex; gap:10px; margin-top:10px;">
+                        <button class="btn-navy" style="background:#10b981;" onclick="alert('데이터베이스에 작품 상태가 저장되었습니다.'); location.href='admin.html';">변경사항 저장</button>
+                        <button class="filter-btn" onclick="location.href='admin.html'">목록 취소</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function toggleDateRow() {
+            var select = document.getElementById('statusSelect');
+            var dateRow = document.getElementById('ingameDateRow');
+            if(select.value === '변환 완료') {
+                dateRow.style.display = 'block';
+            } else {
+                dateRow.style.display = 'none';
+            }
+        }
+
+        window.onload = function() {
+            // URL 파라미터에서 status 값을 읽어서 셀렉트박스와 동기화
+            const urlParams = new URLSearchParams(window.location.search);
+            const passedStatus = urlParams.get('status');
+            
+            if(passedStatus) {
+                const selectElement = document.getElementById('statusSelect');
+                for(let i=0; i<selectElement.options.length; i++) {
+                    if(selectElement.options[i].value === passedStatus) {
+                        selectElement.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            toggleDateRow(); // 초기 상태 반영
+        }
+    </script>
+</body>
+</html>

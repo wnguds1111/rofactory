@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RO FACTORY 웹기획Unit 이주형 작성 - 시스템 서비스 플로우차트입니다.">
+    <title>RO FACTORY 서비스 플로우차트</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Pretendard', sans-serif; background: #f8fafc; color: #1e293b; min-height: 100vh; padding: 40px 20px; }
+        .wrap { max-width: 1200px; margin: 0 auto; }
+
+        /* Header - Premium style */
+        .page-head { background: #fff; border-radius: 20px; padding: 30px 35px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .page-head h1 { font-size: 28px; font-weight: 900; color: #0f172a; display: flex; align-items: center; gap: 10px; }
+        .page-head h1 .ver { font-size: 12px; background: linear-gradient(135deg, #3b82f6, #0ea5e9); color: #fff; padding: 5px 14px; border-radius: 20px; font-weight: 800; }
+        .page-head .meta { font-size: 12px; color: #64748b; font-weight: 600; margin-top: 4px; }
+        .btn-home { text-decoration: none; color: #0ea5e9; font-weight: 800; font-size: 14px; background: #f0f9ff; padding: 10px 20px; border-radius: 10px; border: 1px solid #bae6fd; transition: 0.2s; }
+        .btn-home:hover { background: #e0f2fe; transform: translateY(-2px); }
+
+        /* Section */
+        .section { background: #fff; border-radius: 20px; padding: 40px 45px; margin-bottom: 30px; box-shadow: 0 2px 12px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; }
+        .section-title { font-size: 20px; font-weight: 900; color: #0f172a; margin-bottom: 30px; padding-bottom: 12px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; gap: 10px; }
+        .section-title .tag { font-size: 12px; font-weight: 800; color: #0ea5e9; background: #f0f9ff; padding: 5px 14px; border-radius: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+        /* Node - clean uniform style */
+        .node { padding: 20px 24px; border: 1.5px solid #cbd5e1; border-radius: 12px; background: #fff; min-width: 170px; }
+        .node .label { font-size: 12px; font-weight: 800; color: #0ea5e9; margin-bottom: 6px; letter-spacing: 0.5px; }
+        .node .text { font-size: 16px; font-weight: 800; color: #0f172a; line-height: 1.4; }
+        .node .sub { font-size: 13px; font-weight: 500; color: #94a3b8; margin-top: 4px; line-height: 1.5; }
+
+        .node.dashed { border-style: dashed; }
+
+        /* Arrow */
+        .arrow { padding: 0 10px; color: #cbd5e1; font-size: 24px; display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+        .arrow .lbl { font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 2px; }
+
+        .arrow-down { text-align: center; padding: 10px 0; color: #cbd5e1; font-size: 24px; }
+        .arrow-down .lbl { font-size: 11px; font-weight: 700; color: #94a3b8; margin-left: 6px; }
+
+        /* Flow row */
+        .flow-row { display: flex; align-items: center; overflow-x: auto; padding: 5px 0; }
+
+        /* Branch */
+        .branch { display: flex; gap: 60px; justify-content: center; padding: 0 20px; }
+        .branch-col { display: flex; flex-direction: column; align-items: center; }
+        .branch-label { font-size: 13px; font-weight: 800; color: #0f172a; padding: 6px 20px; border-radius: 20px; background: #f1f5f9; margin-bottom: 14px; }
+
+        /* Status bar */
+        .status-bar { display: flex; align-items: stretch; border: 1.5px solid #e2e8f0; border-radius: 14px; overflow: hidden; }
+        .status-item { flex: 1; text-align: center; padding: 24px 14px; font-size: 16px; font-weight: 800; color: #0f172a; background: #fff; border-right: 1.5px solid #e2e8f0; }
+        .status-item:last-child { border-right: none; }
+        .status-item .s-sub { display: block; font-size: 12px; font-weight: 500; color: #94a3b8; margin-top: 5px; }
+        .status-item.current { background: #f0f9ff; color: #0284c7; }
+
+        /* Etc */
+        .note { text-align: center; margin-top: 16px; font-size: 14px; font-weight: 600; color: #64748b; border: 1.5px dashed #cbd5e1; border-radius: 10px; padding: 14px 24px; display: inline-block; }
+        .divider { text-align: center; color: #94a3b8; padding: 18px 0; font-size: 14px; font-weight: 700; }
+
+        @media (max-width: 700px) {
+            body { padding: 20px 10px; }
+            .section { padding: 20px 15px; }
+            .page-head { padding: 20px; }
+            .page-head h1 { font-size: 20px; }
+            .branch { flex-direction: column; gap: 20px; padding: 0; }
+            .status-bar { flex-direction: column; }
+            .status-item { border-right: none; border-bottom: 1.5px solid #e2e8f0; }
+            .status-item:last-child { border-bottom: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <!-- Header -->
+        <div class="page-head">
+            <div>
+                <h1>🔄 RO FACTORY 시스템 플로우차트 <span class="ver">v2.0</span></h1>
+                <p class="meta">웹기획Unit 이주형 작성 · 2026.03 업데이트</p>
+            </div>
+            <a href="index.html" class="btn-home">🏠 포털 홈으로</a>
+        </div>
+
+        <!-- FLOW 1: Registration -->
+        <div class="section">
+            <div class="section-title">FLOW 1 — 작품 등록 <span class="tag">Registration</span></div>
+            <div class="flow-row">
+                <div class="node">
+                    <div class="label">STEP 01</div>
+                    <div class="text">UGC 편집툴</div>
+                    <div class="sub">.foot 파일 제작 · 추출</div>
+                </div>
+                <div class="arrow"><span class="lbl"></span>→</div>
+                <div class="node">
+                    <div class="label">STEP 02</div>
+                    <div class="text">웹 로그인</div>
+                    <div class="sub">GNJOY 계정 접속</div>
+                </div>
+                <div class="arrow"><span class="lbl"></span>→</div>
+                <div class="node">
+                    <div class="label">STEP 03</div>
+                    <div class="text">작품 등록 (4-Step)</div>
+                    <div class="sub">에셋 + 정보 + 약관동의</div>
+                </div>
+                <div class="arrow"><span class="lbl">POST</span>→</div>
+                <div class="node">
+                    <div class="label">STEP 04</div>
+                    <div class="text">DB · 파일 저장</div>
+                    <div class="sub">메타데이터 + 에셋 업로드</div>
+                </div>
+                <div class="arrow"><span class="lbl"></span>→</div>
+                <div class="node dashed">
+                    <div class="label">STEP 05</div>
+                    <div class="text">변환 대기</div>
+                    <div class="sub">대기열 자동 진입</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLOW 2: Conversion -->
+        <div class="section">
+            <div class="section-title">FLOW 2 — 어드민 변환 처리 <span class="tag">Conversion</span></div>
+            <div style="display:flex; flex-direction:column; align-items:center;">
+                <div class="node" style="min-width:220px;">
+                    <div class="label">STEP 01</div>
+                    <div class="text">변환 대기열</div>
+                    <div class="sub">작품 관리 리스트</div>
+                </div>
+                <div class="arrow-down">↓ <span class="lbl">어드민 검수</span></div>
+                <div class="node" style="min-width:220px;">
+                    <div class="label">STEP 02</div>
+                    <div class="text">변환 판정</div>
+                    <div class="sub">승인 또는 거절 결정</div>
+                </div>
+                <div class="arrow-down">↓</div>
+
+                <div class="branch">
+                    <div class="branch-col">
+                        <div class="branch-label">승인</div>
+                        <div class="node" style="min-width:180px;">
+                            <div class="label">A1</div>
+                            <div class="text">변환 완료</div>
+                            <div class="sub">출시일 설정 · 서버 배포</div>
+                        </div>
+                        <div class="arrow-down">↓</div>
+                        <div class="node" style="min-width:180px;">
+                            <div class="label">A2</div>
+                            <div class="text">판매 진행</div>
+                            <div class="sub">마켓 즉각 노출</div>
+                        </div>
+                    </div>
+                    <div class="branch-col">
+                        <div class="branch-label">거절</div>
+                        <div class="node dashed" style="min-width:180px;">
+                            <div class="label">B1</div>
+                            <div class="text">변환 실패</div>
+                            <div class="sub">거절 사유 유저 노출</div>
+                        </div>
+                        <div class="arrow-down">↓</div>
+                        <div class="node" style="min-width:180px;">
+                            <div class="label">B2</div>
+                            <div class="text">유저 수정 후 재등록</div>
+                            <div class="sub">마이스튜디오에서 수정</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLOW 3: Transaction -->
+        <div class="section">
+            <div class="section-title">FLOW 3 — 마켓 거래 및 정산 <span class="tag">Transaction</span></div>
+            <div class="flow-row">
+                <div class="node">
+                    <div class="label">STEP 01</div>
+                    <div class="text">글로벌 마켓</div>
+                    <div class="sub">검색 · 상세 조회</div>
+                </div>
+                <div class="arrow"><span class="lbl">구매</span>→</div>
+                <div class="node">
+                    <div class="label">STEP 02</div>
+                    <div class="text">KP 결제</div>
+                    <div class="sub">Kafra Point 차감</div>
+                </div>
+                <div class="arrow"><span class="lbl">권한</span>→</div>
+                <div class="node">
+                    <div class="label">STEP 03</div>
+                    <div class="text">구매 목록</div>
+                    <div class="sub">다운로드 권한 획득</div>
+                </div>
+                <div class="arrow"><span class="lbl">연동</span>→</div>
+                <div class="node">
+                    <div class="label">STEP 04</div>
+                    <div class="text">인게임 적용</div>
+                    <div class="sub">게임 서버 발자국 설치</div>
+                </div>
+            </div>
+
+            <div class="divider">↕ 동시 정산 처리</div>
+
+            <div class="flow-row" style="justify-content:center;">
+                <div class="node">
+                    <div class="label">S1</div>
+                    <div class="text">수익 정산 풀</div>
+                    <div class="sub">수수료 차감 후 적립</div>
+                </div>
+                <div class="arrow"><span class="lbl">주기</span>→</div>
+                <div class="node">
+                    <div class="label">S2</div>
+                    <div class="text">지급 승인</div>
+                    <div class="sub">어드민 정산 확인</div>
+                </div>
+                <div class="arrow"><span class="lbl">완료</span>→</div>
+                <div class="node">
+                    <div class="label">S3</div>
+                    <div class="text">KP 지급</div>
+                    <div class="sub">정산 내역 확인 가능</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLOW 4: Lifecycle -->
+        <div class="section">
+            <div class="section-title">FLOW 4 — 만료 및 페널티 <span class="tag">Lifecycle</span></div>
+            <div class="flow-row">
+                <div class="node">
+                    <div class="label">STEP 01</div>
+                    <div class="text">판매 진행 중</div>
+                    <div class="sub">마켓 정상 노출</div>
+                </div>
+                <div class="arrow"><span class="lbl">기간 만료</span>→</div>
+                <div class="node dashed">
+                    <div class="label">STEP 02</div>
+                    <div class="text">만료</div>
+                    <div class="sub">노출 중지 · 소장 유저 유지</div>
+                </div>
+                <div class="arrow"><span class="lbl">선택</span>→</div>
+                <div class="node">
+                    <div class="label">STEP 03</div>
+                    <div class="text">재등록 또는 종료</div>
+                    <div class="sub">유저 판단</div>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:16px;">
+                <div class="note">페널티 발생 시 → 어드민 제재 판정 → 강제 비공개 처리 (마켓 즉시 노출 중지)</div>
+            </div>
+        </div>
+
+        <!-- Status Lifecycle -->
+        <div class="section">
+            <div class="section-title">작품 상태 라이프사이클 <span class="tag">Status</span></div>
+            <div class="status-bar">
+                <div class="status-item">변환 대기<span class="s-sub">등록 직후</span></div>
+                <div class="status-item">변환 완료<span class="s-sub">어드민 승인</span></div>
+                <div class="status-item current">판매 진행<span class="s-sub">마켓 노출</span></div>
+                <div class="status-item">만료<span class="s-sub">기간 종료</span></div>
+            </div>
+            <div style="text-align:center; margin-top:14px;">
+                <div class="note">변환 실패 — 거절 시 발생 · 수정 후 재등록 가능</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

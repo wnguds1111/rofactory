@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO Factory | 메인</title>
+    <!-- Use Pretendard for clean, premium typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Responsive tweaks for the grid layout */
+        @media (min-width: 1200px) {
+            .steps-container[style*="grid-template-columns"] {
+                gap: 25px;
+            }
+            .step-card { padding: 35px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Global GNJOY Bar (Restored!) -->
+    <div class="gnjoy-topbar">
+        <div class="container">
+            <div class="gnjoy-logo">
+                <img src="images/gnjoy_logo.png" alt="GNJOY" style="height: 18px;">
+            </div>
+            <div class="gnjoy-links">
+                <div class="lang-wrap">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    EN
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:2px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <a href="#" class="btn-signup">Sign Up</a>
+                <a href="#" class="btn-login">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- GNB (ROZ Centered layout restored!) -->
+    <header class="gnb">
+        <div class="container gnb-center-layout">
+            <nav class="nav-left">
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_seasonpass.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">🎟️</span>
+                    <span class="gnb-text">SUBSCRIPTION</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_topup.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">💎</span>
+                    <span class="gnb-text">TOP UP</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <div class="dropdown-wrapper">
+                    <a href="main.html" class="gnb-item active">
+                        <img src="images/icon_rofactory.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                        <span class="gnb-emoji" style="display:none; font-size:24px;">🏭</span>
+                        <span class="gnb-text">RO FACTORY</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="register.html">작품 등록</a>
+                        <a href="market.html">마켓 이동</a>
+                        <a href="#" onclick="alert('게시글 연동 예정입니다.'); return false;">가이드 안내</a>
+                        <a href="studio.html">마이 스튜디오</a>
+                    </div>
+                </div>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_getporing.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">🐾</span>
+                    <span class="gnb-text">GET PORING</span>
+                </a>
+            </nav>
+            
+            <div class="logo logo-center">
+                <a href="index.html">
+                    <img src="images/roz_logo.png" alt="ROZ Logo" class="roz-logo-img" onerror="this.outerHTML='<span class=\'logo-text\'>RAGNAROK ZERO</span>'">
+                </a>
+            </div>
+
+            <!-- Hamburger menu for Mobile -->
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav class="nav-right">
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_news.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">📜</span>
+                    <span class="gnb-text">NEWS</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_gameinfo.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">💡</span>
+                    <span class="gnb-text">GAME INFO</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_resource.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">🗃️</span>
+                    <span class="gnb-text">RESOURCE</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_community.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">💬</span>
+                    <span class="gnb-text">COMMUNITY</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Top Reference Layout Section (Hero Slider + 2x2 Grid) -->
+        <section class="main-dashboard container mt-60">
+            <!-- Left Hero Section (now a 3D Image Slider with Mouse Drag) -->
+            <div class="dash-hero" style="border-radius: 30px; overflow:hidden;">
+                <!-- Slider Component -->
+                <div class="hero-slider hover-grab">
+                    <div class="slide active" style="background: url('https://file.gnjoy.com/Upload/Content/Image/2026/03/ro_factory_hero_mockup.jpg') center/cover no-repeat, linear-gradient(135deg, #1e3a8a, #0ea5e9);"></div>
+                    <div class="slide" style="background: linear-gradient(135deg, #0ea5e9, #3b82f6);"></div>
+                    <div class="slide" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);"></div>
+                    <div class="slide" style="background: linear-gradient(135deg, #10b981, #059669);"></div>
+                    <div class="slide" style="background: linear-gradient(135deg, #f59e0b, #d97706);"></div>
+                    
+                    <div class="hero-overlay"></div>
+                    
+                    <div class="hero-content text-dark-hero">
+                        <span class="hero-badge" style="background-color: var(--primary-bright); font-size:14px; padding:6px 16px; border-radius:8px;">GRAND OPEN</span>
+                        <h1 style="color:#fff;">RO FACTORY</h1>
+                    </div>
+
+                    <!-- Slide fractional pagination at the bottom -->
+                    <div class="slider-pagination" style="position:absolute; bottom:30px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.65); backdrop-filter:blur(8px); color:#fff; padding:10px 20px; border-radius:24px; font-size:15px; font-weight:800; display:flex; gap:6px; align-items:center; z-index:4;">
+                        <span id="slideCurrent" style="font-size:18px; font-weight:900;">1</span>
+                        <span style="color:rgba(255,255,255,0.4);">/</span>
+                        <span id="slideTotal" style="color:rgba(255,255,255,0.6);">5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Cards Grid (2x2) -->
+            <div class="dash-grid">
+                <a href="register.html" class="dash-card">
+                    <span class="hashtag">#단하나의_발자국</span>
+                    <h3>작품 등록</h3>
+                    <p>내 감성을 그대로 담은 에셋</p>
+                    <div class="icon-wrap">🪄</div>
+                </a>
+                
+                <a href="studio.html" class="dash-card">
+                    <span class="hashtag">#나의_공간</span>
+                    <h3>MY STUDIO</h3>
+                    <p>등록 현황 및 에셋 관리</p>
+                    <div class="icon-wrap">📝</div>
+                </a>
+
+                <a href="#" onclick="alert('게시글 연동 예정입니다.'); return false;" class="dash-card">
+                    <span class="hashtag" style="background-color:#0ea5e9;">#어떻게_시작할까</span>
+                    <h3>가이드 안내</h3>
+                    <p>만드는 방법이 궁금하다면?</p>
+                    <div class="icon-wrap">💬</div>
+                </a>
+
+                <a href="market.html" class="dash-card">
+                    <span class="hashtag" style="background-color:#0284c7;">#상점_바로가기</span>
+                    <h3>마켓 이동</h3>
+                    <p>모험가들과의 빛나는 거래소</p>
+                    <div class="icon-wrap">🛍️</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Product Listings Container wrapped in White Background Band -->
+        <div class="bg-white-section">
+            <section class="market-section container" id="market">
+                
+            <!-- Best Footprints Header -->
+            <div class="list-header mt-80" style="display:flex; justify-content:space-between; align-items:flex-end;">
+                <div>
+                    <div class="hashtag-title">#MD's_Pick</div>
+                    <h2>이달의 베스트 발자국</h2>
+                </div>
+                <div style="display:flex; gap:8px; margin-bottom:4px;">
+                    <button class="slider-nav-btn" onclick="scrollSlider('bestSliderTrack', -1)">‹</button>
+                    <button class="slider-nav-btn" onclick="scrollSlider('bestSliderTrack', 1)">›</button>
+                </div>
+            </div>
+            
+            <!-- Best Footprints: Scroll -->
+            <div class="slider-wrapper mt-30">
+                <div class="slider-track" id="bestSliderTrack">
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(135deg, #ff9a9e, #fecfef); font-size:80px;">🌸<div class="badge-new" style="background:#3b82f6;">BEST</div></div><div class="info-box"><span class="title">포링 벚꽃 스텝</span><span class="price">FREE</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to top, #00c6fb, #005bea); font-size:80px;">❄️<div class="badge-new" style="background:#3b82f6;">BEST</div></div><div class="info-box"><span class="title">크리스탈 아이스</span><span class="price">1,200 KP</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to right, #434343, black); font-size:80px;">🌑<div class="badge-new" style="background:#3b82f6;">BEST</div></div><div class="info-box"><span class="title">어둠의 심연</span><span class="price">5,500 KP</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to top, #0ba360, #3cba92); font-size:80px;">☂️<div class="badge-new" style="background:#3b82f6;">BEST</div></div><div class="info-box"><span class="title">초록 우산 점프</span><span class="price">FREE</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to right, #f83600, #f9d423); font-size:80px;">✨<div class="badge-new" style="background:#3b82f6;">BEST</div></div><div class="info-box"><span class="title">황금빛 엘프 궤적</span><span class="price">9,000 KP</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to bottom, #8e9eab, #eef2f3); font-size:80px;">🔮<div class="badge-new" style="background:#3b82f6;">BEST</div></div><div class="info-box"><span class="title">다크 메이지</span><span class="price">FREE</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(135deg, #667eea, #764ba2); font-size:80px;">💜<div class="badge-new" style="background:#3b82f6;">BEST</div></div><div class="info-box"><span class="title">암흑의 나비 날개</span><span class="price">7,800 KP</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to right, #ffecd2, #fcb69f); font-size:80px;">🌞<div class="badge-new" style="background:#3b82f6;">BEST</div></div><div class="info-box"><span class="title">서마 손길 했살</span><span class="price">3,200 KP</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb); font-size:80px;">🧙<div class="badge-new" style="background:#3b82f6;">BEST</div></div><div class="info-box"><span class="title">위자드 마법진</span><span class="price">12,000 KP</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to right, #11998e, #38ef7d); font-size:80px;">🌿<div class="badge-new" style="background:#3b82f6;">BEST</div></div><div class="info-box"><span class="title">엘리어스 장미</span><span class="price">FREE</span></div></a>
+                </div>
+            </div>
+
+            <!-- New Footprints Header -->
+            <div class="list-header mt-80" style="display:flex; justify-content:space-between; align-items:flex-end;">
+                <div>
+                    <div class="hashtag-title">#NEW_UPDATE</div>
+                    <h2>신규 업데이트 발자국</h2>
+                </div>
+                <div style="display:flex; gap:8px; margin-bottom:4px;">
+                    <button class="slider-nav-btn" onclick="scrollSlider('newSliderTrack', -1)">‹</button>
+                    <button class="slider-nav-btn" onclick="scrollSlider('newSliderTrack', 1)">›</button>
+                </div>
+            </div>
+            
+            <!-- New Footprints: Scroll -->
+            <div class="slider-wrapper mt-30">
+                <div class="slider-track" id="newSliderTrack">
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to right, #ff0844, #ffb199); font-size:80px;">🔥<div class="badge-new">NEW</div></div><div class="info-box"><span class="title">불타는 용암 조각</span><span class="price">15,000 KP</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to top, #e6e9f0, #eef1f5); font-size:80px;">⛄<div class="badge-new">NEW</div></div><div class="info-box"><span class="title">눈꽃 요정 스텝</span><span class="price">FREE</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to right, #4facfe, #00f2fe); font-size:80px;">🌊<div class="badge-new">NEW</div></div><div class="info-box"><span class="title">아쿠아 슬라이드</span><span class="price">4,200 KP</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to right, #000000, #434343); font-size:80px;">💀<div class="badge-new">NEW</div></div><div class="info-box"><span class="title">네크로맨서 해골 춤</span><span class="price">8,500 KP</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to right, #74ebd5, #9face6); font-size:80px;">🐰<div class="badge-new">NEW</div></div><div class="info-box"><span class="title">토끼 점프</span><span class="price">FREE</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(120deg, #fdfbfb, #ebedee); font-size:80px;">🕊️<div class="badge-new">NEW</div></div><div class="info-box"><span class="title">천사의 깃털 축복</span><span class="price">20,000 KP</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to right, #fa709a, #fee140); font-size:80px;">🎉<div class="badge-new">NEW</div></div><div class="info-box"><span class="title">파티 보명 스텝</span><span class="price">6,600 KP</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(135deg, #c471f5, #fa71cd); font-size:80px;">🧪<div class="badge-new">NEW</div></div><div class="info-box"><span class="title">연금술사 물약</span><span class="price">11,000 KP</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(to right, #ee9ca7, #ffdde1); font-size:80px;">🌹<div class="badge-new">NEW</div></div><div class="info-box"><span class="title">로즈 플라워 트레일</span><span class="price">FREE</span></div></a>
+                    <a href="market.html" class="item-card"><div class="img-box card-blue-bg poring-thumb" style="background: linear-gradient(135deg, #2b5876, #4e4376); font-size:80px;">🌌<div class="badge-new">NEW</div></div><div class="info-box"><span class="title">우주 성운</span><span class="price">18,000 KP</span></div></a>
+                </div>
+            </div>
+            </section>
+        </div>
+
+        <!-- MASSTIGE Scroll-Linked Sweep Animation Section (4-STEP!) -->
+        <section class="masstige-scroll-track mt-30" id="about">
+            <div class="masstige-sticky">
+                
+                <div class="masstige-base w-full">
+                    <div class="container text-center pt-masstige">
+                        <div class="masstige-title-group">
+                            <p class="intro-sub text-cyan">Ragnarok Zero Global 모험가들과 나누는 나만의 기록!</p>
+                            <h1 class="intro-main text-dark">RO FACTORY</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masstige-sweep-inner w-full text-center">
+                    <div class="container pt-masstige">
+                        <div class="masstige-title-group">
+                            <p class="intro-sub text-cyan-bright">Ragnarok Zero Global 모험가들과 나누는 나만의 기록!</p>
+                            <h1 class="intro-main text-white">RO FACTORY</h1>
+                        </div>
+                        
+                        <!-- 3 Steps Layout -->
+                        <div class="steps-container mt-steps" style="padding:0 20px;">
+                            <div class="step-card">
+                                <div class="step-badge">STEP 1</div>
+                                <div class="step-icon-main" style="margin-bottom:15px; font-size:50px;">📁</div>
+                                <h3 style="font-size:20px;">발자국 파일 제작</h3>
+                                <p>라그나로크 UGC 전용 클라이언트를 통해 나만의 커스텀 `.foot` 파일을 추출합니다.</p>
+                                <a href="register.html" class="btn-step outline-white">편집 가이드 보기</a>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-badge">STEP 2</div>
+                                <div class="step-icon-main" style="margin-bottom:15px; font-size:50px;">📤</div>
+                                <h3 style="font-size:20px;">마켓 세부 정보 등록</h3>
+                                <p>추출한 에셋 파일을 스튜디오에 업로드하고 작품 이름, 가격, 태그를 입력합니다.</p>
+                                <a href="register.html" class="btn-step outline-white">발자국 작품 등록</a>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-badge">STEP 3</div>
+                                <div class="step-icon-main" style="margin-bottom:15px; font-size:50px;">🎉</div>
+                                <h3 style="font-size:20px;">팩토리 공식 마켓 출시</h3>
+                                <p>빠른 어드민 승인 절차를 거치면 지정된 일자에 맞춰 공식 거래소에 출시됩니다!</p>
+                                <a href="studio.html" class="btn-step outline-white">MY STUDIO</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Bottom Hooking Banner -->
+        <section class="download-section mt-100 mb-100 container">
+            <div class="download-banner">
+                <div class="text-left">
+                    <h2>나만의 발자국을<br>만들 준비가 되셨나요?</h2>
+                    <p>다양한 에셋을 활용해 더욱 특별한 모험을 시작하세요.</p>
+                </div>
+                <div style="z-index: 2; position: relative;">
+                    <a href="#" class="btn-download">편집툴 가이드 다운로드 🚀</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Simplified Footer -->
+    <footer class="footer-custom">
+        <div class="footer-top">
+            <div class="container footer-top-flex">
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a> <span class="divider">|</span>
+                    <a href="#">Terms of Service</a> <span class="divider">|</span>
+                    <a href="#">Account Policy</a> <span class="divider">|</span>
+                    <a href="#">Refund Policy</a> <span class="divider">|</span>
+                    <a href="#">Punishment Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-main">
+            <div class="container text-center">
+                <p class="footer-text">© GRAVITY Co., Ltd. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNav">
+        <div class="mobile-nav-header">
+            <img src="images/roz_logo.png" alt="ROZ Logo" onerror="this.outerHTML='<span style=\'font-weight:900; color:#1e293b; font-size:20px;\'>RAGNAROK ZERO</span>'">
+            <span class="close-mobile-nav" id="closeMobileNav">✖</span>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="#">SUBSCRIPTION</a>
+            <a href="#">TOP UP</a>
+            <div class="mobile-nav-dropdown">
+                <span>RO FACTORY ▼</span>
+                <div class="mobile-drop-items">
+                    <a href="register.html">작품 등록</a>
+                    <a href="market.html">마켓 이동</a>
+                    <a href="#" onclick="alert('게시글 연동 예정입니다.'); return false;">가이드 안내</a>
+                    <a href="studio.html">마이 스튜디오</a>
+                </div>
+            </div>
+            <a href="#">GET PORING</a>
+            <a href="#">NEWS</a>
+            <a href="#">GAME INFO</a>
+            <a href="#">RESOURCE</a>
+            <a href="#">COMMUNITY</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

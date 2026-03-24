@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>작품 정보 수정 | RO Factory</title>
+    <!-- Use Pretendard for clean, premium typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { background-color: #f8fafc; color: #0f172a; }
+        .edit-container { max-width: 800px; margin: 60px auto 100px; background: #fff; border-radius: 24px; padding: 50px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; }
+        .edit-header { display: flex; align-items: center; gap: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 30px; margin-bottom: 40px; }
+        .edit-thumb { width: 100px; height: 100px; border-radius: 16px; background: linear-gradient(to right, #434343, black); display: flex; align-items: center; justify-content: center; font-size: 40px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .edit-title-wrap { flex: 1; }
+        .edit-title-wrap h1 { font-size: 28px; font-weight: 900; margin-bottom: 8px; color: #0f172a; }
+        .edit-title-wrap p { font-size: 15px; color: #64748b; font-weight: 600; margin: 0; }
+        .badge-status { background: #e2e8f0; color: #475569; padding: 6px 12px; border-radius: 12px; font-size: 13px; font-weight: 800; display: inline-block; margin-bottom: 15px; }
+        
+        /* Form Overrides */
+        .form-container-clean { text-align: left; }
+        .form-row { display: flex; gap: 20px; }
+        .half { flex: 1; }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
+        .form-control { width: 100%; padding: 15px 20px; font-size: 15px; font-weight: 600; border: 2px solid #e2e8f0; border-radius: 12px; background: #f8fafc; color: #0f172a; transition: 0.2s; outline: none; font-family: 'Pretendard'; }
+        .form-control:focus { border-color: #3b82f6; background: #fff; box-shadow: 0 0 0 4px rgba(59,130,246,0.1); }
+        .form-control:read-only { background: #e2e8f0; color: #64748b; border-color: #cbd5e1; cursor: not-allowed; }
+        
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; padding: 5px 0; }
+        .tag-pill { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: #fff; border: 2px solid #cbd5e1; border-radius: 30px; font-size: 14px; font-weight: 700; color: #475569; cursor: pointer; transition: 0.2s; }
+        .tag-pill input { display: none; }
+        .tag-pill:has(input:checked) { background: #eff6ff; border-color: #3b82f6; color: #1e3a8a; }
+        
+        .color-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+        
+        .edit-actions { display: flex; gap: 15px; margin-top: 50px; border-top: 1px solid #f1f5f9; padding-top: 30px; }
+        .btn-cancel { flex: 1; padding: 18px; border-radius: 12px; border: none; background: #f1f5f9; color: #64748b; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.2s; }
+        .btn-cancel:hover { background: #e2e8f0; color: #0f172a; }
+        .btn-save { flex: 2; padding: 18px; border-radius: 12px; border: none; background: #0ea5e9; color: #fff; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.2s; box-shadow: 0 10px 20px rgba(14,165,233,0.2); }
+        .btn-save:hover { background: #0284c7; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <!-- Global GNJOY Bar -->
+    <div class="gnjoy-topbar">
+        <div class="container">
+            <div class="gnjoy-logo">
+                <img src="images/gnjoy_logo.png" alt="GNJOY" style="height: 18px;">
+            </div>
+            <div class="gnjoy-links">
+                <a href="studio.html" class="btn-login" style="background:transparent; color:#333;">마이 스튜디오로 돌아가기</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Main Area -->
+    <div class="edit-container">
+        <div class="edit-header">
+            <div class="edit-thumb">🌑</div>
+            <div class="edit-title-wrap">
+                <span class="badge-status">변환 대기 중</span>
+                <h1>어둠의 심연의 걸음</h1>
+                <p>변환 중 전 까지만 내용 수정이 가능합니다.</p>
+            </div>
+        </div>
+        
+        <form class="form-container-clean" onsubmit="event.preventDefault(); alert('수정된 정보가 저장되었습니다.'); location.href='studio_detail.html?status=pending&title=' + encodeURIComponent(document.getElementById('editTitle').value);">
+            <div class="form-row">
+                <div class="form-group half">
+                    <label>카테고리 분류 <span style="color:#ef4444;">*</span> (수정 불가)</label>
+                    <input type="text" class="form-control" value="발자국" readonly required>
+                </div>
+                <div class="form-group half">
+                    <label>가격 (KP) <span style="color:#ef4444;">*</span></label>
+                    <input type="number" class="form-control" value="5500" min="0" required placeholder="예: 1500">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group half">
+                    <label>작품 게시기간 만료일 <span style="color:#ef4444;">*</span></label>
+                    <input type="date" class="form-control" value="2026-12-31" required>
+                </div>
+                <div class="form-group half">
+                    <label>작품 명칭 <span style="color:#ef4444;">*</span></label>
+                    <input type="text" class="form-control" id="editTitle" value="어둠의 심연의 걸음" required placeholder="작품 이름을 입력해주세요">
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top:20px;">
+                <label>작품 타입 태그 (최대 2개) <span style="color:#ef4444;">*</span></label>
+                <div class="tag-group" id="editTagGroup">
+                    <label class="tag-pill"><input type="checkbox" name="tags" value="cute"> 귀여운</label>
+                    <label class="tag-pill"><input type="checkbox" name="tags" value="fancy"> 화려한</label>
+                    <label class="tag-pill"><input type="checkbox" name="tags" value="chic"> 시크한</label>
+                    <label class="tag-pill"><input type="checkbox" name="tags" value="dark" checked> 다크</label>
+                    <label class="tag-pill"><input type="checkbox" name="tags" value="mystic"> 신비한</label>
+                </div>
+                <div style="font-size:12px; color:#ef4444; margin-top:5px; font-weight:700;" id="tagErr"></div>
+            </div>
+
+            <div class="form-group" style="margin-top:30px;">
+                <label>메인 색상 (1개) <span style="color:#ef4444;">*</span></label>
+                <div class="tag-group">
+                    <label class="tag-pill color-pill"><input type="radio" name="mainColor" value="red" required> <span class="color-dot" style="background:#ef4444;"></span>빨강</label>
+                    <label class="tag-pill color-pill"><input type="radio" name="mainColor" value="blue"> <span class="color-dot" style="background:#3b82f6;"></span>파랑</label>
+                    <label class="tag-pill color-pill"><input type="radio" name="mainColor" value="green"> <span class="color-dot" style="background:#22c55e;"></span>초록</label>
+                    <label class="tag-pill color-pill"><input type="radio" name="mainColor" value="yellow"> <span class="color-dot" style="background:#eab308;"></span>노랑</label>
+                    <label class="tag-pill color-pill"><input type="radio" name="mainColor" value="black" checked> <span class="color-dot" style="background:#1e293b;"></span>블랙</label>
+                </div>
+            </div>
+            
+            <div class="edit-actions">
+                <button type="button" class="btn-cancel" onclick="location.href='studio_detail.html?status=pending'">취소하고 돌아가기</button>
+                <button type="submit" class="btn-save">변경 사항 저장하기</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Tag Max Queue Logic for (Type Tags) constraint max 2 checkboxes
+        const tagGroup = document.getElementById('editTagGroup');
+        const checkboxes = tagGroup.querySelectorAll('input[type="checkbox"]');
+        let typeTagQueue = [];
+
+        // Pre-populate queue with initially checked items
+        checkboxes.forEach(cb => {
+            if (cb.checked) {
+                typeTagQueue.push(cb);
+            }
+        });
+
+        checkboxes.forEach(param => {
+            param.addEventListener('change', function(e) {
+                if(this.checked) {
+                    typeTagQueue.push(this);
+                    if(typeTagQueue.length > 2) {
+                        // Uncheck the oldest one and remove from arr
+                        const oldest = typeTagQueue.shift();
+                        oldest.checked = false;
+                    }
+                } else {
+                    // Remove from queue manually
+                    typeTagQueue = typeTagQueue.filter(item => item !== this);
+                }
+            });
+        });
+        
+        // Form intercept validation on submit natively handled by DOM thanks to 'required' attributes!
+    </script>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- PRD DESCRIPTION MODULE REMOVED - See description_module/ folder for reusable code -->
+</body>
