@@ -3,86 +3,728 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RO FACTORY 웹기획Unit 이주형 작성 - 서비스 운영 정책 및 가이드라인입니다.">
-    <title>RO FACTORY 정책 가이드</title>
+    <meta name="description" content="RO FACTORY 웹기획Unit 이주형 작성 - 서비스 페이지별 상세 기획 명세서입니다.">
+    <title>RO FACTORY 기획 명세서</title>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Pretendard', sans-serif; background: #f8fafc; color: #333; margin: 0; padding: 40px; }
-        .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 50px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .header { border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .title { font-size: 32px; font-weight: 900; color: #0f172a; margin: 0; }
-        .btn-back { display: inline-block; text-decoration: none; color: #0ea5e9; font-weight: 800; font-size: 14px; background: #f0f9ff; padding: 8px 16px; border-radius: 8px; transition: 0.2s; }
-        .btn-back:hover { background: #e0f2fe; }
-        
-        .section { margin-bottom: 40px; }
-        .section-title { font-size: 20px; font-weight: 800; color: #1e293b; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-left: 4px solid #3b82f6; padding-left: 12px; }
-        
-        .policy-list { list-style: none; padding: 0; margin: 0; }
-        .policy-list li { background: #f1f5f9; padding: 20px; border-radius: 8px; margin-bottom: 12px; font-size: 15px; color: #475569; line-height: 1.6; border-left: 3px solid transparent; transition: 0.2s; }
-        .policy-list li:hover { background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-left-color: #3b82f6; }
-        .policy-list li strong { color: #1e293b; font-weight: 800; display: block; margin-bottom: 6px; font-size: 16px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Pretendard', sans-serif; background: #f1f5f9; color: #1e293b; min-height: 100vh; }
+
+        /* Sticky Header */
+        .top-bar { background: #0f172a; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .top-bar h1 { font-size: 16px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .top-bar .ver { font-size: 10px; background: rgba(59,130,246,0.7); color: #fff; padding: 3px 10px; border-radius: 12px; font-weight: 800; }
+        .btn-home { text-decoration: none; color: #94a3b8; font-weight: 700; font-size: 12px; padding: 6px 14px; border: 1px solid #334155; border-radius: 6px; transition: 0.2s; }
+        .btn-home:hover { color: #fff; border-color: #64748b; }
+
+        .layout { display: flex; max-width: 1800px; margin: 0 auto; }
+
+        /* Sidebar Nav */
+        .sidebar { width: 260px; background: #fff; border-right: 1px solid #e2e8f0; padding: 24px 0; position: sticky; top: 50px; height: calc(100vh - 50px); overflow-y: auto; flex-shrink: 0; }
+        .sidebar-title { font-size: 11px; font-weight: 800; color: #94a3b8; padding: 8px 24px; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-item { display: block; padding: 10px 24px; font-size: 13px; font-weight: 700; color: #475569; text-decoration: none; border-left: 3px solid transparent; transition: 0.15s; }
+        .nav-item:hover { background: #f8fafc; color: #1e293b; }
+        .nav-item.active { background: #eff6ff; color: #1d4ed8; border-left-color: #3b82f6; font-weight: 800; }
+        .nav-divider { height: 1px; background: #e2e8f0; margin: 12px 24px; }
+
+        /* Main */
+        .main { flex: 1; padding: 32px 40px; }
+
+        /* Page Section */
+        .page-section { background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 24px; overflow: hidden; }
+        .page-header { padding: 24px 28px; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; gap: 12px; }
+        .page-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .page-header h2 { font-size: 18px; font-weight: 900; color: #0f172a; }
+        .page-header .page-path { font-size: 12px; font-weight: 600; color: #94a3b8; margin-left: auto; background: #f8fafc; padding: 4px 10px; border-radius: 6px; font-family: monospace; }
+        .page-body { padding: 24px 28px; }
+
+        /* Spec Block */
+        .spec-group { margin-bottom: 24px; }
+        .spec-group:last-child { margin-bottom: 0; }
+        .spec-label { font-size: 13px; font-weight: 900; color: #0f172a; margin-bottom: 10px; padding-left: 10px; border-left: 3px solid #3b82f6; }
+        .spec-label.warn { border-left-color: #f59e0b; }
+        .spec-label.danger { border-left-color: #ef4444; }
+        .spec-label.info { border-left-color: #06b6d4; }
+
+        /* Table Style */
+        .spec-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .spec-table th { background: #f8fafc; font-weight: 800; color: #475569; text-align: left; padding: 10px 14px; border: 1px solid #e2e8f0; white-space: nowrap; }
+        .spec-table td { padding: 10px 14px; border: 1px solid #e2e8f0; color: #334155; line-height: 1.6; vertical-align: top; }
+        .spec-table td.field { font-weight: 800; color: #0f172a; background: #fafbfc; white-space: nowrap; width: 160px; }
+        .spec-table td.required { position: relative; }
+        .spec-table td.required::after { content: '*'; color: #ef4444; font-weight: 900; margin-left: 4px; }
+
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 800; }
+        .badge-blue { background: #eff6ff; color: #1d4ed8; }
+        .badge-red { background: #fef2f2; color: #dc2626; }
+        .badge-green { background: #f0fdf4; color: #166534; }
+        .badge-gray { background: #f1f5f9; color: #64748b; }
+        .badge-orange { background: #fff7ed; color: #c2410c; }
+
+        /* Alert Box */
+        .alert-box { display: flex; gap: 10px; padding: 12px 16px; border-radius: 8px; font-size: 12px; font-weight: 600; line-height: 1.6; margin-top: 10px; }
+        .alert-box .alert-icon { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+        .alert-info { background: #f0f9ff; border: 1px solid #bae6fd; color: #0c4a6e; }
+        .alert-warn { background: #fffbeb; border: 1px solid #fde68a; color: #78350f; }
+        .alert-error { background: #fef2f2; border: 1px solid #fecaca; color: #7f1d1d; }
+
+        /* Status Flow */
+        .status-flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin: 10px 0; }
+        .status-node { padding: 8px 14px; border-radius: 6px; font-size: 12px; font-weight: 800; border: 1.5px solid #e2e8f0; background: #fff; }
+        .status-arrow { color: #94a3b8; font-size: 16px; padding: 0 6px; }
+
+        /* Inline Code */
+        code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: 700; color: #be185d; }
+
+        ul.spec-list { padding-left: 18px; margin: 0; }
+        ul.spec-list li { font-size: 13px; color: #475569; line-height: 1.8; margin-bottom: 4px; }
+        ul.spec-list li strong { color: #0f172a; }
+
+        .note-block { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 18px; font-size: 12px; color: #475569; line-height: 1.7; margin-top: 10px; }
+
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; }
+            .sidebar { width: 100%; position: static; height: auto; border-right: none; border-bottom: 1px solid #e2e8f0; }
+            .main { padding: 20px 16px; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="title">📄 RO FACTORY 운영 정책 가이드</h1>
-            <a href="index.html" class="btn-back">← 포털 홈으로 이동</a>
-        </div>
 
-        <div class="section">
-            <div class="section-title">1. 에셋 작품 등록 정책</div>
-            <ul class="policy-list">
-                <li>
-                    <strong>파일 업로드 규격</strong>
-                    크리에이터는 편집툴에서 정상 추출된 무결성의 .foot (메인 데이터) 파일과 미리보기용 mp4 썸네일을 반드시 함께 업로드해야 합니다.
-                </li>
-                <li>
-                    <strong>가격 책정 시스템</strong>
-                    작품 가격은 "0 KP (무료 배포)" 부터 자유롭게 기입이 가능합니다. 단, 한 번 변환이 통과되어 배포된 이후에는 크리에이터가 임의로 가격을 수정할 수 없습니다.
-                </li>
-                <li>
-                    <strong>최소 유지기간 (유효기간) 의무</strong>
-                    마켓 생태계 교란을 방지하기 위해 등록 시 지정하는 '유효 만료일'은 최소 30일 이상 보장되어야만 서버 등록이 승인됩니다.
-                </li>
-            </ul>
-        </div>
+    <div class="top-bar">
+        <h1>RO FACTORY 기획 명세서 <span class="ver">v3.0</span></h1>
+        <a href="index.html" class="btn-home">← 포털 홈으로</a>
+    </div>
 
-        <div class="section">
-            <div class="section-title">2. 거래 및 변환(Admin) 상태 정책</div>
-            <ul class="policy-list">
-                <li>
-                    <strong>수정 가능 권한 (Lock Policy)</strong>
-                    작품의 상세 변경안(가격/태그 등) 수정은 관리자 변환 대기 상태인 '변환 대기' 에서만 유저가 자유롭게 편집 가능합니다. '변환 완료' 단계 진입 즉시 수정 권한은 박탈 및 잠금 처리됩니다.
-                </li>
-                <li>
-                    <strong>판매 중지 및 만료 처리</strong>
-                    설정된 유효기간이 도래하면 상품의 상태표기는 즉각 '만료'로 내려가며, 더 이상 마켓 검색에서 노출되지 않습니다.
-                </li>
-                <li>
-                    <strong>타입(태그) 백오피스 종속성</strong>
-                    운영자가 백오피스(Admin)에서 특정 타입이나 색상 분류 옵션을 영구 삭제하는 경우, 기존에 해당 옵션을 고른 유저 보호를 위해 반드시 '대체 옵션'으로 일괄 자동 이전 처리됩니다.
-                </li>
-            </ul>
-        </div>
+    <div class="layout">
 
-        <div class="section">
-            <div class="section-title">3. 저작권 (UGC) 서약 동의</div>
-            <ul class="policy-list">
-                <li>
-                    <strong>제3자 권리 침해 방지 조항</strong>
-                    업로드되는 에셋에 타사 IP 텍스처 삽입 등 위반 사항이 적발될 경우 즉강 영구 판매 정지 제재 (Admin -> 변환 실패 강제 처리) 됩니다.
-                </li>
-                <li>
-                    <strong>책임의 1차성 귀속</strong>
-                    발생한 모든 저작권 지적재산 분쟁 시 모든 법적 책임은 업로드를 진행한 유저 본인과 약관 동의자에게 귀속되며, 저희 플랫폼 (Gravity) 은 2차 피해에 관한 보증을 하지 않습니다.
-                </li>
-            </ul>
-        </div>
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-title">페이지별 명세</div>
+            <a href="#sec-register" class="nav-item active">📁 작품 등록 (register)</a>
+            <a href="#sec-edit" class="nav-item">✏️ 작품 수정 (edit)</a>
+            <a href="#sec-market" class="nav-item">🛍️ 글로벌 마켓 (market)</a>
+            <a href="#sec-studio" class="nav-item">🪄 마이 스튜디오 (studio)</a>
+            <a href="#sec-studio-detail" class="nav-item">📋 작품 상세 (studio_detail)</a>
+            <a href="#sec-admin" class="nav-item">⚙️ 어드민 백오피스 (admin)</a>
+            <div class="nav-divider"></div>
+            <div class="sidebar-title">공통 규칙</div>
+            <a href="#sec-status" class="nav-item">🔄 작품 상태 정의</a>
+            <a href="#sec-validation" class="nav-item">🛡️ 공통 벨리데이션</a>
+            <a href="#sec-alert" class="nav-item">💬 공통 얼랏 메시지</a>
+        </nav>
 
-        <div style="text-align: center; margin-top: 60px; font-size: 13px; color: #94a3b8; font-weight: 700;">
-            최종 업데이트 날짜 : 20.03.2026 11:30:00 | 웹기획Unit
+        <!-- Main Content -->
+        <div class="main">
+
+            <!-- ===================== 작품 등록 ===================== -->
+            <div class="page-section" id="sec-register">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#eff6ff;">📁</div>
+                    <h2>작품 등록</h2>
+                    <span class="page-path">register.html</span>
+                </div>
+                <div class="page-body">
+                    <div class="spec-group">
+                        <div class="spec-label">페이지 개요</div>
+                        <ul class="spec-list">
+                            <li>위저드(Wizard) 형태의 4단계 등록 폼 (STEP 0 인트로 포함 총 5화면)</li>
+                            <li>GNJOY 로그인 상태에서만 접근 가능, 비로그인 시 로그인 페이지로 리다이렉트</li>
+                            <li>1일 등록 제한: <strong>최대 3회</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">STEP별 상세</div>
+                        <table class="spec-table">
+                            <thead><tr><th>STEP</th><th>화면명</th><th>입력 항목</th><th>벨리데이션</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td class="field">STEP 0</td>
+                                    <td>인트로 안내</td>
+                                    <td>없음 (안내 전용)</td>
+                                    <td>없음</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">STEP 1</td>
+                                    <td>파일 준비 안내</td>
+                                    <td>없음 (UGC 편집툴 다운로드 안내)</td>
+                                    <td>없음</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">STEP 2</td>
+                                    <td>파일 업로드 + 약관</td>
+                                    <td>
+                                        ① 발자국 원본 <code>.foot</code> <span class="badge badge-red">필수</span><br>
+                                        ② 동영상 미리보기 <code>.mp4/.mov</code> <span class="badge badge-red">필수</span><br>
+                                        ③ 콜렉션 썸네일 <code>.png</code> <span class="badge badge-red">필수</span><br>
+                                        ④ 아이템 썸네일 <code>.png/.jpg</code> <span class="badge badge-red">필수</span><br>
+                                        ⑤ 약관 동의 체크 <span class="badge badge-red">필수</span>
+                                    </td>
+                                    <td>
+                                        • 약관 미동의 시 다음 단계 진행 불가<br>
+                                        • 약관은 스크롤 끝까지 내려야 동의 활성화<br>
+                                        • <code>alert('약관에 반드시 동의해야 다음 단계로 진행할 수 있습니다.')</code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field">STEP 3</td>
+                                    <td>마켓 정보 입력</td>
+                                    <td>
+                                        ① 작품 카테고리: <span class="badge badge-gray">발자국 (고정)</span><br>
+                                        ② 판매 금액 <span class="badge badge-red">필수</span> (0 = 무료배포, 숫자만 입력) KP 단위<br>
+                                        ③ 게시만료일 <span class="badge badge-red">필수</span> (MM.DD.YYYY 텍스트 입력)<br>
+                                        ④ 작품명 <span class="badge badge-red">필수</span> (영문만 입력 가능, 최대 20자)<br>
+                                        ⑤ 작품 타입 태그 <span class="badge badge-gray">선택</span> (최대 2개 다중선택)<br>
+                                        ⑥ 메인 색상 <span class="badge badge-gray">선택</span> (select 드롭다운)
+                                    </td>
+                                    <td>
+                                        • 작품명 미입력 시<br>
+                                        <code>alert('작품명을 입력해주세요. (영문만 입력 가능)')</code><br>
+                                        • 게시만료일 미입력 시<br>
+                                        <code>alert('작품 게시기간 만료일을 필수로 입력해주세요. (MM.DD.YYYY)')</code><br>
+                                        • 게시만료일 형식 오류 시<br>
+                                        <code>alert('게시 만료일 형식이 올바르지 않습니다. MM.DD.YYYY 형태로 입력해주세요.')</code><br>
+                                        • 게시만료일은 현재일 기준 <strong>최소 30일 이상</strong><br>
+                                        • 타입 태그 3개 선택 시 가장 오래된 선택 자동 해제 (큐 로직)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field">STEP 4</td>
+                                    <td>등록 완료</td>
+                                    <td>없음 (완료 안내)</td>
+                                    <td>
+                                        • 잔여 등록 횟수 표시 (일 3회 제한)<br>
+                                        • MY STUDIO 이동 버튼 제공
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label warn">약관 모달 동작</div>
+                        <ul class="spec-list">
+                            <li>약관 내용을 <strong>스크롤 끝까지 내려야</strong> 동의 버튼 활성화</li>
+                            <li>활성화 전 버튼 텍스트: "스크롤을 끝까지 내려주세요" / 활성화 후: "확인 및 약관 동의하기"</li>
+                            <li>체크박스는 <code>disabled</code> 상태 → 모달 동의 후 자동 체크</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== 작품 수정 ===================== -->
+            <div class="page-section" id="sec-edit">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#fefce8;">✏️</div>
+                    <h2>작품 정보 수정</h2>
+                    <span class="page-path">edit.html</span>
+                </div>
+                <div class="page-body">
+                    <div class="spec-group">
+                        <div class="spec-label">접근 조건</div>
+                        <div class="alert-box alert-error">
+                            <span class="alert-icon">🚫</span>
+                            <div>
+                                <strong>변환 대기</strong> 상태에서만 수정 가능합니다. 관리자가 조회(변환 처리)를 시작하면 즉시 수정 권한이 잠깁니다.<br>
+                                변환 완료, 판매 중, 만료, 변환 실패 상태에서는 이 페이지에 접근할 수 없습니다.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">수정 가능 항목</div>
+                        <table class="spec-table">
+                            <thead><tr><th>항목</th><th>수정 가능 여부</th><th>벨리데이션</th></tr></thead>
+                            <tbody>
+                                <tr><td class="field">카테고리</td><td><span class="badge badge-gray">수정 불가 (readonly)</span></td><td>—</td></tr>
+                                <tr><td class="field">가격 (KP)</td><td><span class="badge badge-green">수정 가능</span></td><td>숫자만 입력, 0 이상, <code>required</code></td></tr>
+                                <tr><td class="field">게시만료일</td><td><span class="badge badge-green">수정 가능</span></td><td>MM.DD.YYYY 텍스트 입력, 자동 포맷, 최소 30일</td></tr>
+                                <tr><td class="field">작품명</td><td><span class="badge badge-green">수정 가능</span></td><td><code>required</code>, 영문만 입력, 최대 20자</td></tr>
+                                <tr><td class="field">작품 타입</td><td><span class="badge badge-green">수정 가능</span></td><td>최대 2개 선택, 큐 로직 동일</td></tr>
+                                <tr><td class="field">메인 색상</td><td><span class="badge badge-green">수정 가능</span></td><td>select 드롭다운, 선택 사항 (필수 아님)</td></tr>
+                                <tr><td class="field">업로드 파일</td><td><span class="badge badge-green">수정 가능</span></td><td>변경할 파일만 선택 업로드 (미선택 시 기존 파일 유지)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label info">저장 시 동작</div>
+                        <ul class="spec-list">
+                            <li>저장 완료: <code>alert('수정된 정보가 저장되었습니다.')</code></li>
+                            <li>저장 후 studio_detail 페이지로 이동 (변환 대기 상태 유지)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== 글로벌 마켓 ===================== -->
+            <div class="page-section" id="sec-market">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#f0fdf4;">🛍️</div>
+                    <h2>글로벌 마켓</h2>
+                    <span class="page-path">market.html</span>
+                </div>
+                <div class="page-body">
+                    <div class="spec-group">
+                        <div class="spec-label">페이지 구성 (SPA 패널)</div>
+                        <table class="spec-table">
+                            <thead><tr><th>패널</th><th>화면명</th><th>설명</th></tr></thead>
+                            <tbody>
+                                <tr><td class="field">panel-list</td><td>마켓 리스트</td><td>상품 그리드(4열), 사이드바 필터, 검색바, 페이지네이션 (12개/페이지)</td></tr>
+                                <tr><td class="field">panel-detail</td><td>상품 상세</td><td>좌: 이미지+영상미리보기+찜, 우: 정보+가격+구매 버튼</td></tr>
+                                <tr><td class="field">panel-complete</td><td>결제 완료</td><td>구매 작품명, 결제 금액, 잔여 포인트 표시</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">필터 시스템</div>
+                        <table class="spec-table">
+                            <thead><tr><th>필터</th><th>타입</th><th>옵션</th></tr></thead>
+                            <tbody>
+                                <tr><td class="field">카테고리</td><td>고정 버튼</td><td>발자국 (active 고정)</td></tr>
+                                <tr><td class="field">타입</td><td>토글 버튼</td><td>귀여운 / 화려한 / 다크 <span class="badge badge-blue">어드민 항목 관리 가능</span></td></tr>
+                                <tr><td class="field">색상</td><td>토글 버튼</td><td>빨강 / 파랑 / 초록 / 노랑 / 검정 / 흰색 <span class="badge badge-blue">어드민 항목 관리 가능</span></td></tr>
+                                <tr><td class="field">가격 (KP)</td><td>버튼 + Dual Range Slider</td><td>무료 / 1,000이하 / 1,000~5,000 / 5,000~10,000 / 10,000이상<br>슬라이더: 0 ~ 20,000 (500 단위)</td></tr>
+                                <tr><td class="field">정렬</td><td>토글 버튼</td><td>NEW: 최근 배포된 상품<br>Trending: 하트가 가장 많은 상위 10% 작품<br>Best: 구매가 가장 많은 상위 10% 작품</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="alert-box alert-info">
+                            <span class="alert-icon">ℹ️</span>
+                            <div>필터 초기화(↺ 버튼) 시 카테고리(발자국)를 제외한 모든 필터 + 검색어 + 슬라이더 값이 초기화됩니다.</div>
+                        </div>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label danger">KP 결제 모달</div>
+                        <table class="spec-table">
+                            <thead><tr><th>항목</th><th>설명</th></tr></thead>
+                            <tbody>
+                                <tr><td class="field">보유 KP 표시</td><td>나의 보유 Kafra Point 잔액 실시간 표시</td></tr>
+                                <tr><td class="field">영수증</td><td>상품명 / 상품 금액 / 최종 결제 금액 표시</td></tr>
+                                <tr><td class="field">잔액 부족 시</td><td>
+                                    • 결제 버튼 비활성화<br>
+                                    • 텍스트: "Kafra Point 부족"<br>
+                                    • 경고 메시지: <code style="color:#ef4444;">"보유 Kafra Point가 부족하여 결제할 수 없습니다."</code>
+                                </td></tr>
+                                <tr><td class="field">무료 상품</td><td>결제 금액: "0 KP (무료)", 버튼: "무료 결제 진행"</td></tr>
+                                <tr><td class="field">KP 충전 링크</td><td>"Kafra Point 충전하러 가기 ↗" 링크 제공</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">영상 미리보기 모달</div>
+                        <ul class="spec-list">
+                            <li>상세 페이지 내 "🎬 영상 미리보기" 버튼 클릭 시 500x500 모달</li>
+                            <li>모달 열림 시 자동 재생, 닫힘 시 일시정지 + 시간 리셋</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">찜(Heart) 기능</div>
+                        <ul class="spec-list">
+                            <li>♡ 클릭 시 ❤️ 토글, 카운트 ±1</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== 마이 스튜디오 ===================== -->
+            <div class="page-section" id="sec-studio">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#faf5ff;">🪄</div>
+                    <h2>마이 스튜디오</h2>
+                    <span class="page-path">studio.html</span>
+                </div>
+                <div class="page-body">
+                    <div class="spec-group">
+                        <div class="spec-label">사이드바</div>
+                        <ul class="spec-list">
+                            <li>프로필 카드: 아바타 + 닉네임 + 보유 KP 잔액 + KP 충전 버튼</li>
+                            <li>네비게이션: 나의 작품 관리 / 구매 작품 관리 / 찜한 상품 보기</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">나의 작품 관리 탭</div>
+                        <table class="spec-table">
+                            <thead><tr><th>기능</th><th>설명</th></tr></thead>
+                            <tbody>
+                                <tr><td class="field">상태 필터 탭</td><td>전체 / 변환 대기 중 / 변환 중 / 변환 완료 / 판매 중 / 작품 만료 / <span style="color:#ef4444;">변환 실패</span></td></tr>
+                                <tr><td class="field">검색</td><td>작품명 키워드 검색 (탭 필터와 동시 적용)</td></tr>
+                                <tr><td class="field">리스트 항목</td><td>썸네일 + 카테고리 태그 + 작품명 + 날짜 + 가격 + 상태 뱃지</td></tr>
+                                <tr><td class="field">판매수 표시</td><td><span class="badge badge-green">판매 중</span> / <span class="badge badge-gray">만료</span> 상태만 판매수 노출</td></tr>
+                                <tr><td class="field">날짜 강조</td><td>
+                                    변환 완료: <span style="color:#0ea5e9; font-weight:800;">🔵 파란색 (게시 예정일)</span><br>
+                                    판매 중: <span style="color:#166534; font-weight:800;">🟢 녹색 (게시일)</span>
+                                </td></tr>
+                                <tr><td class="field">만료 작품</td><td>제목 취소선, 썸네일 회색 처리</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">구매 작품 관리 탭</div>
+                        <ul class="spec-list">
+                            <li>필터 탭: 전체 / 구매 완료 / 작품 만료</li>
+                            <li>표시: 구매일 + 유효기간 (만료된 경우 유효기간 표시, 아닌 경우 "무제한")</li>
+                            <li>만료 작품: 제목 취소선, 회색 처리</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">찜한 상품 보기 탭</div>
+                        <ul class="spec-list">
+                            <li>찜 해제 버튼: <code>confirm('해당 상품의 찜을 해제하시겠습니까?')</code> 후 DOM 즉시 삭제</li>
+                            <li>만료 상품: 클릭 불가, 버튼 "판매 종료됨", opacity: 0.5</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== 작품 상세 ===================== -->
+            <div class="page-section" id="sec-studio-detail">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#fef3c7;">📋</div>
+                    <h2>작품 상세 정보</h2>
+                    <span class="page-path">studio_detail.html</span>
+                </div>
+                <div class="page-body">
+                    <div class="spec-group">
+                        <div class="spec-label">상태별 상세 정의</div>
+                        <table class="spec-table">
+                            <thead><tr><th>상태</th><th>진입 조건</th><th>상단 뱃지</th><th>액션 버튼</th><th>썸네일</th><th>노출 정보</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td class="field"><span class="badge badge-gray">변환 대기</span></td>
+                                    <td>유저가 작품 등록 완료 직후<br>관리자 조회 전 단계</td>
+                                    <td>"변환 대기 중"<br>(회색 뱃지)</td>
+                                    <td><strong>삭제하기</strong> (secondary)<br><strong>정보 수정하기</strong> (primary)<br>• 삭제 → <code>alert('삭제되었습니다.')</code> → studio.html 이동<br>• 수정 → edit.html 이동</td>
+                                    <td>원본 표시</td>
+                                    <td>카테고리 · 작품명 · 가격 · 태그 · 미리보기 버튼</td>
+                                </tr>
+                                <tr>
+                                    <td class="field"><span class="badge badge-orange">변환 중</span></td>
+                                    <td>관리자가 변환 대기 작품을<br>조회(변환 처리 시작)한 시점</td>
+                                    <td>"변환 중"<br>(회색 뱃지)</td>
+                                    <td>없음<br><span style="color:#94a3b8; font-size:12px;">수정/삭제 권한 잠김</span></td>
+                                    <td>원본 표시</td>
+                                    <td>카테고리 · 작품명 · 가격 · 태그 · 미리보기 버튼</td>
+                                </tr>
+                                <tr>
+                                    <td class="field"><span class="badge badge-blue">변환 완료</span></td>
+                                    <td>관리자 엑셀 업로드 시<br>판매상태 Y로 처리된 작품</td>
+                                    <td>"변환 완료"<br>(파란색 뱃지)</td>
+                                    <td>없음</td>
+                                    <td>원본 표시</td>
+                                    <td>카테고리 · 작품명 · 가격 · 태그 · 미리보기 버튼<br><span style="color:#0284c7; font-weight:800;">+ 게시 예정일 정보 표시</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="field"><span class="badge badge-green">판매 중</span></td>
+                                    <td>서버 배포 완료 후<br>마켓에 등록된 상태</td>
+                                    <td>"판매 중"<br>(녹색 뱃지, 흰색 텍스트)</td>
+                                    <td>없음</td>
+                                    <td>원본 표시</td>
+                                    <td>카테고리 · 작품명 · 가격 · 태그 · 미리보기 버튼<br><span style="color:#166534; font-weight:800;">+ 판매 시작일 표시</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="field"><span class="badge badge-gray">만료</span></td>
+                                    <td>게시만료일이 지난 작품<br>자동 만료 처리</td>
+                                    <td>"작품 만료"<br>(회색 뱃지)</td>
+                                    <td>없음</td>
+                                    <td><span style="color:#ef4444; font-weight:800;">회색 필터(grayscale) 적용</span></td>
+                                    <td>카테고리 · 작품명 · 가격 · 태그<br><span style="color:#64748b;">마켓에서 비노출</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="field"><span class="badge badge-red">변환 실패</span></td>
+                                    <td>관리자 엑셀 업로드 시<br>판매상태 N으로 처리된 작품</td>
+                                    <td>"변환 실패"<br>(빨간색 뱃지)</td>
+                                    <td>없음<br><span style="color:#ef4444; font-size:12px;">⚠️ 수정 후 재등록 불가<br>삭제 후 새로 등록 필요</span></td>
+                                    <td>원본 표시</td>
+                                    <td>카테고리 · 작품명 · 가격 · 태그</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label info">변환 로그 타임라인</div>
+                        <div class="note-block" style="margin-bottom:14px;">현재 상태까지의 로그만 역순(최신이 위)으로 노출됩니다. 현재 활성 단계는 <strong>파란색 불릿</strong> + "(현재 상태)" 텍스트로 강조됩니다.</div>
+                        <table class="spec-table">
+                            <thead><tr><th style="width:90px;">현재 상태</th><th style="width:50px;">순서</th><th style="width:140px;">로그 제목</th><th>로그 설명</th></tr></thead>
+                            <tbody>
+                                <tr style="background:#f0f9ff;"><td class="field" rowspan="2">변환 대기</td><td>1</td><td><strong style="color:#0ea5e9;">변환 대기 중</strong></td><td>파일 변환 대기열에 진입했습니다. (이 단계 정보 수정 가능)</td></tr>
+                                <tr style="background:#f0f9ff;"><td>2</td><td>작품 최초 등록</td><td>RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</td></tr>
+                                <tr style="border-top:2px solid #e2e8f0;"><td class="field" rowspan="3">변환 중</td><td>1</td><td><strong style="color:#854d0e;">변환 작업 진행 중</strong></td><td>서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.</td></tr>
+                                <tr><td>2</td><td>변환 대기 중</td><td>관리자 검수 대기열에 진입했습니다. (이 단계 정보 수정 가능)</td></tr>
+                                <tr><td>3</td><td>작품 최초 등록</td><td>RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</td></tr>
+                                <tr style="border-top:2px solid #e2e8f0;"><td class="field" rowspan="4">변환 완료</td><td>1</td><td><strong style="color:#0284c7;">변환 완료</strong></td><td>모든 변환이 성공적으로 끝났습니다. 안내된 패치 예정일에 맞춰 출시를 대기합니다.</td></tr>
+                                <tr><td>2</td><td>변환 작업 진행 중</td><td>서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.</td></tr>
+                                <tr><td>3</td><td>변환 대기 중</td><td>파일 변환 대기열에 진입했습니다. (이 단계 정보 수정 가능)</td></tr>
+                                <tr><td>4</td><td>작품 최초 등록</td><td>RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</td></tr>
+                                <tr style="border-top:2px solid #e2e8f0;"><td class="field" rowspan="5">판매 중</td><td>1</td><td><strong style="color:#166534;">🎉 제품 판매 중</strong></td><td>오픈 마켓에 정상적으로 등록되어, 현재 유저들이 아이템을 구매하고 있습니다!</td></tr>
+                                <tr><td>2</td><td>변환 완료</td><td>모든 변환이 성공적으로 끝났습니다. 안내된 패치 예정일에 맞춰 출시를 대기합니다.</td></tr>
+                                <tr><td>3</td><td>변환 작업 진행 중</td><td>서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.</td></tr>
+                                <tr><td>4</td><td>변환 대기 중</td><td>파일 변환 대기열에 진입했습니다. (이 단계 정보 수정 가능)</td></tr>
+                                <tr><td>5</td><td>작품 최초 등록</td><td>RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</td></tr>
+                                <tr style="border-top:2px solid #e2e8f0;"><td class="field" rowspan="6">만료</td><td>1</td><td><strong style="color:#64748b;">작품 만료됨</strong></td><td>판매 기간이 종료되어 마켓 품절 처리되었습니다.</td></tr>
+                                <tr><td>2</td><td>🎉 제품 판매 중</td><td>오픈 마켓에 정상적으로 등록되어, 현재 유저들이 아이템을 구매하고 있습니다!</td></tr>
+                                <tr><td>3</td><td>변환 완료</td><td>모든 변환이 성공적으로 끝났습니다. 안내된 패치 예정일에 맞춰 출시를 대기합니다.</td></tr>
+                                <tr><td>4</td><td>변환 작업 진행 중</td><td>서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.</td></tr>
+                                <tr><td>5</td><td>변환 대기 중</td><td>파일 변환 대기열에 진입했습니다. (이 단계 정보 수정 가능)</td></tr>
+                                <tr><td>6</td><td>작품 최초 등록</td><td>RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</td></tr>
+                                <tr style="border-top:2px solid #e2e8f0;"><td class="field" rowspan="3"><span style="color:#991b1b;">변환 실패</span></td><td>1</td><td><strong style="color:#991b1b;">❗️ 변환 실패</strong></td><td>변환 대기 상태에서 파일 변환에 실패했습니다. (파일 형식 틀림)</td></tr>
+                                <tr><td>2</td><td>변환 대기 중</td><td>관리자 검수 대기열에 진입했습니다. (이 단계 정보 수정 가능)</td></tr>
+                                <tr><td>3</td><td>작품 최초 등록</td><td>RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== 어드민 ===================== -->
+            <div class="page-section" id="sec-admin">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#fee2e2;">⚙️</div>
+                    <h2>어드민 백오피스</h2>
+                    <span class="page-path">admin.html</span>
+                </div>
+                <div class="page-body">
+                    <div class="spec-group">
+                        <div class="spec-label">대시보드 카드 (5개)</div>
+                        <div class="status-flow">
+                            <div class="status-node" style="border-color:#3b82f6; color:#1d4ed8;">변환 대기</div>
+                            <span class="status-arrow">→</span>
+                            <div class="status-node">변환 완료</div>
+                            <span class="status-arrow">→</span>
+                            <div class="status-node">판매 진행</div>
+                            <span class="status-arrow">→</span>
+                            <div class="status-node" style="border-color:#ef4444; color:#dc2626;">변환 실패</div>
+                            <span class="status-arrow">→</span>
+                            <div class="status-node" style="color:#64748b;">만료</div>
+                        </div>
+                        <ul class="spec-list">
+                            <li>카드 클릭 시 해당 상태 필터 적용 (토글 방식)</li>
+                            <li>활성 카드: 배경 파란색(#2563eb) + 흰색 텍스트</li>
+                            <li>기본 로딩: <strong>"변환 대기"</strong> 카드가 활성 상태</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">작품관리 탭</div>
+                        <table class="spec-table">
+                            <thead><tr><th>기능</th><th>설명</th></tr></thead>
+                            <tbody>
+                                <tr><td class="field">검색 조건</td><td>날짜 검색 (등록일/유효기간/판매시작일) + 판매상태(Y/N) + 키워드(작품명/ID/카테고리)</td></tr>
+                                <tr><td class="field">날짜 퀵버튼</td><td>오늘 / 1주일 / 1개월 / 3개월 / 6개월</td></tr>
+                                <tr><td class="field">판매상태 행</td><td>변환 대기 / 만료 필터시에는 판매상태 행 <strong>숨김 처리</strong></td></tr>
+                                <tr><td class="field">테이블 컬럼</td><td>변환 대기 필터: 판매시작일 + 판매상태 컬럼 <strong>숨김</strong>, 작품이름 너비 확장(38%)</td></tr>
+                                <tr><td class="field">리스트 다운로드</td><td>필터된 목록을 CSV 파일로 다운로드</td></tr>
+                                <tr><td class="field">작품 내려받기</td><td>필터된 목록의 .foot 파일 info를 TXT로 다운로드</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label danger">변환 업데이트 (Excel 업로드)</div>
+                        <ul class="spec-list">
+                            <li>업로드 양식: <strong>작품 ID, 판매 상태(Y/N), 인게임 업로드 기간</strong></li>
+                            <li>파일 미선택: <code>alert('업로드할 파일을 선택해주세요.')</code></li>
+                            <li>업로드 완료: <code>alert('[파일명] 대량 변환 및 DB 업데이트가 완료되었습니다.')</code></li>
+                            <li>업로드 후 유저 상태 정보 자동 동기화</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label warn">타입/색상 관리 탭</div>
+                        <table class="spec-table">
+                            <thead><tr><th>기능</th><th>설명</th></tr></thead>
+                            <tbody>
+                                <tr><td class="field">타입 추가</td><td>텍스트 입력 → 자동 <code>#</code> 접두사 → 리스트 최상단 추가<br>빈 값: <code>alert('타입명을 입력해주세요.')</code></td></tr>
+                                <tr><td class="field">색상 추가</td><td>색상명 텍스트 + color picker → 리스트 최상단 추가<br>빈 값: <code>alert('색상명칭을 입력해주세요.')</code></td></tr>
+                                <tr><td class="field">삭제</td><td>⚠️ 대체 항목 지정 필수 (기존 유저 작품 보호)<br>미선택: <code>alert('삭제를 위해 대체할 항목을 반드시 선택해야 합니다.')</code><br>완료: <code>alert('[삭제항목] → [대체항목] 일괄 변경 처리')</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== 작품 상태 정의 ===================== -->
+            <div class="page-section" id="sec-status">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#eff6ff;">🔄</div>
+                    <h2>작품 상태 정의</h2>
+                </div>
+                <div class="page-body">
+                    <div class="spec-group">
+                        <div class="spec-label">상태 전이도</div>
+                        <div class="status-flow">
+                            <div class="status-node" style="border-color:#3b82f6; background:#eff6ff;">변환 대기</div>
+                            <span class="status-arrow">→</span>
+                            <div class="status-node">변환 완료</div>
+                            <span class="status-arrow">→</span>
+                            <div class="status-node" style="border-color:#166534; background:#f0fdf4;">판매 진행</div>
+                            <span class="status-arrow">→</span>
+                            <div class="status-node" style="border-color:#64748b; color:#64748b;">만료</div>
+                        </div>
+                        <div style="margin-top: 8px;">
+                            <div class="status-flow">
+                                <div class="status-node" style="border-color:#3b82f6; background:#eff6ff;">변환 대기</div>
+                                <span class="status-arrow">→</span>
+                                <div class="status-node" style="border-color:#ef4444; background:#fef2f2; color:#dc2626;">변환 실패</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">상태별 상세</div>
+                        <table class="spec-table">
+                            <thead><tr><th>상태</th><th>뱃지 색상</th><th>유저 수정</th><th>마켓 노출</th><th>비고</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td class="field">변환 대기</td>
+                                    <td><span class="badge badge-gray">회색</span></td>
+                                    <td><span class="badge badge-green">가능</span></td>
+                                    <td>✕</td>
+                                    <td>관리자 조회 전까지만 수정 가능</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">변환 완료</td>
+                                    <td><span class="badge badge-blue">파랑</span></td>
+                                    <td><span class="badge badge-red">불가</span></td>
+                                    <td>✕</td>
+                                    <td>출시 예정, 수정 권한 잠김</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">판매 진행</td>
+                                    <td><span class="badge badge-green">녹색</span></td>
+                                    <td><span class="badge badge-red">불가</span></td>
+                                    <td>✓</td>
+                                    <td>마켓 정상 노출 중</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">변환 실패</td>
+                                    <td><span class="badge badge-red">빨강</span></td>
+                                    <td><span class="badge badge-red">불가</span></td>
+                                    <td>✕</td>
+                                    <td>⚠️ 수정 후 재등록 <strong>불가</strong> → 삭제 후 새로 등록 필요</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">만료</td>
+                                    <td><span class="badge badge-gray">회색</span></td>
+                                    <td><span class="badge badge-red">불가</span></td>
+                                    <td>✕</td>
+                                    <td>유효기간 종료, 마켓 비노출</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="alert-box alert-error">
+                            <span class="alert-icon">⚠️</span>
+                            <div>
+                                <strong>변환 실패</strong> 상태의 작품은 수정 후 재등록이 <strong>불가</strong>합니다.<br>
+                                반드시 해당 작품을 <strong>삭제</strong>한 후 처음부터 새로 등록해야 합니다.
+                            </div>
+                        </div>
+                        <div class="alert-box alert-info" style="margin-top: 6px;">
+                            <span class="alert-icon">ℹ️</span>
+                            <div>
+                                <strong>변환 대기</strong> 상태에서만 유저가 작품 정보를 수정할 수 있습니다.<br>
+                                관리자가 해당 작품을 조회(변환 처리 시작)하는 시점에 수정 권한이 즉시 잠깁니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== 공통 벨리데이션 ===================== -->
+            <div class="page-section" id="sec-validation">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#fef3c7;">🛡️</div>
+                    <h2>공통 벨리데이션 규칙</h2>
+                </div>
+                <div class="page-body">
+                    <table class="spec-table">
+                        <thead><tr><th>규칙</th><th>적용 페이지</th><th>상세</th></tr></thead>
+                        <tbody>
+                            <tr><td class="field">파일 확장자 제한</td><td>register, edit</td><td>.foot (원본) / .mp4, .mov (영상) / .png (썸네일)</td></tr>
+                            <tr><td class="field">작품명</td><td>register, edit</td><td>영문만 입력 가능 (a-zA-Z0-9, 공백, 특수문자 일부), 최대 20자</td></tr>
+                            <tr><td class="field">게시만료일</td><td>register, edit</td><td>MM.DD.YYYY 텍스트 입력, 자동 포맷팅, 현재일 기준 최소 30일</td></tr>
+                            <tr><td class="field">가격 입력</td><td>register, edit</td><td>숫자만 입력 (type="number"), min=0, 0 → 무료 배포</td></tr>
+                            <tr><td class="field">타입 태그 제한</td><td>register, edit</td><td>최대 2개, 3개 선택 시 가장 먼저 선택한 항목 자동 해제</td></tr>
+                            <tr><td class="field">메인 색상</td><td>register, edit</td><td>select 드롭다운 1개 선택 (선택 사항, 필수 아님)</td></tr>
+                            <tr><td class="field">약관 동의</td><td>register</td><td>스크롤 완료 → 동의 버튼 활성화 → 체크박스 자동 체크</td></tr>
+                            <tr><td class="field">1일 등록 제한</td><td>register</td><td>최대 3회/일, 완료 화면에서 잔여 횟수 표시</td></tr>
+                            <tr><td class="field">KP 잔액 검증</td><td>market</td><td>잔액 < 상품가격 → 결제 버튼 비활성화 + 경고 노출</td></tr>
+                            <tr><td class="field">타입/색상 삭제</td><td>admin</td><td>삭제 시 대체 항목 필수 선택 (기존 유저 데이터 보호)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===================== 공통 얼랏 메시지 ===================== -->
+            <div class="page-section" id="sec-alert">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#fce7f3;">💬</div>
+                    <h2>공통 얼랏 메시지 목록</h2>
+                </div>
+                <div class="page-body">
+                    <table class="spec-table">
+                        <thead><tr><th>페이지</th><th>트리거</th><th>메시지</th><th>타입</th></tr></thead>
+                        <tbody>
+                            <tr><td class="field">register</td><td>STEP 2 → 약관 미동의</td><td>"약관에 반드시 동의해야 다음 단계로 진행할 수 있습니다."</td><td><span class="badge badge-red">alert</span></td></tr>
+                            <tr><td class="field">register</td><td>STEP 3 → 작품명 미입력</td><td>"작품명을 입력해주세요. (영문만 입력 가능)"</td><td><span class="badge badge-red">alert</span></td></tr>
+                            <tr><td class="field">register</td><td>STEP 3 → 만료일 미입력</td><td>"작품 게시기간 만료일을 필수로 입력해주세요. (MM.DD.YYYY)"</td><td><span class="badge badge-red">alert</span></td></tr>
+                            <tr><td class="field">register</td><td>STEP 3 → 만료일 형식 오류</td><td>"게시 만료일 형식이 올바르지 않습니다. MM.DD.YYYY 형태로 입력해주세요."</td><td><span class="badge badge-red">alert</span></td></tr>
+                            <tr><td class="field">edit</td><td>저장 완료</td><td>"수정된 정보가 저장되었습니다."</td><td><span class="badge badge-green">alert</span></td></tr>
+                            <tr><td class="field">studio</td><td>찜 해제 클릭</td><td>"해당 상품의 찜을 해제하시겠습니까?"</td><td><span class="badge badge-orange">confirm</span></td></tr>
+                            <tr><td class="field">studio_detail</td><td>삭제 클릭</td><td>"삭제되었습니다."</td><td><span class="badge badge-red">alert</span></td></tr>
+                            <tr><td class="field">market</td><td>KP 잔액 부족</td><td>"보유 Kafra Point가 부족하여 결제할 수 없습니다."</td><td><span class="badge badge-red">inline</span></td></tr>
+                            <tr><td class="field">admin</td><td>파일 미선택 업로드</td><td>"업로드할 파일을 선택해주세요."</td><td><span class="badge badge-red">alert</span></td></tr>
+                            <tr><td class="field">admin</td><td>업로드 완료</td><td>"[파일명] 대량 변환 및 DB 업데이트가 완료되었습니다."</td><td><span class="badge badge-green">alert</span></td></tr>
+                            <tr><td class="field">admin</td><td>타입 미입력</td><td>"타입명을 입력해주세요."</td><td><span class="badge badge-red">alert</span></td></tr>
+                            <tr><td class="field">admin</td><td>색상명 미입력</td><td>"색상명칭을 입력해주세요."</td><td><span class="badge badge-red">alert</span></td></tr>
+                            <tr><td class="field">admin</td><td>삭제 시 대체 미선택</td><td>"삭제를 위해 대체할 항목을 반드시 선택해야 합니다."</td><td><span class="badge badge-red">alert</span></td></tr>
+                            <tr><td class="field">admin</td><td>삭제+대체 완료</td><td>"[항목] → [대체항목] 일괄 변경 처리되었습니다."</td><td><span class="badge badge-green">alert</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
+
+    <script>
+        // Smooth scroll + active nav tracking
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelectorAll('.nav-item').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Intersection Observer for auto-highlighting sidebar
+        const sections = document.querySelectorAll('.page-section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const id = entry.target.id;
+                    document.querySelectorAll('.nav-item').forEach(l => {
+                        l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { rootMargin: '-100px 0px -60% 0px' });
+
+        sections.forEach(sec => observer.observe(sec));
+    </script>
 </body>
 </html>

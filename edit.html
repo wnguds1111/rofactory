@@ -79,12 +79,12 @@
             
             <div class="form-row">
                 <div class="form-group half">
-                    <label>작품 게시기간 만료일 <span style="color:#ef4444;">*</span></label>
-                    <input type="date" class="form-control" value="2026-12-31" required>
+                    <label>작품 게시기간 만료일 <span style="color:#ef4444;">*</span> <span style="font-size:12px; color:#64748b;">(MM.DD.YYYY)</span></label>
+                    <input type="text" class="form-control" id="editDate" value="12.31.2026" maxlength="10" oninput="formatDateInput(this)">
                 </div>
                 <div class="form-group half">
-                    <label>작품 명칭 <span style="color:#ef4444;">*</span></label>
-                    <input type="text" class="form-control" id="editTitle" value="어둠의 심연의 걸음" required placeholder="작품 이름을 입력해주세요">
+                    <label>작품 명칭 <span style="color:#ef4444;">*</span> <span style="font-size:12px; color:#64748b;">(영문만 입력 가능)</span></label>
+                    <input type="text" class="form-control" id="editTitle" value="Dark Abyss Walk" required placeholder="Enter title in English" maxlength="20" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s\-_.!?']/g, '')">
                 </div>
             </div>
 
@@ -101,13 +101,44 @@
             </div>
 
             <div class="form-group" style="margin-top:30px;">
-                <label>메인 색상 (1개) <span style="color:#ef4444;">*</span></label>
-                <div class="tag-group">
-                    <label class="tag-pill color-pill"><input type="radio" name="mainColor" value="red" required> <span class="color-dot" style="background:#ef4444;"></span>빨강</label>
-                    <label class="tag-pill color-pill"><input type="radio" name="mainColor" value="blue"> <span class="color-dot" style="background:#3b82f6;"></span>파랑</label>
-                    <label class="tag-pill color-pill"><input type="radio" name="mainColor" value="green"> <span class="color-dot" style="background:#22c55e;"></span>초록</label>
-                    <label class="tag-pill color-pill"><input type="radio" name="mainColor" value="yellow"> <span class="color-dot" style="background:#eab308;"></span>노랑</label>
-                    <label class="tag-pill color-pill"><input type="radio" name="mainColor" value="black" checked> <span class="color-dot" style="background:#1e293b;"></span>블랙</label>
+                <label>메인 색상 (선택)</label>
+                <select class="form-control" id="editColorSelect">
+                    <option value="">색상을 선택해주세요</option>
+                    <option value="red">🔴 빨강</option>
+                    <option value="blue">🔵 파랑</option>
+                    <option value="green">🟢 초록</option>
+                    <option value="yellow">🟡 노랑</option>
+                    <option value="black" selected>⚫ 블랙</option>
+                </select>
+            </div>
+
+            <div style="margin-top:30px; padding-top:30px; border-top:2px dashed #e2e8f0;">
+                <label style="display:block; font-size:14px; font-weight:800; color:#1e293b; margin-bottom:15px;">파일 수정 <span style="font-size:12px; color:#64748b; font-weight:600;">(변경할 파일만 선택)</span></label>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                    <div style="background:#f8fafc; border:2px dashed #e2e8f0; border-radius:12px; padding:20px; text-align:center; cursor:pointer;" onclick="document.getElementById('ef1').click()">
+                        <div style="font-size:24px; margin-bottom:8px;">📁</div>
+                        <div style="font-size:13px; font-weight:700; color:#475569;">발자국 원본 (.foot)</div>
+                        <input type="file" id="ef1" style="display:none" accept=".foot" onchange="document.getElementById('ef1_name').innerText=this.files[0].name">
+                        <span id="ef1_name" style="display:block; margin-top:8px; font-size:12px; font-weight:800; color:#3b82f6;"></span>
+                    </div>
+                    <div style="background:#f8fafc; border:2px dashed #e2e8f0; border-radius:12px; padding:20px; text-align:center; cursor:pointer;" onclick="document.getElementById('ef2').click()">
+                        <div style="font-size:24px; margin-bottom:8px;">🎬</div>
+                        <div style="font-size:13px; font-weight:700; color:#475569;">동영상 미리보기 (.mp4)</div>
+                        <input type="file" id="ef2" style="display:none" accept="video/*" onchange="document.getElementById('ef2_name').innerText=this.files[0].name">
+                        <span id="ef2_name" style="display:block; margin-top:8px; font-size:12px; font-weight:800; color:#3b82f6;"></span>
+                    </div>
+                    <div style="background:#f8fafc; border:2px dashed #e2e8f0; border-radius:12px; padding:20px; text-align:center; cursor:pointer;" onclick="document.getElementById('ef3').click()">
+                        <div style="font-size:24px; margin-bottom:8px;">💎</div>
+                        <div style="font-size:13px; font-weight:700; color:#475569;">콜렉션 썸네일 (.png)</div>
+                        <input type="file" id="ef3" style="display:none" accept=".png" onchange="document.getElementById('ef3_name').innerText=this.files[0].name">
+                        <span id="ef3_name" style="display:block; margin-top:8px; font-size:12px; font-weight:800; color:#3b82f6;"></span>
+                    </div>
+                    <div style="background:#f8fafc; border:2px dashed #e2e8f0; border-radius:12px; padding:20px; text-align:center; cursor:pointer;" onclick="document.getElementById('ef4').click()">
+                        <div style="font-size:24px; margin-bottom:8px;">🎒</div>
+                        <div style="font-size:13px; font-weight:700; color:#475569;">아이템 썸네일 (.png/.jpg)</div>
+                        <input type="file" id="ef4" style="display:none" accept=".png,.jpg" onchange="document.getElementById('ef4_name').innerText=this.files[0].name">
+                        <span id="ef4_name" style="display:block; margin-top:8px; font-size:12px; font-weight:800; color:#3b82f6;"></span>
+                    </div>
                 </div>
             </div>
             
@@ -118,6 +149,14 @@
         </form>
     </div>
     <script>
+        function formatDateInput(el) {
+            var v = el.value.replace(/[^0-9]/g, '');
+            if(v.length > 2) v = v.slice(0,2) + '.' + v.slice(2);
+            if(v.length > 5) v = v.slice(0,5) + '.' + v.slice(5);
+            if(v.length > 10) v = v.slice(0,10);
+            el.value = v;
+        }
+
         // Tag Max Queue Logic for (Type Tags) constraint max 2 checkboxes
         const tagGroup = document.getElementById('editTagGroup');
         const checkboxes = tagGroup.querySelectorAll('input[type="checkbox"]');

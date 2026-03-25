@@ -187,7 +187,7 @@
             const tPending = `<div class="tl-item ${status==='pending'?'active':''}">
                                     <div class="tl-date">2026.03.11 10:05 ${status==='pending'?'(현재 상태)':''}</div>
                                     <div class="tl-title" style="color:${status==='pending'?'#0ea5e9':'#1e293b'};">변환 대기 중</div>
-                                    <div class="tl-desc">관리자 검수 대기열에 진입했습니다. (이 단계 정보 수정 가능)</div>
+                                    <div class="tl-desc">파일 변환 대기열에 진입했습니다. (이 단계 정보 수정 가능)</div>
                                </div>`;
             const tConverting = `<div class="tl-item ${status==='converting'?'active':''}">
                                     <div class="tl-date">2026.03.13 14:00 ${status==='converting'?'(현재 상태)':''}</div>
@@ -211,7 +211,7 @@
                                </div>`;
             const tFailed = `<div class="tl-item active">
                                     <div class="tl-date">2026.03.14 16:20 (현재 상태)</div>
-                                    <div class="tl-title" style="color:#991b1b;">❗️ 변환 실패 반려</div>
+                                    <div class="tl-title" style="color:#991b1b;">❗️ 변환 실패</div>
                                     <div class="tl-desc">변환 대기 상태에서 파일 변환에 실패했습니다. (파일 형식 틀림)</div>
                              </div>`;
 
@@ -219,15 +219,18 @@
             
             if (status === 'pending') {
                 logs.push(tPending);
+                logs.push(tRegister);
             } 
             else if (status === 'converting') {
                 logs.push(tConverting);
                 logs.push(tPending);
+                logs.push(tRegister);
             }
             else if (status === 'completed') {
                 logs.push(tCompleted);
                 logs.push(tConverting);
                 logs.push(tPending);
+                logs.push(tRegister);
             }
             else if (status === 'onsale') {
                 logs.push(tOnSale);
@@ -247,6 +250,7 @@
             else if (status === 'failed') {
                 logs.push(tFailed);
                 logs.push(tPending);
+                logs.push(tRegister);
             }
 
             document.getElementById('timelineContainer').innerHTML = logs.join('');
