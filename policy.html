@@ -92,7 +92,7 @@
 <body>
 
     <div class="top-bar">
-        <h1>RO FACTORY 기획 명세서 <span class="ver">v3.0</span></h1>
+        <h1>RO FACTORY 상세 기획서 <span class="ver">v3.0</span></h1>
         <a href="index.html" class="btn-home">← 포털 홈으로</a>
     </div>
 
@@ -101,6 +101,7 @@
         <!-- Sidebar -->
         <nav class="sidebar">
             <div class="sidebar-title">페이지별 명세</div>
+            <a href="#sec-main" class="nav-item">🏠 메인 페이지 (main)</a>
             <a href="#sec-register" class="nav-item active">📁 작품 등록 (register)</a>
             <a href="#sec-edit" class="nav-item">✏️ 작품 수정 (edit)</a>
             <a href="#sec-market" class="nav-item">🛍️ 글로벌 마켓 (market)</a>
@@ -116,6 +117,89 @@
 
         <!-- Main Content -->
         <div class="main">
+
+            <!-- ===================== 메인 페이지 ===================== -->
+            <div class="page-section" id="sec-main">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#fef9c3;">🏠</div>
+                    <h2>메인 페이지</h2>
+                    <span class="page-path">main.html</span>
+                </div>
+                <div class="page-body">
+
+                    <div class="spec-group">
+                        <div class="spec-label">GNB / FNB 내비게이션</div>
+                        <div class="note-block">GNB 및 FNB 레이아웃은 <strong>ROZ 공홈과 동일한 형태</strong>를 사용하며 별도 네비게이션 카피기 없음.<br>단, RO FACTORY 무뉴 클릭 시 드롭다운 노출: <strong>작품등록 / 마켓이동 / 가이드안내 / 마이스튜디오</strong></div>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">히어로 슬라이더 + 2x2 바로가기 카드</div>
+                        <table class="spec-table">
+                            <thead><tr><th>컴포넌트</th><th>내용</th><th>동작/정사</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td class="field">히어로 슬라이더</td>
+                                    <td>최대 5장 슬라이드<br>마우스 드래그 조작 가능<br>"1 / 5" 형식 분수 페이지네이션</td>
+                                    <td>3초 자동 전환<br>마우스 드래그로 수동 전환</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">2×2 클릭 카드</td>
+                                    <td>작품 등록 / MY STUDIO / 가이드 안내 / 마켓 이동</td>
+                                    <td>작품등록 → register.html<br>MY STUDIO → studio.html<br>가이드 안내 → <code>alert('게시글 연동 예정')</code><br>마켓이동 → market.html</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">상품 리스트 섹션 (bg-white-section)</div>
+                        <table class="spec-table">
+                            <thead><tr><th style="width:160px;">섹션</th><th style="width:120px;">소제목</th><th>내용</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td class="field">이달의 베스트 발자국</td>
+                                    <td>#MD's_Pick</td>
+                                    <td>가로 스크롤 슬라이더<br><strong>상위 10개 베스트 상품</strong> 노출 (하트 기준 상위 10%)<br>마우스 드래그 이동 + ‹ › 다음/이전 버튼<br>카드 클릭 → market.html 이동<br>BEST 배지 노출 (파란색)</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">신규 업데이트 발자국</td>
+                                    <td>#NEW_UPDATE</td>
+                                    <td>가로 스크롤 슬라이더<br><strong>최신 10개 등록 상품</strong> 노출 (등록일 기준 최신순)<br>마우스 드래그 이동 + ‹ › 다음/이전 버튼<br>카드 클릭 → market.html 이동<br>NEW 배지 노출 (파란색)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">STEP 섹션 (Scroll-Linked Sweep Animation)</div>
+                        <table class="spec-table">
+                            <thead><tr><th style="width:100px;">STEP</th><th style="width:160px;">제목</th><th>설명</th><th style="width:160px;">버튼 동작</th></tr></thead>
+                            <tbody>
+                                <tr><td class="field">STEP 1</td><td>발자국 파일 제작</td><td>라그나로크 UGC 전용 클라이언트를 통해 `.foot` 파일 추출</td><td>편집 가이드 보기 → register.html</td></tr>
+                                <tr><td class="field">STEP 2</td><td>마켓 세부 정보 등록</td><td>에셋 파일 업로드 후 작품명 / 가격 / 태그 입력</td><td>발자국 작품 등록 → register.html</td></tr>
+                                <tr><td class="field">STEP 3</td><td>팩토리 공식 마켓 출시</td><td>어드민 승인 후 지정 일자에 공식 마켓 상장</td><td>MY STUDIO → studio.html</td></tr>
+                            </tbody>
+                        </table>
+                        <ul class="spec-list" style="margin-top:10px;">
+                            <li>스크롤 링크드 Sweep 애니메이션: 스크롤 위치에 따라 다크 배경이 밝은 영역을 덮어나가는 와이프 인 효과 적용</li>
+                            <li>STEP 컨텐츠는 다크 배경 위에 <code>.masstige-sweep-inner</code> 레이어로 밝은 배경과 함께 노출</li>
+                        </ul>
+                    </div>
+
+                    <div class="spec-group">
+                        <div class="spec-label">하단 마감 배너 + 푸터</div>
+                        <table class="spec-table">
+                            <thead><tr><th>컴포넌트</th><th>내용</th><th>동작</th></tr></thead>
+                            <tbody>
+                                <tr><td class="field">다운로드 배너</td><td>"나만의 발자국을 만들 준비가 되셨나요?"</td><td>편집툴 가이드 다운로드 버튼 (v1 미연동)</td></tr>
+                                <tr><td class="field">푸터</td><td>Privacy Policy · Terms of Service · Account Policy · Refund Policy · Punishment Policy</td><td>미연동 (href="#")</td></tr>
+                                <tr><td class="field">카피라이트</td><td>© GRAVITY Co., Ltd. All Rights Reserved.</td><td>고정 텍스트</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
 
             <!-- ===================== 작품 등록 ===================== -->
             <div class="page-section" id="sec-register">
@@ -493,23 +577,63 @@
                 </div>
                 <div class="page-body">
                     <div class="spec-group">
-                        <div class="spec-label">대시보드 카드 (5개)</div>
-                        <div class="status-flow">
-                            <div class="status-node" style="border-color:#3b82f6; color:#1d4ed8;">변환 대기</div>
-                            <span class="status-arrow">→</span>
-                            <div class="status-node">변환 완료</div>
-                            <span class="status-arrow">→</span>
-                            <div class="status-node">판매 진행</div>
-                            <span class="status-arrow">→</span>
-                            <div class="status-node" style="border-color:#ef4444; color:#dc2626;">변환 실패</div>
-                            <span class="status-arrow">→</span>
-                            <div class="status-node" style="color:#64748b;">만료</div>
-                        </div>
-                        <ul class="spec-list">
-                            <li>카드 클릭 시 해당 상태 필터 적용 (토글 방식)</li>
-                            <li>활성 카드: 배경 파란색(#2563eb) + 흰색 텍스트</li>
-                            <li>기본 로딩: <strong>"변환 대기"</strong> 카드가 활성 상태</li>
-                        </ul>
+                        <div class="spec-label">대시보드 카드 (5개) — 상태별 상세 정의</div>
+                        <div class="note-block" style="margin-bottom:14px;">카드 클릭 시 해당 상태 필터 적용 (토글 방식). 기본 로딩 시 <strong>변환 대기</strong> 카드가 활성 상태. 활성 시 배경 색 변경.</div>
+                        <table class="spec-table">
+                            <thead><tr><th style="width:90px;">상태 카드</th><th style="width:260px;">상태 설명</th><th style="width:360px;">리스트 노출 컬럼</th><th>상세 페이지 클릭 시 가능한 행동</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td class="field"><span class="badge badge-blue">변환 대기</span></td>
+                                    <td>유저가 등록 완료 후 관리자 검수/변환 처리 전 대기 상태.<br>유저는 이 단계에서만 정보 수정 가능.</td>
+                                    <td>번호 · 작품ID · 카테고리 · 작품이름(상태) · 가격 · 등록일 · 유효기간<br><span style="color:#64748b; font-size:12px;">※ 판매시작일 · 판매상태 컬럼 숨김</span></td>
+                                    <td>
+                                        • <strong>변환 처리 시작</strong>: 상세 조회 시 해당 작품 상태가 "변환 중"으로 즉시 전환<br>
+                                        • 작품 기본 정보 확인 (작품명, 카테고리, 가격, 파일 정보)<br>
+                                        • Excel 업로드로 판매상태(Y/N) 일괄 처리 가능
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field"><span class="badge badge-blue">변환 완료</span></td>
+                                    <td>어드민 Excel 업로드로 판매상태 Y 처리 완료.<br>패치 예정일에 맞춰 출시 대기 중인 작품.</td>
+                                    <td>번호 · 작품ID · 카테고리 · 작품이름(상태) · 가격 · 등록일 · 유효기간 · 판매시작일 · 판매상태(Y)</td>
+                                    <td>
+                                        • 작품 상세 정보 확인<br>
+                                        • 판매 시작일 확인<br>
+                                        • 재업로드(Excel)로 상태 재조정 가능
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field"><span class="badge badge-green">판매 진행</span></td>
+                                    <td>마켓에 정상 등록되어 유저들이 구매 가능한 작품.<br>판매 중인 모든 작품 현황 조회.</td>
+                                    <td>번호 · 작품ID · 카테고리 · 작품이름(상태) · 가격 · 등록일 · 유효기간 · 판매시작일 · 판매상태(Y)</td>
+                                    <td>
+                                        • 판매 현황 및 작품 정보 확인<br>
+                                        • Excel 재업로드로 판매상태 N 처리 → 변환 실패 전환 가능<br>
+                                        • 유효기간 만료 시 자동 만료 처리됨
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field"><span class="badge badge-red">변환 실패</span></td>
+                                    <td>Excel 업로드 시 판매상태 N 처리된 작품.<br>파일 형식 오류 등으로 변환 불가 판정.</td>
+                                    <td>번호 · 작품ID · 카테고리 · 작품이름(상태) · 가격 · 등록일 · 유효기간 · 판매시작일 · 판매상태(N)</td>
+                                    <td>
+                                        • 실패 사유 확인 (변환 로그 타임라인)<br>
+                                        • <span style="color:#ef4444; font-weight:800;">수정 후 재등록 불가</span> — 유저가 삭제 후 새로 등록해야 함<br>
+                                        • 관리자는 작품 정보 열람만 가능
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field"><span class="badge badge-gray">만료</span></td>
+                                    <td>게시만료일이 지나 자동 만료 처리된 작품.<br>마켓에서 비노출, 품절 처리.</td>
+                                    <td>번호 · 작품ID · 카테고리 · 작품이름(상태) · 가격 · 등록일 · 유효기간<br><span style="color:#64748b; font-size:12px;">※ 판매상태 행 숨김</span></td>
+                                    <td>
+                                        • 만료된 작품 이력 확인<br>
+                                        • CSV 다운로드로 만료 목록 추출 가능<br>
+                                        • 별도 재등록 불가 (유저가 신규 등록 필요)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="spec-group">
