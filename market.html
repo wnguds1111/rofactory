@@ -397,11 +397,11 @@
             
             // Populate the payment modal UI
             document.getElementById('modal-current-balance').innerText = `${currentKafraPoints.toLocaleString()} KP`;
-            document.getElementById('modal-item-name').innerText = p.title;
+            document.getElementById('modal-item-name').innerHTML = p.title;
             
             if (p.isFree) {
                 document.getElementById('modal-item-price').innerText = `FREE`;
-                document.getElementById('modal-payment-amount').innerText = `0 KP (<span data-en="Free" data-ko="무료">Free</span>)`;
+                document.getElementById('modal-payment-amount').innerHTML = `0 KP (<span data-en="Free" data-ko="무료">Free</span>)`;
                 document.getElementById('modal-payment-amount').style.color = '#3b82f6';
             } else {
                 document.getElementById('modal-item-price').innerText = `${p.price.toLocaleString()} KP`;
@@ -415,7 +415,7 @@
             // Reset state
             btn.style.background = '#3b82f6';
             btn.style.cursor = 'pointer';
-            btn.innerText = p.isFree ? '<span data-en="Free" data-ko="무료">Free</span> <span data-en="Proceed to Checkout" data-ko="결제 진행">Proceed to Checkout</span>' : `${p.price.toLocaleString()} KP <span data-en="Pay" data-ko="결제하기">Pay</span>`;
+            btn.innerHTML = p.isFree ? '<span data-en="Free" data-ko="무료">Free</span> <span data-en="Proceed to Checkout" data-ko="결제 진행">Proceed to Checkout</span>' : `${p.price.toLocaleString()} KP <span data-en="Pay" data-ko="결제하기">Pay</span>`;
             if(alertBox) alertBox.style.display = 'none';
             btn.onclick = executePayment;
             
@@ -423,7 +423,7 @@
                 // Not enough funds UI
                 btn.style.background = '#cbd5e1';
                 btn.style.cursor = 'not-allowed';
-                btn.innerText = 'Kafra Point 부족';
+                btn.innerHTML = '<span data-en="Insufficient Points" data-ko="Kafra Point 부족">Insufficient Points</span>';
                 btn.onclick = null;
                 if(alertBox) alertBox.style.display = 'block';
             }
@@ -440,7 +440,7 @@
             if (!p) return;
             
             // Update Completion Page UI variables
-            document.getElementById('c-item-name').innerText = p.title;
+            document.getElementById('c-item-name').innerHTML = p.title;
             document.getElementById('c-item-price').innerText = `${p.price.toLocaleString()} KP`;
             
             currentKafraPoints -= p.price;
@@ -627,7 +627,7 @@
             // Simple default UI Sort
             filtered.sort((a,b) => b.hearts - a.hearts);
             
-            document.getElementById('marketCountLabel').innerText = `${filtered.length}개의 <span data-en="Footprints" data-ko="발자국">Footprints</span>`;
+            document.getElementById('marketCountLabel').innerHTML = `${filtered.length}개의 <span data-en="Footprints" data-ko="발자국">Footprints</span>`;
             
             if(filtered.length === 0) {
                 grid.innerHTML = `<div style="grid-column:1/-1; padding:40px; text-align:center; color:#64748b; font-weight:700;"><span data-en="No matching search results." data-ko="조건에 맞는 검색 결과가 없습니다.">No matching search results.</span></div>`;
