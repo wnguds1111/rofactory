@@ -54,10 +54,22 @@ function renderGNB(opts = {}) {
                 </a>
             </div>
             <div class="gnjoy-util">
+                <style>
+                .gnjoy-lang { position:relative; display:flex; align-items:center; cursor:pointer; font-family:'Poppins', sans-serif; gap:4px; font-weight:700; color:#555; }
+                .gnjoy-lang-list { position:absolute; top:calc(100% + 10px); right:0; background:#fff; border:1px solid #e8eaed; border-radius:8px; box-shadow:0 10px 25px rgba(0,0,0,0.1); width:80px; display:none; flex-direction:column; padding:4px; z-index:999; }
+                .gnjoy-lang:hover .gnjoy-lang-list { display:flex; }
+                .gnjoy-lang-option { padding:8px; font-size:12px; font-weight:700; text-align:center; color:#333; cursor:pointer; border-radius:4px; text-transform:uppercase; transition:0.2s;}
+                .gnjoy-lang-option:hover { background:#f1f5f9; color:#1e3a8a; }
+                .gnjoy-lang-option.active { background:#e0f2fe; color:#0369a1; }
+                </style>
                 <div class="gnjoy-lang">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                    EN
+                    <span id="currentLangLabel">EN</span>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    <div class="gnjoy-lang-list">
+                        <div class="gnjoy-lang-option" onclick="changeLang('en')" id="langOptEn">EN</div>
+                        <div class="gnjoy-lang-option" onclick="changeLang('kr')" id="langOptKr">KR</div>
+                    </div>
                 </div>
                 <button class="gnb-btn-outline" onclick="alert('Sign Up coming soon.')">Sign Up</button>
                 <button class="gnb-btn-solid"   onclick="alert('Login coming soon.')">Login</button>
@@ -135,6 +147,32 @@ function renderGNB(opts = {}) {
     const temp = document.createElement('div');
     temp.innerHTML = gnbHTML;
     while (temp.firstChild) document.body.insertBefore(temp.firstChild, target);
+
+    // Initial Lang Load Process (Runs when DOM is ready)
+    const savedLang = localStorage.getItem('roz_lang') || 'en';
+    window.changeLang = function(lang) {
+        localStorage.setItem('roz_lang', lang);
+        
+        let label = document.getElementById('currentLangLabel');
+        if(label) label.innerText = lang.toUpperCase();
+        
+        let lEn = document.getElementById('langOptEn');
+        if(lEn) lEn.className = lang === 'en' ? 'gnjoy-lang-option active' : 'gnjoy-lang-option';
+        
+        let lKr = document.getElementById('langOptKr');
+        if(lKr) lKr.className = lang === 'kr' ? 'gnjoy-lang-option active' : 'gnjoy-lang-option';
+        
+        document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = el.getAttribute('data-' + lang);
+            } else {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            }
+        });
+    };
+    
+    // Auto-apply current lang as soon as rendering finishes
+    setTimeout(() => { if(window.changeLang) window.changeLang(savedLang); }, 50);
 
     // Scroll & Mobile Toggle Logic
     const gnbEl = document.getElementById('rozGnb');
