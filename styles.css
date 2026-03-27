@@ -1035,6 +1035,7 @@ select.form-control { cursor: pointer; appearance: none; background-image: url('
 
 /* TABLET & SMALL DESKTOP (Max 1024px) */
 @media (max-width: 1024px) {
+    .gnjoy-topbar { display: none !important; }
     .container { padding: 0 24px; }
     
     /* GNB */
