@@ -162,11 +162,13 @@ function renderGNB(opts = {}) {
         let lKr = document.getElementById('langOptKr');
         if(lKr) lKr.className = lang === 'kr' ? 'gnjoy-lang-option active' : 'gnjoy-lang-option';
         
-        document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+        let dataLang = lang === 'kr' ? 'ko' : lang;
+        
+        document.querySelectorAll('[data-' + dataLang + ']').forEach(el => {
             if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                el.placeholder = el.getAttribute('data-' + lang);
+                el.placeholder = el.getAttribute('data-' + dataLang);
             } else {
-                el.innerHTML = el.getAttribute('data-' + lang);
+                el.innerHTML = el.getAttribute('data-' + dataLang);
             }
         });
     };
