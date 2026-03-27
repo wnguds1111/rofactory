@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RO Factory | Wishlisted Items</title>
+    <title>RO Factory | 찜한 상품</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -12,10 +12,10 @@
         a { text-decoration:none; color:inherit; }
 
 
-        /* GNB Style is styles.cssManaged at */
+        /* GNB 스타일은 styles.css에서 관리 */
 
 
-        /* Layout */
+        /* 레이아웃 */
         .studio-layout { display:flex; gap:32px; margin:40px auto 0; max-width:1400px; padding:0 40px; min-height:70vh; }
         .studio-sidebar { width:260px; flex-shrink:0; }
         .profile-card { background:#fff; border-radius:18px; padding:28px 22px; text-align:center; margin-bottom:20px; border:1px solid #e2e8f0; }
@@ -36,7 +36,7 @@
         .panel-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
         .panel-title { font-size:22px; font-weight:900; }
 
-        /*  */
+        /* 리스트 */
         .item-list { background:#fff; border-radius:16px; border:1px solid #e2e8f0; overflow:hidden; }
         .item-row { display:flex; align-items:center; padding:20px 24px; border-bottom:1px solid #f1f5f9; gap:18px; transition:0.2s; }
         .item-row:hover { background:#f8fafc; }
@@ -97,29 +97,29 @@
 <div class="studio-layout">
         <aside class="studio-sidebar">
             <div class="profile-card">
-                <div class="avatar"><img src="images/poring_hero.png" alt="" onerror="this.outerHTML='<span style=\'font-size:32px;\'>🧙</span>'"></div>
+                <div class="avatar"><img src="images/poring_hero.png" alt="포링" onerror="this.outerHTML='<span style=\'font-size:32px;\'>🧙</span>'"></div>
                 <div class="user-info-wrap">
                     <div class="user-name">GravityUser</div>
-                    <span class="user-kp"> <span>0</span> KP</span>
-                    <a href="#" class="btn-kp">💳 Charge KP</a>
+                    <span class="user-kp">보유 <span>0</span> KP</span>
+                    <a href="#" class="btn-kp">💳 <span data-en="Charge KP" data-ko="KP 충전">Charge KP</span>하기</a>
                 </div>
             </div>
             <ul class="studio-nav">
-                <li onclick="location.href='studio_myworks.html'" class="s-nav-item">Manage Assets  Manage Assets</li>
-                <li onclick="location.href='studio_inventory.html'" class="s-nav-item">Manage Assets  Manage Assets</li>
-                <li onclick="location.href='studio_wishlist.html'" class="s-nav-item active"><span class="s-nav-icon" style="color:#ef4444;">💖</span> Wishlisted Items </li>
+                <li onclick="location.href='studio_myworks.html'" class="s-nav-item"><span class="s-nav-icon">🪄</span> 나의 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></li>
+                <li onclick="location.href='studio_inventory.html'" class="s-nav-item"><span class="s-nav-icon">🎒</span> 구매 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></li>
+                <li onclick="location.href='studio_wishlist.html'" class="s-nav-item active"><span class="s-nav-icon" style="color:#ef4444;">💖</span> 찜한 상품 보기</li>
             </ul>
         </aside>
 
         <main class="studio-main">
             <div class="panel-header">
-                <h2 class="panel-title">Wishlisted Items </h2>
-                <a href="market.html" class="btn-market">Market  🛍️</a>
+                <h2 class="panel-title">찜한 상품 보기</h2>
+                <a href="market.html" class="btn-market"><span data-en="Market" data-ko="마켓">Market</span> 둘러보기 🛍️</a>
             </div>
             <div class="search-bar">
-                <input type="text" id="searchInput" oninput="renderList()" placeholder="🔍  Item Name ...">
+                <input type="text" id="searchInput" oninput="renderList()" placeholder="🔍  작품명 검색...">
             </div>
-            <div class="wish-count"> <b id="wishCount">0</b></div>
+            <div class="wish-count">전체 <b id="wishCount">0</b>개</div>
             <div class="item-list" id="wishList"></div>
         </main>
     </div>
@@ -128,9 +128,9 @@
 
 <script>
 let wishlist = [
-    { id:5,  title:"Golden Elf Trajectory", tag:"", status:"onsale",  bg:"linear-gradient(to right,#f83600,#f9d423)", icon:"✨", price:"9,000 KP" },
-    { id:9,  title:"Aqua Marine Slide", tag:"", status:"onsale", bg:"linear-gradient(to right,#4facfe,#00f2fe)",  icon:"🌊", price:"4,200 KP" },
-    { id:8,  title:"Pure Snow Footsteps",   tag:"", status:"expired", bg:"linear-gradient(to top,#e6e9f0,#eef1f5)",  icon:"⛄", price:"FREE" },
+    { id:5,  title:"황금빛 엘프의 궤적", tag:"발자국", status:"onsale",  bg:"linear-gradient(to right,#f83600,#f9d423)", icon:"✨", price:"9,000 KP" },
+    { id:9,  title:"아쿠아 마린 슬라이드", tag:"발자국", status:"onsale", bg:"linear-gradient(to right,#4facfe,#00f2fe)",  icon:"🌊", price:"4,200 KP" },
+    { id:8,  title:"퓨어 스노우 발걸음",   tag:"발자국", status:"expired", bg:"linear-gradient(to top,#e6e9f0,#eef1f5)",  icon:"⛄", price:"FREE" },
 ];
 function renderList(){
     const kw = document.getElementById('searchInput').value.trim().toUpperCase();
@@ -138,7 +138,7 @@ function renderList(){
     const filtered = wishlist.filter(w=>w.title.toUpperCase().includes(kw));
     document.getElementById('wishCount').textContent = filtered.length;
     if(!filtered.length){
-        container.innerHTML = `<div class="empty-state"><div class="empty-icon">💖</div><div class="empty-text">Wishlisted Items .</div></div>`;
+        container.innerHTML = `<div class="empty-state"><div class="empty-icon">💖</div><div class="empty-text">찜한 상품이 없습니다.</div></div>`;
         return;
     }
     container.innerHTML = filtered.map((w,i)=>{
@@ -152,24 +152,24 @@ function renderList(){
         <div class="item-row" style="opacity:${op};cursor:${isExp?'default':'pointer'};" ${!isExp?`onclick="location.href='${detailLink}'"`:''}>
             <div class="item-thumb" style="background:${w.bg};${gs}">${w.icon}</div>
             <div class="item-info">
-                <span class="item-tag">💖  </span>
+                <span class="item-tag">💖 찜 목록</span>
                 <div class="item-title" style="${strike}">${w.title}</div>
                 <div class="item-meta">
                     <span style="color:${priceColor};font-weight:800;font-size:13px;">${w.price}</span>
-                    ${isExp?'<span style="color:#dc2626;"> </span>':''}
+                    ${isExp?'<span style="color:#dc2626;">판매 종료됨</span>':''}
                 </div>
             </div>
             <div class="item-actions">
-                <button class="btn-action" style="color:#ef4444;border-color:#fca5a5;" onclick="event.stopPropagation();removeFav(${w.id})">💖  </button>
+                <button class="btn-action" style="color:#ef4444;border-color:#fca5a5;" onclick="event.stopPropagation();removeFav(${w.id})">💖 찜 해제</button>
                 ${!isExp
-                    ? `<button class="btn-action primary" onclick="event.stopPropagation();location.href='${detailLink}'">Details</button>`
-                    : `<button class="btn-action" disabled style="opacity:0.4;"> </button>`}
+                    ? `<button class="btn-action primary" onclick="event.stopPropagation();location.href='${detailLink}'">상세 보기</button>`
+                    : `<button class="btn-action" disabled style="opacity:0.4;">판매 종료</button>`}
             </div>
         </div>`;
     }).join('');
 }
 function removeFav(id){
-    if(!confirm('   ?')) return;
+    if(!confirm('해당 상품의 찜을 해제하시겠습니까?')) return;
     wishlist = wishlist.filter(w=>w.id!==id);
     renderList();
 }

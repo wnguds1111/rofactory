@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RO Factory |  Manage Assets</title>
+    <title>RO Factory | 구매 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -12,10 +12,10 @@
         a { text-decoration:none; color:inherit; }
 
 
-        /* GNB Style is styles.cssManaged at */
+        /* GNB 스타일은 styles.css에서 관리 */
 
 
-        /* Layout */
+        /* 레이아웃 */
         .studio-layout { display:flex; gap:32px; margin:40px auto 0; max-width:1400px; padding:0 40px; min-height:70vh; }
         .studio-sidebar { width:260px; flex-shrink:0; }
         .profile-card { background:#fff; border-radius:18px; padding:28px 22px; text-align:center; margin-bottom:20px; border:1px solid #e2e8f0; }
@@ -36,13 +36,13 @@
         .panel-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
         .panel-title { font-size:22px; font-weight:900; }
 
-        /*  */
+        /* 탭 */
         .sub-tabs { display:flex; gap:0; margin-bottom:20px; background:#fff; border-radius:14px; border:1px solid #e2e8f0; padding:6px; }
         .sub-tab { flex:1; text-align:center; padding:10px 8px; font-size:13px; font-weight:700; color:#94a3b8; border-radius:10px; cursor:pointer; transition:0.2s; }
         .sub-tab.active { background:#1d4ed8; color:#fff; }
         .sub-tab:hover:not(.active) { color:#1e293b; background:#f0f7ff; }
 
-        /*  */
+        /* 리스트 */
         .item-list { background:#fff; border-radius:16px; border:1px solid #e2e8f0; overflow:hidden; }
         .item-row { display:flex; align-items:center; padding:20px 24px; border-bottom:1px solid #f1f5f9; gap:18px; transition:0.2s; cursor:pointer; }
         .item-row:hover { background:#f8fafc; }
@@ -102,32 +102,32 @@
 <div class="studio-layout">
         <aside class="studio-sidebar">
             <div class="profile-card">
-                <div class="avatar"><img src="images/poring_hero.png" alt="" onerror="this.outerHTML='<span style=\'font-size:32px;\'>🧙</span>'"></div>
+                <div class="avatar"><img src="images/poring_hero.png" alt="포링" onerror="this.outerHTML='<span style=\'font-size:32px;\'>🧙</span>'"></div>
                 <div class="user-info-wrap">
                     <div class="user-name">GravityUser</div>
-                    <span class="user-kp"> <span>0</span> KP</span>
-                    <a href="#" class="btn-kp">💳 Charge KP</a>
+                    <span class="user-kp">보유 <span>0</span> KP</span>
+                    <a href="#" class="btn-kp">💳 <span data-en="Charge KP" data-ko="KP 충전">Charge KP</span>하기</a>
                 </div>
             </div>
             <ul class="studio-nav">
-                <li onclick="location.href='studio_myworks.html'" class="s-nav-item">Manage Assets  Manage Assets</li>
-                <li onclick="location.href='studio_inventory.html'" class="s-nav-item active">Manage Assets  Manage Assets</li>
-                <li onclick="location.href='studio_wishlist.html'" class="s-nav-item"><span class="s-nav-icon" style="color:#ef4444;">💖</span> Wishlisted Items </li>
+                <li onclick="location.href='studio_myworks.html'" class="s-nav-item"><span class="s-nav-icon">🪄</span> 나의 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></li>
+                <li onclick="location.href='studio_inventory.html'" class="s-nav-item active"><span class="s-nav-icon">🎒</span> 구매 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></li>
+                <li onclick="location.href='studio_wishlist.html'" class="s-nav-item"><span class="s-nav-icon" style="color:#ef4444;">💖</span> 찜한 상품 보기</li>
             </ul>
         </aside>
 
         <main class="studio-main">
             <div class="panel-header">
-                <h2 class="panel-title"> Manage Assets</h2>
-                <a href="market.html" class="btn-market">Market Go 🛍️</a>
+                <h2 class="panel-title">구매 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></h2>
+                <a href="market.html" class="btn-market"><span data-en="Market" data-ko="마켓">Market</span>으로 이동 🛍️</a>
             </div>
             <div class="search-bar">
-                <input type="text" id="searchInput" oninput="applyFilter()" placeholder="🔍  Item Name ...">
+                <input type="text" id="searchInput" oninput="applyFilter()" placeholder="🔍  작품명 검색...">
             </div>
             <div class="sub-tabs">
-                <div class="sub-tab active" id="tab-all"       onclick="setTab('all')"></div>
-                <div class="sub-tab"        id="tab-purchased" onclick="setTab('purchased')"> </div>
-                <div class="sub-tab"        id="tab-expired"   onclick="setTab('expired')"> Expired</div>
+                <div class="sub-tab active" id="tab-all"       onclick="setTab('all')">전체</div>
+                <div class="sub-tab"        id="tab-purchased" onclick="setTab('purchased')">구매 완료</div>
+                <div class="sub-tab"        id="tab-expired"   onclick="setTab('expired')">작품 <span data-en="Expired" data-ko="만료">Expired</span></div>
             </div>
             <div class="item-list" id="invList"></div>
         </main>
@@ -137,9 +137,9 @@
 
 <script>
 const inventory = [
-    { title:"  ", tag:"", status:"purchased", buyDate:"19.03.2026 08:15", state:" ",       bg:"linear-gradient(to right,#ff416c,#ff4b2b)", icon:"🔥" },
-    { title:" Edit ",     tag:"", status:"purchased", buyDate:"14.03.2026 13:40", state:"  ",  bg:"linear-gradient(to top,#00c6fb,#005bea)",   icon:"❄️" },
-    { title:"  ",   tag:"", status:"expired",   buyDate:"05.09.2025",       expDate:"05.10.2025",       bg:"linear-gradient(to right,#ccc,#aaa)",       icon:"🕸️" },
+    { title:"불꽃 스니커즈 발자국", tag:"발자국", status:"purchased", buyDate:"19.03.2026 08:15", state:"인게임 대기",       bg:"linear-gradient(to right,#ff416c,#ff4b2b)", icon:"🔥" },
+    { title:"얼음 수정 발자국",     tag:"발자국", status:"purchased", buyDate:"14.03.2026 13:40", state:"인게임 전송 완료",  bg:"linear-gradient(to top,#00c6fb,#005bea)",   icon:"❄️" },
+    { title:"거미줄 망토 발자국",   tag:"발자국", status:"expired",   buyDate:"05.09.2025",       expDate:"05.10.2025",       bg:"linear-gradient(to right,#ccc,#aaa)",       icon:"🕸️" },
 ];
 let currentTab = 'all';
 function setTab(tab){
@@ -160,11 +160,11 @@ function applyFilter(){
         const op = isExpired?'0.7':'1';
         const strike = isExpired?'text-decoration:line-through;':'';
         const badge = isExpired
-            ? `Expired</span>`
-            : `<span class="item-status" style="background:#dbeafe;color:#1d4ed8;"> </span>`;
+            ? `<span class="item-status" style="background:#f1f5f9;color:#64748b;"><span data-en="Expired" data-ko="만료">Expired</span>됨</span>`
+            : `<span class="item-status" style="background:#dbeafe;color:#1d4ed8;">구매 완료</span>`;
         let meta = isExpired
-            ? `ExpiredExpired: ${w.expDate}</span>`
-            : `<span>: ${w.buyDate}</span><span style="color:#166534;font-weight:700;">Status: ${w.state}</span><span>: </span>`;
+            ? `<span>구매일: ${w.buyDate}</span><span style="color:#dc2626;font-weight:700;"><span data-en="Expired" data-ko="만료">Expired</span>일: ${w.expDate}</span>`
+            : `<span>구매일: ${w.buyDate}</span><span style="color:#166534;font-weight:700;">상태: ${w.state}</span><span>유효기간: 무제한</span>`;
         rows.push(`
         <div class="item-row" style="opacity:${op};cursor:pointer;" onclick="showInvDetail('${w.title}','${w.buyDate}','${w.state||''}','${w.expDate||''}','${isExpired}')">
             <div class="item-thumb" style="background:${w.bg};${gs}">${w.icon}</div>
@@ -174,15 +174,15 @@ function applyFilter(){
                 <div class="item-meta">${meta}</div>
             </div>
             ${badge}
-            <div class="item-actions"><button class="btn-action" onclick="event.stopPropagation();showInvDetail('${w.title}','${w.buyDate}','${w.state||''}','${w.expDate||''}','${isExpired}')">  </button></div>
+            <div class="item-actions"><button class="btn-action" onclick="event.stopPropagation();showInvDetail('${w.title}','${w.buyDate}','${w.state||''}','${w.expDate||''}','${isExpired}')">구매 상세 내역</button></div>
         </div>`);
     });
-    list.innerHTML = rows.length ? rows.join('') : `<div class="empty-state"><div class="empty-icon">🎒</div><div class="empty-text">Purchase History .</div></div>`;
+    list.innerHTML = rows.length ? rows.join('') : `<div class="empty-state"><div class="empty-icon">🎒</div><div class="empty-text">구매 내역이 없습니다.</div></div>`;
 }
 function showInvDetail(title, buyDate, state, expDate, isExpired){
     const msg = isExpired === 'true'
-        ? `📦   \n\nItem Name: ${title}\n: ${buyDate}\nExpired: ${expDate}\nStatus: Expired`
-        : `📦   \n\nItem Name: ${title}\n: ${buyDate}\n Status: ${state}\n: `;
+        ? `📦 구매 상세 내역\n\n<span data-en="Item Name" data-ko="작품명">Item Name</span>: ${title}\n구매일: ${buyDate}\n<span data-en="Expired" data-ko="만료">Expired</span>일: ${expDate}\n상태: <span data-en="Expired" data-ko="만료">Expired</span>됨`
+        : `📦 구매 상세 내역\n\n<span data-en="Item Name" data-ko="작품명">Item Name</span>: ${title}\n구매일: ${buyDate}\n인게임 상태: ${state}\n유효기간: 무제한`;
     alert(msg);
 }
 document.addEventListener('DOMContentLoaded', applyFilter);
