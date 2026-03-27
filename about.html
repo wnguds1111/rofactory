@@ -19,30 +19,6 @@
         a { text-decoration:none; color:inherit; }
         .container { max-width:1400px; margin:0 auto; padding:0 40px; }
 
-        /* ─── GNB (main2.html 동일) ─── */
-        .gnb-wrap { position:sticky; top:0; z-index:200; background:#fff; border-bottom:1px solid #e8eaed; }
-        .gnb-top { height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 40px; border-bottom:1px solid #f0f0f0; }
-        .gnb-top-right { display:flex; align-items:center; gap:10px; }
-        .gnb-lang { display:flex; align-items:center; gap:4px; font-size:13px; font-weight:500; color:#555; cursor:pointer; padding:4px 8px; border-radius:6px; }
-        .gnb-btn-signup { font-size:13px; font-weight:700; color:#e63946; border:1.5px solid #e63946; border-radius:12px; padding:5px 16px; transition:all 0.2s; }
-        .gnb-btn-signup:hover { background:#e63946; color:#fff; }
-        .gnb-btn-login { font-size:13px; font-weight:700; color:#fff; background:#e63946; border-radius:12px; padding:5px 18px; transition:all 0.2s; }
-        .gnb-btn-login:hover { background:#c0303c; }
-        .gnb-main { height:80px; display:flex; align-items:center; justify-content:center; position:relative; }
-        .gnb-side { display:flex; align-items:center; list-style:none; }
-        .gnb-side.left  { margin-right:150px; }
-        .gnb-side.right { margin-left:150px; }
-        .gnb-side li.sep { width:5px; height:5px; border-radius:50%; background:#c5d8f0; flex-shrink:0; margin:0 4px; }
-        .gnb-side li a { display:flex; flex-direction:column; align-items:center; gap:5px; padding:0 20px; font-size:11px; font-weight:800; color:#333; letter-spacing:0.5px; text-transform:uppercase; transition:color 0.2s; white-space:nowrap; }
-        .gnb-side li a:hover { color:#e63946; }
-        .gnb-side li a .ni { width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-size:20px; line-height:1; }
-        .gnb-logo-center { position:absolute; left:50%; top:50%; transform:translate(-50%, -28%); z-index:10; pointer-events:none; }
-        .gnb-logo-center img { height:88px; width:auto; display:block; }
-        .gnb-dropdown { position:relative; }
-        .gnb-dropdown:hover .gnb-drop-menu { opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
-        .gnb-drop-menu { position:absolute; top:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(10px); background:#fff; border:1px solid #e2e8f0; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.15); padding:10px; width:180px; opacity:0; pointer-events:none; transition:0.2s; display:flex; flex-direction:column; gap:4px; }
-        .gnb-drop-menu a { display:block; padding:12px 16px; border-radius:12px; color:#1e293b; font-weight:800; font-size:13px; text-decoration:none; transition:0.2s; text-align:center; }
-        .gnb-drop-menu a:hover { background:#eff6ff; color:#3b82f6; }
 
         /* ─── HERO ─── */
         .about-hero {
@@ -311,50 +287,6 @@
 </head>
 <body>
     <script src="gnb.js"></script>
-<!-- ── GNB ── -->
-    <div class="gnb-wrap">
-        <!-- 상단 GNJOY 바 -->
-        <div class="gnb-top">
-            <div><img src="images/gnjoy_logo.png" alt="GNJOY" style="height:18px;" onerror="this.style.display='none'"></div>
-            <div class="gnb-top-right">
-                <div class="gnb-lang">🌐 EN ▾</div>
-                <a href="#" class="gnb-btn-signup">Sign Up</a>
-                <a href="#" class="gnb-btn-login">Login</a>
-            </div>
-        </div>
-        <!-- ROZ 메인 GNB -->
-        <div class="gnb-main">
-            <ul class="gnb-side left">
-                <li><a href="#"><span class="ni" style="font-size:20px;">🎟️</span>SUBSCRIPTION</a></li>
-                <li class="sep"></li>
-                <li><a href="#"><span class="ni" style="font-size:20px;">💎</span>TOP UP</a></li>
-                <li class="sep"></li>
-                <li class="gnb-dropdown">
-                    <a href="market.html"><span class="ni" style="font-size:20px;">🏭</span>RO FACTORY</a>
-                    <div class="gnb-drop-menu">
-                        <a href="register.html">작품 등록</a>
-                        <a href="market.html">마켓 이동</a>
-                        <a href="about.html">RO FACTORY 란?</a>
-                        <a href="studio_myworks.html">마이 스튜디오</a>
-                    </div>
-                </li>
-                <li class="sep"></li>
-                <li><a href="#"><span class="ni" style="font-size:20px;">🐾</span>GET PORING</a></li>
-            </ul>
-            <div class="gnb-logo-center">
-                <a href="main2.html"><img src="images/roz_logo.png" alt="ROZ Logo" onerror="this.outerHTML='<span style=\"font-size:28px;font-weight:900;color:#1e293b;\">ROZ</span>'"></a>
-            </div>
-            <ul class="gnb-side right">
-                <li><a href="#"><span class="ni" style="font-size:20px;">📜</span>NEWS</a></li>
-                <li class="sep"></li>
-                <li><a href="#"><span class="ni" style="font-size:20px;">💡</span>GAME INFO</a></li>
-                <li class="sep"></li>
-                <li><a href="#"><span class="ni" style="font-size:20px;">🗃️</span>RESOURCE</a></li>
-                <li class="sep"></li>
-                <li><a href="#"><span class="ni" style="font-size:20px;">💬</span>COMMUNITY</a></li>
-            </ul>
-        </div>
-    </div>
 
     <!-- ── HERO ── -->
     <section class="about-hero">
