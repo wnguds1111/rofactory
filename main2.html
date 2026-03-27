@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO Factory | 라그나로크 제로 에셋 마켓플레이스</title>
+    <meta name="description" content="라그나로크 제로의 발자국 에셋을 만들고, 사고 팔 수 있는 글로벌 크리에이터 마켓플레이스입니다.">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family:'Pretendard',system-ui,-apple-system,sans-serif;
+            background: linear-gradient(180deg, #eef5fc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            color:#1a1a1a;
+            -webkit-font-smoothing:antialiased;
+        }
+        a { text-decoration:none; color:inherit; }
+        .container { max-width:1400px; margin:0 auto; padding:0 32px; }
+
+        /* ═══════ GNB ═══════ */
+        .gnb-wrap {
+            position:sticky; top:0; z-index:200;
+            background:#fff;
+            border-bottom:1px solid #e8eaed;
+        }
+
+        /* 상단 바: GNJOY 로고 + EN / Sign Up / Login */
+        .gnb-top {
+            height:44px;
+            display:flex; align-items:center; justify-content:space-between;
+            padding:0 40px;
+            border-bottom:1px solid #f0f0f0;
+        }
+        .gnb-top-logo {
+            display:flex; align-items:center;
+        }
+        .gnb-top-right { display:flex; align-items:center; gap:10px; }
+        .gnb-lang {
+            display:flex; align-items:center; gap:4px;
+            font-size:13px; font-weight:500; color:#555;
+            cursor:pointer; padding:4px 8px; border-radius:6px;
+            transition:background 0.2s;
+        }
+        .gnb-lang:hover { background:#f5f5f5; }
+        .gnb-lang svg { width:15px; height:15px; }
+        .gnb-btn-signup {
+            font-size:13px; font-weight:700; color:#e63946;
+            border:1.5px solid #e63946; border-radius:20px;
+            padding:5px 16px; transition:all 0.2s;
+        }
+        .gnb-btn-signup:hover { background:#e63946; color:#fff; }
+        .gnb-btn-login {
+            font-size:13px; font-weight:700; color:#fff;
+            background:#e63946; border-radius:20px;
+            padding:5px 18px; transition:all 0.2s;
+        }
+        .gnb-btn-login:hover { background:#c0303c; }
+
+        /* ROZ 메인 메뉴 바 */
+        .gnb-main {
+            height:80px;
+            display:flex; align-items:center; justify-content:center;
+            position:relative;
+        }
+        .gnb-side {
+            display:flex; align-items:center;
+            list-style:none;
+        }
+        .gnb-side.left  { margin-right:150px; }
+        .gnb-side.right { margin-left:150px; }
+        .gnb-side li.sep {
+            width:5px; height:5px; border-radius:50%;
+            background:#c5d8f0; flex-shrink:0; margin:0 4px;
+        }
+        .gnb-side li a {
+            display:flex; flex-direction:column; align-items:center; gap:5px;
+            padding:0 20px;
+            font-size:11px; font-weight:800; color:#333;
+            letter-spacing:0.5px; text-transform:uppercase;
+            transition:color 0.2s;
+            white-space:nowrap;
+        }
+        .gnb-side li a:hover { color:#e63946; }
+        .gnb-side li a .ni {
+            width:26px; height:26px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:20px; line-height:1;
+        }
+        /* 중앙 ROZ 로고 */
+        .gnb-logo-center {
+            position:absolute;
+            left:50%; top:50%;
+            transform:translate(-50%, -28%);
+            z-index:10;
+            pointer-events:none;
+        }
+        .gnb-logo-center img {
+            height:88px; width:auto; display:block;
+        }
+
+        /* ═══════ 페이지 본문 ═══════ */
+        .page-body {
+            padding: 32px 0 0;
+        }
+
+        /* ═══════ HERO (컨테이너 폭에 맞춤) ═══════ */
+        .hero-section {
+            margin-bottom: 0;
+        }
+        .hero-banner {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            height: 420px;
+            background-color: #8b4a2a;
+            background-image: url('images/bg.png');
+            background-size: auto 100%;   /* 원본 비율 그대로 유지 — 확대 없음 */
+            background-position: right center;
+            background-repeat: no-repeat;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+        .hero-overlay {
+            position:absolute; inset:0;
+            background:linear-gradient(
+                to right,
+                rgba(30,15,5,0.80) 0%,
+                rgba(30,15,5,0.60) 22%,
+                rgba(30,15,5,0.20) 48%,
+                transparent 65%
+            );
+        }
+        .hero-content {
+            position:absolute;
+            top:50%; left:52px;
+            transform:translateY(-50%);
+            z-index:2; max-width:480px;
+        }
+        .hero-badge {
+            display:inline-block;
+            background:rgba(255,255,255,0.15);
+            backdrop-filter:blur(6px);
+            color:#fff;
+            font-size:12px; font-weight:700;
+            padding:5px 14px; border-radius:16px;
+            margin-bottom:16px;
+            border:1px solid rgba(255,255,255,0.2);
+        }
+        .hero-content h1 {
+            font-size:clamp(28px, 3.5vw, 42px);
+            font-weight:900; color:#fff;
+            line-height:1.3; margin-bottom:12px;
+            letter-spacing:-1px;
+        }
+        .hero-content p {
+            font-size:15px; color:rgba(255,255,255,0.78);
+            line-height:1.7; margin-bottom:28px;
+        }
+        .hero-btns { display:flex; gap:10px; }
+        .btn-hero {
+            display:inline-flex; align-items:center; gap:6px;
+            padding:12px 24px;
+            font-size:14px; font-weight:700;
+            border-radius:24px; transition:all 0.25s;
+        }
+        .btn-hero.white { background:#fff; color:#1a1a1a; }
+        .btn-hero.white:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,0.15); }
+        .btn-hero.outline { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,0.5); }
+        .btn-hero.outline:hover { background:rgba(255,255,255,0.1); border-color:#fff; }
+
+        /* ═══════ 퀵 카드 ═══════ */
+        .quick-section { margin-top: 20px; }
+        .quick-grid {
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:14px;
+        }
+        .quick-card {
+            background:#fff;
+            border-radius:16px;
+            padding:24px 20px;
+            text-align:center;
+            border:1px solid #e8eaed;
+            transition:all 0.25s;
+        }
+        .quick-card:hover {
+            transform:translateY(-3px);
+            box-shadow:0 8px 24px rgba(0,0,0,0.07);
+            border-color:#d0d4de;
+        }
+        .quick-card .qc-icon {
+            width:56px; height:56px;
+            border-radius:18px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:26px;
+            margin:0 auto 14px;
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+            border: 1px solid #c7d2fe;
+            box-shadow: inset 0 2px 4px #ffffff, 0 4px 10px rgba(99,102,241,0.08);
+        }
+        .quick-card h3 { font-size:15px; font-weight:800; margin-bottom:4px; color:#1a1a1a; }
+        .quick-card p { font-size:12px; color:#888; line-height:1.5; }
+
+        /* ═══════ 섹션 공통 ═══════ */
+        .main-section { margin-top:48px; }
+        .section-head {
+            display:flex; justify-content:space-between; align-items:center;
+            margin-bottom:16px;
+        }
+        .section-head-left { display:flex; align-items:center; gap:6px; }
+        .section-head h2 {
+            font-size:22px; font-weight:900; color:#1a1a1a;
+            letter-spacing:-0.5px;
+        }
+        .section-head-arrow {
+            font-size:18px; color:#888; font-weight:400;
+        }
+        .section-head .sub { font-size:12px; color:#aaa; font-weight:500; margin-top:2px; }
+        .nav-arrows { display:flex; gap:6px; }
+        .nav-arrows button {
+            width:34px; height:34px;
+            border-radius:50%;
+            border:1px solid #ddd;
+            background:#fff;
+            font-size:16px; color:#666;
+            cursor:pointer; transition:all 0.2s;
+            display:flex; align-items:center; justify-content:center;
+        }
+        .nav-arrows button:hover { border-color:#333; color:#333; background:#f8f8f8; }
+
+        /* ═══════ 상품 슬라이더 ═══════ */
+        .slider-wrap {
+            overflow-x:auto; scroll-behavior:smooth;
+            scrollbar-width:none; padding-bottom:4px;
+        }
+        .slider-wrap::-webkit-scrollbar { display:none; }
+        .slider-track { display:flex; gap:14px; }
+        .product-card {
+            flex:0 0 188px;
+            background:#fff;
+            border-radius:14px;
+            overflow:hidden;
+            border:1px solid #e8eaed;
+            transition:all 0.25s;
+            cursor:pointer;
+        }
+        .product-card:hover {
+            transform:translateY(-3px);
+            box-shadow:0 8px 24px rgba(0,0,0,0.08);
+            border-color:#cdd0d8;
+        }
+        .product-thumb {
+            height:160px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:50px;
+            position:relative;
+        }
+        .product-thumb .badge {
+            position:absolute; top:10px; left:10px;
+            font-size:10px; font-weight:800;
+            padding:3px 9px; border-radius:8px;
+            color:#fff;
+        }
+        .badge-best { background:linear-gradient(135deg,#e63946,#ff6b6b); }
+        .badge-new  { background:linear-gradient(135deg,#0049ff,#00a3ff); }
+        .product-info { padding:14px 16px; }
+        .product-info .name {
+            font-size:13px; font-weight:700; color:#0f172a;
+            display:block; margin-bottom:4px;
+            white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+        }
+        .product-info .price { font-size:14px; font-weight:900; color:#1d4ed8; }
+        .product-info .price.free { color:#059669; }
+
+        /* ═══════ HOW IT WORKS (STEP) ═══════ */
+        .step-section {
+            margin-top:48px;
+            background:linear-gradient(135deg,#eef4ff 0%,#e0edff 55%,#dbeafe 100%);
+            border-radius:24px;
+            padding:56px 48px;
+            position:relative;
+            overflow:hidden;
+            border:1px solid #bfdbfe;
+        }
+        .step-section::before {
+            content:'';
+            position:absolute; top:-80px; right:-60px;
+            width:280px; height:280px;
+            background:radial-gradient(circle,rgba(59,130,246,0.12) 0%,transparent 70%);
+            border-radius:50%;
+        }
+        .step-section::after {
+            content:'';
+            position:absolute; bottom:-60px; left:40px;
+            width:200px; height:200px;
+            background:radial-gradient(circle,rgba(16,185,129,0.10) 0%,transparent 70%);
+            border-radius:50%;
+        }
+        .step-top {
+            display:flex; align-items:flex-end; justify-content:space-between;
+            margin-bottom:44px; position:relative; z-index:1;
+        }
+        .step-top-left .step-tag {
+            display:inline-block;
+            background:linear-gradient(135deg,#dbeafe,#d1fae5);
+            color:#1d4ed8;
+            font-size:11px; font-weight:800;
+            padding:5px 14px; border-radius:12px;
+            margin-bottom:12px; letter-spacing:1.5px;
+            border:1px solid #bfdbfe;
+        }
+        .step-top-left h2 { font-size:28px; font-weight:900; letter-spacing:-0.5px; color:#0f172a; }
+        .step-top-left p { font-size:13px; color:#64748b; margin-top:8px; }
+        .step-timeline {
+            display:grid; grid-template-columns:repeat(3,1fr);
+            gap:20px; position:relative; z-index:1;
+        }
+        .step-card {
+            background:#ffffff;
+            border-radius:18px;
+            padding:32px 28px;
+            border:1px solid #e2e8f0;
+            transition:all 0.3s;
+            box-shadow:0 4px 16px rgba(0,0,0,0.05);
+        }
+        .step-card:hover {
+            border-color:#93c5fd;
+            transform:translateY(-4px);
+            box-shadow:0 16px 40px rgba(59,130,246,0.14);
+        }
+        .step-num {
+            font-size:11px; font-weight:900;
+            background:linear-gradient(135deg,#1d4ed8,#0ea5e9);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+            background-clip:text;
+            letter-spacing:1.5px; margin-bottom:16px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .step-num::after { content:''; flex:1; height:1px; background:#e2e8f0; }
+        .step-icon { font-size:40px; margin-bottom:16px; display:block; }
+        .step-card h3 { font-size:18px; font-weight:800; margin-bottom:10px; color:#0f172a; }
+        .step-card p { font-size:13px; color:#64748b; line-height:1.7; }
+        .step-card .step-link {
+            display:inline-flex; align-items:center; gap:4px;
+            margin-top:18px; font-size:13px; font-weight:700; color:#1d4ed8;
+            transition:gap 0.2s;
+        }
+        .step-card .step-link:hover { gap:8px; color:#0ea5e9; }
+
+        /* ═══════ CTA 배너 ═══════ */
+        .cta-banner {
+            margin-top:24px;
+            margin-bottom:0;
+            background:linear-gradient(135deg, #001c4e 0%, #003087 50%, #004aad 100%);
+            border-radius:20px;
+            padding:44px 52px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            position:relative;
+            overflow:hidden;
+        }
+        .cta-banner::before {
+            content:'';
+            position:absolute; right:-60px; top:-60px;
+            width:280px; height:280px;
+            background:radial-gradient(circle, rgba(0,163,255,0.20) 0%, transparent 70%);
+            border-radius:50%;
+        }
+        .cta-banner::after {
+            content:'';
+            position:absolute; right:80px; bottom:-80px;
+            width:200px; height:200px;
+            background:radial-gradient(circle, rgba(0,224,125,0.12) 0%, transparent 70%);
+            border-radius:50%;
+        }
+        .cta-banner h2 { font-size:24px; font-weight:900; color:#fff; line-height:1.5; }
+        .cta-banner p { font-size:13px; color:rgba(255,255,255,0.60); margin-top:6px; }
+        .cta-btn {
+            display:inline-flex; align-items:center; gap:8px;
+            background:linear-gradient(135deg,#00a3ff,#00e07d);
+            color:#001c4e;
+            font-size:15px; font-weight:800;
+            padding:14px 30px;
+            border-radius:24px;
+            transition:all 0.25s;
+            white-space:nowrap; position:relative; z-index:1;
+        }
+        .cta-btn:hover { opacity:0.90; transform:translateY(-2px); box-shadow:0 10px 28px rgba(0,163,255,0.35); }
+
+        /* ═══════ 푸터 ═══════ */
+        .footer {
+            margin-top:48px;
+        }
+        .footer img { width:100%; height:auto; display:block; }
+
+        /* ═══════ 반응형 (태블릿 & 모바일 최적화) ═══════ */
+        @media (max-width:1024px) {
+            .quick-grid { grid-template-columns:repeat(2,1fr); }
+            .step-timeline { grid-template-columns:1fr; }
+            .cta-banner { flex-direction:column; gap:24px; text-align:center; padding:32px 24px; }
+            .gnb-center-layout { padding: 0 20px; }
+            .nav-left, .nav-right, .gnb-center-logo { transform: none; }
+            .hero-content h1 { font-size: 52px; }
+        }
+        @media (max-width:768px) {
+            .quick-grid { grid-template-columns:1fr; }
+            .hero-content h1 { font-size: 40px; }
+            .hero-content p { font-size: 16px; }
+            .container { padding: 0 20px; }
+            .market-section h2 { font-size: 28px; }
+            .gnjoy-logo img { height: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Global GNJOY Bar -->
+    <div class="gnjoy-topbar">
+        <div class="container">
+            <div class="gnjoy-logo">
+                <img src="images/gnjoy_logo.png" alt="GNJOY" style="height: 18px;">
+            </div>
+            <div class="gnjoy-links">
+                <div class="lang-wrap">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    EN
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:2px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <a href="#" class="btn-signup">Sign Up</a>
+                <a href="#" class="btn-login">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- GNB -->
+    <header class="gnb">
+        <div class="container gnb-center-layout">
+            <nav class="nav-left">
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_seasonpass.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">🎟️</span>
+                    <span class="gnb-text">SUBSCRIPTION</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_topup.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">💎</span>
+                    <span class="gnb-text">TOP UP</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <div class="dropdown-wrapper">
+                    <a href="market.html" class="gnb-item">
+                        <img src="images/icon_rofactory.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                        <span class="gnb-emoji" style="display:none; font-size:24px;">🏭</span>
+                        <span class="gnb-text">RO FACTORY</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="register.html">작품 등록</a>
+                        <a href="market.html">마켓 이동</a>
+                        <a href="about.html">RO FACTORY 란?</a>
+                        <a href="studio_myworks.html">마이 스튜디오</a>
+                    </div>
+                </div>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_getporing.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">🐾</span>
+                    <span class="gnb-text">GET PORING</span>
+                </a>
+            </nav>
+
+            <div class="logo logo-center">
+                <a href="main2.html">
+                    <img src="images/roz_logo.png" alt="ROZ Logo" class="roz-logo-img" onerror="this.outerHTML='<span class=\'logo-text\'>RAGNAROK ZERO</span>'">
+                </a>
+            </div>
+
+            <nav class="nav-right">
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_news.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">📜</span>
+                    <span class="gnb-text">NEWS</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_gameinfo.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">💡</span>
+                    <span class="gnb-text">GAME INFO</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_resource.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">🗃️</span>
+                    <span class="gnb-text">RESOURCE</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_community.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">💬</span>
+                    <span class="gnb-text">COMMUNITY</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 페이지 본문 -->
+    <div class="page-body">
+        <div class="container">
+
+            <!-- HERO (컨테이너 폭 안에서) -->
+            <section class="hero-section">
+                <div class="hero-banner">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <span class="hero-badge">✨ RO Factory Grand Open</span>
+                        <h1>나만의 발자국으로<br>새로운 모험을 시작하세요</h1>
+                        <div class="hero-btns">
+                            <a href="register.html" class="btn-hero white">발자국 만들기 →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 퀵 카드 -->
+            <section class="quick-section">
+                <div class="quick-grid">
+                    <a href="register.html" class="quick-card">
+                        <div class="qc-icon" style="background:#fff0f3;">🪄</div>
+                        <h3>작품 등록</h3>
+                        <p>나만의 감성을 담은<br>에셋을 등록하세요</p>
+                    </a>
+                    <a href="studio_myworks.html" class="quick-card">
+                        <div class="qc-icon" style="background:#f0fdf4;">📋</div>
+                        <h3>마이 스튜디오</h3>
+                        <p>등록 현황과 수익을<br>한눈에 관리</p>
+                    </a>
+                    <a href="about.html" class="quick-card">
+                        <div class="qc-icon" style="background:#fffbeb;">📖</div>
+                        <h3>RO FACTORY 란?</h3>
+                        <p>플랫폼 소개와<br>안내를 확인하세요</p>
+                    </a>
+                    <a href="market.html" class="quick-card">
+                        <div class="qc-icon" style="background:#f0f7ff;">🛍️</div>
+                        <h3>마켓</h3>
+                        <p>모험가들의<br>빛나는 거래소</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 이달의 베스트 -->
+            <section class="main-section">
+                <div class="section-head">
+                    <div>
+                        <div class="section-head-left">
+                            <h2>이달의 베스트 발자국</h2>
+                            <span class="section-head-arrow">›</span>
+                        </div>
+                        <div class="sub">모험가들이 가장 사랑한 인기 에셋</div>
+                    </div>
+                    <div class="nav-arrows">
+                        <button onclick="sl('bt',-1)">‹</button>
+                        <button onclick="sl('bt',1)">›</button>
+                    </div>
+                </div>
+                <div class="slider-wrap">
+                    <div class="slider-track" id="bt">
+                        <a href="market.html?detail=1" class="product-card"><div class="product-thumb" style="background:#fff0f3;">🌸<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name">포링 벚꽃 발자국</span><span class="price free">FREE</span></div></a>
+                        <a href="market.html?detail=2" class="product-card"><div class="product-thumb" style="background:#e8f4fd;">❄️<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name">얼음 수정 발자국</span><span class="price">1,200 KP</span></div></a>
+                        <a href="market.html?detail=3" class="product-card"><div class="product-thumb" style="background:#f1f1f4;">🌑<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name">어둠의 심연의 걸음</span><span class="price">5,500 KP</span></div></a>
+                        <a href="market.html?detail=4" class="product-card"><div class="product-thumb" style="background:#ecfdf5;">☂️<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name">초록우산 아이의 스텝</span><span class="price">300 KP</span></div></a>
+                        <a href="market.html?detail=5" class="product-card"><div class="product-thumb" style="background:#fef9ee;">✨<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name">황금빛 엘프의 궤적</span><span class="price">9,000 KP</span></div></a>
+                        <a href="market.html?detail=6" class="product-card"><div class="product-thumb" style="background:#f1f5f9;">🔮<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name">다크메이지의 잿빛흔적</span><span class="price free">FREE</span></div></a>
+                        <a href="market.html?detail=11" class="product-card"><div class="product-thumb" style="background:#ecfdf5;">🐰<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name">토끼의 점프 스텝</span><span class="price">500 KP</span></div></a>
+                        <a href="market.html?detail=9" class="product-card"><div class="product-thumb" style="background:#eff6ff;">🌊<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name">아쿠아 마린 슬라이드</span><span class="price">4,200 KP</span></div></a>
+                        <a href="market.html?detail=12" class="product-card"><div class="product-thumb" style="background:#f8fafc;">🕊️<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name">눈부신 천사의 깃털</span><span class="price">20,000 KP</span></div></a>
+                        <a href="market.html?detail=8" class="product-card"><div class="product-thumb" style="background:#f8fafc;">⛄<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name">퓨어 스노우 발걸음</span><span class="price free">FREE</span></div></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 신규 업데이트 -->
+            <section class="main-section">
+                <div class="section-head">
+                    <div>
+                        <div class="section-head-left">
+                            <h2>신규 업데이트 발자국</h2>
+                            <span class="section-head-arrow">›</span>
+                        </div>
+                        <div class="sub">방금 등록된 따끈따끈한 신상 에셋</div>
+                    </div>
+                    <div class="nav-arrows">
+                        <button onclick="sl('nt',-1)">‹</button>
+                        <button onclick="sl('nt',1)">›</button>
+                    </div>
+                </div>
+                <div class="slider-wrap">
+                    <div class="slider-track" id="nt">
+                        <a href="market.html?detail=7" class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#fef2f2,#fee2e2);">🔥<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name">불타는 용암 조각</span><span class="price">15,000 KP</span></div></a>
+                        <a href="market.html?detail=8" class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">⛄<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name">퓨어 스노우 발걸음</span><span class="price free">FREE</span></div></a>
+                        <a href="market.html?detail=9" class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);">🌊<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name">아쿠아 마린 슬라이드</span><span class="price">4,200 KP</span></div></a>
+                        <a href="market.html?detail=10" class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#f8fafc,#f1f5f9);">💀<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name">네크로맨서의 해골 춤</span><span class="price">8,500 KP</span></div></a>
+                        <a href="market.html?detail=11" class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);">🐰<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name">토끼의 점프 스텝</span><span class="price">500 KP</span></div></a>
+                        <a href="market.html?detail=12" class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#fdf4ff,#fae8ff);">🕊️<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name">눈부신 천사의 깃털</span><span class="price">20,000 KP</span></div></a>
+                        <a href="market.html?detail=1" class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#fff1f2,#ffe4e6);">🌸<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name">포링 벚꽃 발자국</span><span class="price free">FREE</span></div></a>
+                        <a href="market.html?detail=2" class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#f0f9ff,#e0f2fe);">❄️<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name">얼음 수정 발자국</span><span class="price">1,200 KP</span></div></a>
+                        <a href="market.html?detail=4" class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#f0fdfa,#ccfbf1);">☂️<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name">초록우산 아이의 스텝</span><span class="price">300 KP</span></div></a>
+                        <a href="market.html?detail=5" class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#fffbeb,#fef3c7);">✨<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name">황금빛 엘프의 궤적</span><span class="price">9,000 KP</span></div></a>
+                    </div>
+                </div>
+            </section>
+
+        </div><!-- /container -->
+
+        <!-- HOW IT WORKS Section -->
+        <section id="custom-step-section" style="margin-top: 60px; padding: 60px 20px; max-width:1400px; margin-left:auto; margin-right:auto; display:block; width:100%; position:relative; overflow:hidden;">
+            <!-- Background decorative lighting -->
+            <div style="position:absolute; top:-100px; left:-50px; width:300px; height:300px; background:radial-gradient(circle, rgba(14,165,233,0.06), transparent 70%); border-radius:50%; z-index:-1;"></div>
+            <div style="position:absolute; bottom:-100px; right:10%; width:400px; height:400px; background:radial-gradient(circle, rgba(59,130,246,0.04), transparent 70%); border-radius:50%; z-index:-1;"></div>
+
+            <div style="text-align:center; margin-bottom:50px; display:block; position:relative; z-index:2;">
+                <span style="display:inline-block; padding:5px 15px; border-radius:20px; background:#e0f2fe; color:#0369a1; font-size:12px; font-weight:800; margin-bottom:10px;">HOW IT WORKS</span>
+                <h2 style="font-size:32px; font-weight:900; color:#0f172a; margin:0 0 10px 0;">3단계로 완성되는 나만의 발자국</h2>
+                <p style="color:#64748b; margin:0; font-size:15px;">누구나 쉽게 시작할 수 있어요</p>
+            </div>
+            
+            <!-- 3 Steps Layout -->
+            <div class="custom-steps-container" style="display:flex; justify-content:center; gap:20px; padding:0 20px; box-sizing:border-box;">
+                <div class="custom-step-card" style="flex:1; background:#ffffff; padding:40px 30px; border-radius:24px; color:#0f172a; text-align:center; position:relative; overflow:hidden; border:1px solid #e2e8f0; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease; z-index:2;">
+                    <div class="step-badge" style="display:inline-block; font-size:12px; font-weight:800; background:#e0f2fe; color:#0369a1; padding:4px 12px; border-radius:12px; margin-bottom:15px; border:1px solid #bae6fd;">STEP 1</div>
+                    <div class="step-icon-main" style="margin-bottom:15px; font-size:50px; line-height:1;">📁</div>
+                    <h3 style="font-size:20px; font-weight:800; margin-bottom:12px;">발자국 파일 제작</h3>
+                    <p style="font-size:14px; color:#475569; margin-bottom:20px; line-height:1.6;">UGC 편집툴을 통해 .foot 원본 파일과 영상 미리보기 파일을 추출합니다.</p>
+                    <a href="#" class="btn-step outline-white" style="display:inline-block; padding:10px 24px; font-size:14px; font-weight:700; border-radius:8px; border:1px solid #0ea5e9; color:#0ea5e9; background:#fff; text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='#0ea5e9'; this.style.color='#fff';" onmouseout="this.style.background='#fff'; this.style.color='#0ea5e9';" onclick="alert('UGC 편집툴 다운로드가 시작됩니다.'); return false;">편집툴 다운로드</a>
+                </div>
+                <div class="custom-step-card" style="flex:1; background:#ffffff; padding:40px 30px; border-radius:24px; color:#0f172a; text-align:center; position:relative; overflow:hidden; border:1px solid #e2e8f0; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease; z-index:2;">
+                    <div class="step-badge" style="display:inline-block; font-size:12px; font-weight:800; background:#e0f2fe; color:#0369a1; padding:4px 12px; border-radius:12px; margin-bottom:15px; border:1px solid #bae6fd;">STEP 2</div>
+                    <div class="step-icon-main" style="margin-bottom:15px; font-size:50px; line-height:1;">📤</div>
+                    <h3 style="font-size:20px; font-weight:800; margin-bottom:12px;">마켓 세부 정보 등록</h3>
+                    <p style="font-size:14px; color:#475569; margin-bottom:20px; line-height:1.6;">추출한 에셋 파일을 업로드하고 작품명, 가격, 코멘트 등을 기입합니다.</p>
+                    <a href="register.html" class="btn-step outline-white" style="display:inline-block; padding:10px 24px; font-size:14px; font-weight:700; border-radius:8px; border:1px solid #0ea5e9; background:#0ea5e9; color:#fff; text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='#0284c7'; this.style.borderColor='#0284c7';" onmouseout="this.style.background='#0ea5e9'; this.style.borderColor='#0ea5e9';">발자국 작품 등록</a>
+                </div>
+                <div class="custom-step-card" style="flex:1; background:#ffffff; padding:40px 30px; border-radius:24px; color:#0f172a; text-align:center; position:relative; overflow:hidden; border:1px solid #e2e8f0; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease; z-index:2;">
+                    <div class="step-badge" style="display:inline-block; font-size:12px; font-weight:800; background:#e0f2fe; color:#0369a1; padding:4px 12px; border-radius:12px; margin-bottom:15px; border:1px solid #bae6fd;">STEP 3</div>
+                    <div class="step-icon-main" style="margin-bottom:15px; font-size:50px; line-height:1;">🎉</div>
+                    <h3 style="font-size:20px; font-weight:800; margin-bottom:12px;">파일 변환 &amp; 마켓 등재</h3>
+                    <p style="font-size:14px; color:#475569; margin-bottom:20px; line-height:1.6;">파일 변환이 완료되면 글로벌 마켓에 자동으로 등재 및 노출됩니다.</p>
+                    <a href="studio_myworks.html" class="btn-step outline-white" style="display:inline-block; padding:10px 24px; font-size:14px; font-weight:700; border-radius:8px; border:1px solid #0ea5e9; color:#0ea5e9; background:#fff; text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='#0ea5e9'; this.style.color='#fff';" onmouseout="this.style.background='#fff'; this.style.color='#0ea5e9';">MY STUDIO</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Hooking Banner -->
+        <section class="download-section mt-100 mb-100 container">
+            <div class="download-banner">
+                <div class="text-left">
+                    <h2>나만의 발자국을<br>만들 준비가 되셨나요?</h2>
+                    <p>다양한 에셋을 활용해 더욱 특별한 모험을 시작하세요.</p>
+                </div>
+                <div style="z-index: 2; position: relative;">
+                    <a href="#" class="btn-download" onclick="alert('UGC 편집툴 다운로드가 시작됩니다.'); return false;">UGC 편집툴 다운로드  🚀</a>
+                </div>
+            </div>
+        </section>
+
+        </div><!-- /container -->
+    </div><!-- /page-body -->
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <img src="images/FOOTER.png" alt="Footer">
+    </footer>
+
+    <script>
+        function sl(id,d){ var t=document.getElementById(id); if(t) t.parentElement.scrollBy({left:d*210,behavior:'smooth'}); }
+        document.querySelectorAll('.slider-wrap').forEach(function(w){
+            var d=false,sx,sl;
+            w.onmousedown=function(e){d=true;sx=e.pageX-w.offsetLeft;sl=w.scrollLeft;w.style.cursor='grabbing';};
+            w.onmouseleave=w.onmouseup=function(){d=false;w.style.cursor='';};
+            w.onmousemove=function(e){if(!d)return;e.preventDefault();w.scrollLeft=sl-(e.pageX-w.offsetLeft-sx);};
+        });
+    </script>
+</body>
+</html>

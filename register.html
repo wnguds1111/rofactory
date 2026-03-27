@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -27,13 +27,37 @@
             </div>
         </div>
     </div>
-    <header class="wizard-header">
-        <div class="logo">
-            <a href="index.html">
-                <img src="images/roz_logo.png" alt="ROZ Logo" class="roz-logo-img" onerror="this.outerHTML='<span class=\'logo-text\' style=\'font-weight:900; font-size:24px;\'>RO FACTORY</span>'">
-            </a>
+    <!-- GNB -->
+    <header class="gnb">
+        <div class="container gnb-center-layout">
+            <nav class="nav-left">
+                <a href="#" class="gnb-item"><img src="images/icon_seasonpass.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><span class="gnb-emoji" style="display:none; font-size:24px;">🎟️</span><span class="gnb-text">SUBSCRIPTION</span></a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item"><img src="images/icon_topup.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><span class="gnb-emoji" style="display:none; font-size:24px;">💎</span><span class="gnb-text">TOP UP</span></a>
+                <span class="gnb-dot"></span>
+                <div class="dropdown-wrapper">
+                    <a href="market.html" class="gnb-item"><img src="images/icon_rofactory.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><span class="gnb-emoji" style="display:none; font-size:24px;">🏭</span><span class="gnb-text">RO FACTORY</span></a>
+                    <div class="dropdown-menu">
+                        <a href="register.html">작품 등록</a>
+                        <a href="market.html">마켓 이동</a>
+                        <a href="about.html">RO FACTORY 란?</a>
+                        <a href="studio_myworks.html">마이 스튜디오</a>
+                    </div>
+                </div>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item"><img src="images/icon_getporing.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><span class="gnb-emoji" style="display:none; font-size:24px;">🐾</span><span class="gnb-text">GET PORING</span></a>
+            </nav>
+            <div class="logo logo-center"><a href="main2.html"><img src="images/roz_logo.png" alt="ROZ Logo" class="roz-logo-img" onerror="this.outerHTML='<span class=\'logo-text\'>RAGNAROK ZERO</span>'"></a></div>
+            <nav class="nav-right">
+                <a href="#" class="gnb-item"><img src="images/icon_news.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><span class="gnb-emoji" style="display:none; font-size:24px;">📜</span><span class="gnb-text">NEWS</span></a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item"><img src="images/icon_gameinfo.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><span class="gnb-emoji" style="display:none; font-size:24px;">💡</span><span class="gnb-text">GAME INFO</span></a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item"><img src="images/icon_resource.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><span class="gnb-emoji" style="display:none; font-size:24px;">🗃️</span><span class="gnb-text">RESOURCE</span></a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item"><img src="images/icon_community.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><span class="gnb-emoji" style="display:none; font-size:24px;">💬</span><span class="gnb-text">COMMUNITY</span></a>
+            </nav>
         </div>
-        <a href="index.html" id="exitBtn" class="wizard-exit-btn">나가기 / 취소</a>
     </header>
 
     <main class="wizard-main">
@@ -93,7 +117,8 @@
                 <p class="step-desc text-center mb-30">편집툴에서 추출해둔 에셋 파일들을 업로드하고 약관에 동의합니다.</p>
                 
                 <div class="form-container-clean">
-                    <div class="file-grid">
+                    <!-- 1x4 파일 그리드 -->
+                    <div class="file-grid" style="grid-template-columns:repeat(4,1fr); gap:14px;">
                         <div class="file-box" onclick="document.getElementById('f1').click()">
                             <div class="icon">📁</div>
                             <h4>발자국 원본 데이터</h4><span>(.foot 확장자 필수)</span>
@@ -114,73 +139,89 @@
                         <div class="file-box" id="f4_box" onclick="document.getElementById('f4').click()">
                             <div class="icon" style="color: #d97706;">🎒</div>
                             <h4>아이템 썸네일</h4><span>(인게임 아이템 적용 가능 이미지)</span>
-                            <input type="file" id="f4" style="display:none" accept=".png, .jpg" onchange="handleImageSelect(this, 'f4_box', 'f4_name')">
+                            <input type="file" id="f4" style="display:none" accept=".png,.jpg,.jpeg" onchange="handleImageSelect(this, 'f4_box', 'f4_name')">
                         </div>
-                    </div>
-                    
+                    </div> <!-- file-grid close -->
+
                     <div class="section-divider">약관 동의 <span style="color:#ef4444">*필수</span></div>
-                    <label class="custom-chk mt-30" style="margin-bottom: 20px;" onclick="forceOpenTerms(event)">
+                    <label class="custom-chk mt-30" style="margin-bottom:20px;" onclick="forceOpenTerms(event)">
                         <input type="checkbox" id="termsChk" disabled>
                         <div class="chk-box"></div>
                         <span class="chk-text">제3자의 저작권, 초상권 등 제반 권리를 침해하지 않으며 분쟁 시 당사자가 법적 책임을 지는 것에 동의합니다. <br><a href="#" onclick="forceOpenTerms(event)" style="font-weight:900;">(약관 보기)</a></span>
                     </label>
-
                 </div>
             </div>
 
-            <!-- STEP 3: DETAILS (FORM) -->
-            <div class="step-panel" id="step3">
+            <!-- STEP 3: MKT INFO UPLOAD -->
+            <div class="step-panel" id="step3" style="padding-top:24px;">
                 <div class="step-sub text-center">STEP 3</div>
-                <h2 class="step-title text-center">마켓 정보 입력</h2>
-                <p class="step-desc text-center mb-30">글로벌 마켓에 노출될 기초 데이터를 자세히 기입해주세요.</p>
-                
+                <h2 class="step-title text-center" style="margin-bottom:6px;">마켓 정보 입력</h2>
+                <p class="step-desc text-center" style="margin-bottom:20px; font-size:14px;">글로벌 마켓에 노출될 기초 데이터를 기입해주세요.</p>
+
                 <div class="form-container-clean">
-                    <div class="form-row">
+                    <div class="form-row" style="margin-bottom:16px;">
                         <div class="form-group half">
                             <label>작품 카테고리</label>
                             <input type="text" class="form-control" value="발자국" readonly>
                         </div>
                         <div class="form-group half">
-                            <label>판매 금액 설정 <span>(숫자만 입력, 무료 배포 시 0 KP)</span></label>
-                            <div style="position:relative;">
-                                <input type="number" class="form-control" placeholder="0" style="padding-right: 40px;" min="0">
-                                <span style="position:absolute; right:15px; top:12px; font-weight:700; color:#64748b;">KP</span>
+                            <label>판매 금액 <span>(OBT 기간 중 무료 배포 고정)</span></label>
+                            <input type="text" class="form-control" value="FREE" readonly style="font-weight:900;color:#059669;background:#f0fdf4;border-color:#86efac;cursor:not-allowed;font-size:18px;letter-spacing:1px;">
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-bottom:16px;">
+                        <div class="form-group half">
+                            <label>작품 게시기간 <span style="color:#ef4444;">*필수</span> <span>(최소 30일)</span></label>
+                            <input type="date" class="form-control" id="postDate">
+                        </div>
+                        <div class="form-group half">
+                            <label>작품명 <span style="color:#ef4444;">*</span> <span>(영문만)</span></label>
+                            <input type="text" class="form-control" id="workTitle" placeholder="Enter title in English (max 20 chars)" maxlength="20" oninput="this.value=this.value.replace(/[^a-zA-Z0-9\s\-_.!?']/g,'')">
+                        </div>
+                    </div>
+
+                    <!-- 작품 타입 + 메인 색상 나란히 -->
+                    <div class="s3-bottom-row">
+                        <div class="s3-card">
+                            <div class="s3-card-label">작품 타입 <span>최대 2개 선택</span></div>
+                            <div class="tag-group" id="typeTags">
+                                <label class="tag-pill"><input type="checkbox" value="c1"> 귀여운</label>
+                                <label class="tag-pill"><input type="checkbox" value="c2"> 화려한</label>
+                                <label class="tag-pill"><input type="checkbox" value="c3"> 시크한</label>
+                                <label class="tag-pill"><input type="checkbox" value="c4"> 다크</label>
+                                <label class="tag-pill"><input type="checkbox" value="c5"> 신비한</label>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group half">
-                            <label>작품 게시기간 <span class="required" style="color:#ef4444">*필수</span> <span>(MM.DD.YYYY, 최소 30일 이상)</span></label>
-                            <input type="text" class="form-control" id="postDate" placeholder="MM.DD.YYYY" maxlength="10" oninput="formatDateInput(this)">
+                        <div class="s3-divider"></div>
+                        <div class="s3-card">
+                            <div class="s3-card-label">메인 색상 <span>1개 선택 (선택)</span></div>
+                            <div class="tag-group" id="colorTags">
+                                <label class="tag-pill color-pill">
+                                    <input type="radio" name="mainColor" value="red">
+                                    <span class="color-dot" style="background:#ef4444;"></span> 빨강
+                                </label>
+                                <label class="tag-pill color-pill">
+                                    <input type="radio" name="mainColor" value="blue">
+                                    <span class="color-dot" style="background:#3b82f6;"></span> 파랑
+                                </label>
+                                <label class="tag-pill color-pill">
+                                    <input type="radio" name="mainColor" value="green">
+                                    <span class="color-dot" style="background:#22c55e;"></span> 초록
+                                </label>
+                                <label class="tag-pill color-pill">
+                                    <input type="radio" name="mainColor" value="yellow">
+                                    <span class="color-dot" style="background:#eab308;"></span> 노랑
+                                </label>
+                                <label class="tag-pill color-pill">
+                                    <input type="radio" name="mainColor" value="black">
+                                    <span class="color-dot" style="background:#0f172a;"></span> 블랙
+                                </label>
+                                <label class="tag-pill color-pill">
+                                    <input type="radio" name="mainColor" value="white">
+                                    <span class="color-dot" style="background:#f1f5f9; border:1px solid #cbd5e1;"></span> 흰색
+                                </label>
+                            </div>
                         </div>
-                        <div class="form-group half">
-                            <label>작품명 <span class="required">*</span> <span>(영문만 입력 가능)</span></label>
-                            <input type="text" class="form-control" id="workTitle" placeholder="Enter title in English (max 20 chars)" maxlength="20" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s\-_.!?']/g, '')">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>작품 타입 <span>최대 2개 다중 선택 가능</span></label>
-                        <div class="tag-group" id="typeTags">
-                            <label class="tag-pill"><input type="checkbox" value="c1"> 귀여운</label>
-                            <label class="tag-pill"><input type="checkbox" value="c2"> 화려한</label>
-                            <label class="tag-pill"><input type="checkbox" value="c3"> 시크한</label>
-                            <label class="tag-pill"><input type="checkbox" value="c4"> 다크</label>
-                            <label class="tag-pill"><input type="checkbox" value="c5"> 신비한</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>메인 색상 <span>(선택)</span></label>
-                        <select class="form-control" id="mainColorSelect">
-                            <option value="">색상을 선택해주세요</option>
-                            <option value="red">🔴 빨강</option>
-                            <option value="blue">🔵 파랑</option>
-                            <option value="green">🟢 초록</option>
-                            <option value="yellow">🟡 노랑</option>
-                            <option value="black">⚫ 블랙</option>
-                        </select>
                     </div>
                 </div>
             </div>
@@ -365,9 +406,22 @@
 
         function nextStep() {
             // Validations
-            if (currentStep === 2 && !document.getElementById('termsChk').checked) {
-                alert('약관에 반드시 동의해야 다음 단계로 진행할 수 있습니다.');
-                return;
+            if (currentStep === 2) {
+                /* 파일 업로드 밸리데이션 (현재는 문구만 남겨두고 패스)
+                const f1 = document.getElementById('f1').files.length > 0;
+                const f2 = document.getElementById('f2').files.length > 0;
+                const f3 = document.getElementById('f3').files.length > 0;
+                const f4 = document.getElementById('f4').files.length > 0;
+                
+                if (!f1 || !f2 || !f3 || !f4) {
+                    alert('모든 파일을 업로드해야 진행할 수 있습니다.');
+                    // return;
+                }
+                */
+                if (!document.getElementById('termsChk').checked) {
+                    alert('약관에 반드시 동의해야 다음 단계로 진행할 수 있습니다.');
+                    return;
+                }
             }
             if (currentStep === 3) {
                 var titleInput = document.getElementById('workTitle');
@@ -377,11 +431,7 @@
                 }
                 var dateInput = document.getElementById('postDate');
                 if (!dateInput.value) {
-                    alert('작품 게시기간 만료일을 필수로 입력해주세요. (MM.DD.YYYY)');
-                    return;
-                }
-                if (!validateDateFormat(dateInput.value)) {
-                    alert('게시 만료일 형식이 올바르지 않습니다. MM.DD.YYYY 형태로 입력해주세요.');
+                    alert('작품 게시기간 만료일을 달력에서 선택해주세요.');
                     return;
                 }
 
@@ -392,7 +442,7 @@
                 updateWizard();
             } else {
                 // Final Redirection Event Output Trigger 
-                window.location.href = "studio.html"; 
+                window.location.href = "studio_myworks.html"; 
             }
         }
 

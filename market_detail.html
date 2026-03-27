@@ -281,8 +281,8 @@
         <!-- STEP 2: MARKET DETAIL -->
         <div id="panel-detail" class="market-panel">
             <div class="breadcrumb">
-                <a onclick="goToStep('list')">홈</a> <span>></span> 
-                <a onclick="goToStep('list')">마켓</a> <span>></span> 
+                <a href="main2.html">홈</a> <span>></span> 
+                <a href="market.html">마켓</a> <span>></span> 
                 <strong id="detail-bread-title">상품 상세</strong>
             </div>
             
@@ -324,7 +324,7 @@
             
             <!-- Bottom Navigation -->
             <div style="text-align:center; padding: 40px 0; border-top: 1px dashed #e2e8f0; margin-top: 50px;">
-                <button onclick="goToStep('list')" class="btn-back-to-list" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 14px 40px; font-size: 15px; font-weight: 800; color: #475569; border-radius: 8px; cursor: pointer; transition: 0.2s;">목록으로 돌아가기</button>
+                <button onclick="location.href='market.html'" class="btn-back-to-list" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 14px 40px; font-size: 15px; font-weight: 800; color: #475569; border-radius: 8px; cursor: pointer; transition: 0.2s;">목록으로 돌아가기</button>
             </div>
         </div>
 
@@ -342,7 +342,7 @@
                 </div>
 
                 <div class="c-btns">
-                    <button class="c-btn-go-market" onclick="goToStep('list')">마켓 더 구경하기</button>
+                    <button class="c-btn-go-market" onclick="location.href='market.html'">마켓 더 구경하기</button>
                     <button class="c-btn-go-studio" onclick="location.href='studio_inventory.html'">마이 스튜디오 이동</button>
                 </div>
             </div>
@@ -416,7 +416,30 @@
         let currentKafraPoints = 0; // Set default Kafra Points to 0
 
         function goToDetail(id) {
-            window.location.href = `market_detail.html?id=${id}`;
+            const p = mockProducts.find(x => x.id === id);
+            if(!p) return;
+            currentProductId = id;
+            
+            // Populate Detail View
+            document.getElementById('detail-bread-title').innerText = p.title;
+            document.getElementById('detail-title').innerText = p.title;
+            document.getElementById('detail-img-wrap').style.background = p.img;
+            document.getElementById('detail-icon').innerText = p.icon;
+            
+            const tagEl = document.getElementById('detail-tag');
+            if(p.tag) { tagEl.style.display = 'inline-block'; tagEl.innerText = p.tag; }
+            else { tagEl.style.display = 'none'; }
+            
+            const typeMap = { 'cute': '✨ 귀여운', 'fancy': '🎉 화려한', 'dark': '🌑 다크' };
+            const colorMap = { 'red': '🔴 빨강', 'blue': '🔵 파랑', 'green': '🟢 초록', 'yellow': '🟡 노랑', 'black': '⚫ 검정', 'white': '⚪ 흰색' };
+            document.getElementById('detail-type-tag').innerText = typeMap[p.type] || '';
+            document.getElementById('detail-color-tag').innerText = colorMap[p.color] || '';
+            
+            updateDetailHeartUI(p);
+            
+            document.getElementById('detail-price').innerHTML = p.isFree ? '<span style="color:#22c55e;">FREE</span>' : `${p.price.toLocaleString()} <span>KP</span>`;
+            
+            goToStep('detail');
         }
 
         function updateDetailHeartUI(p) {
@@ -737,16 +760,18 @@
         }
         
         // Initial setup
-        updateSlider();
+        // updateSlider();
         
         // URL Parameter Handler for opening detail views from Index
-        setTimeout(() => {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.market-panel').forEach(el => el.classList.remove('active'));
+            // Default show detail panel
+            document.getElementById('panel-detail').classList.add('active');
+
             const urlParams = new URLSearchParams(window.location.search);
-            const detailId = urlParams.get('detail');
-            if (detailId) {
-                goToDetail(parseInt(detailId));
-            }
-        }, 150);
+            const detailId = urlParams.get('id') || urlParams.get('detail') || 1; 
+            goToDetail(parseInt(detailId));
+        });
     </script>
 
 

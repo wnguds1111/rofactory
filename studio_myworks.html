@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO Factory | 나의 작품 관리</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Pretendard',system-ui,-apple-system,sans-serif; background:#f0f2f5; color:#0f172a; -webkit-font-smoothing:antialiased; }
+        a { text-decoration:none; color:inherit; }
+
+
+        /* GNB 스타일은 styles.css에서 관리 */
+
+
+        /* ── 레이아웃 ── */
+        .studio-layout { display:flex; gap:32px; margin:40px auto 0; max-width:1400px; padding:0 40px; min-height:70vh; }
+
+        /* ── 사이드바 ── */
+        .studio-sidebar { width:260px; flex-shrink:0; }
+        .profile-card { background:#fff; border-radius:18px; padding:28px 22px; text-align:center; margin-bottom:20px; border:1px solid #e2e8f0; }
+        .avatar { width:72px; height:72px; border-radius:50%; background:#fff; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; border:2px solid #e8eaed; overflow:hidden; }
+        .avatar img { width:100%; height:100%; object-fit:contain; border-radius:50%; }
+        .user-name { font-size:18px; font-weight:900; margin-bottom:8px; }
+        .user-kp { font-size:13px; font-weight:700; color:#64748b; background:#f8fafc; padding:8px 14px; border-radius:10px; display:block; margin-bottom:12px; }
+        .user-kp span { color:#3b82f6; font-weight:900; font-size:16px; }
+        .btn-kp { display:block; width:100%; padding:11px; border-radius:12px; font-size:13px; font-weight:800; color:#fff; background:linear-gradient(135deg,#3b82f6,#1e3a8a); text-align:center; transition:0.2s; }
+        .btn-kp:hover { opacity:0.9; transform:translateY(-1px); }
+        .studio-nav { background:#fff; border-radius:18px; border:1px solid #e2e8f0; padding:12px; list-style:none; }
+        .s-nav-item { display:flex; align-items:center; gap:10px; padding:13px 16px; color:#64748b; font-weight:700; font-size:14px; border-radius:10px; cursor:pointer; transition:0.2s; margin-bottom:4px; }
+        .s-nav-item:last-child { margin-bottom:0; }
+        .s-nav-item:hover { background:#f8fafc; color:#1e293b; }
+        .s-nav-item.active { background:#eff6ff; color:#1d4ed8; }
+        .s-nav-icon { font-size:17px; }
+
+        /* ── 메인 ── */
+        .studio-main { flex:1; padding-bottom:60px; }
+        .panel-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
+        .panel-title { font-size:22px; font-weight:900; }
+
+        /* ── 탭 (파란계열) ── */
+        .sub-tabs { display:flex; gap:0; margin-bottom:20px; background:#fff; border-radius:14px; border:1px solid #e2e8f0; padding:6px; }
+        .sub-tab { flex:1; text-align:center; padding:10px 8px; font-size:13px; font-weight:700; color:#94a3b8; border-radius:10px; cursor:pointer; transition:0.2s; white-space:nowrap; }
+        .sub-tab.active { background:#1d4ed8; color:#fff; }
+        .sub-tab:hover:not(.active) { color:#1e293b; background:#f0f7ff; }
+
+        /* ── 아이템 리스트 ── */
+        .item-list { background:#fff; border-radius:16px; border:1px solid #e2e8f0; overflow:hidden; }
+        .item-row { display:flex; align-items:center; padding:20px 24px; border-bottom:1px solid #f1f5f9; gap:18px; transition:0.2s; cursor:pointer; }
+        .item-row:hover { background:#f8fafc; }
+        .item-row:last-child { border-bottom:none; }
+        .item-thumb { width:76px; height:76px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:30px; flex-shrink:0; }
+        .item-info { flex:1; min-width:0; }
+        .item-tag { font-size:10px; font-weight:800; background:#f1f5f9; color:#475569; padding:3px 8px; border-radius:6px; margin-bottom:5px; display:inline-block; }
+        .item-title { font-size:15px; font-weight:800; color:#0f172a; margin-bottom:5px; }
+        .item-meta { font-size:12px; color:#94a3b8; display:flex; gap:12px; flex-wrap:wrap; }
+        .item-status { padding:5px 13px; border-radius:20px; font-size:11px; font-weight:800; flex-shrink:0; }
+        .s-converting        { background:#fef3c7; color:#92400e; }
+        .s-completed-wait    { background:#dbeafe; color:#1d4ed8; }
+        .s-completed-sale    { background:#dcfce7; color:#166534; }
+        .s-expired           { background:#f1f5f9; color:#64748b; }
+        .s-failed            { background:#fee2e2; color:#991b1b; }
+        .item-actions { display:flex; gap:8px; flex-shrink:0; }
+        .btn-action { background:#fff; border:1px solid #e2e8f0; color:#475569; padding:7px 14px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; transition:0.2s; }
+        .btn-action:hover { background:#f8fafc; border-color:#cbd5e1; }
+        .btn-register { background:#0f172a; color:#fff; border:none; padding:11px 22px; border-radius:11px; font-size:13px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:6px; }
+        .btn-register:hover { background:#1e293b; }
+        .search-bar { margin-bottom:16px; }
+        .search-bar input { width:100%; max-width:380px; padding:11px 14px; border-radius:10px; border:1px solid #e2e8f0; font-family:'Pretendard'; font-size:14px; background:#fff; }
+        .search-bar input:focus { outline:none; border-color:#3b82f6; }
+        .empty-state { padding:60px; text-align:center; color:#94a3b8; }
+        .empty-icon { font-size:44px; margin-bottom:14px; opacity:0.4; }
+        .empty-text { font-size:15px; font-weight:700; }
+
+        /* ── 푸터 ── */
+        .footer { margin-top:48px; }
+        .footer img { width:100%; height:auto; display:block; }
+
+        /* ── 반응형 최적화 ── */
+        @media(max-width:1024px) {
+            .studio-layout { flex-direction:column; padding:0 24px; gap:24px; }
+            .studio-sidebar { width:100%; display:flex; gap:20px; }
+            .profile-card { flex:1; margin-bottom:0; display:flex; align-items:center; text-align:left; gap:20px; padding:20px; }
+            .avatar { margin:0; width:64px; height:64px; flex-shrink:0; }
+            .user-info-wrap { flex:1; }
+            .user-kp { display:inline-block; margin-bottom:8px; }
+            .btn-kp { width:auto; padding:8px 20px; display:inline-block; }
+            .studio-nav { flex:2; display:flex; flex-wrap:wrap; gap:8px; padding:12px; align-content:center; }
+            .s-nav-item { flex:1; justify-content:center; margin-bottom:0; min-width:140px; }
+        }
+        @media(max-width:768px) {
+            .studio-layout { padding:0 16px; margin-top:24px; }
+            .studio-sidebar { flex-direction:column; gap:12px; }
+            .profile-card { flex-direction:column; text-align:center; }
+            .user-info-wrap { width:100%; display:flex; flex-direction:column; align-items:center; }
+            .btn-kp { width:100%; }
+            .studio-nav { flex-direction:column; }
+            .s-nav-item { justify-content:flex-start; min-width:100%; }
+            .panel-header { flex-direction:column; align-items:flex-start; gap:16px; }
+            .item-row { flex-direction:column; align-items:flex-start; padding:16px; }
+            .item-thumb { width:100%; height:140px; font-size:40px; }
+            .item-actions { width:100%; margin-top:10px; display:flex; gap:8px; }
+            .btn-action { flex:1; text-align:center; justify-content:center; }
+            .sub-tabs { overflow-x:auto; }
+            .sub-tab { padding:10px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Global GNJOY Bar -->
+    <div class="gnjoy-topbar">
+        <div class="container">
+            <div class="gnjoy-logo">
+                <img src="images/gnjoy_logo.png" alt="GNJOY" style="height: 18px;">
+            </div>
+            <div class="gnjoy-links">
+                <div class="lang-wrap">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    EN
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:2px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <a href="#" class="btn-signup">Sign Up</a>
+                <a href="#" class="btn-login">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- GNB -->
+    <header class="gnb">
+        <div class="container gnb-center-layout">
+            <nav class="nav-left">
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_seasonpass.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">🎟️</span>
+                    <span class="gnb-text">SUBSCRIPTION</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_topup.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">💎</span>
+                    <span class="gnb-text">TOP UP</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <div class="dropdown-wrapper">
+                    <a href="market.html" class="gnb-item">
+                        <img src="images/icon_rofactory.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                        <span class="gnb-emoji" style="display:none; font-size:24px;">🏭</span>
+                        <span class="gnb-text">RO FACTORY</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="register.html">작품 등록</a>
+                        <a href="market.html">마켓 이동</a>
+                        <a href="#" onclick="alert('게시글 연동 예정입니다.'); return false;">가이드 안내</a>
+                        <a href="studio_myworks.html">마이 스튜디오</a>
+                    </div>
+                </div>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_getporing.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">🐾</span>
+                    <span class="gnb-text">GET PORING</span>
+                </a>
+            </nav>
+            <div class="logo logo-center">
+                <a href="main2.html">
+                    <img src="images/roz_logo.png" alt="ROZ Logo" class="roz-logo-img" onerror="this.outerHTML='<span class=\'logo-text\'>RAGNAROK ZERO</span>'">
+                </a>
+            </div>
+            <nav class="nav-right">
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_news.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">📜</span>
+                    <span class="gnb-text">NEWS</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_gameinfo.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">💡</span>
+                    <span class="gnb-text">GAME INFO</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_resource.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">🗃️</span>
+                    <span class="gnb-text">RESOURCE</span>
+                </a>
+                <span class="gnb-dot"></span>
+                <a href="#" class="gnb-item">
+                    <img src="images/icon_community.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="gnb-emoji" style="display:none; font-size:24px;">💬</span>
+                    <span class="gnb-text">COMMUNITY</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="studio-layout">
+        <!-- 사이드바 -->
+        <aside class="studio-sidebar">
+            <div class="profile-card">
+                <div class="avatar"><img src="images/poring_hero.png" alt="포링" onerror="this.outerHTML='<span style=\'font-size:32px;\'>🧙</span>'"></div>
+                <div class="user-info-wrap">
+                    <div class="user-name">GravityUser</div>
+                    <span class="user-kp">보유 <span>0</span> KP</span>
+                    <a href="#" class="btn-kp">💳 KP 충전하기</a>
+                </div>
+            </div>
+            <ul class="studio-nav">
+                <li onclick="location.href='studio_myworks.html'" class="s-nav-item active"><span class="s-nav-icon">🪄</span> 나의 작품 관리</li>
+                <li onclick="location.href='studio_inventory.html'" class="s-nav-item"><span class="s-nav-icon">🎒</span> 구매 작품 관리</li>
+                <li onclick="location.href='studio_wishlist.html'" class="s-nav-item"><span class="s-nav-icon" style="color:#ef4444;">💖</span> 찜한 상품 보기</li>
+            </ul>
+        </aside>
+
+        <!-- 메인 -->
+        <main class="studio-main">
+            <div class="panel-header">
+                <h2 class="panel-title">나의 작품 관리</h2>
+                <a href="register.html" class="btn-register">✨ 새 작품 등록하기</a>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" oninput="applyFilter()" placeholder="🔍  작품명 검색...">
+            </div>
+            <div class="sub-tabs">
+                <div class="sub-tab active" id="tab-all"        onclick="setTab('all')">전체</div>
+                <div class="sub-tab"        id="tab-converting" onclick="setTab('converting')">변환 중</div>
+                <div class="sub-tab"        id="tab-completed"  onclick="setTab('completed')">변환 완료</div>
+                <div class="sub-tab"        id="tab-expired"    onclick="setTab('expired')">작품 만료</div>
+            </div>
+            <div class="item-list" id="workList"></div>
+        </main>
+    </div>
+
+    <!-- 푸터 (main2 동일) -->
+    <footer class="footer">
+        <img src="images/FOOTER.png" alt="Footer">
+    </footer>
+
+<script>
+// completedSub: 'wait'=판매대기 | 'sale'=판매중
+const works = [
+    { id:7,  title:"천사의 날개 깃털 발자국", tag:"발자국", status:"converting",  bg:"linear-gradient(120deg,#e0c3fc,#8ec5fc)",  icon:"🪽", price:"9,900 KP",  sales:0,    regDate:"19.03.2026" },
+    { id:15, title:"황금빛 재화 발자국",      tag:"발자국", status:"converting",  bg:"linear-gradient(to right,#f6d365,#fda085)", icon:"💰", price:"15,000 KP", sales:0,    regDate:"15.03.2026" },
+
+    { id:3,  title:"토끼 귀 발자국",          tag:"발자국", status:"completed",   completedSub:"wait", bg:"linear-gradient(to right,#74ebd5,#9face6)", icon:"🐰", price:"1,200 KP", sales:0,    pubDate:"01.04.2026" },
+    { id:8,  title:"고양이 꾹꾹이 발자국",    tag:"발자국", status:"completed",   completedSub:"wait", bg:"linear-gradient(to right,#fa709a,#fee140)", icon:"🐾", price:"4,500 KP", sales:0,    pubDate:"05.04.2026" },
+    { id:18, title:"크리스탈 조각 발자국",    tag:"발자국", status:"completed",   completedSub:"sale", bg:"linear-gradient(to right,#e0c3fc,#8ec5fc)", icon:"💎", price:"6,000 KP", sales:142,  pubDate:"20.03.2026" },
+    { id:1,  title:"포링의 벚꽃 발자국",      tag:"발자국", status:"completed",   completedSub:"sale", bg:"linear-gradient(135deg,#ff9a9e,#fecfef)",   icon:"🌸", price:"FREE",     sales:1420, pubDate:"11.03.2026" },
+    { id:5,  title:"초보자의 첫 발자국",      tag:"발자국", status:"completed",   completedSub:"sale", bg:"linear-gradient(135deg,#a18cd1,#fbc2eb)",   icon:"👣", price:"FREE",     sales:5302, pubDate:"10.01.2026" },
+
+    { id:4,  title:"겨울눈 장식 발자국",      tag:"발자국", status:"expired",     bg:"linear-gradient(to right,#ccc,#aaa)",       icon:"❄️", price:"800 KP",   sales:830,  expDate:"28.02.2026" },
+    { id:9,  title:"별빛 발자국",             tag:"발자국", status:"expired",     bg:"linear-gradient(135deg,#667eea,#764ba2)",   icon:"⭐", price:"1,000 KP", sales:2150, expDate:"31.12.2025" },
+    { id:19, title:"낙엽 바스락 발자국",      tag:"발자국", status:"expired",     bg:"linear-gradient(to right,#d4fc79,#96e6a1)", icon:"🍂", price:"1,500 KP", sales:1200, expDate:"30.11.2025" }
+];
+
+let currentTab = 'all';
+function setTab(tab){
+    currentTab = tab;
+    document.querySelectorAll('.sub-tab').forEach(el=>el.classList.remove('active'));
+    document.getElementById('tab-'+tab).classList.add('active');
+    applyFilter();
+}
+function applyFilter(){
+    const kw = document.getElementById('searchInput').value.trim().toUpperCase();
+    const container = document.getElementById('workList');
+    let rows = [];
+    works.forEach(w=>{
+        if(currentTab!=='all' && w.status!==currentTab) return;
+        if(kw && !w.title.toUpperCase().includes(kw)) return;
+        rows.push(buildRow(w));
+    });
+    container.innerHTML = rows.length ? rows.join('') : `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">해당 조건의 작품이 없습니다.</div></div>`;
+}
+function buildRow(w){
+    const isExpired = w.status==='expired';
+    const gs = isExpired?'filter:grayscale(1);':'';
+    const strike = isExpired?'text-decoration:line-through;':'';
+    const opacity = isExpired?'0.7':'1';
+
+    // 상세 링크 — completedSub도 같이 넘김
+    const detailLink = `studio_detail.html?status=${w.status}&completedSub=${w.completedSub||''}&title=${encodeURIComponent(w.title)}&icon=${encodeURIComponent(w.icon)}&bg=${encodeURIComponent(w.bg)}&price=${encodeURIComponent(w.price)}&sales=${w.sales||0}&regDate=${encodeURIComponent(w.regDate||'')}&pubDate=${encodeURIComponent(w.pubDate||'')}&expDate=${encodeURIComponent(w.expDate||'')}&failReason=${encodeURIComponent(w.failReason||'')}`;
+
+    // 배지
+    let badge = '';
+    if(w.status==='converting'){
+        badge = `<span class="item-status s-converting">변환 중</span>`;
+    } else if(w.status==='completed'){
+        badge = w.completedSub==='wait'
+            ? `<span class="item-status s-completed-wait">판매 대기</span>`
+            : `<span class="item-status s-completed-sale">판매 중</span>`;
+    } else if(w.status==='expired'){
+        badge = `<span class="item-status s-expired">작품 만료</span>`;
+    } else if(w.status==='failed'){
+        badge = `<span class="item-status s-failed">변환 실패</span>`;
+    }
+
+    // 메타
+    let meta = `<span>가격: ${w.price}</span>`;
+    if(w.status==='converting'){
+        meta += `<span>등록일: ${w.regDate}</span><span>판매수: 0</span>`;
+    } else if(w.status==='completed'){
+        const c = w.completedSub==='sale'?'#166534':'#1d4ed8';
+        meta += `<span style="color:${c};font-weight:800;">게시일: ${w.pubDate}</span>`;
+        meta += `<span>판매수: <b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
+    } else if(w.status==='expired'){
+        meta += `<span style="color:#64748b;">만료일: ${w.expDate}</span>`;
+        meta += `<span>판매수: <b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
+    } else if(w.status==='failed'){
+        meta += `<span>등록일: ${w.regDate}</span>`;
+        if(w.failReason) meta += `<span style="color:#dc2626;">실패 사유: ${w.failReason}</span>`;
+    }
+
+    return `
+    <div class="item-row" onclick="location.href='${detailLink}'" style="opacity:${opacity};">
+        <div class="item-thumb" style="background:${w.bg};${gs}">${w.icon}</div>
+        <div class="item-info">
+            <span class="item-tag">${w.tag}</span>
+            <div class="item-title" style="${strike}">${w.title}</div>
+            <div class="item-meta">${meta}</div>
+        </div>
+        ${badge}
+        <div class="item-actions">
+            <button class="btn-action" onclick="event.stopPropagation();location.href='${detailLink}'">상세 보기</button>
+        </div>
+    </div>`;
+}
+document.addEventListener('DOMContentLoaded', applyFilter);
+</script>
+</body>
+</html>
