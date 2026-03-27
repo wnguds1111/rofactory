@@ -131,7 +131,7 @@ function renderGNB(opts = {}) {
         </div>
     </header>`;
 
-    const target = document.querySelector('main') || document.body.firstChild;
+    const target = document.body.firstChild;
     const temp = document.createElement('div');
     temp.innerHTML = gnbHTML;
     while (temp.firstChild) document.body.insertBefore(temp.firstChild, target);
