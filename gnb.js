@@ -1,11 +1,48 @@
 /**
  * ROZ GNB — Common Header Renderer
- * Pixel-perfect match to code.gnjoy.com/prototype/ggu/roz/index.html
- * Structure & dimensions from roz/assets/scss/_header.scss
+ * HTML-based nav with real icon images (crisp, no blur).
+ * Left 4: SUBSCRIPTION, TOP UP, RO FACTORY, GET PORING
+ * Right 4: NEWS, GAME INFO, RESOURCE, COMMUNITY
  */
 
 function renderGNB(opts = {}) {
     const assetBase = 'roz/assets/images/header';
+
+    const leftItems = [
+        { icon: 'gnb-bi-sub.png',     label: 'SUBSCRIPTION', href: '#' },
+        { icon: 'gnb-bi-topup.png',   label: 'TOP UP',       href: '#' },
+        {
+            icon: 'gnb-bi-factory.png', label: 'RO FACTORY', href: 'main.html',
+            active: opts.activePage === 'ro-factory',
+            dropdown: [
+                { href: 'register.html',       label: 'Register'  },
+                { href: 'market.html',         label: 'Market'    },
+                { href: 'studio_myworks.html', label: 'My Studio' },
+            ]
+        },
+        { icon: 'gnb-bi-poring.png',  label: 'GET PORING',  href: '#' },
+    ];
+
+    const rightItems = [
+        { icon: 'gnb-bi-1.png', label: 'NEWS',       href: '#' },
+        { icon: 'gnb-bi-2.png', label: 'GAME INFO',  href: '#' },
+        { icon: 'gnb-bi-6.png', label: 'RESOURCE',   href: '#' },
+        { icon: 'gnb-bi-5.png', label: 'COMMUNITY',  href: '#' },
+    ];
+
+    const renderItem = (item) => {
+        const dropdownHTML = item.dropdown
+            ? `<div class="roz-gnb-dropdown">${item.dropdown.map(d => `<a href="${d.href}">${d.label}</a>`).join('')}</div>`
+            : '';
+        const activeClass = item.active ? ' roz-gnb-item--active' : '';
+        return `
+        <div class="roz-gnb-item-wrap${item.dropdown ? ' roz-gnb-has-dropdown' : ''}">
+            <a href="${item.href}" class="roz-gnb-item${activeClass}">
+                <img src="${assetBase}/${item.icon}" alt="${item.label}" class="roz-gnb-icon">
+                <span class="roz-gnb-label">${item.label}</span>
+            </a>${dropdownHTML}
+        </div>`;
+    };
 
     const gnbHTML = `
     <!-- GNJOY Topbar (46px) -->
@@ -13,7 +50,7 @@ function renderGNB(opts = {}) {
         <div class="gnb-inner-wrap">
             <div class="gnjoy-logo">
                 <a href="index.html">
-                    <img src="${assetBase}/logo-header-light.png" alt="GNJOY" style="height:20px; display:block;">
+                    <img src="${assetBase}/logo-header-light.png" alt="GNJOY" style="height:20px;display:block;">
                 </a>
             </div>
             <div class="gnjoy-util">
@@ -23,30 +60,29 @@ function renderGNB(opts = {}) {
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                 </div>
                 <button class="gnb-btn-outline" onclick="alert('Sign Up coming soon.')">Sign Up</button>
-                <button class="gnb-btn-solid" onclick="alert('Login coming soon.')">Login</button>
+                <button class="gnb-btn-solid"   onclick="alert('Login coming soon.')">Login</button>
             </div>
         </div>
     </div>
 
-    <!-- ROZ GNB (80px, image-based, exact ROZ spec) -->
+    <!-- ROZ GNB (80px, HTML icon nav) -->
     <header class="roz-gnb" id="rozGnb">
         <div class="roz-gnb-inner">
 
-            <!-- Full menu image bar (NEWS / GAME INFO / COMMUNITY / RESOURCE etc.) -->
-            <div class="roz-gnb-menu-wrap">
-                <img src="${assetBase}/header-menu-full.webp" alt="Navigation Menu" class="roz-gnb-menu-img">
-            </div>
+            <nav class="roz-gnb-nav roz-gnb-nav--left">
+                ${leftItems.map(renderItem).join('')}
+            </nav>
 
-            <!-- ROZ Logo: 159px wide, aspect-ratio 211/167, top:0 = sticks out below 80px bar -->
+            <!-- Center Logo: 159×126px, top:0 → straddles below bar -->
             <a href="main.html" class="roz-gnb-logo">
                 <img src="${assetBase}/roz-logo.webp" alt="Ragnarok Zero Global">
             </a>
 
-            <!--
-                Download wrap: 278x76px, positioned at top:80px (= right below the 80px bar)
-                CSS ::before renders shape-download-header.webp as background
-                This element is hidden (opacity:0) and shows when .is-fixed is added on scroll
-            -->
+            <nav class="roz-gnb-nav roz-gnb-nav--right">
+                ${rightItems.map(renderItem).join('')}
+            </nav>
+
+            <!-- Download button (hidden → shown on scroll) -->
             <div class="roz-gnb-download-wrap">
                 <button class="roz-gnb-download-btn" onclick="alert('UGC Editor Download starting...')">
                     <img src="${assetBase}/download-header.png" alt="Download">
@@ -56,15 +92,12 @@ function renderGNB(opts = {}) {
         </div>
     </header>`;
 
-    // Insert before <main> element
     const target = document.querySelector('main') || document.body.firstChild;
     const temp = document.createElement('div');
     temp.innerHTML = gnbHTML;
-    while (temp.firstChild) {
-        document.body.insertBefore(temp.firstChild, target);
-    }
+    while (temp.firstChild) document.body.insertBefore(temp.firstChild, target);
 
-    // Scroll behavior: add is-fixed when GNJOY bar (46px) scrolls out of view
+    // Scroll: is-fixed after GNJOY bar scrolls out (46px)
     const gnbEl = document.getElementById('rozGnb');
     if (gnbEl) {
         window.addEventListener('scroll', () => {

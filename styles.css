@@ -135,16 +135,105 @@ a {
     overflow: visible;  /* allow logo to straddle below the bar */
 }
 
-/* ---- Full Menu Image (background-image = crisp, no distortion) ---- */
-.roz-gnb-menu-wrap {
-    width: 100%;
-    height: 80px;
-    position: relative;
-    background: url('roz/assets/images/header/header-menu-full.webp') center / auto 80px repeat-x;
-    background-color: #ffffff;
+/* ---- HTML Icon Nav (left/right, 4+4 items) ---- */
+.roz-gnb-inner {
+    background: #ffffff; /* clean white bar */
+    border-bottom: 1px solid #E8ECF0;
 }
-/* Hide img tag — background-image handles rendering */
-.roz-gnb-menu-img { display: none; }
+.roz-gnb-nav {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    flex: 1;
+    gap: 0;
+}
+.roz-gnb-nav--left  { justify-content: flex-end;  padding-right: 95px; }
+.roz-gnb-nav--right { justify-content: flex-start; padding-left:  95px; }
+
+.roz-gnb-item-wrap {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+/* Separator dot between items */
+.roz-gnb-item-wrap + .roz-gnb-item-wrap::before {
+    content: '';
+    width: 3px; height: 3px;
+    background: #D0D5DD;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin: 0 2px;
+}
+.roz-gnb-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 80px;
+    padding: 0 12px;
+    text-decoration: none;
+    transition: background 0.15s;
+    cursor: pointer;
+}
+.roz-gnb-item:hover { background: rgba(2, 93, 208, 0.04); }
+.roz-gnb-item--active .roz-gnb-label { color: #025DD0; font-weight: 800; }
+
+.roz-gnb-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    display: block;
+}
+.roz-gnb-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #303030;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 1;
+}
+.roz-gnb-item:hover .roz-gnb-label { color: #025DD0; }
+
+/* Dropdown */
+.roz-gnb-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    padding: 6px;
+    min-width: 140px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    z-index: 20;
+}
+.roz-gnb-has-dropdown:hover .roz-gnb-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+.roz-gnb-dropdown a {
+    display: block;
+    padding: 9px 14px;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #303030;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    transition: background 0.15s, color 0.15s;
+}
+.roz-gnb-dropdown a:hover { background: #EBF3FC; color: #025DD0; }
 
 /* ---- Center ROZ Logo (159px wide, aspect-ratio 211/167, top:0 = straddles bar) ---- */
 .roz-gnb-logo {
@@ -176,7 +265,7 @@ a {
     width: 278px;
     height: 76px;
     position: absolute;
-    top: 80px;                     /* ROZ original: right below the 80px GNB bar */
+    top: 80px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 9;
@@ -185,15 +274,13 @@ a {
     transition: opacity 0.35s ease, visibility 0.35s ease;
     pointer-events: none;
 }
-/* Background shape image via ::before (ROZ original technique) */
 .roz-gnb-download-wrap::before {
     display: block;
     content: '';
     width: 278px;
     height: 76px;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     background: url('roz/assets/images/header/shape-download-header.webp') center / cover no-repeat;
     opacity: 0.8;
     pointer-events: none;
@@ -205,10 +292,9 @@ a {
 }
 .roz-gnb-download-btn {
     width: 100%;
-    max-width: 196px;              /* ROZ original button width */
+    max-width: 196px;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     background: none;
     border: none;
@@ -217,22 +303,21 @@ a {
     transition: transform 0.2s;
     z-index: 1;
 }
-.roz-gnb-download-btn:hover {
-    transform: translate(-50%, -50%) scale(1.05);
-}
-.roz-gnb-download-btn img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+.roz-gnb-download-btn:hover { transform: translate(-50%, -50%) scale(1.05); }
+.roz-gnb-download-btn img { width: 100%; height: auto; display: block; }
 
-/* ---- Backward-compat aliases (some pages use .gnb class) ---- */
+/* ---- Backward-compat ---- */
 .gnb { display: none; }
 
-/* MOBILE hide sub styles */
+/* Mobile */
+@media (max-width: 900px) {
+    .roz-gnb-nav--left  { padding-right: 80px; }
+    .roz-gnb-nav--right { padding-left:  80px; }
+    .roz-gnb-item { padding: 0 8px; }
+    .roz-gnb-label { font-size: 9px; }
+}
 @media (max-width: 768px) {
-    .roz-gnb-sub-overlay { display: none; }
-    .roz-gnb-dropdown-wrap { left: 15px; }
+    .roz-gnb-nav { display: none; }
 }
 
 
