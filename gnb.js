@@ -9,10 +9,10 @@ function renderGNB(opts = {}) {
     const assetBase = 'roz/assets/images/header';
 
     const leftItems = [
-        { icon: 'gnb-bi-sub.png',     label: 'SUBSCRIPTION', href: '#' },
-        { icon: 'gnb-bi-topup.png',   label: 'TOP UP',       href: '#' },
+        { icon: 'gnb-sub.png',     label: 'SUBSCRIPTION', href: '#' },
+        { icon: 'gnb-topup.png',   label: 'TOP UP',       href: '#' },
         {
-            icon: 'gnb-bi-factory.png', label: 'RO FACTORY', href: 'main.html',
+            icon: 'gnb-factory.png', label: 'RO FACTORY', href: 'main.html',
             active: opts.activePage === 'ro-factory',
             dropdown: [
                 { href: 'register.html',       label: 'Register'  },
@@ -20,14 +20,14 @@ function renderGNB(opts = {}) {
                 { href: 'studio_myworks.html', label: 'My Studio' },
             ]
         },
-        { icon: 'gnb-bi-poring.png',  label: 'GET PORING',  href: '#' },
+        { icon: 'gnb-poring.png',  label: 'GET PORING',  href: '#' },
     ];
 
     const rightItems = [
-        { icon: 'gnb-bi-1.png', label: 'NEWS',       href: '#' },
-        { icon: 'gnb-bi-2.png', label: 'GAME INFO',  href: '#' },
-        { icon: 'gnb-bi-6.png', label: 'RESOURCE',   href: '#' },
-        { icon: 'gnb-bi-5.png', label: 'COMMUNITY',  href: '#' },
+        { icon: 'gnb-news.png',      label: 'NEWS',       href: '#' },
+        { icon: 'gnb-gameinfo.png',  label: 'GAME INFO',  href: '#' },
+        { icon: 'gnb-resource.png',  label: 'RESOURCE',   href: '#' },
+        { icon: 'gnb-community.png', label: 'COMMUNITY',  href: '#' },
     ];
 
     const renderItem = (item) => {
