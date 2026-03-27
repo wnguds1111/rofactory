@@ -151,65 +151,7 @@ a {
     display: block;
 }
 
-/* ---- RO Factory sub-nav overlay (right side of menu image) ---- */
-.roz-gnb-sub-overlay {
-    position: absolute;
-    right: 60px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    gap: 0;
-    z-index: 5;
-}
-.roz-sub-link {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    color: #303030;
-    text-decoration: none;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 6px 10px;
-    transition: color 0.2s;
-    white-space: nowrap;
-}
-.roz-sub-link:hover, .roz-sub-link.active { color: #025DD0; }
-.roz-sub-dot {
-    width: 3px; height: 3px;
-    background: #D6D6D6; border-radius: 50%;
-    display: inline-block; margin: 0 4px;
-}
-
-/* ---- Left Dropdown (hamburger/NOTICE menu) ---- */
-.roz-gnb-dropdown-wrap {
-    position: absolute;
-    left: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    cursor: pointer;
-}
-.roz-gnb-dropdown-trigger {
-    display: flex; align-items: center; justify-content: center;
-    width: 40px; height: 40px;
-}
-.roz-gnb-dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(8px);
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-}
-.roz-gnb-dropdown-wrap.open .roz-gnb-dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-/* ---- Center ROZ Logo (absolutely centered) ---- */
+/* ---- Center ROZ Logo (absolutely centered, larger) ---- */
 .roz-gnb-logo {
     position: absolute;
     left: 50%;
@@ -220,57 +162,45 @@ a {
     align-items: center;
     transition: transform 0.3s ease;
 }
-.roz-gnb-logo:hover { transform: translate(-50%, -50%) scale(1.05); }
+.roz-gnb-logo:hover { transform: translate(-50%, -50%) scale(1.06); }
 .roz-gnb-logo img {
-    height: 70px;
+    height: 90px;        /* Taller than the 80px bar so it pops out nicely */
     object-fit: contain;
     display: block;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.18));
 }
 
-/* ---- Download button (center-bottom, hidden → visible on scroll) ---- */
+/* ---- Download button (centered below logo, hidden → visible on scroll) ---- */
 .roz-gnb-download-wrap {
     position: absolute;
     left: 50%;
-    bottom: -40px;
+    top: 100%;
     transform: translateX(-50%);
-    z-index: 8;
+    z-index: 9;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.35s ease, visibility 0.35s ease;
-    text-align: center;
+    pointer-events: none;
 }
 .roz-gnb.is-fixed .roz-gnb-download-wrap {
     opacity: 1;
     visibility: visible;
-}
-.roz-gnb-download-bg {
-    position: absolute;
-    inset: 0;
-    background: url('roz/assets/images/header/shape-download-header.webp') center/cover no-repeat;
-    opacity: 0.85;
-    pointer-events: none;
-    width: 278px;
-    height: 76px;
-    left: 50%;
-    transform: translateX(-50%);
+    pointer-events: auto;
 }
 .roz-gnb-download-btn {
-    position: relative;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px 0;
+    padding: 0;
     display: block;
     transition: transform 0.2s;
 }
-.roz-gnb-download-btn:hover { transform: scale(1.05); }
+.roz-gnb-download-btn:hover { transform: scale(1.06); }
 .roz-gnb-download-btn img {
-    height: 50px;
+    height: 52px;
     object-fit: contain;
     display: block;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
 }
 
 /* ---- Backward-compat aliases (some pages use .gnb class) ---- */
