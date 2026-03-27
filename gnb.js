@@ -39,6 +39,7 @@ function renderGNB(opts = {}) {
         <div class="roz-gnb-item-wrap${item.dropdown ? ' roz-gnb-has-dropdown' : ''}">
             <a href="${item.href}" class="roz-gnb-item${activeClass}" title="${item.label}">
                 <img src="${assetBase}/${item.icon}" alt="${item.label}" class="roz-gnb-icon">
+                <span class="roz-gnb-label">${item.label}</span>
             </a>${dropdownHTML}
         </div>`;
     };
