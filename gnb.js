@@ -24,10 +24,10 @@ function renderGNB(opts = {}) {
     ];
 
     const rightItems = [
-        { icon: 'gnb-news.png',      label: 'NEWS',       href: '#' },
-        { icon: 'gnb-gameinfo.png',  label: 'GAME INFO',  href: '#' },
-        { icon: 'gnb-resource.png',  label: 'RESOURCE',   href: '#' },
-        { icon: 'gnb-community.png', label: 'COMMUNITY',  href: '#' },
+        { icon: 'gnb-bi-1.png', label: 'NEWS',       href: '#' },
+        { icon: 'gnb-bi-2.png', label: 'GAME INFO',  href: '#' },
+        { icon: 'gnb-bi-6.png', label: 'RESOURCE',   href: '#' },
+        { icon: 'gnb-bi-5.png', label: 'COMMUNITY',  href: '#' },
     ];
 
     const renderItem = (item) => {
