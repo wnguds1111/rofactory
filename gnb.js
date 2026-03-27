@@ -1,126 +1,105 @@
 /**
  * ROZ GNB — Common Header Renderer
- * Matches the official ROZ two-tier header structure exactly.
- * Automatically injects GNB when DOM is ready.
- * To set active page, add data-active-page="ro-factory" on <body>.
+ * Matches the official ROZ site (code.gnjoy.com/prototype/ggu/roz/index.html) exactly.
+ * Uses actual ROZ image assets from /roz/assets/images/header/
+ * Auto-initializes on DOMContentLoaded.
  */
 
 function renderGNB(opts = {}) {
+    // Determine relative path to roz assets based on current page depth
+    const assetBase = 'roz/assets/images/header';
+
     const gnbHTML = `
-    <!-- GNJOY Topbar -->
+    <!-- ====== GNJOY Topbar (46px) ====== -->
     <div class="gnjoy-topbar">
-        <div class="container">
+        <div class="gnb-inner-wrap">
             <div class="gnjoy-logo">
                 <a href="index.html">
-                    <img src="roz/assets/images/header/logo-header-light.png" alt="GNJOY" style="height:22px;">
+                    <img src="${assetBase}/logo-header-light.png" alt="GNJOY" style="height:20px; display:block;">
                 </a>
             </div>
-            <div class="gnjoy-links">
-                <div class="lang-wrap">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <div class="gnjoy-util">
+                <div class="gnjoy-lang">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                     EN
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:2px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                 </div>
-                <button class="btn-signup" onclick="alert('Sign Up coming soon.')">Sign Up</button>
-                <button class="btn-login" onclick="alert('Login coming soon.')">Login</button>
+                <button class="gnb-btn-outline" onclick="alert('Sign Up coming soon.')">Sign Up</button>
+                <button class="gnb-btn-solid" onclick="alert('Login coming soon.')">Login</button>
             </div>
         </div>
     </div>
 
-    <!-- ROZ GNB -->
-    <header class="gnb" id="rozGnb">
-        <div class="container gnb-center-layout">
-            <!-- Left nav -->
-            <nav class="nav-left">
-                <a href="#" class="gnb-item">
-                    <span class="gnb-text">SUBSCRIPTION</span>
-                </a>
-                <span class="gnb-dot"></span>
-                <a href="#" class="gnb-item">
-                    <span class="gnb-text">TOP UP</span>
-                </a>
-                <span class="gnb-dot"></span>
-                <div class="dropdown-wrapper">
-                    <a href="main.html" class="gnb-item${opts.activePage === 'ro-factory' ? ' gnb-active' : ''}">
-                        <span class="gnb-text">RO FACTORY</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="register.html">Register</a>
-                        <a href="market.html">Market</a>
-                        <a href="#" onclick="alert('Guide coming soon.'); return false;">Guide</a>
-                        <a href="studio_myworks.html">My Studio</a>
-                    </div>
-                </div>
-                <span class="gnb-dot"></span>
-                <a href="#" class="gnb-item">
-                    <span class="gnb-text">GET PORING</span>
-                </a>
-            </nav>
+    <!-- ====== ROZ GNB (80px image-based) ====== -->
+    <header class="roz-gnb" id="rozGnb">
+        <div class="roz-gnb-inner">
 
-            <!-- Center Logo -->
-            <div class="logo logo-center">
-                <a href="main.html">
-                    <img src="roz/assets/images/header/roz-logo.webp" alt="Ragnarok Zero Global" class="roz-logo-img">
-                </a>
+            <!-- Left: Dropdown Toggle (NOTICE/UPDATE/EVENTS/PROBLIST) -->
+            <div class="roz-gnb-dropdown-wrap">
+                <div class="roz-gnb-dropdown-trigger">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#025DD0" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </div>
+                <div class="roz-gnb-dropdown-menu">
+                    <img src="${assetBase}/header-dropdown.png" alt="Menu" style="width:160px; display:block; border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,0.15);">
+                </div>
             </div>
 
-            <!-- Scroll Download Button -->
-            <a href="#" class="gnb-download-btn" onclick="alert('UGC Editor Download starting...'); return false;">
-                <img src="roz/assets/images/header/download-header.png" alt="Download" style="height:28px; vertical-align:middle; margin-right:6px;">
-                Download
+            <!-- Center: Full menu image (NEWS, GAME INFO, COMMUNITY, RESOURCE...) -->
+            <div class="roz-gnb-menu-wrap">
+                <img src="${assetBase}/header-menu-full.webp" alt="Navigation" class="roz-gnb-menu-img">
+
+                <!-- RO FACTORY Sub-nav overlaid on menu image (right side area) -->
+                <div class="roz-gnb-sub-overlay">
+                    <a href="main.html" class="roz-sub-link${opts.activePage === 'ro-factory' ? ' active' : ''}">RO FACTORY</a>
+                    <span class="roz-sub-dot"></span>
+                    <a href="register.html" class="roz-sub-link">REGISTER</a>
+                    <span class="roz-sub-dot"></span>
+                    <a href="market.html" class="roz-sub-link">MARKET</a>
+                    <span class="roz-sub-dot"></span>
+                    <a href="studio_myworks.html" class="roz-sub-link">MY STUDIO</a>
+                </div>
+            </div>
+
+            <!-- Center: ROZ Logo (absolutely centered) -->
+            <a href="main.html" class="roz-gnb-logo">
+                <img src="${assetBase}/roz-logo.webp" alt="Ragnarok Zero Global">
             </a>
 
-            <!-- Right nav -->
-            <nav class="nav-right">
-                <a href="#" class="gnb-item">
-                    <span class="gnb-text">NEWS</span>
-                </a>
-                <span class="gnb-dot"></span>
-                <a href="#" class="gnb-item">
-                    <span class="gnb-text">GAME INFO</span>
-                </a>
-                <span class="gnb-dot"></span>
-                <a href="#" class="gnb-item">
-                    <span class="gnb-text">RESOURCE</span>
-                </a>
-                <span class="gnb-dot"></span>
-                <a href="#" class="gnb-item">
-                    <span class="gnb-text">COMMUNITY</span>
-                </a>
-            </nav>
-
-            <!-- Mobile Hamburger -->
-            <div class="hamburger-menu" id="hamburgerMenu">
-                <span></span><span></span><span></span>
+            <!-- Download Button (hidden → visible on scroll) -->
+            <div class="roz-gnb-download-wrap" id="gnbDownload">
+                <div class="roz-gnb-download-bg"></div>
+                <button class="roz-gnb-download-btn" onclick="alert('UGC Editor Download starting...')">
+                    <img src="${assetBase}/download-header.png" alt="Download">
+                </button>
             </div>
+
         </div>
     </header>`;
 
-    // Insert before <main> or at start of body
-    const target = document.querySelector('main') || document.querySelector('.wizard-main') || document.body.firstChild;
+    // Insert at start of body (before <main> or first child)
+    const target = document.querySelector('main') || document.body.firstChild;
     const wrapper = document.createElement('div');
     wrapper.innerHTML = gnbHTML;
-    document.body.insertBefore(wrapper, target);
-
-    // === Scroll Behavior: add is-fixed after 46px (gnjoy bar height) ===
-    const gnbEl = document.getElementById('rozGnb');
-    if (gnbEl) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 46) {
-                gnbEl.classList.add('is-fixed');
-            } else {
-                gnbEl.classList.remove('is-fixed');
-            }
-        });
+    // Insert each child node (avoid extra wrapper div)
+    while (wrapper.firstChild) {
+        document.body.insertBefore(wrapper.firstChild, target);
     }
 
-    // === Mobile Nav ===
-    const hamburger = document.getElementById('hamburgerMenu');
-    const mobileNav = document.getElementById('mobileNav');
-    if (hamburger && mobileNav) {
-        hamburger.addEventListener('click', () => mobileNav.classList.add('active'));
-        const closeBtn = document.getElementById('closeMobileNav');
-        if (closeBtn) closeBtn.addEventListener('click', () => mobileNav.classList.remove('active'));
+    // === Scroll: show download button + fix gnb after gnjoy bar scrolls out ===
+    const gnbEl = document.getElementById('rozGnb');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 46) {
+            gnbEl.classList.add('is-fixed');
+        } else {
+            gnbEl.classList.remove('is-fixed');
+        }
+    });
+
+    // === Dropdown hover ===
+    const dropTrigger = document.querySelector('.roz-gnb-dropdown-wrap');
+    if (dropTrigger) {
+        dropTrigger.addEventListener('mouseenter', () => dropTrigger.classList.add('open'));
+        dropTrigger.addEventListener('mouseleave', () => dropTrigger.classList.remove('open'));
     }
 }
 
