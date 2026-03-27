@@ -1,0 +1,77 @@
+.main-contents {
+  width: 100%;
+  aspect-ratio: 2560/1514;
+  max-width: 2560px;
+  height: auto;
+  position: relative;
+  background: url('../images/main/main-contents-bg.webp') no-repeat;
+  background-position: top center;
+  padding: 233px 0 0;
+}
+
+.main-contents-container {
+  position: relative;
+  
+}
+
+.character-wrap {
+  width: 100%;
+  aspect-ratio: 689/139;
+  max-width: 689px;
+  position: absolute;
+  top: -117px;
+  left: 45%;
+  transform: translateX(-50%);
+}
+
+// 다운로드 버튼 
+.btn-wrap {
+  position: absolute;
+  width: 220px;
+  height: 260px;
+  border: 0;
+  padding: 150px 0 0;
+  overflow: hidden;
+  cursor: pointer;
+  top: -175px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+
+  opacity:1;
+  visibility: visible;
+
+  &::before {
+    display: block;
+    content: '';
+    width:100%; 
+    height: 62px;
+    background: url('../images/main/shape-download.webp');
+    position: absolute;
+    left:0;
+    top:50%;
+  }
+}
+.download-btn {
+  width: 100%;
+  max-width:200px;
+  height: 200px;
+  position: relative;
+  top: -88px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.download-btn .video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: transparent;
+
+}
+
+.btn-wrap.is-fixed {
+  opacity: 0;
+  visibility: hidden;
+}

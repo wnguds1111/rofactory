@@ -37,39 +37,39 @@
         </div>
     </div>
 
-    <!-- GNB (ROZ Centered layout restored!) -->
+    <!-- GNB (ROZ Centered layout) -->
     <header class="gnb">
         <div class="container gnb-center-layout">
             <nav class="nav-left">
                 <a href="#" class="gnb-item">
                     <img src="images/icon_seasonpass.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-                    <span class="gnb-emoji" style="display:none; font-size:24px;">🎟️</span>
+                    <span class="gnb-emoji" style="display:none; font-size:20px;">🎟️</span>
                     <span class="gnb-text">SUBSCRIPTION</span>
                 </a>
                 <span class="gnb-dot"></span>
                 <a href="#" class="gnb-item">
                     <img src="images/icon_topup.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-                    <span class="gnb-emoji" style="display:none; font-size:24px;">💎</span>
+                    <span class="gnb-emoji" style="display:none; font-size:20px;">💎</span>
                     <span class="gnb-text">TOP UP</span>
                 </a>
                 <span class="gnb-dot"></span>
                 <div class="dropdown-wrapper">
                     <a href="main.html" class="gnb-item active">
                         <img src="images/icon_rofactory.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-                        <span class="gnb-emoji" style="display:none; font-size:24px;">🏭</span>
+                        <span class="gnb-emoji" style="display:none; font-size:20px;">🏭</span>
                         <span class="gnb-text">RO FACTORY</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a href="register.html">작품 등록</a>
-                        <a href="market.html">마켓 이동</a>
-                        <a href="#" onclick="alert('게시글 연동 예정입니다.'); return false;">가이드 안내</a>
-                        <a href="studio_myworks.html">마이 스튜디오</a>
+                        <a href="register.html">Register</a>
+                        <a href="market.html">Market</a>
+                        <a href="#" onclick="alert('Guide coming soon.'); return false;">Guide</a>
+                        <a href="studio_myworks.html">My Studio</a>
                     </div>
                 </div>
                 <span class="gnb-dot"></span>
                 <a href="#" class="gnb-item">
                     <img src="images/icon_getporing.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-                    <span class="gnb-emoji" style="display:none; font-size:24px;">🐾</span>
+                    <span class="gnb-emoji" style="display:none; font-size:20px;">🐾</span>
                     <span class="gnb-text">GET PORING</span>
                 </a>
             </nav>
@@ -79,6 +79,9 @@
                     <img src="images/roz_logo.png" alt="ROZ Logo" class="roz-logo-img" onerror="this.outerHTML='<span class=\'logo-text\'>RAGNAROK ZERO</span>'">
                 </a>
             </div>
+
+            <!-- Download button: visible on scroll -->
+            <a href="#" class="gnb-download-btn" onclick="alert('UGC Editor Download will start.'); return false;">⬇ Download UGC Editor</a>
 
             <!-- Hamburger menu for Mobile -->
             <div class="hamburger-menu" id="hamburgerMenu">
@@ -90,25 +93,25 @@
             <nav class="nav-right">
                 <a href="#" class="gnb-item">
                     <img src="images/icon_news.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-                    <span class="gnb-emoji" style="display:none; font-size:24px;">📜</span>
+                    <span class="gnb-emoji" style="display:none; font-size:20px;">📜</span>
                     <span class="gnb-text">NEWS</span>
                 </a>
                 <span class="gnb-dot"></span>
                 <a href="#" class="gnb-item">
                     <img src="images/icon_gameinfo.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-                    <span class="gnb-emoji" style="display:none; font-size:24px;">💡</span>
+                    <span class="gnb-emoji" style="display:none; font-size:20px;">💡</span>
                     <span class="gnb-text">GAME INFO</span>
                 </a>
                 <span class="gnb-dot"></span>
                 <a href="#" class="gnb-item">
                     <img src="images/icon_resource.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-                    <span class="gnb-emoji" style="display:none; font-size:24px;">🗃️</span>
+                    <span class="gnb-emoji" style="display:none; font-size:20px;">🗃️</span>
                     <span class="gnb-text">RESOURCE</span>
                 </a>
                 <span class="gnb-dot"></span>
                 <a href="#" class="gnb-item">
                     <img src="images/icon_community.png" alt="Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-                    <span class="gnb-emoji" style="display:none; font-size:24px;">💬</span>
+                    <span class="gnb-emoji" style="display:none; font-size:20px;">💬</span>
                     <span class="gnb-text">COMMUNITY</span>
                 </a>
             </nav>
@@ -351,5 +354,16 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // ROZ GNB scroll behavior: add is-fixed class after 80px scroll
+        const rozGnb = document.querySelector('.gnb');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                rozGnb.classList.add('is-fixed');
+            } else {
+                rozGnb.classList.remove('is-fixed');
+            }
+        });
+    </script>
 </body>
 </html>
