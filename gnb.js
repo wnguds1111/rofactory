@@ -1,7 +1,7 @@
 /**
  * ROZ GNB — Common Header Renderer
- * Two-tier: GNJOY bar (46px) + ROZ image-based bar (80px)
- * Auto-initializes on DOMContentLoaded.
+ * Pixel-perfect match to code.gnjoy.com/prototype/ggu/roz/index.html
+ * Structure & dimensions from roz/assets/scss/_header.scss
  */
 
 function renderGNB(opts = {}) {
@@ -28,21 +28,25 @@ function renderGNB(opts = {}) {
         </div>
     </div>
 
-    <!-- ROZ GNB (80px image-based) -->
+    <!-- ROZ GNB (80px, image-based, exact ROZ spec) -->
     <header class="roz-gnb" id="rozGnb">
         <div class="roz-gnb-inner">
 
-            <!-- Full menu background image -->
+            <!-- Full menu image bar (NEWS / GAME INFO / COMMUNITY / RESOURCE etc.) -->
             <div class="roz-gnb-menu-wrap">
-                <img src="${assetBase}/header-menu-full.webp" alt="Navigation" class="roz-gnb-menu-img">
+                <img src="${assetBase}/header-menu-full.webp" alt="Navigation Menu" class="roz-gnb-menu-img">
             </div>
 
-            <!-- Center ROZ Logo (absolutely centered, larger) -->
+            <!-- ROZ Logo: 159px wide, aspect-ratio 211/167, top:0 = sticks out below 80px bar -->
             <a href="main.html" class="roz-gnb-logo">
                 <img src="${assetBase}/roz-logo.webp" alt="Ragnarok Zero Global">
             </a>
 
-            <!-- Download button: hidden by default, appears on scroll below logo -->
+            <!--
+                Download wrap: 278x76px, positioned at top:80px (= right below the 80px bar)
+                CSS ::before renders shape-download-header.webp as background
+                This element is hidden (opacity:0) and shows when .is-fixed is added on scroll
+            -->
             <div class="roz-gnb-download-wrap">
                 <button class="roz-gnb-download-btn" onclick="alert('UGC Editor Download starting...')">
                     <img src="${assetBase}/download-header.png" alt="Download">
@@ -52,7 +56,7 @@ function renderGNB(opts = {}) {
         </div>
     </header>`;
 
-    // Insert at start of body, before <main>
+    // Insert before <main> element
     const target = document.querySelector('main') || document.body.firstChild;
     const temp = document.createElement('div');
     temp.innerHTML = gnbHTML;
@@ -60,7 +64,7 @@ function renderGNB(opts = {}) {
         document.body.insertBefore(temp.firstChild, target);
     }
 
-    // Scroll: toggle is-fixed on roz-gnb after gnjoy bar height
+    // Scroll behavior: add is-fixed when GNJOY bar (46px) scrolls out of view
     const gnbEl = document.getElementById('rozGnb');
     if (gnbEl) {
         window.addEventListener('scroll', () => {
