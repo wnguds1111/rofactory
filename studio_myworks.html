@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RO Factory | 나의 작품 관리</title>
+    <title>RO Factory | 나의 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -119,12 +119,12 @@
                 <div class="user-info-wrap">
                     <div class="user-name">GravityUser</div>
                     <span class="user-kp">보유 <span>0</span> KP</span>
-                    <a href="#" class="btn-kp">💳 KP 충전하기</a>
+                    <a href="#" class="btn-kp">💳 <span data-en="Charge KP" data-ko="KP 충전">Charge KP</span>하기</a>
                 </div>
             </div>
             <ul class="studio-nav">
-                <li onclick="location.href='studio_myworks.html'" class="s-nav-item active"><span class="s-nav-icon">🪄</span> 나의 작품 관리</li>
-                <li onclick="location.href='studio_inventory.html'" class="s-nav-item"><span class="s-nav-icon">🎒</span> 구매 작품 관리</li>
+                <li onclick="location.href='studio_myworks.html'" class="s-nav-item active"><span class="s-nav-icon">🪄</span> 나의 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></li>
+                <li onclick="location.href='studio_inventory.html'" class="s-nav-item"><span class="s-nav-icon">🎒</span> 구매 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></li>
                 <li onclick="location.href='studio_wishlist.html'" class="s-nav-item"><span class="s-nav-icon" style="color:#ef4444;">💖</span> 찜한 상품 보기</li>
             </ul>
         </aside>
@@ -132,8 +132,8 @@
         <!-- 메인 -->
         <main class="studio-main">
             <div class="panel-header">
-                <h2 class="panel-title">나의 작품 관리</h2>
-                <a href="register.html" class="btn-register">✨ 새 작품 등록하기</a>
+                <h2 class="panel-title">나의 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></h2>
+                <a href="register.html" class="btn-register">✨ 새 <span data-en="Register Asset" data-ko="작품 등록">Register Asset</span>하기</a>
             </div>
             <div class="search-bar">
                 <input type="text" id="searchInput" oninput="applyFilter()" placeholder="🔍  작품명 검색...">
@@ -142,7 +142,7 @@
                 <div class="sub-tab active" id="tab-all"        onclick="setTab('all')">전체</div>
                 <div class="sub-tab"        id="tab-converting" onclick="setTab('converting')">변환 중</div>
                 <div class="sub-tab"        id="tab-completed"  onclick="setTab('completed')">변환 완료</div>
-                <div class="sub-tab"        id="tab-expired"    onclick="setTab('expired')">작품 만료</div>
+                <div class="sub-tab"        id="tab-expired"    onclick="setTab('expired')">작품 <span data-en="Expired" data-ko="만료">Expired</span></div>
             </div>
             <div class="item-list" id="workList"></div>
         </main>
@@ -206,24 +206,24 @@ function buildRow(w){
             ? `<span class="item-status s-completed-wait">판매 대기</span>`
             : `<span class="item-status s-completed-sale">판매 중</span>`;
     } else if(w.status==='expired'){
-        badge = `<span class="item-status s-expired">작품 만료</span>`;
+        badge = `<span class="item-status s-expired">작품 <span data-en="Expired" data-ko="만료">Expired</span></span>`;
     } else if(w.status==='failed'){
-        badge = `<span class="item-status s-failed">변환 실패</span>`;
+        badge = `<span class="item-status s-failed"><span data-en="Failed" data-ko="변환 실패">Failed</span></span>`;
     }
 
     // 메타
-    let meta = `<span>가격: ${w.price}</span>`;
+    let meta = `<span><span data-en="Price" data-ko="가격">Price</span>: ${w.price}</span>`;
     if(w.status==='converting'){
-        meta += `<span>등록일: ${w.regDate}</span><span>판매수: 0</span>`;
+        meta += `<span><span data-en="Register" data-ko="등록">Register</span>일: ${w.regDate}</span><span>판매수: 0</span>`;
     } else if(w.status==='completed'){
         const c = w.completedSub==='sale'?'#166534':'#1d4ed8';
         meta += `<span style="color:${c};font-weight:800;">게시일: ${w.pubDate}</span>`;
         meta += `<span>판매수: <b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
     } else if(w.status==='expired'){
-        meta += `<span style="color:#64748b;">만료일: ${w.expDate}</span>`;
+        meta += `<span style="color:#64748b;"><span data-en="Expired" data-ko="만료">Expired</span>일: ${w.expDate}</span>`;
         meta += `<span>판매수: <b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
     } else if(w.status==='failed'){
-        meta += `<span>등록일: ${w.regDate}</span>`;
+        meta += `<span><span data-en="Register" data-ko="등록">Register</span>일: ${w.regDate}</span>`;
         if(w.failReason) meta += `<span style="color:#dc2626;">실패 사유: ${w.failReason}</span>`;
     }
 

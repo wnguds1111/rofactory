@@ -144,9 +144,9 @@
             <!-- Search Bar -->
             <div class="market-search-bar">
                 <div class="market-search-cat">
-                    <select><option>발자국</option></select>
+                    <select><option><span data-en="Footprints" data-ko="발자국">Footprints</span></option></select>
                 </div>
-                <input type="text" class="market-search-input" placeholder="상품을 검색해 보세요.">
+                <input type="text" class="market-search-input" placeholder="Search for items." data-ko="상품을 검색해 보세요." data-en="Search for items.">
                 <button class="market-search-btn" style="font-size: 12px;">✖</button>
                 <button class="market-search-btn">🔍</button>
             </div>
@@ -155,14 +155,14 @@
                 <!-- Sidebar -->
                 <aside class="market-sidebar">
                     <div class="filter-header">
-                        <span>옵션 필터</span>
+                        <span><span data-en="Option Filter" data-ko="옵션 필터">Option Filter</span></span>
                         <span class="filter-reset" onclick="resetFilters()">↺</span>
                     </div>
 
                     <div class="filter-group filter-category">
                         <div class="filter-title">카테고리</div>
                         <div class="filter-btns">
-                            <button class="f-btn active">발자국</button>
+                            <button class="f-btn active"><span data-en="Footprints" data-ko="발자국">Footprints</span></button>
                         </div>
                     </div>
 
@@ -176,7 +176,7 @@
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-title">🎨 색상</div>
+                        <div class="filter-title">🎨 <span data-en="Color" data-ko="색상">Color</span></div>
                         <div class="filter-btns filter-color">
                             <button class="f-btn" data-val="red"><span class="f-color-dot" style="background:red;"></span> 빨강</button>
                             <button class="f-btn" data-val="blue"><span class="f-color-dot" style="background:blue;"></span> 파랑</button>
@@ -188,7 +188,7 @@
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-title">💰 가격 (KP)</div>
+                        <div class="filter-title">💰 <span data-en="Price" data-ko="가격">Price</span> (KP)</div>
                         <div class="filter-btns filter-price">
                             <button class="f-btn" data-val="0">무료</button>
                             <button class="f-btn" data-val="1000">1,000 이하</button>
@@ -221,7 +221,7 @@
 
                 <!-- Main Content -->
                 <main class="market-main">
-                    <span class="market-count" id="marketCountLabel">0개의 발자국</span>
+                    <span class="market-count" id="marketCountLabel">0개의 <span data-en="Footprints" data-ko="발자국">Footprints</span></span>
                     <div class="market-grid" id="marketGridContainer">
                         <!-- Loaded through JS -->
                     </div>
@@ -233,7 +233,7 @@
         <div id="panel-detail" class="market-panel">
             <div class="breadcrumb">
                 <a href="main2.html">홈</a> <span>></span> 
-                <a href="market.html">마켓</a> <span>></span> 
+                <a href="market.html"><span data-en="Market" data-ko="마켓">Market</span></a> <span>></span> 
                 <strong id="detail-bread-title">상품 상세</strong>
             </div>
             
@@ -248,7 +248,7 @@
                     </div>
                 </div>
                 <div class="detail-right">
-                    <div class="d-cat">발자국</div>
+                    <div class="d-cat"><span data-en="Footprints" data-ko="발자국">Footprints</span></div>
                     <h2 class="d-title" id="detail-title" style="margin-bottom: 15px;">상품명</h2>
                     
                     <div class="d-tags-wrap" id="detail-tags-wrap" style="margin-bottom: 30px;">
@@ -287,14 +287,14 @@
                 <div class="c-desc">아이템이 내 스튜디오로 정상적으로 전송되었습니다.<br>인게임 우편함에서도 확인하실 수 있습니다.</div>
                 
                 <div class="c-box">
-                    <div class="c-item"><span>구매 작품명</span> <span id="c-item-name">상품명</span></div>
+                    <div class="c-item"><span>구매 <span data-en="Item Name" data-ko="작품명">Item Name</span></span> <span id="c-item-name">상품명</span></div>
                     <div class="c-item"><span>결제 금액</span> <span id="c-item-price">0 KP</span></div>
                     <div class="c-item"><span>잔여 포인트</span> <span id="c-item-balance">0 KP</span></div>
                 </div>
 
                 <div class="c-btns">
-                    <button class="c-btn-go-market" onclick="location.href='market.html'">마켓 더 구경하기</button>
-                    <button class="c-btn-go-studio" onclick="location.href='studio_inventory.html'">마이 스튜디오 이동</button>
+                    <button class="c-btn-go-market" onclick="location.href='market.html'"><span data-en="Market" data-ko="마켓">Market</span> 더 구경하기</button>
+                    <button class="c-btn-go-studio" onclick="location.href='studio_inventory.html'"><span data-en="My Studio" data-ko="마이 스튜디오">My Studio</span> 이동</button>
                 </div>
             </div>
         </div>
@@ -438,7 +438,7 @@
             // Reset state
             btn.style.background = '#3b82f6';
             btn.style.cursor = 'pointer';
-            btn.innerText = p.isFree ? '무료 결제 진행' : `${p.price.toLocaleString()} KP 결제하기`;
+            btn.innerText = p.isFree ? '무료 <span data-en="Proceed to Checkout" data-ko="결제 진행">Proceed to Checkout</span>' : `${p.price.toLocaleString()} KP 결제하기`;
             if(alertBox) alertBox.style.display = 'none';
             btn.onclick = executePayment;
             
@@ -487,18 +487,18 @@
 
         /* ----- MARKET FILTER & DATA LOGIC ----- */
         let mockProducts = [
-            { id: 1, title: '포링의 벚꽃 발자국', type: 'cute', color: 'red', price: 0, isFree: true, tag: 'NEW', hearts: 21, img: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)', icon: '🌸' },
-            { id: 2, title: '얼음 수정 발자국', type: 'fancy', color: 'blue', price: 1200, isFree: false, tag: 'BEST', hearts: 350, img: 'linear-gradient(to top, #00c6fb 0%, #005bea 100%)', icon: '❄️' },
-            { id: 3, title: '어둠의 심연의 걸음', type: 'dark', color: 'black', price: 5500, isFree: false, tag: 'HOT', hearts: 140, img: 'linear-gradient(to right, #434343 0%, black 100%)', icon: '🌑' },
-            { id: 4, title: '초록우산 아이의 스텝', type: 'cute', color: 'green', price: 300, isFree: false, tag: '', hearts: 5, img: 'linear-gradient(to top, #0ba360 0%, #3cba92 100%)', icon: '☂️' },
-            { id: 5, title: '황금빛 엘프의 궤적', type: 'fancy', color: 'yellow', price: 9000, isFree: false, tag: 'BEST', hearts: 1000, img: 'linear-gradient(to right, #f83600 0%, #f9d423 100%)', icon: '✨' },
-            { id: 6, title: '다크메이지의 잿빛흔적', type: 'dark', color: 'black', price: 0, isFree: true, tag: '', hearts: 89, img: 'linear-gradient(to bottom, #8e9eab, #eef2f3)', icon: '🔮' },
-            { id: 7, title: '불타는 용암 조각', type: 'fancy', color: 'red', price: 15000, isFree: false, tag: 'NEW', hearts: 12, img: 'linear-gradient(to right, #ff0844 0%, #ffb199 100%)', icon: '🔥' },
-            { id: 8, title: '퓨어 스노우 발걸음', type: 'cute', color: 'white', price: 0, isFree: true, tag: '', hearts: 60, img: 'linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)', icon: '⛄' },
-            { id: 9, title: '아쿠아 마린 슬라이드', type: 'fancy', color: 'blue', price: 4200, isFree: false, tag: 'HOT', hearts: 220, img: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)', icon: '🌊' },
-            { id: 10, title: '네크로맨서의 해골 춤', type: 'dark', color: 'black', price: 8500, isFree: false, tag: '', hearts: 44, img: 'linear-gradient(to right, #000000, #434343)', icon: '💀' },
-            { id: 11, title: '토끼의 점프 스텝', type: 'cute', color: 'white', price: 500, isFree: false, tag: 'BEST', hearts: 402, img: 'linear-gradient(to right, #74ebd5 0%, #9face6 100%)', icon: '🐰' },
-            { id: 12, title: '눈부신 천사의 깃털', type: 'fancy', color: 'white', price: 20000, isFree: false, tag: 'NEW', hearts: 300, img: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)', icon: '🕊️' }
+            { id: 1, title: '포링의 벚꽃 <span data-en="Footprints" data-ko="발자국">Footprints</span>', type: 'cute', color: 'red', price: 0, isFree: true, tag: 'NEW', hearts: 21, img: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)', icon: '🌸' },
+            { id: 2, title: '<span data-en="Ice Crystal Footprints" data-ko="얼음 수정 발자국">Ice Crystal Footprints</span>', type: 'fancy', color: 'blue', price: 1200, isFree: false, tag: 'BEST', hearts: 350, img: 'linear-gradient(to top, #00c6fb 0%, #005bea 100%)', icon: '❄️' },
+            { id: 3, title: '<span data-en="Steps of Dark Abyss" data-ko="어둠의 심연의 걸음">Steps of Dark Abyss</span>', type: 'dark', color: 'black', price: 5500, isFree: false, tag: 'HOT', hearts: 140, img: 'linear-gradient(to right, #434343 0%, black 100%)', icon: '🌑' },
+            { id: 4, title: '<span data-en="Green Umbrella Step" data-ko="초록우산 아이의 스텝">Green Umbrella Step</span>', type: 'cute', color: 'green', price: 300, isFree: false, tag: '', hearts: 5, img: 'linear-gradient(to top, #0ba360 0%, #3cba92 100%)', icon: '☂️' },
+            { id: 5, title: '<span data-en="Golden Elf Trajectory" data-ko="황금빛 엘프의 궤적">Golden Elf Trajectory</span>', type: 'fancy', color: 'yellow', price: 9000, isFree: false, tag: 'BEST', hearts: 1000, img: 'linear-gradient(to right, #f83600 0%, #f9d423 100%)', icon: '✨' },
+            { id: 6, title: '<span data-en="Dark Mage's Trace" data-ko="다크메이지의 잿빛흔적">Dark Mage's Trace</span>', type: 'dark', color: 'black', price: 0, isFree: true, tag: '', hearts: 89, img: 'linear-gradient(to bottom, #8e9eab, #eef2f3)', icon: '🔮' },
+            { id: 7, title: '<span data-en="Burning Lava Fragment" data-ko="불타는 용암 조각">Burning Lava Fragment</span>', type: 'fancy', color: 'red', price: 15000, isFree: false, tag: 'NEW', hearts: 12, img: 'linear-gradient(to right, #ff0844 0%, #ffb199 100%)', icon: '🔥' },
+            { id: 8, title: '<span data-en="Pure Snow Footsteps" data-ko="퓨어 스노우 발걸음">Pure Snow Footsteps</span>', type: 'cute', color: 'white', price: 0, isFree: true, tag: '', hearts: 60, img: 'linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)', icon: '⛄' },
+            { id: 9, title: '<span data-en="Aqua Marine Slide" data-ko="아쿠아 마린 슬라이드">Aqua Marine Slide</span>', type: 'fancy', color: 'blue', price: 4200, isFree: false, tag: 'HOT', hearts: 220, img: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)', icon: '🌊' },
+            { id: 10, title: '<span data-en="Necromancer Skull Dance" data-ko="네크로맨서의 해골 춤">Necromancer Skull Dance</span>', type: 'dark', color: 'black', price: 8500, isFree: false, tag: '', hearts: 44, img: 'linear-gradient(to right, #000000, #434343)', icon: '💀' },
+            { id: 11, title: '<span data-en="Rabbit Jump Step" data-ko="토끼의 점프 스텝">Rabbit Jump Step</span>', type: 'cute', color: 'white', price: 500, isFree: false, tag: 'BEST', hearts: 402, img: 'linear-gradient(to right, #74ebd5 0%, #9face6 100%)', icon: '🐰' },
+            { id: 12, title: '<span data-en="Dazzling Angel Feather" data-ko="눈부신 천사의 깃털">Dazzling Angel Feather</span>', type: 'fancy', color: 'white', price: 20000, isFree: false, tag: 'NEW', hearts: 300, img: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)', icon: '🕊️' }
         ];
 
         // MOCK MULTIPLICATION: Create 60 items so we have 5 pages
@@ -650,7 +650,7 @@
             // Simple default UI Sort
             filtered.sort((a,b) => b.hearts - a.hearts);
             
-            document.getElementById('marketCountLabel').innerText = `${filtered.length}개의 발자국`;
+            document.getElementById('marketCountLabel').innerText = `${filtered.length}개의 <span data-en="Footprints" data-ko="발자국">Footprints</span>`;
             
             if(filtered.length === 0) {
                 grid.innerHTML = `<div style="grid-column:1/-1; padding:40px; text-align:center; color:#64748b; font-weight:700;">조건에 맞는 검색 결과가 없습니다.</div>`;

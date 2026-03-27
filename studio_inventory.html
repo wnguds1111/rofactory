@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RO Factory | 구매 작품 관리</title>
+    <title>RO Factory | 구매 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -106,20 +106,20 @@
                 <div class="user-info-wrap">
                     <div class="user-name">GravityUser</div>
                     <span class="user-kp">보유 <span>0</span> KP</span>
-                    <a href="#" class="btn-kp">💳 KP 충전하기</a>
+                    <a href="#" class="btn-kp">💳 <span data-en="Charge KP" data-ko="KP 충전">Charge KP</span>하기</a>
                 </div>
             </div>
             <ul class="studio-nav">
-                <li onclick="location.href='studio_myworks.html'" class="s-nav-item"><span class="s-nav-icon">🪄</span> 나의 작품 관리</li>
-                <li onclick="location.href='studio_inventory.html'" class="s-nav-item active"><span class="s-nav-icon">🎒</span> 구매 작품 관리</li>
+                <li onclick="location.href='studio_myworks.html'" class="s-nav-item"><span class="s-nav-icon">🪄</span> 나의 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></li>
+                <li onclick="location.href='studio_inventory.html'" class="s-nav-item active"><span class="s-nav-icon">🎒</span> 구매 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></li>
                 <li onclick="location.href='studio_wishlist.html'" class="s-nav-item"><span class="s-nav-icon" style="color:#ef4444;">💖</span> 찜한 상품 보기</li>
             </ul>
         </aside>
 
         <main class="studio-main">
             <div class="panel-header">
-                <h2 class="panel-title">구매 작품 관리</h2>
-                <a href="market.html" class="btn-market">마켓으로 이동 🛍️</a>
+                <h2 class="panel-title">구매 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></h2>
+                <a href="market.html" class="btn-market"><span data-en="Market" data-ko="마켓">Market</span>으로 이동 🛍️</a>
             </div>
             <div class="search-bar">
                 <input type="text" id="searchInput" oninput="applyFilter()" placeholder="🔍  작품명 검색...">
@@ -127,7 +127,7 @@
             <div class="sub-tabs">
                 <div class="sub-tab active" id="tab-all"       onclick="setTab('all')">전체</div>
                 <div class="sub-tab"        id="tab-purchased" onclick="setTab('purchased')">구매 완료</div>
-                <div class="sub-tab"        id="tab-expired"   onclick="setTab('expired')">작품 만료</div>
+                <div class="sub-tab"        id="tab-expired"   onclick="setTab('expired')">작품 <span data-en="Expired" data-ko="만료">Expired</span></div>
             </div>
             <div class="item-list" id="invList"></div>
         </main>
@@ -160,10 +160,10 @@ function applyFilter(){
         const op = isExpired?'0.7':'1';
         const strike = isExpired?'text-decoration:line-through;':'';
         const badge = isExpired
-            ? `<span class="item-status" style="background:#f1f5f9;color:#64748b;">만료됨</span>`
+            ? `<span class="item-status" style="background:#f1f5f9;color:#64748b;"><span data-en="Expired" data-ko="만료">Expired</span>됨</span>`
             : `<span class="item-status" style="background:#dbeafe;color:#1d4ed8;">구매 완료</span>`;
         let meta = isExpired
-            ? `<span>구매일: ${w.buyDate}</span><span style="color:#dc2626;font-weight:700;">만료일: ${w.expDate}</span>`
+            ? `<span>구매일: ${w.buyDate}</span><span style="color:#dc2626;font-weight:700;"><span data-en="Expired" data-ko="만료">Expired</span>일: ${w.expDate}</span>`
             : `<span>구매일: ${w.buyDate}</span><span style="color:#166534;font-weight:700;">상태: ${w.state}</span><span>유효기간: 무제한</span>`;
         rows.push(`
         <div class="item-row" style="opacity:${op};cursor:pointer;" onclick="showInvDetail('${w.title}','${w.buyDate}','${w.state||''}','${w.expDate||''}','${isExpired}')">
@@ -181,8 +181,8 @@ function applyFilter(){
 }
 function showInvDetail(title, buyDate, state, expDate, isExpired){
     const msg = isExpired === 'true'
-        ? `📦 구매 상세 내역\n\n작품명: ${title}\n구매일: ${buyDate}\n만료일: ${expDate}\n상태: 만료됨`
-        : `📦 구매 상세 내역\n\n작품명: ${title}\n구매일: ${buyDate}\n인게임 상태: ${state}\n유효기간: 무제한`;
+        ? `📦 구매 상세 내역\n\n<span data-en="Item Name" data-ko="작품명">Item Name</span>: ${title}\n구매일: ${buyDate}\n<span data-en="Expired" data-ko="만료">Expired</span>일: ${expDate}\n상태: <span data-en="Expired" data-ko="만료">Expired</span>됨`
+        : `📦 구매 상세 내역\n\n<span data-en="Item Name" data-ko="작품명">Item Name</span>: ${title}\n구매일: ${buyDate}\n인게임 상태: ${state}\n유효기간: 무제한`;
     alert(msg);
 }
 document.addEventListener('DOMContentLoaded', applyFilter);
