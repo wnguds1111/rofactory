@@ -24,10 +24,10 @@ function renderGNB(opts = {}) {
     ];
 
     const rightItems = [
-        { icon: 'gnb-bi-1.png', label: 'NEWS',       href: '#' },
-        { icon: 'gnb-bi-2.png', label: 'GAME INFO',  href: '#' },
-        { icon: 'gnb-bi-6.png', label: 'RESOURCE',   href: '#' },
-        { icon: 'gnb-bi-5.png', label: 'COMMUNITY',  href: '#' },
+        { icon: 'gnb-news.png',      label: 'NEWS',       href: '#' },
+        { icon: 'gnb-gameinfo.png',  label: 'GAME INFO',  href: '#' },
+        { icon: 'gnb-resource.png',  label: 'RESOURCE',   href: '#' },
+        { icon: 'gnb-community.png', label: 'COMMUNITY',  href: '#' },
     ];
 
     const renderItem = (item) => {
@@ -78,9 +78,15 @@ function renderGNB(opts = {}) {
                 <img src="${assetBase}/roz-logo.webp" alt="Ragnarok Zero Global">
             </a>
 
+            <!-- Right 4 items -->
             <nav class="roz-gnb-nav roz-gnb-nav--right">
                 ${rightItems.map(renderItem).join('')}
             </nav>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button class="roz-gnb-toggle" id="rozGnbToggle">
+                <span></span><span></span><span></span>
+            </button>
 
             <!-- Download button (hidden → shown on scroll) -->
             <div class="roz-gnb-download-wrap">
@@ -90,6 +96,39 @@ function renderGNB(opts = {}) {
             </div>
 
         </div>
+
+        <!-- Mobile Side Menu -->
+        <div class="roz-gnb-mobile-wrapper" id="rozGnbMobile">
+            <div class="roz-gnb-mobile-dim"></div>
+            <div class="roz-gnb-mobile-menu">
+                <button class="roz-gnb-mobile-close" id="rozGnbMobileClose">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+                <div class="roz-gnb-mobile-logo">
+                    <img src="${assetBase}/roz-logo.webp" alt="ROZ">
+                </div>
+                <!-- Combined menus for mobile -->
+                <div class="roz-gnb-mobile-nav">
+                    ${[...leftItems, ...rightItems].map(item => `
+                        <div class="roz-gnb-mobile-item-wrap">
+                            <a href="${item.href}" class="roz-gnb-mobile-item">
+                                <img src="${assetBase}/${item.icon}" alt="${item.label}" class="roz-gnb-icon">
+                                <span>${item.label}</span>
+                            </a>
+                            ${item.dropdown ? `
+                            <div class="roz-gnb-mobile-sub">
+                                ${item.dropdown.map(d => `<a href="${d.href}">${d.label}</a>`).join('')}
+                            </div>
+                            ` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <button class="roz-gnb-mobile-download" onclick="alert('UGC Editor Download starting...')">
+                    UGC EDITOR DOWNLOAD
+                </button>
+            </div>
+        </div>
     </header>`;
 
     const target = document.querySelector('main') || document.body.firstChild;
@@ -97,13 +136,25 @@ function renderGNB(opts = {}) {
     temp.innerHTML = gnbHTML;
     while (temp.firstChild) document.body.insertBefore(temp.firstChild, target);
 
-    // Scroll: is-fixed after GNJOY bar scrolls out (46px)
+    // Scroll & Mobile Toggle Logic
     const gnbEl = document.getElementById('rozGnb');
+    const toggleBtn = document.getElementById('rozGnbToggle');
+    const closeBtn = document.getElementById('rozGnbMobileClose');
+    const mobileWrap = document.getElementById('rozGnbMobile');
+    const mobileDim = mobileWrap ? mobileWrap.querySelector('.roz-gnb-mobile-dim') : null;
+
     if (gnbEl) {
         window.addEventListener('scroll', () => {
             gnbEl.classList.toggle('is-fixed', window.scrollY > 46);
         });
     }
+
+    const openMenu = () => mobileWrap && mobileWrap.classList.add('is-open');
+    const closeMenu = () => mobileWrap && mobileWrap.classList.remove('is-open');
+
+    if (toggleBtn) toggleBtn.addEventListener('click', openMenu);
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    if (mobileDim) mobileDim.addEventListener('click', closeMenu);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
