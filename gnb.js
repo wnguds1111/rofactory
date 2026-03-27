@@ -149,7 +149,7 @@ function renderGNB(opts = {}) {
     while (temp.firstChild) document.body.insertBefore(temp.firstChild, target);
 
     // Initial Lang Load Process (Runs when DOM is ready)
-    const savedLang = localStorage.getItem('roz_lang') || 'en';
+    const savedLang = localStorage.getItem('roz_lang') || 'kr';
     window.changeLang = function(lang) {
         localStorage.setItem('roz_lang', lang);
         
