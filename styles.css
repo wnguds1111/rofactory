@@ -132,54 +132,44 @@ a {
     justify-content: center;
     max-width: 2560px;
     margin: 0 auto;
+    overflow: visible;  /* allow logo to straddle below the bar */
 }
 
-/* ---- Full Menu Image (background bar — natural render, no crop) ---- */
+/* ---- Full Menu Image (background-image = crisp, no distortion) ---- */
 .roz-gnb-menu-wrap {
     width: 100%;
     height: 80px;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible;
+    background: url('roz/assets/images/header/header-menu-full.webp') center / auto 80px repeat-x;
+    background-color: #ffffff;
 }
-.roz-gnb-menu-img {
-    width: 100%;
-    height: 80px;
-    object-fit: fill;   /* fill = pixel-perfect, no rescale cropping */
-    display: block;
-}
+/* Hide img tag — background-image handles rendering */
+.roz-gnb-menu-img { display: none; }
 
-/* ---- Center ROZ Logo (exact ROZ spec: 159px wide, aspect-ratio 211/167, top:0) ---- */
+/* ---- Center ROZ Logo (159px wide, aspect-ratio 211/167, top:0 = straddles bar) ---- */
 .roz-gnb-logo {
     position: absolute;
     left: 50%;
-    top: 0;                       /* ROZ original: aligned to top of GNB bar */
+    top: 0;                      /* aligns to top of 80px bar, overflows below */
     transform: translateX(-50%);
     z-index: 10;
     display: block;
-    width: 100%;
-    max-width: 159px;
-    aspect-ratio: 211 / 167;     /* ≈ 126px tall — pokes below 80px bar */
+    width: 159px;
+    height: 126px;               /* 159 × (167/211) ≈ 126px */
     transition: top 0.3s ease;
+    text-decoration: none;
 }
 .roz-gnb-logo img {
-    position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: contain;          /* keep logo crisp, not stretched */
+    object-fit: contain;
     display: block;
     transition: transform 0.3s ease;
 }
 
-/* Scroll state: logo slides up + shrinks (matches ROZ is-fixed behavior) */
-.roz-gnb.is-fixed .roz-gnb-logo {
-    top: -20%;
-}
-.roz-gnb.is-fixed .roz-gnb-logo img {
-    transform: scale(0.8);
-}
+/* Scroll: logo slides up + shrinks (exact ROZ behavior) */
+.roz-gnb.is-fixed .roz-gnb-logo { top: -20%; }
+.roz-gnb.is-fixed .roz-gnb-logo img { transform: scale(0.8); }
 
 /* ---- Download wrap (278x76px, positioned top:80px below GNB) ---- */
 .roz-gnb-download-wrap {
