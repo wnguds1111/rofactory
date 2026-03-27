@@ -3,444 +3,444 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RO FACTORY 웹기획Unit 이주형 작성 - 사용자들이 게임 에셋(발자국)을 등록할 수 있는 My Studio 사용자 프론트 페이지 프로토타입입니다.">
-    <title><span data-en="Register Asset" data-ko="작품 등록">Register Asset</span> | RO Factory</title>
-    <!-- Use Poppins for clean, premium typography -->
+    <meta name="description" content="RO FACTORY 작품 등록 - 나만의 발자국 에셋을 글로벌 마켓에 등록하세요.">
+    <title>RO FACTORY</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── Terms Modal ── */
+        .terms-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .terms-modal-overlay.show {
+            display: flex;
+        }
+        .terms-modal {
+            background: #fff;
+            border-radius: 20px;
+            padding: 36px;
+            max-width: 560px;
+            width: 100%;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+        }
+        .terms-modal h2 {
+            font-size: 20px;
+            font-weight: 900;
+            color: #0f172a;
+            margin: 0;
+        }
+        .terms-content {
+            flex: 1;
+            overflow-y: auto;
+            font-size: 13px;
+            line-height: 1.8;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            max-height: 320px;
+        }
+        .btn-close-modal {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-close-modal:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body class="wizard-layout">
     <script src="gnb.js"></script>
-</div>
+
 <main class="wizard-main">
-        <div class="w-full">
-            
-            <!-- STEP 0: INTRO OVERVIEW -->
-            <div class="step-panel active text-center" id="step0">
-                <h2 class="step-title">환영합니다!<br>나만의 <span data-en="Footprints" data-ko="발자국">Footprints</span> <span data-en="Register" data-ko="등록">Register</span>을 시작해볼까요?</h2>
-                <p class="step-desc">단 4개의 과정만 거치면 나만의 <span data-en="Footprints" data-ko="발자국">Footprints</span>이 탄생합니다.</p>
-                
-                <div class="intro-steps-list">
-                    <div class="intro-card">
-                        <div class="step-icon">📁</div>
-                        <span class="step-tag">STEP 1</span>
-                        <h4 style="font-size: 18px;">파일 준비</h4>
-                        <p style="font-size:13px;">전용 편집툴에서 .foot 원본과 클립을 PC로 추출합니다.</p>
-                    </div>
-                    <div class="intro-card">
-                        <div class="step-icon">📤</div>
-                        <span class="step-tag">STEP 2</span>
-                        <h4 style="font-size: 18px;">에셋 업로드</h4>
-                        <p style="font-size:13px;">추출하신 파일들과 썸네일을 안전하게 서버에 <span data-en="Register" data-ko="등록">Register</span>합니다.</p>
-                    </div>
-                    <div class="intro-card">
-                        <div class="step-icon">✨</div>
-                        <span class="step-tag">STEP 3</span>
-                        <h4 style="font-size: 18px;"><span data-en="Market" data-ko="마켓">Market</span> 정보 입력</h4>
-                        <p style="font-size:13px;"><span data-en="Item Name" data-ko="작품명">Item Name</span>과 <span data-en="Price" data-ko="가격">Price</span>, <span data-en="Tags" data-ko="태그">Tags</span> 등 상세 데이터를 결정하고 기입합니다.</p>
-                    </div>
-                    <div class="intro-card">
-                        <div class="step-icon">🎉</div>
-                        <span class="step-tag">STEP 4</span>
-                        <h4 style="font-size: 18px;">파일 변환 완료</h4>
-                        <p style="font-size:13px;">업로드 파일이 변환을 거쳐 글로벌 <span data-en="Market" data-ko="마켓">Market</span>에 자동 등재됩니다!</p>
-                    </div>
+    <div class="w-full">
+
+        <!-- STEP 0: INTRO OVERVIEW -->
+        <div class="step-panel active text-center" id="step0">
+            <h2 class="step-title">환영합니다!<br>나만의 <span data-en="Footprints" data-ko="발자국">발자국</span> 등록을 시작해볼까요?</h2>
+            <p class="step-desc">단 4개의 과정만 거치면 나만의 <span data-en="Footprints" data-ko="발자국">발자국</span>이 탄생합니다.</p>
+
+            <div class="intro-steps-list">
+                <div class="intro-card">
+                    <div class="step-icon">📁</div>
+                    <span class="step-tag">STEP 1</span>
+                    <h4 style="font-size: 18px;">파일 준비</h4>
+                    <p style="font-size:13px;">전용 편집툴에서 .foot 원본과 영상 클립을 PC로 추출합니다.</p>
+                </div>
+                <div class="intro-card">
+                    <div class="step-icon">📤</div>
+                    <span class="step-tag">STEP 2</span>
+                    <h4 style="font-size: 18px;">에셋 업로드</h4>
+                    <p style="font-size:13px;">추출하신 파일들과 썸네일을 안전하게 서버에 등록합니다.</p>
+                </div>
+                <div class="intro-card">
+                    <div class="step-icon">✨</div>
+                    <span class="step-tag">STEP 3</span>
+                    <h4 style="font-size: 18px;"><span data-en="Market" data-ko="마켓">마켓</span> 정보 입력</h4>
+                    <p style="font-size:13px;">작품명과 가격, 태그 등 상세 데이터를 결정하고 기입합니다.</p>
+                </div>
+                <div class="intro-card">
+                    <div class="step-icon">🎉</div>
+                    <span class="step-tag">STEP 4</span>
+                    <h4 style="font-size: 18px;">파일 변환 완료</h4>
+                    <p style="font-size:13px;">업로드 파일이 변환을 거쳐 글로벌 <span data-en="Market" data-ko="마켓">마켓</span>에 자동 등재됩니다!</p>
                 </div>
             </div>
 
-            <!-- STEP 1: TOOL INSTRUCTION -->
-            <div class="step-panel text-center" id="step1">
-                <div class="step-sub">STEP 1</div>
-                <h2 class="step-title">편집툴에서 파일을 먼저 준비해주세요.</h2>
-                <p class="step-desc mb-30">RO Factory 공식 편집툴을 실행한 뒤,<br>제작하신 작품의 <strong>원본 파일(.foot)</strong>과 <strong>동영상 미리보기 파일</strong>을 미리 저장해주세요.</p>
-                
-                <div class="tool-guide-box">
-                    <div class="icon-wrap">🛠️</div>
-                    <h3>아직 파일 준비가 안되셨나요?</h3>
-                    <p>편집툴을 다운하여 나만의 <span data-en="Footprints" data-ko="발자국">Footprints</span>을 만들어보세요.</p>
-                    <button class="btn-tool-download">UGC 편집 툴 다운로드 🚀</button>
-                </div>
+            <div class="alert-notice" style="margin-top:32px; background:#fef9c3; border:1px solid #fde68a; border-radius:12px; padding:16px 24px; font-size:14px; color:#78350f; font-weight:600; max-width:640px; margin-left:auto; margin-right:auto; text-align:left;">
+                ⚠️ <strong>중요 안내:</strong> RO Factory는 등록 즉시 파일 변환 파이프라인이 시작됩니다. <strong>등록 완료 후에는 어떠한 정보 및 파일 수정도 불가합니다.</strong> 등록 전 파일과 정보를 반드시 재확인해주세요.
             </div>
-
-            <!-- STEP 2: FILE UPLOAD ONLY -->
-            <div class="step-panel" id="step2">
-                <div class="step-sub text-center">STEP 2</div>
-                <h2 class="step-title text-center"><span data-en="Footprints" data-ko="발자국">Footprints</span> <span data-en="Register Files" data-ko="파일 등록">Register Files</span></h2>
-                <p class="step-desc text-center mb-30">편집툴에서 추출해둔 에셋 파일들을 업로드하고 약관에 동의합니다.</p>
-                
-                <div class="form-container-clean">
-                    <!-- 1x4 파일 그리드 -->
-                    <div class="file-grid" style="grid-template-columns:repeat(4,1fr); gap:14px;">
-                        <div class="file-box" onclick="document.getElementById('f1').click()">
-                            <div class="icon">📁</div>
-                            <h4><span data-en="Footprints" data-ko="발자국">Footprints</span> 원본 데이터</h4><span>(.foot 확장자 필수)</span>
-                            <input type="file" id="f1" style="display:none" accept=".foot" onchange="handleFileSelect(this, 'f1_name')">
-                            <span id="f1_name" style="display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;"></span>
-                        </div>
-                        <div class="file-box" onclick="document.getElementById('f2').click()">
-                            <div class="icon">🎬</div>
-                            <h4>동영상 미리보기 파일</h4><span>(.mp4 / .mov 권장)</span>
-                            <input type="file" id="f2" style="display:none" accept="video/*" onchange="handleFileSelect(this, 'f2_name')">
-                            <span id="f2_name" style="display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;"></span>
-                        </div>
-                        <div class="file-box" id="f3_box" onclick="document.getElementById('f3').click()">
-                            <div class="icon" style="color: #6366f1;">💎</div>
-                            <h4>콜렉션 썸네일</h4><span>(<span data-en="Market" data-ko="마켓">Market</span> 노출용 누끼 .png)</span>
-                            <input type="file" id="f3" style="display:none" accept=".png" onchange="handleImageSelect(this, 'f3_box', 'f3_name')">
-                        </div>
-                        <div class="file-box" id="f4_box" onclick="document.getElementById('f4').click()">
-                            <div class="icon" style="color: #d97706;">🎒</div>
-                            <h4>아이템 썸네일</h4><span>(인게임 아이템 적용 가능 이미지)</span>
-                            <input type="file" id="f4" style="display:none" accept=".png,.jpg,.jpeg" onchange="handleImageSelect(this, 'f4_box', 'f4_name')">
-                        </div>
-                    </div> <!-- file-grid close -->
-
-                    <div class="section-divider"><span data-en="Agree to Terms" data-ko="약관 동의">Agree to Terms</span> <span style="color:#ef4444">*필수</span></div>
-                    <label class="custom-chk mt-30" style="margin-bottom:20px;" onclick="forceOpenTerms(event)">
-                        <input type="checkbox" id="termsChk" disabled>
-                        <div class="chk-box"></div>
-                        <span class="chk-text">제3자의 저작권, 초상권 등 제반 권리를 침해하지 않으며 분쟁 시 당사자가 법적 책임을 지는 것에 동의합니다. <br><a href="#" onclick="forceOpenTerms(event)" style="font-weight:900;">(약관 보기)</a></span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- STEP 3: MKT INFO UPLOAD -->
-            <div class="step-panel" id="step3" style="padding-top:24px;">
-                <div class="step-sub text-center">STEP 3</div>
-                <h2 class="step-title text-center" style="margin-bottom:6px;"><span data-en="Market" data-ko="마켓">Market</span> 정보 입력</h2>
-                <p class="step-desc text-center" style="margin-bottom:20px; font-size:14px;">글로벌 <span data-en="Market" data-ko="마켓">Market</span>에 노출될 기초 데이터를 기입해주세요.</p>
-
-                <div class="form-container-clean">
-                    <div class="form-row" style="margin-bottom:16px;">
-                        <div class="form-group half">
-                            <label>작품 카테고리</label>
-                            <input type="text" class="form-control" value="발자국" readonly>
-                        </div>
-                        <div class="form-group half">
-                            <label>판매 금액 <span>(OBT 기간 중 무료 배포 고정)</span></label>
-                            <input type="text" class="form-control" value="FREE" readonly style="font-weight:900;color:#059669;background:#f0fdf4;border-color:#86efac;cursor:not-allowed;font-size:18px;letter-spacing:1px;">
-                        </div>
-                    </div>
-                    <div class="form-row" style="margin-bottom:16px;">
-                        <div class="form-group half">
-                            <label>작품 게시기간 <span style="color:#ef4444;">*필수</span> <span>(최소 30일)</span></label>
-                            <input type="date" class="form-control" id="postDate">
-                        </div>
-                        <div class="form-group half">
-                            <label><span data-en="Item Name" data-ko="작품명">Item Name</span> <span style="color:#ef4444;">*</span> <span>(영문만)</span></label>
-                            <input type="text" class="form-control" id="workTitle" placeholder="Enter title in English (max 20 chars)" maxlength="20" oninput="this.value=this.value.replace(/[^a-zA-Z0-9\s\-_.!?']/g,'')">
-                        </div>
-                    </div>
-
-                    <!-- 작품 타입 + 메인 색상 나란히 -->
-                    <div class="s3-bottom-row">
-                        <div class="s3-card">
-                            <div class="s3-card-label">작품 타입 <span>최대 2개 선택</span></div>
-                            <div class="tag-group" id="typeTags">
-                                <label class="tag-pill"><input type="checkbox" value="c1"> Cute</label>
-                                <label class="tag-pill"><input type="checkbox" value="c2"> Fancy</label>
-                                <label class="tag-pill"><input type="checkbox" value="c3"> Chic</label>
-                                <label class="tag-pill"><input type="checkbox" value="c4"> Dark</label>
-                                <label class="tag-pill"><input type="checkbox" value="c5"> Mystic</label>
-                            </div>
-                        </div>
-                        <div class="s3-divider"></div>
-                        <div class="s3-card">
-                            <div class="s3-card-label">메인 <span data-en="Color" data-ko="색상">Color</span> <span>1개 선택 (선택)</span></div>
-                            <div class="tag-group" id="colorTags">
-                                <label class="tag-pill color-pill">
-                                    <input type="radio" name="mainColor" value="red">
-                                    <span class="color-dot" style="background:#ef4444;"></span> Red
-                                </label>
-                                <label class="tag-pill color-pill">
-                                    <input type="radio" name="mainColor" value="blue">
-                                    <span class="color-dot" style="background:#3b82f6;"></span> Blue
-                                </label>
-                                <label class="tag-pill color-pill">
-                                    <input type="radio" name="mainColor" value="green">
-                                    <span class="color-dot" style="background:#22c55e;"></span> Green
-                                </label>
-                                <label class="tag-pill color-pill">
-                                    <input type="radio" name="mainColor" value="yellow">
-                                    <span class="color-dot" style="background:#eab308;"></span> Yellow
-                                </label>
-                                <label class="tag-pill color-pill">
-                                    <input type="radio" name="mainColor" value="black">
-                                    <span class="color-dot" style="background:#0f172a;"></span> Black
-                                </label>
-                                <label class="tag-pill color-pill">
-                                    <input type="radio" name="mainColor" value="white">
-                                    <span class="color-dot" style="background:#f1f5f9; border:1px solid #cbd5e1;"></span> White
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STEP 4: COMPLETION (SUCCESS) -->
-            <div class="step-panel text-center" id="step4">
-                <div class="step-sub">STEP 4</div>
-                <h2 class="step-title">성공적으로 마무리되었습니다!</h2>
-                <div class="completion-box">
-                    <div class="anim-icon">🎉</div>
-                    <p class="step-desc">파일 변환이 진행 중이며, 완료되면 글로벌 <span data-en="Market" data-ko="마켓">Market</span>에 자동 등재됩니다.</p>
-                    
-                    <div class="limit-box mt-30">
-                        <span>오늘 남은 <span data-en="Register" data-ko="등록">Register</span> 잔여 횟수</span>
-                        <strong>2 / 3회 남음</strong>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
-    </main>
 
-    <!-- Floating bottom controller for progressive forms -->
-    <footer class="wizard-footer">
-        <div class="progress-track">
-            <div class="progress-fill" id="progressBar" style="width: 20%;"></div>
-        </div>
-        <button class="btn-back" id="btnBack" onclick="prevStep()">이전으로</button>
-        <button class="btn-next" id="btnNext" onclick="nextStep()"><span data-en="Next Step" data-ko="다음 단계">Next Step</span> 이동</button>
-    </footer>
+        <!-- STEP 1: TOOL INSTRUCTION -->
+        <div class="step-panel text-center" id="step1">
+            <div class="step-sub">STEP 1</div>
+            <h2 class="step-title">편집툴에서 파일을 먼저 준비해주세요.</h2>
+            <p class="step-desc mb-30">RO Factory 공식 편집툴을 실행한 뒤,<br>제작하신 작품의 <strong>원본 파일(.foot)</strong>과 <strong>동영상 미리보기 파일</strong>을 미리 저장해주세요.</p>
 
-    <!-- Terms Modal -->
-    <div id="termsModal" class="terms-modal-overlay" onclick="closeTerms(event)">
-        <div class="terms-modal" onclick="event.stopPropagation()">
-            <h2>RO Factory 이용 약관</h2>
-            <div class="terms-content" id="termsContent" onscroll="checkTermsScroll()">
-                제 1장 총칙<br><br>
-                제 1조 목적<br>
-                이 약관은 사용자가 RO Factory 스튜디오를 통해 에셋(UGC)을 시장에 <span data-en="Register" data-ko="등록">Register</span>함에 있어 지적재산권 및 타인의 권리를 침해하지 않았음을 보증하며, 분쟁 발생 시 모든 1차적 법적 책임이 사용자 본인에게 있음을 명시합니다.<br><br>
-                제 2조 권리 보증<br>
-                <span data-en="Register" data-ko="등록">Register</span>하는 작품 내 포함된 모든 이미지, 모델링, 효과음 등은 제3자의 저작권을 침해하지 아니한 순수 창작물이거나 합법적으로 사용 권한을 획득한 에셋 포맷이어야 합니다.<br><br>
-                제 3조 법적 책임의 귀속<br>
-                만일 본인이 <span data-en="Register" data-ko="등록">Register</span>한 콘텐츠로 인하여 제 3자가 이의를 제기하거나 저작권법, 상표법 위반 등의 법적 분쟁이 발생할 경우, 업로더는 전적으로 당사자 간의 책임 아래 해결해야 하며 Gravity는 이로 인한 2차적 피해에 연루되지 않음을 원칙으로 합니다.<br><br>
-                해당 조항에 서명(체크박스 활성화)함으로써 사용자는 모든 규칙을 준수할 것을 인증하며 동의 절차를 갈음합니다.<br><br>
-                (본 약관의 동의 버튼 활성화를 위해 스크롤을 최하단으로 내려주세요)
+            <div class="tool-guide-box">
+                <div class="icon-wrap">🛠️</div>
+                <h3>아직 파일 준비가 안되셨나요?</h3>
+                <p>편집툴을 다운하여 나만의 <span data-en="Footprints" data-ko="발자국">발자국</span>을 만들어보세요.</p>
+                <button class="btn-tool-download" onclick="alert('UGC 편집 툴 다운로드 (준비 중)')">UGC 편집 툴 다운로드 🚀</button>
             </div>
-            <button type="button" class="btn-close-modal" id="btnAgree" onclick="agreeTerms(event)" disabled style="opacity:0.5; cursor:not-allowed;">스크롤을 끝까지 내려주세요</button>
         </div>
+
+        <!-- STEP 2: FILE UPLOAD + TERMS -->
+        <div class="step-panel" id="step2">
+            <div class="step-sub text-center">STEP 2</div>
+            <h2 class="step-title text-center"><span data-en="Footprints" data-ko="발자국">발자국</span> 파일 등록</h2>
+            <p class="step-desc text-center mb-30">편집툴에서 추출해둔 에셋 파일들을 업로드하고 약관에 동의합니다.</p>
+
+            <div class="form-container-clean">
+                <!-- 1x4 파일 그리드 -->
+                <div class="file-grid" style="grid-template-columns:repeat(4,1fr); gap:14px;">
+                    <div class="file-box" onclick="document.getElementById('f1').click()">
+                        <div class="icon">📁</div>
+                        <h4><span data-en="Footprints" data-ko="발자국">발자국</span> 원본 데이터</h4><span>(.foot 확장자 필수)</span>
+                        <input type="file" id="f1" style="display:none" accept=".foot" onchange="handleFileSelect(this, 'f1_name')">
+                        <span id="f1_name" style="display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;"></span>
+                    </div>
+                    <div class="file-box" onclick="document.getElementById('f2').click()">
+                        <div class="icon">🎬</div>
+                        <h4>동영상 미리보기 파일</h4><span>(.mp4 / .mov 권장)</span>
+                        <input type="file" id="f2" style="display:none" accept="video/*" onchange="handleFileSelect(this, 'f2_name')">
+                        <span id="f2_name" style="display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;"></span>
+                    </div>
+                    <div class="file-box" id="f3_box" onclick="document.getElementById('f3').click()">
+                        <div class="icon" style="color: #6366f1;">💎</div>
+                        <h4>콜렉션 썸네일</h4><span>(<span data-en="Market" data-ko="마켓">마켓</span> 노출용 누끼 .png)</span>
+                        <input type="file" id="f3" style="display:none" accept=".png" onchange="handleImageSelect(this, 'f3_box', 'f3_name')">
+                    </div>
+                    <div class="file-box" id="f4_box" onclick="document.getElementById('f4').click()">
+                        <div class="icon" style="color: #d97706;">🎒</div>
+                        <h4>아이템 썸네일</h4><span>(인게임 아이템 적용 가능 이미지)</span>
+                        <input type="file" id="f4" style="display:none" accept=".png,.jpg,.jpeg" onchange="handleImageSelect(this, 'f4_box', 'f4_name')">
+                    </div>
+                </div>
+
+                <div class="section-divider">약관 동의 <span style="color:#ef4444">*필수</span></div>
+                <label class="custom-chk mt-30" style="margin-bottom:20px;" onclick="forceOpenTerms(event)">
+                    <input type="checkbox" id="termsChk" disabled>
+                    <div class="chk-box"></div>
+                    <span class="chk-text">제3자의 저작권, 초상권 등 제반 권리를 침해하지 않으며 분쟁 시 당사자가 법적 책임을 지는 것에 동의합니다.
+                    <br><a href="#" onclick="forceOpenTerms(event)" style="font-weight:900;">(약관 보기)</a></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- STEP 3: MARKET INFO -->
+        <div class="step-panel" id="step3" style="padding-top:24px;">
+            <div class="step-sub text-center">STEP 3</div>
+            <h2 class="step-title text-center" style="margin-bottom:6px;"><span data-en="Market" data-ko="마켓">마켓</span> 정보 입력</h2>
+            <p class="step-desc text-center" style="margin-bottom:20px; font-size:14px;">글로벌 <span data-en="Market" data-ko="마켓">마켓</span>에 노출될 기초 데이터를 기입해주세요.</p>
+
+            <div class="form-container-clean">
+                <div class="form-row" style="margin-bottom:16px;">
+                    <div class="form-group half">
+                        <label>작품 카테고리</label>
+                        <input type="text" class="form-control" value="발자국" readonly>
+                    </div>
+                    <div class="form-group half">
+                        <label>판매 금액 <span>(OBT 기간 중 무료 배포 고정)</span></label>
+                        <input type="text" class="form-control" value="FREE" readonly style="font-weight:900;color:#059669;background:#f0fdf4;border-color:#86efac;cursor:not-allowed;font-size:18px;letter-spacing:1px;">
+                    </div>
+                </div>
+                <div class="form-row" style="margin-bottom:16px;">
+                    <div class="form-group half">
+                        <label>작품 게시기간 <span style="color:#ef4444;">*필수</span> <span>(최소 30일)</span></label>
+                        <input type="date" class="form-control" id="postDate">
+                    </div>
+                    <div class="form-group half">
+                        <label>작품명 <span style="color:#ef4444;">*</span> <span>(영문만, 최대 20자)</span></label>
+                        <input type="text" class="form-control" id="workTitle" placeholder="Enter title in English (max 20 chars)" maxlength="20" oninput="this.value=this.value.replace(/[^a-zA-Z0-9\s\-_.!?']/g,'')">
+                    </div>
+                </div>
+
+                <!-- 작품 타입 + 메인 색상 나란히 -->
+                <div class="s3-bottom-row">
+                    <div class="s3-card">
+                        <div class="s3-card-label">작품 타입 <span>최대 2개 선택</span></div>
+                        <div class="tag-group" id="typeTags">
+                            <label class="tag-pill"><input type="checkbox" value="c1"> Cute</label>
+                            <label class="tag-pill"><input type="checkbox" value="c2"> Fancy</label>
+                            <label class="tag-pill"><input type="checkbox" value="c3"> Chic</label>
+                            <label class="tag-pill"><input type="checkbox" value="c4"> Dark</label>
+                            <label class="tag-pill"><input type="checkbox" value="c5"> Mystic</label>
+                        </div>
+                    </div>
+                    <div class="s3-divider"></div>
+                    <div class="s3-card">
+                        <div class="s3-card-label">메인 <span data-en="Color" data-ko="색상">색상</span> <span>1개 선택 (선택)</span></div>
+                        <div class="tag-group" id="colorTags">
+                            <label class="tag-pill color-pill">
+                                <input type="radio" name="mainColor" value="red">
+                                <span class="color-dot" style="background:#ef4444;"></span> Red
+                            </label>
+                            <label class="tag-pill color-pill">
+                                <input type="radio" name="mainColor" value="blue">
+                                <span class="color-dot" style="background:#3b82f6;"></span> Blue
+                            </label>
+                            <label class="tag-pill color-pill">
+                                <input type="radio" name="mainColor" value="green">
+                                <span class="color-dot" style="background:#22c55e;"></span> Green
+                            </label>
+                            <label class="tag-pill color-pill">
+                                <input type="radio" name="mainColor" value="yellow">
+                                <span class="color-dot" style="background:#eab308;"></span> Yellow
+                            </label>
+                            <label class="tag-pill color-pill">
+                                <input type="radio" name="mainColor" value="black">
+                                <span class="color-dot" style="background:#0f172a;"></span> Black
+                            </label>
+                            <label class="tag-pill color-pill">
+                                <input type="radio" name="mainColor" value="white">
+                                <span class="color-dot" style="background:#f1f5f9; border:1px solid #cbd5e1;"></span> White
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: COMPLETION -->
+        <div class="step-panel text-center" id="step4">
+            <div class="step-sub">STEP 4</div>
+            <h2 class="step-title">성공적으로 마무리되었습니다!</h2>
+            <div class="completion-box">
+                <div class="anim-icon">🎉</div>
+                <p class="step-desc">파일 변환이 진행 중이며, 완료되면 글로벌 <span data-en="Market" data-ko="마켓">마켓</span>에 자동 등재됩니다.</p>
+
+                <div class="limit-box mt-30">
+                    <span>오늘 남은 등록 잔여 횟수</span>
+                    <strong>2 / 3회 남음</strong>
+                </div>
+            </div>
+        </div>
+
     </div>
+</main>
 
-    <script src="script.js"></script>
-    <script>
-        function forceOpenTerms(e) { 
-            e.preventDefault(); 
-            document.getElementById('termsModal').classList.add('show'); 
-            checkTermsScroll(); 
-        }
-        function closeTerms(e) { document.getElementById('termsModal').classList.remove('show'); }
-        function checkTermsScroll() {
-            var el = document.getElementById('termsContent');
-            if (el.scrollHeight - el.scrollTop <= el.clientHeight + 50) {
-                var btn = document.getElementById('btnAgree');
-                btn.disabled = false;
-                btn.style.opacity = 1;
-                btn.style.cursor = 'pointer';
-                btn.innerText = '확인 및 약관 동의하기';
-            }
-        }
-        function agreeTerms(e) {
-            document.getElementById('termsChk').checked = true;
-            closeTerms(e);
-        }
+<!-- Floating bottom controller -->
+<footer class="wizard-footer">
+    <div class="progress-track">
+        <div class="progress-fill" id="progressBar" style="width: 20%;"></div>
+    </div>
+    <button class="btn-back" id="btnBack" onclick="prevStep()">이전으로</button>
+    <button class="btn-next" id="btnNext" onclick="nextStep()">확인 후 다음 단계</button>
+</footer>
 
-        function handleFileSelect(input, labelId) {
-            if(input.files && input.files[0]) {
-                document.getElementById(labelId).innerText = "파일명: " + input.files[0].name;
-            }
-        }
-        function handleImageSelect(input, boxId, nameId) {
-            if(input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var box = document.getElementById(boxId);
-                    
-                    var preview = box.querySelector('.preview-img');
-                    if (!preview) {
-                        preview = document.createElement('div');
-                        preview.className = 'preview-img';
-                        preview.style.cssText = 'width: 80px; height: 80px; margin: 10px auto; border-radius: 8px; border: 1px dashed #cbd5e1;';
-                        box.insertBefore(preview, box.querySelector('input'));
-                    }
-                    preview.style.backgroundImage = 'url(' + e.target.result + ')';
-                    preview.style.backgroundSize = 'contain';
-                    preview.style.backgroundPosition = 'center';
-                    preview.style.backgroundRepeat = 'no-repeat';
+<!-- Terms Modal -->
+<div id="termsModal" class="terms-modal-overlay" onclick="closeTerms(event)">
+    <div class="terms-modal" onclick="event.stopPropagation()">
+        <h2>RO Factory 이용 약관</h2>
+        <div class="terms-content" id="termsContent" onscroll="checkTermsScroll()">
+            제 1장 총칙<br><br>
+            제 1조 목적<br>
+            이 약관은 사용자가 RO Factory 스튜디오를 통해 에셋(UGC)을 시장에 등록함에 있어 지적재산권 및 타인의 권리를 침해하지 않았음을 보증하며, 분쟁 발생 시 모든 1차적 법적 책임이 사용자 본인에게 있음을 명시합니다.<br><br>
+            제 2조 권리 보증<br>
+            등록하는 작품 내 포함된 모든 이미지, 모델링, 효과음 등은 제3자의 저작권을 침해하지 아니한 순수 창작물이거나 합법적으로 사용 권한을 획득한 에셋 포맷이어야 합니다.<br><br>
+            제 3조 법적 책임의 귀속<br>
+            만일 본인이 등록한 콘텐츠로 인하여 제 3자가 이의를 제기하거나 저작권법, 상표법 위반 등의 법적 분쟁이 발생할 경우, 업로더는 전적으로 당사자 간의 책임 아래 해결해야 하며 Gravity는 이로 인한 2차적 피해에 연루되지 않음을 원칙으로 합니다.<br><br>
+            해당 조항에 서명(체크박스 활성화)함으로써 사용자는 모든 규칙을 준수할 것을 인증하며 동의 절차를 갈음합니다.<br><br>
+            (본 약관의 동의 버튼 활성화를 위해 스크롤을 최하단으로 내려주세요)
+        </div>
+        <button type="button" class="btn-close-modal" id="btnAgree" onclick="agreeTerms(event)" disabled style="opacity:0.5; cursor:not-allowed;">스크롤을 끝까지 내려주세요</button>
+    </div>
+</div>
 
-                    var nameSpan = document.getElementById(nameId);
-                    if (!nameSpan) {
-                        nameSpan = document.createElement('span');
-                        nameSpan.id = nameId;
-                        nameSpan.style.cssText = 'display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;';
-                        box.insertBefore(nameSpan, box.querySelector('input'));
-                    }
-                    nameSpan.innerText = "파일명: " + input.files[0].name;
-                    
-                    // Only hide the default icon
-                    var icon = box.querySelector('.icon');
-                    if(icon) icon.style.display = 'none';
-                    
-                    // Clear previous styles if any
-                    box.style.backgroundImage = 'none'; 
-                    var children = box.children;
-                    for(var i=0; i<children.length; i++) {
-                        if(children[i].tagName !== 'INPUT') { children[i].style.opacity = '1'; }
-                    }
+<script>
+    function forceOpenTerms(e) {
+        e.preventDefault();
+        document.getElementById('termsModal').classList.add('show');
+        checkTermsScroll();
+    }
+    function closeTerms(e) { document.getElementById('termsModal').classList.remove('show'); }
+    function checkTermsScroll() {
+        var el = document.getElementById('termsContent');
+        if (el.scrollHeight - el.scrollTop <= el.clientHeight + 50) {
+            var btn = document.getElementById('btnAgree');
+            btn.disabled = false;
+            btn.style.opacity = 1;
+            btn.style.cursor = 'pointer';
+            btn.innerText = '확인 및 약관 동의하기';
+        }
+    }
+    function agreeTerms(e) {
+        document.getElementById('termsChk').checked = true;
+        closeTerms(e);
+    }
+
+    function handleFileSelect(input, labelId) {
+        if(input.files && input.files[0]) {
+            document.getElementById(labelId).innerText = "파일명: " + input.files[0].name;
+        }
+    }
+    function handleImageSelect(input, boxId, nameId) {
+        if(input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var box = document.getElementById(boxId);
+                var preview = box.querySelector('.preview-img');
+                if (!preview) {
+                    preview = document.createElement('div');
+                    preview.className = 'preview-img';
+                    preview.style.cssText = 'width: 80px; height: 80px; margin: 10px auto; border-radius: 8px; border: 1px dashed #cbd5e1;';
+                    box.insertBefore(preview, box.querySelector('input'));
                 }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+                preview.style.backgroundImage = 'url(' + e.target.result + ')';
+                preview.style.backgroundSize = 'contain';
+                preview.style.backgroundPosition = 'center';
+                preview.style.backgroundRepeat = 'no-repeat';
 
-        // Custom Wizard UI Logic execution (DOM Isolation)
-        let currentStep = 0; 
-        const totalSteps = 4; // Intro(0) + Form(1,2,3) + Finish(4)
-        
-        function updateWizard() {
-            document.querySelectorAll('.step-panel').forEach((el, idx) => {
-                el.classList.remove('active');
-                if (idx === currentStep) { el.classList.add('active'); }
-            });
-            
-            // Advanced progress bar tracking width calculation
-            const progress = ((currentStep + 1) / (totalSteps + 1)) * 100;
-            document.getElementById('progressBar').style.width = `${progress}%`;
-            
-            // Controller states
-            const btnBack = document.getElementById('btnBack');
-            const exitBtns = document.querySelectorAll('.wizard-exit-btn'); // handles potential multiple exit btns
-
-            if(currentStep === 0) { 
-                btnBack.style.visibility = 'hidden'; 
-                exitBtns.forEach(btn => btn.style.display = 'inline-block');
-            } 
-            else if (currentStep === totalSteps) { 
-                btnBack.style.visibility = 'hidden'; 
-                exitBtns.forEach(btn => btn.style.display = 'none'); // Hide exit btn on finish!
-            }
-            else { 
-                btnBack.style.visibility = 'visible'; 
-                exitBtns.forEach(btn => btn.style.display = 'inline-block');
-            }
-            
-            // Update confirmation states naturally matching the form sequence architecture
-            const btnNext = document.getElementById('btnNext');
-            if (currentStep === totalSteps - 1) {
-                btnNext.innerText = "데이터 최종 등록하기";
-                btnNext.style.background = "#06b6d4";
-                btnNext.style.color = "#000";
-            } else if (currentStep === totalSteps) {
-                btnNext.innerText = "MY STUDIO 이동 ↗";
-                btnNext.style.background = "#fff"; 
-                btnNext.style.color = "#1e3a8a";
-            } else {
-                btnNext.innerText = "확인 후 다음 단계";
-                btnNext.style.background = "var(--primary-bright)";
-                btnNext.style.color = "#fff";
-            }
-        }
-
-        function formatDateInput(el) {
-            var v = el.value.replace(/[^0-9]/g, '');
-            if(v.length > 2) v = v.slice(0,2) + '.' + v.slice(2);
-            if(v.length > 5) v = v.slice(0,5) + '.' + v.slice(5);
-            if(v.length > 10) v = v.slice(0,10);
-            el.value = v;
-        }
-
-        function validateDateFormat(val) {
-            var regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12]\d|3[01])\.(\d{4})$/;
-            return regex.test(val);
-        }
-
-        function nextStep() {
-            // Validations
-            if (currentStep === 2) {
-                /* 파일 업로드 밸리데이션 (현재는 문구만 남겨두고 패스)
-                const f1 = document.getElementById('f1').files.length > 0;
-                const f2 = document.getElementById('f2').files.length > 0;
-                const f3 = document.getElementById('f3').files.length > 0;
-                const f4 = document.getElementById('f4').files.length > 0;
-                
-                if (!f1 || !f2 || !f3 || !f4) {
-                    alert('모든 파일을 업로드해야 진행할 수 있습니다.');
-                    // return;
+                var nameSpan = document.getElementById(nameId);
+                if (!nameSpan) {
+                    nameSpan = document.createElement('span');
+                    nameSpan.id = nameId;
+                    nameSpan.style.cssText = 'display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;';
+                    box.insertBefore(nameSpan, box.querySelector('input'));
                 }
-                */
-                if (!document.getElementById('termsChk').checked) {
-                    alert('약관에 반드시 동의해야 <span data-en="Next Step" data-ko="다음 단계">Next Step</span>로 진행할 수 있습니다.');
-                    return;
-                }
-            }
-            if (currentStep === 3) {
-                var titleInput = document.getElementById('workTitle');
-                if (!titleInput.value.trim()) {
-                    alert('<span data-en="Item Name" data-ko="작품명">Item Name</span>을 입력해주세요. (영문만 입력 가능)');
-                    return;
-                }
-                var dateInput = document.getElementById('postDate');
-                if (!dateInput.value) {
-                    alert('작품 게시기간 <span data-en="Expired" data-ko="만료">Expired</span>일을 달력에서 선택해주세요.');
-                    return;
-                }
+                nameSpan.innerText = "파일명: " + input.files[0].name;
 
-            }
-
-            if (currentStep < totalSteps) {
-                currentStep++;
-                updateWizard();
-            } else {
-                // Final Redirection Event Output Trigger 
-                window.location.href = "studio_myworks.html"; 
-            }
+                var icon = box.querySelector('.icon');
+                if(icon) icon.style.display = 'none';
+                box.style.backgroundImage = 'none';
+            };
+            reader.readAsDataURL(input.files[0]);
         }
+    }
 
-        function prevStep() {
-            if (currentStep > 0) {
-                currentStep--;
-                updateWizard();
-            }
-        }
+    // Wizard logic
+    let currentStep = 0;
+    const totalSteps = 4;
 
-        // Tag Max Queue Logic for (Type Tags) constraint max 2 checkboxes
-        const typeTags = document.querySelectorAll('#typeTags input[type="checkbox"]');
-        let typeTagQueue = [];
-
-        typeTags.forEach(param => {
-            param.addEventListener('change', function(e) {
-                if(this.checked) {
-                    typeTagQueue.push(this);
-                    if(typeTagQueue.length > 2) {
-                        // Uncheck the oldest one and remove from arr
-                        const oldest = typeTagQueue.shift();
-                        oldest.checked = false;
-                    }
-                } else {
-                    // Remove from queue manually
-                    typeTagQueue = typeTagQueue.filter(item => item !== this);
-                }
-            });
+    function updateWizard() {
+        document.querySelectorAll('.step-panel').forEach((el, idx) => {
+            el.classList.remove('active');
+            if (idx === currentStep) el.classList.add('active');
         });
 
-        // Initialize view safely 
-        updateWizard();
-    </script>
+        const progress = ((currentStep + 1) / (totalSteps + 1)) * 100;
+        document.getElementById('progressBar').style.width = `${progress}%`;
 
+        const btnBack = document.getElementById('btnBack');
+        const btnNext = document.getElementById('btnNext');
 
-</html>
+        if (currentStep === 0) {
+            btnBack.style.visibility = 'hidden';
+        } else if (currentStep === totalSteps) {
+            btnBack.style.visibility = 'hidden';
+        } else {
+            btnBack.style.visibility = 'visible';
+        }
 
+        if (currentStep === totalSteps - 1) {
+            btnNext.innerText = "데이터 최종 등록하기";
+            btnNext.style.background = "#06b6d4";
+            btnNext.style.color = "#000";
+        } else if (currentStep === totalSteps) {
+            btnNext.innerText = "MY STUDIO 이동 ↗";
+            btnNext.style.background = "#fff";
+            btnNext.style.color = "#1e3a8a";
+        } else {
+            btnNext.innerText = "확인 후 다음 단계";
+            btnNext.style.background = "var(--primary-bright)";
+            btnNext.style.color = "#fff";
+        }
+    }
 
+    function nextStep() {
+        if (currentStep === 2) {
+            if (!document.getElementById('termsChk').checked) {
+                alert('약관에 반드시 동의해야 다음 단계로 진행할 수 있습니다.');
+                return;
+            }
+        }
+        if (currentStep === 3) {
+            var titleInput = document.getElementById('workTitle');
+            if (!titleInput.value.trim()) {
+                alert('작품명을 입력해주세요. (영문만 입력 가능)');
+                return;
+            }
+            var dateInput = document.getElementById('postDate');
+            if (!dateInput.value) {
+                alert('작품 게시기간 만료일을 달력에서 선택해주세요.');
+                return;
+            }
+        }
 
+        if (currentStep < totalSteps) {
+            currentStep++;
+            updateWizard();
+        } else {
+            window.location.href = "studio_myworks.html";
+        }
+    }
 
+    function prevStep() {
+        if (currentStep > 0) {
+            currentStep--;
+            updateWizard();
+        }
+    }
 
+    // Type tag max 2 logic
+    const typeTags = document.querySelectorAll('#typeTags input[type="checkbox"]');
+    let typeTagQueue = [];
+    typeTags.forEach(param => {
+        param.addEventListener('change', function() {
+            if (this.checked) {
+                typeTagQueue.push(this);
+                if (typeTagQueue.length > 2) {
+                    const oldest = typeTagQueue.shift();
+                    oldest.checked = false;
+                }
+            } else {
+                typeTagQueue = typeTagQueue.filter(item => item !== this);
+            }
+        });
+    });
 
-
-
-
-
-
-<!-- PRD DESCRIPTION MODULE REMOVED - See description_module/ folder for reusable code -->
+    updateWizard();
+</script>
 </body>
+</html>
