@@ -18,7 +18,7 @@
     --text-muted: #64748b; /* Accessible grey */
     
     --border-color: #D6D6D6; /* ROZ Dark 3 */
-    --font-family: 'Poppins', 'Pretendard', sans-serif;
+    --font-family: 'Poppins', sans-serif;
     
     /* ROZ Signature Shadows (blue glow) */
     --shadow-soft: 0 4px 10px rgba(2, 93, 208, 0.15);

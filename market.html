@@ -144,9 +144,9 @@
             <!-- Search Bar -->
             <div class="market-search-bar">
                 <div class="market-search-cat">
-                    <select><option><span data-en="Footprints" data-ko="발자국">Footprints</span></option></select>
+                    <select><option>Footprints</option></select>
                 </div>
-                <input type="text" class="market-search-input" placeholder="Search for items." data-ko="상품을 검색해 보세요." data-en="Search for items.">
+                <input type="text" class="market-search-input" placeholder="Search for items."  >
                 <button class="market-search-btn" style="font-size: 12px;">✖</button>
                 <button class="market-search-btn">🔍</button>
             </div>
@@ -155,19 +155,19 @@
                 <!-- Sidebar -->
                 <aside class="market-sidebar">
                     <div class="filter-header">
-                        <span><span data-en="Option Filter" data-ko="옵션 필터">Option Filter</span></span>
+                        Option Filter</span>
                         <span class="filter-reset" onclick="resetFilters()">↺</span>
                     </div>
 
                     <div class="filter-group filter-category">
-                        <div class="filter-title"><span data-en="Category" data-ko="카테고리">Category</span></div>
+                        <div class="filter-title">Category</div>
                         <div class="filter-btns">
-                            <button class="f-btn active"><span data-en="Footprints" data-ko="발자국">Footprints</span></button>
+                            <button class="f-btn active">Footprints</button>
                         </div>
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-title"><span data-en="Type" data-ko="타입">Type</span></div>
+                        <div class="filter-title">Type</div>
                         <div class="filter-btns filter-type">
                             <button class="f-btn" data-val="cute">#Cute</button>
                             <button class="f-btn" data-val="fancy">#Fancy</button>
@@ -176,7 +176,7 @@
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-title">🎨 <span data-en="Color" data-ko="색상">Color</span></div>
+                        <div class="filter-title">🎨 Color</div>
                         <div class="filter-btns filter-color">
                             <button class="f-btn" data-val="red"><span class="f-color-dot" style="background:red;"></span> Red</button>
                             <button class="f-btn" data-val="blue"><span class="f-color-dot" style="background:blue;"></span> Blue</button>
@@ -188,9 +188,9 @@
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-title">💰 <span data-en="Price" data-ko="가격">Price</span> (KP)</div>
+                        <div class="filter-title">💰 Price (KP)</div>
                         <div class="filter-btns filter-price">
-                            <button class="f-btn" data-val="0"><span data-en="Free" data-ko="무료">Free</span></button>
+                            <button class="f-btn" data-val="0">Free</button>
                             <button class="f-btn" data-val="1000">~ 1,000</button>
                             <button class="f-btn" data-val="5000">1,000 ~ 5,000</button>
                             <button class="f-btn" data-val="10000">5,000 ~ 10,000</button>
@@ -210,7 +210,7 @@
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-title"><span data-en="Sort" data-ko="정렬">Sort</span></div>
+                        <div class="filter-title">Sort</div>
                         <div class="filter-btns filter-sort">
                             <button class="f-btn" data-val="new">NEW</button>
                             <button class="f-btn" data-val="trending">Trending</button>
@@ -221,7 +221,7 @@
 
                 <!-- Main Content -->
                 <main class="market-main">
-                    <span class="market-count" id="marketCountLabel">0개의 <span data-en="Footprints" data-ko="발자국">Footprints</span></span>
+                    Footprints</span>
                     <div class="market-grid" id="marketGridContainer">
                         <!-- Loaded through JS -->
                     </div>
@@ -232,9 +232,9 @@
         <!-- STEP 2: MARKET DETAIL -->
         <div id="panel-detail" class="market-panel">
             <div class="breadcrumb">
-                <a onclick="goToStep('list')"><span data-en="Home" data-ko="홈">Home</span></a> <span>></span> 
-                <a onclick="goToStep('list')"><span data-en="Market" data-ko="마켓">Market</span></a> <span>></span> 
-                <strong id="detail-bread-title"><span data-en="Item Details" data-ko="상품 상세">Item Details</span></strong>
+                <a onclick="goToStep('list')">Home</a> <span>></span> 
+                <a onclick="goToStep('list')">Market</a> <span>></span> 
+                <strong id="detail-bread-title">Item Details</strong>
             </div>
             
             <div class="detail-wrapper">
@@ -243,13 +243,13 @@
                     <span id="detail-icon" style="font-size: 140px; text-shadow: 0 10px 30px rgba(0,0,0,0.2);">🐾</span>
                     <!-- Bottom Overlay Buttons -->
                     <div style="position:absolute; bottom:20px; right:20px; display:flex; gap:10px;">
-                        <button class="btn-preview" onclick="openVideoModal()">🎬 <span data-en="Video Preview" data-ko="영상 미리보기">Video Preview</span></button>
+                        <button class="btn-preview" onclick="openVideoModal()">🎬 Video Preview</button>
                         <button class="btn-heart" id="detail-heart" onclick="toggleHeart()">♡ <span id="detail-heart-count">0</span></button>
                     </div>
                 </div>
                 <div class="detail-right">
-                    <div class="d-cat"><span data-en="Footprints" data-ko="발자국">Footprints</span></div>
-                    <h2 class="d-title" id="detail-title" style="margin-bottom: 15px;"><span data-en="Item Name" data-ko="상품명">Item Name</span></h2>
+                    <div class="d-cat">Footprints</div>
+                    <h2 class="d-title" id="detail-title" style="margin-bottom: 15px;">Item Name</h2>
                     
                     <div class="d-tags-wrap" id="detail-tags-wrap" style="margin-bottom: 30px;">
                         <span class="d-tag" id="detail-type-tag" style="font-size: 14px; padding: 8px 16px; background:#f8fafc; color:#1e293b; border-color:#cbd5e1; margin-right:6px;"></span>
@@ -258,24 +258,24 @@
                     
                     <div class="d-info-list" style="margin-bottom: 30px; border-top: 1px solid #e2e8f0; padding-top: 25px;">
                         <div class="d-info-item">
-                            <div class="d-info-lbl"><span data-en="Validity Period" data-ko="유효기간">Validity Period</span></div>
-                            <div class="d-info-val"><span data-en="Unlimited from purchase (Permanent)" data-ko="구매일로부터 무제한 (영구 소장)">Unlimited from purchase (Permanent)</span></div>
+                            <div class="d-info-lbl">Validity Period</div>
+                            <div class="d-info-val">Unlimited from purchase (Permanent)</div>
                         </div>
                     </div>
 
                     <div class="d-buy-box">
                         <div class="d-price-wrap">
-                            <div class="d-price-lbl"><span data-en="Price" data-ko="판매 포인트">Price</span></div>
+                            <div class="d-price-lbl">Price</div>
                             <div class="d-price-val" id="detail-price">0 <span>KP</span></div>
                         </div>
-                        <button class="btn-buy" onclick="openPaymentModal()"><span data-en="Buy with Kafra Point" data-ko="Kafra Point로 구매하기">Buy with Kafra Point</span></button>
+                        <button class="btn-buy" onclick="openPaymentModal()">Buy with Kafra Point</button>
                     </div>
                 </div>
             </div>
             
             <!-- Bottom Navigation -->
             <div style="text-align:center; padding: 40px 0; border-top: 1px dashed #e2e8f0; margin-top: 50px;">
-                <button onclick="goToStep('list')" class="btn-back-to-list" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 14px 40px; font-size: 15px; font-weight: 800; color: #475569; border-radius: 8px; cursor: pointer; transition: 0.2s;"><span data-en="Back to List" data-ko="목록으로 돌아가기">Back to List</span></button>
+                <button onclick="goToStep('list')" class="btn-back-to-list" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 14px 40px; font-size: 15px; font-weight: 800; color: #475569; border-radius: 8px; cursor: pointer; transition: 0.2s;">Back to List</button>
             </div>
         </div>
 
@@ -283,18 +283,18 @@
         <div id="panel-complete" class="market-panel">
             <div class="complete-wrapper">
                 <div class="c-icon">🎉</div>
-                <h2 class="c-title"><span data-en="Payment Complete!" data-ko="결제가 완료되었습니다!">Payment Complete!</span></h2>
-                <div class="c-desc"><span data-en="The item has been successfully transferred to your Studio.<br>You can also check your in-game mailbox." data-ko="아이템이 내 스튜디오로 정상적으로 전송되었습니다.<br>인게임 우편함에서도 확인하실 수 있습니다.">The item has been successfully transferred to your Studio.<br>You can also check your in-game mailbox.</span></div>
+                <h2 class="c-title">Payment Complete!</h2>
+                <div class="c-desc">The item has been successfully transferred to your Studio.<br>You can also check your in-game mailbox.</div>
                 
                 <div class="c-box">
-                    <div class="c-item"><span>구매 <span data-en="Item Name" data-ko="작품명">Item Name</span></span> <span id="c-item-name"><span data-en="Item Name" data-ko="상품명">Item Name</span></span></div>
-                    <div class="c-item"><span><span data-en="Payment Amount" data-ko="결제 금액">Payment Amount</span></span> <span id="c-item-price">0 KP</span></div>
-                    <div class="c-item"><span><span data-en="Remaining Balance" data-ko="잔여 포인트">Remaining Balance</span></span> <span id="c-item-balance">0 KP</span></div>
+                    <div class="c-item">Item Name</span> Item Name</span></div>
+                    <div class="c-item">Payment Amount</span> <span id="c-item-price">0 KP</span></div>
+                    <div class="c-item">Remaining Balance</span> <span id="c-item-balance">0 KP</span></div>
                 </div>
 
                 <div class="c-btns">
-                    <button class="c-btn-go-market" onclick="goToStep('list')"><span data-en="Market" data-ko="마켓">Market</span> <span data-en="Continue Browsing" data-ko="더 구경하기">Continue Browsing</span></button>
-                    <button class="c-btn-go-studio" onclick="location.href='studio_inventory.html'"><span data-en="My Studio" data-ko="마이 스튜디오">My Studio</span> <span data-en="Go" data-ko="이동">Go</span></button>
+                    <button class="c-btn-go-market" onclick="goToStep('list')">Market Continue Browsing</button>
+                    <button class="c-btn-go-studio" onclick="location.href='studio_inventory.html'">My Studio Go</button>
                 </div>
             </div>
         </div>
@@ -306,40 +306,40 @@
     <div id="paymentModal" class="modal-overlay">
             <div class="kp-modal">
                 <div class="kp-modal-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0; padding:24px 30px;">
-                    <h3 style="font-size:20px; font-weight:900; color:#0f172a;"><span data-en="Kafra Point Payment" data-ko="Kafra Point 결제">Kafra Point Payment</span></h3>
+                    <h3 style="font-size:20px; font-weight:900; color:#0f172a;">Kafra Point Payment</h3>
                     <button class="btn-close" style="background:none; border:none; font-size:22px; cursor:pointer;" onclick="closePaymentModal()">✖</button>
                 </div>
                 <div class="kp-modal-body" style="padding: 30px;">
                     <div class="kp-balance-box" style="background:#f8fafc; padding:22px 24px; border-radius:14px; display:flex; justify-content:space-between; margin-bottom:24px; border:1px solid #e2e8f0;">
-                        <span style="font-size:16px; font-weight:700; color:#64748b;"><span data-en="My Kafra Points" data-ko="나의 보유 Kafra Point">My Kafra Points</span></span>
+                        My Kafra Points</span>
                         <strong style="font-size:20px; color:#3b82f6;" id="modal-current-balance">5,000 KP</strong>
                     </div>
                     
                     <div class="kp-receipt" style="background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:24px;">
                         <div class="receipt-row" style="display:flex; justify-content:space-between; margin-bottom:14px; font-size:15px; font-weight:700; color:#475569;">
-                            <span><span data-en="Item Name" data-ko="상품명">Item Name</span></span>
-                            <span id="modal-item-name">불타는 대장장</span>
+                            Item Name</span>
+                            <span id="modal-item-name">Burning Blacksmith</span>
                         </div>
                         <div class="receipt-row" style="display:flex; justify-content:space-between; margin-bottom:14px; font-size:15px; font-weight:700; color:#475569;">
-                            <span><span data-en="Item Price" data-ko="상품 금액">Item Price</span></span>
+                            Item Price</span>
                             <span id="modal-item-price">50 KP</span>
                         </div>
                         <div class="receipt-row total" style="display:flex; justify-content:space-between; margin-top:18px; padding-top:18px; border-top:1px dashed #cbd5e1; font-size:18px; font-weight:900; color:#0f172a;">
-                            <span><span data-en="Final Payment Amount" data-ko="최종 결제 금액">Final Payment Amount</span></span>
-                            <span style="color:#ef4444;" id="modal-payment-amount"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP"><span data-en="- 50 KP" data-ko="- 50 KP">- 50 KP</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>
+                            Final Payment Amount</span>
+                            - 50 KP</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>
                         </div>
                         
-                        <div id="modal-warning" style="display:none; color:#ef4444; font-size:14px; font-weight:800; margin-top:18px; text-align:center;"><span data-en="Insufficient Kafra Points for payment." data-ko="보유 Kafra Point가 부족하여 결제할 수 없습니다.">Insufficient Kafra Points for payment.</span></div>
+                        <div id="modal-warning" style="display:none; color:#ef4444; font-size:14px; font-weight:800; margin-top:18px; text-align:center;">Insufficient Kafra Points for payment.</div>
                         
                         <!-- Recharge Link -->
                         <div style="text-align: right; margin-top: 20px;">
-                            <button onclick="alert('KP 충전소로 이동합니다.')" style="background:none; border:none; color:#3b82f6; font-size:13px; font-weight:800; cursor:pointer; text-decoration:underline;"><span data-en="Go to Charge Kafra Point ↗" data-ko="Kafra Point 충전하러 가기 ↗">Go to Charge Kafra Point ↗</span></button>
+                            <button onclick="alert('Go to KP Charge Station.')" style="background:none; border:none; color:#3b82f6; font-size:13px; font-weight:800; cursor:pointer; text-decoration:underline;">Go to Charge Kafra Point ↗</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-btns" style="display:flex; padding:24px 30px; border-top:1px solid #e2e8f0; gap:15px; background:#fff; border-bottom-left-radius:24px; border-bottom-right-radius:24px;">
-                    <button class="btn-modal-cancel" style="flex:1; padding:18px; background:transparent; color:#64748b; font-weight:800; font-size:17px; border:none; cursor:pointer;" onclick="closePaymentModal()"><span data-en="Cancel" data-ko="취소">Cancel</span></button>
-                    <button class="btn-modal-confirm" id="btn-modal-confirm" style="flex:1; padding:18px; background:#3b82f6; color:#fff; font-weight:800; font-size:17px; border:none; border-radius:14px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#3b82f6'" onclick="executePayment()"><span data-en="Pay 50 KP" data-ko="50 KP 결제하기">Pay 50 KP</span></button>
+                    <button class="btn-modal-cancel" style="flex:1; padding:18px; background:transparent; color:#64748b; font-weight:800; font-size:17px; border:none; cursor:pointer;" onclick="closePaymentModal()">Cancel</button>
+                    <button class="btn-modal-confirm" id="btn-modal-confirm" style="flex:1; padding:18px; background:#3b82f6; color:#fff; font-weight:800; font-size:17px; border:none; border-radius:14px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#3b82f6'" onclick="executePayment()">Pay 50 KP</button>
                 </div>
             </div>
         </div>
@@ -401,7 +401,7 @@
             
             if (p.isFree) {
                 document.getElementById('modal-item-price').innerText = `FREE`;
-                document.getElementById('modal-payment-amount').innerHTML = `0 KP (<span data-en="Free" data-ko="무료">Free</span>)`;
+                document.getElementById('modal-payment-amount').innerHTML = `0 KP (Free)`;
                 document.getElementById('modal-payment-amount').style.color = '#3b82f6';
             } else {
                 document.getElementById('modal-item-price').innerText = `${p.price.toLocaleString()} KP`;
@@ -415,7 +415,7 @@
             // Reset state
             btn.style.background = '#3b82f6';
             btn.style.cursor = 'pointer';
-            btn.innerHTML = p.isFree ? '<span data-en="Free" data-ko="무료">Free</span> <span data-en="Proceed to Checkout" data-ko="결제 진행">Proceed to Checkout</span>' : `${p.price.toLocaleString()} KP <span data-en="Pay" data-ko="결제하기">Pay</span>`;
+            btn.innerHTML = p.isFree ? 'Free Proceed to Checkout' : `${p.price.toLocaleString()} KP Pay`;
             if(alertBox) alertBox.style.display = 'none';
             btn.onclick = executePayment;
             
@@ -423,7 +423,7 @@
                 // Not enough funds UI
                 btn.style.background = '#cbd5e1';
                 btn.style.cursor = 'not-allowed';
-                btn.innerHTML = '<span data-en="Insufficient Points" data-ko="Kafra Point 부족">Insufficient Points</span>';
+                btn.innerHTML = 'Insufficient Points';
                 btn.onclick = null;
                 if(alertBox) alertBox.style.display = 'block';
             }
@@ -464,18 +464,18 @@
 
         /* ----- MARKET FILTER & DATA LOGIC ----- */
         let mockProducts = [
-            { id: 1, title: '포링의 벚꽃 <span data-en="Footprints" data-ko="발자국">Footprints</span>', type: 'cute', color: 'red', price: 0, isFree: true, tag: 'NEW', hearts: 21, img: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)', icon: '🌸' },
-            { id: 2, title: '<span data-en="Ice Crystal Footprints" data-ko="얼음 수정 발자국">Ice Crystal Footprints</span>', type: 'fancy', color: 'blue', price: 1200, isFree: false, tag: 'BEST', hearts: 350, img: 'linear-gradient(to top, #00c6fb 0%, #005bea 100%)', icon: '❄️' },
-            { id: 3, title: '<span data-en="Steps of Dark Abyss" data-ko="어둠의 심연의 걸음">Steps of Dark Abyss</span>', type: 'dark', color: 'black', price: 5500, isFree: false, tag: 'HOT', hearts: 140, img: 'linear-gradient(to right, #434343 0%, black 100%)', icon: '🌑' },
-            { id: 4, title: '<span data-en="Green Umbrella Step" data-ko="초록우산 아이의 스텝">Green Umbrella Step</span>', type: 'cute', color: 'green', price: 300, isFree: false, tag: '', hearts: 5, img: 'linear-gradient(to top, #0ba360 0%, #3cba92 100%)', icon: '☂️' },
-            { id: 5, title: '<span data-en="Golden Elf Trajectory" data-ko="황금빛 엘프의 궤적">Golden Elf Trajectory</span>', type: 'fancy', color: 'yellow', price: 9000, isFree: false, tag: 'BEST', hearts: 1000, img: 'linear-gradient(to right, #f83600 0%, #f9d423 100%)', icon: '✨' },
-            { id: 6, title: `<span data-en="Dark Mage's Trace" data-ko="다크메이지의 잿빛흔적">Dark Mage's Trace</span>`, type: 'dark', color: 'black', price: 0, isFree: true, tag: '', hearts: 89, img: 'linear-gradient(to bottom, #8e9eab, #eef2f3)', icon: '🔮' },
-            { id: 7, title: '<span data-en="Burning Lava Fragment" data-ko="불타는 용암 조각">Burning Lava Fragment</span>', type: 'fancy', color: 'red', price: 15000, isFree: false, tag: 'NEW', hearts: 12, img: 'linear-gradient(to right, #ff0844 0%, #ffb199 100%)', icon: '🔥' },
-            { id: 8, title: '<span data-en="Pure Snow Footsteps" data-ko="퓨어 스노우 발걸음">Pure Snow Footsteps</span>', type: 'cute', color: 'white', price: 0, isFree: true, tag: '', hearts: 60, img: 'linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)', icon: '⛄' },
-            { id: 9, title: '<span data-en="Aqua Marine Slide" data-ko="아쿠아 마린 슬라이드">Aqua Marine Slide</span>', type: 'fancy', color: 'blue', price: 4200, isFree: false, tag: 'HOT', hearts: 220, img: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)', icon: '🌊' },
-            { id: 10, title: '<span data-en="Necromancer Skull Dance" data-ko="네크로맨서의 해골 춤">Necromancer Skull Dance</span>', type: 'dark', color: 'black', price: 8500, isFree: false, tag: '', hearts: 44, img: 'linear-gradient(to right, #000000, #434343)', icon: '💀' },
-            { id: 11, title: '<span data-en="Rabbit Jump Step" data-ko="토끼의 점프 스텝">Rabbit Jump Step</span>', type: 'cute', color: 'white', price: 500, isFree: false, tag: 'BEST', hearts: 402, img: 'linear-gradient(to right, #74ebd5 0%, #9face6 100%)', icon: '🐰' },
-            { id: 12, title: '<span data-en="Dazzling Angel Feather" data-ko="눈부신 천사의 깃털">Dazzling Angel Feather</span>', type: 'fancy', color: 'white', price: 20000, isFree: false, tag: 'NEW', hearts: 300, img: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)', icon: '🕊️' }
+            { id: 1, title: 'Poring's Cherry Blossoms Footprints', type: 'cute', color: 'red', price: 0, isFree: true, tag: 'NEW', hearts: 21, img: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)', icon: '🌸' },
+            { id: 2, title: 'Ice Crystal Footprints', type: 'fancy', color: 'blue', price: 1200, isFree: false, tag: 'BEST', hearts: 350, img: 'linear-gradient(to top, #00c6fb 0%, #005bea 100%)', icon: '❄️' },
+            { id: 3, title: 'Steps of Dark Abyss', type: 'dark', color: 'black', price: 5500, isFree: false, tag: 'HOT', hearts: 140, img: 'linear-gradient(to right, #434343 0%, black 100%)', icon: '🌑' },
+            { id: 4, title: 'Green Umbrella Step', type: 'cute', color: 'green', price: 300, isFree: false, tag: '', hearts: 5, img: 'linear-gradient(to top, #0ba360 0%, #3cba92 100%)', icon: '☂️' },
+            { id: 5, title: 'Golden Elf Trajectory', type: 'fancy', color: 'yellow', price: 9000, isFree: false, tag: 'BEST', hearts: 1000, img: 'linear-gradient(to right, #f83600 0%, #f9d423 100%)', icon: '✨' },
+            { id: 6, title: `Dark Mage's Trace`, type: 'dark', color: 'black', price: 0, isFree: true, tag: '', hearts: 89, img: 'linear-gradient(to bottom, #8e9eab, #eef2f3)', icon: '🔮' },
+            { id: 7, title: 'Burning Lava Fragment', type: 'fancy', color: 'red', price: 15000, isFree: false, tag: 'NEW', hearts: 12, img: 'linear-gradient(to right, #ff0844 0%, #ffb199 100%)', icon: '🔥' },
+            { id: 8, title: 'Pure Snow Footsteps', type: 'cute', color: 'white', price: 0, isFree: true, tag: '', hearts: 60, img: 'linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)', icon: '⛄' },
+            { id: 9, title: 'Aqua Marine Slide', type: 'fancy', color: 'blue', price: 4200, isFree: false, tag: 'HOT', hearts: 220, img: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)', icon: '🌊' },
+            { id: 10, title: 'Necromancer Skull Dance', type: 'dark', color: 'black', price: 8500, isFree: false, tag: '', hearts: 44, img: 'linear-gradient(to right, #000000, #434343)', icon: '💀' },
+            { id: 11, title: 'Rabbit Jump Step', type: 'cute', color: 'white', price: 500, isFree: false, tag: 'BEST', hearts: 402, img: 'linear-gradient(to right, #74ebd5 0%, #9face6 100%)', icon: '🐰' },
+            { id: 12, title: 'Dazzling Angel Feather', type: 'fancy', color: 'white', price: 20000, isFree: false, tag: 'NEW', hearts: 300, img: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)', icon: '🕊️' }
         ];
 
         // MOCK MULTIPLICATION: Create 60 items so we have 5 pages
@@ -627,10 +627,10 @@
             // Simple default UI Sort
             filtered.sort((a,b) => b.hearts - a.hearts);
             
-            document.getElementById('marketCountLabel').innerHTML = `${filtered.length}개의 <span data-en="Footprints" data-ko="발자국">Footprints</span>`;
+            document.getElementById('marketCountLabel').innerHTML = `${filtered.length} Footprints`;
             
             if(filtered.length === 0) {
-                grid.innerHTML = `<div style="grid-column:1/-1; padding:40px; text-align:center; color:#64748b; font-weight:700;"><span data-en="No matching search results." data-ko="조건에 맞는 검색 결과가 없습니다.">No matching search results.</span></div>`;
+                grid.innerHTML = `<div style="grid-column:1/-1; padding:40px; text-align:center; color:#64748b; font-weight:700;">No matching search results.</div>`;
                 document.getElementById('paginationWrap').innerHTML = '';
                 return;
             }

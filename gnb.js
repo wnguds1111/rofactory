@@ -12,7 +12,7 @@ function renderGNB(opts = {}) {
         { icon: 'gnb-sub.png',     label: 'SUBSCRIPTION', href: '#' },
         { icon: 'gnb-topup.png',   label: 'TOP UP',       href: '#' },
         {
-            icon: 'gnb-factory.png', label: 'RO FACTORY', href: 'main.html',
+            icon: 'gnb-factory.png', label: 'RO FACTORY', href: 'main2.html',
             active: opts.activePage === 'ro-factory',
             dropdown: [
                 { href: 'register.html',       label: 'Register'  },
@@ -86,7 +86,7 @@ function renderGNB(opts = {}) {
             </nav>
 
             <!-- Center Logo: 159×126px, top:0 → straddles below bar -->
-            <a href="main.html" class="roz-gnb-logo">
+            <a href="main2.html" class="roz-gnb-logo">
                 <img src="${assetBase}/roz-logo.webp" alt="Ragnarok Zero Global">
             </a>
 
