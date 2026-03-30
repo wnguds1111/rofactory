@@ -3,285 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RO FACTORY</title>
-    <meta name="description" content="RO FACTORY는 라그나로크 제로 플레이어가 직접 발자국 에셋을 제작하고 글로벌 마켓에 판매할 수 있는 공식 UGC 크리에이터 플랫폼입니다.">
+    <title>RO FACTORY - ABOUT</title>
+    <meta name="description" content="RO FACTORY OFFICIAL GUIDE">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family:'Pretendard',system-ui,-apple-system,sans-serif;
-            background: linear-gradient(180deg, #eef5fc 0%, #f1f5f9 100%);
+            background: #ffffff;
             min-height: 100vh;
-            color:#1a1a1a;
+            color:#0a192f;
             -webkit-font-smoothing:antialiased;
         }
         a { text-decoration:none; color:inherit; }
-        .container { max-width:1400px; margin:0 auto; padding:0 40px; }
+        .container { max-width:1440px; margin:0 auto; padding:0 40px; }
 
-
-        /* ─── HERO ─── */
+        /* ─── NEXON CREATORS STYLE PREMIUM UI ─── */
+        /* HERO */
         .about-hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1d4ed8 100%);
-            padding: 100px 0 80px;
+            background: linear-gradient(145deg, #001233 0%, #0045ff 50%, #00d2ff 100%);
+            padding: 200px 0 160px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
         .about-hero::before {
-            content: '';
+            content: 'CREATORS';
             position: absolute;
-            top: -100px; right: -100px;
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(59,130,246,0.25), transparent 70%);
-            border-radius: 50%;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 26vw; font-weight: 900;
+            color: rgba(255,255,255,0.03);
+            white-space: nowrap; pointer-events: none;
+            line-height: 1;
         }
         .about-hero::after {
             content: '';
             position: absolute;
-            bottom: -80px; left: -80px;
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(6,182,212,0.2), transparent 70%);
+            bottom: -150px; right: -100px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0,255,255,0.15), transparent 70%);
             border-radius: 50%;
+            pointer-events: none;
         }
         .hero-eyebrow {
             display: inline-block;
-            background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #93c5fd;
-            font-size: 13px; font-weight: 800;
-            padding: 6px 18px; border-radius: 12px;
+            background: #ffffff;
+            color: #0045ff;
+            font-size: 14px; font-weight: 900;
+            padding: 10px 28px; border-radius: 50px;
             margin-bottom: 24px;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative; z-index: 2;
         }
         .about-hero h1 {
             font-size: clamp(36px, 5vw, 64px);
             font-weight: 900;
-            color: #fff;
+            color: #ffffff;
             line-height: 1.15;
             letter-spacing: -2px;
             margin-bottom: 20px;
             position: relative; z-index: 2;
         }
-        .about-hero h1 span { color: #38bdf8; }
+        .about-hero h1 span { color: #00ffff; }
         .about-hero p {
-            font-size: 18px;
-            color: rgba(255,255,255,0.72);
-            max-width: 620px;
+            font-size: 17px;
+            color: rgba(255,255,255,0.8);
+            max-width: 700px;
             margin: 0 auto 36px;
             line-height: 1.7;
+            font-weight: 500;
             position: relative; z-index: 2;
         }
-        .hero-cta-group { display:flex; justify-content:center; gap:14px; position:relative; z-index:2; flex-wrap:wrap; }
+        .hero-cta-group { display:flex; justify-content:center; gap:16px; position:relative; z-index:2; flex-wrap:wrap; }
         .btn-hero-primary {
             display: inline-flex; align-items: center; gap: 8px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            background: linear-gradient(135deg, #0055ff, #0033cc);
             color: #fff; font-size: 15px; font-weight: 800;
-            padding: 14px 32px; border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(59,130,246,0.4);
-            transition: all 0.3s;
+            padding: 16px 40px; border-radius: 50px;
+            box-shadow: 0 16px 40px rgba(0,85,255,0.4);
+            transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
         }
-        .btn-hero-primary:hover { transform:translateY(-3px); box-shadow:0 16px 40px rgba(59,130,246,0.5); }
+        .btn-hero-primary:hover { transform:translateY(-4px); box-shadow:0 24px 50px rgba(0,85,255,0.5); }
         .btn-hero-outline {
             display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(255,255,255,0.10);
-            border: 1.5px solid rgba(255,255,255,0.3);
-            color: #fff; font-size: 15px; font-weight: 700;
-            padding: 14px 32px; border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.25);
+            color: #fff; font-size: 15px; font-weight: 800;
+            padding: 16px 40px; border-radius: 50px;
             transition: all 0.3s;
+            backdrop-filter: blur(10px);
         }
-        .btn-hero-outline:hover { background: rgba(255,255,255,0.18); border-color:rgba(255,255,255,0.6); }
+        .btn-hero-outline:hover { background: rgba(255,255,255,0.2); border-color:#fff; }
 
         /* ─── SECTION BASE ─── */
-        .section { padding: 80px 0; }
-        .section-alt { background: #fff; }
-        .section-dark { background: linear-gradient(135deg, #0f172a, #1e3a8a); color: #fff; }
-        .sec-eyebrow { display:inline-block; font-size:12px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:#3b82f6; background:#eff6ff; padding:5px 14px; border-radius:12px; margin-bottom:16px; }
-        .sec-eyebrow-white { background:rgba(255,255,255,0.12); color:#93c5fd; }
-        .sec-title { font-size:clamp(28px,4vw,44px); font-weight:900; line-height:1.2; letter-spacing:-1.5px; margin-bottom:16px; }
-        .sec-sub { font-size:16px; color:#64748b; font-weight:500; line-height:1.7; max-width:640px; }
-        .sec-sub-white { color:rgba(255,255,255,0.64); }
+        .section { padding: 140px 0; position:relative; overflow:hidden; }
+        .section-alt { background: #f8fafc; }
+        .section-dark { background: #001233; color: #fff; }
+        .sec-eyebrow { display:inline-block; font-size:14px; font-weight:900; letter-spacing:1px; color:#0055ff; background:#e0ecff; padding:8px 20px; border-radius:50px; margin-bottom:20px; }
+        .sec-eyebrow-white { background:rgba(255,255,255,0.12); color:#00ffff; }
+        .sec-title { font-size:clamp(32px,4vw,48px); font-weight:900; line-height:1.2; letter-spacing:-1.5px; margin-bottom:24px; color:#0a1930; }
+        .section-dark .sec-title { color: #fff; }
+        .sec-sub { font-size:17px; color:#475569; font-weight:500; line-height:1.7; max-width:800px; }
+        .sec-sub-white { color:rgba(255,255,255,0.7); }
+        .bg-huge-text { position:absolute; top:140px; left:-5%; font-size:160px; font-weight:900; color:rgba(0,0,0,0.02); white-space:nowrap; pointer-events:none; z-index:0; letter-spacing:-5px; }
+        .section-dark .bg-huge-text { color:rgba(255,255,255,0.02); }
 
         /* ─── WHAT IS ─── */
-        .what-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+        .what-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:center; position:relative; z-index:2; }
         .what-visual {
-            background: linear-gradient(135deg, #e0f2fe, #dbeafe);
-            border-radius: 32px;
-            height: 380px;
+            background: linear-gradient(145deg, #ffffff, #f1f5f9);
+            border-radius: 40px;
+            padding: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 120px;
             position: relative;
             overflow: hidden;
-            border: 1px solid #bfdbfe;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.04);
+            min-height: 400px;
         }
         .what-visual::before {
             content: '';
-            position: absolute; top: -40px; right: -40px;
-            width: 200px; height: 200px;
-            background: radial-gradient(circle, rgba(59,130,246,0.15), transparent);
+            position: absolute; top: -60px; right: -60px;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(0,85,255,0.08), transparent);
             border-radius: 50%;
+        }
+        /* ─── VISUAL STACK ANIMATION ─── */
+        .visual-stack { position:relative; width:100%; aspect-ratio:4/3; perspective:1000px; display:flex; align-items:center; justify-content:center; }
+        .stack-img {
+            position:absolute; width:85%; object-fit:cover; border-radius:24px;
+            box-shadow:0 30px 60px rgba(0,20,100,0.15); border:1px solid rgba(255,255,255,0.6);
+            opacity:0; animation: stackFadeIn 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        }
+        .stack-1 { z-index:1; animation-delay:0.2s; --final-y:-40px; --final-scale:0.85; }
+        .stack-2 { z-index:2; animation-delay:0.6s; --final-y:-10px; --final-scale:0.95; }
+        .stack-3 { z-index:3; animation-delay:1.0s; --final-y:30px; --final-scale:1.05; box-shadow:0 40px 80px rgba(0,20,100,0.25); }
+        @keyframes stackFadeIn {
+            0% { opacity:0; transform:translateY(60px) scale(0.8); }
+            100% { opacity:1; transform:translateY(var(--final-y)) scale(var(--final-scale)); }
+        }
+        @media(max-width:768px) {
+            .stack-1 { --final-y: -20px; } .stack-2 { --final-y: -5px; } .stack-3 { --final-y: 15px; }
         }
         .what-text-block { display:flex; flex-direction:column; gap:20px; }
         .what-bullet {
             display: flex; gap: 16px; align-items: flex-start;
-            background: #f8fafc; border-radius: 16px; padding: 20px 22px;
-            border: 1px solid #e2e8f0; transition: all 0.28s;
+            background: #ffffff; border-radius: 20px; padding: 28px 32px;
+            border: 1px solid #e2e8f0; box-shadow:0 10px 30px rgba(0,0,0,0.02);
+            transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
         }
-        .what-bullet:hover { background:#eff6ff; border-color:#bfdbfe; transform:translateX(4px); }
-        .bullet-icon { font-size: 28px; flex-shrink:0; }
-        .bullet-title { font-size:16px; font-weight:900; color:#0f172a; margin-bottom:4px; }
-        .bullet-desc { font-size:14px; color:#64748b; line-height:1.6; }
+        .what-bullet:hover { transform:translateY(-6px); border-color:#0055ff; box-shadow:0 20px 50px rgba(0,85,255,0.1); }
+        .bullet-icon { font-size: 32px; flex-shrink:0; background:#e0ecff; width:56px; height:56px; border-radius:16px; display:flex; align-items:center; justify-content:center; }
+        .bullet-title { font-size:18px; font-weight:900; color:#0a1930; margin-bottom:6px; margin-top:2px;}
+        .bullet-desc { font-size:15px; color:#475569; line-height:1.7; font-weight:500;}
 
         /* ─── TOOL SECTION ─── */
-        .tool-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+        .tool-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; position:relative; z-index:2; }
         .tool-card {
             background: #fff;
-            border-radius: 24px;
-            padding: 36px 28px;
+            border-radius: 32px;
+            padding: 48px 40px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            transition: all 0.3s;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+            transition: all 0.4s cubic-bezier(0.25,0.8,0.25,1);
             position: relative;
             overflow: hidden;
         }
         .tool-card::before {
             content: '';
             position: absolute; top: 0; left: 0; right: 0;
-            height: 4px;
+            height: 6px;
         }
-        .tool-card.blue::before { background: linear-gradient(to right, #3b82f6, #06b6d4); }
+        .tool-card.blue::before { background: linear-gradient(to right, #0055ff, #00d2ff); }
         .tool-card.purple::before { background: linear-gradient(to right, #8b5cf6, #ec4899); }
-        .tool-card.green::before { background: linear-gradient(to right, #10b981, #3b82f6); }
-        .tool-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(0,0,0,0.08); border-color:#c7d2fe; }
-        .tool-num { font-size:11px; font-weight:900; letter-spacing:1px; color:#94a3b8; margin-bottom:12px; }
-        .tool-icon { font-size:44px; margin-bottom:16px; display:block; }
-        .tool-name { font-size:20px; font-weight:900; color:#0f172a; margin-bottom:8px; }
-        .tool-desc { font-size:14px; color:#64748b; line-height:1.7; margin-bottom:20px; }
+        .tool-card.green::before { background: linear-gradient(to right, #10b981, #0055ff); }
+        .tool-card:hover { transform:translateY(-10px); box-shadow:0 30px 60px rgba(0,20,100,0.08); border-color:#bfdbfe; }
+        .tool-num { font-size:13px; font-weight:900; letter-spacing:1px; color:#94a3b8; margin-bottom:16px; }
+        .tool-icon { font-size:44px; margin-bottom:20px; display:block; }
+        .tool-name { font-size:20px; font-weight:900; color:#0a1930; margin-bottom:12px; letter-spacing:-1px;}
+        .tool-desc { font-size:15px; color:#475569; line-height:1.7; margin-bottom:28px; font-weight:500;}
         .tool-tags { display:flex; flex-wrap:wrap; gap:8px; }
-        .tool-tag { font-size:12px; font-weight:700; padding:4px 12px; border-radius:12px; }
-        .tag-blue { background:#eff6ff; color:#1d4ed8; }
+        .tool-tag { font-size:13px; font-weight:800; padding:6px 14px; border-radius:50px; }
+        .tag-blue { background:#e0ecff; color:#0055ff; }
         .tag-purple { background:#f5f3ff; color:#6d28d9; }
-        .tag-green { background:#f0fdf4; color:#166534; }
-
-        /* ─── FLOW SECTION ─── */
-        .flow-steps { display:flex; align-items:flex-start; gap:0; position:relative; }
-        .flow-steps::before {
-            content: '';
-            position: absolute;
-            top: 40px; left: 40px; right: 40px;
-            height: 2px;
-            background: linear-gradient(to right, #3b82f6, #06b6d4);
-            z-index: 0;
-        }
-        .flow-step {
-            flex: 1; text-align:center; position:relative; z-index:1; padding:0 16px;
-        }
-        .flow-num {
-            width: 80px; height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: #fff;
-            font-size: 28px; font-weight: 900;
-            display: flex; align-items:center; justify-content:center;
-            margin: 0 auto 20px;
-            box-shadow: 0 8px 24px rgba(59,130,246,0.4);
-            border: 4px solid #fff;
-        }
-        .flow-step-title { font-size:17px; font-weight:900; color:#0f172a; margin-bottom:8px; }
-        .flow-step-desc { font-size:13px; color:#64748b; line-height:1.6; }
+        .tag-green { background:#dcfce7; color:#166534; }
 
         /* ─── BENEFIT SECTION ─── */
-        .benefit-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+        .benefit-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:32px; position:relative; z-index:2; }
         .benefit-card {
-            border-radius: 24px;
-            padding: 36px 32px;
+            border-radius: 32px;
+            padding: 56px 48px;
             position: relative;
             overflow: hidden;
         }
-        .benefit-card.creator { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; }
-        .benefit-card.buyer   { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; }
-        .benefit-header { display:flex; align-items:center; gap:14px; margin-bottom:24px; }
-        .benefit-icon { font-size:36px; }
-        .benefit-role { font-size:13px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:#60a5fa; }
-        .benefit-card.buyer .benefit-role { color:#34d399; }
-        .benefit-card-title { font-size:22px; font-weight:900; color:#0f172a; margin-top:2px; }
-        .benefit-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+        .benefit-card.creator { background: linear-gradient(145deg, #e0ecff, #f8fafc); border: 1px solid #bfdbfe; }
+        .benefit-card.buyer   { background: linear-gradient(145deg, #dcfce7, #f8fafc); border: 1px solid #86efac; }
+        .benefit-header { display:flex; align-items:center; gap:16px; margin-bottom:32px; }
+        .benefit-icon { font-size:44px; }
+        .benefit-role { font-size:14px; font-weight:900; letter-spacing:1px; color:#0055ff; margin-bottom:4px; }
+        .benefit-card.buyer .benefit-role { color:#059669; }
+        .benefit-card-title { font-size:24px; font-weight:900; color:#0a1930; letter-spacing:-1px;}
+        .benefit-list { list-style:none; display:flex; flex-direction:column; gap:14px; }
         .benefit-list li {
-            display: flex; gap:12px; align-items:flex-start;
-            font-size:15px; color:#334155; line-height:1.6;
+            display: flex; gap:14px; align-items:flex-start;
+            font-size:15px; color:#334155; line-height:1.7; font-weight:500;
         }
         .benefit-list li::before {
             content: '✓';
-            width: 22px; height:22px; border-radius:50%;
-            background: #3b82f6; color:#fff;
+            width: 24px; height:24px; border-radius:50%;
+            background: #0055ff; color:#fff;
             font-size:12px; font-weight:900;
             display:flex; align-items:center; justify-content:center;
-            flex-shrink:0; margin-top:1px;
+            flex-shrink:0; margin-top:2px;
         }
         .benefit-card.buyer .benefit-list li::before { background:#10b981; }
 
         /* ─── METRICS ─── */
-        .metrics-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center; }
-        .metric-card { padding:40px 20px; }
-        .metric-num { font-size:52px; font-weight:900; line-height:1; color:#fff; margin-bottom:8px; letter-spacing:-2px; }
-        .metric-num span { font-size:28px; color:#93c5fd; }
-        .metric-label { font-size:14px; color:rgba(255,255,255,0.6); font-weight:600; }
-        .metric-divider { width:1px; background:rgba(255,255,255,0.1); }
+        .metrics-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center; position:relative; z-index:2; }
+        .metric-card { padding:32px 16px; }
+        .metric-num { font-size:56px; font-weight:900; line-height:1; color:#fff; margin-bottom:12px; letter-spacing:-2px; }
+        .metric-num span { font-size:26px; color:#00ffff; }
+        .metric-label { font-size:15px; color:rgba(255,255,255,0.7); font-weight:600; }
 
         /* ─── FAQ ─── */
-        .faq-list { display:flex; flex-direction:column; gap:12px; max-width:800px; margin:0 auto; }
-        .faq-item { background:#fff; border-radius:16px; border:1px solid #e2e8f0; overflow:hidden; }
+        .faq-list { display:flex; flex-direction:column; gap:14px; max-width:900px; margin:0 auto; position:relative; z-index:2; }
+        .faq-item { background:#fff; border-radius:20px; border:1px solid #e2e8f0; overflow:hidden; transition:border-color 0.3s, box-shadow 0.3s;}
+        .faq-item:hover { border-color:#bfdbfe; box-shadow:0 10px 30px rgba(0,0,0,0.03); }
         .faq-q {
-            padding:22px 26px; display:flex; justify-content:space-between; align-items:center;
-            cursor:pointer; font-size:16px; font-weight:800; color:#0f172a;
+            padding:28px 36px; display:flex; justify-content:space-between; align-items:center;
+            cursor:pointer; font-size:18px; font-weight:800; color:#0a1930;
             transition:background 0.2s;
         }
-        .faq-q:hover { background:#f8fafc; }
-        .faq-icon { font-size:20px; color:#94a3b8; transition:transform 0.2s; }
-        .faq-item.open .faq-icon { transform:rotate(45deg); color:#3b82f6; }
-        .faq-a {
-            display:none; padding:0 26px 22px; font-size:14px; color:#475569; line-height:1.7;
-        }
-        .faq-item.open .faq-a { max-height: 400px; padding: 0 26px 22px; }
+        .faq-icon { font-size:22px; color:#94a3b8; transition:transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .faq-item.open .faq-icon { transform:rotate(45deg); color:#0055ff; }
+        /* FAQ Dropdown Smooth Animation using Grid */
+        .faq-a-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .faq-item.open .faq-a-wrapper { grid-template-rows: 1fr; }
+        .faq-a { overflow: hidden; }
+        .faq-a-inner { padding:0 36px 28px; font-size:15px; color:#475569; line-height:1.8; font-weight:500; opacity:0; transition:opacity 0.4s; }
+        .faq-item.open .faq-a-inner { opacity:1; }
 
         /* ─── CTA BOTTOM ─── */
         .cta-bottom {
-            text-align:center; padding:100px 0;
-            background: linear-gradient(135deg, #1e3a8a, #1d4ed8, #0ea5e9);
+            text-align:center; padding:120px 0;
+            background: linear-gradient(145deg, #001233 0%, #0045ff 50%, #00d2ff 100%);
             position:relative; overflow:hidden;
         }
-        .cta-bottom::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:radial-gradient(ellipse at 70% 50%, rgba(6,182,212,0.2), transparent 60%); }
-        .cta-bottom h2 { font-size:clamp(28px,4vw,48px); font-weight:900; color:#fff; letter-spacing:-1.5px; margin-bottom:16px; position:relative; z-index:2; }
-        .cta-bottom p { font-size:17px; color:rgba(255,255,255,0.7); margin-bottom:36px; position:relative; z-index:2; }
+        .cta-bottom::before { content:''; position:absolute; top:-200px; left:50%; transform:translateX(-50%); width:1000px; height:1000px; background:radial-gradient(circle, rgba(0,255,255,0.1), transparent 70%); border-radius:50%; }
+        .cta-bottom h2 { font-size:clamp(32px,5vw,56px); font-weight:900; color:#fff; letter-spacing:-2px; margin-bottom:40px; position:relative; z-index:2; line-height:1.2; }
         .cta-btn-group { display:flex; justify-content:center; gap:14px; position:relative; z-index:2; flex-wrap:wrap; }
 
         /* ─── FOOTER ─── */
-        .footer { background:#0f172a; padding:40px 0; text-align:center; }
-        .footer-inner { color:#64748b; font-size:13px; font-weight:500; }
-        .footer-inner a { color:#94a3b8; margin:0 12px; }
+        .footer { background:#0a1930; padding:60px 0; text-align:center; }
+        .footer-inner { color:#64748b; font-size:14px; font-weight:600; }
+        .footer-inner a { color:#94a3b8; margin:0 16px; transition:color 0.2s; }
         .footer-inner a:hover { color:#fff; }
 
         /* Responsive */
         @media(max-width:1024px) {
-            .what-grid { grid-template-columns:1fr; gap:40px; }
-            .tool-cards { grid-template-columns:1fr 1fr; }
-            .flow-steps { flex-wrap:wrap; gap:24px; }
-            .flow-steps::before { display:none; }
-            .flow-step { flex:1 1 calc(50% - 12px); }
+            .section { padding:100px 0; }
+            .what-grid { grid-template-columns:1fr; gap:60px; }
+            .tool-cards { grid-template-columns:1fr; }
+            .benefit-grid { grid-template-columns:1fr; }
             .metrics-grid { grid-template-columns:repeat(2,1fr); }
+            .bg-huge-text { font-size:100px; }
         }
         @media(max-width:768px) {
-            .section { padding:60px 0; }
-            .what-visual { height:220px; font-size:80px; }
-            .tool-cards { grid-template-columns:1fr; }
-            .flow-step { flex:1 1 100%; }
-            .benefit-grid { grid-template-columns:1fr; }
-            .metrics-grid { grid-template-columns:1fr 1fr; }
-            .metric-num { font-size:38px; }
-            .gnb-side { display:none; }
+            .section { padding:80px 0; }
+            .what-visual { min-height:300px; }
+            .metrics-grid { grid-template-columns:1fr; }
+            .metric-num { font-size:44px; }
+            .bg-huge-text { display:none; }
+            .faq-q { padding: 24px; font-size:15px; }
+            .faq-a-inner { padding: 0 24px 24px; font-size:14px; }
         }
     </style>
 </head>
@@ -291,69 +290,56 @@
     <!-- ── HERO ── -->
     <section class="about-hero">
         <div class="container">
-            <span class="hero-eyebrow">OFFICIAL GUIDE · RO FACTORY</span>
+            <span class="hero-eyebrow">RO FACTORY OFFICIAL GUIDE</span>
             <h1>라그나로크 제로의<br><span>크리에이터 경제</span>를 만나다</h1>
             <p>RO FACTORY는 플레이어가 직접 발자국 에셋을 창작하고, 글로벌 마켓에서 수익을 올릴 수 있는<br>공식 UGC(User-Generated Content) 크리에이터 플랫폼입니다.</p>
             <div class="hero-cta-group">
-                <a href="register.html" class="btn-hero-primary">🪄 <span data-en="Footprints" data-ko="발자국">Footprints</span> <span data-en="Register" data-ko="등록">Register</span> 시작</a>
-                <a href="market.html" class="btn-hero-outline">🛍️ <span data-en="Market" data-ko="마켓">Market</span> 둘러보기</a>
+                <a href="register.html" class="btn-hero-primary" data-en="Start Registration" data-ko="시작하기">🪄 시작하기</a>
+                <a href="market.html" class="btn-hero-outline" data-en="Browse Market" data-ko="마켓 둘러보기">🛍️ 마켓 둘러보기</a>
             </div>
         </div>
     </section>
 
     <!-- ── WHAT IS RO FACTORY ── -->
     <section class="section section-alt">
+        <div class="bg-huge-text" style="top:140px;">CREATORS ECONOMY</div>
         <div class="container">
             <div class="what-grid">
                 <div>
                     <span class="sec-eyebrow">WHAT IS RO FACTORY?</span>
                     <h2 class="sec-title">플레이어가 만들고,<br>플레이어가 즐긴다</h2>
-                    <p class="sec-sub" style="margin-bottom:36px;">라그나로크 제로는 단순한 게임을 넘어, 플레이어의 창의성이 실제 가치로 이어지는 생태계를 만들고 있습니다. RO FACTORY는 그 중심입니다.</p>
+                    <p class="sec-sub" style="margin-bottom:48px;">라그나로크 제로는 단순한 게임을 넘어, 플레이어의 창의성이 실제 가치로 이어지는 생태계를 만들고 있습니다. RO FACTORY는 그 중심입니다.</p>
                     <div class="what-text-block">
                         <div class="what-bullet">
                             <span class="bullet-icon">🎨</span>
                             <div>
-                                <div class="bullet-title">창작 → <span data-en="Market" data-ko="마켓">Market</span> <span data-en="Register" data-ko="등록">Register</span> → 수익 실현</div>
-                                <div class="bullet-desc">전용 UGC 편집툴로 <span data-en="Footprints" data-ko="발자국">Footprints</span>을 제작하면, 변환을 거쳐 글로벌 <span data-en="Market" data-ko="마켓">Market</span>에 자동 등재됩니다. 구매가 이루어질 때마다 크리에이터에게 수익이 적립됩니다.</div>
+                                <div class="bullet-title">창작 → 마켓 등록 → 수익 실현</div>
+                                <div class="bullet-desc">전용 UGC 편집툴로 발자국을 제작하면, 변환을 거쳐 글로벌 마켓에 자동 등재됩니다. 구매가 이루어질 때마다 크리에이터에게 수익이 적립됩니다.</div>
                             </div>
                         </div>
                         <div class="what-bullet">
                             <span class="bullet-icon">🌍</span>
                             <div>
-                                <div class="bullet-title">글로벌 플레이어 대상 동시 출시</div>
-                                <div class="bullet-desc">한 번 <span data-en="Register" data-ko="등록">Register</span>하면 라그나로크 제로 글로벌 서버의 모든 플레이어에게 노출됩니다. 별도 현지화 작업 없이 자동으로 다국어 노출됩니다.</div>
+                                <div class="bullet-title">글로벌 플레이어 동시 출시</div>
+                                <div class="bullet-desc">한 번 등록하면 라그나로크 제로 글로벌 서버의 모든 플레이어에게 노출됩니다. 현지화 작업 없이 자동으로 다국어 처리됩니다.</div>
                             </div>
                         </div>
                         <div class="what-bullet">
                             <span class="bullet-icon">🔒</span>
                             <div>
                                 <div class="bullet-title">공식 변환 및 저작권 보호</div>
-                                <div class="bullet-desc">모든 <span data-en="Register" data-ko="등록">Register</span> 에셋은 GRAVITY의 공식 변환 처리를 완료해야 합니다. 창작자의 저작권이 보호되며, 모든 원본 파일은 암호화되어 안전하게 관리됩니다.</div>
+                                <div class="bullet-desc">모든 에셋은 GRAVITY의 공식 변환을 거치며, 창작자의 저작권 보호를 위해 원본 파일이 안전하게 암호화 관리됩니다.</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="what-visual" style="flex-direction:column;gap:0;padding:28px;background:linear-gradient(135deg,#1e3a8a,#0f172a);border:none;height:auto;min-height:380px;border-radius:24px;">
-                    <div style="color:#93c5fd;font-size:11px;font-weight:800;letter-spacing:1.5px;margin-bottom:16px;text-align:left;width:100%;">CREATOR FLOW PREVIEW</div>
-                    <div style="display:flex;flex-direction:column;gap:10px;width:100%;">
-                        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;">
-                            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">📁</div>
-                            <div><div style="font-size:12px;font-weight:800;color:#fff;margin-bottom:2px;">STEP 1 — 파일 준비</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">.foot 원본 + 영상 미리보기 추출</div></div>
-                        </div>
-                        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;">
-                            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">📤</div>
-                            <div><div style="font-size:12px;font-weight:800;color:#fff;margin-bottom:2px;">STEP 2 — 에셋 업로드</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">파일 4종 업로드 + 약관 동의</div></div>
-                        </div>
-                        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;">
-                            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">✨</div>
-                            <div><div style="font-size:12px;font-weight:800;color:#fff;margin-bottom:2px;">STEP 3 — 마켓 정보 입력</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">작품명 · 가격 · 태그 · 색상 설정</div></div>
-                        </div>
-                        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(59,130,246,0.4);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;">
-                            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🎉</div>
-                            <div><div style="font-size:12px;font-weight:800;color:#4ade80;margin-bottom:2px;">STEP 4 — 변환 완료 & 마켓 등재</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">글로벌 마켓 자동 배포 + KP 수익</div></div>
-                        </div>
+                <!-- 2. 순차 애니메이션 다중 스크린샷 스택 -->
+                <div class="what-visual" style="padding: 0; border: none; background: transparent;">
+                    <div class="visual-stack">
+                        <img src="images/market_preview.png" alt="글로벌 마켓 프리뷰" class="stack-img stack-1">
+                        <img src="images/register_preview.png" alt="작품 등록 폼 프리뷰" class="stack-img stack-2">
+                        <img src="images/ugc_tool_preview.jpg" alt="UGC 편집 툴 프리뷰" class="stack-img stack-3">
                     </div>
-                    <a href="register.html" style="display:block;margin-top:16px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;font-size:13px;font-weight:800;padding:12px;border-radius:10px;text-align:center;text-decoration:none;width:100%;">🪄 지금 등록 시작하기 →</a>
                 </div>
             </div>
         </div>
@@ -361,120 +347,84 @@
 
     <!-- ── TOOL SECTION ── -->
     <section class="section">
+        <div class="bg-huge-text" style="top:140px; left:50%; transform:translateX(-50%); letter-spacing:0;">UGC TOOLS</div>
         <div class="container">
-            <div style="text-align:center; margin-bottom:52px;">
-                <span class="sec-eyebrow">UGC CREATION TOOLS</span>
-                <h2 class="sec-title">세 가지 핵심 도구로<br>창작의 문을 열다</h2>
-                <p class="sec-sub" style="margin:0 auto;">전문 지식 없이도 누구나 쉽게 <span data-en="Footprints" data-ko="발자국">Footprints</span> 에셋을 제작할 수 있도록 도구와 플랫폼을 제공합니다.</p>
+            <div style="text-align:center; margin-bottom:72px; position:relative; z-index:2;">
+                <span class="sec-eyebrow">CREATION TOOLS</span>
+                <h2 class="sec-title">창작의 문을 여는<br>핵심 도구</h2>
+                <p class="sec-sub" style="margin:0 auto;">전문 지식 없이도 누구나 쉽게 에셋을 제작할 수 있도록 지원합니다.</p>
             </div>
             <div class="tool-cards">
                 <div class="tool-card blue">
                     <div class="tool-num">TOOL 01</div>
                     <span class="tool-icon">🛠️</span>
                     <div class="tool-name">UGC 편집툴</div>
-                    <div class="tool-desc">라그나로크 제로 전용 UGC 편집 툴을 통해 <span data-en="Footprints" data-ko="발자국">Footprints</span> 애니메이션(.foot)과 동영상 미리보기(.mp4) 파일을 직접 제작할 수 있습니다. 직관적인 UI와 미리보기 기능으로 결과물을 즉시 확인할 수 있습니다.</div>
+                    <div class="tool-desc">전용 편집 툴을 통해 애니메이션 원본(.foot)과 미리보기 영상을 직접 제작할 수 있습니다. 직관적인 UI로 즉시 결과물을 확인하세요.</div>
                     <div class="tool-tags">
-                        <span class="tool-tag tag-blue"><span data-en="Footprints" data-ko="발자국">Footprints</span> 에셋 제작</span>
-                        <span class="tool-tag tag-blue">.foot 익스포트</span>
+                        <span class="tool-tag tag-blue">에셋 직접 제작</span>
                         <span class="tool-tag tag-blue">실시간 미리보기</span>
                     </div>
                 </div>
                 <div class="tool-card purple">
                     <div class="tool-num">TOOL 02</div>
                     <span class="tool-icon">🖥️</span>
-                    <div class="tool-name">RO FACTORY 웹 플랫폼</div>
-                    <div class="tool-desc">편집툴에서 제작한 에셋을 업로드하고 <span data-en="Market" data-ko="마켓">Market</span> 정보(<span data-en="Item Name" data-ko="작품명">Item Name</span>·<span data-en="Price" data-ko="가격">Price</span>·<span data-en="Tags" data-ko="태그">Tags</span>)를 설정하는 공식 <span data-en="Register" data-ko="등록">Register</span> 포털입니다. <span data-en="My Studio" data-ko="마이 스튜디오">My Studio</span>를 통해 실시간으로 변환 진행 상황, 판매 현황, 수익 현황을 모두 한 화면에서 확인할 수 있습니다.</div>
+                    <div class="tool-name">웹 포털 스튜디오</div>
+                    <div class="tool-desc">제작한 에셋을 업로드하고 마켓 정보를 설정합니다. 판매 현황과 수익을 한 화면에서 실시간으로 완벽하게 제어할 수 있습니다.</div>
                     <div class="tool-tags">
-                        <span class="tool-tag tag-purple">에셋 업로드</span>
-                        <span class="tool-tag tag-purple">실시간 현황</span>
-                        <span class="tool-tag tag-purple">수익 관리</span>
+                        <span class="tool-tag tag-purple">스튜디오 대시보드</span>
+                        <span class="tool-tag tag-purple">수익 실시간 정산</span>
                     </div>
                 </div>
                 <div class="tool-card green">
                     <div class="tool-num">PLATFORM</div>
                     <span class="tool-icon">🌐</span>
-                    <div class="tool-name">글로벌 <span data-en="Market" data-ko="마켓">Market</span> & 인게임 연동</div>
-                    <div class="tool-desc">변환 완료 후 변환 완료된 에셋은 글로벌 <span data-en="Market" data-ko="마켓">Market</span>에 자동 노출됩니다. 구매한 <span data-en="Footprints" data-ko="발자국">Footprints</span>은 플레이어의 인게임 캐릭터에 즉시 적용되며, 아이템 썸네일과 컬렉션 이미지로 <span data-en="Market" data-ko="마켓">Market</span> 카탈로그에도 등장합니다.</div>
+                    <div class="tool-name">글로벌 마켓 연동</div>
+                    <div class="tool-desc">변환된 에셋은 자동으로 글로벌 마켓 카탈로그에 노출되며, 플레이어가 구매하는 즉시 인게임 캐릭터에 연동 및 적용됩니다.</div>
                     <div class="tool-tags">
-                        <span class="tool-tag tag-green">자동 <span data-en="Market" data-ko="마켓">Market</span> 배포</span>
-                        <span class="tool-tag tag-green">인게임 즉시 적용</span>
-                        <span class="tool-tag tag-green">글로벌 노출</span>
+                        <span class="tool-tag tag-green">자동 마켓 배포</span>
+                        <span class="tool-tag tag-green">인게임 즉시 연동</span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── FLOW ── -->
-    <section class="section section-alt">
-        <div class="container">
-            <div style="text-align:center; margin-bottom:64px;">
-                <span class="sec-eyebrow">CREATOR FLOW</span>
-                <h2 class="sec-title">에셋 <span data-en="Register" data-ko="등록">Register</span>부터 수익화까지<br>단 4단계</h2>
-            </div>
-            <div class="flow-steps">
-                <div class="flow-step">
-                    <div class="flow-num">1</div>
-                    <div class="flow-step-title">📁 파일 준비</div>
-                    <div class="flow-step-desc">UGC 편집툴로 <span data-en="Footprints" data-ko="발자국">Footprints</span>을 제작하고<br>.foot 원본과 영상 미리보기를 추출합니다</div>
-                </div>
-                <div class="flow-step">
-                    <div class="flow-num">2</div>
-                    <div class="flow-step-title">📤 에셋 <span data-en="Register" data-ko="등록">Register</span></div>
-                    <div class="flow-step-desc">RO FACTORY 웹에서 파일을 업로드하고<br><span data-en="Item Name" data-ko="작품명">Item Name</span>·<span data-en="Price" data-ko="가격">Price</span>·<span data-en="Tags" data-ko="태그">Tags</span> 등 <span data-en="Market" data-ko="마켓">Market</span> 정보를 입력합니다</div>
-                </div>
-                <div class="flow-step">
-                    <div class="flow-num">3</div>
-                    <div class="flow-step-title">🔍 파일 변환</div>
-                    <div class="flow-step-desc">GRAVITY 공식 변환 처리를 거쳐<br>게임 포맷으로 자동 변환됩니다</div>
-                </div>
-                <div class="flow-step">
-                    <div class="flow-num">4</div>
-                    <div class="flow-step-title">💰 <span data-en="Market" data-ko="마켓">Market</span> & 수익</div>
-                    <div class="flow-step-desc">글로벌 <span data-en="Market" data-ko="마켓">Market</span>에 자동 등재되며<br>판매 수익이 KP로 적립됩니다</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ── BENEFITS ── -->
-    <section class="section">
+    <section class="section section-alt">
         <div class="container">
-            <div style="text-align:center; margin-bottom:52px;">
-                <span class="sec-eyebrow">WHO BENEFITS?</span>
-                <h2 class="sec-title">크리에이터와 플레이어,<br>모두가 이기는 구조</h2>
+            <div style="text-align:center; margin-bottom:72px;">
+                <span class="sec-eyebrow">FEATURES</span>
+                <h2 class="sec-title">RO FACTORY 특징</h2>
             </div>
             <div class="benefit-grid">
                 <div class="benefit-card creator">
                     <div class="benefit-header">
                         <span class="benefit-icon">🎨</span>
                         <div>
-                            <div class="benefit-role">CREATOR</div>
-                            <div class="benefit-card-title">에셋 창작자 기대 효과</div>
+                            <div class="benefit-role">FOR CREATORS</div>
+                            <div class="benefit-card-title">매력적인 창작 환경</div>
                         </div>
                     </div>
                     <ul class="benefit-list">
-                        <li><li><strong>수동 수익 창출</strong> — 한 번 등록하면 지속적인 판매 수익이 KP로 자동 적립됩니다</li>
-                        <li><strong>글로벌 노출</strong> — 별도 마케팅 없이 전 세계 라그나로크 제로 플레이어에게 노출됩니다</li>
-                        <li><strong>공식 크리에이터 인증</strong> — GRAVITY 공식 크리에이터로 등재되어 브랜드 가치를 높일 수 있습니다</li>
-                        <li><strong><span data-en="My Studio" data-ko="마이 스튜디오">My Studio</span> 통합 관리</strong> — 변환 현황, 판매 수, 누적 수익을 실시간으로 모니터링합니다</li>
-                        <li><li><strong>낮은 진입 장벽</strong> — 전용 편집툴과 단계별 등록 가이드로 코딩 없이 누구나 시작 가능합니다</li>
+                        <li>한 번의 등록으로 끊임없이 자동 패시브 인컴 창출 기능</li>
+                        <li>언어 장벽을 넘는 플랫폼 파워로 100만 글로벌 동시 노출 가능</li>
+                        <li>복잡한 개발 로직이나 코딩 지식 없이 아웃라인과 색상만으로 완성</li>
+                        <li>투명한 판매 내역 확인 및 My Studio 기반의 실시간 통합 관리 제공</li>
                     </ul>
                 </div>
                 <div class="benefit-card buyer">
                     <div class="benefit-header">
                         <span class="benefit-icon">🛒</span>
                         <div>
-                            <div class="benefit-role">PLAYER / BUYER</div>
-                            <div class="benefit-card-title">구매 플레이어 기대 효과</div>
+                            <div class="benefit-role">FOR PLAYERS</div>
+                            <div class="benefit-card-title">무한한 구매 경험</div>
                         </div>
                     </div>
                     <ul class="benefit-list">
-                        <li><strong>개성 있는 <span data-en="Footprints" data-ko="발자국">Footprints</span></strong> — 공식 콘텐츠에 없는 유니크한 에셋으로 나만의 캐릭터를 꾸밉니다</li>
-                        <li><strong>다양한 <span data-en="Price" data-ko="가격">Price</span>대</strong> — 무료 에셋부터 프리미엄 에셋까지 취향에 맞게 선택합니다</li>
-                        <li><strong>즉시 적용</strong> — 구매 즉시 인게임 캐릭터에 <span data-en="Footprints" data-ko="발자국">Footprints</span>이 적용됩니다</li>
-                        <li><strong>인벤토리 관리</strong> — 구매한 모든 에셋은 <span data-en="My Studio" data-ko="마이 스튜디오">My Studio</span> 인벤토리에서 확인·관리됩니다</li>
-                        <li><strong>커뮤니티 지원</strong> — 에셋 구매가 직접 좋아하는 크리에이터를 후원하는 효과를 냅니다</li>
+                        <li>매주 쏟아지는 크리에이터들의 독창적이고 한정판적인 발자국 수집</li>
+                        <li>공식 마켓 시스템과 동일한 안전성으로 즉시 충전 후 사용</li>
+                        <li>구매 버튼 클릭 한 번으로 나의 게임 캐릭터와 1초 만에 최적화 적용</li>
+                        <li>커뮤니티 내 크리에이터를 직접 응원하며 생태계 활성화에 기여</li>
                     </ul>
                 </div>
             </div>
@@ -483,27 +433,29 @@
 
     <!-- ── METRICS ── -->
     <section class="section section-dark">
+        <div class="bg-huge-text" style="top:140px;">GLOBAL SCALE</div>
         <div class="container">
-            <div style="text-align:center; margin-bottom:56px;">
+            <div style="text-align:center; margin-bottom:80px; position:relative; z-index:2;">
                 <span class="sec-eyebrow sec-eyebrow-white">PLATFORM SCALE</span>
-                <h2 class="sec-title" style="color:#fff;">RO FACTORY가 만들어갈<br>크리에이터 경제</h2>
+                <h2 class="sec-title">숫자로 증명하는<br>우리의 무대</h2>
             </div>
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-num">100<span>만+</span></div>
-                    <div class="metric-label">글로벌 라그나로크 제로 플레이어</div>
+                    <div class="metric-label">잠재적 글로벌 플레이어 고객</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-num">3<span>개</span></div>
-                    <div class="metric-label">변환 완료 후 글로벌 서버 동시 노출</div>
+                    <div class="metric-num">24<span>/7</span></div>
+                    <div class="metric-label">중단 없는 마켓 시스템 가동</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-num">4<span>단계</span></div>
-                    <div class="metric-label"><span data-en="Register" data-ko="등록">Register</span> → 심사 → 변환 → <span data-en="Market" data-ko="마켓">Market</span> 자동 배포</div>
+                    <!-- 4. 변환 및 검수 시간 7Day로 변경 -->
+                    <div class="metric-num">7<span>Day</span></div>
+                    <div class="metric-label">최대 소요 변환 및 검수 시간</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-num">∞<span></span></div>
-                    <div class="metric-label">창작자가 만들 수 있는 에셋의 무한한 가능성</div>
+                    <div class="metric-label">무한한 UGC 창작물의 가능성</div>
                 </div>
             </div>
         </div>
@@ -511,46 +463,46 @@
 
     <!-- ── FAQ ── -->
     <section class="section section-alt">
+        <div class="bg-huge-text" style="top:140px; left:-5%; color:rgba(0,0,0,0.03);">SUPPORT FAQs</div>
         <div class="container">
-            <div style="text-align:center; margin-bottom:48px;">
+            <div style="text-align:center; margin-bottom:60px; position:relative; z-index:2;">
                 <span class="sec-eyebrow">FAQ</span>
-                <h2 class="sec-title">자주 묻는 질문</h2>
+                <h2 class="sec-title">무엇을 도와드릴까요?</h2>
             </div>
             <div class="faq-list">
+                <!-- 5. FAQ 아코디언 애니메이션 구조 변경 (grid-template-rows 1fr) -->
                 <div class="faq-item">
                     <div class="faq-q" onclick="toggleFaq(this)">
-                        누구나 <span data-en="Footprints" data-ko="발자국">Footprints</span> 에셋을 <span data-en="Register" data-ko="등록">Register</span>할 수 있나요?
+                        누구나 에셋을 등록하고 수익을 낼 수 있나요?
                         <span class="faq-icon">+</span>
                     </div>
-                    <div class="faq-a">네, 라그나로크 제로 계정이 있는 플레이어라면 누구나 <span data-en="Register" data-ko="등록">Register</span>할 수 있습니다. 단, 전용 UGC 편집툴을 통해 제작된 파일(.foot)만 업로드 가능하며, GRAVITY 공식 변환 처리 처리를 완료해야 <span data-en="Market" data-ko="마켓">Market</span>에 등재됩니다.</div>
+                    <div class="faq-a-wrapper">
+                        <div class="faq-a">
+                            <div class="faq-a-inner">네, 라그나로크 제로 계정이 있는 플레이어라면 누구나 크리에이터로 참여할 수 있습니다. 전용 UGC 편집툴을 사용해 파일을 제작하고 공식 변환 절차를 통과하면 즉시 마켓에 판매가 개시됩니다.</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-q" onclick="toggleFaq(this)">
-                        수익은 어떻게 정산되나요?
+                        수익 정산 비율과 방법이 궁금합니다.
                         <span class="faq-icon">+</span>
                     </div>
-                    <div class="faq-a">구매자가 발자국을 KP로 구입하면, 설정한 판매 금액의 일정 비율이 크리에이터에게 KP로 자동 적립됩니다. 마이 스튜디오 > 나의 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span>에서 누적 판매 수익을 실시간으로 확인할 수 있습니다.</div>
+                    <div class="faq-a-wrapper">
+                        <div class="faq-a">
+                            <div class="faq-a-inner">에셋이 1개 판매될 때마다 판매 가격의 정해진 수수료를 제외한 금액이 크리에이터 계정으로 실시간 적립됩니다. 이 재화(KP)는 마이 스튜디오 대시보드에서 매월 정해진 일자에 언제든 정산 신청이 가능합니다.</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-q" onclick="toggleFaq(this)">
-                        <span data-en="Register" data-ko="등록">Register</span> 후 수정이 가능한가요?
+                        등록한 작품의 가격이나 파일을 변경할 수 있나요?
                         <span class="faq-icon">+</span>
                     </div>
-                    <div class="faq-a">에셋 파일(원본·영상)은 인게임 변환 프로세스 특성상 <span data-en="Register" data-ko="등록">Register</span> 후 수정이 불가합니다. 변경이 필요한 경우 작품을 삭제 후 재<span data-en="Register" data-ko="등록">Register</span>해야 합니다. 단, <span data-en="Price" data-ko="가격">Price</span> 정보는 <span data-en="My Studio" data-ko="마이 스튜디오">My Studio</span>에서 언제든 수정 가능합니다.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFaq(this)">
-                        변환 기간은 얼마나 걸리나요?
-                        <span class="faq-icon">+</span>
+                    <div class="faq-a-wrapper">
+                        <div class="faq-a">
+                            <div class="faq-a-inner">저작권 검수 및 변환 완료 후 파일 자체를 변경하는 것은 불가능합니다. 단, 작품명이나 가격, 검색 태그 등 마켓 노출 정보는 스튜디오에서 관리 버튼을 눌러 언제든지 자유롭게 수정할 수 있습니다.</div>
+                        </div>
                     </div>
-                    <div class="faq-a">접수 후 영업일 기준 최대 5일 이내에 변환 결과가 통보됩니다. 변환 중 상태는 <span data-en="My Studio" data-ko="마이 스튜디오">My Studio</span> 변환 로그에서 실시간으로 확인할 수 있으며, 반려 시 사유가 함께 안내됩니다.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFaq(this)">
-                        UGC 편집툴은 어디서 받을 수 있나요?
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-a"><span data-en="Register Asset" data-ko="작품 등록">Register Asset</span> 페이지(STEP 1)의 '편집툴 다운로드' 버튼을 통해 공식 UGC 편집툴을 다운로드할 수 있습니다. Window 환경을 지원하며, 설치 가이드가 패키지에 포함되어 있습니다.</div>
                 </div>
             </div>
         </div>
@@ -559,11 +511,10 @@
     <!-- ── CTA ── -->
     <section class="cta-bottom">
         <div class="container">
-            <h2>지금 바로 나만의 <span data-en="Footprints" data-ko="발자국">Footprints</span>을<br>세상에 선보여보세요!</h2>
-            <p>라그나로크 제로의 새로운 크리에이터 경제에 첫 발을 내딛어보세요.</p>
+            <!-- 6. 하단 디자인 수정 -->
+            <h2>지금 당장 발자국을<br>등록해 보세요</h2>
             <div class="cta-btn-group">
-                <a href="register.html" class="btn-hero-primary" style="font-size:16px; padding:16px 40px;">🪄 지금 <span data-en="Register" data-ko="등록">Register</span> 시작하기</a>
-                <a href="market.html" class="btn-hero-outline" style="font-size:16px; padding:16px 40px;">🛍️ <span data-en="Market" data-ko="마켓">Market</span> 둘러보기</a>
+                <a href="register.html" class="btn-hero-primary">🪄 작품 등록 폼으로 이동</a>
             </div>
         </div>
     </section>
@@ -572,13 +523,13 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-inner">
-                <div style="margin-bottom:16px;">
+                <div style="margin-bottom:24px;">
                     <a href="main2.html">← 메인으로</a>
-                    <a href="policy.html">기획 명세서</a>
-                    <a href="register.html"><span data-en="Register Asset" data-ko="작품 등록">Register Asset</span></a>
-                    <a href="market.html"><span data-en="Market" data-ko="마켓">Market</span></a>
+                    <a href="policy.html">수익화 정책</a>
+                    <a href="register.html">작품 등록</a>
+                    <a href="market.html">글로벌 마켓</a>
                 </div>
-                © 2026 GRAVITY Co., Ltd. All Rights Reserved. RO FACTORY는 GRAVITY의 공식 UGC 플랫폼입니다.
+                © 2026 GRAVITY Co., Ltd. ALL RIGHTS RESERVED. <br>RO FACTORY는 GRAVITY 공식 플랫폼입니다.
             </div>
         </div>
     </footer>

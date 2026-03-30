@@ -107,6 +107,52 @@ function renderGNB(opts = {}) {
                 </button>
             </div>
 
+            <!-- Mobile Right: Lang + User (visible on mobile only) -->
+            <div class="roz-gnb-mobile-right">
+                <style>
+                .roz-gnb-mobile-right { display: none; }
+                @media (max-width: 900px) {
+                    .roz-gnb-mobile-right { display: flex; align-items: center; gap: 10px; }
+                }
+                .mob-lang-btn {
+                    display: flex; align-items: center; gap: 4px;
+                    font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700;
+                    color: #333; background: none; border: none; cursor: pointer;
+                    position: relative;
+                }
+                .mob-lang-drop {
+                    position: absolute; top: calc(100% + 8px); right: 0;
+                    background: #fff; border: 1px solid #e8eaed; border-radius: 8px;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.12); width: 70px;
+                    display: none; flex-direction: column; padding: 4px; z-index: 999;
+                }
+                .mob-lang-btn.open .mob-lang-drop { display: flex; }
+                .mob-lang-opt { padding: 8px; font-size: 12px; font-weight: 700;
+                    text-align: center; color: #333; cursor: pointer; border-radius: 4px;
+                    text-transform: uppercase; transition: 0.2s; }
+                .mob-lang-opt:hover { background: #f1f5f9; color: #1e3a8a; }
+                .mob-lang-opt.active { background: #e0f2fe; color: #0369a1; }
+                .mob-user-btn {
+                    width: 34px; height: 34px; border-radius: 50%;
+                    background: #f1f5f9; border: 1px solid #e2e8f0;
+                    display: flex; align-items: center; justify-content: center;
+                    cursor: pointer;
+                }
+                </style>
+                <button class="mob-lang-btn" id="mobLangBtn" onclick="this.classList.toggle('open')">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    <span id="mobLangLabel">EN</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    <div class="mob-lang-drop">
+                        <div class="mob-lang-opt" onclick="event.stopPropagation(); changeLang('en'); document.getElementById('mobLangBtn').classList.remove('open'); document.getElementById('mobLangLabel').innerText='EN';">EN</div>
+                        <div class="mob-lang-opt" onclick="event.stopPropagation(); changeLang('kr'); document.getElementById('mobLangBtn').classList.remove('open'); document.getElementById('mobLangLabel').innerText='KR';">KR</div>
+                    </div>
+                </button>
+                <div class="mob-user-btn" onclick="alert('Login coming soon.')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+            </div>
+
         </div>
 
         <!-- Mobile Side Menu -->

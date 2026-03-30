@@ -6,7 +6,7 @@
     <title>RO FACTORY</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Pretendard', sans-serif; background: #f8fafc; color: #333; margin: 0; padding: 40px; }
+        body { font-family: 'Pretendard', sans-serif; background: #f8fafc; color: #333; margin: 0; }
         .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 50px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 40px; }
         .title { font-size: 28px; font-weight: 900; color: #0f172a; margin: 0; }
@@ -37,10 +37,53 @@
         /* Table Edit Styles */
         .editable-cell { transition: background 0.2s, box-shadow 0.2s; outline: none; }
         .editable-cell[contenteditable="true"]:focus { background-color: #fff; box-shadow: inset 0 0 0 2px #3b82f6; border-radius: 4px; z-index: 10; position: relative; }
-        .btn-edit { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 800; cursor: pointer; color: #475569; transition: 0.2s; margin-right: 15px;}
+        .btn-edit { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; color: #fff; transition: 0.2s; }
         .btn-edit.active { background: #3b82f6; color: #fff; border-color: #3b82f6; }
-        .btn-edit:hover:not(.active) { background: #e2e8f0; }
-        .header-actions { display: flex; align-items: center; }
+        .btn-edit:hover:not(.active) { background: rgba(255,255,255,0.2); }
+        .header-actions { display: flex; align-items: center; gap: 8px; }
+
+        /* Sticky Header */
+        .top-bar {
+            background: #0f172a;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .top-bar h1 {
+            font-size: 16px;
+            font-weight: 900;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+        }
+        .top-bar .ver {
+            font-size: 10px;
+            background: rgba(59, 130, 246, 0.7);
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 800;
+        }
+        .btn-home {
+            text-decoration: none;
+            color: #94a3b8;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 6px 14px;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+        .btn-home:hover {
+            color: #fff;
+            border-color: #64748b;
+        }
         .btn-micro { background: #fff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 8px; font-size: 13px; font-weight: 800; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); white-space: nowrap; }
         .btn-micro:hover { background: #f8fafc; border-color: #94a3b8; transform: translateY(-1px); }
         .btn-del { color: #ef4444; background: #fef2f2; border-color: #fca5a5; }
@@ -64,14 +107,15 @@
     </style>
 </head>
 <body>
-<div class="container">
-        <div class="header">
-            <h1 class="title">🗺️ RO FACTORY 정보구조도 (IA)</h1>
-            <div class="header-actions">
-                <button class="btn-edit" id="editToggleBtn" onclick="toggleEditMode()">✏️ 표 편집 켜기</button>
-                <a href="index.html" class="btn-back">← 포털 홈으로 돌아가기</a>
-            </div>
+    <div class="top-bar">
+        <h1>RO FACTORY 정보구조도 (IA) <span class="ver">v1.0</span></h1>
+        <div class="header-actions">
+            <button class="btn-edit" id="editToggleBtn" onclick="toggleEditMode()">✏️ 표 편집 켜기</button>
+            <a href="index.html" class="btn-home">← 포털 홈으로</a>
         </div>
+    </div>
+    <div style="padding: 40px;">
+        <div class="container">
         
         <table class="ia-table" id="iaTable">
             <thead>
@@ -169,6 +213,7 @@
             </tbody>
         </table>
         
+        </div>
     </div>
 
     <!-- Password Modal -->

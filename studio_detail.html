@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="info-box" style="border-color:#fca5a5;background:#fff5f5;">
             <div class="info-label" style="color:#dc2626;">실패 사유</div>
-            <div class="info-val" style="font-size:13px;color:#991b1b;font-weight:700;">${failReason||'—'}</div>
+            <div class="info-val" style="font-size:13px;color:#991b1b;font-weight:700;">변환 실패</div>
         </div>`;
     }
     document.getElementById('infoGrid').innerHTML = gridHTML;
@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tCompWait  = tlItem(status==='completed'&&completedSub==='wait', '2026.03.15 09:30','✅ 변환 완료 — 판매 대기','#1d4ed8','변환이 완료되었습니다. 게시일 도래 후 마켓에 자동 노출됩니다.');
     const tCompSale  = tlItem(status==='completed'&&completedSub==='sale', pubDate?pubDate.replace(/\./g,'/')+' 00:00':'—', '🎉 판매 중','#166634','마켓에 정상 노출 중입니다. 유저들이 구매할 수 있습니다.');
     const tExpired   = tlItem(true, expDate||'—', '⏹ 작품 만료','#64748b','판매 기간이 종료되어 마켓 품절 처리되었습니다.');
-    const tFailed    = tlItem(true, '2026.03.14 16:20','❗ 변환 실패','#991b1b',`변환 처리 중 오류가 발생했습니다. 사유: ${failReason||'파일 오류'}`);
+    const tFailed    = tlItem(true, '2026.03.14 16:20','❗ 변환 실패','#991b1b',`변환 처리 중 오류가 발생했습니다. 사유: 변환 실패`);
 
     let logs = [];
     if(status === 'converting'){

@@ -181,14 +181,14 @@
                         <input type="text" class="form-control" value="발자국" readonly>
                     </div>
                     <div class="form-group half">
-                        <label>판매 금액 <span>(OBT 기간 중 무료 배포 고정)</span></label>
-                        <input type="text" class="form-control" value="FREE" readonly style="font-weight:900;color:#059669;background:#f0fdf4;border-color:#86efac;cursor:not-allowed;font-size:18px;letter-spacing:1px;">
+                        <label>판매 금액 <span data-en="(Free during OBT)" data-ko="(OBT 고정)">(OBT 고정)</span></label>
+                        <input type="text" class="form-control" value="FREE" readonly>
                     </div>
                 </div>
                 <div class="form-row" style="margin-bottom:16px;">
                     <div class="form-group half">
-                        <label>작품 게시기간 <span style="color:#ef4444;">*필수</span> <span>(최소 30일)</span></label>
-                        <input type="date" class="form-control" id="postDate">
+                        <label>작품 게시기간 <span style="color:#ef4444;">*필수</span> <span>(DD.MM.YYYY, 최소 30일)</span></label>
+                        <input type="text" class="form-control" id="postDate" placeholder="DD.MM.YYYY" maxlength="10">
                     </div>
                     <div class="form-group half">
                         <label>작품명 <span style="color:#ef4444;">*</span> <span>(영문만, 최대 20자)</span></label>
@@ -201,16 +201,16 @@
                     <div class="s3-card">
                         <div class="s3-card-label">작품 타입 <span>최대 2개 선택</span></div>
                         <div class="tag-group" id="typeTags">
-                            <label class="tag-pill"><input type="checkbox" value="c1"> Cute</label>
-                            <label class="tag-pill"><input type="checkbox" value="c2"> Fancy</label>
-                            <label class="tag-pill"><input type="checkbox" value="c3"> Chic</label>
-                            <label class="tag-pill"><input type="checkbox" value="c4"> Dark</label>
-                            <label class="tag-pill"><input type="checkbox" value="c5"> Mystic</label>
+                            <label class="tag-pill type-pill"><input type="checkbox" value="c1"> Cute</label>
+                            <label class="tag-pill type-pill"><input type="checkbox" value="c2"> Fancy</label>
+                            <label class="tag-pill type-pill"><input type="checkbox" value="c3"> Chic</label>
+                            <label class="tag-pill type-pill"><input type="checkbox" value="c4"> Dark</label>
+                            <label class="tag-pill type-pill"><input type="checkbox" value="c5"> Mystic</label>
                         </div>
                     </div>
                     <div class="s3-divider"></div>
                     <div class="s3-card">
-                        <div class="s3-card-label">메인 <span data-en="Color" data-ko="색상">색상</span> <span>1개 선택 (선택)</span></div>
+                        <div class="s3-card-label"><span data-en="Color" data-ko="색상">색상</span> <span>1개 선택 (선택)</span></div>
                         <div class="tag-group" id="colorTags">
                             <label class="tag-pill color-pill">
                                 <input type="radio" name="mainColor" value="red">
@@ -402,8 +402,12 @@
                 return;
             }
             var dateInput = document.getElementById('postDate');
-            if (!dateInput.value) {
-                alert('작품 게시기간 만료일을 달력에서 선택해주세요.');
+            if (!dateInput.value.trim()) {
+                alert('작품 게시기간 만료일을 필수로 입력해주세요. (DD.MM.YYYY)');
+                return;
+            }
+            if (!/^\d{2}\.\d{2}\.\d{4}$/.test(dateInput.value.trim())) {
+                alert('게시 만료일 형식이 올바르지 않습니다. DD.MM.YYYY 형태로 입력해주세요.');
                 return;
             }
         }

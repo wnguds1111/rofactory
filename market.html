@@ -367,7 +367,33 @@
         let currentKafraPoints = 0; // Set default Kafra Points to 0
 
         function goToDetail(id) {
-            window.location.href = `market_detail.html?id=${id}`;
+            currentProductId = id;
+            const p = mockProducts.find(x => x.id === id);
+            if (!p) return;
+
+            document.getElementById('detail-title').innerHTML = p.title;
+            const priceLabel = p.isFree ? '<span style="color:#22c55e;">FREE</span>' : p.price.toLocaleString() + ' <span>KP</span>';
+            document.getElementById('detail-price').innerHTML = priceLabel;
+            
+            const detailImgWrap = document.getElementById('detail-img-wrap');
+            detailImgWrap.style.background = p.img;
+            document.getElementById('detail-icon').innerText = p.icon;
+            
+            const tagElem = document.getElementById('detail-tag');
+            if (p.tag) {
+                tagElem.style.display = 'block';
+                tagElem.innerText = p.tag;
+            } else {
+                tagElem.style.display = 'none';
+            }
+            
+            document.getElementById('detail-type-tag').innerText = '#' + p.type.toUpperCase();
+            document.getElementById('detail-color-tag').innerText = '#' + p.color.toUpperCase();
+            
+            updateDetailHeartUI(p);
+            
+            goToStep('detail');
+            window.history.pushState({ panel: 'detail', id }, '', `?productId=${id}`);
         }
 
         function updateDetailHeartUI(p) {
@@ -693,7 +719,7 @@
         // URL Parameter Handler for opening detail views from Index
         setTimeout(() => {
             const urlParams = new URLSearchParams(window.location.search);
-            const detailId = urlParams.get('detail');
+            const detailId = urlParams.get('detail') || urlParams.get('productId');
             if (detailId) {
                 goToDetail(parseInt(detailId));
             }
