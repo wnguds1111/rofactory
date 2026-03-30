@@ -195,7 +195,7 @@ function buildRow(w){
         badge = `<span class="item-status s-converting">변환 중</span>`;
     } else if(w.status === 'completed'){
         badge = w.completedSub === 'wait'
-            ? `<span class="item-status s-completed-wait">판매 대기</span>`
+            ? `<span class="item-status s-completed-wait">게시 예정일</span>`
             : `<span class="item-status s-completed-sale">판매 중</span>`;
     } else if(w.status === 'expired'){
         badge = `<span class="item-status s-expired">작품 만료</span>`;
@@ -208,8 +208,9 @@ function buildRow(w){
         meta += `<span>등록일: ${w.regDate}</span><span>판매수: 0</span>`;
     } else if(w.status === 'completed'){
         const c = w.completedSub === 'sale' ? '#166534' : '#1d4ed8';
-        meta += `<span style="color:${c};font-weight:800;">게시일: ${w.pubDate}</span>`;
-        meta += `<span>판매수: <b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
+        const dateLabel = w.completedSub === 'sale' ? '게시일' : '게시 예정일';
+        meta += `<span style="color:${c};font-weight:800;">${dateLabel}: ${w.pubDate}</span>`;
+        if(w.completedSub === 'sale') meta += `<span>판매수: <b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
     } else if(w.status === 'expired'){
         meta += `<span style="color:#64748b;">만료일: ${w.expDate}</span>`;
         meta += `<span>판매수: <b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;

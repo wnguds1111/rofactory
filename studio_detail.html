@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const badge = document.getElementById('statusBadge');
     const badgeMap = {
         'converting':      { text:'변환 중',   cls:'s-converting' },
-        'completed_wait':  { text:'판매 대기', cls:'s-completed-wait' },
+        'completed_wait':  { text:'게시 예정일', cls:'s-completed-wait' },
         'completed_sale':  { text:'판매 중',   cls:'s-completed-sale' },
         'expired':         { text:'작품 만료', cls:'s-expired' },
         'failed':          { text:'변환 실패', cls:'s-failed' },
@@ -213,9 +213,10 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>`;
     } else if(status === 'completed'){
         const pubColor = completedSub==='sale'?'#166534':'#1d4ed8';
+        const pubLabel = completedSub==='sale'?'게시일':'게시 예정일';
         gridHTML += `
         <div class="info-box">
-            <div class="info-label">게시일</div>
+            <div class="info-label">${pubLabel}</div>
             <div class="info-val" style="font-size:15px;color:${pubColor};">${pubDate||'—'}</div>
         </div>
         <div class="info-box">
@@ -248,9 +249,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── 액션 버튼 ──────────────────────────────────
     const acts = document.getElementById('actionContainer');
     if(status === 'failed'){
-        acts.innerHTML = `<button class="dt-btn dt-btn-danger" onclick="if(confirm('작품을 삭제하시겠습니까?')){alert('삭제되었습니다.');location.href='studio_myworks.html';}">🗑 삭제하기</button>`;
+        acts.innerHTML = `<button class="dt-btn dt-btn-danger" onclick="if(confirm('작품을 삭제하시겠습니까?')){alert('삭제되었습니다.');location.href='studio_myworks.html';}">&#x1F5D1; 삭제하기</button>`;
     } else if(status === 'expired'){
-        acts.innerHTML = `<button class="dt-btn dt-btn-secondary" onclick="alert('만료된 작품입니다. 새로 등록해주세요.')">재등록 불가</button>`;
+        acts.innerHTML = `<button class="dt-btn dt-btn-secondary" onclick="alert('만료된 작품입니다. 새로 등록해주세요.')">&#x1f504; 재등록 불가</button>`;
+    } else if(status === 'completed'){
+        acts.innerHTML = `<button class="dt-btn dt-btn-primary" onclick="downloadFoot('${title.replace(/'/g,"\\'")}')">&#x1F4E5; 작품 내려받기 (.foot)</button>`;
     } else {
         acts.innerHTML = '';
     }
@@ -308,6 +311,35 @@ function closePreview(){
 document.getElementById('previewModal').addEventListener('click', function(e){
     if(e.target === this) closePreview();
 });
+
+function downloadFoot(itemTitle) {
+    const safeTitle = itemTitle.replace(/[^a-zA-Z0-9가-힣\s_-]/g, '').trim().replace(/\s+/g, '_');
+    const fileName = safeTitle + '.foot';
+    const content = [
+        'RO Factory .foot File',
+        '====================',
+        'Item Name : ' + itemTitle,
+        'File Type : .foot',
+        'Category  : 발자국',
+        'Generated : ' + new Date().toLocaleString('ko-KR'),
+        '',
+        '[This is a simulated .foot asset file for demo purposes.]',
+        '[In production, this would be a binary UGC footprint asset.]',
+    ].join('\n');
+
+    // ZIP 시뮬레이션: 아이템명.foot 파일을 포함한 텍스트 다운로드
+    const blob = new Blob([content], { type: 'application/octet-stream' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = safeTitle + '_bundle.zip'; // zip 이름으로 다운
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    alert('📦 ' + itemTitle + ' (.foot) 파일이 압축 다운로드 됩니다.');
+}
+
 </script>
 </body>
 </html>

@@ -442,8 +442,72 @@
 
                     <div class="spec-group">
                         <div class="spec-label">GNB / FNB 내비게이션</div>
-                        <div class="note-block">GNB 및 FNB 레이아웃은 <strong>ROZ 공홈과 동일한 형태</strong>를 사용하며 별도 네비게이션 카피기
-                            없음.<br>단, RO FACTORY 메뉴 클릭 시 드롭다운 노출: <strong>작품등록 / 마켓이동 / 가이드안내 / 마이스튜디오</strong></div>
+                        <div class="note-block" style="margin-bottom:14px;">GNB 및 FNB 레이아웃은 <strong>ROZ 공홈과 동일한 형태</strong>를 사용합니다.</div>
+                        <table class="spec-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:140px;">구분</th>
+                                    <th style="width:280px;">메뉴명</th>
+                                    <th>이동 페이지 / 동작</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="field" rowspan="8">GNB</td>
+                                    <td><strong>SUBSCRIPTION</strong></td>
+                                    <td>GNJOY 정액제 페이지 이동</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TOP UP</strong></td>
+                                    <td>GNJOY KP 결제 페이지 이동</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RO FACTORY</strong></td>
+                                    <td>RO FACTORY 메인 페이지 이동</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GET PORING</strong></td>
+                                    <td>GET PORING 페이지 이동</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>NEWS</strong></td>
+                                    <td>NEWS 리스트 페이지 이동</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GAME INFO</strong></td>
+                                    <td>게임 안내 리스트 페이지 이동</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RESOURCE</strong></td>
+                                    <td>다운로드 페이지 이동</td>
+                                </tr>
+                                <tr>
+                                    <td style="white-space:nowrap;"><strong>COMMUNITY</strong> <span style="font-size:12px;">(외부 링크 아이콘)</span></td>
+                                    <td>기존 SNS 5개 노출</td>
+                                </tr>
+                                <tr>
+                                    <td class="field" rowspan="5">하단 고정 메뉴</td>
+                                    <td><strong>BGM 버튼</strong></td>
+                                    <td>BGM 재생</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>REDEEM</strong></td>
+                                    <td>GNJOY 쿠폰 등록 페이지 이동</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ROADMAP</strong></td>
+                                    <td>GNJOY 로드맵 페이지 이동</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>LIBRARY</strong></td>
+                                    <td>도서관 페이지 이동</td>
+                                </tr>
+                                <tr>
+                                    <td style="white-space:nowrap;"><strong>SUPPORT</strong> <span style="font-size:12px;">(외부링크 아이콘)</span></td>
+                                    <td>zoho 데스크 이동</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="spec-group">
@@ -884,29 +948,6 @@
                                 </tr>
                                 <tr>
                                     <td class="field">리스트 항목</td>
-                                    <td>썸네일 + 카테고리 태그 + 작품명 + 날짜 + 가격 + 상태 뱃지</td>
-                                </tr>
-                                <tr>
-                                    <td class="field">판매수 표시</td>
-                                    <td><span class="badge badge-green">판매 중</span> / <span class="badge badge-gray">작품
-                                            만료</span> 상태만 판매수 노출</td>
-                                </tr>
-                                <tr>
-                                    <td class="field">날짜 강조</td>
-                                    <td>
-                                        변환 완료: <span style="color:#0ea5e9; font-weight:800;">🔵 파란색 (게시 예정일)</span><br>
-                                        판매 중: <span style="color:#166534; font-weight:800;">🟢 녹색 (게시일)</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="field">만료 작품</td>
-                                    <td>제목 취소선, 썸네일 회색 처리</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="spec-group">
                         <div class="spec-label info">1-1. [나의 작품 관리] - 상태별 상세 정의 (studio_detail 뷰 연동)</div>
                         <table class="spec-table">
                             <thead>
@@ -962,6 +1003,14 @@
                                     <td>없음</td>
                                     <td><span style="color:#ef4444; font-weight:800;">회색 필터(grayscale) 적용</span></td>
                                     <td>카테고리 · 작품명 · 가격 · 태그<br><span style="color:#64748b;">마켓에서 비노출</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="field"><span class="badge badge-red">변환 실패</span></td>
+                                    <td>변환 파이프라인 처리 중<br>오류 발생 시</td>
+                                    <td>"변환 실패"<br>(빨간 뱃지)</td>
+                                    <td>가능 — <span style="color:#dc2626;font-weight:800;">파일 삭제만 가능</span><br><span style="font-size:12px;color:#94a3b8;">수정 불가 / 신규 등록은 가능</span></td>
+                                    <td>원본 표시</td>
+                                    <td>카테고리 · 작품명 · 등록일<br><span style="color:#dc2626;font-weight:800;">실패 사유 표시</span><br><span style="color:#64748b;font-size:12px;">마켓 비노출</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1083,6 +1132,27 @@
                                 </tr>
                                 <tr>
                                     <td>6</td>
+                                    <td>작품 최초 등록</td>
+                                    <td>RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</td>
+                                </tr>
+                                <tr style="border-top:2px solid #e2e8f0; background:#fff5f5;">
+                                    <td class="field" rowspan="4"><span style="color:#991b1b;font-weight:900;">변환 실패</span></td>
+                                    <td>1</td>
+                                    <td><strong style="color:#991b1b;">&#x2757; 변환 실패</strong></td>
+                                    <td>변환 파이프라인 처리 중 오류가 발생했습니다. 파일 삭제 후 신규 등록하실 수 있습니다.</td>
+                                </tr>
+                                <tr style="background:#fff5f5;">
+                                    <td>2</td>
+                                    <td>변환 작업 진행 중</td>
+                                    <td>서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하는 중 실패했습니다.</td>
+                                </tr>
+                                <tr style="background:#fff5f5;">
+                                    <td>3</td>
+                                    <td>변환 대기 중</td>
+                                    <td>파일 변환 대기열에 진입했습니다.</td>
+                                </tr>
+                                <tr style="background:#fff5f5;">
+                                    <td>4</td>
                                     <td>작품 최초 등록</td>
                                     <td>RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</td>
                                 </tr>
@@ -1211,7 +1281,7 @@
                                 </tr>
                                 <tr>
                                     <td class="field">작품 내려받기</td>
-                                    <td>필터된 목록의 .foot 파일 info를 TXT로 다운로드</td>
+                                    <td>필터된 항목의 아이템명 + <code>.foot</code> 파일을 zip으로 압축 다운로드 (<code>[itemName]_bundle.zip</code>)</td>
                                 </tr>
                             </tbody>
                         </table>
