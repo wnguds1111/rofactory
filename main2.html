@@ -355,8 +355,7 @@
             cursor:pointer;
         }
         .product-card:hover {
-            transform:translateY(-3px);
-            box-shadow:0 8px 24px rgba(0,0,0,0.08);
+            box-shadow:0 8px 24px rgba(0,0,0,0.10);
             border-color:#cdd0d8;
         }
         .product-thumb {
@@ -745,10 +744,18 @@
         /* ─── 상품 슬라이더 (가로 스크롤) ─── */
         function sl(id,d){ var t=document.getElementById(id); if(t) t.parentElement.scrollBy({left:d*210,behavior:'smooth'}); }
         document.querySelectorAll('.slider-wrap').forEach(function(w){
-            var d=false,sx,sc;
-            w.onmousedown=function(e){d=true;sx=e.pageX-w.offsetLeft;sc=w.scrollLeft;w.style.cursor='grabbing';};
+            var d=false,sx,sc,moved=false;
+            w.onmousedown=function(e){d=true;sx=e.pageX-w.offsetLeft;sc=w.scrollLeft;moved=false;w.style.cursor='grabbing';};
             w.onmouseleave=w.onmouseup=function(){d=false;w.style.cursor='';};
-            w.onmousemove=function(e){if(!d)return;e.preventDefault();w.scrollLeft=sc-(e.pageX-w.offsetLeft-sx);};
+            w.onmousemove=function(e){
+                if(!d)return;
+                var dx=e.pageX-w.offsetLeft-sx;
+                if(Math.abs(dx)>5){ moved=true; e.preventDefault(); w.scrollLeft=sc-dx; }
+            };
+            // 드래그가 있으면 링크 클릭 방지
+            w.querySelectorAll('a.product-card').forEach(function(a){
+                a.addEventListener('click', function(e){ if(moved){ e.preventDefault(); moved=false; } });
+            });
         });
 
         /* ─── 히어로 페이드 슬라이더 ─── */
