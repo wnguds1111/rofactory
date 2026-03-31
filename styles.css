@@ -487,13 +487,15 @@ a {
     .roz-gnb-toggle {
         display: flex;
         position: relative;
+        top: 0;           /* 기본값에 있던 top:50% 해제하여 flex 세로 중앙정렬 부작용 해소 */
+        transform: none;  /* 기본값에 있던 translateY(-50%) 해제 */
         z-index: 2;
         flex-shrink: 0;
         width: 24px;   /* 햄버거 너비 축소 */
         height: 20px;  /* 햄버거 높이 축소 */
         align-items: center;
         justify-content: center;
-        margin-left: 0; /* 좌측에 달라붙지 않게 기존 margin 제거하고 padding 24px에 의존 */
+        margin-left: 24px; /* 강제로 화면 왼쪽에서 24px 떨어지도록 설정 */
     }
 
     /* 우측: lang + user icon */
@@ -504,6 +506,7 @@ a {
         position: relative;
         z-index: 2;
         flex-shrink: 0;
+        margin-right: 24px;
     }
 }
 
