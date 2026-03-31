@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -99,13 +99,7 @@
                     <button class="filter-btn">6개월</button>
                 </div>
 
-                <div class="search-row" id="searchSaleStatusRow">
-                    <div class="search-label">판매 상태</div>
-                    <div class="radio-group">
-                        <label class="radio-item"><input type="radio" name="sale" checked> Y</label>
-                        <label class="radio-item"><input type="radio" name="sale"> N</label>
-                    </div>
-                </div>
+
 
                 <div class="search-row">
                     <div class="search-label">검색 키워드</div>
@@ -370,24 +364,20 @@
                 </div>
             `;
 
-            // Dynamic Table Header (Hide columns if '변환 대기')
+            // Dynamic Table Header (Hide columns if '변환 중')
             let isConverting = (currentFilter === '변환 대기');
             let isExpired = (currentFilter === '만료');
-            
-            // 유저 요청: 만료 페이지에서는 검색 판매 상태 없애줌
-            document.getElementById('searchSaleStatusRow').style.display = (isConverting || isExpired) ? 'none' : 'flex';
             
             let htmlHead = `
                 <tr>
                     <th style="width: 5%;">번호</th>
                     <th style="width: 15%;">작품 ID</th>
                     <th style="width: 10%;">작품 카테고리</th>
-                    <th style="width: ${isConverting ? '38%' : '20%'};">작품 이름</th>
+                    <th style="width: ${isConverting ? '50%' : '30%'};">작품 이름</th>
                     <th style="width: 5%;">가격</th>
                     <th style="width: 12%;">등록일</th>
                     <th style="width: 12%;">유효기간</th>
-                    ${!isConverting ? '<th style="width: 12%;">판매 시작일</th>' : ''}
-                    ${!isConverting ? '<th style="width: 9%;">판매상태</th>' : ''}
+                    ${!isConverting ? '<th style="width: 11%;">판매 시작일</th>' : ''}
                 </tr>
             `;
             thead.innerHTML = htmlHead;
@@ -395,9 +385,6 @@
             // Dynamic Table Body (Index per page, conditionally hide columns)
             let pageIndex = 1;
             filteredList.forEach(item => {
-                let statusStr = (item.statusText === '판매 진행') ? 'Y' : 'N';
-                let weight = (statusStr === 'Y') ? '800' : '800; color:#ef4444';
-                
                 htmlBody += `
                 <tr>
                     <td style="font-weight:700;">${pageIndex++}</td>
@@ -413,11 +400,10 @@
                     <td>${item.reg}</td>
                     <td>${item.exp}</td>
                     ${!isConverting ? `<td>${item.start}</td>` : ''}
-                    ${!isConverting ? `<td style="font-weight:${weight};">${statusStr}</td>` : ''}
                 </tr>`;
             });
             if(filteredList.length === 0) {
-                let colSpan = isConverting ? 7 : 9;
+                let colSpan = isConverting ? 6 : 7;
                 htmlBody = `<tr><td colspan="${colSpan}" style="padding:40px; color:#888;">조회된 내역이 없습니다. (현재 필터: ${currentFilter})</td></tr>`;
             }
             tbody.innerHTML = htmlBody;
