@@ -428,15 +428,32 @@
 
         function downloadCSV() {
             let filteredList = currentFilter === 'All' ? mockList : mockList.filter(item => item.statusText === currentFilter);
-            let csvContent = "작품 ID,카테고리,작품 이름,가격,등록일,유효기간,판매상태\n"; // Header
-            
+            let isConverting = (currentFilter === '변환 대기');
+
+            // 현재 탭에 보이는 컬럼과 동일하게 헤더 구성
+            let headers = ['작품ID', '카테고리', '작성자ID', '작품이름', '가격', '등록일', '유효기간'];
+            if (!isConverting) headers.push('판매시작일');
+
+            let csvContent = headers.join(',') + '\n';
+
             filteredList.forEach(item => {
-                let statusYn = (item.statusText === '판매 진행') ? 'Y' : 'N';
-                csvContent += `${item.rid},${item.cat},${item.name},${item.price.replace(',','')},${item.reg},${item.exp},${statusYn}\n`;
+                let row = [
+                    item.rid,
+                    item.cat,
+                    item.author || '-',
+                    `"${item.name}"`,   // 쉼표 포함 대비 따옴표 처리
+                    item.price,
+                    item.reg,
+                    item.exp
+                ];
+                if (!isConverting) row.push(item.start);
+                csvContent += row.join(',') + '\n';
             });
-            
-            _downloadFileTemplate("\uFEFF" + csvContent, 'ro_factory_list.csv', 'text/csv;charset=utf-8;');
-            alert('목록 다운로드가 완료되었습니다.');
+
+            const filterLabel = currentFilter === 'All' ? '전체' : currentFilter.replace(' ', '_');
+            const filename = `ro_factory_${filterLabel}_list.csv`;
+            _downloadFileTemplate('\uFEFF' + csvContent, filename, 'text/csv;charset=utf-8;');
+            alert(`[${currentFilter}] 목록 다운로드가 완료되었습니다. (${filteredList.length}건)`);
         }
 
         function downloadAssets() {
