@@ -7,32 +7,15 @@
     <title>RO FACTORY</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <style>
+    <style type="text/tailwindcss">
         /* ── Terms Modal (JS 동적 클래스 제어 필요) ── */
-        .terms-modal-overlay {
-            display: none; position: fixed; inset: 0;
-            background: rgba(0,0,0,0.6); z-index: 9999;
-            align-items: center; justify-content: center; padding: 20px;
-        }
-        .terms-modal-overlay.show { display: flex; }
-        .terms-modal {
-            background: #fff; border-radius: 20px; padding: 36px;
-            max-width: 560px; width: 100%; max-height: 80vh;
-            display: flex; flex-direction: column; gap: 20px;
-            box-shadow: 0 24px 60px rgba(0,0,0,0.25);
-        }
-        .terms-modal h2 { font-size: 20px; font-weight: 900; color: #0f172a; margin: 0; }
-        .terms-content {
-            flex: 1; overflow-y: auto; font-size: 13px; line-height: 1.8;
-            color: #475569; border: 1px solid #e2e8f0; border-radius: 12px;
-            padding: 20px; max-height: 320px;
-        }
-        .btn-close-modal {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: #fff; border: none; padding: 14px; border-radius: 12px;
-            font-size: 14px; font-weight: 800; cursor: pointer; width: 100%;
-        }
-        .btn-close-modal:disabled { background: #cbd5e1; cursor: not-allowed; }
+        .terms-modal-overlay { @apply hidden fixed inset-0 bg-black/60 z-[9999] opacity-0 transition-opacity duration-300 items-center justify-center p-5; }
+        .terms-modal-overlay.show { @apply flex opacity-100; }
+        .terms-modal { @apply bg-white rounded-[20px] md:p-9 p-6 max-w-[560px] w-full max-h-[80vh] flex flex-col md:gap-5 gap-4 shadow-[0_24px_60px_rgba(0,0,0,0.25)]; }
+        .terms-modal h2 { @apply text-[20px] font-black text-slate-900 m-0; }
+        .terms-content { @apply flex-1 overflow-y-auto text-[13px] leading-[1.8] text-slate-600 border border-slate-200 rounded-xl p-5 max-h-[320px]; }
+        .btn-close-modal { @apply bg-gradient-to-br from-blue-500 to-blue-700 text-white border-none p-[14px] rounded-[12px] text-[14px] font-extrabold cursor-pointer w-full transition-colors duration-200; }
+        .btn-close-modal:disabled { @apply bg-slate-300 !from-slate-300 !to-slate-300 cursor-not-allowed opacity-70; }
 
         /* ── 모바일 반응형 (Tailwind @media로 처리 불가한 부분만) ── */
         @media (max-width: 767px) {
