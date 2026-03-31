@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -160,11 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── 상태 배지 ──────────────────────────────────
     const badge = document.getElementById('statusBadge');
     const badgeMap = {
-        'converting':      { text:'변환 중',   cls:'s-converting' },
-        'completed_wait':  { text:'게시 예정일', cls:'s-completed-wait' },
-        'completed_sale':  { text:'판매 중',   cls:'s-completed-sale' },
-        'expired':         { text:'작품 만료', cls:'s-expired' },
-        'failed':          { text:'변환 실패', cls:'s-failed' },
+        'converting':      { text:'변환 중',          cls:'s-converting' },
+        'completed_wait':  { text:'게시 예정일',       cls:'s-completed-wait' },
+        'completed_sale':  { text:'판매 중',          cls:'s-completed-sale' },
+        'expired':         { text:'작품 만료',         cls:'s-expired' },
+        'failed':          { text:'변환 실패',         cls:'s-failed' },
+        'pending':         { text:'변환 대기',         cls:'s-pending' },
     };
     const compositeKey = status === 'completed'
         ? (completedSub === 'sale' ? 'completed_sale' : 'completed_wait')
@@ -254,15 +255,15 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="tl-desc">${desc}</div>
         </div>`;
 
-    const tReg       = tlItem(false,'2026.03.10 10:00','작품 최초 등록','','RO Factory를 통해 작품 정보가 등록되었습니다.');
-    const tConvert   = tlItem(status==='converting', '2026.03.13 14:00','🔄 변환 작업 진행 중','#92400e','서버 엔진에서 인게임 적용을 위한 파일 변환을 진행하고 있습니다.');
-    const tCompWait  = tlItem(status==='completed'&&completedSub==='wait', '2026.03.15 09:30','✅ 변환 완료 — 판매 대기','#1d4ed8','변환이 완료되었습니다. 게시일 도래 후 마켓에 자동 노출됩니다.');
-    const tCompSale  = tlItem(status==='completed'&&completedSub==='sale', pubDate?pubDate.replace(/\./g,'/')+' 00:00':'—', '🎉 판매 중','#166634','마켓에 정상 노출 중입니다. 유저들이 구매할 수 있습니다.');
-    const tExpired   = tlItem(true, expDate||'—', '⏹ 작품 만료','#64748b','판매 기간이 종료되어 마켓 품절 처리되었습니다.');
-    const tFailed    = tlItem(true, '2026.03.14 16:20','❗ 변환 실패','#991b1b',`변환 처리 중 오류가 발생했습니다. 사유: 변환 실패`);
+    const tReg       = tlItem(false,'2026.03.10 10:00','작품 최초 등록','','RO Factory 폼을 통해 최초로 정보가 등록되었습니다.');
+    const tConvert   = tlItem(status==='converting', '2026.03.13 14:00','🔄 변환 작업 진행 중','#92400e','서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.');
+    const tCompWait  = tlItem(status==='completed'&&completedSub==='wait', '2026.03.15 09:30','✅ 변환 완료','#1d4ed8','모든 변환이 성공적으로 끝났습니다. 안내된 패치 예정일에 맞춰 출시를 대기합니다.');
+    const tCompSale  = tlItem(status==='completed'&&completedSub==='sale', pubDate?pubDate.replace(/\./g,'/')+' 00:00':'—', '🎉 제품 판매 중','#166634','오픈 마켓에 정상적으로 등록되어, 현재 유저들이 아이템을 구매하고 있습니다!');
+    const tExpired   = tlItem(true, expDate||'—', '⏹ 작품 만료됨','#64748b','판매 기간이 종료되어 마켓 품절 처리되었습니다.');
+    const tFailed    = tlItem(true, '2026.03.14 16:20','❗ 변환 실패','#991b1b','변환 파이프라인 처리 중 오류가 발생했습니다. 파일 삭제 후 신규 등록하실 수 있습니다.');
 
     let logs = [];
-    if(status === 'converting'){
+    if(status === 'converting' || status === 'pending'){
         logs = [tConvert, tReg];
     } else if(status === 'completed' && completedSub === 'wait'){
         logs = [tCompWait, tConvert, tReg];
