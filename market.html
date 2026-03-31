@@ -10,6 +10,107 @@
         /* Shared Market Layout */
         body { background-color: #ffffff; color: #0f172a; border: 1px solid #e2e8f0; }
         .market-container { max-width: 1400px; margin: 40px auto; padding: 0 40px; min-height: 80vh; }
+
+        /* ── Mobile Filter Toggle Button ── */
+        .mobile-filter-btn {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 500;
+            background: #1e3a8a;
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(30,58,138,0.35);
+            gap: 8px;
+            align-items: center;
+            white-space: nowrap;
+        }
+        /* ── Mobile Filter Drawer Overlay ── */
+        .filter-drawer-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 800;
+            backdrop-filter: blur(3px);
+        }
+        .filter-drawer-overlay.open { display: block; }
+        .filter-drawer {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: #fff;
+            border-radius: 24px 24px 0 0;
+            max-height: 85vh;
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 900;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+            overflow: hidden;
+        }
+        .filter-drawer-overlay.open .filter-drawer {
+            transform: translateY(0);
+        }
+        /* 드로워 상단 고정 헤더 */
+        .filter-drawer-header {
+            flex-shrink: 0;
+            padding: 16px 20px 0;
+            background: #fff;
+        }
+        .filter-drawer-handle {
+            width: 40px; height: 4px;
+            background: #cbd5e1;
+            border-radius: 2px;
+            margin: 0 auto 16px;
+        }
+        .filter-drawer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 14px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        .filter-drawer-title { font-size: 16px; font-weight: 900; color: #0f172a; }
+        .filter-drawer-close {
+            background: #f1f5f9; border: none;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            font-size: 16px; cursor: pointer; color: #64748b;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s;
+        }
+        .filter-drawer-close:hover { background: #e2e8f0; }
+        /* 드로워 스크롤 영역 */
+        .filter-drawer-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 20px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+        /* 드로워 하단 고정 버튼 */
+        .filter-drawer-footer {
+            flex-shrink: 0;
+            padding: 12px 20px 20px;
+            background: #fff;
+            border-top: 1px solid #f1f5f9;
+        }
+        .filter-apply-btn {
+            width: 100%; padding: 15px;
+            background: #1e3a8a; color: #fff;
+            border: none; border-radius: 14px;
+            font-size: 15px; font-weight: 800;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .filter-apply-btn:hover { background: #1e40af; }
         .market-panel { display: none; animation: fadeIn 0.4s ease forwards; }
         .market-panel.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -132,10 +233,119 @@
         .btn-heart:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         .btn-heart span { color: #0f172a; }
         .d-tag { display: inline-block; background: #f8fafc; border: 1px solid #cbd5e1; color: #475569; font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 6px; margin-right: 4px; }
+        /* ── Responsive Breakpoints ── */
+        @media (max-width: 900px) {
+            .market-container { margin: 12px auto; padding: 0 16px; }
+            .mobile-filter-btn { display: flex; }
+            .market-sidebar { display: none !important; }
+            .market-layout { border-top: none; padding-top: 0; }
+
+            /* ── 검색바: 가로 한 줄 유지 (styles.css flex-direction:column 덮어쓰기) ── */
+            .market-search-bar {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                max-width: 100% !important;
+                margin: 0 0 14px !important;
+                height: 48px !important;
+                border-radius: 12px !important;
+                border: 1.5px solid #e2e8f0 !important;
+                background: #f8fafc !important;
+                overflow: hidden !important;
+            }
+            .market-search-cat {
+                width: auto !important;
+                flex-shrink: 0 !important;
+                border-right: 1px solid #e2e8f0 !important;
+                border-bottom: none !important;
+                padding: 0 14px !important;
+                height: 100% !important;
+                font-size: 13px !important;
+                justify-content: center !important;
+            }
+            .market-search-cat select { font-size: 13px !important; }
+            .market-search-input {
+                flex: 1 !important;
+                width: auto !important;
+                padding: 0 12px !important;
+                font-size: 14px !important;
+                text-align: left !important;
+            }
+            .market-search-btn {
+                padding: 0 12px !important;
+                font-size: 15px !important;
+                height: 100%;
+                flex-shrink: 0;
+            }
+
+            .market-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .card-img-wrap { font-size: 50px; }
+            .card-name { font-size: 12px; }
+            .card-price { font-size: 12px; }
+            /* Detail Panel mobile */
+            .detail-wrapper { flex-direction: column; gap: 24px; padding: 20px 16px; border-radius: 16px; }
+            .detail-left { min-height: 280px; font-size: 80px; }
+            .d-title { font-size: 24px; }
+            .d-price-val { font-size: 26px; }
+            .btn-buy { padding: 16px; font-size: 16px; }
+            /* KP Modal mobile */
+            .kp-modal { width: calc(100vw - 32px); border-radius: 20px; }
+            /* Complete view mobile */
+            .complete-wrapper { padding: 48px 20px; }
+            .c-icon { font-size: 60px; }
+            .c-title { font-size: 24px; }
+        }
+        @media (max-width: 480px) {
+            .market-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .card-img-wrap { border-radius: 6px; }
+        }
+
+        /* ── 드로워 내 range slider 터치 충돌 방지 ── */
+        #drawerFilterContent .range-wrapper {
+            touch-action: none;
+            padding: 8px 0;
+        }
+        #drawerFilterContent input[type="range"].dual-range {
+            touch-action: none;
+            height: 24px !important;
+        }
+        #drawerFilterContent input[type="range"].dual-range::-webkit-slider-thumb {
+            width: 28px !important;
+            height: 28px !important;
+            margin-top: -11px !important;
+        }
+        /* 드로워 내 슬라이더 구역 전체 스크롤 방지 */
+        .drawer-slider-zone {
+            overflow: hidden;
+            padding: 4px 0;
+        }
     </style>
 </head>
 <body>
     <script src="gnb.js"></script>
+
+<!-- Mobile Filter Drawer Overlay -->
+<div class="filter-drawer-overlay" id="filterDrawerOverlay" onclick="closeMobileFilter(event)">
+    <div class="filter-drawer" id="filterDrawer">
+        <!-- ① 고정 헤더 -->
+        <div class="filter-drawer-header">
+            <div class="filter-drawer-handle"></div>
+            <div class="filter-drawer-top">
+                <span class="filter-drawer-title">🎛️ 필터 & 정렬</span>
+                <button class="filter-drawer-close" onclick="event.stopPropagation(); window.closeMobileFilter()">✕</button>
+            </div>
+        </div>
+        <!-- ② 스크롤 콘텐츠 영역 -->
+        <div class="filter-drawer-body" id="drawerFilterContent"></div>
+        <!-- ③ 고정 하단 적용버튼 -->
+        <div class="filter-drawer-footer">
+            <button class="filter-apply-btn" onclick="event.stopPropagation(); window.closeMobileFilter()">필터 적용하기 ✓</button>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Filter Floating Button (마켓 리스트에서만 표시) -->
+<button class="mobile-filter-btn" id="mobileFilterBtn" onclick="openMobileFilter()">🎛️ 필터 & 정렬</button>
 
 <div class="market-container">
         
@@ -227,7 +437,7 @@
                     </div>
                 </main>
             </div>
-        </div>
+            </div>
 
         <!-- STEP 2: MARKET DETAIL -->
         <div id="panel-detail" class="market-panel">
@@ -360,6 +570,9 @@
             document.querySelectorAll('.market-panel').forEach(el => el.classList.remove('active'));
             document.getElementById('panel-' + step).classList.add('active');
             window.scrollTo(0, 0);
+            // 마켓 리스트일 때만 모바일 필터 버튼 표시
+            const filterBtn = document.getElementById('mobileFilterBtn');
+            if (filterBtn) filterBtn.style.display = step === 'list' ? 'flex' : 'none';
         }
 
         // Global state mapping for Detail and Checkout
@@ -724,6 +937,119 @@
                 goToDetail(parseInt(detailId));
             }
         }, 150);
+
+        /* ── Mobile Filter Drawer Logic ── */
+        function openMobileFilter() {
+            // Clone sidebar content into drawer
+            const sidebar = document.querySelector('.market-sidebar');
+            const drawerContent = document.getElementById('drawerFilterContent');
+            drawerContent.innerHTML = sidebar.innerHTML;
+
+            // Sync active states from sidebar buttons to drawer
+            document.querySelectorAll('.market-sidebar .f-btn').forEach((btn, i) => {
+                if (btn.classList.contains('active')) {
+                    drawerContent.querySelectorAll('.f-btn')[i]?.classList.add('active');
+                }
+            });
+
+            // Attach filter events to drawer buttons
+            drawerContent.querySelectorAll('.filter-btns').forEach(group => {
+                group.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.f-btn');
+                    if (!btn) return;
+                    if (btn.classList.contains('active')) {
+                        btn.classList.remove('active');
+                    } else {
+                        group.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                    }
+                    // Sync to real sidebar
+                    const allDrawerBtns = [...drawerContent.querySelectorAll('.f-btn')];
+                    const allSidebarBtns = [...document.querySelectorAll('.market-sidebar .f-btn')];
+                    allDrawerBtns.forEach((db, idx) => {
+                        if (allSidebarBtns[idx]) {
+                            db.classList.contains('active')
+                                ? allSidebarBtns[idx].classList.add('active')
+                                : allSidebarBtns[idx].classList.remove('active');
+                        }
+                    });
+                    activeFilters.type = document.querySelector('.filter-type .f-btn.active')?.dataset.val || null;
+                    activeFilters.color = document.querySelector('.filter-color .f-btn.active')?.dataset.val || null;
+                    activeFilters.btnPrice = document.querySelector('.filter-price .f-btn.active')?.dataset.val || null;
+                    activeFilters.sort = document.querySelector('.filter-sort .f-btn.active')?.dataset.val || null;
+                    renderProducts();
+                });
+            });
+
+            // ── Range Slider: 드로워 스크롤 충돌 방지 + 독립 이벤트 ──
+            const drawerWrapper = drawerContent.querySelector('.range-wrapper');
+            if (drawerWrapper) {
+                // slider-zone으로 감싸 overflow:hidden 처리
+                const zone = document.createElement('div');
+                zone.className = 'drawer-slider-zone';
+                drawerWrapper.parentNode.insertBefore(zone, drawerWrapper);
+                zone.appendChild(drawerWrapper);
+
+                const dMin = drawerContent.querySelector('#minRange');
+                const dMax = drawerContent.querySelector('#maxRange');
+                const dFill = drawerContent.querySelector('#rangeFill');
+                const dMinLbl = drawerContent.querySelector('#priceMinLabel');
+                const dMaxLbl = drawerContent.querySelector('#priceMaxLabel');
+
+                // 원본과 ID 충돌 방지
+                if (dMin) dMin.id = 'drawerMinRange';
+                if (dMax) dMax.id = 'drawerMaxRange';
+                if (dFill) dFill.id = 'drawerRangeFill';
+                if (dMinLbl) dMinLbl.id = 'drawerPriceMinLabel';
+                if (dMaxLbl) dMaxLbl.id = 'drawerPriceMaxLabel';
+
+                // 현재 필터값 동기화
+                if (dMin) dMin.value = activeFilters.minPrice;
+                if (dMax) dMax.value = activeFilters.maxPrice;
+
+                function syncDrawerSlider() {
+                    let minVal = parseInt(dMin?.value || 0);
+                    let maxVal = parseInt(dMax?.value || 20000);
+                    if (minVal > maxVal) { let t = minVal; minVal = maxVal; maxVal = t; }
+                    const maxTotal = 20000;
+                    if (dFill) {
+                        dFill.style.left = (minVal / maxTotal * 100) + '%';
+                        dFill.style.width = ((maxVal - minVal) / maxTotal * 100) + '%';
+                    }
+                    if (dMinLbl) dMinLbl.innerText = minVal.toLocaleString() + ' KP';
+                    if (dMaxLbl) dMaxLbl.innerText = maxVal === maxTotal
+                        ? maxVal.toLocaleString() + '+ KP'
+                        : maxVal.toLocaleString() + ' KP';
+                    // 원본 슬라이더 + 필터 동기화
+                    activeFilters.minPrice = minVal;
+                    activeFilters.maxPrice = maxVal;
+                    document.getElementById('minRange').value = minVal;
+                    document.getElementById('maxRange').value = maxVal;
+                    renderProducts();
+                }
+
+                [dMin, dMax].forEach(el => {
+                    if (!el) return;
+                    el.addEventListener('input', syncDrawerSlider);
+                    // 슬라이더 터치 시 드로워 스크롤 막기
+                    el.addEventListener('touchstart', e => e.stopPropagation(), { passive: false });
+                    el.addEventListener('touchmove',  e => e.stopPropagation(), { passive: false });
+                });
+
+                syncDrawerSlider();
+            }
+
+            document.getElementById('filterDrawerOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 드로워 닫기
+        window.closeMobileFilter = function(e) {
+            // e가 있으면 오버레이 직접 클릭인지 확인 (드로워 내부 클릭은 무시)
+            if (e && e.target && e.target.id !== 'filterDrawerOverlay') return;
+            document.getElementById('filterDrawerOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        };
     </script>
 
 

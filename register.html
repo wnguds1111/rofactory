@@ -66,6 +66,102 @@
             background: #cbd5e1;
             cursor: not-allowed;
         }
+
+        /* ── Mobile Responsive Overrides ── */
+        @media (max-width: 767px) {
+            /* GNB 상단 영역 압축 */
+            .gnb .container { height: 50px !important; }
+            .gnb { box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
+            .gnjoy-topbar { display: none !important; }
+
+            /* Intro step cards: 2x2 grid */
+            .intro-steps-list {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 12px !important;
+                margin-top: 16px !important;
+            }
+            .intro-card {
+                padding: 18px 10px !important;
+            }
+            .intro-card .step-icon { font-size: 36px !important; }
+            .intro-card h4 { font-size: 15px !important; }
+            .intro-card p { font-size: 12px !important; }
+
+            /* File upload grid: 2x2 */
+            .file-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 10px !important;
+            }
+            .file-box { padding: 14px 8px !important; }
+            .file-box .icon { font-size: 24px !important; }
+            .file-box h4 { font-size: 13px !important; }
+            .file-box span { font-size: 11px !important; }
+
+            /* Form rows stack vertically */
+            .form-row {
+                flex-direction: column !important;
+                gap: 12px !important;
+                margin-bottom: 12px !important;
+            }
+
+            /* STEP 3 type/color cards */
+            .s3-bottom-row {
+                flex-direction: column !important;
+                gap: 14px !important;
+                margin-top: 16px !important;
+            }
+            .s3-card { padding: 18px !important; }
+            .tag-pill {
+                padding: 10px 16px !important;
+                font-size: 13px !important;
+            }
+
+            /* Wizard main padding */
+            .wizard-main { padding: 0 16px 110px !important; }
+
+            /* ── Footer: 슬림하게 ── */
+            .wizard-footer {
+                padding: 10px 16px 10px !important;
+                gap: 10px;
+            }
+            .btn-next {
+                padding: 11px 20px !important;
+                font-size: 14px !important;
+                border-radius: 10px !important;
+                box-shadow: 0 3px 10px rgba(59,130,246,0.25) !important;
+                flex: 1;
+            }
+            .btn-back {
+                font-size: 13px !important;
+                flex-shrink: 0;
+            }
+            .progress-fill { height: 3px !important; }
+
+            /* Notice box */
+            .alert-notice {
+                font-size: 13px !important;
+                padding: 14px 16px !important;
+            }
+
+            /* Step title 압축 */
+            .step-title { font-size: 22px !important; margin-bottom: 10px !important; }
+            .step-sub { font-size: 16px !important; }
+            .step-desc { font-size: 14px !important; }
+
+            /* Terms modal mobile */
+            .terms-modal {
+                padding: 24px 16px !important;
+                border-radius: 16px !important;
+            }
+        }
+        @media (max-width: 400px) {
+            .intro-steps-list {
+                grid-template-columns: 1fr !important;
+            }
+            .file-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
 </head>
 <body class="wizard-layout">
