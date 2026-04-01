@@ -76,7 +76,7 @@
                 <thead><tr><th style="width:200px;">항목</th><th style="width:200px;">현재 구현 상태</th><th>결정 필요 사항</th></tr></thead>
                 <tbody>
                     <tr><td class="item">1일 등록 횟수</td><td class="curr"><span class="badge badge-warn">수치 미확정</span></td><td>❓ 최대 일 몇 회 등록 가능한지 수치 확정 필요</td></tr>
-                    <tr><td class="item">파일 포맷</td><td class="curr">.foot + .mp4 + .png 4종 필수</td><td>✅ 완료</td></tr>
+                    <tr><td class="item">파일 포맷</td><td class="curr">.foot + .mp4 + .png 4종 필수</td><td>❓ 파일 포맷은 확정이나 보안을 위해 파일 식별자를 foot 파일 내 부여하여 전달 가능할지</td></tr>
                     <tr><td class="item">영상 파일 크기</td><td class="curr"><span class="badge badge-warn">500kb 이하 기재</span></td><td>✅ 완료</td></tr>
                     <tr><td class="item">작품명 규칙</td><td class="curr">영문 최대 20자</td><td>✅ 완료</td></tr>
                     <tr><td class="item">작품 만료일</td><td class="curr">유저가 등록 기준 최소 30일 이상 입력</td><td>❓ 초기 오픈 시 모든 작품 만료일은 영구인지 확인 / 유저가 입력하는게 맞는지</td></tr>
@@ -108,7 +108,7 @@
         <div class="section-card">
             <div class="section-header">
                 <div class="section-icon" style="background:#fef2f2;">🔒</div>
-                <div class="section-title">3. 수정 / 삭제 정책</div>
+                <div class="section-title">3. 수정 / 삭제 / 취소 정책</div>
             </div>
             <table>
                 <thead><tr><th>항목</th><th>현재 구현 상태</th><th>결정 필요 사항</th></tr></thead>
@@ -118,6 +118,7 @@
                     <tr><td class="item">등록 작품 만료</td><td class="curr">영구 보관 및 삭제 기능 없음</td><td>❓ 영구 보관 vs 일정 기간 후 자동 삭제 정책</td></tr>
                     <tr><td class="item">구매 작품 만료</td><td class="curr">영구 보관 및 삭제 기능 없음</td><td>❓ 영구 보관 vs 일정 기간 후 자동 삭제 정책</td></tr>
                     <tr><td class="item">어드민 강제 삭제</td><td class="curr"><span class="badge badge-danger">불가</span></td><td>❓ 운영 방식에 따라 강제 삭제 기능 필요한지</td></tr>
+                    <tr><td class="item">취소 정책</td><td class="curr"><span class="badge badge-danger">미구현</span></td><td>❓ 작품 등록 시 스튜디오 변환 전 단계에 유저가 '등록 취소' 기능이 필요한지 검토</td></tr>
                 </tbody>
             </table>
         </div>
