@@ -207,7 +207,7 @@
             </div>
             <div class="modal-body" style="background:#f8fafc; padding:20px; border-radius:8px;">
                 <p style="font-size:13px; color:#475569; margin-bottom:15px; line-height:1.5;">
-                    엑셀 양식에 맞추어 <strong>작품 ID, 판매 상태(Y/N), 인게임 업로드 기간</strong> 데이터를 입력 후 업로드해주세요.<br>
+                    엑셀 양식에 맞추어 <strong>작품 ID, 판매 시작일</strong> 데이터를 입력 후 업로드해주세요.<br>
                     (주의: 업로드가 완료되면 목록의 상태가 즉각 갱신되며, 유저의 상태 정보도 동기화됩니다.)
                 </p>
                 <div style="display:flex; justify-content:center; margin-bottom:20px;">
@@ -434,19 +434,22 @@
             let headers = ['작품ID', '카테고리', '작성자ID', '작품이름', '가격', '등록일', '유효기간'];
             if (!isConverting) headers.push('판매시작일');
 
-            let csvContent = headers.join(',') + '\n';
+            // CSV 안전 처리: 모든 필드를 따옴표로 감싸기
+            const esc = v => `"${String(v).replace(/"/g, '""')}"`;
+
+            let csvContent = headers.map(esc).join(',') + '\n';
 
             filteredList.forEach(item => {
                 let row = [
-                    item.rid,
-                    item.cat,
-                    item.author || '-',
-                    `"${item.name}"`,   // 쉼표 포함 대비 따옴표 처리
-                    item.price,
-                    item.reg,
-                    item.exp
+                    esc(item.rid),
+                    esc(item.cat),
+                    esc(item.author || '-'),
+                    esc(item.name),
+                    esc(item.price),    // "1,500" → "\"1,500\"" 안전 처리
+                    esc(item.reg),
+                    esc(item.exp)
                 ];
-                if (!isConverting) row.push(item.start);
+                if (!isConverting) row.push(esc(item.start));
                 csvContent += row.join(',') + '\n';
             });
 
@@ -460,14 +463,14 @@
             let content = "RO FACTORY 에셋 아카이브 정보\n============================\n";
             let filteredList = currentFilter === 'All' ? mockList : mockList.filter(item => item.statusText === currentFilter);
             filteredList.forEach(item => {
-                content += `파일: ${item.rid}_${item.name}.foot (작품이름: ${item.name})\n`;
+                content += `파일: ${item.rid}_${item.author}_${item.name}.foot (작품이름: ${item.name})\n`;
             });
             _downloadFileTemplate(content, 'ro_factory_assets.txt', 'text/plain;charset=utf-8;');
             alert('작품 이름 및 foot 파일 압축 다운로드(샘플)가 실행되었습니다.');
         }
 
         function downloadSample() {
-            let csvContent = "\uFEFF작품 ID,판매 상태(Y/N),인게임 업로드 기간\nRF00010,Y,2026-05-15\nRF00009,N,2026-05-20\n";
+            let csvContent = "\uFEFF작품 ID,판매 시작일\nRF00010,2026-05-15 14:05:00\nRF00009,2026-05-20 18:30:00\n";
             _downloadFileTemplate(csvContent, 'upload_sample.csv', 'text/csv;charset=utf-8;');
         }
 

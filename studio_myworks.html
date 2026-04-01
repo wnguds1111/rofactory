@@ -11,7 +11,7 @@
         body { font-family:'Pretendard',system-ui,-apple-system,sans-serif; @apply bg-[#f0f2f5] text-slate-900 antialiased; }
         a { text-decoration:none; color:inherit; }
 
-        .studio-layout { @apply flex lg:flex-row flex-col lg:gap-8 gap-[12px] md:gap-[24px] max-w-[1400px] mx-auto mt-6 md:mt-8 lg:mt-[45px] px-3 md:px-6 lg:px-10 min-h-[70vh]; }
+        .studio-layout { @apply flex lg:flex-row flex-col lg:gap-8 gap-[12px] md:gap-[24px] max-w-[1200px] mx-auto mt-6 md:mt-8 lg:mt-[45px] px-3 md:px-6 lg:px-10 min-h-[70vh]; }
 
         /* Sidebar */
         .studio-sidebar { @apply w-full lg:w-[260px] shrink-0 flex flex-col md:flex-row lg:flex-col lg:gap-5 gap-2.5 md:gap-5; }
@@ -177,7 +177,7 @@ function buildRow(w){
         badge = `<span class="item-status s-converting">변환 중</span>`;
     } else if(w.status === 'completed'){
         badge = w.completedSub === 'wait'
-            ? `<span class="item-status s-completed-wait">게시 예정일</span>`
+            ? `<span class="item-status s-completed-wait">판매 대기</span>`
             : `<span class="item-status s-completed-sale">판매 중</span>`;
     } else if(w.status === 'expired'){
         badge = `<span class="item-status s-expired">작품 만료</span>`;
@@ -190,7 +190,7 @@ function buildRow(w){
         meta += `<span>등록일: ${w.regDate}</span><span>판매수: 0</span>`;
     } else if(w.status === 'completed'){
         const c = w.completedSub === 'sale' ? '#166534' : '#1d4ed8';
-        const dateLabel = w.completedSub === 'sale' ? '게시일' : '게시 예정일';
+        const dateLabel = '판매 시작일';
         meta += `<span style="color:${c};font-weight:800;">${dateLabel}: ${w.pubDate}</span>`;
         if(w.completedSub === 'sale') meta += `<span>판매수: <b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
     } else if(w.status === 'expired'){

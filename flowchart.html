@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="RO FACTORY 웹기획Unit 이주형 작성 - 시스템 서비스 플로우차트입니다.">
-    <title>RO FACTORY</title>
+    <title>RO FACTORY 플로우차트</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style type="text/tailwindcss">
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -60,59 +60,53 @@
         .section-title .num { font-size: 11px; font-weight: 800; color: #fff; background: #3b82f6; width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
         /* Node */
-        .node { padding: 16px 20px; border: 1.5px solid #e2e8f0; border-radius: 10px; background: #fff; min-width: 150px; transition: 0.2s; }
-        .node:hover { border-color: #93c5fd; box-shadow: 0 2px 8px rgba(59,130,246,0.08); }
+        .node { padding: 20px 24px; border: 1.5px solid #e2e8f0; border-radius: 12px; background: #fff; transition: 0.2s; }
+        .node:hover { border-color: #93c5fd; box-shadow: 0 2px 12px rgba(59,130,246,0.08); transform: translateY(-2px); }
         .node .label { font-size: 11px; font-weight: 800; color: #3b82f6; margin-bottom: 4px; letter-spacing: 0.5px; }
-        .node .text { font-size: 15px; font-weight: 800; color: #0f172a; line-height: 1.4; }
-        .node .sub { font-size: 12px; font-weight: 500; color: #94a3b8; margin-top: 3px; line-height: 1.4; }
-        .node.dashed { border-style: dashed; border-color: #cbd5e1; }
+        .node .text { font-size: 16px; font-weight: 800; color: #0f172a; line-height: 1.4; margin-bottom: 6px; }
+        .node .sub { font-size: 13px; font-weight: 500; color: #64748b; line-height: 1.5; }
+
+        /* Role Badges */
+        .role-badge { display:inline-block; font-size:11px; font-weight:800; padding:6px 12px; border-radius:6px; margin-bottom:0; letter-spacing:0.5px; height:max-content; border:1px solid transparent; }
+        .role-client { background:#e0e7ff; color:#4338ca; border-color:#c7d2fe; }
+        .role-web { background:#dcfce7; color:#15803d; border-color:#bbf7d0; }
+        .role-admin { background:#fee2e2; color:#b91c1c; border-color:#fecaca; }
+        .role-server { background:#f3e8ff; color:#7e22ce; border-color:#e9d5ff; }
 
         /* Arrow */
-        .arrow { padding: 0 8px; color: #94a3b8; font-size: 20px; display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
-        .arrow .lbl { font-size: 10px; font-weight: 700; color: #94a3b8; margin-bottom: 2px; }
-        .arrow-down { text-align: center; padding: 8px 0; color: #94a3b8; font-size: 20px; }
-        .arrow-down .lbl { font-size: 10px; font-weight: 700; color: #94a3b8; margin-left: 4px; }
-
-        /* Flow row */
-        .flow-row { display: flex; align-items: center; overflow-x: auto; padding: 4px 0; gap: 0; }
-
-        /* Branch */
-        .branch { display: flex; gap: 50px; justify-content: center; padding: 0 20px; }
-        .branch-col { display: flex; flex-direction: column; align-items: center; }
-        .branch-label { font-size: 12px; font-weight: 800; color: #0f172a; padding: 5px 16px; border-radius: 12px; background: #f1f5f9; margin-bottom: 12px; }
-        .branch-label.success { background: #f0fdf4; color: #166534; }
-        .branch-label.fail { background: #fef2f2; color: #991b1b; }
-
-        /* Status bar */
-        .status-bar { display: flex; align-items: stretch; border: 1.5px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
-        .status-item { flex: 1; text-align: center; padding: 20px 12px; font-size: 14px; font-weight: 800; color: #475569; background: #fff; border-right: 1.5px solid #e2e8f0; position: relative; }
-        .status-item:last-child { border-right: none; }
-        .status-item .s-sub { display: block; font-size: 11px; font-weight: 500; color: #94a3b8; margin-top: 4px; }
-        .status-item.active { background: #eff6ff; color: #1d4ed8; }
-        .status-item.fail { background: #fef2f2; color: #dc2626; }
-        .status-item.expired { background: #f8fafc; color: #64748b; }
-        .status-item .arrow-indicator { position: absolute; right: -8px; top: 50%; transform: translateY(-50%); color: #cbd5e1; font-size: 14px; z-index: 1; }
+        .arrow-down { text-align: center; padding: 12px 0; color: #94a3b8; font-size: 20px; }
+        .arrow-down .lbl { font-size: 11px; font-weight: 700; color: #94a3b8; margin-left: 8px; vertical-align: middle; }
 
         /* Note */
         .note { text-align: center; margin-top: 14px; font-size: 13px; font-weight: 600; color: #64748b; border: 1.5px dashed #e2e8f0; border-radius: 8px; padding: 12px 20px; display: inline-block; line-height: 1.6; }
-        .note-list { text-align: left; margin-top: 16px; padding: 16px 20px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; }
-        .note-list li { font-size: 13px; font-weight: 500; color: #475569; margin-bottom: 8px; line-height: 1.6; list-style: none; padding-left: 16px; position: relative; }
+        .note-list { text-align: left; margin-top: 5px; padding: 20px 24px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; }
+        .note-list li { font-size: 14px; font-weight: 500; color: #475569; margin-bottom: 12px; line-height: 1.6; list-style: none; padding-left: 16px; position: relative; }
         .note-list li:last-child { margin-bottom: 0; }
         .note-list li::before { content: '•'; position: absolute; left: 0; color: #3b82f6; font-weight: 900; }
-        .note-list .highlight { color: #dc2626; font-weight: 700; }
-        .note-list .info { color: #0284c7; font-weight: 700; }
+        .note-list .highlight { background: #fee2e2; color: #b91c1c; padding:2px 6px; border-radius:4px; font-size:12px; font-weight:800; }
+        .note-list .info { background: #e0e7ff; color: #4338ca; padding:2px 6px; border-radius:4px; font-size:12px; font-weight:800; }
 
-        .divider { text-align: center; color: #94a3b8; padding: 14px 0; font-size: 13px; font-weight: 700; }
+        /* Diagram Flow Vertical Layout */
+        .flow-vertical { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 900px; margin: 0 auto; position: relative; margin-top: 10px; }
+        
+        .d-card { background: #fff; border: 2.5px solid #e2e8f0; border-radius: 16px; padding: 22px; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: 0.3s; width: 100%; max-width: 500px; margin: 0 auto; }
+        .d-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-color: #93c5fd; }
+        .d-card-border-client { border-color: #c7d2fe; }
+        .d-card-border-web { border-color: #bbf7d0; }
+        .d-card-border-admin { border-color: #fecaca; }
+        .d-card-border-server { border-color: #e9d5ff; }
+
+        .d-title { font-size: 15px; font-weight: 900; color: #0f172a; margin: 14px 0 8px 0; line-height: 1.4; letter-spacing: -0.3px; }
+        .d-desc { font-size: 13px; font-weight: 500; color: #475569; line-height: 1.55; word-break: keep-all; }
+        
+        .arr-down { display: flex; justify-content: center; align-items: center; height: 38px; padding: 4px 0; }
+        .arr-down span { font-size: 20px; color: #cbd5e1; font-weight: 900; }
 
         @media (max-width: 700px) {
             body { padding: 20px 10px; }
             .section { padding: 20px 16px; }
-            .page-head { padding: 24px 20px; }
-            .page-head h1 { font-size: 18px; }
-            .branch { flex-direction: column; gap: 16px; padding: 0; }
-            .status-bar { flex-direction: column; }
-            .status-item { border-right: none; border-bottom: 1.5px solid #e2e8f0; }
-            .status-item:last-child { border-bottom: none; }
+            .node { flex-direction:column; gap:10px !important; }
+            .role-badge { width:auto !important; display:inline-block; }
         }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -120,139 +114,157 @@
 </head>
 <body>
     <div class="top-bar">
-        <h1>RO FACTORY 시스템 플로우차트 <span class="ver">v3.0</span></h1>
+        <h1>RO FACTORY 시스템 플로우차트 <span class="ver">v3.5 상세화</span></h1>
         <a href="index.html" class="btn-home">← 포털 홈으로</a>
     </div>
+    
     <div style="padding: 40px 20px;">
         <div class="wrap">
-        <!-- FLOW 1: Registration -->
-        <div class="section">
-            <div class="section-title"><span class="num">1</span> 작품 등록</div>
-            <div class="flow-row">
-                <div class="node">
-                    <div class="label">STEP 01</div>
-                    <div class="text">파일 추출</div>
-                    <div class="sub">.foot 파일, 영상 미리보기 파일 추출</div>
-                </div>
-                <div class="arrow">→</div>
-                <div class="node">
-                    <div class="label">STEP 02</div>
-                    <div class="text">등록 폼 호출</div>
-                    <div class="sub">GNJOY 로그인 기반</div>
-                </div>
-                <div class="arrow">→</div>
-                <div class="node">
-                    <div class="label">STEP 03</div>
-                    <div class="text">작품 등록</div>
-                    <div class="sub">추출 파일 등록, 웹 등록 정보 등록</div>
-                </div>
-                <div class="arrow">→</div>
-                <div class="node">
-                    <div class="label">STEP 04</div>
-                    <div class="text">등록완료</div>
-                    <div class="sub">등록 접수 완료</div>
-                </div>
-            </div>
-        </div>
+            
+            <!-- FLOW 1. Data Flow -->
+            <div class="section">
+                <div class="section-title"><span class="num">1</span> 클라이언트 ↔ 웹 ↔ 어드민 연동 데이터 플로우</div>
+                <div style="font-size:14px; color:#64748b; margin-bottom:25px; font-weight:600;">클라이언트와 웹단 사이에서 에셋 파일이 어떻게 교환되고 적용되는지 디테일한 흐름을 나타냅니다.</div>
 
-        <!-- FLOW 2: Conversion -->
-        <div class="section">
-            <div class="section-title"><span class="num">2</span> 어드민 변환 처리</div>
-            <div style="display:flex; flex-direction:column; align-items:center;">
-                <div class="node" style="min-width:240px;">
-                    <div class="label">STEP 01</div>
-                    <div class="text">변환 대기열</div>
-                    <div class="sub">등록 접수된 작품 리스트</div>
-                </div>
-                <div class="arrow-down">↓</div>
-                <div class="node" style="min-width:280px;">
-                    <div class="label">STEP 02</div>
-                    <div class="text">어드민 변환 정상 여부</div>
-                    <div class="sub">엑셀 업로드</div>
-                </div>
-                <div class="arrow-down">↓</div>
-
-                <div class="branch">
-                    <div class="branch-col">
-                        <div class="branch-label success">정상 (Y)</div>
-                        <div class="node" style="min-width:170px;">
-                            <div class="label">A1</div>
-                            <div class="text">변환 완료</div>
-                            <div class="sub">변환 정상 처리</div>
-                        </div>
-                        <div class="arrow-down">↓</div>
-                        <div class="node" style="min-width:170px;">
-                            <div class="label">A2</div>
-                            <div class="text">출시 예정일 입력</div>
-                            <div class="sub">마켓 노출 일자 설정</div>
-                        </div>
-                        <div class="arrow-down">↓</div>
-                        <div class="node" style="min-width:170px;">
-                            <div class="label">A3</div>
-                            <div class="text">서버 배포</div>
-                            <div class="sub">게임 서버 적용</div>
-                        </div>
-                        <div class="arrow-down">↓</div>
-                        <div class="node" style="min-width:170px;">
-                            <div class="label">A4</div>
-                            <div class="text">판매 진행</div>
-                            <div class="sub">마켓 노출 시작</div>
-                        </div>
+                <div class="flow-vertical">
+                    <!-- Step 1 -->
+                    <div class="d-card d-card-border-client">
+                        <span class="role-badge role-client">1. 클라이언트(툴)</span>
+                        <div class="d-title">발자국 생성</div>
+                        <div class="d-desc">UGC 툴을 이용하여 스킨/발자국 제작.<br>핵심 결과물인 <strong>.foot 파일</strong>과 미리보기 <strong>영상(MP4)</strong>을 추출합니다.<br><span style="color:#b45309;font-weight:700;font-size:11px;">* 영상은 500kb 이하로 추출</span></div>
                     </div>
-                    <div class="branch-col">
-                        <div class="branch-label fail">실패 (N)</div>
-                        <div class="node dashed" style="min-width:170px;">
-                            <div class="label">B1</div>
-                            <div class="text">변환 실패 리스트</div>
+                    
+                    <div class="arr-down"><span>⬇</span></div>
+
+                    <!-- Step 2 -->
+                    <div class="d-card d-card-border-web">
+                        <span class="role-badge role-web">2. 웹 (프론트/스튜디오)</span>
+                        <div class="d-title">마이 스튜디오 파일 업로드</div>
+                        <div class="d-desc">웹 발자국 등록 폼을 통해 <strong>.foot 파일, 미리보기 영상, 썸네일 이미지, 작품명, 유효기간, 타입 등록</strong><br><span style="color:#b45309;font-weight:700;font-size:11px;">* 로그인 필수</span></div>
+                    </div>
+                    
+                    <div class="arr-down"><span>⬇</span></div>
+
+                    <!-- Step 3 -->
+                    <div class="d-card d-card-border-admin">
+                        <span class="role-badge role-admin">3. 어드민 (웹)</span>
+                        <div class="d-title">발자국 일괄 다운로드 준비</div>
+                        <div class="d-desc">웹 서버 스토리지의 유저 에셋을 <code>작품_유저ID_작품명.foot</code> 압축 파일로 다운로드.</div>
+                    </div>
+                    
+                    <div class="arr-down"><span>⬇</span></div>
+
+                    <!-- Step 4 -->
+                    <div class="d-card d-card-border-server">
+                        <span class="role-badge role-server">4. 스튜디오</span>
+                        <div class="d-title">에셋 무결성 검증</div>
+                        <div class="d-desc">.foot 파일의 <strong>무결성 체크</strong> 후 인게임 게시될 날짜와 작품 ID를 CSV 형태로 어드민 갱신.</div>
+                    </div>
+
+                    <!-- Y/N Branch Split Visual (Desktop) -->
+                    <div class="hidden md:block relative w-full h-[45px] my-2">
+                        <!-- Center stem -->
+                        <div class="absolute top-0 left-1/2 w-[2.5px] h-[15px] bg-slate-200 transform -translate-x-1/2"></div>
+                        <!-- Horizontal bar -->
+                        <div class="absolute top-[15px] left-[25%] right-[25%] h-[2.5px] bg-slate-200"></div>
+                        
+                        <!-- Left drop (Y) -->
+                        <div class="absolute top-[15px] left-[25%] w-[2.5px] h-[30px] bg-slate-200 transform -translate-x-1/2"></div>
+                        <div class="absolute bottom-[-15px] left-[25%] transform -translate-x-1/2 text-slate-300 text-[16px] font-extrabold z-10">▼</div>
+                        <div class="absolute top-[21px] left-[25%] transform -translate-x-1/2 -ml-[45px] text-xs font-extrabold text-[#10b981] bg-emerald-50 px-2 py-[2px] rounded border border-emerald-100 z-10">Y (통과)</div>
+                        
+                        <!-- Right drop (N) -->
+                        <div class="absolute top-[15px] right-[25%] w-[2.5px] h-[30px] bg-slate-200 transform translate-x-1/2"></div>
+                        <div class="absolute bottom-[-15px] right-[25%] transform translate-x-1/2 text-slate-300 text-[16px] font-extrabold z-10">▼</div>
+                        <div class="absolute top-[21px] right-[25%] transform translate-x-1/2 ml-[45px] text-xs font-extrabold text-[#ef4444] bg-red-50 px-2 py-[2px] rounded border border-red-100 z-10">N (실패)</div>
+                    </div>
+                    
+                    <!-- Split Columns -->
+                    <div class="w-full flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-12 mt-2 md:mt-4 max-w-full justify-center">
+                        
+                        <!-- Y Branch Content (Left) -->
+                        <div class="flex-1 flex flex-col items-center order-1 w-full max-w-[500px] mx-auto">
+                            <!-- Mobile Y Indicator -->
+                            <div class="block md:hidden arr-down mb-2 mt-4">
+                                <span class="text-[13px] font-extrabold text-[#10b981] bg-emerald-50 px-4 py-1.5 rounded-full border border-emerald-100 shadow-sm">Y (통과 시) ⬇</span>
+                            </div>
+
+                            <!-- Step 5 -->
+                            <div class="d-card d-card-border-admin w-full">
+                                <span class="role-badge role-admin">5. 어드민 (웹)</span>
+                                <div class="d-title">엑셀 변환 결과 일괄 반영</div>
+                                <div class="d-desc">업로드된 게시될 날짜에 <strong>판매 시작일 도달 시 실시간 마켓 노출.</strong></div>
+                            </div>
+                            
+                            <div class="arr-down"><span>⬇</span></div>
+
+                            <!-- Step 6 -->
+                            <div class="d-card d-card-border-web w-full">
+                                <span class="role-badge role-web">6. 마켓 (웹)</span>
+                                <div class="d-title">발자국 판매 시작</div>
+                                <div class="d-desc"><strong>유저 결제 발생 시 IR CORE 통해 인게임 아이템 지급.</strong></div>
+                            </div>
+                            
+                            <div class="arr-down"><span>⬇</span></div>
+
+                            <!-- Step 7 -->
+                            <div class="d-card d-card-border-web w-full">
+                                <span class="role-badge role-web">7. 마켓(웹) / 인게임</span>
+                                <div class="d-title">작품 만료</div>
+                                <div class="d-desc">유효기간이 지난 작품은 플랫폼 마켓 및 <strong>인게임에서 삭제</strong> 처리.</div>
+                            </div>
                         </div>
+
+                        <!-- N Branch Content (Right) -->
+                        <div class="flex-1 flex flex-col items-center order-2 w-full max-w-[500px] mx-auto">
+                            <!-- Mobile N Indicator -->
+                            <div class="block md:hidden arr-down mb-2 mt-8 md:mt-2">
+                                <span class="text-[13px] font-extrabold text-[#ef4444] bg-red-50 px-4 py-1.5 rounded-full border border-red-100 shadow-sm">N (무결성 실패 시) ⬇</span>
+                            </div>
+
+                            <!-- Step 8 -->
+                            <div class="d-card d-card-border-server w-full h-full md:h-auto">
+                                <span class="role-badge role-server">8. 스튜디오 (예외)</span>
+                                <div class="d-title">파일 변환 실패</div>
+                                <div class="d-desc">적합하지 않은 파일 형식일 경우 <strong>변환 실패 처리</strong>하여 어드민(웹)에 안내 및 업데이트.</div>
+                            </div>
+                            
+                        </div>
+
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- FLOW 3: Transaction -->
-        <div class="section">
-            <div class="section-title"><span class="num">3</span> 거래 프로세스</div>
-            <div class="flow-row">
-                <div class="node">
-                    <div class="label">STEP 01</div>
-                    <div class="text">마켓 조회</div>
-                    <div class="sub">상품 검색 · 상세 조회</div>
-                </div>
-                <div class="arrow">→</div>
-                <div class="node">
-                    <div class="label">STEP 02</div>
-                    <div class="text">KP 결제</div>
-                    <div class="sub">Kafra Point 차감</div>
-                </div>
-                <div class="arrow">→</div>
-                <div class="node">
-                    <div class="label">STEP 03</div>
-                    <div class="text">인게임 적용</div>
-                    <div class="sub">게임 서버 발자국 설치</div>
-                </div>
-            </div>
-            <div style="text-align:center; margin-top:14px;">
-                <div class="note">유효기간 지난 상품은 만료 리스트 이동</div>
-            </div>
-        </div>
+            <hr style="border:none; border-top:1px dashed #cbd5e1; margin:40px 0;">
 
-        <!-- Status Lifecycle -->
-        <div class="section">
-            <div class="section-title"><span class="num" style="background:#0f172a;">⟳</span> 작품 상태 라이프사이클</div>
-            <div class="status-bar">
-                <div class="status-item active">변환 대기<span class="s-sub">등록 직후</span></div>
-                <div class="status-item">변환 완료<span class="s-sub">어드민 승인</span></div>
-                <div class="status-item">판매 진행<span class="s-sub">마켓 노출</span></div>
-                <div class="status-item fail">변환 실패<span class="s-sub">변환 N 판정</span></div>
-                <div class="status-item expired">만료<span class="s-sub">유효기간 종료</span></div>
+            <!-- FLOW 2. User Status -->
+            <div class="section">
+                <div class="section-title"><span class="num">2</span> 유저 작품관리 상태 값 <span style="font-size:13px; font-weight:600; color:#64748b; margin-left:5px;">(마이 스튜디오 > My Works 기준)</span></div>
+                <div style="font-size:14px; color:#64748b; margin-bottom:15px; font-weight:600; line-height:1.6;">유저는 본인 스튜디오에서 작품이 검수되고 마켓에 오르기까지 4가지 상태를 확인하게 됩니다.</div>
+                
+                <ul class="note-list">
+                    <li><span class="info" style="display:inline-block; width:90px; text-align:center;">변환 중</span> <span style="color:#1e293b;">작품을 최초 업로드한 뒤 관리자의 에셋 다운로드 및 오류 검수 처리를 기다리는 등록 대기 상태입니다. <strong>(수정 불가)</strong></span></li>
+                    <li><span class="info" style="display:inline-block; width:90px; text-align:center; background:#dbeafe; color:#1d4ed8;">판매 대기</span> <span style="color:#1e293b;">관리자 검수가 무사 통과되어 승인되었으나, 설정된 <strong>판매 시작일이 아직 도달하지 않아 마켓 노출이 대기 중인 상태</strong>입니다. <strong>(수정 불가)</strong></span></li>
+                    <li><span class="highlight" style="display:inline-block; width:90px; text-align:center;">변환 실패</span> <span style="color:#1e293b;">클라이언트 에셋 검증 중 파일 결함(.foot 오류 등), 또는 정책 위반 사유로 관리자(어드민) 단에서 등록 반려를 내린 상태입니다. <strong>(해결 후 별도로 재등록 필요)</strong></span></li>
+                    <li><span class="info" style="display:inline-block; width:90px; text-align:center; background:#f1f5f9; color:#64748b;">작품 만료</span> <span style="color:#1e293b;">정상적으로 마켓에 올라 판매되다 판매 기간(유효기간, 예: 1년)이 종료되어 마켓 노출과 거래가 영구 중지된 과거의 작품 기록입니다.</span></li>
+                </ul>
             </div>
-            <ul class="note-list">
-                <li><span class="info">변환 대기</span> 상태 시 관리자 조회 전까지 유저 수정 가능</li>
-                <li><span class="highlight">변환 실패</span> 시 수정 후 재등록 불가 → 삭제 후 다시 등록 필요</li>
-            </ul>
+
+            <!-- FLOW 3. Admin Status -->
+            <div class="section">
+                <div class="section-title"><span class="num" style="background:#ef4444;">3</span> 어드민 작품관리 상태 값 <span style="font-size:13px; font-weight:600; color:#64748b; margin-left:5px;">(관리자 백오피스 작품 관리 기준)</span></div>
+                <div style="font-size:14px; color:#64748b; margin-bottom:15px; font-weight:600; line-height:1.6;">운영진(관리자)은 유저가 올린 방대한 데이터를 통제하고 다루기 위해 보다 세분화된 5가지 상태 값(필터링 탭)을 기준으로 관리합니다.</div>
+                
+                <ul class="note-list">
+                    <li><span class="info" style="display:inline-block; width:110px; text-align:center;">변환 대기</span> <span style="color:#1e293b;">프론트 웹에서 방금 넘어온 따끈한 신규 데이터입니다. <strong>관리자가 묶음 에셋 파일(.foot)을 로컬로 내려받아 툴 검증을 착수해야 하는 '가장 우선 타겟' 업무 리스트</strong>입니다.</span></li>
+                    <li><span class="info" style="display:inline-block; width:110px; text-align:center; background:#dbeafe; color:#1d4ed8;">변환 완료</span> <span style="color:#1e293b;">어드민에서 정상(엑셀 업데이트 성공) 판정 후 마켓 대기 상태로 걸쳐있는 작품입니다. <strong>등록한 '판매 시작일'이 도래할 때까지 대기</strong>하는 상태입니다.</span></li>
+                    <li><span class="info" style="display:inline-block; width:110px; text-align:center; background:#dcfce7; color:#15803d;">판매 진행 작품</span> <span style="color:#1e293b;">검수 통과 후 판매 시작일자가 지나 <strong>현재 실시간으로 웹 스토어 상에서 대중에게 노출 및 KP 기반 거래가 일어나고 있는 핵심 라이브 작품</strong>입니다.</span></li>
+                    <li><span class="highlight" style="display:inline-block; width:110px; text-align:center;">변환 실패</span> <span style="color:#1e293b;">엑셀 단체 업데이트 처리를 통해 결함 검출로 인한 실패(N) 상태를 확정한 작품입니다. 영구 노출 차단입니다.</span></li>
+                    <li><span class="info" style="display:inline-block; width:110px; text-align:center; background:#f1f5f9; color:#64748b;">작품 만료</span> <span style="color:#1e293b;">정상 서비스 기간이 경과하여 라이브 마켓에서 삭제되었고, 히스토리 조회 목적으로만 남겨두는 과거의 데이터 저장고 탭입니다.</span></li>
+                </ul>
+            </div>
+            
         </div>
     </div>
-</div>
 </body>
 </html>

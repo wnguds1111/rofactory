@@ -1,0 +1,36 @@
+@charset 'UTF-8';
+@use 'sass:math';
+@use 'sass:color';
+
+// layout
+@import 'layout/fonts';
+@import 'layout/reset.scss';
+@import 'layout/layout';
+
+// 컨텐츠
+@import './header';
+@import './footer';
+
+@import 'main/main';
+@import 'main/contents';
+
+:root {
+  --color-bg: #ffffff;
+  --color-text: #151515;
+  --color-header-bg: rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme='dark'] {
+  --color-bg: #303030;
+  --color-text: #ffffff;
+  --color-header-bg: rgba(0,0,0,0.9);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.header-wrap {
+  background: var(--color-header-bg);
+}

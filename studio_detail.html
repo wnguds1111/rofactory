@@ -11,7 +11,7 @@
         body { font-family:'Pretendard',system-ui,-apple-system,sans-serif; @apply bg-[#f0f2f5] text-slate-900 antialiased; }
         a { text-decoration:none; color:inherit; }
 
-        .studio-layout { @apply flex lg:flex-row flex-col lg:gap-8 gap-[12px] md:gap-[24px] max-w-[1400px] mx-auto mt-10 md:mt-3 px-3 md:px-6 lg:px-10 min-h-[70vh]; }
+        .studio-layout { @apply flex lg:flex-row flex-col lg:gap-8 gap-[12px] md:gap-[24px] max-w-[1200px] mx-auto mt-10 md:mt-3 px-3 md:px-6 lg:px-10 min-h-[70vh]; }
 
         /* Sidebar */
         .studio-sidebar { @apply w-full lg:w-[260px] shrink-0 flex flex-col md:flex-row lg:flex-col lg:gap-5 gap-2.5 md:gap-5; }
@@ -74,14 +74,51 @@
 
         .footer { @apply mt-12; }
         .footer img { @apply w-full h-auto block; }
+
+        /* Detail Page Unique Styles */
+        .studio-detail-container { @apply max-w-[1000px] mx-auto mt-6 md:mt-10 px-4 md:px-6 lg:px-8 mb-20 min-h-[70vh]; }
+        .breadcrumb { @apply text-sm text-slate-500 font-bold mb-5; }
+        .breadcrumb a { @apply hover:text-blue-600 transition-colors; }
+        .detail-card { @apply bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm; }
+        .detail-top { @apply p-6 md:p-10 flex flex-col md:flex-row gap-8 md:gap-12 border-b border-slate-100 items-start; }
+        .dt-left { @apply w-32 h-32 md:w-48 md:h-48 rounded-2xl flex items-center justify-center text-6xl md:text-8xl shrink-0 bg-slate-100; }
+        .dt-right { @apply flex-1 w-full; }
+        .dt-status { @apply inline-block px-3 py-1.5 text-xs font-bold rounded-lg mb-3; }
+        .dt-category { @apply text-sm text-blue-600 font-black mb-1; }
+        .dt-title { @apply text-2xl md:text-3xl font-black text-slate-900 mb-6; }
+        
+        .dt-info-grid { @apply grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6; }
+        .info-box { @apply bg-slate-50 p-4 rounded-xl border border-slate-100; }
+        .info-label { @apply text-xs font-bold text-slate-400 mb-1; }
+        .info-val { @apply text-lg font-black text-slate-800; }
+        
+        .dt-tags { @apply flex flex-wrap gap-2 mb-8; }
+        .dt-tag { @apply px-3 py-1.5 bg-slate-100 border border-transparent text-slate-600 text-xs font-bold rounded-lg transition-colors; }
+        
+        .dt-actions { @apply flex gap-3; }
+        .dt-btn { @apply flex-1 md:flex-none px-6 py-3.5 rounded-xl font-black text-[13px] transition-all cursor-pointer; }
+        .dt-btn-primary { @apply bg-gray-900 text-white hover:bg-gray-800 border-none; }
+        .dt-btn-secondary { @apply bg-slate-100 text-slate-500 hover:bg-slate-200 border-none; }
+        .dt-btn-danger { @apply bg-white border border-red-500 text-red-500 hover:bg-red-50; }
+
+        .detail-bottom { @apply p-6 md:p-10 bg-slate-50/50; }
+        .bottom-title { @apply text-lg font-black text-slate-800 mb-6; }
+        
+        .timeline { @apply relative border-l pl-5 md:pl-6 border-slate-200 ml-3; }
+        .tl-item { @apply relative pb-8; }
+        .tl-item:last-child { @apply pb-0; }
+        .tl-item::before { content:''; @apply absolute left-[-26px] md:left-[-30px] top-1 w-[11px] h-[11px] bg-slate-200 rounded-full transition-colors border-2 border-white; }
+        .tl-item.active::before { @apply bg-blue-600 w-[13px] h-[13px] left-[-27px] md:left-[-31px]; }
+        .tl-date { @apply text-xs font-bold text-slate-400 mb-1; }
+        .tl-title { @apply text-sm font-black mb-1; }
+        .tl-desc { @apply text-[13px] text-slate-500 leading-relaxed max-w-2xl; }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="tailwind-init.js"></script>
 </head>
 <body>
     <script src="gnb.js"></script>
-</div>
-<div class="studio-detail-container">
+    <div class="studio-detail-container">
         <div class="breadcrumb">
             <a href="studio_myworks.html">← 나의 작품 관리</a> &gt; <span id="bcTitle">작품 상세</span>
         </div>
@@ -161,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const badge = document.getElementById('statusBadge');
     const badgeMap = {
         'converting':      { text:'변환 중',          cls:'s-converting' },
-        'completed_wait':  { text:'게시 예정일',       cls:'s-completed-wait' },
+        'completed_wait':  { text:'판매 대기',         cls:'s-completed-wait' },
         'completed_sale':  { text:'판매 중',          cls:'s-completed-sale' },
         'expired':         { text:'작품 만료',         cls:'s-expired' },
         'failed':          { text:'변환 실패',         cls:'s-failed' },
@@ -201,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>`;
     } else if(status === 'completed'){
         const pubColor = completedSub==='sale'?'#166534':'#1d4ed8';
-        const pubLabel = completedSub==='sale'?'게시일':'게시 예정일';
+        const pubLabel = '판매 시작일';
         gridHTML += `
         <div class="info-box">
             <div class="info-label">${pubLabel}</div>
