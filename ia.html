@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style type="text/tailwindcss">
         body { font-family: 'Pretendard', sans-serif; background: #f8fafc; color: #333; margin: 0; }
-        .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 50px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .container { max-width: 1400px; margin: 0 auto; background: #fff; padding: 50px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .wrap { max-width: 1400px; margin: 0 auto; padding: 40px 24px; }
+        /* Hero Banner */
+        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1d4ed8 100%); border-radius: 20px; padding: 40px 48px; margin-bottom: 36px; color: white; position: relative; overflow: hidden; }
+        .hero::before { content: '🗺️'; position: absolute; right: 48px; top: 50%; transform: translateY(-50%); font-size: 80px; opacity: 0.12; }
+        .hero h2 { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
+        .hero p { font-size: 14px; color: #93c5fd; font-weight: 600; margin: 0; }
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 40px; }
         .title { font-size: 28px; font-weight: 900; color: #0f172a; margin: 0; }
         .btn-back { text-decoration: none; color: #0ea5e9; font-weight: 800; font-size: 14px; background: #f0f9ff; padding: 10px 20px; border-radius: 8px; transition: 0.2s; }
@@ -116,8 +122,13 @@
             <a href="index.html" class="btn-home">← 포털 홈으로</a>
         </div>
     </div>
-    <div style="padding: 40px;">
-        <div class="container">
+    <div class="wrap">
+        <!-- Hero -->
+        <div class="hero">
+            <h2>🗺️ 정보구조도 (IA) 맵</h2>
+            <p>RO FACTORY 1차 프론트/어드민 화면 구조</p>
+        </div>
+        <div class="container" style="max-width: 100%;">
         
         <table class="ia-table" id="iaTable">
             <thead>

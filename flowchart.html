@@ -9,8 +9,13 @@
     <style type="text/tailwindcss">
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Pretendard', sans-serif; background: #f1f5f9; color: #1e293b; min-height: 100vh; margin: 0; }
-        .wrap { max-width: 1100px; margin: 0 auto; }
+        .wrap { max-width: 1400px; margin: 0 auto; padding: 40px 24px; }
 
+        /* Hero Banner */
+        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1d4ed8 100%); border-radius: 20px; padding: 40px 48px; margin-bottom: 36px; color: white; position: relative; overflow: hidden; }
+        .hero::before { content: '🔄'; position: absolute; right: 48px; top: 50%; transform: translateY(-50%); font-size: 80px; opacity: 0.12; }
+        .hero h2 { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
+        .hero p { font-size: 14px; color: #93c5fd; font-weight: 600; margin: 0; }
         /* Sticky Header */
         .top-bar {
             background: #0f172a;
@@ -118,9 +123,12 @@
         <a href="index.html" class="btn-home">← 포털 홈으로</a>
     </div>
     
-    <div style="padding: 40px 20px;">
-        <div class="wrap">
-            
+    <div class="wrap">
+        <!-- Hero -->
+        <div class="hero">
+            <h2>🔄 시스템 플로우차트 (Flow Map)</h2>
+            <p>RO FACTORY 클라이언트 ↔ 웹 ↔ 어드민 시스템 서비스 전체 플로우</p>
+        </div>
             <!-- FLOW 1. Data Flow -->
             <div class="section">
                 <div class="section-title"><span class="num">1</span> 클라이언트 ↔ 웹 ↔ 어드민 연동 데이터 플로우</div>
@@ -265,6 +273,6 @@
             </div>
             
         </div>
-    </div>
+
 </body>
 </html>
