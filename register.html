@@ -14,7 +14,7 @@
         .terms-modal { @apply bg-white rounded-[20px] md:p-9 p-6 max-w-[560px] w-full max-h-[80vh] flex flex-col md:gap-5 gap-4 shadow-[0_24px_60px_rgba(0,0,0,0.25)]; }
         .terms-modal h2 { @apply text-[20px] font-black text-slate-900 m-0; }
         .terms-content { @apply flex-1 overflow-y-auto text-[13px] leading-[1.8] text-slate-600 border border-slate-200 rounded-xl p-5 max-h-[320px]; }
-        .btn-close-modal { @apply bg-gradient-to-br from-blue-500 to-blue-700 text-white border-none p-[14px] rounded-[12px] text-[14px] font-extrabold cursor-pointer w-full transition-colors duration-200; }
+        .btn-close-modal { @apply bg-[#025DD0] text-white border-none p-[14px] rounded-[12px] text-[14px] font-extrabold cursor-pointer w-full transition-colors duration-200; }
         .btn-close-modal:disabled { @apply bg-slate-300 !from-slate-300 !to-slate-300 cursor-not-allowed opacity-70; }
 
         /* ── 모바일 반응형 (Tailwind @media로 처리 불가한 부분만) ── */
@@ -98,13 +98,13 @@
                         <div class="icon">📁</div>
                         <h4><span data-en="Footprints" data-ko="발자국">발자국</span> 원본 데이터</h4><span>(.foot 확장자 필수)</span>
                         <input type="file" id="f1" style="display:none" accept=".foot" onchange="handleFileSelect(this, 'f1_name')">
-                        <span id="f1_name" style="display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;"></span>
+                        <span id="f1_name" style="display:block; margin-top:10px; font-weight:900; color:#025DD0; word-break: break-all;"></span>
                     </div>
                     <div class="file-box" onclick="document.getElementById('f2').click()">
                         <div class="icon">🎬</div>
                         <h4>동영상 미리보기 파일</h4><span>(.mp4 / .mov 권장)</span>
                         <input type="file" id="f2" style="display:none" accept="video/*" onchange="handleFileSelect(this, 'f2_name')">
-                        <span id="f2_name" style="display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;"></span>
+                        <span id="f2_name" style="display:block; margin-top:10px; font-weight:900; color:#025DD0; word-break: break-all;"></span>
                     </div>
                     <div class="file-box" id="f3_box" onclick="document.getElementById('f3').click()">
                         <div class="icon" style="color: #6366f1;">💎</div>
@@ -335,12 +335,12 @@
 
         if (currentStep === totalSteps - 1) {
             btnNext.innerText = "데이터 최종 등록하기";
-            btnNext.style.background = "#06b6d4";
-            btnNext.style.color = "#000";
+            btnNext.style.background = "#012553";
+            btnNext.style.color = "#fff";
         } else if (currentStep === totalSteps) {
             btnNext.innerText = "MY STUDIO 이동 ↗";
-            btnNext.style.background = "#fff";
-            btnNext.style.color = "#1e3a8a";
+            btnNext.style.background = "#025DD0";
+            btnNext.style.color = "#fff";
         } else {
             btnNext.innerText = "확인 후 다음 단계";
             btnNext.style.background = "var(--primary-bright)";

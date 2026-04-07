@@ -54,8 +54,9 @@
         .market-count { font-size: 13px; font-weight: 800; color: #0f172a; margin-bottom: 20px; display: block; }
         
         .card-img-wrap { width: 100%; aspect-ratio: 1; background: url('images/main_thumb_bg.jpg') center/cover; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 80px; margin-bottom: 8px; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(2,93,208,0.10); }
-        .card-img-overlay { position: absolute; inset: 0; border-radius: 10px; opacity: 0.45; }
-        .card-img-icon { position: relative; z-index: 2; text-shadow: 0 6px 18px rgba(0,0,0,0.22); line-height: 1; }
+        .card-img-overlay { position: absolute; inset: 0; opacity: 0.30; mix-blend-mode: multiply; }
+        .card-img-icon { position: relative; z-index: 2; text-shadow: 0 6px 20px rgba(0,0,0,0.3); line-height: 1; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); }
+        .card-img-tag { position: absolute; top: 8px; left: 8px; z-index: 4; background: var(--primary-bright); color: #fff; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .card-heart { position: absolute; bottom: 8px; right: 10px; font-size: 16px; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.4); z-index: 3; }
         .card-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 800; }
         .card-name { color: #151515; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75%; }
@@ -681,7 +682,7 @@
                     <div class="card-img-wrap">
                         <div class="card-img-overlay" style="background: ${p.img};"></div>
                         <span class="card-img-icon">${p.icon}</span>
-                        ${tagHtml}
+                        ${p.tag ? `<span class="card-img-tag">${p.tag}</span>` : ''}
                         <span class="card-heart">${p.hearts > 100 ? '❤️' : '♡'}</span>
                     </div>
                     <div class="card-bottom">
