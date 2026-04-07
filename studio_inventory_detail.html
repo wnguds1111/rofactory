@@ -121,7 +121,7 @@
     <div class="studio-detail-container">
         <div class="breadcrumb" style="font-size:16px; margin-bottom:24px;">
             <a href="studio_inventory.html" style="display:inline-flex; align-items:center; gap:6px; color:#1e293b; transition:color 0.2s;" onmouseover="this.style.color='#025DD0'" onmouseout="this.style.color='#1e293b'">
-                <span style="font-size:20px;">←</span> 구매 작품 관리
+                <span style="font-size:20px;">←</span> <span data-en="Purchase History" data-ko="구매 작품 관리">구매 작품 관리</span>
             </a>
         </div>
 
@@ -130,7 +130,7 @@
                 <div class="dt-left" id="dtThumb">🪄</div>
                 <div class="dt-right">
                     <div id="statusBadge" class="dt-status">상태</div>
-                    <div class="dt-category">발자국</div>
+                    <div class="dt-category" data-en="Footprint" data-ko="발자국">발자국</div>
                     <div id="pageTitle" class="dt-title">작품명</div>
 
                     <div class="dt-info-grid" id="infoGrid">
@@ -186,42 +186,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const badge = document.getElementById('statusBadge');
     if (status === 'expired') {
-        badge.innerText = '작품 만료됨';
+        badge.innerHTML = '<span data-en="Expired" data-ko="작품 만료됨">작품 만료됨</span>';
         badge.className = 'dt-status s-expired';
     } else {
-        badge.innerText = '구매 완료';
+        badge.innerHTML = '<span data-en="Purchased" data-ko="구매 완료">구매 완료</span>';
         badge.className = 'dt-status s-completed-wait';
     }
 
     let gridHTML = `
         <div class="info-box">
-            <div class="info-label">구매일</div>
+            <div class="info-label" data-en="Purchase Date" data-ko="구매일">구매일</div>
             <div class="info-val" style="font-size:15px;">${buyDate}</div>
         </div>`;
     
     if (status === 'expired') {
         gridHTML += `
         <div class="info-box" style="border-color:#fca5a5;background:#fff5f5;">
-            <div class="info-label" style="color:#dc2626;">상태</div>
-            <div class="info-val" style="font-size:15px;color:#dc2626;font-weight:700;">만료됨 (${expDate})</div>
+            <div class="info-label" style="color:#dc2626;" data-en="Status" data-ko="상태">상태</div>
+            <div class="info-val" style="font-size:15px;color:#dc2626;font-weight:700;"><span data-en="Expired" data-ko="만료됨">만료됨</span> (${expDate})</div>
         </div>`;
     } else {
         gridHTML += `
         <div class="info-box">
-            <div class="info-label">구매 상태</div>
-            <div class="info-val" style="font-size:15px;color:#166534;font-weight:700;">구매 완료</div>
+            <div class="info-label" data-en="Purchase Status" data-ko="구매 상태">구매 상태</div>
+            <div class="info-val" style="font-size:15px;color:#166534;font-weight:700;" data-en="Purchased" data-ko="구매 완료">구매 완료</div>
         </div>`;
     }
 
     gridHTML += `
         <div class="info-box">
-            <div class="info-label">구매 금액</div>
+            <div class="info-label" data-en="Price" data-ko="구매 금액">구매 금액</div>
             <div class="info-val" style="font-size:15px;font-weight:700;color:#025DD0;">${price}</div>
         </div>`;
     document.getElementById('infoGrid').innerHTML = gridHTML;
 
     const acts = document.getElementById('actionContainer');
     acts.innerHTML = ``;
+
+    if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
 });
 </script>
 </body>

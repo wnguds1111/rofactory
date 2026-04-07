@@ -89,32 +89,32 @@
             <div class="avatar"><img src="images/poring_hero.png" alt="포링" onerror="this.outerHTML='<span style=\'font-size:32px;\'>🧙</span>'"></div>
             <div class="user-info-wrap">
                 <div class="user-name">GravityUser</div>
-                <span class="user-kp">보유 <span>0</span> KP</span>
-                <a href="#" class="btn-kp">💳 KP 충전하기</a>
+                <span class="user-kp"><span data-en="Owned" data-ko="보유">보유</span> <span>0</span> KP</span>
+                <a href="#" class="btn-kp" data-en="💳 Charge KP" data-ko="💳 KP 충전하기">💳 KP 충전하기</a>
             </div>
         </div>
         <ul class="studio-nav">
-            <li onclick="location.href='studio_myworks.html'" class="s-nav-item active"><span class="s-nav-icon">🪄</span><span>나의 작품 관리</span></li>
-            <li onclick="location.href='studio_inventory.html'" class="s-nav-item"><span class="s-nav-icon">🎒</span><span>구매 작품 관리</span></li>
-            <li onclick="location.href='studio_wishlist.html'" class="s-nav-item"><span class="s-nav-icon" style="color:#ef4444;">💖</span><span>찜한 상품 보기</span></li>
+            <li onclick="location.href='studio_myworks.html'" class="s-nav-item active"><span class="s-nav-icon">🪄</span><span data-en="Manage Assets" data-ko="나의 작품 관리">나의 작품 관리</span></li>
+            <li onclick="location.href='studio_inventory.html'" class="s-nav-item"><span class="s-nav-icon">🎒</span><span data-en="Purchase History" data-ko="구매 작품 관리">구매 작품 관리</span></li>
+            <li onclick="location.href='studio_wishlist.html'" class="s-nav-item"><span class="s-nav-icon" style="color:#ef4444;">💖</span><span data-en="Wishlist" data-ko="찜한 상품 보기">찜한 상품 보기</span></li>
         </ul>
     </aside>
 
     <!-- 메인 -->
     <main class="studio-main">
         <div class="panel-header">
-            <h2 class="panel-title">나의 작품 관리</h2>
-            <a href="register.html" class="btn-register">✨ 새 작품 등록하기</a>
+            <h2 class="panel-title" data-en="Manage Assets" data-ko="나의 작품 관리">나의 작품 관리</h2>
+            <a href="register.html" class="btn-register" data-en="✨ Register New Asset" data-ko="✨ 새 작품 등록하기">✨ 새 작품 등록하기</a>
         </div>
         <div class="search-bar">
-            <input type="text" id="searchInput" oninput="applyFilter()" placeholder="🔍  작품명 검색...">
+            <input type="text" id="searchInput" oninput="applyFilter()" placeholder="🔍  작품명 검색..." data-en="🔍 Search assets..." data-ko="🔍  작품명 검색...">
         </div>
         <div class="sub-tabs">
-            <div class="sub-tab active" id="tab-all"       onclick="setTab('all')">전체</div>
-            <div class="sub-tab"       id="tab-converting" onclick="setTab('converting')">변환 중</div>
-            <div class="sub-tab"       id="tab-completed"  onclick="setTab('completed')">변환 완료</div>
-            <div class="sub-tab"       id="tab-failed"     onclick="setTab('failed')">변환 실패</div>
-            <div class="sub-tab"       id="tab-expired"    onclick="setTab('expired')">작품 만료</div>
+            <div class="sub-tab active" id="tab-all"       onclick="setTab('all')" data-en="All" data-ko="전체">전체</div>
+            <div class="sub-tab"       id="tab-converting" onclick="setTab('converting')" data-en="Converting" data-ko="변환 중">변환 중</div>
+            <div class="sub-tab"       id="tab-completed"  onclick="setTab('completed')" data-en="Completed" data-ko="변환 완료">변환 완료</div>
+            <div class="sub-tab"       id="tab-failed"     onclick="setTab('failed')" data-en="Failed" data-ko="변환 실패">변환 실패</div>
+            <div class="sub-tab"       id="tab-expired"    onclick="setTab('expired')" data-en="Expired" data-ko="작품 만료">작품 만료</div>
         </div>
         <div class="item-list" id="workList"></div>
     </main>
@@ -162,7 +162,11 @@ function applyFilter(){
     });
     container.innerHTML = rows.length
         ? rows.join('')
-        : `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">해당 조건의 작품이 없습니다.</div></div>`;
+        : `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text" data-en="No assets match the conditions." data-ko="해당 조건의 작품이 없습니다.">해당 조건의 작품이 없습니다.</div></div>`;
+    
+    if(window.changeLang) {
+        window.changeLang(localStorage.getItem('roz_lang') || 'kr');
+    }
 }
 function buildRow(w){
     const isExpired = w.status === 'expired';
@@ -174,44 +178,43 @@ function buildRow(w){
 
     let badge = '';
     if(w.status === 'converting'){
-        badge = `<span class="item-status s-converting">변환 중</span>`;
+        badge = `<span class="item-status s-converting" data-en="Converting" data-ko="변환 중">변환 중</span>`;
     } else if(w.status === 'completed'){
         badge = w.completedSub === 'wait'
-            ? `<span class="item-status s-completed-wait">판매 대기</span>`
-            : `<span class="item-status s-completed-sale">판매 중</span>`;
+            ? `<span class="item-status s-completed-wait" data-en="Pending" data-ko="판매 대기">판매 대기</span>`
+            : `<span class="item-status s-completed-sale" data-en="On Sale" data-ko="판매 중">판매 중</span>`;
     } else if(w.status === 'expired'){
-        badge = `<span class="item-status s-expired">작품 만료</span>`;
+        badge = `<span class="item-status s-expired" data-en="Expired" data-ko="작품 만료">작품 만료</span>`;
     } else if(w.status === 'failed'){
-        badge = `<span class="item-status s-failed">변환 실패</span>`;
+        badge = `<span class="item-status s-failed" data-en="Failed" data-ko="변환 실패">변환 실패</span>`;
     }
 
-    let meta = `<span>가격: ${w.price}</span>`;
+    let meta = `<span><span data-en="Price: " data-ko="가격: ">가격: </span>${w.price}</span>`;
     if(w.status === 'converting'){
-        meta += `<span>등록일: ${w.regDate}</span><span>판매수: 0</span>`;
+        meta += `<span><span data-en="Reg: " data-ko="등록일: ">등록일: </span>${w.regDate}</span><span><span data-en="Sales: " data-ko="판매수: ">판매수: </span>0</span>`;
     } else if(w.status === 'completed'){
         const c = w.completedSub === 'sale' ? '#166534' : '#1d4ed8';
-        const dateLabel = '판매 시작일';
-        meta += `<span style="color:${c};font-weight:800;">${dateLabel}: ${w.pubDate}</span>`;
-        if(w.completedSub === 'sale') meta += `<span>판매수: <b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
+        meta += `<span style="color:${c};font-weight:800;"><span data-en="Sale Date: " data-ko="판매 시작일: ">판매 시작일: </span>${w.pubDate}</span>`;
+        if(w.completedSub === 'sale') meta += `<span><span data-en="Sales: " data-ko="판매수: ">판매수: </span><b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
     } else if(w.status === 'expired'){
-        meta += `<span style="color:#64748b;">만료일: ${w.expDate}</span>`;
-        meta += `<span>판매수: <b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
+        meta += `<span style="color:#64748b;"><span data-en="Exp: " data-ko="만료일: ">만료일: </span>${w.expDate}</span>`;
+        meta += `<span><span data-en="Sales: " data-ko="판매수: ">판매수: </span><b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
     } else if(w.status === 'failed'){
-        meta += `<span>등록일: ${w.regDate}</span>`;
-        meta += `<span style="color:#dc2626;">사유: 변환 실패</span>`;
+        meta += `<span><span data-en="Reg: " data-ko="등록일: ">등록일: </span>${w.regDate}</span>`;
+        meta += `<span style="color:#dc2626;" data-en="Reason: Failed" data-ko="사유: 변환 실패">사유: 변환 실패</span>`;
     }
 
     return `
     <div class="item-row" onclick="location.href='${detailLink}'" style="opacity:${opacity};">
         <div class="item-thumb" style="background:url('images/main_thumb_bg.jpg') center/cover;${gs}">${w.icon}</div>
         <div class="item-info">
-            <span class="item-tag">${w.tag}</span>
+            <span class="item-tag" data-en="Footprint" data-ko="${w.tag}">${w.tag}</span>
             <div class="item-title" style="${strike}">${w.title}</div>
             <div class="item-meta">${meta}</div>
         </div>
         ${badge}
         <div class="item-actions">
-            <button class="btn-action" onclick="event.stopPropagation();location.href='${detailLink}'">상세 보기</button>
+            <button class="btn-action" onclick="event.stopPropagation();location.href='${detailLink}'" data-en="Details" data-ko="상세 보기">상세 보기</button>
         </div>
     </div>`;
 }

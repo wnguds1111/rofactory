@@ -88,29 +88,29 @@
                 <div class="avatar"><img src="images/poring_hero.png" alt="포링" onerror="this.outerHTML='<span style=\'font-size:32px;\'>🧙</span>'"></div>
                 <div class="user-info-wrap">
                     <div class="user-name">GravityUser</div>
-                    <span class="user-kp">보유 <span>0</span> KP</span>
-                    <a href="#" class="btn-kp">💳 <span data-en="Charge KP" data-ko="KP 충전">Charge KP</span>하기</a>
+                    <span class="user-kp"><span data-en="Owned" data-ko="보유">보유</span> <span>0</span> KP</span>
+                    <a href="#" class="btn-kp" data-en="💳 Charge KP" data-ko="💳 KP 충전하기">💳 KP 충전하기</a>
                 </div>
             </div>
             <ul class="studio-nav">
-                <li onclick="location.href='studio_myworks.html'" class="s-nav-item"><span class="s-nav-icon">🪄</span><span>나의 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></span></li>
-                <li onclick="location.href='studio_inventory.html'" class="s-nav-item active"><span class="s-nav-icon">🎒</span><span>구매 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></span></li>
-                <li onclick="location.href='studio_wishlist.html'" class="s-nav-item"><span class="s-nav-icon" style="color:#ef4444;">💖</span><span>찜한 상품 보기</span></li>
+                <li onclick="location.href='studio_myworks.html'" class="s-nav-item"><span class="s-nav-icon">🪄</span><span data-en="Manage Assets" data-ko="나의 작품 관리">나의 작품 관리</span></li>
+                <li onclick="location.href='studio_inventory.html'" class="s-nav-item active"><span class="s-nav-icon">🎒</span><span data-en="Purchase History" data-ko="구매 작품 관리">구매 작품 관리</span></li>
+                <li onclick="location.href='studio_wishlist.html'" class="s-nav-item"><span class="s-nav-icon" style="color:#ef4444;">💖</span><span data-en="Wishlist" data-ko="찜한 상품 보기">찜한 상품 보기</span></li>
             </ul>
         </aside>
 
         <main class="studio-main">
             <div class="panel-header">
-                <h2 class="panel-title">구매 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></h2>
-                <a href="market.html" class="btn-market">마켓으로 이동 🛍️</a>
+                <h2 class="panel-title" data-en="Purchase History" data-ko="구매 작품 관리">구매 작품 관리</h2>
+                <a href="market.html" class="btn-market" data-en="Go to Market 🛍️" data-ko="마켓으로 이동 🛍️">마켓으로 이동 🛍️</a>
             </div>
             <div class="search-bar">
-                <input type="text" id="searchInput" oninput="applyFilter()" placeholder="🔍  작품명 검색...">
+                <input type="text" id="searchInput" oninput="applyFilter()" placeholder="🔍  작품명 검색..." data-en="🔍 Search purchases..." data-ko="🔍  작품명 검색...">
             </div>
             <div class="sub-tabs">
-                <div class="sub-tab active" id="tab-all"       onclick="setTab('all')">전체</div>
-                <div class="sub-tab"        id="tab-purchased" onclick="setTab('purchased')">구매 완료</div>
-                <div class="sub-tab"        id="tab-expired"   onclick="setTab('expired')">작품 <span data-en="Expired" data-ko="만료">Expired</span></div>
+                <div class="sub-tab active" id="tab-all"       onclick="setTab('all')" data-en="All" data-ko="전체">전체</div>
+                <div class="sub-tab"        id="tab-purchased" onclick="setTab('purchased')" data-en="Purchased" data-ko="구매 완료">구매 완료</div>
+                <div class="sub-tab"        id="tab-expired"   onclick="setTab('expired')" data-en="Expired" data-ko="작품 만료">작품 만료</div>
             </div>
             <div class="item-list" id="invList"></div>
         </main>
@@ -143,26 +143,29 @@ function applyFilter(){
         const op = isExpired?'0.7':'1';
         const strike = isExpired?'text-decoration:line-through;':'';
         const badge = isExpired
-            ? `<span class="item-status" style="background:#f1f5f9;color:#64748b;"><span data-en="Expired" data-ko="만료">Expired</span>됨</span>`
-            : `<span class="item-status" style="background:#dbeafe;color:#1d4ed8;">구매 완료</span>`;
+            ? `<span class="item-status" style="background:#f1f5f9;color:#64748b;" data-en="Expired" data-ko="만료됨">만료됨</span>`
+            : `<span class="item-status" style="background:#dbeafe;color:#1d4ed8;" data-en="Purchased" data-ko="구매 완료">구매 완료</span>`;
         let meta = isExpired
-            ? `<span>구매일: ${w.buyDate}</span><span style="color:#dc2626;font-weight:700;">만료일: ${w.expDate}</span>`
-            : `<span>구매일: ${w.buyDate}</span><span>유효기간: 무제한</span>`;
+            ? `<span><span data-en="Buy Date: " data-ko="구매일: ">구매일: </span>${w.buyDate}</span><span style="color:#dc2626;font-weight:700;"><span data-en="Exp Date: " data-ko="만료일: ">만료일: </span>${w.expDate}</span>`
+            : `<span><span data-en="Buy Date: " data-ko="구매일: ">구매일: </span>${w.buyDate}</span><span><span data-en="Valid: Unlimited" data-ko="유효기간: 무제한">유효기간: 무제한</span></span>`;
         const detailLink = `studio_inventory_detail.html?status=${isExpired?'expired':'purchased'}&title=${encodeURIComponent(w.title)}&icon=${encodeURIComponent(w.icon)}&buyDate=${encodeURIComponent(w.buyDate)}&state=${encodeURIComponent(w.state||'')}&expDate=${encodeURIComponent(w.expDate||'')}&price=${encodeURIComponent(w.price||'0 KP')}`;
         rows.push(`
         <div class="item-row" style="opacity:${op};cursor:pointer;" onclick="location.href='${detailLink}'">
             <div class="item-thumb" style="background:url('images/main_thumb_bg.jpg') center/cover;${gs}">${w.icon}</div>
             <div class="item-info">
-                <span class="item-tag">${w.tag}</span>
+                <span class="item-tag" data-en="Footprint" data-ko="${w.tag}">${w.tag}</span>
                 <div class="item-title" style="${strike}">${w.title}</div>
                 <div class="item-meta">${meta}</div>
             </div>
             ${badge}
-            <div class="item-actions"><button class="btn-action" onclick="event.stopPropagation();location.href='${detailLink}'">구매 상세 내역</button></div>
+            <div class="item-actions"><button class="btn-action" onclick="event.stopPropagation();location.href='${detailLink}'" data-en="Details" data-ko="구매 상세 내역">구매 상세 내역</button></div>
         </div>`);
     });
-    list.innerHTML = rows.length ? rows.join('') : `<div class="empty-state"><div class="empty-icon">🎒</div><div class="empty-text">구매 내역이 없습니다.</div></div>`;
+    list.innerHTML = rows.length ? rows.join('') : `<div class="empty-state"><div class="empty-icon">🎒</div><div class="empty-text" data-en="No purchase history found." data-ko="구매 내역이 없습니다.">구매 내역이 없습니다.</div></div>`;
 
+    if(window.changeLang) {
+        window.changeLang(localStorage.getItem('roz_lang') || 'kr');
+    }
 }
 document.addEventListener('DOMContentLoaded', applyFilter);
 </script>

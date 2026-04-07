@@ -121,7 +121,7 @@
     <div class="studio-detail-container">
         <div class="breadcrumb" style="font-size:16px; margin-bottom:24px;">
             <a href="studio_myworks.html" style="display:inline-flex; align-items:center; gap:6px; color:#1e293b; transition:color 0.2s;" onmouseover="this.style.color='#025DD0'" onmouseout="this.style.color='#1e293b'">
-                <span style="font-size:20px;">←</span> 나의 작품 관리
+                <span style="font-size:20px;">←</span> <span data-en="Manage Assets" data-ko="나의 작품 관리">나의 작품 관리</span>
             </a>
         </div>
 
@@ -130,7 +130,7 @@
                 <div class="dt-left" id="dtThumb">🪄</div>
                 <div class="dt-right">
                     <div id="statusBadge" class="dt-status">상태</div>
-                    <div class="dt-category">발자국</div>
+                    <div class="dt-category" data-en="Footprint" data-ko="발자국">발자국</div>
                     <div id="pageTitle" class="dt-title">작품명</div>
 
                     <div class="dt-info-grid" id="infoGrid">
@@ -138,9 +138,9 @@
                     </div>
 
                     <div class="dt-tags" id="tagArea">
-                        <span class="dt-tag">#트렌디</span>
-                        <span class="dt-tag">#화려한</span>
-                        <button class="dt-tag" id="previewBtn" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8;" onclick="openPreview()">▶ 미리보기</button>
+                        <span class="dt-tag" data-en="#Trendy" data-ko="#트렌디">#트렌디</span>
+                        <span class="dt-tag" data-en="#Brilliant" data-ko="#화려한">#화려한</span>
+                        <button class="dt-tag" id="previewBtn" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8;" onclick="openPreview()"><span data-en="▶ Preview" data-ko="▶ 미리보기">▶ 미리보기</span></button>
                     </div>
 
                     <div id="actionContainer" class="dt-actions"></div>
@@ -148,7 +148,7 @@
             </div>
 
             <div class="detail-bottom">
-                <h3 class="bottom-title">작품 변환 로그</h3>
+                <h3 class="bottom-title" data-en="Asset Conversion Log" data-ko="작품 변환 로그">작품 변환 로그</h3>
                 <div id="timelineContainer" class="timeline"></div>
             </div>
         </div>
@@ -198,18 +198,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── 상태 배지 ──────────────────────────────────
     const badge = document.getElementById('statusBadge');
     const badgeMap = {
-        'converting':      { text:'변환 중',          cls:'s-converting' },
-        'completed_wait':  { text:'판매 대기',         cls:'s-completed-wait' },
-        'completed_sale':  { text:'판매 중',          cls:'s-completed-sale' },
-        'expired':         { text:'작품 만료',         cls:'s-expired' },
-        'failed':          { text:'변환 실패',         cls:'s-failed' },
-        'pending':         { text:'변환 대기',         cls:'s-pending' },
+        'converting':      { text:'<span data-en="Converting" data-ko="변환 중">변환 중</span>',          cls:'s-converting' },
+        'completed_wait':  { text:'<span data-en="Pending" data-ko="판매 대기">판매 대기</span>',         cls:'s-completed-wait' },
+        'completed_sale':  { text:'<span data-en="On Sale" data-ko="판매 중">판매 중</span>',          cls:'s-completed-sale' },
+        'expired':         { text:'<span data-en="Expired" data-ko="작품 만료">작품 만료</span>',         cls:'s-expired' },
+        'failed':          { text:'<span data-en="Failed" data-ko="변환 실패">변환 실패</span>',         cls:'s-failed' },
+        'pending':         { text:'<span data-en="Waiting" data-ko="변환 대기">변환 대기</span>',         cls:'s-pending' },
     };
     const compositeKey = status === 'completed'
         ? (completedSub === 'sale' ? 'completed_sale' : 'completed_wait')
         : status;
     const bInfo = badgeMap[compositeKey] || { text:status, cls:'' };
-    badge.innerText = bInfo.text;
+    badge.innerHTML = bInfo.text;
     badge.className = 'dt-status ' + bInfo.cls;
 
     // ── 정보 그리드 ────────────────────────────────
@@ -219,55 +219,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let gridHTML = `
         <div class="info-box">
-            <div class="info-label">가격</div>
+            <div class="info-label" data-en="Price" data-ko="가격">가격</div>
             <div class="info-val">${priceDisplay}</div>
         </div>
         <div class="info-box">
-            <div class="info-label">판매수</div>
-            <div class="info-val">${status==='converting'||status==='failed'?'—':sales.toLocaleString()+'건'}</div>
+            <div class="info-label" data-en="Sales" data-ko="판매수">판매수</div>
+            <div class="info-val">${status==='converting'||status==='failed'?'—':sales.toLocaleString()+'<span data-en="" data-ko="건">건</span>'}</div>
         </div>`;
 
     if(status === 'converting'){
         gridHTML += `
         <div class="info-box">
-            <div class="info-label">등록일</div>
+            <div class="info-label" data-en="Reg Date" data-ko="등록일">등록일</div>
             <div class="info-val" style="font-size:15px;">${regDate||'—'}</div>
         </div>
         <div class="info-box">
-            <div class="info-label">변환 상태</div>
-            <div class="info-val" style="font-size:13px;color:#92400e;">처리 중…</div>
+            <div class="info-label" data-en="Conversion Status" data-ko="변환 상태">변환 상태</div>
+            <div class="info-val" style="font-size:13px;color:#92400e;" data-en="Processing..." data-ko="처리 중…">처리 중…</div>
         </div>`;
     } else if(status === 'completed'){
         const pubColor = completedSub==='sale'?'#166534':'#1d4ed8';
-        const pubLabel = '판매 시작일';
+        const pubLabel = '<span data-en="Sale Start" data-ko="판매 시작일">판매 시작일</span>';
         gridHTML += `
         <div class="info-box">
             <div class="info-label">${pubLabel}</div>
             <div class="info-val" style="font-size:15px;color:${pubColor};">${pubDate||'—'}</div>
         </div>
         <div class="info-box">
-            <div class="info-label">등록일</div>
+            <div class="info-label" data-en="Reg Date" data-ko="등록일">등록일</div>
             <div class="info-val" style="font-size:15px;">${regDate||'—'}</div>
         </div>`;
     } else if(status === 'expired'){
         gridHTML += `
         <div class="info-box">
-            <div class="info-label">만료일</div>
+            <div class="info-label" data-en="Exp Date" data-ko="만료일">만료일</div>
             <div class="info-val" style="font-size:15px;color:#64748b;">${expDate||'—'}</div>
         </div>
         <div class="info-box">
-            <div class="info-label">누적 판매수</div>
-            <div class="info-val">${sales.toLocaleString()}건</div>
+            <div class="info-label" data-en="Total Sales" data-ko="누적 판매수">누적 판매수</div>
+            <div class="info-val">${sales.toLocaleString()}<span data-en="" data-ko="건">건</span></div>
         </div>`;
     } else if(status === 'failed'){
         gridHTML += `
         <div class="info-box">
-            <div class="info-label">등록일</div>
+            <div class="info-label" data-en="Reg Date" data-ko="등록일">등록일</div>
             <div class="info-val" style="font-size:15px;">${regDate||'—'}</div>
         </div>
         <div class="info-box" style="border-color:#fca5a5;background:#fff5f5;">
-            <div class="info-label" style="color:#dc2626;">실패 사유</div>
-            <div class="info-val" style="font-size:13px;color:#991b1b;font-weight:700;">변환 실패</div>
+            <div class="info-label" style="color:#dc2626;" data-en="Fail Reason" data-ko="실패 사유">실패 사유</div>
+            <div class="info-val" style="font-size:13px;color:#991b1b;font-weight:700;" data-en="Conversion Failed" data-ko="변환 실패">변환 실패</div>
         </div>`;
     }
     document.getElementById('infoGrid').innerHTML = gridHTML;
@@ -275,11 +275,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── 액션 버튼 ──────────────────────────────────
     const acts = document.getElementById('actionContainer');
     if(status === 'failed'){
-        acts.innerHTML = `<button class="dt-btn dt-btn-danger" onclick="if(confirm('작품을 삭제하시겠습니까?')){alert('삭제되었습니다.');location.href='studio_myworks.html';}">&#x1F5D1; 삭제하기</button>`;
+        acts.innerHTML = `<button class="dt-btn dt-btn-danger" onclick="if(confirm('작품을 삭제하시겠습니까?')){alert('삭제되었습니다.');location.href='studio_myworks.html';}" data-en="&#x1F5D1; Delete" data-ko="&#x1F5D1; 삭제하기">&#x1F5D1; 삭제하기</button>`;
     } else if(status === 'expired'){
-        acts.innerHTML = `<button class="dt-btn dt-btn-secondary" onclick="alert('만료된 작품입니다. 새로 등록해주세요.')">&#x1f504; 재등록 불가</button>`;
+        acts.innerHTML = `<button class="dt-btn dt-btn-secondary" onclick="alert('만료된 작품입니다. 새로 등록해주세요.')" data-en="&#x1f504; Cannot re-register" data-ko="&#x1f504; 재등록 불가">&#x1f504; 재등록 불가</button>`;
     } else if(status === 'completed'){
-        acts.innerHTML = `<button class="dt-btn dt-btn-primary" onclick="downloadFoot('${title.replace(/'/g,"\\'")}')">&#x1F4E5; 작품 내려받기 (.foot)</button>`;
+        acts.innerHTML = `<button class="dt-btn dt-btn-primary" onclick="downloadFoot('${title.replace(/'/g,"\\'")}')" data-en="&#x1F4E5; Download (.foot)" data-ko="&#x1F4E5; 작품 내려받기 (.foot)">&#x1F4E5; 작품 내려받기 (.foot)</button>`;
     } else {
         acts.innerHTML = '';
     }
@@ -288,17 +288,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // 헬퍼
     const tlItem = (isActive, date, titleText, titleColor, desc) => `
         <div class="tl-item${isActive?' active':''}">
-            <div class="tl-date">${date}${isActive?' <span style="color:#1d4ed8;font-size:11px;">(현재)</span>':''}</div>
+            <div class="tl-date">${date}${isActive?' <span style="color:#1d4ed8;font-size:11px;" data-en="(Current)" data-ko="(현재)">(현재)</span>':''}</div>
             <div class="tl-title" style="color:${titleColor||'#1e293b'};">${titleText}</div>
             <div class="tl-desc">${desc}</div>
         </div>`;
 
-    const tReg       = tlItem(false,'2026.03.10 10:00','작품 최초 등록','','RO Factory 폼을 통해 최초로 정보가 등록되었습니다.');
-    const tConvert   = tlItem(status==='converting', '2026.03.13 14:00','🔄 변환 작업 진행 중','#92400e','서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.');
-    const tCompWait  = tlItem(status==='completed'&&completedSub==='wait', '2026.03.15 09:30','✅ 변환 완료','#1d4ed8','모든 변환이 성공적으로 끝났습니다. 안내된 패치 예정일에 맞춰 출시를 대기합니다.');
-    const tCompSale  = tlItem(status==='completed'&&completedSub==='sale', pubDate?pubDate.replace(/\./g,'/')+' 00:00':'—', '🎉 제품 판매 중','#166634','오픈 마켓에 정상적으로 등록되어, 현재 유저들이 아이템을 구매하고 있습니다!');
-    const tExpired   = tlItem(true, expDate||'—', '⏹ 작품 만료됨','#64748b','판매 기간이 종료되어 마켓 품절 처리되었습니다.');
-    const tFailed    = tlItem(true, '2026.03.14 16:20','❗ 변환 실패','#991b1b','변환 파이프라인 처리 중 오류가 발생했습니다. 파일 삭제 후 신규 등록하실 수 있습니다.');
+    const tReg       = tlItem(false,'2026.03.10 10:00','<span data-en="Initial Registration" data-ko="작품 최초 등록">작품 최초 등록</span>','','<span data-en="Registered via RO Factory." data-ko="RO Factory 폼을 통해 최초로 정보가 등록되었습니다.">RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</span>');
+    const tConvert   = tlItem(status==='converting', '2026.03.13 14:00','<span data-en="🔄 Converting" data-ko="🔄 변환 작업 진행 중">🔄 변환 작업 진행 중</span>','#92400e','<span data-en="Simulating file conversion for in-game." data-ko="서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.">서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.</span>');
+    const tCompWait  = tlItem(status==='completed'&&completedSub==='wait', '2026.03.15 09:30','<span data-en="✅ Conversion Complete" data-ko="✅ 변환 완료">✅ 변환 완료</span>','#1d4ed8','<span data-en="Conversion finished. Awaiting requested patch date." data-ko="모든 변환이 성공적으로 끝났습니다. 안내된 패치 예정일에 맞춰 출시를 대기합니다.">모든 변환이 성공적으로 끝났습니다. 안내된 패치 예정일에 맞춰 출시를 대기합니다.</span>');
+    const tCompSale  = tlItem(status==='completed'&&completedSub==='sale', pubDate?pubDate.replace(/\./g,'/')+' 00:00':'—', '<span data-en="🎉 On Sale" data-ko="🎉 제품 판매 중">🎉 제품 판매 중</span>','#166634','<span data-en="Now available on the open market!" data-ko="오픈 마켓에 정상적으로 등록되어, 현재 유저들이 아이템을 구매하고 있습니다!">오픈 마켓에 정상적으로 등록되어, 현재 유저들이 아이템을 구매하고 있습니다!</span>');
+    const tExpired   = tlItem(true, expDate||'—', '<span data-en="⏹ Expired" data-ko="⏹ 작품 만료됨">⏹ 작품 만료됨</span>','#64748b','<span data-en="Sale period ended." data-ko="판매 기간이 종료되어 마켓 품절 처리되었습니다.">판매 기간이 종료되어 마켓 품절 처리되었습니다.</span>');
+    const tFailed    = tlItem(true, '2026.03.14 16:20','<span data-en="❗ Failed" data-ko="❗ 변환 실패">❗ 변환 실패</span>','#991b1b','<span data-en="Pipeline error. Retrying after deletion is possible." data-ko="변환 파이프라인 처리 중 오류가 발생했습니다. 파일 삭제 후 신규 등록하실 수 있습니다.">변환 파이프라인 처리 중 오류가 발생했습니다. 파일 삭제 후 신규 등록하실 수 있습니다.</span>');
 
     let logs = [];
     if(status === 'converting' || status === 'pending'){
@@ -315,6 +315,8 @@ document.addEventListener('DOMContentLoaded', () => {
         logs = [tReg];
     }
     document.getElementById('timelineContainer').innerHTML = logs.join('');
+
+    if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
 });
 
 function openPreview(){

@@ -341,7 +341,7 @@
         <div class="filter-drawer-header">
             <div class="filter-drawer-handle"></div>
             <div class="filter-drawer-top">
-                <span class="filter-drawer-title">🎛️ 필터 & 정렬</span>
+                <span class="filter-drawer-title" data-en="🎛️ Filter & Sort" data-ko="🎛️ 필터 & 정렬">🎛️ 필터 & 정렬</span>
                 <button class="filter-drawer-close" onclick="event.stopPropagation(); window.closeMobileFilter()">✕</button>
             </div>
         </div>
@@ -349,13 +349,13 @@
         <div class="filter-drawer-body" id="drawerFilterContent"></div>
         <!-- ③ 고정 하단 적용버튼 -->
         <div class="filter-drawer-footer">
-            <button class="filter-apply-btn" onclick="event.stopPropagation(); window.closeMobileFilter()">필터 적용하기 ✓</button>
+            <button class="filter-apply-btn" onclick="event.stopPropagation(); window.closeMobileFilter()" data-en="Apply Filters ✓" data-ko="필터 적용하기 ✓">필터 적용하기 ✓</button>
         </div>
     </div>
 </div>
 
 <!-- Mobile Filter Floating Button (마켓 리스트에서만 표시) -->
-<button class="mobile-filter-btn" id="mobileFilterBtn" onclick="openMobileFilter()">🎛️ 필터 & 정렬</button>
+<button class="mobile-filter-btn" id="mobileFilterBtn" onclick="openMobileFilter()" data-en="🎛️ Filter & Sort" data-ko="🎛️ 필터 & 정렬">🎛️ 필터 & 정렬</button>
 
 <div class="market-container">
         
@@ -375,42 +375,42 @@
                 <!-- Sidebar -->
                 <aside class="market-sidebar">
                     <div class="filter-header">
-                        <span><span data-en="Option Filter" data-ko="옵션 필터">Option Filter</span></span>
+                        <span><span data-en="Option Filter" data-ko="옵션 필터">옵션 필터</span></span>
                         <span class="filter-reset" onclick="resetFilters()">↺</span>
                     </div>
 
                     <div class="filter-group filter-category">
-                        <div class="filter-title"><span data-en="Category" data-ko="카테고리">Category</span></div>
+                        <div class="filter-title"><span data-en="Category" data-ko="카테고리">카테고리</span></div>
                         <div class="filter-btns">
-                            <button class="f-btn active"><span data-en="Footprints" data-ko="발자국">Footprints</span></button>
+                            <button class="f-btn active"><span data-en="Footprints" data-ko="발자국">발자국</span></button>
                         </div>
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-title"><span data-en="Type" data-ko="타입">Type</span></div>
+                        <div class="filter-title"><span data-en="Type" data-ko="타입">타입</span></div>
                         <div class="filter-btns filter-type">
-                            <button class="f-btn" data-val="cute">#Cute</button>
-                            <button class="f-btn" data-val="fancy">#Fancy</button>
-                            <button class="f-btn" data-val="dark">#Dark</button>
+                            <button class="f-btn" data-val="cute" data-en="#Cute" data-ko="#큐티">#큐티</button>
+                            <button class="f-btn" data-val="fancy" data-en="#Fancy" data-ko="#화려">#화려</button>
+                            <button class="f-btn" data-val="dark" data-en="#Dark" data-ko="#다크">#다크</button>
                         </div>
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-title">🎨 <span data-en="Color" data-ko="색상">Color</span></div>
+                        <div class="filter-title">🎨 <span data-en="Color" data-ko="색상">색상</span></div>
                         <div class="filter-btns filter-color">
-                            <button class="f-btn" data-val="red"><span class="f-color-dot" style="background:red;"></span> Red</button>
-                            <button class="f-btn" data-val="blue"><span class="f-color-dot" style="background:blue;"></span> Blue</button>
-                            <button class="f-btn" data-val="green"><span class="f-color-dot" style="background:green;"></span> Green</button>
-                            <button class="f-btn" data-val="yellow"><span class="f-color-dot" style="background:gold;"></span> Yellow</button>
-                            <button class="f-btn" data-val="black"><span class="f-color-dot" style="background:black;"></span> Black</button>
-                            <button class="f-btn" data-val="white"><span class="f-color-dot" style="background:#fff; border:1px solid #ccc;"></span> White</button>
+                            <button class="f-btn" data-val="red"><span class="f-color-dot" style="background:red;"></span> <span data-en="Red" data-ko="레드">레드</span></button>
+                            <button class="f-btn" data-val="blue"><span class="f-color-dot" style="background:blue;"></span> <span data-en="Blue" data-ko="블루">블루</span></button>
+                            <button class="f-btn" data-val="green"><span class="f-color-dot" style="background:green;"></span> <span data-en="Green" data-ko="그린">그린</span></button>
+                            <button class="f-btn" data-val="yellow"><span class="f-color-dot" style="background:gold;"></span> <span data-en="Yellow" data-ko="옐로우">옐로우</span></button>
+                            <button class="f-btn" data-val="black"><span class="f-color-dot" style="background:black;"></span> <span data-en="Black" data-ko="블랙">블랙</span></button>
+                            <button class="f-btn" data-val="white"><span class="f-color-dot" style="background:#fff; border:1px solid #ccc;"></span> <span data-en="White" data-ko="화이트">화이트</span></button>
                         </div>
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-title">💰 <span data-en="Price" data-ko="가격">Price</span> (KP)</div>
+                        <div class="filter-title">💰 <span data-en="Price" data-ko="가격">가격</span> (KP)</div>
                         <div class="filter-btns filter-price">
-                            <button class="f-btn" data-val="0"><span data-en="Free" data-ko="무료">Free</span></button>
+                            <button class="f-btn" data-val="0"><span data-en="Free" data-ko="무료">무료</span></button>
                             <button class="f-btn" data-val="1000">~ 1,000</button>
                             <button class="f-btn" data-val="5000">1,000 ~ 5,000</button>
                             <button class="f-btn" data-val="10000">5,000 ~ 10,000</button>
@@ -430,18 +430,18 @@
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-title"><span data-en="Sort" data-ko="정렬">Sort</span></div>
+                        <div class="filter-title"><span data-en="Sort" data-ko="정렬">정렬</span></div>
                         <div class="filter-btns filter-sort">
-                            <button class="f-btn" data-val="new">NEW</button>
-                            <button class="f-btn" data-val="trending">Trending</button>
-                            <button class="f-btn" data-val="best">Best</button>
+                            <button class="f-btn" data-val="new" data-en="NEW" data-ko="신상품">신상품</button>
+                            <button class="f-btn" data-val="trending" data-en="Trending" data-ko="인기순">인기순</button>
+                            <button class="f-btn" data-val="best" data-en="Best" data-ko="추천순">추천순</button>
                         </div>
                     </div>
                 </aside>
 
                 <!-- Main Content -->
                 <main class="market-main">
-                    <span class="market-count" id="marketCountLabel">0개의 <span data-en="Footprints" data-ko="발자국">Footprints</span></span>
+                    <span class="market-count" id="marketCountLabel">0<span data-en=" Items" data-ko="개의 발자국">개의 발자국</span></span>
                     <div class="market-grid" id="marketGridContainer">
                         <!-- Loaded through JS -->
                     </div>
@@ -874,11 +874,12 @@
             // Simple default UI Sort
             filtered.sort((a,b) => b.hearts - a.hearts);
             
-            document.getElementById('marketCountLabel').innerHTML = `${filtered.length}개의 <span data-en="Footprints" data-ko="발자국">Footprints</span>`;
+            document.getElementById('marketCountLabel').innerHTML = `${filtered.length}<span data-en=" Items" data-ko="개의 발자국">개의 발자국</span>`;
             
             if(filtered.length === 0) {
-                grid.innerHTML = `<div style="grid-column:1/-1; padding:40px; text-align:center; color:#64748b; font-weight:700;"><span data-en="No matching search results." data-ko="조건에 맞는 검색 결과가 없습니다.">No matching search results.</span></div>`;
+                grid.innerHTML = `<div style="grid-column:1/-1; padding:40px; text-align:center; color:#64748b; font-weight:700;"><span data-en="No matching search results." data-ko="조건에 맞는 검색 결과가 없습니다.">조건에 맞는 검색 결과가 없습니다.</span></div>`;
                 document.getElementById('paginationWrap').innerHTML = '';
+                if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
                 return;
             }
 
@@ -915,6 +916,7 @@
             });
             
             renderPagination(totalPages);
+            if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
         }
 
         function renderPagination(totalPages) {

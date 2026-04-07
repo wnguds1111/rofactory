@@ -88,32 +88,32 @@
         <!-- STEP 2: FILE UPLOAD + TERMS -->
         <div class="step-panel" id="step2">
             <div class="step-sub text-center">STEP 2</div>
-            <h2 class="step-title text-center"><span data-en="Footprints" data-ko="발자국">발자국</span> 파일 등록</h2>
-            <p class="step-desc text-center mb-30">편집툴에서 추출해둔 에셋 파일들을 업로드하고 약관에 동의합니다.</p>
+            <h2 class="step-title text-center"><span data-en="Register Footprints File" data-ko="발자국 파일 등록"><span data-en="Footprints" data-ko="발자국">발자국</span> 파일 등록</span></h2>
+            <p class="step-desc text-center mb-30" data-en="Upload asset files extracted from the editing tool and agree to the terms." data-ko="편집툴에서 추출해둔 에셋 파일들을 업로드하고 약관에 동의합니다.">편집툴에서 추출해둔 에셋 파일들을 업로드하고 약관에 동의합니다.</p>
 
             <div class="form-container-clean">
                 <!-- 1x4 파일 그리드 -->
                 <div class="file-grid" style="grid-template-columns:repeat(4,1fr); gap:14px;">
                     <div class="file-box" onclick="document.getElementById('f1').click()">
                         <div class="icon">📁</div>
-                        <h4><span data-en="Footprints" data-ko="발자국">발자국</span> 원본 데이터</h4><span>(.foot 확장자 필수)</span>
+                        <h4><span data-en="Original Footprints Data" data-ko="발자국 원본 데이터"><span data-en="Footprints" data-ko="발자국">발자국</span> 원본 데이터</span></h4><span data-en="(.foot extension required)" data-ko="(.foot 확장자 필수)">(.foot 확장자 필수)</span>
                         <input type="file" id="f1" style="display:none" accept=".foot" onchange="handleFileSelect(this, 'f1_name')">
                         <span id="f1_name" style="display:block; margin-top:10px; font-weight:900; color:#025DD0; word-break: break-all;"></span>
                     </div>
                     <div class="file-box" onclick="document.getElementById('f2').click()">
                         <div class="icon">🎬</div>
-                        <h4>동영상 미리보기 파일</h4><span>(.mp4 / .mov 권장)</span>
+                        <h4 data-en="Video Preview File" data-ko="동영상 미리보기 파일">동영상 미리보기 파일</h4><span data-en="(.mp4 / .mov recommended)" data-ko="(.mp4 / .mov 권장)">(.mp4 / .mov 권장)</span>
                         <input type="file" id="f2" style="display:none" accept="video/*" onchange="handleFileSelect(this, 'f2_name')">
                         <span id="f2_name" style="display:block; margin-top:10px; font-weight:900; color:#025DD0; word-break: break-all;"></span>
                     </div>
                     <div class="file-box" id="f3_box" onclick="document.getElementById('f3').click()">
                         <div class="icon" style="color: #6366f1;">💎</div>
-                        <h4>콜렉션 썸네일</h4><span>(<span data-en="Market" data-ko="마켓">마켓</span> 노출용 누끼 .png)</span>
+                        <h4 data-en="Collection Thumbnail" data-ko="콜렉션 썸네일">콜렉션 썸네일</h4><span data-en="(Transparent .png for Market)" data-ko="(마켓 노출용 누끼 .png)">(<span data-en="Market" data-ko="마켓">마켓</span> 노출용 누끼 .png)</span>
                         <input type="file" id="f3" style="display:none" accept=".png" onchange="handleImageSelect(this, 'f3_box', 'f3_name')">
                     </div>
                     <div class="file-box" id="f4_box" onclick="document.getElementById('f4').click()">
                         <div class="icon" style="color: #d97706;">🎒</div>
-                        <h4>아이템 썸네일</h4><span>(인게임 아이템 적용 가능 이미지)</span>
+                        <h4 data-en="Item Thumbnail" data-ko="아이템 썸네일">아이템 썸네일</h4><span data-en="(In-game compatible image)" data-ko="(인게임 아이템 적용 가능 이미지)">(인게임 아이템 적용 가능 이미지)</span>
                         <input type="file" id="f4" style="display:none" accept=".png,.jpg,.jpeg" onchange="handleImageSelect(this, 'f4_box', 'f4_name')">
                     </div>
                 </div>
@@ -137,21 +137,21 @@
             <div class="form-container-clean">
                 <div class="form-row" style="margin-bottom:16px;">
                     <div class="form-group half">
-                        <label>작품 카테고리</label>
-                        <input type="text" class="form-control" value="발자국" readonly>
+                        <label data-en="Category" data-ko="작품 카테고리">작품 카테고리</label>
+                        <input type="text" class="form-control" value="발자국" data-en="Footprints" data-ko="발자국" readonly>
                     </div>
                     <div class="form-group half">
-                        <label>판매 금액</label>
+                        <label data-en="Sale Price" data-ko="판매 금액">판매 금액</label>
                         <input type="text" class="form-control" value="FREE" readonly>
                     </div>
                 </div>
                 <div class="form-row" style="margin-bottom:16px;">
                     <div class="form-group half">
-                        <label>작품 게시기간 <span style="color:#ef4444;">*필수</span> <span>(DD.MM.YYYY, 최소 30일)</span></label>
+                        <label><span data-en="Post Period" data-ko="작품 게시기간">작품 게시기간</span> <span style="color:#ef4444;" data-en="*Required" data-ko="*필수">*필수</span> <span data-en="(DD.MM.YYYY, min 30 days)" data-ko="(DD.MM.YYYY, 최소 30일)">(DD.MM.YYYY, 최소 30일)</span></label>
                         <input type="text" class="form-control" id="postDate" placeholder="DD.MM.YYYY" maxlength="10">
                     </div>
                     <div class="form-group half">
-                        <label>작품명 <span style="color:#ef4444;">*</span> <span>(영문만, 최대 20자)</span></label>
+                        <label><span data-en="Item Title" data-ko="작품명">작품명</span> <span style="color:#ef4444;">*</span> <span data-en="(English only, max 20 chars)" data-ko="(영문만, 최대 20자)">(영문만, 최대 20자)</span></label>
                         <input type="text" class="form-control" id="workTitle" placeholder="Enter title in English (max 20 chars)" maxlength="20" oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')">
                     </div>
                 </div>
@@ -159,7 +159,7 @@
                 <!-- 작품 타입 + 메인 색상 나란히 -->
                 <div class="s3-bottom-row">
                     <div class="s3-card">
-                        <div class="s3-card-label">작품 타입 <span>최대 2개 선택</span></div>
+                        <div class="s3-card-label"><span data-en="Type" data-ko="작품 타입">작품 타입</span> <span data-en="Select up to 2" data-ko="최대 2개 선택">최대 2개 선택</span></div>
                         <div class="tag-group" id="typeTags">
                             <label class="tag-pill type-pill"><input type="checkbox" value="c1"> Cute</label>
                             <label class="tag-pill type-pill"><input type="checkbox" value="c2"> Fancy</label>
@@ -170,7 +170,7 @@
                     </div>
                     <div class="s3-divider"></div>
                     <div class="s3-card">
-                        <div class="s3-card-label"><span data-en="Color" data-ko="색상">색상</span> <span>1개 선택 (선택)</span></div>
+                        <div class="s3-card-label"><span data-en="Color" data-ko="색상">색상</span> <span data-en="Select 1 (Optional)" data-ko="1개 선택 (선택)">1개 선택 (선택)</span></div>
                         <div class="tag-group" id="colorTags">
                             <label class="tag-pill color-pill">
                                 <input type="radio" name="mainColor" value="red">
@@ -205,14 +205,14 @@
         <!-- STEP 4: COMPLETION -->
         <div class="step-panel text-center" id="step4">
             <div class="step-sub">STEP 4</div>
-            <h2 class="step-title">성공적으로 마무리되었습니다!</h2>
+            <h2 class="step-title" data-en="Successfully Registered!" data-ko="성공적으로 마무리되었습니다!">성공적으로 마무리되었습니다!</h2>
             <div class="completion-box">
                 <div class="anim-icon">🎉</div>
-                <p class="step-desc">파일 변환이 진행 중이며, 완료되면 글로벌 <span data-en="Market" data-ko="마켓">마켓</span>에 자동 등재됩니다.</p>
+                <p class="step-desc"><span data-en="File conversion is in progress. Once complete, it will be automatically listed on the global Market." data-ko="파일 변환이 진행 중이며, 완료되면 글로벌 마켓에 자동 등재됩니다.">파일 변환이 진행 중이며, 완료되면 글로벌 <span data-en="Market" data-ko="마켓">마켓</span>에 자동 등재됩니다.</span></p>
 
                 <div class="limit-box mt-30">
-                    <span>오늘 남은 등록 잔여 횟수</span>
-                    <strong>2 / 3회 남음</strong>
+                    <span data-en="Remaining uploads today" data-ko="오늘 남은 등록 잔여 횟수">오늘 남은 등록 잔여 횟수</span>
+                    <strong><span data-en="2 / 3 times remaining" data-ko="2 / 3회 남음">2 / 3회 남음</span></strong>
                 </div>
             </div>
         </div>
@@ -225,8 +225,8 @@
     <div class="progress-track">
         <div class="progress-fill" id="progressBar" style="width: 20%;"></div>
     </div>
-    <button class="btn-back" id="btnBack" onclick="prevStep()">이전으로</button>
-    <button class="btn-next" id="btnNext" onclick="nextStep()">확인 후 다음 단계</button>
+    <button class="btn-back" id="btnBack" onclick="prevStep()" data-en="Back" data-ko="이전으로">이전으로</button>
+    <button class="btn-next" id="btnNext" onclick="nextStep()" data-en="Confirm & Next Step" data-ko="확인 후 다음 단계">확인 후 다음 단계</button>
 </footer>
 
 <!-- Terms Modal -->
@@ -262,7 +262,8 @@
             btn.disabled = false;
             btn.style.opacity = 1;
             btn.style.cursor = 'pointer';
-            btn.innerText = '확인 및 약관 동의하기';
+            btn.innerHTML = '<span data-en="Confirm and Agree to Terms" data-ko="확인 및 약관 동의하기">확인 및 약관 동의하기</span>';
+            if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
         }
     }
     function agreeTerms(e) {
@@ -334,18 +335,19 @@
         }
 
         if (currentStep === totalSteps - 1) {
-            btnNext.innerText = "데이터 최종 등록하기";
+            btnNext.innerHTML = '<span data-en="Finalize Registration" data-ko="데이터 최종 등록하기">데이터 최종 등록하기</span>';
             btnNext.style.background = "#012553";
             btnNext.style.color = "#fff";
         } else if (currentStep === totalSteps) {
-            btnNext.innerText = "MY STUDIO 이동 ↗";
+            btnNext.innerHTML = '<span data-en="Go to MY STUDIO ↗" data-ko="MY STUDIO 이동 ↗">MY STUDIO 이동 ↗</span>';
             btnNext.style.background = "#025DD0";
             btnNext.style.color = "#fff";
         } else {
-            btnNext.innerText = "확인 후 다음 단계";
+            btnNext.innerHTML = '<span data-en="Confirm & Next Step" data-ko="확인 후 다음 단계">확인 후 다음 단계</span>';
             btnNext.style.background = "var(--primary-bright)";
             btnNext.style.color = "#fff";
         }
+        if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
     }
 
     function nextStep() {
