@@ -37,9 +37,9 @@ tailwind.config = {
         'card-hover': '0 10px 30px rgba(0,0,0,0.08)',
       },
       borderRadius: {
-        'xl': '12px',
-        '2xl': '16px',
-        '3xl': '24px',
+        'xl': '10px',
+        '2xl': '12px',
+        '3xl': '20px',
       },
       animation: {
         'fade-in': 'fadeIn 0.4s ease forwards',
