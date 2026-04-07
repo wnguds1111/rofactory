@@ -160,10 +160,12 @@
         .market-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
         .market-card { cursor: pointer; display: flex; flex-direction: column; transition: transform 0.2s; }
         .market-card:hover { transform: translateY(-4px); }
-        .card-img-wrap { width: 100%; aspect-ratio: 1; background: #CCDFF6 url('images/main_thumb_bg.jpg') center/cover; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #333; margin-bottom: 8px; position: relative; }
-        .card-heart { position: absolute; bottom: 8px; right: 10px; font-size: 16px; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .card-img-wrap { width: 100%; aspect-ratio: 1; background: url('images/main_thumb_bg.jpg') center/cover; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 80px; margin-bottom: 8px; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(2,93,208,0.10); }
+        .card-img-overlay { position: absolute; inset: 0; border-radius: 10px; opacity: 0.45; }
+        .card-img-icon { position: relative; z-index: 2; text-shadow: 0 6px 18px rgba(0,0,0,0.22); line-height: 1; }
+        .card-heart { position: absolute; bottom: 8px; right: 10px; font-size: 16px; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.4); z-index: 3; }
         .card-bottom { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding-top: 4px; }
-        .card-name { font-size: 13px; font-weight: 700; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; text-align: left; }
+        .card-name { font-size: 13px; font-weight: 700; color: #151515; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; text-align: left; }
         .card-price { font-size: 14px; font-weight: 900; color: #025DD0; text-align: left; }
 
         /* PANEL 2: Detail View */
@@ -235,6 +237,10 @@
         .btn-heart:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         .btn-heart span { color: #0f172a; }
         .d-tag { display: inline-block; background: #f8fafc; border: 1px solid #cbd5e1; color: #475569; font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 6px; margin-right: 4px; }
+        /* ── PC: 모바일 필터 버튼 숨김 ── */
+        @media (min-width: 901px) {
+            .mobile-filter-btn { display: none !important; }
+        }
         /* ── Responsive Breakpoints ── */
         @media (max-width: 900px) {
             .market-container { margin: 12px auto; padding: 0 16px; }
@@ -526,7 +532,7 @@
                 <div class="kp-modal-body" style="padding: 30px;">
                     <div class="kp-balance-box" style="background:#f8fafc; padding:22px 24px; border-radius:14px; display:flex; justify-content:space-between; margin-bottom:24px; border:1px solid #e2e8f0;">
                         <span style="font-size:16px; font-weight:700; color:#64748b;"><span data-en="My Kafra Points" data-ko="나의 보유 Kafra Point">My Kafra Points</span></span>
-                        <strong style="font-size:20px; color:#3b82f6;" id="modal-current-balance">5,000 KP</strong>
+                        <strong style="font-size:20px; color:#025DD0;" id="modal-current-balance">5,000 KP</strong>
                     </div>
                     
                     <div class="kp-receipt" style="background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:24px;">
@@ -553,7 +559,7 @@
                 </div>
                 <div class="modal-btns" style="display:flex; padding:24px 30px; border-top:1px solid #e2e8f0; gap:15px; background:#fff; border-bottom-left-radius:24px; border-bottom-right-radius:24px;">
                     <button class="btn-modal-cancel" style="flex:1; padding:18px; background:transparent; color:#64748b; font-weight:800; font-size:17px; border:none; cursor:pointer;" onclick="closePaymentModal()"><span data-en="Cancel" data-ko="취소">Cancel</span></button>
-                    <button class="btn-modal-confirm" id="btn-modal-confirm" style="flex:1; padding:18px; background:#3b82f6; color:#fff; font-weight:800; font-size:17px; border:none; border-radius:14px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#3b82f6'" onclick="executePayment()"><span data-en="Pay 50 KP" data-ko="50 KP 결제하기">Pay 50 KP</span></button>
+                    <button class="btn-modal-confirm" id="btn-modal-confirm" style="flex:1; padding:18px; background:#025DD0; color:#fff; font-weight:800; font-size:17px; border:none; border-radius:14px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#012553'" onmouseout="this.style.background='#025DD0'" onclick="executePayment()"><span data-en="Pay 50 KP" data-ko="50 KP 결제하기">Pay 50 KP</span></button>
                 </div>
             </div>
         </div>
@@ -645,7 +651,7 @@
             if (p.isFree) {
                 document.getElementById('modal-item-price').innerText = `FREE`;
                 document.getElementById('modal-payment-amount').innerHTML = `0 KP (<span data-en="Free" data-ko="무료">Free</span>)`;
-                document.getElementById('modal-payment-amount').style.color = '#3b82f6';
+                document.getElementById('modal-payment-amount').style.color = '#025DD0';
             } else {
                 document.getElementById('modal-item-price').innerText = `${p.price.toLocaleString()} KP`;
                 document.getElementById('modal-payment-amount').innerText = `- ${p.price.toLocaleString()} KP`;
@@ -656,7 +662,7 @@
             const alertBox = document.getElementById('modal-warning');
             
             // Reset state
-            btn.style.background = '#3b82f6';
+            btn.style.background = '#025DD0';
             btn.style.cursor = 'pointer';
             btn.innerHTML = p.isFree ? '<span data-en="Free" data-ko="무료">Free</span> <span data-en="Proceed to Checkout" data-ko="결제 진행">Proceed to Checkout</span>' : `${p.price.toLocaleString()} KP <span data-en="Pay" data-ko="결제하기">Pay</span>`;
             if(alertBox) alertBox.style.display = 'none';
@@ -896,14 +902,15 @@
                 const pLabel = p.isFree ? '<span style="color:#22c55e;">FREE</span>' : p.price.toLocaleString() + ' KP';
                 
                 card.innerHTML = `
-                    <div class="card-img-wrap" style="background: ${p.img}; font-size: 80px; text-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-                        ${p.icon}
+                    <div class="card-img-wrap">
+                        <div class="card-img-overlay" style="background: ${p.img};"></div>
+                        <span class="card-img-icon">${p.icon}</span>
                         ${tagHtml}
                         <span class="card-heart">${p.hearts > 100 ? '❤️' : '♡'}</span>
                     </div>
                     <div class="card-bottom">
                         <span class="card-name">${p.title}</span>
-                        <span class="card-price" style="color: #3b82f6;">${pLabel}</span>
+                        <span class="card-price">${pLabel}</span>
                     </div>
                 `;
                 grid.appendChild(card);
