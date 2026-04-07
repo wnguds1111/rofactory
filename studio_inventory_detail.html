@@ -11,7 +11,7 @@
         body { font-family:'Pretendard',system-ui,-apple-system,sans-serif; @apply bg-[#f0f2f5] text-slate-900 antialiased; }
         a { text-decoration:none; color:inherit; }
 
-        .studio-layout { @apply flex lg:flex-row flex-col lg:gap-8 gap-[12px] md:gap-[24px] max-w-[1200px] mx-auto mt-10 md:mt-3 px-3 md:px-6 lg:px-0 min-h-[70vh]; }
+        .studio-layout { @apply flex lg:flex-row flex-col lg:gap-8 gap-[12px] md:gap-[24px] max-w-[1200px] mx-auto mt-10 md:mt-3 px-3 md:px-6 lg:px-10 min-h-[70vh]; }
 
         /* Sidebar */
         .studio-sidebar { @apply w-full lg:w-[260px] shrink-0 flex flex-col md:flex-row lg:flex-col lg:gap-5 gap-2.5 md:gap-5; }
@@ -87,7 +87,7 @@
         .dt-category { @apply text-sm text-blue-600 font-black mb-1; }
         .dt-title { @apply text-2xl md:text-3xl font-black text-slate-900 mb-6; }
         
-        .dt-info-grid { @apply grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6; }
+        .dt-info-grid { @apply grid grid-cols-3 gap-4 mb-6; }
         .info-box { @apply bg-slate-50 p-4 rounded-xl border border-slate-100; }
         .info-label { @apply text-xs font-bold text-slate-400 mb-1; }
         .info-val { @apply text-lg font-black text-slate-800; }
@@ -119,99 +119,110 @@
 <body>
     <script src="gnb.js"></script>
     <div class="studio-detail-container">
-        <div class="breadcrumb">
-            <a href="studio_inventory.html">??援щℓ ?묓뭹 愿由?/a> &gt; <span id="bcTitle">援щℓ ?곸꽭</span>
+        <div class="breadcrumb" style="font-size:16px; margin-bottom:24px;">
+            <a href="studio_inventory.html" style="display:inline-flex; align-items:center; gap:6px; color:#1e293b; transition:color 0.2s;" onmouseover="this.style.color='#025DD0'" onmouseout="this.style.color='#1e293b'">
+                <span style="font-size:20px;">←</span> 구매 작품 관리
+            </a>
         </div>
 
         <div class="detail-card">
             <div class="detail-top">
-                <div class="dt-left" id="dtThumb">?챷</div>
+                <div class="dt-left" id="dtThumb">🪄</div>
                 <div class="dt-right">
-                    <div id="statusBadge" class="dt-status">?곹깭</div>
-                    <div class="dt-category">諛쒖옄援?/div>
-                    <div id="pageTitle" class="dt-title">?묓뭹紐?/div>
+                    <div id="statusBadge" class="dt-status">상태</div>
+                    <div class="dt-category">발자국</div>
+                    <div id="pageTitle" class="dt-title">작품명</div>
 
                     <div class="dt-info-grid" id="infoGrid">
-                        <!-- JS 濡?梨꾩? -->
+                        <!-- JS 로 채움 -->
                     </div>
 
-                    <div class="dt-tags" id="tagArea">
-                        <span class="dt-tag">#?몃젋??/span>
-                        <span class="dt-tag">#?붾젮??/span>
-                        <button class="dt-tag" id="previewBtn" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8;" onclick="openPreview()">??誘몃━蹂닿린</button>
-                    </div>
+                    <div class="dt-tags" id="tagArea" style="display:none;"></div>
 
                     <div id="actionContainer" class="dt-actions"></div>
                 </div>
             </div>
+
+            <div class="detail-bottom" style="display:none;"></div>
+        </div>
+
+        <!-- 미리보기 영상 모달 -->
+        <div id="previewModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:9999;align-items:center;justify-content:center;">
+            <div style="background:#0f172a;border-radius:12px;padding:28px;max-width:660px;width:90%;position:relative;">
+                <button onclick="closePreview()" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:20px;width:36px;height:36px;border-radius:50%;cursor:pointer;font-weight:700;">✕</button>
+                <div style="font-size:14px;font-weight:800;color:#94a3b8;margin-bottom:14px;" id="modalTitle">미리보기 영상</div>
+                <!-- 실제 영상 파일이 없으므로 데모 비디오 사용 -->
+                <video id="previewVideo" controls autoplay loop style="width:100%;border-radius:12px;background:#1e293b;aspect-ratio:16/9;outline:none;"
+                    src="" poster="">
+                    <div style="color:#fff;text-align:center;padding:60px 0;">▶ 미리보기 영상 (게임 내 적용 시뮬레이션)</div>
+                </video>
+                <p style="color:#64748b;font-size:12px;font-weight:600;margin-top:12px;text-align:center;">🎮 인게임 발자국 적용 미리보기 영상입니다. 실제 게임 환경에서 다를 수 있습니다.</p>
+            </div>
         </div>
     </div>
 
-    <!-- ?명꽣 (main2 ?숈씪) -->
+    <!-- 푸터 (main2 동일) -->
     <footer class="footer">
         <img src="images/FOOTER.png" alt="Footer">
     </footer>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    const p = new URLSearchParams(window.location.search);
     const status       = p.get('status')       || 'purchased';
-    const title        = p.get('title')        || '援щℓ ?곸꽭 ?댁뿭';
-    const icon         = p.get('icon')         || '?챷';
+    const title        = p.get('title')        || '구매 상세 내역';
+    const icon         = p.get('icon')         || '🐾';
     const bg           = p.get('bg')           || '#e2e8f0';
-    const buyDate      = p.get('buyDate')      || '??;
-    const state        = p.get('state')        || '??;
-    const expDate      = p.get('expDate')      || '??;
+    const buyDate      = p.get('buyDate')      || '—';
+    const state        = p.get('state')        || '—';
+    const expDate      = p.get('expDate')      || '—';
+    const price        = p.get('price')        || '—';
 
-    // ?? ??댄?쨌?몃꽕????????????????????????????????
-    document.getElementById('bcTitle').innerText = title;
     document.getElementById('pageTitle').innerText = title;
     const thumb = document.getElementById('dtThumb');
     thumb.innerText = icon;
-    thumb.style.background = bg;
+    thumb.style.background = "url('images/main_thumb_bg.jpg') center/cover";
     if(status === 'expired') thumb.style.filter = 'grayscale(1)';
 
-    // ?? ?곹깭 諛곗? ??????????????????????????????????
     const badge = document.getElementById('statusBadge');
     if (status === 'expired') {
-        badge.innerText = '?묓뭹 留뚮즺??;
+        badge.innerText = '작품 만료됨';
         badge.className = 'dt-status s-expired';
     } else {
-        badge.innerText = '援щℓ ?꾨즺';
+        badge.innerText = '구매 완료';
         badge.className = 'dt-status s-completed-wait';
     }
 
-    // ?? ?뺣낫 洹몃━??????????????????????????????????
     let gridHTML = `
         <div class="info-box">
-            <div class="info-label">援щℓ??/div>
+            <div class="info-label">구매일</div>
             <div class="info-val" style="font-size:15px;">${buyDate}</div>
         </div>`;
     
     if (status === 'expired') {
         gridHTML += `
-        <div class="info-box">
-            <div class="info-label" style="color:#dc2626;">留뚮즺??/div>
-            <div class="info-val" style="font-size:15px;color:#dc2626;">${expDate}</div>
+        <div class="info-box" style="border-color:#fca5a5;background:#fff5f5;">
+            <div class="info-label" style="color:#dc2626;">상태</div>
+            <div class="info-val" style="font-size:15px;color:#dc2626;font-weight:700;">만료됨 (${expDate})</div>
         </div>`;
     } else {
         gridHTML += `
         <div class="info-box">
-            <div class="info-label">?멸쾶???곹깭</div>
-            <div class="info-val" style="font-size:15px;color:#166534;">${state}</div>
+            <div class="info-label">구매 상태</div>
+            <div class="info-val" style="font-size:15px;color:#166534;font-weight:700;">구매 완료</div>
         </div>`;
     }
 
+    gridHTML += `
+        <div class="info-box">
+            <div class="info-label">구매 금액</div>
+            <div class="info-val" style="font-size:15px;font-weight:700;color:#025DD0;">${price}</div>
+        </div>`;
     document.getElementById('infoGrid').innerHTML = gridHTML;
 
-    // ?? ?≪뀡 踰꾪듉 ??????????????????????????????????
     const acts = document.getElementById('actionContainer');
-    if(status !== 'expired'){
-        acts.innerHTML = `<button class="dt-btn dt-btn-primary" onclick="alert('?멸쾶???곸슜 ?듭뀡????λ릺?덉뒿?덈떎.')">?멸쾶?꾩뿉 ?곸슜?섍린</button>`;
-    } else {
-        acts.innerHTML = `<button class="dt-btn dt-btn-secondary" onclick="alert('留뚮즺???묓뭹?낅땲??')">?ъ슜 遺덇?</button>`;
-    }
+    acts.innerHTML = ``;
 });
-
 </script>
 </body>
 </html>

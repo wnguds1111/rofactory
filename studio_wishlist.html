@@ -93,9 +93,9 @@
                 </div>
             </div>
             <ul class="studio-nav">
-                <li onclick="location.href='studio_myworks.html'" class="s-nav-item"><span class="s-nav-icon">🪄</span> 나의 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></li>
-                <li onclick="location.href='studio_inventory.html'" class="s-nav-item"><span class="s-nav-icon">🎒</span> 구매 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></li>
-                <li onclick="location.href='studio_wishlist.html'" class="s-nav-item active"><span class="s-nav-icon" style="color:#ef4444;">💖</span> 찜한 상품 보기</li>
+                <li onclick="location.href='studio_myworks.html'" class="s-nav-item"><span class="s-nav-icon">🪄</span><span>나의 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></span></li>
+                <li onclick="location.href='studio_inventory.html'" class="s-nav-item"><span class="s-nav-icon">🎒</span><span>구매 <span data-en="Manage Assets" data-ko="작품 관리">Manage Assets</span></span></li>
+                <li onclick="location.href='studio_wishlist.html'" class="s-nav-item active"><span class="s-nav-icon" style="color:#ef4444;">💖</span><span>찜한 상품 보기</span></li>
             </ul>
         </aside>
 
@@ -138,7 +138,7 @@ function renderList(){
         const detailLink = `market.html?detail=${w.id}`;
         return `
         <div class="item-row" style="opacity:${op};cursor:${isExp?'default':'pointer'};" ${!isExp?`onclick="location.href='${detailLink}'"`:''}>
-            <div class="item-thumb" style="background:${w.bg};${gs}">${w.icon}</div>
+            <div class="item-thumb" style="background:url('images/main_thumb_bg.jpg') center/cover;${gs}">${w.icon}</div>
             <div class="item-info">
                 <span class="item-tag">💖 찜 목록</span>
                 <div class="item-title" style="${strike}">${w.title}</div>
