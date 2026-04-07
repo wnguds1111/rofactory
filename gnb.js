@@ -55,8 +55,8 @@ function renderGNB(opts = {}) {
             </div>
             <div class="gnjoy-util">
                 <style>
-                .gnjoy-lang { position:relative; display:flex; align-items:center; cursor:pointer; font-family:'Poppins', sans-serif; gap:4px; font-weight:700; color:#555; }
-                .gnjoy-lang-list { position:absolute; top:calc(100% + 10px); right:0; background:#fff; border:1px solid #e8eaed; border-radius:8px; box-shadow:0 10px 25px rgba(0,0,0,0.1); width:80px; display:none; flex-direction:column; padding:4px; z-index:999; }
+                .gnjoy-lang { position:relative; display:flex; align-items:center; cursor:pointer; font-family:'Poppins', sans-serif; gap:4px; font-weight:700; color:#555; height: 100%; padding: 10px 0; }
+                .gnjoy-lang-list { position:absolute; top:100%; right:0; background:#fff; border:1px solid #e8eaed; border-radius:8px; box-shadow:0 10px 25px rgba(0,0,0,0.1); width:80px; display:none; flex-direction:column; padding:4px; z-index:999; margin-top:-5px; }
                 .gnjoy-lang:hover .gnjoy-lang-list { display:flex; }
                 .gnjoy-lang-option { padding:8px; font-size:12px; font-weight:700; text-align:center; color:#333; cursor:pointer; border-radius:4px; text-transform:uppercase; transition:0.2s;}
                 .gnjoy-lang-option:hover { background:#f1f5f9; color:#1e3a8a; }
