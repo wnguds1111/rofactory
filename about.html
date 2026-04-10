@@ -1,508 +1,387 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RO FACTORY - ABOUT</title>
     <meta name="description" content="RO FACTORY OFFICIAL GUIDE">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind-init.js"></script>
     <style type="text/tailwindcss">
         *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family:'Pretendard',system-ui,-apple-system,sans-serif;
-            background: #ffffff;
-            min-height: 100vh;
-            color:#0a192f;
-            -webkit-font-smoothing:antialiased;
-        }
-        a { text-decoration:none; color:inherit; }
-        .container { max-width:1440px; margin:0 auto; padding:0 40px; }
+        body { font-family: 'Poppins', 'Pretendard', sans-serif; -webkit-font-smoothing: antialiased; background: #fff; overflow-x: hidden; }
+        
+        /* Typography Utilities */
+        .h-title { font-size: 40px; font-weight: 900; letter-spacing: -0.02em; line-height: 1.25; }
+        .h-tag { display: inline-block; padding: 6px 20px; border-radius: 50px; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 24px; color: #fff; }
+        
+        .container-1200 { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; } /* Standardized width */
 
-        /* ─── NEXON CREATORS STYLE PREMIUM UI ─── */
-        /* HERO */
-        .about-hero {
-            background: linear-gradient(145deg, #001233 0%, #0045ff 50%, #00d2ff 100%);
-            padding: 200px 0 160px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        /* Hero Section */
+        .hero-bg {
+            background-color: #0c1220;
+            background-image: url('images/about_bg2.jpg'); /* Fixed missing specific about image */
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
         }
-        .about-hero::before {
-            content: 'CREATORS';
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 26vw; font-weight: 900;
-            color: rgba(255,255,255,0.03);
-            white-space: nowrap; pointer-events: none;
-            line-height: 1;
-        }
-        .about-hero::after {
-            content: '';
-            position: absolute;
-            bottom: -150px; right: -100px;
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(0,255,255,0.15), transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .hero-eyebrow {
-            display: inline-block;
-            background: #ffffff;
-            color: #0045ff;
-            font-size: 14px; font-weight: 900;
-            padding: 10px 28px; border-radius: 50px;
-            margin-bottom: 24px;
-            letter-spacing: 0.5px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative; z-index: 2;
-        }
-        .about-hero h1 {
-            font-size: clamp(36px, 5vw, 64px);
-            font-weight: 900;
-            color: #ffffff;
-            line-height: 1.15;
-            letter-spacing: -2px;
-            margin-bottom: 20px;
-            position: relative; z-index: 2;
-        }
-        .about-hero h1 span { color: #00ffff; }
-        .about-hero p {
-            font-size: 17px;
-            color: rgba(255,255,255,0.8);
-            max-width: 700px;
-            margin: 0 auto 36px;
-            line-height: 1.7;
-            font-weight: 500;
-            position: relative; z-index: 2;
-        }
-        .hero-cta-group { display:flex; justify-content:center; gap:16px; position:relative; z-index:2; flex-wrap:wrap; }
-        .btn-hero-primary {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: linear-gradient(135deg, #0055ff, #0033cc);
-            color: #fff; font-size: 15px; font-weight: 800;
-            padding: 16px 40px; border-radius: 50px;
-            box-shadow: 0 16px 40px rgba(0,85,255,0.4);
-            transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
-        }
-        .btn-hero-primary:hover { transform:translateY(-4px); box-shadow:0 24px 50px rgba(0,85,255,0.5); }
-        .btn-hero-outline {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.25);
-            color: #fff; font-size: 15px; font-weight: 800;
-            padding: 16px 40px; border-radius: 50px;
-            transition: all 0.3s;
-            backdrop-filter: blur(10px);
-        }
-        .btn-hero-outline:hover { background: rgba(255,255,255,0.2); border-color:#fff; }
 
-        /* ─── SECTION BASE ─── */
-        .section { padding: 140px 0; position:relative; overflow:hidden; }
-        .section-alt { background: #f8fafc; }
-        .section-dark { background: #001233; color: #fff; }
-        .sec-eyebrow { display:inline-block; font-size:14px; font-weight:900; letter-spacing:1px; color:#0055ff; background:#e0ecff; padding:8px 20px; border-radius:50px; margin-bottom:20px; }
-        .sec-eyebrow-white { background:rgba(255,255,255,0.12); color:#00ffff; }
-        .sec-title { font-size:clamp(32px,4vw,48px); font-weight:900; line-height:1.2; letter-spacing:-1.5px; margin-bottom:24px; color:#0a1930; }
-        .section-dark .sec-title { color: #fff; }
-        .sec-sub { font-size:17px; color:#475569; font-weight:500; line-height:1.7; max-width:800px; }
-        .sec-sub-white { color:rgba(255,255,255,0.7); }
-        .bg-huge-text { position:absolute; top:140px; left:-5%; font-size:160px; font-weight:900; color:rgba(0,0,0,0.02); white-space:nowrap; pointer-events:none; z-index:0; letter-spacing:-5px; }
-        .section-dark .bg-huge-text { color:rgba(255,255,255,0.02); }
+        /* Number Circle */
+        .num-circle {
+            width: 180px; height: 180px; border-radius: 50%;
+            border: 6px solid rgba(255,255,255,0.06);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: inset 0 0 0 2px rgba(255,255,255,0.08);
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+        }
 
-        /* ─── WHAT IS ─── */
-        .what-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:center; position:relative; z-index:2; }
-        .what-visual {
-            background: linear-gradient(145deg, #ffffff, #f1f5f9);
-            border-radius: 40px;
-            padding: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.04);
-            min-height: 400px;
-        }
-        .what-visual::before {
-            content: '';
-            position: absolute; top: -60px; right: -60px;
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(0,85,255,0.08), transparent);
-            border-radius: 50%;
-        }
-        /* ─── VISUAL STACK ANIMATION ─── */
-        .visual-stack { position:relative; width:100%; aspect-ratio:4/3; perspective:1000px; display:flex; align-items:center; justify-content:center; }
-        .stack-img {
-            position:absolute; width:85%; object-fit:cover; border-radius:24px;
-            box-shadow:0 30px 60px rgba(0,20,100,0.15); border:1px solid rgba(255,255,255,0.6);
-            opacity:0; animation: stackFadeIn 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-        }
-        .stack-1 { z-index:1; animation-delay:0.2s; --final-y:-40px; --final-scale:0.85; }
-        .stack-2 { z-index:2; animation-delay:0.6s; --final-y:-10px; --final-scale:0.95; }
-        .stack-3 { z-index:3; animation-delay:1.0s; --final-y:30px; --final-scale:1.05; box-shadow:0 40px 80px rgba(0,20,100,0.25); }
-        @keyframes stackFadeIn {
-            0% { opacity:0; transform:translateY(60px) scale(0.8); }
-            100% { opacity:1; transform:translateY(var(--final-y)) scale(var(--final-scale)); }
-        }
-        @media(max-width:768px) {
-            .stack-1 { --final-y: -20px; } .stack-2 { --final-y: -5px; } .stack-3 { --final-y: 15px; }
-        }
-        .what-text-block { display:flex; flex-direction:column; gap:20px; }
-        .what-bullet {
-            display: flex; gap: 16px; align-items: flex-start;
-            background: #ffffff; border-radius: 20px; padding: 28px 32px;
-            border: 1px solid #e2e8f0; box-shadow:0 10px 30px rgba(0,0,0,0.02);
-            transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
-        }
-        .what-bullet:hover { transform:translateY(-6px); border-color:#0055ff; box-shadow:0 20px 50px rgba(0,85,255,0.1); }
-        .bullet-icon { font-size: 32px; flex-shrink:0; background:#e0ecff; width:56px; height:56px; border-radius:16px; display:flex; align-items:center; justify-content:center; }
-        .bullet-title { font-size:18px; font-weight:900; color:#0a1930; margin-bottom:6px; margin-top:2px;}
-        .bullet-desc { font-size:15px; color:#475569; line-height:1.7; font-weight:500;}
+        /* FAQ Accordion */
+        .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease-out; }
+        .faq-answer > div { overflow: hidden; }
+        .faq-item.active .faq-answer { grid-template-rows: 1fr; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); color: #0066FF; }
 
-        /* ─── TOOL SECTION ─── */
-        .tool-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; position:relative; z-index:2; }
-        .tool-card {
-            background: #fff;
-            border-radius: 32px;
-            padding: 48px 40px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.03);
-            transition: all 0.4s cubic-bezier(0.25,0.8,0.25,1);
-            position: relative;
-            overflow: hidden;
+        /* Feature Underlines */
+        .feature-title-underline { position: relative; z-index: 1; display: inline-block; }
+        .feature-title-underline::after {
+            content: ''; position: absolute; left: 0; bottom: 4px; width: 100%; height: 10px;
+            z-index: -1; border-radius: 4px;
         }
-        .tool-card::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0;
-            height: 6px;
-        }
-        .tool-card.blue::before { background: linear-gradient(to right, #0055ff, #00d2ff); }
-        .tool-card.purple::before { background: linear-gradient(to right, #8b5cf6, #ec4899); }
-        .tool-card.green::before { background: linear-gradient(to right, #10b981, #0055ff); }
-        .tool-card:hover { transform:translateY(-10px); box-shadow:0 30px 60px rgba(0,20,100,0.08); border-color:#bfdbfe; }
-        .tool-num { font-size:13px; font-weight:900; letter-spacing:1px; color:#94a3b8; margin-bottom:16px; }
-        .tool-icon { font-size:44px; margin-bottom:20px; display:block; }
-        .tool-name { font-size:20px; font-weight:900; color:#0a1930; margin-bottom:12px; letter-spacing:-1px;}
-        .tool-desc { font-size:15px; color:#475569; line-height:1.7; margin-bottom:28px; font-weight:500;}
-        .tool-tags { display:flex; flex-wrap:wrap; gap:8px; }
-        .tool-tag { font-size:13px; font-weight:800; padding:6px 14px; border-radius:50px; }
-        .tag-blue { background:#e0ecff; color:#0055ff; }
-        .tag-purple { background:#f5f3ff; color:#6d28d9; }
-        .tag-green { background:#dcfce7; color:#166534; }
+        .feature-title-underline.blue::after { background-color: rgba(59, 130, 246, 0.2); }
+        .feature-title-underline.green::after { background-color: rgba(16, 185, 129, 0.2); }
 
-        /* ─── BENEFIT SECTION ─── */
-        .benefit-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:32px; position:relative; z-index:2; }
-        .benefit-card {
-            border-radius: 32px;
-            padding: 56px 48px;
-            position: relative;
-            overflow: hidden;
-        }
-        .benefit-card.creator { background: linear-gradient(145deg, #e0ecff, #f8fafc); border: 1px solid #bfdbfe; }
-        .benefit-card.buyer   { background: linear-gradient(145deg, #dcfce7, #f8fafc); border: 1px solid #86efac; }
-        .benefit-header { display:flex; align-items:center; gap:16px; margin-bottom:32px; }
-        .benefit-icon { font-size:44px; }
-        .benefit-role { font-size:14px; font-weight:900; letter-spacing:1px; color:#0055ff; margin-bottom:4px; }
-        .benefit-card.buyer .benefit-role { color:#059669; }
-        .benefit-card-title { font-size:24px; font-weight:900; color:#0a1930; letter-spacing:-1px;}
-        .benefit-list { list-style:none; display:flex; flex-direction:column; gap:14px; }
-        .benefit-list li {
-            display: flex; gap:14px; align-items:flex-start;
-            font-size:15px; color:#334155; line-height:1.7; font-weight:500;
-        }
-        .benefit-list li::before {
-            content: '✓';
-            width: 24px; height:24px; border-radius:50%;
-            background: #0055ff; color:#fff;
-            font-size:12px; font-weight:900;
-            display:flex; align-items:center; justify-content:center;
-            flex-shrink:0; margin-top:2px;
-        }
-        .benefit-card.buyer .benefit-list li::before { background:#10b981; }
-
-        /* ─── METRICS ─── */
-        .metrics-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center; position:relative; z-index:2; }
-        .metric-card { padding:32px 16px; }
-        .metric-num { font-size:56px; font-weight:900; line-height:1; color:#fff; margin-bottom:12px; letter-spacing:-2px; }
-        .metric-num span { font-size:26px; color:#00ffff; }
-        .metric-label { font-size:15px; color:rgba(255,255,255,0.7); font-weight:600; }
-
-        /* ─── FAQ ─── */
-        .faq-list { display:flex; flex-direction:column; gap:14px; max-width:900px; margin:0 auto; position:relative; z-index:2; }
-        .faq-item { background:#fff; border-radius:20px; border:1px solid #e2e8f0; overflow:hidden; transition:border-color 0.3s, box-shadow 0.3s;}
-        .faq-item:hover { border-color:#bfdbfe; box-shadow:0 10px 30px rgba(0,0,0,0.03); }
-        .faq-q {
-            padding:28px 36px; display:flex; justify-content:space-between; align-items:center;
-            cursor:pointer; font-size:18px; font-weight:800; color:#0a1930;
-            transition:background 0.2s;
-        }
-        .faq-icon { font-size:22px; color:#94a3b8; transition:transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .faq-item.open .faq-icon { transform:rotate(45deg); color:#0055ff; }
-        /* FAQ Dropdown Smooth Animation using Grid */
-        .faq-a-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .faq-item.open .faq-a-wrapper { grid-template-rows: 1fr; }
-        .faq-a { overflow: hidden; }
-        .faq-a-inner { padding:0 36px 28px; font-size:15px; color:#475569; line-height:1.8; font-weight:500; opacity:0; transition:opacity 0.4s; }
-        .faq-item.open .faq-a-inner { opacity:1; }
-
-        /* ─── CTA BOTTOM ─── */
-        .cta-bottom {
-            text-align:center; padding:120px 0;
-            background: linear-gradient(145deg, #001233 0%, #0045ff 50%, #00d2ff 100%);
-            position:relative; overflow:hidden;
-        }
-        .cta-bottom::before { content:''; position:absolute; top:-200px; left:50%; transform:translateX(-50%); width:1000px; height:1000px; background:radial-gradient(circle, rgba(0,255,255,0.1), transparent 70%); border-radius:50%; }
-        .cta-bottom h2 { font-size:clamp(32px,5vw,56px); font-weight:900; color:#fff; letter-spacing:-2px; margin-bottom:40px; position:relative; z-index:2; line-height:1.2; }
-        .cta-btn-group { display:flex; justify-content:center; gap:14px; position:relative; z-index:2; flex-wrap:wrap; }
-
-        /* ─── FOOTER ─── */
+        /* FOOTER */
         .footer { background:#0a1930; padding:60px 0; text-align:center; }
         .footer-inner { color:#64748b; font-size:14px; font-weight:600; }
         .footer-inner a { color:#94a3b8; margin:0 16px; transition:color 0.2s; }
         .footer-inner a:hover { color:#fff; }
 
-        /* Responsive */
-        @media(max-width:1024px) {
-            .section { padding:100px 0; }
-            .what-grid { grid-template-columns:1fr; gap:60px; }
-            .tool-cards { grid-template-columns:1fr; }
-            .benefit-grid { grid-template-columns:1fr; }
-            .metrics-grid { grid-template-columns:repeat(2,1fr); }
-            .bg-huge-text { font-size:100px; }
+        /* Animated Blob Background */
+        .blob-bg {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.7; mix-blend-mode: screen;
+            animation: blob-float 6s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none; z-index: 0;
         }
-        @media(max-width:768px) {
-            .section { padding:80px 0; }
-            .what-visual { min-height:300px; }
-            .metrics-grid { grid-template-columns:1fr; }
-            .metric-num { font-size:44px; }
-            .bg-huge-text { display:none; }
-            .faq-q { padding: 24px; font-size:15px; }
-            .faq-a-inner { padding: 0 24px 24px; font-size:14px; }
+        @keyframes blob-float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(300px, -200px) scale(1.3); }
+            100% { transform: translate(-250px, 150px) scale(0.85); }
         }
+        .blob-1 { width: 500px; height: 500px; background: #0066FF; top: -50px; left: -150px; }
+        .blob-2 { width: 600px; height: 600px; background: #8b5cf6; bottom: -100px; right: -250px; animation-duration: 8s; animation-direction: alternate-reverse; }
+        .blob-3 { width: 450px; height: 450px; background: #00f2fe; top: 10%; left: 30%; animation-duration: 10s; opacity: 0.5; }
     </style>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="tailwind-init.js"></script>
 </head>
 <body>
     <script src="gnb.js"></script>
 
-    <!-- ── HERO ── -->
-    <section class="about-hero">
-        <div class="container">
-            <span class="hero-eyebrow">RO FACTORY OFFICIAL GUIDE</span>
-            <h1>라그나로크 제로의<br><span>크리에이터 경제</span>를 만나다</h1>
-            <p>RO FACTORY는 플레이어가 직접 발자국 에셋을 창작하고, 글로벌 마켓에서 수익을 올릴 수 있는<br>공식 UGC(User-Generated Content) 크리에이터 플랫폼입니다.</p>
-            <div class="hero-cta-group">
-                <a href="register.html" class="btn-hero-primary" data-en="Start Registration" data-ko="시작하기">🪄 시작하기</a>
-                <a href="market.html" class="btn-hero-outline" data-en="Browse Market" data-ko="마켓 둘러보기">🛍️ 마켓 둘러보기</a>
+    <!-- 1. HERO SECTION (Figma: h-640) -->
+    <section class="hero-bg relative h-[640px] flex items-center justify-center text-center overflow-hidden bg-cover bg-center" style="background-image: url('images/main_visual.jpg');">
+        <!-- 배경이 선명히 보이도록 Dim 수치 최소화 -->
+        <div class="absolute inset-0 bg-[#0c1220]/30 z-0"></div>
+        <div class="container-1200 z-10 mt-10">
+            <span class="inline-block border border-[#0066FF] text-[#4da6ff] font-extrabold text-[12px] px-6 py-2 rounded-[30px] mb-6 tracking-wide bg-transparent">RO FACTORY OFFICIAL GUIDE</span>
+            <h1 class="text-[52px] md:text-[60px] font-black leading-[1.1] tracking-tight mb-5">
+                <span class="text-[#0066FF]">RAGNAROK ZERO'S</span><br>
+                <span class="text-white">MEET THE CREATOR ECONOMY<span class="text-[#0066FF]">.</span></span>
+            </h1>
+            <p class="text-gray-300 font-medium text-[16px] mt-2 mb-10 max-w-2xl mx-auto leading-relaxed">
+                ROFACTORY allows players to create their own footprint assets and earn profits in the global market<br>
+                It is the official User-Generated Content (UGC) creator platform.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="register.html" class="flex items-center gap-2 border border-white/60 text-white hover:bg-white/10 px-[40px] py-[16px] rounded-[4px] font-bold text-[16px] transition-all">
+                    Start Registration <span class="text-[#d4d4d8] font-normal text-lg leading-none">→</span>
+                </a>
+                <a href="market.html" class="flex items-center gap-2 bg-[#0066FF] hover:bg-[#0055cc] text-white px-[40px] py-[16px] rounded-[4px] font-bold text-[16px] transition-all shadow-[0_8px_30px_rgba(0,102,255,0.4)]">
+                    Browse Market <span class="text-white font-normal text-lg leading-none">→</span>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- ── WHAT IS RO FACTORY ── -->
-    <section class="section section-alt">
-        <div class="bg-huge-text" style="top:140px;">CREATORS ECONOMY</div>
-        <div class="container">
-            <div class="what-grid">
+    <!-- 2. WHAT IS RO FACTORY (Figma: pt-100 pb-110) -->
+    <section class="pt-[100px] pb-[110px] relative overflow-hidden bg-[#f4f6f9] bg-cover bg-center" style="background-image: url('images/main_top_bg.jpg');">
+        <div class="container-1200 flex flex-col lg:flex-row gap-12 items-center z-10 relative">
+            <!-- Left Info -->
+            <div class="w-full lg:w-[48%] relative z-20">
+                <span class="h-tag bg-[#0066FF] shadow-md border-[2px] border-transparent font-bold">WHAT IS RO FACTORY?</span>
+                <h2 class="h-title text-[#111827] mb-5"><span class="text-[#0066FF]">Players edit,</span><br>and players enjoy<span class="text-[#0066FF] font-sans">.</span></h2>
+                <p class="text-[#4b5563] text-[16px] mb-10 font-semibold leading-relaxed tracking-tight">
+                    ROFACTORY allows players to create their own footprint assets<br>and earn profits in the global market.<br>
+                    It is the official User-Generated Content (UGC) creator platform.
+                </p>
+
+                <div class="flex flex-col gap-5">
+                    <div class="bg-white p-6 rounded-[24px] flex items-start gap-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-transparent hover:-translate-y-1 transition-transform">
+                        <div class="w-[60px] h-[60px] bg-[#fdf2d1] rounded-full flex items-center justify-center shrink-0">
+                            <img src="images/about_icon1.png" alt="Marketplace" class="w-8 object-contain">
+                        </div>
+                        <div class="pt-1">
+                            <h3 class="text-[17px] font-extrabold text-[#1f2937] mb-2 tracking-tight">Marketplace Registration</h3>
+                            <p class="text-[14.5px] text-[#64748b] font-medium leading-[1.6]">Lorem ipsum dolor sit amet consectetur. Enim tellus tellus ut massa imperdiet sed risus nec sed. Consectetur consequat quis vitae nisl suscipit aenean dignissim varius.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-[24px] flex items-start gap-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-transparent hover:-translate-y-1 transition-transform">
+                        <div class="w-[60px] h-[60px] bg-[#d7efff] rounded-full flex items-center justify-center shrink-0">
+                            <img src="images/about_icon2.png" alt="Global Return" class="w-8 object-contain">
+                        </div>
+                        <div class="pt-1">
+                            <h3 class="text-[17px] font-extrabold text-[#1f2937] mb-2 tracking-tight">Global players emerge</h3>
+                            <p class="text-[14.5px] text-[#64748b] font-medium leading-[1.6]">Lorem ipsum dolor sit amet consectetur. Arcu dui sit bibendum pretium egestas ac. Tincidunt nisl gravida vestibulum consequat iaculis faucibus orci lacinia.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-[24px] flex items-start gap-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-transparent hover:-translate-y-1 transition-transform">
+                        <div class="w-[60px] h-[60px] bg-[#d1f7e3] rounded-full flex items-center justify-center shrink-0">
+                            <img src="images/about_icon3.png" alt="Copyright" class="w-8 object-contain">
+                        </div>
+                        <div class="pt-1">
+                            <h3 class="text-[17px] font-extrabold text-[#1f2937] mb-2 tracking-tight">Copyright protection</h3>
+                            <p class="text-[14.5px] text-[#64748b] font-medium leading-[1.6]">Lorem ipsum dolor sit amet consectetur. Ante neque vitae odio aliquam. Lectus orci faucibus neque vulputate scelerisque.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Visual -->
+            <div class="w-full lg:w-[52%] flex items-center justify-center relative">
+                <img src="images/about_ro_img.png" alt="RO Characters" class="w-full max-w-[550px] object-contain drop-shadow-xl z-10 relative">
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. CREATION TOOLS (Figma: pt-100 pb-110) -->
+    <section class="pt-[100px] pb-[110px] bg-white">
+        <div class="container-1200">
+            <div class="text-center mb-16">
+                <span class="h-tag bg-[#0066FF]">CREATION TOOLS</span>
+                <h2 class="h-title text-[#0066FF] mb-4">A key tool that opens the door<br><span class="text-[#111827]">to creation<span class="text-[#0066FF]">.</span></span></h2>
+                <p class="text-[16px] text-[#64748b] font-medium">We support anyone in easily creating assets without specialized knowledge.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Tool 1 -->
+                <div class="bg-white rounded-[30px] p-8 text-center border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:-translate-y-2 transition-transform relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1.5 bg-[#38bdf8]"></div>
+                    <span class="inline-block bg-[#38bdf8] text-white font-bold text-[11px] px-5 py-1.5 rounded-full mb-8 tracking-wide">✦ POINT 01 ✦</span>
+                    <div class="h-[100px] flex justify-center items-center mb-6">
+                        <img src="images/about_point_icon1.png" alt="Pencil" class="h-20 object-contain">
+                    </div>
+                    <h3 class="text-[20px] font-bold text-[#1f2937] mb-3">UGC editing tool</h3>
+                    <p class="text-[14px] text-[#64748b] leading-[1.6] font-medium mb-8">Lorem ipsum dolor sit amet consectetur. Luctus orci sodales quam urna diam. Tincidunt gravida ac arcu vitae ultrices.</p>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <span class="bg-[#f1f5f9] text-[#64748b] text-[12px] font-bold px-3 py-1.5 rounded-md">#Direct creation</span>
+                        <span class="bg-[#f1f5f9] text-[#64748b] text-[12px] font-bold px-3 py-1.5 rounded-md">#Preview</span>
+                    </div>
+                </div>
+                <!-- Tool 2 -->
+                <div class="bg-white rounded-[30px] p-8 text-center border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:-translate-y-2 transition-transform relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1.5 bg-[#818cf8]"></div>
+                    <span class="inline-block bg-[#818cf8] text-white font-bold text-[11px] px-5 py-1.5 rounded-full mb-8 tracking-wide">✦ POINT 02 ✦</span>
+                    <div class="h-[100px] flex justify-center items-center mb-6">
+                        <img src="images/about_point_icon2.png" alt="Monitor" class="h-20 object-contain">
+                    </div>
+                    <h3 class="text-[20px] font-bold text-[#1f2937] mb-3">Web portal studio</h3>
+                    <p class="text-[14px] text-[#64748b] leading-[1.6] font-medium mb-8">Lorem ipsum dolor sit amet consectetur. Pellentesque suscipit augue congue egestas pretium. Sit amet vitae proin</p>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <span class="bg-[#f1f5f9] text-[#64748b] text-[12px] font-bold px-3 py-1.5 rounded-md">#Dashboard</span>
+                        <span class="bg-[#f1f5f9] text-[#64748b] text-[12px] font-bold px-3 py-1.5 rounded-md">#Management</span>
+                    </div>
+                </div>
+                <!-- Tool 3 -->
+                <div class="bg-white rounded-[30px] p-8 text-center border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:-translate-y-2 transition-transform relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1.5 bg-[#34d399]"></div>
+                    <span class="inline-block bg-[#34d399] text-white font-bold text-[11px] px-5 py-1.5 rounded-full mb-8 tracking-wide">✦ POINT 03 ✦</span>
+                    <div class="h-[100px] flex justify-center items-center mb-6">
+                        <img src="images/about_point_icon3.png" alt="Globe" class="h-20 object-contain">
+                    </div>
+                    <h3 class="text-[20px] font-bold text-[#1f2937] mb-3">Global market</h3>
+                    <p class="text-[14px] text-[#64748b] leading-[1.6] font-medium mb-8">Lorem ipsum dolor sit amet consectetur. Arcu ultrices egestas ullamcorper sed. Laoreet vitae in posuere ligula</p>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <span class="bg-[#f1f5f9] text-[#64748b] text-[12px] font-bold px-3 py-1.5 rounded-md">#Global Linkage</span>
+                        <span class="bg-[#f1f5f9] text-[#64748b] text-[12px] font-bold px-3 py-1.5 rounded-md">#Sync</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. FEATURES (Figma: pt-100 pb-110) -->
+    <section class="pt-[100px] pb-[120px] bg-[#eef2f6] relative bg-cover bg-center" style="background-image: url('images/about_bg3.jpg');">
+        <!-- Semi-transparent overlay to ensure readability if bg is too busy -->
+        <div class="absolute inset-0 bg-white/40 mix-blend-overlay"></div>
+        <div class="container-1200 relative z-10">
+            <div class="text-center mb-16">
+                <span class="h-tag bg-[#0066FF] shadow-sm">FEATURES</span>
+                <h2 class="h-title text-[#111827]">RO FACTORY Features<span class="text-[#0066FF]">.</span></h2>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-8 relative items-stretch">
+                <!-- Mascot Left -->
+                <div class="hidden lg:block absolute left-[-90px] top-[15%] w-[220px] z-20 pointer-events-none drop-shadow-2xl">
+                    <img src="images/about_features_cha1.png" alt="Creator Mascot" class="w-full object-contain">
+                </div>
+
+                <!-- Creators Card -->
+                <div class="bg-white/95 rounded-[24px] p-10 lg:pl-[120px] w-full md:w-1/2 shadow-[0_12px_40px_rgba(0,102,255,0.06)] border border-white relative z-10 backdrop-blur-sm">
+                    <div class="text-center mb-8">
+                        <h4 class="text-[#0066FF] font-black tracking-widest text-[12px] mb-2">FOR CREATORS</h4>
+                        <h3 class="text-[20px] font-bold text-[#1f2937] feature-title-underline blue px-2 pb-1">Attractive creative environment</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 shrink-0 text-[#0066FF] mt-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <p class="text-[#4b5563] text-[15px] font-medium leading-[1.6]">Lorem ipsum dolor sit amet consectetur. Massa nisl justo</p>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 shrink-0 text-[#0066FF] mt-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <p class="text-[#4b5563] text-[15px] font-medium leading-[1.6]">Continuous automatic passive income generation feature with</p>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 shrink-0 text-[#0066FF] mt-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <p class="text-[#4b5563] text-[15px] font-medium leading-[1.6]">Continuous automatic passive income generation feature with</p>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 shrink-0 text-[#0066FF] mt-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <p class="text-[#4b5563] text-[15px] font-medium leading-[1.6]">Continuous automatic passive income generation feature with</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Players Card -->
+                <div class="bg-white/95 rounded-[24px] p-10 lg:pr-[120px] w-full md:w-1/2 shadow-[0_12px_40px_rgba(16,185,129,0.06)] border border-white relative z-10 backdrop-blur-sm">
+                    <div class="text-center mb-8">
+                        <h4 class="text-[#10b981] font-black tracking-widest text-[12px] mb-2">FOR PLAYERS</h4>
+                        <h3 class="text-[20px] font-bold text-[#1f2937] feature-title-underline green px-2 pb-1">Attractive creative environment</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 shrink-0 text-[#22c55e] mt-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <p class="text-[#4b5563] text-[15px] font-medium leading-[1.6]">Lorem ipsum dolor sit amet consectetur. Massa nisl justo</p>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 shrink-0 text-[#22c55e] mt-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <p class="text-[#4b5563] text-[15px] font-medium leading-[1.6]">Continuous automatic passive income generation feature with</p>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 shrink-0 text-[#22c55e] mt-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <p class="text-[#4b5563] text-[15px] font-medium leading-[1.6]">Continuous automatic passive income generation feature with</p>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 shrink-0 text-[#22c55e] mt-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <p class="text-[#4b5563] text-[15px] font-medium leading-[1.6]">Continuous automatic passive income generation feature with</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mascot Right -->
+                <div class="hidden lg:block absolute right-[-110px] top-[15%] w-[260px] z-20 pointer-events-none drop-shadow-2xl">
+                    <img src="images/about_features_cha2.png" alt="Player Mascot" class="w-full object-contain">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SCALE/NUMBERS -->
+    <section class="h-[632px] flex items-center bg-gradient-to-b from-[#0a358c] to-[#011442] text-white relative overflow-hidden">
+        <!-- Floating Gradient Blobs -->
+        <div class="blob-bg blob-1"></div>
+        <div class="blob-bg blob-2"></div>
+        <div class="blob-bg blob-3"></div>
+        
+        <div class="absolute inset-0 bg-[#0066FF] opacity-10 mix-blend-overlay"></div>
+        <div class="container-1200 text-center relative z-20 pt-[20px]">
+            <span class="h-tag bg-white text-[#0066FF] shadow-lg tracking-widest text-[11px] px-5 py-2 rounded-full mb-6 inline-block relative border border-white/20 z-30">PLATFORM SCALE</span>
+            <h2 class="h-title text-white mb-[60px] drop-shadow-md">Our stage, proven by numbers<span class="text-[#3b82f6]">.</span></h2>
+            
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 relative z-30">
+                <!-- Num 1 -->
                 <div>
-                    <span class="sec-eyebrow">WHAT IS RO FACTORY?</span>
-                    <h2 class="sec-title">플레이어가 만들고,<br>플레이어가 즐긴다</h2>
-                    <p class="sec-sub" style="margin-bottom:48px;">라그나로크 제로는 단순한 게임을 넘어, 플레이어의 창의성이 실제 가치로 이어지는 생태계를 만들고 있습니다. RO FACTORY는 그 중심입니다.</p>
-                    <div class="what-text-block">
-                        <div class="what-bullet">
-                            <span class="bullet-icon">🎨</span>
-                            <div>
-                                <div class="bullet-title">창작 → 마켓 등록 → 수익 실현</div>
-                                <div class="bullet-desc">전용 UGC 편집툴로 발자국을 제작하면, 변환을 거쳐 글로벌 마켓에 자동 등재됩니다. 구매가 이루어질 때마다 크리에이터에게 수익이 적립됩니다.</div>
-                            </div>
-                        </div>
-                        <div class="what-bullet">
-                            <span class="bullet-icon">🌍</span>
-                            <div>
-                                <div class="bullet-title">글로벌 플레이어 동시 출시</div>
-                                <div class="bullet-desc">한 번 등록하면 라그나로크 제로 글로벌 서버의 모든 플레이어에게 노출됩니다. 현지화 작업 없이 자동으로 다국어 처리됩니다.</div>
-                            </div>
-                        </div>
-                        <div class="what-bullet">
-                            <span class="bullet-icon">🔒</span>
-                            <div>
-                                <div class="bullet-title">공식 변환 및 저작권 보호</div>
-                                <div class="bullet-desc">모든 에셋은 GRAVITY의 공식 변환을 거치며, 창작자의 저작권 보호를 위해 원본 파일이 안전하게 암호화 관리됩니다.</div>
-                            </div>
-                        </div>
+                    <div class="num-circle bg-[#0b1c45]">
+                        <h3 class="text-[44px] font-black text-[#60a5fa] mb-1"><span class="count-number" data-target="100">0</span>M<span class="text-[24px] text-[#93c5fd] ml-1">+</span></h3>
                     </div>
+                    <p class="text-[14px] font-medium text-blue-100 max-w-[160px] mx-auto leading-relaxed">Potential Global Player Customers</p>
                 </div>
-                <!-- 2. 순차 애니메이션 다중 스크린샷 스택 -->
-                <div class="what-visual" style="padding: 0; border: none; background: transparent;">
-                    <div class="visual-stack">
-                        <img src="images/market_preview.png" alt="글로벌 마켓 프리뷰" class="stack-img stack-1">
-                        <img src="images/register_preview.png" alt="작품 등록 폼 프리뷰" class="stack-img stack-2">
-                        <img src="images/ugc_tool_preview.jpg" alt="UGC 편집 툴 프리뷰" class="stack-img stack-3">
+                <!-- Num 2 -->
+                <div>
+                    <div class="num-circle bg-[#0b1c45]">
+                        <h3 class="text-[44px] font-black text-[#60a5fa]"><span class="count-number" data-target="24">0</span><span class="text-[#34d399] text-[36px]">/7</span></h3>
                     </div>
+                    <p class="text-[14px] font-medium text-blue-100 max-w-[160px] mx-auto leading-relaxed">Uninterrupted operation of the system</p>
+                </div>
+                <!-- Num 3 -->
+                <div>
+                    <div class="num-circle bg-[#0b1c45]">
+                        <h3 class="text-[44px] font-black text-[#60a5fa] mb-1"><span class="count-number" data-target="7">0</span><span class="text-[#2dd4bf] text-[28px] ml-1">day</span></h3>
+                    </div>
+                    <p class="text-[14px] font-medium text-blue-100 max-w-[160px] mx-auto leading-relaxed">Maximum conversion / verification time</p>
+                </div>
+                <!-- Num 4 -->
+                <div>
+                    <div class="num-circle bg-[#0b1c45]">
+                        <h3 class="text-[64px] font-black text-[#60a5fa] mb-2 leading-none tracking-tighter" style="font-family: Arial, sans-serif;">∞</h3>
+                    </div>
+                    <p class="text-[14px] font-medium text-blue-100 max-w-[160px] mx-auto leading-relaxed">Infinite possibilities for UGC creations</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── TOOL SECTION ── -->
-    <section class="section">
-        <div class="bg-huge-text" style="top:140px; left:50%; transform:translateX(-50%); letter-spacing:0;">UGC TOOLS</div>
-        <div class="container">
-            <div style="text-align:center; margin-bottom:72px; position:relative; z-index:2;">
-                <span class="sec-eyebrow">CREATION TOOLS</span>
-                <h2 class="sec-title">창작의 문을 여는<br>핵심 도구</h2>
-                <p class="sec-sub" style="margin:0 auto;">전문 지식 없이도 누구나 쉽게 에셋을 제작할 수 있도록 지원합니다.</p>
+    <!-- 6. FAQ (Figma: pt-100 pb-110) -->
+    <section class="pt-[100px] pb-[110px] bg-[#f8fafc] relative z-0">
+        <!-- Subtle Map Pattern -->
+        <div class="absolute inset-0 bg-[url('images/main_top_bg.jpg')] bg-cover bg-center opacity-10 mix-blend-overlay z-[-1]"></div>
+        
+        <div class="container-1200 relative z-10" style="max-width: 900px;">
+            <div class="text-center mb-12">
+                <span class="h-tag bg-[#0066FF] text-white px-6 py-2.5 mb-5">FAQ</span>
+                <h2 class="h-title text-[#111827]">How can I help you?</h2>
             </div>
-            <div class="tool-cards">
-                <div class="tool-card blue">
-                    <div class="tool-num">TOOL 01</div>
-                    <span class="tool-icon">🛠️</span>
-                    <div class="tool-name">UGC 편집툴</div>
-                    <div class="tool-desc">전용 편집 툴을 통해 애니메이션 원본(.foot)과 미리보기 영상을 직접 제작할 수 있습니다. 직관적인 UI로 즉시 결과물을 확인하세요.</div>
-                    <div class="tool-tags">
-                        <span class="tool-tag tag-blue">에셋 직접 제작</span>
-                        <span class="tool-tag tag-blue">실시간 미리보기</span>
-                    </div>
-                </div>
-                <div class="tool-card purple">
-                    <div class="tool-num">TOOL 02</div>
-                    <span class="tool-icon">🖥️</span>
-                    <div class="tool-name">웹 포털 스튜디오</div>
-                    <div class="tool-desc">제작한 에셋을 업로드하고 마켓 정보를 설정합니다. 판매 현황과 수익을 한 화면에서 실시간으로 완벽하게 제어할 수 있습니다.</div>
-                    <div class="tool-tags">
-                        <span class="tool-tag tag-purple">스튜디오 대시보드</span>
-                        <span class="tool-tag tag-purple">수익 실시간 정산</span>
-                    </div>
-                </div>
-                <div class="tool-card green">
-                    <div class="tool-num">PLATFORM</div>
-                    <span class="tool-icon">🌐</span>
-                    <div class="tool-name">글로벌 마켓 연동</div>
-                    <div class="tool-desc">변환된 에셋은 자동으로 글로벌 마켓 카탈로그에 노출되며, 플레이어가 구매하는 즉시 인게임 캐릭터에 연동 및 적용됩니다.</div>
-                    <div class="tool-tags">
-                        <span class="tool-tag tag-green">자동 마켓 배포</span>
-                        <span class="tool-tag tag-green">인게임 즉시 연동</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- ── BENEFITS ── -->
-    <section class="section section-alt">
-        <div class="container">
-            <div style="text-align:center; margin-bottom:72px;">
-                <span class="sec-eyebrow">FEATURES</span>
-                <h2 class="sec-title">RO FACTORY 특징</h2>
-            </div>
-            <div class="benefit-grid">
-                <div class="benefit-card creator">
-                    <div class="benefit-header">
-                        <span class="benefit-icon">🎨</span>
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item bg-white border border-[#e2e8f0] rounded-[16px] shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="this.classList.toggle('active')">
+                    <div class="px-8 py-6 flex justify-between items-center bg-white rounded-[16px] relative z-10">
+                        <h3 class="text-[17px] font-bold text-[#1f2937]">누구나 에셋을 등록하고 수익을 낼 수 있나요?</h3>
+                        <svg class="faq-icon w-5 h-5 text-[#9ca3af] transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                    </div>
+                    <div class="faq-answer">
                         <div>
-                            <div class="benefit-role">FOR CREATORS</div>
-                            <div class="benefit-card-title">매력적인 창작 환경</div>
+                            <div class="px-8 pb-7 pt-1 text-[#475569] font-medium text-[15px] leading-[1.7] bg-white rounded-b-[16px]">
+                                네, 라그나로크 제로 계정이 있는 플레이어라면 누구나 크리에이터로 참여할 수 있습니다. 전용 UGC 편집툴을 사용해 파일을 제작하고 공식 변환 절차를 통과하면 즉시 마켓에 판매가 개시됩니다.
+                            </div>
                         </div>
                     </div>
-                    <ul class="benefit-list">
-                        <li>한 번의 등록으로 끊임없이 자동 패시브 인컴 창출 기능</li>
-                        <li>언어 장벽을 넘는 플랫폼 파워로 100만 글로벌 동시 노출 가능</li>
-                        <li>복잡한 개발 로직이나 코딩 지식 없이 아웃라인과 색상만으로 완성</li>
-                        <li>투명한 판매 내역 확인 및 My Studio 기반의 실시간 통합 관리 제공</li>
-                    </ul>
                 </div>
-                <div class="benefit-card buyer">
-                    <div class="benefit-header">
-                        <span class="benefit-icon">🛒</span>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item bg-white border border-[#e2e8f0] rounded-[16px] shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="this.classList.toggle('active')">
+                    <div class="px-8 py-6 flex justify-between items-center bg-white rounded-[16px] relative z-10">
+                        <h3 class="text-[17px] font-bold text-[#1f2937]">수익 정산 비율과 방법이 궁금합니다.</h3>
+                        <svg class="faq-icon w-5 h-5 text-[#9ca3af] transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                    </div>
+                    <div class="faq-answer">
                         <div>
-                            <div class="benefit-role">FOR PLAYERS</div>
-                            <div class="benefit-card-title">무한한 구매 경험</div>
+                            <div class="px-8 pb-7 pt-1 text-[#475569] font-medium text-[15px] leading-[1.7] bg-white rounded-b-[16px]">
+                                에셋이 1개 판매될 때마다 판매 가격의 정해진 수수료를 제외한 금액이 크리에이터 계정으로 실시간 적립됩니다. 이 재화(KP)는 마이 스튜디오 대시보드에서 매월 정해진 일자에 언제든 정산 신청이 가능합니다.
+                            </div>
                         </div>
                     </div>
-                    <ul class="benefit-list">
-                        <li>매주 쏟아지는 크리에이터들의 독창적이고 한정판적인 발자국 수집</li>
-                        <li>공식 마켓 시스템과 동일한 안전성으로 즉시 충전 후 사용</li>
-                        <li>구매 버튼 클릭 한 번으로 나의 게임 캐릭터와 1초 만에 최적화 적용</li>
-                        <li>커뮤니티 내 크리에이터를 직접 응원하며 생태계 활성화에 기여</li>
-                    </ul>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- ── METRICS ── -->
-    <section class="section section-dark">
-        <div class="bg-huge-text" style="top:140px;">GLOBAL SCALE</div>
-        <div class="container">
-            <div style="text-align:center; margin-bottom:80px; position:relative; z-index:2;">
-                <span class="sec-eyebrow sec-eyebrow-white">PLATFORM SCALE</span>
-                <h2 class="sec-title">숫자로 증명하는<br>우리의 무대</h2>
-            </div>
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-num">100<span>만+</span></div>
-                    <div class="metric-label">잠재적 글로벌 플레이어 고객</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-num">24<span>/7</span></div>
-                    <div class="metric-label">중단 없는 마켓 시스템 가동</div>
-                </div>
-                <div class="metric-card">
-                    <!-- 4. 변환 및 검수 시간 7Day로 변경 -->
-                    <div class="metric-num">7<span>Day</span></div>
-                    <div class="metric-label">최대 소요 변환 및 검수 시간</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-num">∞<span></span></div>
-                    <div class="metric-label">무한한 UGC 창작물의 가능성</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── FAQ ── -->
-    <section class="section section-alt">
-        <div class="bg-huge-text" style="top:140px; left:-5%; color:rgba(0,0,0,0.03);">SUPPORT FAQs</div>
-        <div class="container">
-            <div style="text-align:center; margin-bottom:60px; position:relative; z-index:2;">
-                <span class="sec-eyebrow">FAQ</span>
-                <h2 class="sec-title">무엇을 도와드릴까요?</h2>
-            </div>
-            <div class="faq-list">
-                <!-- 5. FAQ 아코디언 애니메이션 구조 변경 (grid-template-rows 1fr) -->
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFaq(this)">
-                        누구나 에셋을 등록하고 수익을 낼 수 있나요?
-                        <span class="faq-icon">+</span>
+                <!-- FAQ Item 3 -->
+                <div class="faq-item bg-white border border-[#e2e8f0] rounded-[16px] shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="this.classList.toggle('active')">
+                    <div class="px-8 py-6 flex justify-between items-center bg-white rounded-[16px] relative z-10">
+                        <h3 class="text-[17px] font-bold text-[#1f2937]">등록한 작품의 가격이나 파일을 변경할 수 있나요?</h3>
+                        <svg class="faq-icon w-5 h-5 text-[#9ca3af] transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
                     </div>
-                    <div class="faq-a-wrapper">
-                        <div class="faq-a">
-                            <div class="faq-a-inner">네, 라그나로크 제로 계정이 있는 플레이어라면 누구나 크리에이터로 참여할 수 있습니다. 전용 UGC 편집툴을 사용해 파일을 제작하고 공식 변환 절차를 통과하면 즉시 마켓에 판매가 개시됩니다.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFaq(this)">
-                        수익 정산 비율과 방법이 궁금합니다.
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-a-wrapper">
-                        <div class="faq-a">
-                            <div class="faq-a-inner">에셋이 1개 판매될 때마다 판매 가격의 정해진 수수료를 제외한 금액이 크리에이터 계정으로 실시간 적립됩니다. 이 재화(KP)는 마이 스튜디오 대시보드에서 매월 정해진 일자에 언제든 정산 신청이 가능합니다.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFaq(this)">
-                        등록한 작품의 가격이나 파일을 변경할 수 있나요?
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-a-wrapper">
-                        <div class="faq-a">
-                            <div class="faq-a-inner">저작권 검수 및 변환 완료 후 파일 자체를 변경하는 것은 불가능합니다. 단, 작품명이나 가격, 검색 태그 등 마켓 노출 정보는 스튜디오에서 관리 버튼을 눌러 언제든지 자유롭게 수정할 수 있습니다.</div>
+                    <div class="faq-answer">
+                        <div>
+                            <div class="px-8 pb-7 pt-1 text-[#475569] font-medium text-[15px] leading-[1.7] bg-white rounded-b-[16px]">
+                                저작권 검수 및 변환 완료 후 파일 자체를 변경하는 것은 불가능합니다. 단, 작품명이나 가격, 검색 태그 등 마켓 노출 정보는 스튜디오에서 관리 버튼을 눌러 언제든지 자유롭게 수정할 수 있습니다.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -510,20 +389,21 @@
         </div>
     </section>
 
-    <!-- ── CTA ── -->
-    <section class="cta-bottom">
-        <div class="container">
-            <!-- 6. 하단 디자인 수정 -->
-            <h2>지금 당장 발자국을<br>등록해 보세요</h2>
-            <div class="cta-btn-group">
-                <a href="register.html" class="btn-hero-primary">🪄 작품 등록 폼으로 이동</a>
-            </div>
+    <!-- 7. CTA BOTTOM (Figma: h-540) -->
+    <section class="h-[540px] flex items-center justify-center relative bg-center bg-cover" style="background-image: url('images/about_bt_banner.png');">
+        <!-- 필터 완전 제거! 원본 100% -->
+        <div class="container-1200 relative z-10 text-center mt-[-30px]">
+            <h2 class="text-[40px] md:text-[50px] font-black text-[#111827] mb-2 drop-shadow-lg tracking-tight">Register your footprints</h2>
+            <h2 class="text-[40px] md:text-[50px] font-black text-[#0066FF] mb-10 drop-shadow-lg tracking-tight">Right now.</h2>
+            <a href="register.html" class="inline-flex items-center gap-3 bg-[#0066FF] hover:bg-[#0052cc] text-white transition-all px-[40px] py-[18px] rounded-full font-bold text-[17px] shadow-[0_15px_40px_rgba(0,102,255,0.4)] hover:scale-105 transform">
+                Go to Registration <span>→</span>
+            </a>
         </div>
     </section>
 
-    <!-- ── FOOTER ── -->
+    <!-- 8. FOOTER -->
     <footer class="footer">
-        <div class="container">
+        <div class="container-1200 mx-auto">
             <div class="footer-inner">
                 <div style="margin-bottom:24px;">
                     <a href="main2.html">← 메인으로</a>
@@ -536,13 +416,42 @@
         </div>
     </footer>
 
+    <!-- Count-up Animation Script -->
     <script>
-        function toggleFaq(el) {
-            const item = el.parentElement;
-            const isOpen = item.classList.contains('open');
-            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-            if (!isOpen) item.classList.add('open');
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const counters = document.querySelectorAll('.count-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const configTarget = +target.getAttribute('data-target');
+                        
+                        // Prevent re-running if already done
+                        if (+target.innerText === configTarget) return;
+
+                        const duration = 1500; // 1.5 seconds to finish counting
+                        const interval = 30; // updates every 30ms
+                        const increment = configTarget / (duration / interval);
+                        
+                        const updateCount = () => {
+                            const val = +target.innerText;
+                            if (val < configTarget) {
+                                target.innerText = Math.ceil(val + increment);
+                                setTimeout(updateCount, interval);
+                            } else {
+                                target.innerText = configTarget;
+                            }
+                        };
+                        updateCount();
+                        observer.unobserve(target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+        });
     </script>
 </body>
 </html>
