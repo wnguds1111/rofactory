@@ -174,7 +174,7 @@ function buildRow(w){
     const strike  = isExpired ? 'text-decoration:line-through;' : '';
     const opacity = isExpired ? '0.7' : '1';
 
-    const detailLink = `studio_detail?status=${w.status}&completedSub=${w.completedSub||''}&title=${encodeURIComponent(w.title)}&icon=${encodeURIComponent(w.icon)}&bg=${encodeURIComponent(w.bg)}&price=${encodeURIComponent(w.price)}&sales=${w.sales||0}&regDate=${encodeURIComponent(w.regDate||'')}&pubDate=${encodeURIComponent(w.pubDate||'')}&expDate=${encodeURIComponent(w.expDate||'')}&failReason=${encodeURIComponent(w.failReason||'')}`;
+    const detailLink = `studio_detail.html?status=${w.status}&completedSub=${w.completedSub||''}&title=${encodeURIComponent(w.title)}&icon=${encodeURIComponent(w.icon)}&bg=${encodeURIComponent(w.bg)}&price=${encodeURIComponent(w.price)}&sales=${w.sales||0}&regDate=${encodeURIComponent(w.regDate||'')}&pubDate=${encodeURIComponent(w.pubDate||'')}&expDate=${encodeURIComponent(w.expDate||'')}&failReason=${encodeURIComponent(w.failReason||'')}`;
 
     let badge = '';
     if(w.status === 'converting'){
