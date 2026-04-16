@@ -54,25 +54,25 @@
         <div class="workspace-body" id="view-item">
             <!-- 5 Stats Cards -->
             <div class="dash-cards">
-                <div class="dash-card" onclick="filterList('변환 대기')" style="cursor:pointer; background:#fff;" id="card-변환대기">
+                <div class="dash-card" onclick="filterList('변환 중')" style="cursor:pointer; background:#fff;" id="card-변환중">
                     <div class="card-num olive">3</div>
-                    <div class="card-text" style="color:#555;">변환 대기</div>
+                    <div class="card-text" style="color:#555;">변환 중</div>
                 </div>
-                <div class="dash-card" onclick="filterList('변환 완료')" style="cursor:pointer;" id="card-변환완료">
+                <div class="dash-card" onclick="filterList('판매대기')" style="cursor:pointer;" id="card-판매대기">
                     <div class="card-num olive">2</div>
-                    <div class="card-text">변환 완료</div>
+                    <div class="card-text">판매대기</div>
                 </div>
-                <div class="dash-card" onclick="filterList('판매 진행')" style="cursor:pointer; background:#fff;" id="card-판매진행">
+                <div class="dash-card" onclick="filterList('판매 중')" style="cursor:pointer; background:#fff;" id="card-판매중">
                     <div class="card-num" style="color:#111;">3</div>
-                    <div class="card-text" style="color:#555;">판매 진행 작품</div>
+                    <div class="card-text" style="color:#555;">판매 중</div>
                 </div>
-                <div class="dash-card" onclick="filterList('변환 실패')" style="cursor:pointer;" id="card-변환실패">
+                <div class="dash-card" onclick="filterList('변환실패')" style="cursor:pointer;" id="card-변환실패">
                     <div class="card-num red">1</div>
-                    <div class="card-text">변환 실패</div>
+                    <div class="card-text">변환실패</div>
                 </div>
-                <div class="dash-card" onclick="filterList('만료')" style="cursor:pointer;" id="card-만료">
+                <div class="dash-card" onclick="filterList('작품만료')" style="cursor:pointer;" id="card-작품만료">
                     <div class="card-num red">1</div>
-                    <div class="card-text">만료</div>
+                    <div class="card-text">작품만료</div>
                 </div>
             </div>
 
@@ -260,16 +260,16 @@
     <script>
         // Mock DB Data matching Frontend My Studio realistic mock data (DD.MM.YYYY HH:MM:SS format)
         const mockList = [
-            { id: 10, rid: 'RF00010', cat: '발자국', author: 'gravity_01',   name: '다크메이지 잿빛흔적',       price: '1,500', reg: '20.03.2026 14:05', exp: '20.03.2027 23:59', start: '-',                  statusText: '변환 대기' },
-            { id: 9,  rid: 'RF00009', cat: '발자국', author: 'roz_user22',   name: '골든 소드오라 발자국',      price: '2,000', reg: '19.03.2026 10:20', exp: '무제한',           start: '20.03.2026 22:00',    statusText: '판매 진행' },
-            { id: 8,  rid: 'RF00008', cat: '발자국', author: 'poring_fan',   name: '포링 벚꽃길',              price: '무료',  reg: '18.03.2026 09:12', exp: '무제한',           start: '19.03.2026 15:30',    statusText: '판매 진행' },
-            { id: 7,  rid: 'RF00007', cat: '발자국', author: 'ice_crafter',  name: '얼음 수정 발자국',         price: '500',   reg: '18.03.2026 08:30', exp: '18.03.2027 23:59', start: '18.03.2026 12:00',    statusText: '판매 진행' },
-            { id: 6,  rid: 'RF00006', cat: '발자국', author: 'angel_step',   name: '천사의 새하얀 깃털',       price: '3,500', reg: '17.03.2026 16:45', exp: '무제한',           start: '-',                  statusText: '변환 실패' },
-            { id: 5,  rid: 'RF00005', cat: '발자국', author: 'witch_maker',  name: '마녀의 뾰족 모자 길',      price: '1,000', reg: '16.03.2026 11:22', exp: '무제한',           start: '17.03.2026 10:00',    statusText: '변환 완료' },
-            { id: 4,  rid: 'RF00004', cat: '발자국', author: 'sparkle_roz',  name: '반짝이는 요정 가루',        price: '무료',  reg: '15.03.2026 18:05', exp: '15.03.2027 23:59', start: '16.03.2026 18:00',    statusText: '변환 완료' },
-            { id: 3,  rid: 'RF00003', cat: '발자국', author: 'galaxy_walk',  name: '우주 은하수 길',           price: '2,000', reg: '10.02.2026 14:00', exp: '10.03.2026 23:59', start: '11.02.2026 10:00',    statusText: '만료' },
-            { id: 2,  rid: 'RF00002', cat: '발자국', author: 'lava_step',    name: '불타는 용암 조각',         price: '800',   reg: '13.03.2026 09:30', exp: '13.03.2027 23:59', start: '-',                  statusText: '변환 대기' },
-            { id: 1,  rid: 'RF00001', cat: '발자국', author: 'knight_ro',    name: '기사단의 제복 발자국',      price: '5,000', reg: '12.03.2026 10:10', exp: '무제한',           start: '-',                  statusText: '변환 대기' }
+            { id: 10, rid: 'RF00010', cat: '발자국', author: 'gravity_01',   name: '다크메이지 잿빛흔적',       price: 'FREE',  reg: '20.03.2026 14:05', exp: '-',                  start: '-',                  statusText: '변환 중' },
+            { id: 9,  rid: 'RF00009', cat: '발자국', author: 'roz_user22',   name: '골든 소드오라 발자국',      price: 'FREE',  reg: '19.03.2026 10:20', exp: '17.06.2026',         start: '20.03.2026 22:00',   statusText: '판매 중' },
+            { id: 8,  rid: 'RF00008', cat: '발자국', author: 'poring_fan',   name: '포링 벚꽃길',              price: 'FREE',  reg: '18.03.2026 09:12', exp: '16.06.2026',         start: '19.03.2026 15:30',   statusText: '판매 중' },
+            { id: 7,  rid: 'RF00007', cat: '발자국', author: 'ice_crafter',  name: '얼음 수정 발자국',         price: 'FREE',  reg: '18.03.2026 08:30', exp: '16.06.2026',         start: '18.03.2026 12:00',   statusText: '판매 중' },
+            { id: 6,  rid: 'RF00006', cat: '발자국', author: 'angel_step',   name: '천사의 새하얀 깃털',       price: 'FREE',  reg: '17.03.2026 16:45', exp: '-',                  start: '-',                  statusText: '변환실패' },
+            { id: 5,  rid: 'RF00005', cat: '발자국', author: 'witch_maker',  name: '마녀의 뾰족 모자 길',      price: 'FREE',  reg: '16.03.2026 11:22', exp: '-',                  start: '-',                  statusText: '판매대기' },
+            { id: 4,  rid: 'RF00004', cat: '발자국', author: 'sparkle_roz',  name: '반짝이는 요정 가루',        price: 'FREE',  reg: '15.03.2026 18:05', exp: '-',                  start: '-',                  statusText: '판매대기' },
+            { id: 3,  rid: 'RF00003', cat: '발자국', author: 'galaxy_walk',  name: '우주 은하수 길',           price: 'FREE',  reg: '10.02.2026 14:00', exp: '11.05.2026',         start: '11.02.2026 10:00',   statusText: '작품만료' },
+            { id: 2,  rid: 'RF00002', cat: '발자국', author: 'lava_step',    name: '불타는 용암 조각',         price: 'FREE',  reg: '13.03.2026 09:30', exp: '-',                  start: '-',                  statusText: '변환 중' },
+            { id: 1,  rid: 'RF00001', cat: '발자국', author: 'knight_ro',    name: '기사단의 제복 발자국',      price: 'FREE',  reg: '12.03.2026 10:10', exp: '-',                  start: '-',                  statusText: '변환 중' }
         ];
 
         let typeTags = [
@@ -292,20 +292,20 @@
         let colorIdCounter = 6;
         let pendingDelete = null; // { id, name, category }
 
-        let currentFilter = '변환 대기'; // Default to "변환 대기" based on user instruction
+        let currentFilter = '변환 중'; // Default to "변환 중" (V2.0)
 
         function initDashboard() {
-            const counts = { '변환 대기': 0, '변환 완료': 0, '판매 진행': 0, '변환 실패': 0, '만료': 0 };
+            const counts = { '변환 중': 0, '판매대기': 0, '판매 중': 0, '변환실패': 0, '작품만료': 0 };
             mockList.forEach(item => {
                 if(counts[item.statusText] !== undefined) {
                     counts[item.statusText]++;
                 }
             });
-            document.querySelector('#card-변환대기 .card-num').innerText = counts['변환 대기'];
-            document.querySelector('#card-변환완료 .card-num').innerText = counts['변환 완료'];
-            document.querySelector('#card-판매진행 .card-num').innerText = counts['판매 진행'];
-            document.querySelector('#card-변환실패 .card-num').innerText = counts['변환 실패'];
-            document.querySelector('#card-만료 .card-num').innerText = counts['만료'];
+            document.querySelector('#card-변환중 .card-num').innerText = counts['변환 중'];
+            document.querySelector('#card-판매대기 .card-num').innerText = counts['판매대기'];
+            document.querySelector('#card-판매중 .card-num').innerText = counts['판매 중'];
+            document.querySelector('#card-변환실패 .card-num').innerText = counts['변환실패'];
+            document.querySelector('#card-작품만료 .card-num').innerText = counts['작품만료'];
         }
 
         function filterList(status) {
@@ -331,7 +331,7 @@
             });
             
             if(currentFilter !== 'All') {
-                let cardId = 'card-' + currentFilter.replace(' ', '');
+                let cardId = 'card-' + currentFilter.replace(/ /g, '');
                 let activeCard = document.getElementById(cardId);
                 if(activeCard) {
                     activeCard.style.background = '#2563eb'; // blue fill
@@ -364,9 +364,9 @@
                 </div>
             `;
 
-            // Dynamic Table Header (Hide columns if '변환 중')
-            let isConverting = (currentFilter === '변환 대기');
-            let isExpired = (currentFilter === '만료');
+            // Dynamic Table Header (Hide columns if converting)
+            let isConverting = (currentFilter === '변환 중');
+            let isExpired = (currentFilter === '작품만료');
             
             let htmlHead = `
                 <tr>
@@ -377,7 +377,7 @@
                     <th style="width:${isConverting ? '36%' : '24%'}; white-space:nowrap;">작품 이름</th>
                     <th style="width:5%; white-space:nowrap;">가격</th>
                     <th style="width:11%; white-space:nowrap;">등록일</th>
-                    <th style="width:11%; white-space:nowrap;">유효기간</th>
+                    <th style="width:11%; white-space:nowrap;">게재 만료일</th>
                     ${!isConverting ? '<th style="width:11%; white-space:nowrap;">판매 시작일</th>' : ''}
                 </tr>
             `;
@@ -428,7 +428,7 @@
 
         function downloadCSV() {
             let filteredList = currentFilter === 'All' ? mockList : mockList.filter(item => item.statusText === currentFilter);
-            let isConverting = (currentFilter === '변환 대기');
+            let isConverting = (currentFilter === '변환 중');
 
             // 현재 탭에 보이는 컬럼과 동일하게 헤더 구성
             let headers = ['작품ID', '카테고리', '작성자ID', '작품이름', '가격', '등록일', '유효기간'];
