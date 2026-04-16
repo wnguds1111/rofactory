@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -46,7 +46,8 @@
             <span class="brand-lang">| 🌐 KO ▾</span>
         </div>
         
-        <div class="user-section">
+        <div class="user-section" style="display:flex; align-items:center; gap:10px;">
+            <div style="background:#dbeafe; color:#1e40af; font-size:11px; font-weight:800; padding:4px 8px; border-radius:6px;">운영 관리자 (L3)</div>
             TEST <button class="btn-logout">로그아웃</button>
         </div>
         
@@ -92,10 +93,11 @@
                     <div class="label" style="font-weight:800; color:#555; padding-top:10px;">현재 상태설정</div>
                     <div>
                         <select class="search-select" id="statusSelect" style="width:250px; background:#fff;" onchange="toggleDateRow()">
-                            <option value="변환 대기">변환 대기</option>
-                            <option value="변환 완료">변환 완료</option>
-                            <option value="판매 진행">판매 진행</option>
-                            <option value="변환 실패">변환 실패</option>
+                            <option value="변환 중">변환 중</option>
+                            <option value="판매대기">판매대기</option>
+                            <option value="판매 중">판매 중</option>
+                            <option value="작품만료">작품만료</option>
+                            <option value="변환실패">변환실패</option>
                         </select>
                         
                         <div id="ingameDateRow" style="display:none; margin-top:15px; padding:15px; background:#f1f5f9; border:1px solid #e2e8f0; border-radius:6px; width:250px;">
@@ -104,8 +106,8 @@
                         </div>
                         
                         <ul style="margin-top:15px; font-size:12px; color:#64748b; margin-left:15px; line-height:1.4;">
-                            <li><strong style="color:#ef4444;">판매 대기 / 진행</strong> 상태로 즉각 변경 시 마이 스튜디오 정책에 의해 유저의 '수정하기' 권한이 박탈됩니다.</li>
-                            <li>실제 마이 스튜디오 프론트엔드와 실시간 동기화로 반영됩니다.</li>
+                            <li><strong style="color:#ef4444;">[V2.0 정책]</strong> <strong>판매대기</strong> 이후 상태로 변경 시 유저의 작품 수정/삭제 권한이 전면 차단(데이터 프리징)됩니다.</li>
+                            <li>변환실패 시 7일 이후 자동 삭제 스케줄러가 대기 등록됩니다.</li>
                         </ul>
                     </div>
 
@@ -124,7 +126,7 @@
         function toggleDateRow() {
             var select = document.getElementById('statusSelect');
             var dateRow = document.getElementById('ingameDateRow');
-            if(select.value === '변환 완료') {
+            if(select.value === '판매대기') {
                 dateRow.style.display = 'block';
             } else {
                 dateRow.style.display = 'none';

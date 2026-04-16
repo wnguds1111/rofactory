@@ -408,7 +408,7 @@
 
 <body>
     <div class="top-bar">
-        <h1>RO FACTORY 상세 기획서 <span class="ver">v5.0</span></h1>
+        <h1>RO FACTORY 상세 기획서 <span class="ver">v6.0</span> <span style="font-size:10px; background:rgba(34,197,94,0.7); color:#fff; padding:3px 10px; border-radius:12px; font-weight:800; margin-left:4px;">V2.0 정책 반영</span></h1>
         <a href="index.html" class="btn-home">← 포털 홈으로</a>
     </div>
 
@@ -591,8 +591,8 @@
                                 </tr>
                                 <tr>
                                     <td class="field">STEP 3</td>
-                                    <td>파일 변환 &amp; 마켓 등재</td>
-                                    <td>파일 변환 완료 후 글로벌 마켓에 자동 등재</td>
+                                    <td>패치 취합 &amp; 마켓 순차 게시</td>
+                                    <td>주 단위 패치 취합 후 운영팀에서 상점에 순차 게시됩니다.<br><span style="color:#0284c7; font-size:12px; font-weight:700;">※ 자동 등재 아님 — 등록 후 차후 업데이트에서 순차 등록</span></td>
                                     <td>MY STUDIO → studio_myworks.html</td>
                                 </tr>
                             </tbody>
@@ -617,9 +617,15 @@
                         <div class="spec-label">페이지 개요</div>
                         <ul class="spec-list">
                             <li>위저드(Wizard) 형태의 4단계 등록 폼 (STEP 0 인트로 포함 총 5화면)</li>
-                            <li>GNJOY 로그인 상태에서만 접근 가능, 비로그인 시 로그인 페이지로 리다이렉트</li>
-                            <li>1일 등록 제한: <strong>최대 3회</strong></li>
+                            <li><strong>GNJOY 정액제 가입 계정만 접근 가능</strong> (비로그인/비정액제 → 리다이렉트)</li>
+                            <li>등록 권한: <strong>정액제 가입 계정당 이용권 1회 기본 제공</strong> <span class="badge badge-green">V2.0 신규</span></li>
+                            <li>추가 이용권: 이벤트/배포/향후 구매를 통해 획득 가능 (Alpha 이후 도입 예정)</li>
+                            <li>이용권 0장 시 등록 버튼 비활성화 + 안내 문구 노출</li>
                         </ul>
+                        <div class="alert-box alert-info" style="margin-top:10px;">
+                            <span class="alert-icon">💡</span>
+                            <div><strong>[V2.0 변경]</strong> 기존 "1일 3회 제한"에서 <strong>이용권 기반 등록 방식</strong>으로 변경되었습니다. 이용권 잔여 수량이 마이 스튜디오 프로필 영역 및 STEP 0/STEP 4 완료화면에 표시됩니다.</div>
+                        </div>
                     </div>
 
                     <div class="spec-group">
@@ -669,25 +675,30 @@
                                     <td>마켓 정보 입력</td>
                                     <td>
                                         ① 작품 카테고리: <span class="badge badge-gray">발자국 (고정)</span><br>
-                                        ② 판매 금액 <span class="badge badge-gray">고정</span> (OBT 기간 중 FREE 무료 배포 고정 처리)<br>
-                                        ③ 게시만료일 <span class="badge badge-red">필수</span> (DD.MM.YYYY 텍스트 입력)<br>
+                                        ② 판매 금액 <span class="badge badge-gray">FREE 고정</span> (Alpha 기간 고정, KP 입력 불가)<br>
+                                        ③ 게재 기간: <span class="badge badge-blue">90일 자동 적용</span> 안내 표시 (입력 없음) <span class="badge badge-green">V2.0 변경</span><br>
                                         ④ 작품명 <span class="badge badge-red">필수</span> (영문만 입력 가능, 최대 20자)<br>
                                         ⑤ 작품 타입 태그 <span class="badge badge-gray">선택</span> (최대 2개 다중선택)<br>
                                         ⑥ 메인 색상 <span class="badge badge-gray">선택</span> (select 드롭다운)
                                     </td>
                                     <td>
-                                        • 필수 항목 누락 시 진행 불가<br>
-                                        • 누락 시 <code>alert('필수 항목을 모두 입력해 주세요.')</code><br>
+                                        • 필수 항목(작품명) 누락 시 진행 불가<br>
+                                        • 누락 시 <code>alert('작품명을 입력해주세요.')</code><br>
                                         • 작품명 20자 초과 시 입력 방지<br>
-                                        • <code>alert('작품명은 영문 최대 20자까지만 입력 가능합니다.')</code><br>
-                                        • 성공 시 등록 API 호출 및 스튜디오로 이동
+                                        • 게시만료일 입력 필드 제거 — 상점 게시 시점 기준 90일 자동 산출<br>
+                                        • 성공 시 등록 API 호출 및 STEP 4로 이동
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="field">STEP 4</td>
                                     <td>등록 완료</td>
-                                    <td>없음 (변환 작업 시작 안내)</td>
-                                    <td>-</td>
+                                    <td>
+                                        ① 안내 문구: <strong>"등록된 발자국은 차후 업데이트에서 상점에 순차적으로 등록됩니다."</strong> <span class="badge badge-green">V2.0 확정</span><br>
+                                        ② 이용권 잔여 표시: <code>보유 이용권: N장</code><br>
+                                        ③ 이용권 소진 시: "이용권이 없습니다. 추가 이용권을 획득해주세요." 노출<br>
+                                        ④ MY STUDIO 이동 버튼
+                                    </td>
+                                    <td>이용권 N-1 차감 처리 (최종 제출 시점 기준)</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -704,68 +715,80 @@
                 </div>
                 <div class="page-body">
                     <div class="spec-group">
-                        <div class="spec-label danger">핵심 정책: 등록 시점부터 수정 불가</div>
+                        <div class="spec-label danger">핵심 정책: 판매대기 상태부터 수정/삭제 불가 <span class="badge badge-green" style="font-size:11px;">V2.0 변경</span></div>
                         <div class="alert-box alert-error">
                             <span class="alert-icon">🚨</span>
                             <div>
-                                <strong>RO Factory는 등록(Submit) 자체가 파일 변환 요청에 해당합니다.</strong><br>
-                                작품을 등록하는 시점에서 이미 변환 파이프라인이 시작되므로, <strong>등록 완료 후 어느 시점에도 정보 및 파일 수정이 불가합니다.</strong>
+                                <strong>판매대기(변환 완료) 상태부터는 패치 데이터 프리징이 적용되어 수정/삭제가 불가합니다.</strong><br>
+                                변환 중 상태까지는 수정/삭제 가능. 판매대기 이후부터 완전 잠김 — 부서 간 운영 혼선 방지 목적.
                             </div>
                         </div>
                     </div>
 
                     <div class="spec-group">
-                        <div class="spec-label warn">상태별 사용자 권한 정의</div>
+                        <div class="spec-label warn">상태별 사용자 권한 정의 <span class="badge badge-green" style="font-size:11px;">V2.0 기준</span></div>
                         <table class="spec-table">
                             <thead>
                                 <tr>
-                                    <th>상태</th>
-                                    <th>상태값</th>
-                                    <th>삭제 가능</th>
-                                    <th>수정 가능</th>
+                                    <th>V2.0 상태명</th>
+                                    <th>상태 설명</th>
+                                    <th>수정</th>
+                                    <th>삭제</th>
                                     <th>비고</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="field">변환 중</td>
-                                    <td><span class="badge badge-orange">변환 중</span></td>
-                                    <td><span class="badge badge-red">불가</span></td>
-                                    <td><span class="badge badge-red">불가</span></td>
-                                    <td>변환 파이프라인 진행 중</td>
-                                </tr>
-                                <tr>
-                                    <td class="field">변환 완료</td>
-                                    <td><span class="badge badge-blue">판매 대기 / 판매 중</span></td>
-                                    <td><span class="badge badge-red">불가</span></td>
-                                    <td><span class="badge badge-red">불가</span></td>
-                                    <td>이미 인게임 게시 예정 또는 판매 중</td>
-                                </tr>
-                                <tr>
-                                    <td class="field">작품 만료</td>
-                                    <td><span class="badge badge-gray">작품 만료</span></td>
-                                    <td><span class="badge badge-red">불가</span></td>
-                                    <td><span class="badge badge-red">불가</span></td>
-                                    <td>판매 기간 종료</td>
-                                </tr>
-                                <tr>
-                                    <td class="field">변환 실패</td>
-                                    <td><span class="badge badge-red">변환 실패</span></td>
+                                <tr style="background:#f0fdf4;">
+                                    <td class="field">⏳ 변환 중</td>
+                                    <td>유저 등록 완료 후 S3 업로드 상태</td>
                                     <td><span class="badge badge-green">가능</span></td>
+                                    <td><span class="badge badge-green">가능</span></td>
+                                    <td>이 단계까지만 수정/삭제 허용</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">⏸ 판매대기</td>
+                                    <td>패치 취합 완료 또는 패치 진행/완료 상태</td>
                                     <td><span class="badge badge-red">불가</span></td>
-                                    <td>안내 메시지 확인 후 작품 삭제 가능</td>
+                                    <td><span class="badge badge-red">불가</span></td>
+                                    <td>데이터 프리징 시작</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">🟢 판매 중</td>
+                                    <td>마켓에 정상 게시된 상태</td>
+                                    <td><span class="badge badge-red">불가</span></td>
+                                    <td><span class="badge badge-green">가능</span></td>
+                                    <td>판매 중 삭제는 마켓 철수 처리</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">⚪ 작품만료</td>
+                                    <td>게재 기간(90일) 만료 또는 유저 직접 등록 취소</td>
+                                    <td><span class="badge badge-red">불가</span></td>
+                                    <td><span class="badge badge-red">불가</span></td>
+                                    <td>7일 후 자동 삭제</td>
+                                </tr>
+                                <tr style="background:#fff5f5;">
+                                    <td class="field">❌ 변환실패</td>
+                                    <td>스튜디오 유효성 검사 실패</td>
+                                    <td><span class="badge badge-red">불가</span></td>
+                                    <td><span class="badge badge-red">불가</span></td>
+                                    <td>고정 실패 문구 표시 / 7일 후 자동 삭제 / 재등록 방식 협의 중</td>
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="alert-box alert-warn" style="margin-top:12px;">
+                            <span class="alert-icon">⚠️</span>
+                            <div><strong>재등록 방식 및 이용권 환급 여부는 협의 중</strong>입니다. 확정 전까지 변환실패 상태에서 버튼 노출 보류.</div>
+                        </div>
                     </div>
 
                     <div class="spec-group">
-                        <div class="spec-label info">등록 전 유의사항 안내 (STEP 0)</div>
+                        <div class="spec-label info">유저 고지 문구 (STEP 0 + 등록 완료 화면)</div>
                         <div class="alert-box alert-warn">
                             <span class="alert-icon">⚠️</span>
-                            <div>등록 전 STEP 0 화면에 다음 문구를 명시합니다:<br>
-                                <strong>"RO Factory는 파일 등록 즉시 변환 파이프라인이 시작되어, 제출 이후에는 절대로 수정이 불가합니다. 등록 전 파일과 정보를 반드시
-                                    재확인해주세요."</strong>
+                            <div>
+                                STEP 0 또는 등록 완료 화면에 다음 문구를 반드시 명시합니다:<br>
+                                <strong>① "판매대기 상태의 발자국은 수정 및 삭제가 불가합니다."</strong><br>
+                                <strong>② "등록된 발자국은 차후 업데이트에서 상점에 순차적으로 등록됩니다."</strong>
                             </div>
                         </div>
                     </div>
@@ -1047,7 +1070,7 @@
                                     <td class="field" rowspan="3">변환 완료</td>
                                     <td>1</td>
                                     <td><strong style="color:#0284c7;">변환 완료</strong></td>
-                                    <td>모든 변환이 성공적으로 끝났습니다. 안내된 패치 예정일에 맞춰 출시를 대기합니다.</td>
+                                    <td>모든 변환이 성공적으로 끝났습니다. 등록된 발자국은 차후 업데이트에서 상점에 순차적으로 등록됩니다.</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
@@ -1110,7 +1133,7 @@
                                     <td class="field" rowspan="3"><span style="color:#991b1b;font-weight:900;">변환 실패</span></td>
                                     <td>1</td>
                                     <td><strong style="color:#991b1b;">&#x2757; 변환 실패</strong></td>
-                                    <td>변환 파이프라인 처리 중 오류가 발생했습니다. 파일 삭제 후 신규 등록하실 수 있습니다.</td>
+                                    <td>등록하신 발자국 파일을 처리하는 과정에서 변환이 완료되지 않았습니다.<br><span style="color:#94a3b8; font-size:12px;">※ 7일 이내 자동 삭제 예정 / 재등록 방식 협의 중</span></td>
                                 </tr>
                                 <tr style="background:#fff5f5;">
                                     <td>2</td>
@@ -1169,8 +1192,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="field"><span class="badge badge-blue">변환 대기</span></td>
-                                    <td>유저가 등록 완료 후 변환 처리 전 대기 상태.<br>유저는 이 단계에서만 정보 수정 가능.</td>
+                                    <td class="field"><span class="badge badge-orange">변환 중</span></td>
+                                    <td>유저가 등록 완료 후 S3 업로드 상태.<br><span style="color:#0284c7; font-weight:700;">이 단계까지만 유저 수정/삭제 가능 (V2.0)</span></td>
                                     <td>번호 · 작품ID · 카테고리 · 작품이름(상태) · 가격 · 등록일 · 유효기간<br><span
                                             style="color:#64748b; font-size:12px;">※ 판매시작일 · 판매상태 컬럼 숨김</span></td>
                                     <td>
@@ -1190,7 +1213,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="field"><span class="badge badge-green">판매 진행</span></td>
+                                    <td class="field"><span class="badge badge-green">판매 중</span></td>
                                     <td>마켓에 정상 등록되어 유저들이 구매 가능한 작품.<br>판매 중인 모든 작품 현황 조회.</td>
                                     <td>번호 · 작품ID · 카테고리 · 작품이름(상태) · 가격 · 등록일 · 유효기간 · 판매시작일 · 판매상태(Y)</td>
                                     <td>
@@ -1200,8 +1223,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="field"><span class="badge badge-gray">만료</span></td>
-                                    <td>게시만료일이 지나 자동 만료 처리된 작품.<br>마켓에서 비노출, 품절 처리.</td>
+                                    <td class="field"><span class="badge badge-gray">작품만료</span></td>
+                                    <td>상점 게시 시점 기준 90일 경과 후 자동 만료.<br>마켓에서 비노출, 품절 처리.</td>
                                     <td>번호 · 작품ID · 카테고리 · 작품이름(상태) · 가격 · 등록일 · 유효기간<br><span
                                             style="color:#64748b; font-size:12px;">※ 판매상태 행 숨김</span></td>
                                     <td>
@@ -1211,14 +1234,14 @@
                                     </td>
                                 </tr>
                                 <tr style="border-top:2px solid #e2e8f0; background:#fff5f5;">
-                                    <td class="field"><span class="badge badge-red">변환 실패</span></td>
-                                    <td>변환 파이프라인 처리 중 오류 발생 시.<br>유저에게 실패 사유 노출, 파일 삭제 후 신규 등록 가능.</td>
-                                    <td>번호 · 작품ID · 카테고리 · 작품이름(상태) · 등록일 · 실패 사유<br><span
+                                    <td class="field"><span class="badge badge-red">변환실패</span></td>
+                                    <td>변환 파이프라인 처리 중 오류 발생 시.<br><span style="color:#dc2626; font-weight:700;">고정 안내 문구 표시 + 7일 이내 자동 삭제</span><br><span style="color:#94a3b8; font-size:12px;">재등록 방식 및 이용권 환급 ⚠️ 협의 중</span></td>
+                                    <td>번호 · 작품ID · 카테고리 · 작품이름(상태) · 등록일 · 자동삭제예정일<br><span
                                             style="color:#dc2626; font-size:12px;">※ 판매시작일 · 판매상태 컬럼 숨김</span></td>
                                     <td>
-                                        • <strong style="color:#dc2626;">작품 삭제만 가능</strong> (수정 불가)<br>
-                                        • 실패 사유 확인<br>
-                                        • 유저에게 안내 메시지 발송 가능
+                                        • 수정/삭제 모두 불가 (버튼 없음) <span class="badge badge-green">V2.0</span><br>
+                                        • 고정 문구: "등록하신 발자국 파일을 처리하는 과정에서 변환이 완료되지 않았습니다."<br>
+                                        • 자동 삭제 예정일 표시 (실패 전달일 기준 +7일)
                                     </td>
                                 </tr>
                             </tbody>
@@ -1323,22 +1346,22 @@
                             <tr>
                                 <td class="field">파일 확장자 제한</td>
                                 <td>register, edit</td>
-                                <td>.foot (원본) / .mp4, .mov (영상) / .png (썸네일)</td>
+                                <td>.foot (원본) / .mp4 (영상, 500KB 이하) / .png (썸네일)</td>
                             </tr>
                             <tr>
                                 <td class="field">작품명</td>
                                 <td>register, edit</td>
                                 <td>영문만 입력 가능 (a-zA-Z0-9, 공백, 특수문자 일부), 최대 20자</td>
                             </tr>
-                            <tr>
-                                <td class="field">게시만료일</td>
+                            <tr style="background:#f0fdf4;">
+                                <td class="field">게재 기간</td>
                                 <td>register, edit</td>
-                                <td>DD.MM.YYYY 텍스트 입력, 자동 포맷팅, 현재일 기준 최소 30일</td>
+                                <td><strong>상점 게시 시점 기준 90일 자동 적용</strong> — 유저 입력 불가, readonly 안내 표시 <span class="badge badge-green">V2.0 변경</span></td>
                             </tr>
-                            <tr>
-                                <td class="field">가격 입력</td>
+                            <tr style="background:#f0fdf4;">
+                                <td class="field">판매 금액</td>
                                 <td>register, edit</td>
-                                <td>숫자만 입력 (type="number"), min=0, 0 → 무료 배포</td>
+                                <td><strong>FREE 고정</strong> (Alpha 기간) — 유저 입력 불가, KP 입력 필드 제거 <span class="badge badge-green">V2.0 변경</span></td>
                             </tr>
                             <tr>
                                 <td class="field">타입 태그 제한</td>
@@ -1355,10 +1378,10 @@
                                 <td>register</td>
                                 <td>스크롤 완료 → 동의 버튼 활성화 → 체크박스 자동 체크</td>
                             </tr>
-                            <tr>
-                                <td class="field">1일 등록 제한</td>
+                            <tr style="background:#f0fdf4;">
+                                <td class="field">이용권 확인</td>
                                 <td>register</td>
-                                <td>최대 3회/일, 완료 화면에서 잔여 횟수 표시</td>
+                                <td>정액제 계정당 이용권 1장 기본 제공. 0장 시 등록 버튼 비활성화 + 안내 노출 <span class="badge badge-green">V2.0 신규</span></td>
                             </tr>
                             <tr>
                                 <td class="field">KP 잔액 검증</td>
@@ -1404,17 +1427,11 @@
                                 <td>"작품명을 입력해주세요. (영문만 입력 가능)"</td>
                                 <td><span class="badge badge-red">alert</span></td>
                             </tr>
-                            <tr>
+                            <tr style="background:#f0fdf4;">
                                 <td class="field">register</td>
-                                <td>STEP 3 → 만료일 미입력</td>
-                                <td>"작품 게시기간 만료일을 필수로 입력해주세요. (DD.MM.YYYY)"</td>
-                                <td><span class="badge badge-red">alert</span></td>
-                            </tr>
-                            <tr>
-                                <td class="field">register</td>
-                                <td>STEP 3 → 만료일 형식 오류</td>
-                                <td>"게시 만료일 형식이 올바르지 않습니다. DD.MM.YYYY 형태로 입력해주세요."</td>
-                                <td><span class="badge badge-red">alert</span></td>
+                                <td>STEP 3 → 게재 기간 안내</td>
+                                <td>"게재 기간은 상점 게시 시점 기준 90일이 자동 적용됩니다." (alert 아님 — 상시 고지 텍스트) <span class="badge badge-green">V2.0</span></td>
+                                <td><span class="badge badge-blue">inline</span></td>
                             </tr>
                             <tr>
                                 <td class="field">edit</td>

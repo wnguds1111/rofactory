@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -50,9 +50,9 @@
         <div class="edit-header">
             <div class="edit-thumb">🌑</div>
             <div class="edit-title-wrap">
-                <span class="badge-status">변환 대기 중</span>
+                <span class="badge-status" style="background:#fff7ed; color:#c2410c;">변환 중</span>
                 <h1>어둠의 심연의 걸음</h1>
-                <p>변환 중 전 까지만 내용 수정이 가능합니다.</p>
+                <p>판매대기 이후 상태부터는 완전히 잠기며 수정이 불가합니다.</p>
             </div>
         </div>
         
@@ -63,15 +63,15 @@
                     <input type="text" class="form-control" value="발자국" readonly required>
                 </div>
                 <div class="form-group half">
-                    <label>가격 (KP) <span style="color:#ef4444;">*</span></label>
-                    <input type="number" class="form-control" value="5500" min="0" required placeholder="예: 1500">
+                    <label>가격 (KP) <span style="font-size:12px; color:#64748b;">(Alpha 기간 무료 고정)</span></label>
+                    <input type="text" class="form-control" value="FREE" readonly style="background-color: #f8fafc; color: #64748b;">
                 </div>
             </div>
             
             <div class="form-row">
                 <div class="form-group half">
-                    <label>작품 게시기간 만료일 <span style="color:#ef4444;">*</span></label>
-                    <input type="date" class="form-control" id="editDate" value="2026-12-31" required>
+                    <label>작품 게재기간 <span style="color:#3b82f6; font-weight:700;">*자동 적용</span></label>
+                    <input type="text" class="form-control" value="상점 게시 시점 기준 90일" readonly style="background-color: #f8fafc; color: #64748b;">
                 </div>
                 <div class="form-group half">
                     <label>작품 명칭 <span style="color:#ef4444;">*</span> <span style="font-size:12px; color:#64748b;">(영문만 입력 가능)</span></label>

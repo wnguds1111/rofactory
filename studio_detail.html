@@ -274,8 +274,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── 액션 버튼 ──────────────────────────────────
     const acts = document.getElementById('actionContainer');
-    if(status === 'failed'){
-        acts.innerHTML = `<button class="dt-btn dt-btn-danger" onclick="if(confirm('작품을 삭제하시겠습니까?')){alert('삭제되었습니다.');location.href='studio_myworks.html';}" data-en="&#x1F5D1; Delete" data-ko="&#x1F5D1; 삭제하기">&#x1F5D1; 삭제하기</button>`;
+    if(status === 'converting' || status === 'pending'){
+        acts.innerHTML = `
+            <button class="dt-btn dt-btn-secondary" onclick="location.href='edit.html'" data-en="&#x270E; Edit" data-ko="&#x270E; 수정하기">&#x270E; 수정하기</button>
+            <button class="dt-btn dt-btn-danger" onclick="if(confirm('작품을 삭제하시겠습니까?')){alert('삭제되었습니다.');location.href='studio_myworks.html';}" data-en="&#x1F5D1; Delete" data-ko="&#x1F5D1; 삭제하기">&#x1F5D1; 삭제하기</button>
+        `;
     } else if(status === 'expired'){
         acts.innerHTML = `<button class="dt-btn dt-btn-secondary" onclick="alert('만료된 작품입니다. 새로 등록해주세요.')" data-en="&#x1f504; Cannot re-register" data-ko="&#x1f504; 재등록 불가">&#x1f504; 재등록 불가</button>`;
     } else if(status === 'completed'){
@@ -295,10 +298,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const tReg       = tlItem(false,'2026.03.10 10:00','<span data-en="Initial Registration" data-ko="작품 최초 등록">작품 최초 등록</span>','','<span data-en="Registered via RO Factory." data-ko="RO Factory 폼을 통해 최초로 정보가 등록되었습니다.">RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</span>');
     const tConvert   = tlItem(status==='converting', '2026.03.13 14:00','<span data-en="🔄 Converting" data-ko="🔄 변환 작업 진행 중">🔄 변환 작업 진행 중</span>','#92400e','<span data-en="Simulating file conversion for in-game." data-ko="서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.">서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.</span>');
-    const tCompWait  = tlItem(status==='completed'&&completedSub==='wait', '2026.03.15 09:30','<span data-en="✅ Conversion Complete" data-ko="✅ 변환 완료">✅ 변환 완료</span>','#1d4ed8','<span data-en="Conversion finished. Awaiting requested patch date." data-ko="모든 변환이 성공적으로 끝났습니다. 안내된 패치 예정일에 맞춰 출시를 대기합니다.">모든 변환이 성공적으로 끝났습니다. 안내된 패치 예정일에 맞춰 출시를 대기합니다.</span>');
+    const tCompWait  = tlItem(status==='completed'&&completedSub==='wait', '2026.03.15 09:30','<span data-en="✅ Conversion Complete" data-ko="✅ 변환 완료">✅ 변환 완료</span>','#1d4ed8','<span data-en="Conversion finished. Awaiting requested patch date." data-ko="모든 변환이 성공적으로 끝났습니다. 차후 업데이트에서 상점에 순차적으로 등록할 예정입니다.">모든 변환이 성공적으로 끝났습니다. 차후 업데이트에서 상점에 순차적으로 등록할 예정입니다.</span>');
     const tCompSale  = tlItem(status==='completed'&&completedSub==='sale', pubDate?pubDate.replace(/\./g,'/')+' 00:00':'—', '<span data-en="🎉 On Sale" data-ko="🎉 제품 판매 중">🎉 제품 판매 중</span>','#166634','<span data-en="Now available on the open market!" data-ko="오픈 마켓에 정상적으로 등록되어, 현재 유저들이 아이템을 구매하고 있습니다!">오픈 마켓에 정상적으로 등록되어, 현재 유저들이 아이템을 구매하고 있습니다!</span>');
     const tExpired   = tlItem(true, expDate||'—', '<span data-en="⏹ Expired" data-ko="⏹ 작품 만료됨">⏹ 작품 만료됨</span>','#64748b','<span data-en="Sale period ended." data-ko="판매 기간이 종료되어 마켓 품절 처리되었습니다.">판매 기간이 종료되어 마켓 품절 처리되었습니다.</span>');
-    const tFailed    = tlItem(true, '2026.03.14 16:20','<span data-en="❗ Failed" data-ko="❗ 변환 실패">❗ 변환 실패</span>','#991b1b','<span data-en="Pipeline error. Retrying after deletion is possible." data-ko="변환 파이프라인 처리 중 오류가 발생했습니다. 파일 삭제 후 신규 등록하실 수 있습니다.">변환 파이프라인 처리 중 오류가 발생했습니다. 파일 삭제 후 신규 등록하실 수 있습니다.</span>');
+    const tFailed    = tlItem(true, '2026.03.14 16:20','<span data-en="❗ Failed" data-ko="❗ 변환 실패">❗ 변환 실패</span>','#991b1b','<span data-en="Pipeline error. Retrying after deletion is possible." data-ko="변환 파이프라인 처리 중 오류가 발생했습니다. (7일 이내 자동 삭제 예정)">변환 파이프라인 처리 중 오류가 발생했습니다. (7일 이내 자동 삭제 예정)</span>');
 
     let logs = [];
     if(status === 'converting' || status === 'pending'){

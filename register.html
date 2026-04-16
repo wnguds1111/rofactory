@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="alert-notice" style="margin-top:32px; background:#fef9c3; border:1px solid #fde68a; border-radius:12px; padding:16px 24px; font-size:14px; color:#78350f; font-weight:600; max-width:640px; margin-left:auto; margin-right:auto; text-align:left;">
-                    ⚠️ <strong>중요 안내:</strong> RO Factory는 등록 즉시 파일 변환 파이프라인이 시작됩니다. <strong>등록 완료 후에는 어떠한 정보 및 파일 수정도 불가합니다.</strong> 등록 전 파일과 정보를 반드시 재확인해주세요.
+                    ⚠️ <strong>중요 안내:</strong> 판매대기 상태의 발자국은 <strong>수정 및 삭제가 불가합니다.</strong> 등록 내용에 변동이 있을 경우 판매대기 전인 변환 중 상태에서만 삭제 및 신규 등록이 가능합니다.
                 </div>
             </div>
 
@@ -157,14 +157,14 @@
                             <input type="text" class="form-control" value="발자국" readonly>
                         </div>
                         <div class="form-group half">
-                            <label>판매 금액 <span data-en="(Free during OBT)" data-ko="(OBT 고정)">(OBT 고정)</span></label>
+                            <label>판매 금액 <span data-en="(Fixed FREE)" data-ko="(Alpha 고정)">(Alpha 고정)</span></label>
                             <input type="text" class="form-control" value="FREE" readonly>
                         </div>
                     </div>
                     <div class="form-row" style="margin-bottom:16px;">
                         <div class="form-group half">
-                            <label>작품 게시기간 <span style="color:#ef4444;">*필수</span> <span>(DD.MM.YYYY, 최소 30일)</span></label>
-                            <input type="text" class="form-control" id="postDate" placeholder="DD.MM.YYYY" maxlength="10">
+                            <label>작품 게재기간 <span style="color:#3b82f6; font-weight:700;">*자동 적용</span></label>
+                            <input type="text" class="form-control" value="상점 게시 시점 기준 90일" readonly style="background-color: #f8fafc; color: #64748b; font-weight: 500;">
                         </div>
                         <div class="form-group half">
                             <label>작품명 <span style="color:#ef4444;">*필수</span> <span>(영문만, 최대 20자)</span></label>
@@ -224,10 +224,10 @@
                 <h2 class="step-title" style="margin-bottom: 40px;">성공적으로 마무리되었습니다!</h2>
                 <div class="completion-box">
                     <div class="anim-icon flex justify-center"><img src="images/step4_img.png" style="width: 260px; height: auto; display: block;" alt=""></div>
-                    <p>파일 변환이 진행 중이며, 완료되면 글로벌 <span data-en="Market" data-ko="마켓">마켓</span>에 자동 등재됩니다.</p>
-                    <div class="limit-box">
-                        <span>오늘 남은 등록 잔여 횟수</span>
-                        <strong>2 / 3회 남음</strong>
+                    <p>등록된 발자국은 차후 업데이트에서 상점에 순차적으로 등록됩니다.</p>
+                    <div class="limit-box" style="background:#f0fdf4; border:1px solid #bbf7d0;">
+                        <span style="color:#166534;">현재 보유 이용권</span>
+                        <strong style="color:#15803d;">1 장</strong>
                     </div>
                 </div>
             </div>
@@ -375,15 +375,6 @@
             var titleInput = document.getElementById('workTitle');
             if (!titleInput.value.trim()) {
                 alert('작품명을 입력해주세요. (영문만 입력 가능)');
-                return;
-            }
-            var dateInput = document.getElementById('postDate');
-            if (!dateInput.value.trim()) {
-                alert('작품 게시기간 만료일을 필수로 입력해주세요. (DD.MM.YYYY)');
-                return;
-            }
-            if (!/^\d{2}\.\d{2}\.\d{4}$/.test(dateInput.value.trim())) {
-                alert('게시 만료일 형식이 올바르지 않습니다. DD.MM.YYYY 형태로 입력해주세요.');
                 return;
             }
         }

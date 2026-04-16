@@ -89,6 +89,10 @@
             <div class="avatar"><img src="images/poring_hero.png" alt="포링" onerror="this.outerHTML='<span style=\'font-size:32px;\'>🧙</span>'"></div>
             <div class="user-info-wrap">
                 <div class="user-name">GravityUser</div>
+                <div class="user-kp" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; background:#f0fdf4;">
+                    <span data-en="Tickets" data-ko="이용권" style="color:#166534; font-weight:700;">이용권</span>
+                    <span style="color:#166534; font-weight:700;"><span style="color:#15803d; font-size:16px; font-weight:900;">1</span> 장</span>
+                </div>
                 <span class="user-kp"><span data-en="Owned" data-ko="보유">보유</span> <span>0</span> KP</span>
                 <a href="#" class="btn-kp" data-en="💳 Charge KP" data-ko="💳 KP 충전하기">💳 KP 충전하기</a>
             </div>
@@ -181,7 +185,7 @@ function buildRow(w){
         badge = `<span class="item-status s-converting" data-en="Converting" data-ko="변환 중">변환 중</span>`;
     } else if(w.status === 'completed'){
         badge = w.completedSub === 'wait'
-            ? `<span class="item-status s-completed-wait" data-en="Pending" data-ko="판매 대기">판매 대기</span>`
+            ? `<span class="item-status s-completed-wait" data-en="Pending" data-ko="판매대기">판매대기</span>`
             : `<span class="item-status s-completed-sale" data-en="On Sale" data-ko="판매 중">판매 중</span>`;
     } else if(w.status === 'expired'){
         badge = `<span class="item-status s-expired" data-en="Expired" data-ko="작품 만료">작품 만료</span>`;
