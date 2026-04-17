@@ -157,17 +157,17 @@
                             <input type="text" class="form-control" value="발자국" readonly>
                         </div>
                         <div class="form-group half">
-                            <label>판매 금액 <span data-en="(Fixed FREE)" data-ko="(Alpha 고정)">(Alpha 고정)</span></label>
+                            <label>판매 금액</label>
                             <input type="text" class="form-control" value="FREE" readonly>
                         </div>
                     </div>
                     <div class="form-row" style="margin-bottom:16px;">
                         <div class="form-group half">
-                            <label>작품 게재기간 <span style="color:#3b82f6; font-weight:700;">*자동 적용</span></label>
+                            <label>작품 게재기간</label>
                             <input type="text" class="form-control" value="상점 게시 시점 기준 90일" readonly style="background-color: #f8fafc; color: #64748b; font-weight: 500;">
                         </div>
                         <div class="form-group half">
-                            <label>작품명 <span style="color:#ef4444;">*필수</span> <span>(영문만, 최대 20자)</span></label>
+                            <label>작품명 <span style="color:#ef4444;">*필수</span></label>
                             <input type="text" class="form-control" id="workTitle" placeholder="Enter title in English (max 20 chars)" maxlength="20" oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')">
                         </div>
                     </div>
@@ -225,9 +225,9 @@
                 <div class="completion-box">
                     <div class="anim-icon flex justify-center"><img src="images/step4_img.png" style="width: 260px; height: auto; display: block;" alt=""></div>
                     <p>등록된 발자국은 차후 업데이트에서 상점에 순차적으로 등록됩니다.</p>
-                    <div class="limit-box" style="background:#f0fdf4; border:1px solid #bbf7d0;">
-                        <span style="color:#166534;">현재 보유 이용권</span>
-                        <strong style="color:#15803d;">1 장</strong>
+                    <div class="limit-box" style="background:#eff6ff; border:1px solid #bfdbfe;">
+                        <span style="color:#1e40af;">현재 보유 이용권</span>
+                        <strong style="color:#025DD0;">1 장</strong>
                     </div>
                 </div>
             </div>
@@ -240,8 +240,16 @@
         <div class="progress-track">
             <div class="progress-fill" id="progressBar" style="width: 20%;"></div>
         </div>
-        <button class="btn-back" id="btnBack" onclick="prevStep()"data-en="< Previous">< 이전으로</button>
-        <button class="btn-next" id="btnNext" onclick="nextStep()" data-en="Next step after verification →">확인 후 다음 단계 →</button>
+        <div style="display:flex; align-items:center; justify-content:space-between; width:100%; gap:12px;">
+            <button class="btn-back" id="btnBack" onclick="handleBack()"
+                style="min-width:110px; display:flex; align-items:center; gap:6px; justify-content:center;">
+                ← <span id="btnBackLabel">BACK</span>
+            </button>
+            <button class="btn-next" id="btnNext" onclick="nextStep()"
+                style="min-width:140px;">
+                <span id="btnNextLabel">NEXT →</span>
+            </button>
+        </div>
     </footer>
 
     <!-- Terms Modal -->
@@ -288,7 +296,19 @@
 
     function handleFileSelect(input, labelId) {
         if(input.files && input.files[0]) {
-            document.getElementById(labelId).innerText = "파일명: " + input.files[0].name;
+            var nameEl = document.getElementById(labelId);
+            nameEl.innerText = input.files[0].name;
+            nameEl.style.display = 'block';
+            nameEl.style.whiteSpace = 'nowrap';
+            nameEl.style.overflow = 'hidden';
+            nameEl.style.textOverflow = 'ellipsis';
+            nameEl.style.maxWidth = '100%';
+            // 이모지 숨기기
+            var box = input.closest('.file-box');
+            if (box) {
+                var icon = box.querySelector('.icon');
+                if (icon) icon.style.display = 'none';
+            }
         }
     }
     function handleImageSelect(input, boxId, nameId) {
@@ -296,11 +316,13 @@
             var reader = new FileReader();
             reader.onload = function(e) {
                 var box = document.getElementById(boxId);
+
+                // 썸네일 프리뷰
                 var preview = box.querySelector('.preview-img');
                 if (!preview) {
                     preview = document.createElement('div');
                     preview.className = 'preview-img';
-                    preview.style.cssText = 'width: 80px; height: 80px; margin: 10px auto; border-radius: 8px; border: 1px dashed #cbd5e1;';
+                    preview.style.cssText = 'width: 80px; height: 80px; margin: 6px auto; border-radius: 8px; border: 1px dashed #cbd5e1; flex-shrink:0;';
                     box.insertBefore(preview, box.querySelector('input'));
                 }
                 preview.style.backgroundImage = 'url(' + e.target.result + ')';
@@ -308,17 +330,20 @@
                 preview.style.backgroundPosition = 'center';
                 preview.style.backgroundRepeat = 'no-repeat';
 
+                // 파일명 (한 줄 ellipsis)
                 var nameSpan = document.getElementById(nameId);
                 if (!nameSpan) {
                     nameSpan = document.createElement('span');
                     nameSpan.id = nameId;
-                    nameSpan.style.cssText = 'display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;';
-                    box.insertBefore(nameSpan, box.querySelector('input'));
+                    nameSpan.style.cssText = 'display:block; margin-top:6px; font-weight:900; color:#3b82f6; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; padding:0 6px; font-size:12px;';
+                    box.appendChild(nameSpan);
                 }
-                nameSpan.innerText = "파일명: " + input.files[0].name;
+                nameSpan.innerText = input.files[0].name;
 
+                // 이모지(.icon) 숨기기
                 var icon = box.querySelector('.icon');
-                if(icon) icon.style.display = 'none';
+                if (icon) icon.style.display = 'none';
+
                 box.style.backgroundImage = 'none';
             };
             reader.readAsDataURL(input.files[0]);
@@ -338,43 +363,69 @@
         const progress = ((currentStep + 1) / (totalSteps + 1)) * 100;
         document.getElementById('progressBar').style.width = `${progress}%`;
 
-        const btnBack = document.getElementById('btnBack');
-        const btnNext = document.getElementById('btnNext');
+        const btnBack     = document.getElementById('btnBack');
+        const btnNext     = document.getElementById('btnNext');
+        const backLabel   = document.getElementById('btnBackLabel');
+        const nextLabel   = document.getElementById('btnNextLabel');
 
+        // ── BACK 버튼 ──────────────────────────────────
         if (currentStep === 0) {
-            btnBack.style.visibility = 'hidden';
+            // 첫 진입: 메인으로 가는 BACK 버튼 표시
+            btnBack.style.visibility = 'visible';
+            backLabel.textContent = 'BACK';
+            btnBack.style.background = '';
+            btnBack.style.color = '';
         } else if (currentStep === totalSteps) {
+            // 완료 화면: BACK 숨김
             btnBack.style.visibility = 'hidden';
         } else {
+            // 중간 스텝: PREV 버튼
             btnBack.style.visibility = 'visible';
+            backLabel.textContent = 'PREV';
         }
 
+        // ── NEXT 버튼 ──────────────────────────────────
         if (currentStep === totalSteps - 1) {
-            btnNext.innerText = "데이터 최종 등록하기";
-            btnNext.style.background = "linear-gradient(to right, #025dd0, #54b0e1)";
-            btnNext.style.color = "fff";
+            // 마지막 입력 스텝: REGISTER
+            nextLabel.textContent = 'REGISTER →';
+            btnNext.style.background = 'linear-gradient(to right, #025dd0, #54b0e1)';
+            btnNext.style.color = '#fff';
         } else if (currentStep === totalSteps) {
-            btnNext.innerText = "MY STUDIO 이동 ↗";
-            btnNext.style.background = "#fff";
-            btnNext.style.color = "#012553";
+            // 완료 화면: MY STUDIO
+            nextLabel.textContent = 'MY STUDIO ↗';
+            btnNext.style.background = '#fff';
+            btnNext.style.color = '#012553';
+            btnNext.style.border = '1.5px solid #012553';
         } else {
-            btnNext.innerText = "확인 후 다음 단계 →";
-            btnNext.style.background = "var(--primary-bright)";
-            btnNext.style.color = "#fff";
+            // 일반 스텝: NEXT
+            nextLabel.textContent = 'NEXT →';
+            btnNext.style.background = 'var(--primary-bright)';
+            btnNext.style.color = '#fff';
+            btnNext.style.border = '';
+        }
+    }
+
+    // BACK 버튼 핸들러: step0 이면 메인, 그 외엔 prevStep
+    function handleBack() {
+        if (currentStep === 0) {
+            window.location.href = 'main2.html';
+        } else {
+            currentStep--;
+            updateWizard();
         }
     }
 
     function nextStep() {
         if (currentStep === 2) {
             if (!document.getElementById('termsChk').checked) {
-                alert('약관에 반드시 동의해야 다음 단계로 진행할 수 있습니다.');
+                alert('Terms must be agreed before proceeding.');
                 return;
             }
         }
         if (currentStep === 3) {
             var titleInput = document.getElementById('workTitle');
             if (!titleInput.value.trim()) {
-                alert('작품명을 입력해주세요. (영문만 입력 가능)');
+                alert('Please enter the title. (English only)');
                 return;
             }
         }
@@ -383,15 +434,12 @@
             currentStep++;
             updateWizard();
         } else {
-            window.location.href = "studio_myworks.html";
+            window.location.href = 'studio_myworks.html';
         }
     }
 
     function prevStep() {
-        if (currentStep > 0) {
-            currentStep--;
-            updateWizard();
-        }
+        handleBack();
     }
 
     // Type tag max 2 logic

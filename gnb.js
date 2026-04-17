@@ -15,9 +15,10 @@ function renderGNB(opts = {}) {
             icon: 'gnb-factory.png', label: 'RO FACTORY', href: 'main2.html',
             active: opts.activePage === 'ro-factory',
             dropdown: [
-                { href: 'register.html',       label: 'Register'  },
-                { href: 'market.html',         label: 'Market'    },
-                { href: 'studio_myworks.html', label: 'My Studio' },
+                { href: 'register.html',       label: 'Register'      },
+                { href: 'market.html',         label: 'Market'        },
+                { href: 'studio_myworks.html', label: 'My Studio'     },
+                { href: 'about.html',          label: 'RO FACTORY?'   },
             ]
         },
         { icon: 'gnb-poring.png',  label: 'GET PORING',  href: '#' },

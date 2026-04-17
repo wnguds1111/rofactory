@@ -125,11 +125,15 @@
         .breadcrumb strong { color: #1e3a8a; }
 
         /* PANEL 1: Market Search Layout */
-        .market-search-bar { background: #f1f5f9; display: flex; align-items: center; max-width: 900px; margin: 0 auto 40px; border-radius: 4px; border: 1px solid #e2e8f0; overflow: hidden; height: 50px; }
+        .market-search-bar { background: #fff; display: flex; align-items: center; max-width: 900px; margin: 0 auto 40px; border-radius: 6px; border: 1px solid #e2e8f0; overflow: hidden; height: 50px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .market-search-cat { padding: 0 20px; font-weight: 700; color: #1e293b; border-right: 1px solid #e2e8f0; height: 100%; display: flex; align-items: center; cursor: pointer; }
         .market-search-cat select { background: transparent; border: none; outline: none; font-weight: 700; cursor: pointer; font-family: 'Pretendard'; }
-        .market-search-input { flex: 1; border: none; background: transparent; padding: 0 20px; outline: none; font-size: 15px; font-family: 'Pretendard'; }
-        .market-search-btn { background: transparent; border: none; padding: 0 15px; font-size: 16px; cursor: pointer; color: #64748b; }
+        .market-search-input { flex: 1; border: none; background: transparent; padding: 0 20px; outline: none; font-size: 15px; font-family: 'Pretendard'; color: #0f172a; }
+        .market-search-input::placeholder { color: #94a3b8; }
+        .market-search-btn { background: transparent; border: none; padding: 0 14px; font-size: 13px; cursor: pointer; color: #64748b; height: 100%; display: flex; align-items: center; transition: color 0.15s; }
+        .market-search-btn:hover { color: #025DD0; }
+        .search-submit-btn { font-weight: 800; color: #025DD0 !important; border-left: 1px solid #e2e8f0; padding: 0 20px; font-size: 13px; }
+        .search-submit-btn:hover { background: #eff6ff; }
         
         .market-layout { display: flex; gap: 40px; padding-top: 10px; border-top: 1px solid #e2e8f0; }
         .market-sidebar { width: 240px; flex-shrink: 0; padding: 20px 20px 0 0; border-right: 1px solid #e2e8f0; }
@@ -233,8 +237,9 @@
         .video-modal { background: #000; width: 500px; height: 500px; border-radius: 16px; padding: 0; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .btn-preview { background: rgba(255,255,255,0.9); color: #0f172a; border: 1px solid rgba(0,0,0,0.1); padding: 10px 20px; border-radius: 12px; font-weight: 800; font-size: 13px; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 8px; }
         .btn-preview:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-        .btn-heart { background: #fff; color: #ef4444; border: 1px solid rgba(0,0,0,0.05); padding: 10px 20px; border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.2s; }
-        .btn-heart:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .btn-heart { background: #fff; color: #025DD0; border: 1px solid rgba(2,93,208,0.15); padding: 10px 20px; border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: 0.2s; }
+        .btn-heart:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(2,93,208,0.2); }
+        .btn-heart.hearted { background: #eff6ff; border-color: #025DD0; }
         .btn-heart span { color: #0f172a; }
         .d-tag { display: inline-block; background: #f8fafc; border: 1px solid #cbd5e1; color: #475569; font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 6px; margin-right: 4px; }
         /* ── PC: 모바일 필터 버튼 숨김 ── */
@@ -363,12 +368,9 @@
         <div id="panel-list" class="market-panel active">
             <!-- Search Bar -->
             <div class="market-search-bar">
-                <div class="market-search-cat">
-                    <select><option><span data-en="Footprints" data-ko="발자국">Footprints</span></option></select>
-                </div>
-                <input type="text" class="market-search-input" placeholder="Search for items." data-ko="상품을 검색해 보세요." data-en="Search for items.">
-                <button class="market-search-btn" style="font-size: 12px;">✖</button>
-                <button class="market-search-btn">🔍</button>
+                <input type="text" class="market-search-input" placeholder="발자국을 검색해보세요." data-ko="발자국을 검색해보세요." data-en="Search for footprints.">
+                <button class="market-search-btn" style="font-size: 12px;">&#10006;</button>
+                <button class="market-search-btn search-submit-btn" style="font-weight:700; font-size:13px; padding:0 18px; color:#025DD0; border-left:1px solid #e2e8f0;">검색</button>
             </div>
 
             <div class="market-layout">
@@ -396,7 +398,7 @@
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-title">🎨 <span data-en="Color" data-ko="색상">색상</span></div>
+                        <div class="filter-title"><span data-en="Color" data-ko="색상">색상</span></div>
                         <div class="filter-btns filter-color">
                             <button class="f-btn" data-val="red"><span class="f-color-dot" style="background:red;"></span> <span data-en="Red" data-ko="레드">레드</span></button>
                             <button class="f-btn" data-val="blue"><span class="f-color-dot" style="background:blue;"></span> <span data-en="Blue" data-ko="블루">블루</span></button>
@@ -408,24 +410,21 @@
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-title">💰 <span data-en="Price" data-ko="가격">가격</span> (KP)</div>
+                        <div class="filter-title"><span data-en="Price" data-ko="가격">가격</span></div>
                         <div class="filter-btns filter-price">
                             <button class="f-btn" data-val="0"><span data-en="Free" data-ko="무료">무료</span></button>
-                            <button class="f-btn" data-val="1000">~ 1,000</button>
-                            <button class="f-btn" data-val="5000">1,000 ~ 5,000</button>
-                            <button class="f-btn" data-val="10000">5,000 ~ 10,000</button>
-                            <button class="f-btn" data-val="20000">10,000 ~</button>
                         </div>
-                        
-                        <div class="range-labels" style="margin-top: 25px;">
-                            <span id="priceMinLabel">0 KP</span>
-                            <span id="priceMaxLabel">20,000+ KP</span>
-                        </div>
-                        <div class="range-wrapper">
-                            <div class="range-track"></div>
-                            <div class="range-fill" id="rangeFill"></div>
-                            <input type="range" class="dual-range" id="minRange" min="0" max="20000" step="500" value="0">
-                            <input type="range" class="dual-range" id="maxRange" min="0" max="20000" step="500" value="20000">
+                        <div style="display:none;">
+                            <div class="range-labels" style="margin-top: 25px;">
+                                <span id="priceMinLabel">0 KP</span>
+                                <span id="priceMaxLabel">20,000+ KP</span>
+                            </div>
+                            <div class="range-wrapper">
+                                <div class="range-track"></div>
+                                <div class="range-fill" id="rangeFill"></div>
+                                <input type="range" class="dual-range" id="minRange" min="0" max="20000" step="500" value="0">
+                                <input type="range" class="dual-range" id="maxRange" min="0" max="20000" step="500" value="20000">
+                            </div>
                         </div>
                     </div>
 
@@ -498,7 +497,9 @@
         <!-- STEP 3: PURCHASE COMPLETE -->
         <div id="panel-complete" class="market-panel">
             <div class="complete-wrapper">
-                <div class="c-icon">🎉</div>
+                <div class="c-icon" style="font-size:0; margin-bottom:20px;">
+                    <img src="images/step4_img.png" style="width:220px; height:auto; display:block; margin:0 auto;" alt="">
+                </div>
                 <h2 class="c-title"><span data-en="Payment Complete!" data-ko="결제가 완료되었습니다!">Payment Complete!</span></h2>
                 <div class="c-desc"><span data-en="The item has been successfully transferred to your Studio.<br>You can also check your in-game mailbox." data-ko="아이템이 내 스튜디오로 정상적으로 전송되었습니다.<br>인게임 우편함에서도 확인하실 수 있습니다.">The item has been successfully transferred to your Studio.<br>You can also check your in-game mailbox.</span></div>
                 
@@ -630,24 +631,28 @@
         }
 
         function updateDetailHeartUI(p) {
-            document.getElementById('detail-heart-count').innerText = p.hearts.toLocaleString();
-            if (p.isHearted || p.hearts > 100) {
-                document.getElementById('detail-heart').innerHTML = `❤️ <span id="detail-heart-count">${p.hearts.toLocaleString()}</span>`;
-            } else {
-                document.getElementById('detail-heart').innerHTML = `♡ <span id="detail-heart-count">${p.hearts.toLocaleString()}</span>`;
-            }
+            const btn = document.getElementById('detail-heart');
+            const icon = p.isHearted ? '♥' : '♡';
+            btn.innerHTML = `<span style="color:#025DD0; font-size:18px;">${icon}</span> <span id="detail-heart-count" style="color:#0f172a;">${p.hearts.toLocaleString()}</span>`;
+            btn.classList.toggle('hearted', !!p.isHearted);
         }
 
         function toggleHeart() {
             const p = mockProducts.find(x => x.id === currentProductId);
             if (!p) return;
-            
             p.isHearted = !p.isHearted;
-            if (p.isHearted) p.hearts++;
-            else p.hearts--;
-            
+            p.hearts += p.isHearted ? 1 : -1;
             updateDetailHeartUI(p);
-            renderProducts(); 
+            renderProducts();
+        }
+
+        function toggleHeartFromList(id) {
+            const p = mockProducts.find(x => x.id === id);
+            if (!p) return;
+            p.isHearted = !p.isHearted;
+            p.hearts += p.isHearted ? 1 : -1;
+            if (currentProductId === id) updateDetailHeartUI(p);
+            renderProducts();
         }
 
         function openPaymentModal() {
@@ -912,20 +917,28 @@
                 
                 const card = document.createElement('div');
                 card.className = 'market-card';
-                card.onclick = () => goToDetail(p.id);
+                card.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('card-heart')) {
+                        goToDetail(p.id);
+                    }
+                });
                 const pLabel = p.isFree ? '<span style="color:#22c55e;">FREE</span>' : p.price.toLocaleString() + ' KP';
                 
                 card.innerHTML = `
                     <div class="card-img-wrap">
                         <span class="card-img-icon">${p.icon}</span>
                         ${p.tag ? `<span class="card-img-tag">${p.tag}</span>` : ''}
-                        <span class="card-heart">${p.hearts > 100 ? '❤' : '♡'}</span>
+                        <span class="card-heart" data-id="${p.id}" style="color:#025DD0; font-size:19px; font-weight:900; cursor:pointer; padding:6px; line-height:1;">${p.isHearted ? '♥' : '♡'}</span>
                     </div>
                     <div class="card-bottom">
                         <span class="card-name">${p.title}</span>
                         <span class="card-price">${pLabel}</span>
                     </div>
                 `;
+                card.querySelector('.card-heart').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleHeartFromList(p.id);
+                });
                 grid.appendChild(card);
             });
             

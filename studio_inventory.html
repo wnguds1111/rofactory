@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -40,7 +40,13 @@
         .btn-market { @apply inline-flex items-center gap-1.5 bg-[#012553] text-white border-none py-[11px] px-[22px] rounded-xl text-[12px] lg:text-[13px] font-extrabold cursor-pointer hover:bg-[#025DD0] w-full md:w-auto whitespace-nowrap no-underline; }
         
         .search-bar { @apply mb-4; }
-        .search-bar input { @apply w-full lg:max-w-[380px] max-w-full lg:py-[11px] py-[11px] px-[14px] rounded-[10px] border border-slate-200 font-[Pretendard] text-[13px] lg:text-[14px] bg-white focus:outline-none focus:border-blue-500; }
+        .search-bar-wrap { display:flex; align-items:center; background:#fff; border:1px solid #e2e8f0; border-radius:6px; overflow:hidden; max-width:480px; height:46px; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+        .search-bar-wrap input { flex:1; border:none; background:transparent; padding:0 16px; outline:none; font-size:14px; font-family:'Pretendard','Poppins',sans-serif; color:#0f172a; }
+        .search-bar-wrap input::placeholder { color:#94a3b8; }
+        .sb-btn { background:transparent; border:none; padding:0 14px; font-size:13px; cursor:pointer; color:#64748b; height:100%; display:flex; align-items:center; transition:color 0.15s; }
+        .sb-btn:hover { color:#025DD0; }
+        .sb-btn-search { font-weight:800; color:#025DD0; border-left:1px solid #e2e8f0; padding:0 18px; font-size:13px; }
+        .sb-btn-search:hover { background:#eff6ff; }
         
         /* Tabs */
         .sub-tabs { @apply flex gap-1 mb-5 bg-white rounded-[14px] border border-slate-200 p-1.5 overflow-x-auto; scrollbar-width:none; }
@@ -75,6 +81,34 @@
 
         .footer { @apply mt-12; }
         .footer img { @apply w-full h-auto block; }
+
+        /* ─── Mobile Compact UI ─── */
+        @media (max-width: 767px) {
+            .studio-layout { margin-top: 10px; gap: 8px; }
+            .profile-card { padding: 10px 12px; border-radius: 14px; gap: 10px; }
+            .avatar { width: 40px !important; height: 40px !important; min-width: 40px; }
+            .user-name { font-size: 14px; margin-bottom: 2px; }
+            .user-kp { padding: 6px 10px; font-size: 11px; margin-bottom: 4px; border-radius: 8px; }
+            .studio-nav { padding: 5px; gap: 3px; border-radius: 12px; }
+            .s-nav-item { padding: 8px 12px; font-size: 12px; gap: 5px; border-radius: 8px; min-width: 0; }
+            .s-nav-icon { font-size: 14px; }
+            .panel-header { margin-bottom: 10px; padding-top: 2px; }
+            .panel-title { font-size: 16px; }
+            .btn-register, .btn-market { font-size: 12px; padding: 9px 14px; border-radius: 10px; justify-content: center; }
+            .search-bar { margin-bottom: 10px; }
+            .search-bar-wrap { height: 42px; max-width: 100%; border-radius: 10px; }
+            .sub-tabs { padding: 5px; gap: 3px; border-radius: 12px; margin-bottom: 10px; }
+            .sub-tab { padding: 8px 10px; font-size: 11px; border-radius: 8px; flex: 1; min-width: max-content; }
+            .item-row { padding: 12px 14px; gap: 10px; }
+            .item-thumb { width: 58px !important; height: 58px !important; font-size: 22px !important; border-radius: 8px; }
+            .item-tag { font-size: 9px; padding: 2px 7px; margin-bottom: 3px; }
+            .item-title { font-size: 13px; margin-bottom: 3px; }
+            .item-meta { font-size: 10px; gap: 3px; }
+            .item-status { font-size: 10px; padding: 3px 9px; border-radius: 8px; align-self: flex-start; }
+            .item-actions { margin-top: 2px; }
+            .btn-action { font-size: 11px; padding: 7px 10px; border-radius: 7px; }
+            .empty-state { padding: 40px 20px; }
+        }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="tailwind-init.js"></script>
@@ -92,8 +126,6 @@
                         <span data-en="Tickets" data-ko="이용권" style="color:#166534; font-weight:700;">이용권</span>
                         <span style="color:#166534; font-weight:700;"><span style="color:#15803d; font-size:16px; font-weight:900;">1</span> 장</span>
                     </div>
-                    <span class="user-kp"><span data-en="Owned" data-ko="보유">보유</span> <span>0</span> KP</span>
-                    <a href="#" class="btn-kp" data-en="💳 Charge KP" data-ko="💳 KP 충전하기">💳 KP 충전하기</a>
                 </div>
             </div>
             <ul class="studio-nav">
@@ -106,10 +138,14 @@
         <main class="studio-main">
             <div class="panel-header">
                 <h2 class="panel-title" data-en="Purchase History" data-ko="구매 작품 관리">구매 작품 관리</h2>
-                <a href="market.html" class="btn-market" data-en="Go to Market 🛍️" data-ko="마켓으로 이동 🛍️">마켓으로 이동 🛍️</a>
+                <a href="market.html" class="btn-market" data-en="Browse Market 🛍️" data-ko="마켓 둘러보기 🛍️">마켓 둘러보기 🛍️</a>
             </div>
             <div class="search-bar">
-                <input type="text" id="searchInput" oninput="applyFilter()" placeholder="🔍  작품명 검색..." data-en="🔍 Search purchases..." data-ko="🔍  작품명 검색...">
+                <div class="search-bar-wrap">
+                    <input type="text" id="searchInput" oninput="applyFilter()" placeholder="작품명 검색" data-en="Search purchases..." data-ko="작품명 검색">
+                    <button class="sb-btn" onclick="document.getElementById('searchInput').value=''; applyFilter();" title="지우기">&#10006;</button>
+                    <button class="sb-btn sb-btn-search" onclick="applyFilter()">검색</button>
+                </div>
             </div>
             <div class="sub-tabs">
                 <div class="sub-tab active" id="tab-all"       onclick="setTab('all')" data-en="All" data-ko="전체">전체</div>
