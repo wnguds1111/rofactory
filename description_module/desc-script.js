@@ -143,11 +143,6 @@ setInterval(() => {
     }
 }, 500);
 
-// GitHub API 설정
-const GITHUB_REPO_OWNER = 'wnguds1111';
-const GITHUB_REPO_NAME = 'rofactory';
-const GITHUB_DATA_PATH = 'description_module/desc-data.json';
-
 // 전체 페이지 데이터 캐시 (모든 페이지 데이터를 한 번에 로드)
 window.descAllPagesData = null;
 
@@ -174,7 +169,6 @@ async function showDynamicDescPanel(pageNum, silent = false) {
 
     const targetKey = getTargetKey();
 
-    // 데이터 로드 (캐시가 없으면 서버에서 fetch)
     if (!window.descAllPagesData) {
         document.getElementById('descContent').innerHTML = '<div style="text-align:center; padding:20px;">로딩 중...</div>';
         await loadDescData();
@@ -230,7 +224,6 @@ function saveBuilderMarks(re_render = true) {
     window.currentMarks.forEach((m, i) => m.num = i + 1);
     const pageKey = getTargetKey();
 
-    // 메모리 내 전체 데이터 캐시에도 즉시 반영
     if (!window.descAllPagesData) window.descAllPagesData = { pages: {} };
     window.descAllPagesData.pages[pageKey] = {
         title: window.pageTitle,
@@ -242,101 +235,6 @@ function saveBuilderMarks(re_render = true) {
     };
 
     if (re_render) renderBuilderMarks();
-}
-
-// GitHub API를 통해 desc-data.json을 원격 저장소에 커밋
-async function syncToGitHub() {
-    let token = localStorage.getItem('rofactory_github_token');
-    if (!token) {
-        token = prompt(
-            '📌 GitHub Personal Access Token을 입력해주세요.\n\n' +
-            '이 토큰은 디스크립션 데이터를 GitHub 저장소에 자동 저장하기 위해 필요합니다.\n' +
-            '최초 1회만 입력하면 브라우저에 안전하게 저장됩니다.\n\n' +
-            '📋 토큰 생성 방법:\n' +
-            'GitHub → Settings → Developer settings →\n' +
-            'Personal access tokens → Fine-grained tokens → Generate\n' +
-            '→ Repository: rofactory 선택 → Contents: Read and write 권한 부여'
-        );
-        if (!token) {
-            showSaveToast(false, '토큰 미입력으로 원격 동기화가 취소되었습니다.');
-            return false;
-        }
-        localStorage.setItem('rofactory_github_token', token.trim());
-    }
-
-    const apiBase = `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${GITHUB_DATA_PATH}`;
-    const headers = {
-        'Authorization': 'token ' + token,
-        'Content-Type': 'application/json',
-        'Accept': 'application/vnd.github.v3+json'
-    };
-
-    try {
-        // 1단계: 현재 파일의 SHA 값 조회 (업데이트에 필수)
-        const getRes = await fetch(apiBase, { headers });
-        if (getRes.status === 401 || getRes.status === 403) {
-            localStorage.removeItem('rofactory_github_token');
-            showSaveToast(false, '토큰이 만료되었거나 권한이 없습니다. 다시 시도해주세요.');
-            return false;
-        }
-        const fileInfo = await getRes.json();
-        const currentSha = fileInfo.sha;
-
-        // 2단계: 업데이트된 JSON 데이터를 base64로 인코딩
-        const jsonStr = JSON.stringify(window.descAllPagesData, null, 2);
-        const contentBase64 = btoa(unescape(encodeURIComponent(jsonStr)));
-
-        // 3단계: GitHub Content API로 파일 업데이트 커밋
-        const putRes = await fetch(apiBase, {
-            method: 'PUT',
-            headers: headers,
-            body: JSON.stringify({
-                message: 'sync: update description data via browser editor',
-                content: contentBase64,
-                sha: currentSha
-            })
-        });
-
-        if (putRes.ok) {
-            showSaveToast(true, '모든 PC에서 동일하게 보이도록 원격 동기화 완료!');
-            // 캐시 무효화 - 다음 로드 시 최신 데이터를 서버에서 가져옴
-            window.descAllPagesData = null;
-            return true;
-        } else {
-            const errData = await putRes.json();
-            console.error('GitHub API 에러:', errData);
-            showSaveToast(false, 'GitHub 저장 실패: ' + (errData.message || putRes.statusText));
-            return false;
-        }
-    } catch (e) {
-        console.error('GitHub 동기화 오류:', e);
-        showSaveToast(false, '네트워크 오류: ' + e.message);
-        return false;
-    }
-}
-
-function showSaveToast(isSuccess, message) {
-    let toast = document.getElementById('desc-save-toast');
-    if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'desc-save-toast';
-        toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0f172a; color:#fff; padding:12px 24px; border-radius:30px; font-size:13px; font-weight:bold; z-index:100002; box-shadow:0 10px 25px rgba(0,0,0,0.2); transition:0.3s opacity, 0.3s transform; opacity:0; pointer-events:none; display:flex; align-items:center; gap:8px; border: 1px solid rgba(255,255,255,0.1);';
-        document.body.appendChild(toast);
-    }
-    if (isSuccess) {
-        toast.innerHTML = '✅ ' + (message || '원격 저장소에 동기화 완료!');
-        toast.style.background = '#0f172a';
-    } else {
-        toast.innerHTML = '⚠️ ' + (message || '동기화 실패');
-        toast.style.background = '#ef4444';
-    }
-    toast.style.opacity = '1';
-    toast.style.transform = 'translateX(-50%) translateY(-10px)';
-    
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateX(-50%) translateY(0)';
-    }, 4000);
 }
 
 window.updatePageMeta = function (type, txt) {
@@ -541,32 +439,14 @@ function hideTooltip(id) {
     }
 }
 
-async function toggleLock() {
+function toggleLock() {
     if (!window.hasEditPermission) {
         alert("편집 권한이 없습니다. (지정된 관리자 IP에서만 편집할 수 있습니다)");
         return;
     }
-
-    // 편집 모드 → 잠금 모드로 전환할 때 GitHub에 자동 동기화
     if (!window.isBuilderLocked) {
-        // 현재 편집 중이었으므로 저장 후 잠금
         saveBuilderMarks(false);
-        const lockBtn = document.getElementById('lockToggleBtn');
-        if (lockBtn) {
-            lockBtn.innerHTML = '⏳ 동기화 중...';
-            lockBtn.style.background = '#f59e0b';
-            lockBtn.disabled = true;
-        }
-        const success = await syncToGitHub();
-        if (lockBtn) {
-            lockBtn.disabled = false;
-        }
-        if (!success) {
-            // 동기화 실패해도 잠금은 진행
-            console.warn('GitHub 동기화 실패, 로컬에만 저장됩니다.');
-        }
     }
-
     window.isBuilderLocked = !window.isBuilderLocked;
     localStorage.setItem('rofactory_desc_panel_locked', window.isBuilderLocked ? 'true' : 'false');
     renderBuilderMarks();
