@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span style="font-weight:900; font-size:18px; letter-spacing:1px; color:#0f172a;">DESCRIPTION</span>
                 <div style="display:flex; gap:10px; align-items:center;">
                     <button id="lockToggleBtn" onclick="toggleLock()" style="border:none; cursor:pointer; background:#0f172a; color:#fff; font-size:12px; font-weight:900; padding:8px 16px; border-radius:20px; transition:0.2s; box-shadow:0 4px 10px rgba(0,0,0,0.1);">🔒 편집 자물쇠 풀기</button>
-                    <button onclick="showDynamicDescPanel(window.currentPrdPageNum)" style="border:none; background:transparent; font-size:24px; font-weight:900; color:#64748b; cursor:pointer; line-height:1; padding:0 5px; transition:0.2s; display:flex; align-items:center;" onmouseover="this.style.color='#0f172a'" onmouseout="this.style.color='#64748b'">×</button>
+                    <button onclick="showDynamicDescPanel(window.currentPrdPageNum)" style="border:none; background:transparent; font-size:24px; font-weight:900; color:#64748b; cursor:pointer; line-height:1; padding:0 5px; transition:0.2s; display:flex; align-items:center;" onmouseover="this.style.color='#0f172a'" onmouseout="this.style.color='#64748b'">\u00d7</button>
                 </div>
             </div>
             <div class="pdp-body" id="descContent"></div>
@@ -101,15 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 3. 새로고침 후 이전 활성화 상태 복원
+    // 3. 새로고침 후 이전 활성화 상태 복원 및 상시 디스크립션 로드
     const wasActive = localStorage.getItem('rofactory_desc_panel_active') === 'true';
-    if (wasActive) {
-        const panel = document.getElementById('pageDescPanel');
-        if (panel) {
-            panel.classList.add('active');
-            showDynamicDescPanel(window.currentPrdPageNum, true);
-        }
+    const panel = document.getElementById('pageDescPanel');
+    if (wasActive && panel) {
+        panel.classList.add('active');
     }
+    showDynamicDescPanel(window.currentPrdPageNum, true);
 });
 
 function getTargetKey() {
@@ -132,10 +130,7 @@ setInterval(() => {
     let currentKey = getTargetKey();
     if (currentKey !== window.lastObservedKey) {
         window.lastObservedKey = currentKey;
-        const panel = document.getElementById('pageDescPanel');
-        if (panel && panel.classList.contains('active')) {
-            showDynamicDescPanel(window.currentPrdPageNum, true);
-        }
+        showDynamicDescPanel(window.currentPrdPageNum, true);
     }
 }, 500);
 
@@ -146,18 +141,17 @@ async function showDynamicDescPanel(pageNum, silent = false) {
         localStorage.setItem('rofactory_desc_panel_active', panel.classList.contains('active') ? 'true' : 'false');
     }
 
-    if (panel.classList.contains('active')) {
-        const targetKey = getTargetKey();
-        const savedStateStr = localStorage.getItem('rofactory_marks_builder_p' + targetKey);
-        let savedStateObj = savedStateStr ? JSON.parse(savedStateStr) : null;
+    const targetKey = getTargetKey();
+    const savedStateStr = localStorage.getItem('rofactory_marks_builder_p' + targetKey);
+    let savedStateObj = savedStateStr ? JSON.parse(savedStateStr) : null;
 
-        if (savedStateObj && !Array.isArray(savedStateObj)) {
-            window.currentMarks = savedStateObj.marks || [];
-            window.pageTitle = savedStateObj.title || "";
-            window.pageOverview = savedStateObj.overview || "";
-            renderBuilderMarks();
-        } else {
-            document.getElementById('descContent').innerHTML = '<div style="text-align:center; padding:20px;">로딩 중...</div>';
+    if (savedStateObj && !Array.isArray(savedStateObj)) {
+        window.currentMarks = savedStateObj.marks || [];
+        window.pageTitle = savedStateObj.title || "";
+        window.pageOverview = savedStateObj.overview || "";
+        renderBuilderMarks();
+    } else {
+        document.getElementById('descContent').innerHTML = '<div style="text-align:center; padding:20px;">로딩 중...</div>';
             try {
                 const res = await fetch('RO_Factory_Detailed_Features.md?t=' + new Date().getTime());
                 if (!res.ok) throw new Error("Failed to load MD file");
@@ -253,9 +247,6 @@ async function showDynamicDescPanel(pageNum, silent = false) {
                 document.getElementById('descContent').innerHTML = '초기 파일 파싱 에러: ' + e.message;
             }
         }
-    } else {
-        document.querySelectorAll('.coach-mark-badge').forEach(e => e.remove());
-        hideTooltip();
     }
 }
 
