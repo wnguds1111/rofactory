@@ -352,7 +352,7 @@ function renderBuilderMarks() {
         let addSubBtn = (!window.isBuilderLocked && !isSubItem) ? `<button onclick="event.stopPropagation(); addSubMark('${m.id}')" style="margin-top:6px; background:none; border:1px dashed #cbd5e1; color:#64748b; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; cursor:pointer; transition:0.2s;" onmouseover="this.style.borderColor='#0ea5e9'; this.style.color='#0ea5e9'" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#64748b'">+ 하위 항목 추가</button>` : '';
 
         const badgeSize = isSubItem ? 'min-width:36px; height:22px; border-radius:6px; font-size:10px;' : 'min-width:26px; height:26px; border-radius:8px; font-size:12px;';
-        const badgeBg = isSubItem ? 'background:#f59e0b;' : 'background:#0ea5e9;';
+        const badgeBg = isSubItem ? 'background:#f59e0b;' : 'background:#ef4444;';
         const indent = isSubItem ? 'margin-left:28px;' : '';
 
         html += `<div class="md-line" onclick="scrollToBadge('${m.id}')" onmouseenter="highlightBadge('${m.id}')" onmouseleave="resetBadge('${m.id}')" style="position:relative; padding-right:30px; display:flex; align-items:flex-start; ${indent}">
