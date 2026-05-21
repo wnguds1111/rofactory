@@ -348,9 +348,7 @@ function renderBuilderMarks() {
             `<div class="mark-sub editable" contenteditable="true" onclick="event.stopPropagation()" onblur="updateMarkText('${m.id}', 'sub', this.innerText)" style="margin-top:4px;" placeholder="상세 설명 입력">${m.sub}</div>` :
             `<div class="mark-sub">${m.sub}</div>`;
 
-        const clickAction = m.selector ? `scrollToSelector('${m.selector.replace(/'/g, "\\'") }')` : '';
-
-        html += `<div class="md-line" onclick="${clickAction}" onmouseenter="highlightBadge('${m.id}')" onmouseleave="resetBadge('${m.id}')" style="position:relative; padding-right:30px; display:flex; align-items:flex-start;">
+        html += `<div class="md-line" onclick="scrollToBadge('${m.id}')" onmouseenter="highlightBadge('${m.id}')" onmouseleave="resetBadge('${m.id}')" style="position:relative; padding-right:30px; display:flex; align-items:flex-start;">
             <span style="background:#0ea5e9; color:#fff; min-width:26px; height:26px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:12px; margin-right:12px; margin-top:1px; flex-shrink:0;">${m.num}</span>
             <div style="flex:1; display:flex; flex-direction:column;">${titleHTML}${subHTML}</div>
             ${deleteBtn}
@@ -385,21 +383,11 @@ function updateMarkText(id, field, newText) {
     }
 }
 
-function scrollToSelector(selector) {
-    try {
-        const el = document.querySelector(selector);
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            // 하이라이트 효과
-            el.style.outline = '3px solid #0ea5e9';
-            el.style.outlineOffset = '4px';
-            el.style.transition = 'outline 0.3s';
-            setTimeout(() => {
-                el.style.outline = '';
-                el.style.outlineOffset = '';
-            }, 2000);
-        }
-    } catch (e) { /* invalid selector */ }
+function scrollToBadge(id) {
+    const badge = document.getElementById('coach-badge-' + id);
+    if (badge) {
+        badge.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 }
 
 function deleteMark(id) {
