@@ -8,7 +8,7 @@
  * 3. RO_Factory_Detailed_Features.md 파일에 기획 데이터 작성
  */
 
-window.currentPrdPageNum = 1; // 페이지 번호: 프로젝트별로 변경
+window.currentPrdPageNum = (typeof window.currentPrdPageNum !== 'undefined') ? window.currentPrdPageNum : 1; // 페이지 번호: 프로젝트별로 변경
 window.descModuleBasePath = '';
 const currentScriptEl = document.currentScript || document.querySelector('script[src*="desc-script.js"]');
 if (currentScriptEl) {

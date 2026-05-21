@@ -11,8 +11,8 @@
 .mark-title { font-size: 14px; font-weight: 900; color: #0f172a; margin-bottom: 4px; }
 .mark-sub { font-size: 13px; color: #64748b; line-height: 1.6; }
 
-.pdp-top-title { font-size: 24px; font-weight: 900; color: #0f172a; margin-bottom: 8px; transition: 0.2s; padding-bottom: 2px; }
-.pdp-top-overview { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; transition: 0.2s; }
+.pdp-top-title { font-size: 24px; font-weight: 900; color: #0f172a; margin-bottom: 4px; transition: 0.2s; padding-bottom: 2px; }
+.pdp-top-overview { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px solid #e2e8f0; transition: 0.2s; }
 
 .editable { border-bottom: 1px dashed transparent; }
 .editable:hover { border-bottom: 1px dashed #cbd5e1; }
