@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         panel.innerHTML = `
             <style>
                 .mark-title { font-size: 14px; font-weight: 800; color: #0f172a; margin-bottom: 3px; letter-spacing: -0.2px; }
-                .mark-sub { font-size: 12.5px; color: #64748b; line-height: 1.55; }
+                .mark-sub { font-size: 12.5px; color: #64748b; line-height: 1.55; white-space: pre-wrap; }
             </style>
             <div class="pdp-header">
                 <span style="font-weight:900; font-size:18px; letter-spacing:1px; color:#0f172a;">DESCRIPTION</span>
