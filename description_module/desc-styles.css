@@ -38,11 +38,38 @@
     font-size: 15px;
     border: 2px solid #fff;
     z-index: 99999;
-    pointer-events: none;
+    pointer-events: auto;
+    cursor: pointer;
     user-select: none;
     transition: 0.3s transform, 0.3s box-shadow;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-.coach-mark-badge.draggable { pointer-events: auto; cursor: grab; }
+.coach-mark-badge.draggable { cursor: grab; }
 .coach-mark-badge.draggable:active { cursor: grabbing; }
 .coach-mark-badge.pulsing { animation: ui-pulse 1.5s infinite; }
+
+/* Tooltip style */
+#coach-mark-tooltip {
+    position: absolute;
+    background: rgba(15, 23, 42, 0.95);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    z-index: 9999999;
+    pointer-events: none;
+    max-width: 300px;
+    display: none;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: opacity 0.2s, transform 0.2s;
+    opacity: 0;
+    transform: translateY(5px);
+}
+#coach-mark-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

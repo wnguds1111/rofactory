@@ -12,7 +12,105 @@ window.currentPrdPageNum = 1; // 페이지 번호: 프로젝트별로 변경
 window.currentMarks = [];
 window.pageTitle = "";
 window.pageOverview = "";
-window.isBuilderLocked = true;
+// 로컬 스토리지에 저장된 잠금 상태 로드 (기본값: 잠금 상태인 true)
+window.isBuilderLocked = localStorage.getItem('rofactory_desc_panel_locked') !== 'false';
+window.hasEditPermission = false;
+
+// 허용된 관리자 IP 목록 (사용자 IP 및 로컬/사설 네트워크 환경 포함)
+const ALLOWED_IPS = ['119.192.146.202', 'localhost', '127.0.0.1', '::1'];
+
+// 초기 권한 확인 및 스타일 처리
+(async function initPermission() {
+    // 일단 버튼을 기본적으로 보이지 않게 처리하는 스타일 동적 삽입
+    const styleEl = document.createElement('style');
+    styleEl.id = 'desc-edit-lock-style';
+    styleEl.innerHTML = '#lockToggleBtn { display: none !important; }';
+    document.head.appendChild(styleEl);
+
+    const hostname = window.location.hostname;
+    // 로컬 개발 환경 또는 사설 IP 대역 체크
+    const isLocal = hostname === 'localhost' || 
+                    hostname === '127.0.0.1' || 
+                    hostname === '' || 
+                    hostname.startsWith('192.168.') || 
+                    hostname.startsWith('10.') || 
+                    hostname.startsWith('172.');
+
+    if (isLocal) {
+        window.hasEditPermission = true;
+        if (styleEl.parentNode) styleEl.parentNode.removeChild(styleEl);
+        return;
+    }
+
+    try {
+        const res = await fetch('https://api.ipify.org?format=json');
+        if (res.ok) {
+            const data = await res.json();
+            if (ALLOWED_IPS.includes(data.ip)) {
+                window.hasEditPermission = true;
+                if (styleEl.parentNode) styleEl.parentNode.removeChild(styleEl);
+            }
+        }
+    } catch (e) {
+        console.error("IP check failed, defaulting to read-only mode:", e);
+    }
+})();
+
+// DOM 로드 완료 시 디스크립션 마크업 동적 주입 및 이전 활성화 상태 복원
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. 스타일시트 자동 추가 (HTML에 없으면 추가)
+    if (!document.querySelector('link[href*="desc-styles.css"]')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'description_module/desc-styles.css';
+        document.head.appendChild(link);
+    }
+
+    // 2. 디스크립션 버튼 및 패널이 없으면 자동 주입
+    if (!document.getElementById('pageDescPanel')) {
+        // (1) 버튼 주입
+        const btn = document.createElement('div');
+        btn.className = 'page-desc-btn';
+        btn.innerHTML = '💡 Description';
+        btn.onclick = function() {
+            showDynamicDescPanel(window.currentPrdPageNum);
+        };
+        document.body.appendChild(btn);
+
+        // (2) 패널 주입
+        const panel = document.createElement('div');
+        panel.className = 'page-desc-panel';
+        panel.id = 'pageDescPanel';
+        panel.innerHTML = `
+            <div class="pdp-header">
+                <span style="font-weight:900; font-size:18px; letter-spacing:1px; color:#0f172a;">DESCRIPTION</span>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <button id="lockToggleBtn" onclick="toggleLock()" style="border:none; cursor:pointer; background:#0f172a; color:#fff; font-size:12px; font-weight:900; padding:8px 16px; border-radius:20px; transition:0.2s; box-shadow:0 4px 10px rgba(0,0,0,0.1);">🔒 편집 자물쇠 풀기</button>
+                    <button onclick="showDynamicDescPanel(window.currentPrdPageNum)" style="border:none; background:transparent; font-size:24px; font-weight:900; color:#64748b; cursor:pointer; line-height:1; padding:0 5px; transition:0.2s; display:flex; align-items:center;" onmouseover="this.style.color='#0f172a'" onmouseout="this.style.color='#64748b'">×</button>
+                </div>
+            </div>
+            <div class="pdp-body" id="descContent"></div>
+        `;
+        document.body.appendChild(panel);
+
+        // (3) 툴팁 컨테이너 주입
+        if (!document.getElementById('coach-mark-tooltip')) {
+            const tooltip = document.createElement('div');
+            tooltip.id = 'coach-mark-tooltip';
+            document.body.appendChild(tooltip);
+        }
+    }
+
+    // 3. 새로고침 후 이전 활성화 상태 복원
+    const wasActive = localStorage.getItem('rofactory_desc_panel_active') === 'true';
+    if (wasActive) {
+        const panel = document.getElementById('pageDescPanel');
+        if (panel) {
+            panel.classList.add('active');
+            showDynamicDescPanel(window.currentPrdPageNum, true);
+        }
+    }
+});
 
 function getTargetKey() {
     let key = window.currentPrdPageNum.toString();
@@ -43,7 +141,10 @@ setInterval(() => {
 
 async function showDynamicDescPanel(pageNum, silent = false) {
     const panel = document.getElementById('pageDescPanel');
-    if (!silent) panel.classList.toggle('active');
+    if (!silent) {
+        panel.classList.toggle('active');
+        localStorage.setItem('rofactory_desc_panel_active', panel.classList.contains('active') ? 'true' : 'false');
+    }
 
     if (panel.classList.contains('active')) {
         const targetKey = getTargetKey();
@@ -154,6 +255,7 @@ async function showDynamicDescPanel(pageNum, silent = false) {
         }
     } else {
         document.querySelectorAll('.coach-mark-badge').forEach(e => e.remove());
+        hideTooltip();
     }
 }
 
@@ -184,6 +286,17 @@ function renderBuilderMarks() {
         mark.style.top = m.top + 'px';
         mark.style.left = m.left + 'px';
         if (!window.isBuilderLocked) mark.classList.add('draggable');
+
+        // 마우스 호버 시 툴팁 및 하이라이트 이벤트 바인딩
+        mark.addEventListener('mouseenter', (e) => {
+            showTooltip(e, m);
+            highlightBadge(m.id);
+        });
+        mark.addEventListener('mouseleave', () => {
+            hideTooltip(m.id);
+            resetBadge(m.id);
+        });
+
         document.body.appendChild(mark);
     });
 
@@ -312,44 +425,78 @@ function resetBadge(id) {
     }
 }
 
-function toggleLock() {
-    if (window.isBuilderLocked) {
-        if (!document.getElementById('pwdLayer')) {
-            const layerHtml = `<div id="pwdLayer" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:9999999; background:rgba(15,23,42,0.8); display:flex; align-items:center; justify-content:center; backdrop-filter:blur(3px);">
-                <div style="background:#fff; padding:35px 30px; border-radius:20px; width:340px; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.3);">
-                    <h3 style="margin-top:0; color:#0f172a; font-size:20px; font-weight:900; margin-bottom:25px;">🔒 관리자 인증</h3>
-                    <input type="password" id="pwdInput" style="width:100%; padding:14px; border:2px solid #e2e8f0; border-radius:12px; margin-bottom:25px; outline:none; text-align:center; letter-spacing:10px; font-size:24px; font-weight:900; box-sizing:border-box;" maxlength="4" placeholder="****" onkeyup="if(event.key==='Enter') window.checkPwdLayer()">
-                    <div style="display:flex; gap:10px;">
-                        <button onclick="document.getElementById('pwdLayer').style.display='none'" style="flex:1; padding:14px; border:none; border-radius:12px; background:#f1f5f9; color:#475569; font-weight:900; font-size:15px; cursor:pointer;">이전</button>
-                        <button onclick="window.checkPwdLayer()" style="flex:1; padding:14px; border:none; border-radius:12px; background:#0ea5e9; color:#fff; font-weight:900; font-size:15px; cursor:pointer;">확인</button>
-                    </div>
-                </div>
-            </div>`;
-            document.body.insertAdjacentHTML('beforeend', layerHtml);
-        }
-        document.getElementById('pwdLayer').style.display = 'flex';
-        document.getElementById('pwdInput').value = '';
-        setTimeout(() => document.getElementById('pwdInput').focus(), 100);
+function showTooltip(e, m) {
+    const badge = e.currentTarget;
+    const rect = badge.getBoundingClientRect();
+    const tooltip = document.getElementById('coach-mark-tooltip');
+    if (!tooltip) return;
 
-        window.checkPwdLayer = function () {
-            const pwd = document.getElementById('pwdInput').value;
-            if (pwd === "1111") {
-                document.getElementById('pwdLayer').style.display = 'none';
-                window.isBuilderLocked = false;
-                renderBuilderMarks();
-            } else {
-                const input = document.getElementById('pwdInput');
-                input.style.borderColor = '#ef4444';
-                input.style.transform = 'translateX(-5px)';
-                setTimeout(() => input.style.transform = 'translateX(5px)', 50);
-                setTimeout(() => input.style.transform = 'translateX(-5px)', 100);
-                setTimeout(() => { input.style.transform = 'translateX(0)'; input.value = ''; input.focus(); }, 150);
-            }
-        };
-    } else {
-        window.isBuilderLocked = true;
-        renderBuilderMarks();
+    tooltip.innerHTML = `
+        <div style="font-weight:900; font-size:14px; color:#38bdf8; margin-bottom:4px;">${m.num}. ${m.title}</div>
+        <div style="color:#e2e8f0; font-size:12px; line-height:1.5;">${m.sub}</div>
+    `;
+
+    tooltip.style.display = 'block';
+
+    const tooltipRect = tooltip.getBoundingClientRect();
+    
+    // 뱃지 위에 툴팁 배치
+    let top = window.scrollY + rect.top - tooltipRect.height - 10;
+    let left = window.scrollX + rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+
+    // 화면 밖으로 벗어나는 경우 하단 배치 등 예외 처리
+    if (rect.top - tooltipRect.height - 10 < 0) {
+        top = window.scrollY + rect.bottom + 10;
     }
+    if (left < window.scrollX) {
+        left = window.scrollX + 10;
+    } else if (left + tooltipRect.width > window.scrollX + window.innerWidth) {
+        left = window.scrollX + window.innerWidth - tooltipRect.width - 10;
+    }
+
+    tooltip.style.top = top + 'px';
+    tooltip.style.left = left + 'px';
+
+    tooltip.getBoundingClientRect();
+    tooltip.classList.add('visible');
+
+    // 패널 내 매칭되는 리스트 아이템 하이라이트
+    const line = document.querySelector(`.md-line[onmouseenter*="${m.id}"]`);
+    if (line) {
+        line.style.background = '#f8fafc';
+        line.style.borderColor = '#e2e8f0';
+    }
+}
+
+function hideTooltip(id) {
+    const tooltip = document.getElementById('coach-mark-tooltip');
+    if (tooltip) {
+        tooltip.classList.remove('visible');
+        tooltip.style.display = 'none';
+    }
+
+    if (id) {
+        const line = document.querySelector(`.md-line[onmouseenter*="${id}"]`);
+        if (line) {
+            line.style.background = '';
+            line.style.borderColor = 'transparent';
+        }
+    } else {
+        document.querySelectorAll('.md-line').forEach(line => {
+            line.style.background = '';
+            line.style.borderColor = 'transparent';
+        });
+    }
+}
+
+function toggleLock() {
+    if (!window.hasEditPermission) {
+        alert("편집 권한이 없습니다. (지정된 관리자 IP에서만 편집할 수 있습니다)");
+        return;
+    }
+    window.isBuilderLocked = !window.isBuilderLocked;
+    localStorage.setItem('rofactory_desc_panel_locked', window.isBuilderLocked ? 'true' : 'false');
+    renderBuilderMarks();
 }
 
 // Drag support for badges
