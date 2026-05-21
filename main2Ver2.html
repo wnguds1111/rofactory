@@ -187,7 +187,7 @@
         }
         .hero-content p {
             font-size: 14px; color: #ffffff;
-            line-height: 1.5; margin-bottom: 80px;
+            line-height: 1.5; margin-bottom: 24px;
             opacity: 0.7;
         }
         /* 히어로 버튼 (withgo 스타일) */
@@ -207,35 +207,38 @@
         }
         /* ═══════ 썸네일 네비 (퀵 카드 + 슬라이드 컨트롤 통합) ═══════ */
         .hero-thumb-nav {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
+            position: relative;
             z-index: 10;
             display: flex;
-            gap: 8px;
-            padding: 20px 24px;
+            gap: 12px;
+            padding: 16px 0 0;
+            margin-top: 4px;
         }
         .hero-thumb-item {
             flex: 1 0 0;
             display: flex;
             flex-direction: column;
             padding: 0px;
-            background: rgba(15, 20, 30, 0.55);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 10px;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
             cursor: pointer;
             text-decoration: none;
             color: #fff;
-            transition: background 0.25s, border-color 0.25s;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.15), 0 8px 10px -6px rgba(15, 23, 42, 0.15);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
         }
         .hero-thumb-item:hover {
-            background: rgba(15, 20, 30, 0.72);
-            border-color: rgba(255,255,255,0.22);
+            background: #0f172a;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.25), 0 10px 10px -5px rgba(15, 23, 42, 0.25);
+            border-color: rgba(255, 255, 255, 0.15);
         }
         .hero-thumb-item.active {
-            background: rgba(15, 20, 30, 0.72);
-            border-color: rgba(255,255,255,0.35);
+            background: #0f172a;
+            border-color: #ef4444;
+            box-shadow: 0 0 0 2px #ef4444;
         }
         /* 로딩바 */
         .hero-thumb-bar-wrap {
@@ -246,9 +249,13 @@
         }
         .hero-thumb-bar {
             height: 100%; width: 0;
-            background: #025DD0;
+            background: #ef4444;
             border-radius: 3px;
             /* JS로 transition 제어 */
+        }
+        /* ═══════ 모바일 Dot 네비 ═══════ */
+        .hero-dot-nav {
+            display: none; /* 기본 숨김 */
         }
         /* 아이콘 + 텍스트 row */
         .hero-thumb-body {
@@ -554,6 +561,7 @@
             .hero-content p { font-size: 14px; }
         }
         @media (max-width:768px) {
+            .page-body { padding-top: 30px; }
             .quick-grid { grid-template-columns:1fr; }
             .hero-content h1 { font-size: 20px; }
             .hero-content p { font-size: 14px; }
@@ -562,6 +570,31 @@
             .gnjoy-logo img { height: 16px; }
             .custom-steps-container { flex-direction: column; }
             .custom-step-card { flex: auto !important; width: 100%; border-radius: 16px; padding: 30px 20px !important; margin-bottom: 20px; }
+            /* 모바일: 4탭 숨기고 dot 네비 표시 */
+            .hero-thumb-nav { display: none !important; }
+            .hero-dot-nav {
+                display: flex;
+                position: absolute;
+                bottom: 14px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10;
+                gap: 8px;
+                align-items: center;
+            }
+            .hero-dot {
+                width: 8px; height: 8px;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.4);
+                border: none;
+                cursor: pointer;
+                padding: 0;
+                transition: background 0.25s, transform 0.25s;
+            }
+            .hero-dot.active {
+                background: #fff;
+                transform: scale(1.3);
+            }
         }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -579,102 +612,118 @@
             <section class="hero-section">
                 <div class="hero-slider" id="heroSlider">
 
-                    <!-- Slide 1 -->
+                    <!-- Slide 1: 작품 등록 -->
                     <div class="hero-slide active">
+                        <a href="register.html" style="position:absolute;inset:0;z-index:1;"></a>
                         <div class="hero-slide-bg hero-slide-bg-1"></div>
                         <div class="hero-overlay"></div>
-                        <div class="hero-content">
-                            <h1 data-en="Start a new adventure<br>with your own footprints" data-ko="나만의 발자국으로<br>새로운 모험을 시작하세요">나만의 발자국으로<br>새로운 모험을 시작하세요</h1>
-                            <p data-en="Create unique footprint assets and sell them on the global market." data-ko="나만의 발자국 에셋을 만들고<br>글로벌 마켓에서 판매하세요.">나만의 발자국 에셋을 만들고<br>글로벌 마켓에서 판매하세요.</p>
+                        <div class="hero-content" style="z-index:2;">
+                            <h1 data-en="Create your own footprints<br>and start selling today" data-ko="나만의 발자국을 만들고<br>지금 바로 등록해보세요">나만의 발자국을 만들고<br>지금 바로 등록해보세요</h1>
+                            <p data-en="Upload your .foot files and register your asset on the global market." data-ko="UGC 편집툴로 만든 에셋 파일을<br>손쉽게 마켓에 등록할 수 있습니다.">UGC 편집툴로 만든 에셋 파일을<br>손쉽게 마켓에 등록할 수 있습니다.</p>
+                            <a href="register.html" class="btn-hero-outline" style="position:relative; z-index:10;" data-ko="등록하러 가기 &rarr;" data-en="Register &rarr;">등록하러 가기 &rarr;</a>
                         </div>
                     </div>
 
-                    <!-- Slide 2 -->
+                    <!-- Slide 2: 마이 스튜디오 -->
                     <div class="hero-slide">
+                        <a href="studio_myworks.html" style="position:absolute;inset:0;z-index:1;"></a>
                         <div class="hero-slide-bg hero-slide-bg-2"></div>
                         <div class="hero-overlay"></div>
-                        <div class="hero-content">
-                            <h1 data-en="Discover unique footprints<br>from creators worldwide" data-ko="전 세계 크리에이터의<br>발자국을 만나보세요">전 세계 크리에이터의<br>발자국을 만나보세요</h1>
-                            <p data-en="Browse and purchase diverse styles of footprint assets." data-ko="다양한 스타일의 발자국 에셋을<br>자유롭게 구매하세요.">다양한 스타일의 발자국 에셋을<br>자유롭게 구매하세요.</p>
+                        <div class="hero-content" style="z-index:2;">
+                            <h1 data-en="Manage all your works<br>in one place" data-ko="내 모든 작품을<br>한 곳에서 관리하세요">내 모든 작품을<br>한 곳에서 관리하세요</h1>
+                            <p data-en="Track registration status, conversion progress, and market listings at a glance." data-ko="등록 현황부터 변환 진행, 마켓 노출까지<br>마이 스튜디오에서 한눈에 확인하세요.">등록 현황부터 변환 진행, 마켓 노출까지<br>마이 스튜디오에서 한눈에 확인하세요.</p>
+                            <a href="studio_myworks.html" class="btn-hero-outline" style="position:relative; z-index:10;" data-ko="마이 스튜디오 &rarr;" data-en="My Studio &rarr;">마이 스튜디오 &rarr;</a>
                         </div>
                     </div>
 
-                    <!-- Slide 3 -->
+                    <!-- Slide 3: RO FACTORY 소개 -->
                     <div class="hero-slide">
+                        <a href="about.html" style="position:absolute;inset:0;z-index:1;"></a>
                         <div class="hero-slide-bg hero-slide-bg-3"></div>
                         <div class="hero-overlay"></div>
-                        <div class="hero-content">
-                            <h1 data-en="Manage your works<br>and track your earnings" data-ko="내 작품을 관리하고<br>수익을 확인하세요">내 작품을 관리하고<br>수익을 확인하세요</h1>
-                            <p data-en="Check registration status, conversion progress, and sales all in one place." data-ko="등록 현황과 변환 진행, 판매 수익을<br>한 곳에서 확인하세요.">등록 현황과 변환 진행, 판매 수익을<br>한 곳에서 확인하세요.</p>
+                        <div class="hero-content" style="z-index:2;">
+                            <h1 data-en="What is RO FACTORY?<br>A platform built for creators" data-ko="RO FACTORY는 무엇인가요?<br>크리에이터를 위한 플랫폼">RO FACTORY는 무엇인가요?<br>크리에이터를 위한 플랫폼</h1>
+                            <p data-en="Learn everything about RO FACTORY — from creation to global distribution." data-ko="발자국 에셋 제작부터<br>글로벌 마켓 등록까지 모든 것을 안내합니다.">발자국 에셋 제작부터<br>글로벌 마켓 등록까지 모든 것을 안내합니다.</p>
+                            <a href="about.html" class="btn-hero-outline" style="position:relative; z-index:10;" data-ko="자세히 알아보기 &rarr;" data-en="Learn More &rarr;">자세히 알아보기 &rarr;</a>
                         </div>
                     </div>
 
-                    <!-- Slide 4 -->
+                    <!-- Slide 4: 마켓 -->
                     <div class="hero-slide">
+                        <a href="market.html" style="position:absolute;inset:0;z-index:1;"></a>
                         <div class="hero-slide-bg hero-slide-bg-4"></div>
                         <div class="hero-overlay"></div>
-                        <div class="hero-content">
-                            <h1 data-en="Manage your works<br>and track your earnings" data-ko="내 작품을 관리하고<br>수익을 확인하세요">내 작품을 관리하고<br>수익을 확인하세요</h1>
-                            <p data-en="Check registration status, conversion progress, and sales all in one place." data-ko="등록 현황과 변환 진행, 판매 수익을<br>한 곳에서 확인하세요.">등록 현황과 변환 진행, 판매 수익을<br>한 곳에서 확인하세요.</p>
+                        <div class="hero-content" style="z-index:2;">
+                            <h1 data-en="Discover unique footprints<br>from creators worldwide" data-ko="전 세계 크리에이터의<br>발자국을 만나보세요">전 세계 크리에이터의<br>발자국을 만나보세요</h1>
+                            <p data-en="Browse BEST &amp; NEW footprint assets on the global marketplace." data-ko="BEST &amp; NEW 발자국 에셋을<br>자유롭게 구매하고 인벤토리를 채워보세요.">BEST &amp; NEW 발자국 에셋을<br>자유롭게 구매하고 인벤토리를 채워보세요.</p>
+                            <a href="market.html" class="btn-hero-outline" style="position:relative; z-index:10;" data-ko="마켓 구경하기 &rarr;" data-en="Browse Market &rarr;">마켓 구경하기 &rarr;</a>
                         </div>
                     </div>
 
-                    <!-- 썸네일 네비 (슬라이드 컨트롤 + 퀵 링크 통합) -->
-                    <div class="hero-thumb-nav">
+                    <!-- 모바일 전용 Dot 네비 -->
+                    <div class="hero-dot-nav" id="heroDotNav">
+                        <button class="hero-dot active" data-dot="0"></button>
+                        <button class="hero-dot" data-dot="1"></button>
+                        <button class="hero-dot" data-dot="2"></button>
+                        <button class="hero-dot" data-dot="3"></button>
+                    </div>
 
-                        <a href="register.html" class="hero-thumb-item active" data-slide="0">
-                            <div class="hero-thumb-bar-wrap">
-                                <div class="hero-thumb-bar" id="thumbBar0"></div>
-                            </div>
-                            <div class="hero-thumb-body">
-                                <div class="hero-thumb-icon" style="background:rgba(230,57,70,0.25);">🪄</div>
-                                <div class="hero-thumb-text">
-                                    <strong data-ko="작품 등록" data-en="Register Asset">작품 등록</strong>
-                                    <span data-ko="나만의 에셋을 등록하세요" data-en="Register your unique asset">나만의 에셋을 등록하세요</span>
-                                </div>
-                            </div>
-                        </a>
+                </div>
 
-                        <a href="studio_myworks.html" class="hero-thumb-item" data-slide="1">
-                            <div class="hero-thumb-bar-wrap">
-                                <div class="hero-thumb-bar" id="thumbBar1"></div>
-                            </div>
-                            <div class="hero-thumb-body">
-                                <div class="hero-thumb-icon" style="background:rgba(16,185,129,0.25);">📋</div>
-                                <div class="hero-thumb-text">
-                                    <strong data-ko="마이 스튜디오" data-en="My Studio">마이 스튜디오</strong>
-                                    <span data-ko="등록 현황과 수익 관리" data-en="Manage assets and sales">등록 현황과 수익 관리</span>
-                                </div>
-                            </div>
-                        </a>
+                <!-- 썸네일 네비 (슬라이드 컨트롤 + 퀵 링크 통합) -->
+                <div class="hero-thumb-nav">
 
-                        <a href="about.html" class="hero-thumb-item" data-slide="2">
-                            <div class="hero-thumb-bar-wrap">
-                                <div class="hero-thumb-bar" id="thumbBar2"></div>
+                    <a href="register.html" class="hero-thumb-item active" data-slide="0">
+                        <div class="hero-thumb-bar-wrap">
+                            <div class="hero-thumb-bar" id="thumbBar0"></div>
+                        </div>
+                        <div class="hero-thumb-body">
+                            <div class="hero-thumb-icon" style="background:rgba(230,57,70,0.25);">🪄</div>
+                            <div class="hero-thumb-text">
+                                <strong data-ko="작품 등록" data-en="Register Asset">작품 등록</strong>
+                                <span data-ko="나만의 에셋을 등록하세요" data-en="Register your unique asset">나만의 에셋을 등록하세요</span>
                             </div>
-                            <div class="hero-thumb-body">
-                                <div class="hero-thumb-icon" style="background:rgba(234,179,8,0.25);">📖</div>
-                                <div class="hero-thumb-text">
-                                    <strong data-ko="RO FACTORY 란?" data-en="About RO FACTORY">RO FACTORY 란?</strong>
-                                    <span data-ko="플랫폼 소개 안내" data-en="Platform guide and intro">플랫폼 소개 안내</span>
-                                </div>
-                            </div>
-                        </a>
+                        </div>
+                    </a>
 
-                        <a href="market.html" class="hero-thumb-item" data-slide="3">
-                            <div class="hero-thumb-bar-wrap">
-                                <div class="hero-thumb-bar" id="thumbBar3"></div>
+                    <a href="studio_myworks.html" class="hero-thumb-item" data-slide="1">
+                        <div class="hero-thumb-bar-wrap">
+                            <div class="hero-thumb-bar" id="thumbBar1"></div>
+                        </div>
+                        <div class="hero-thumb-body">
+                            <div class="hero-thumb-icon" style="background:rgba(16,185,129,0.25);">📋</div>
+                            <div class="hero-thumb-text">
+                                <strong data-ko="마이 스튜디오" data-en="My Studio">마이 스튜디오</strong>
+                                <span data-ko="등록 현황과 수익 관리" data-en="Manage assets and sales">등록 현황과 수익 관리</span>
                             </div>
-                            <div class="hero-thumb-body">
-                                <div class="hero-thumb-icon" style="background:rgba(59,130,246,0.25);">🛍️</div>
-                                <div class="hero-thumb-text">
-                                    <strong data-ko="마켓" data-en="Market">마켓</strong>
-                                    <span data-ko="모험가들의 빛나는 거래소" data-en="The global marketplace">모험가들의 빛나는 거래소</span>
-                                </div>
-                            </div>
-                        </a>
+                        </div>
+                    </a>
 
-                    </div><!-- /hero-thumb-nav -->
+                    <a href="about.html" class="hero-thumb-item" data-slide="2">
+                        <div class="hero-thumb-bar-wrap">
+                            <div class="hero-thumb-bar" id="thumbBar2"></div>
+                        </div>
+                        <div class="hero-thumb-body">
+                            <div class="hero-thumb-icon" style="background:rgba(234,179,8,0.25);">📖</div>
+                            <div class="hero-thumb-text">
+                                <strong data-ko="RO FACTORY 란?" data-en="About RO FACTORY">RO FACTORY 란?</strong>
+                                <span data-ko="플랫폼 소개 안내" data-en="Platform guide and intro">플랫폼 소개 안내</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="market.html" class="hero-thumb-item" data-slide="3">
+                        <div class="hero-thumb-bar-wrap">
+                            <div class="hero-thumb-bar" id="thumbBar3"></div>
+                        </div>
+                        <div class="hero-thumb-body">
+                            <div class="hero-thumb-icon" style="background:rgba(59,130,246,0.25);">🛍️</div>
+                            <div class="hero-thumb-text">
+                                <strong data-ko="마켓" data-en="Market">마켓</strong>
+                                <span data-ko="모험가들의 빛나는 거래소" data-en="The global marketplace">모험가들의 빛나는 거래소</span>
+                            </div>
+                        </div>
+                    </a>
 
                 </div>
             </section>
@@ -885,6 +934,11 @@
                 // 다음 슬라이드가 있는 썸네일 bar만 시작
                 startBar(next);
 
+                // 모바일 Dot sync
+                document.querySelectorAll('.hero-dot').forEach(function(d) { d.classList.remove('active'); });
+                var activeDot = document.querySelector('.hero-dot[data-dot="' + next + '"]');
+                if (activeDot) activeDot.classList.add('active');
+
                 cur = next;
             }
 
@@ -896,23 +950,24 @@
                 }, INTERVAL);
             }
 
-            /* 썸네일 클릭 */
+            /* 썸네일 클릭: 슬라이드 전환만, 페이지 이동 없음 */
             thumbs.forEach(function(t, i) {
                 t.addEventListener('click', function(e) {
-                    e.preventDefault(); // 링크 즉시 이동 방지
+                    e.preventDefault(); // 링크 이동 항상 차단
                     var slideIdx = parseInt(t.getAttribute('data-slide'));
-                    var href = t.getAttribute('href');
-
-                    // 슬라이드 전환 + 로딩바 리셋
                     goTo(slideIdx);
                     startAuto();
+                    // 페이지 이동은 슬라이드 안의 btn-hero-outline 버튼으로만 가능
+                });
+            });
 
-                    // 링크가 있으면 300ms 후 이동 (슬라이드 전환 보여주고 이동)
-                    if (href && href !== '#') {
-                        setTimeout(function() {
-                            window.location.href = href;
-                        }, 300);
-                    }
+            /* 모바일 Dot 클릭 */
+            var dots = document.querySelectorAll('.hero-dot');
+            dots.forEach(function(dot) {
+                dot.addEventListener('click', function() {
+                    var idx = parseInt(dot.getAttribute('data-dot'));
+                    goTo(idx);
+                    startAuto();
                 });
             });
 
@@ -936,5 +991,9 @@
             els.forEach(function(el){ observer.observe(el); });
         })();
     </script>
+    <!-- PRD DESCRIPTION INJECTION -->
+    <script>window.currentPrdPageNum = 0;</script>
+    <script src="description_module/desc-script.js"></script>
+    <!-- // PRD DESCRIPTION INJECTION -->
 </body>
 </html>

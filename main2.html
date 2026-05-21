@@ -167,7 +167,7 @@
         /* 슬라이드 콘텐츠 */
         .hero-content {
             position: absolute;
-            top: 42%; left: 60px;
+            top: 50%; left: 60px;
             transform: translateY(-50%);
             z-index: 2; max-width: 520px;
         }
@@ -210,35 +210,38 @@
         }
         /* ═══════ 썸네일 네비 (퀵 카드 + 슬라이드 컨트롤 통합) ═══════ */
         .hero-thumb-nav {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
+            position: relative;
             z-index: 10;
             display: flex;
-            gap: 8px;
-            padding: 20px 24px;
+            gap: 12px;
+            padding: 16px 0 0;
+            margin-top: 4px;
         }
         .hero-thumb-item {
             flex: 1 0 0;
             display: flex;
             flex-direction: column;
             padding: 0px;
-            background: rgba(15, 20, 30, 0.55);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 10px;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
             cursor: pointer;
             text-decoration: none;
             color: #fff;
-            transition: background 0.25s, border-color 0.25s;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.15), 0 8px 10px -6px rgba(15, 23, 42, 0.15);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
         }
         .hero-thumb-item:hover {
-            background: rgba(15, 20, 30, 0.72);
-            border-color: rgba(255,255,255,0.22);
+            background: #0f172a;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.25), 0 10px 10px -5px rgba(15, 23, 42, 0.25);
+            border-color: rgba(255, 255, 255, 0.15);
         }
         .hero-thumb-item.active {
-            background: rgba(15, 20, 30, 0.72);
-            border-color: rgba(255,255,255,0.35);
+            background: #0f172a;
+            border-color: #ef4444;
+            box-shadow: 0 0 0 2px #ef4444;
         }
         /* 로딩바 */
         .hero-thumb-bar-wrap {
@@ -249,7 +252,7 @@
         }
         .hero-thumb-bar {
             height: 100%; width: 0;
-            background: #025DD0;
+            background: #ef4444;
             border-radius: 3px;
             /* JS로 transition 제어 */
         }
@@ -660,63 +663,6 @@
                         </div>
                     </div>
 
-                    <!-- 썸네일 네비 (슬라이드 컨트롤 + 퀵 링크 통합) -->
-                    <div class="hero-thumb-nav">
-
-                        <a href="register.html" class="hero-thumb-item active" data-slide="0">
-                            <div class="hero-thumb-bar-wrap">
-                                <div class="hero-thumb-bar" id="thumbBar0"></div>
-                            </div>
-                            <div class="hero-thumb-body">
-                                <div class="hero-thumb-icon" style="background:rgba(230,57,70,0.25);">🪄</div>
-                                <div class="hero-thumb-text">
-                                    <strong data-ko="작품 등록" data-en="Register Asset">작품 등록</strong>
-                                    <span data-ko="나만의 에셋을 등록하세요" data-en="Register your unique asset">나만의 에셋을 등록하세요</span>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="studio_myworks.html" class="hero-thumb-item" data-slide="1">
-                            <div class="hero-thumb-bar-wrap">
-                                <div class="hero-thumb-bar" id="thumbBar1"></div>
-                            </div>
-                            <div class="hero-thumb-body">
-                                <div class="hero-thumb-icon" style="background:rgba(16,185,129,0.25);">📋</div>
-                                <div class="hero-thumb-text">
-                                    <strong data-ko="마이 스튜디오" data-en="My Studio">마이 스튜디오</strong>
-                                    <span data-ko="등록 현황과 수익 관리" data-en="Manage assets and sales">등록 현황과 수익 관리</span>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="about.html" class="hero-thumb-item" data-slide="2">
-                            <div class="hero-thumb-bar-wrap">
-                                <div class="hero-thumb-bar" id="thumbBar2"></div>
-                            </div>
-                            <div class="hero-thumb-body">
-                                <div class="hero-thumb-icon" style="background:rgba(234,179,8,0.25);">📖</div>
-                                <div class="hero-thumb-text">
-                                    <strong data-ko="RO FACTORY 란?" data-en="About RO FACTORY">RO FACTORY 란?</strong>
-                                    <span data-ko="플랫폼 소개 안내" data-en="Platform guide and intro">플랫폼 소개 안내</span>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="market.html" class="hero-thumb-item" data-slide="3">
-                            <div class="hero-thumb-bar-wrap">
-                                <div class="hero-thumb-bar" id="thumbBar3"></div>
-                            </div>
-                            <div class="hero-thumb-body">
-                                <div class="hero-thumb-icon" style="background:rgba(59,130,246,0.25);">🛍️</div>
-                                <div class="hero-thumb-text">
-                                    <strong data-ko="마켓" data-en="Market">마켓</strong>
-                                    <span data-ko="모험가들의 빛나는 거래소" data-en="The global marketplace">모험가들의 빛나는 거래소</span>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div><!-- /hero-thumb-nav -->
-
                     <!-- 모바일 전용 Dot 네비 -->
                     <div class="hero-dot-nav" id="heroDotNav">
                         <button class="hero-dot active" data-dot="0"></button>
@@ -726,6 +672,63 @@
                     </div>
 
                 </div>
+
+                <!-- 썸네일 네비 (슬라이드 컨트롤 + 퀵 링크 통합) -->
+                <div class="hero-thumb-nav">
+
+                    <a href="register.html" class="hero-thumb-item active" data-slide="0">
+                        <div class="hero-thumb-bar-wrap">
+                            <div class="hero-thumb-bar" id="thumbBar0"></div>
+                        </div>
+                        <div class="hero-thumb-body">
+                            <div class="hero-thumb-icon" style="background:rgba(230,57,70,0.25);">🪄</div>
+                            <div class="hero-thumb-text">
+                                <strong data-ko="작품 등록" data-en="Register Asset">작품 등록</strong>
+                                <span data-ko="나만의 에셋을 등록하세요" data-en="Register your unique asset">나만의 에셋을 등록하세요</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="studio_myworks.html" class="hero-thumb-item" data-slide="1">
+                        <div class="hero-thumb-bar-wrap">
+                            <div class="hero-thumb-bar" id="thumbBar1"></div>
+                        </div>
+                        <div class="hero-thumb-body">
+                            <div class="hero-thumb-icon" style="background:rgba(16,185,129,0.25);">📋</div>
+                            <div class="hero-thumb-text">
+                                <strong data-ko="마이 스튜디오" data-en="My Studio">마이 스튜디오</strong>
+                                <span data-ko="등록 현황과 수익 관리" data-en="Manage assets and sales">등록 현황과 수익 관리</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="about.html" class="hero-thumb-item" data-slide="2">
+                        <div class="hero-thumb-bar-wrap">
+                            <div class="hero-thumb-bar" id="thumbBar2"></div>
+                        </div>
+                        <div class="hero-thumb-body">
+                            <div class="hero-thumb-icon" style="background:rgba(234,179,8,0.25);">📖</div>
+                            <div class="hero-thumb-text">
+                                <strong data-ko="RO FACTORY 란?" data-en="About RO FACTORY">RO FACTORY 란?</strong>
+                                <span data-ko="플랫폼 소개 안내" data-en="Platform guide and intro">플랫폼 소개 안내</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="market.html" class="hero-thumb-item" data-slide="3">
+                        <div class="hero-thumb-bar-wrap">
+                            <div class="hero-thumb-bar" id="thumbBar3"></div>
+                        </div>
+                        <div class="hero-thumb-body">
+                            <div class="hero-thumb-icon" style="background:rgba(59,130,246,0.25);">🛍️</div>
+                            <div class="hero-thumb-text">
+                                <strong data-ko="마켓" data-en="Market">마켓</strong>
+                                <span data-ko="모험가들의 빛나는 거래소" data-en="The global marketplace">모험가들의 빛나는 거래소</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </div><!-- /hero-thumb-nav -->
             </section>
 
             <!-- 이달의 베스트 -->
