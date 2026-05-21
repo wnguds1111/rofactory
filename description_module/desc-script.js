@@ -9,6 +9,15 @@
  */
 
 window.currentPrdPageNum = 1; // 페이지 번호: 프로젝트별로 변경
+window.descModuleBasePath = '';
+const currentScriptEl = document.currentScript || document.querySelector('script[src*="desc-script.js"]');
+if (currentScriptEl) {
+    const src = currentScriptEl.getAttribute('src');
+    const idx = src.indexOf('description_module/');
+    if (idx !== -1) {
+        window.descModuleBasePath = src.substring(0, idx);
+    }
+}
 window.currentMarks = [];
 window.pageTitle = "";
 window.pageOverview = "";
@@ -62,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!document.querySelector('link[href*="desc-styles.css"]')) {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = 'description_module/desc-styles.css';
+        link.href = window.descModuleBasePath + 'description_module/desc-styles.css';
         document.head.appendChild(link);
     }
 
@@ -153,7 +162,7 @@ async function showDynamicDescPanel(pageNum, silent = false) {
     } else {
         document.getElementById('descContent').innerHTML = '<div style="text-align:center; padding:20px;">로딩 중...</div>';
             try {
-                const res = await fetch('RO_Factory_Detailed_Features.md?t=' + new Date().getTime());
+                const res = await fetch(window.descModuleBasePath + 'RO_Factory_Detailed_Features.md?t=' + new Date().getTime());
                 if (!res.ok) throw new Error("Failed to load MD file");
                 const text = await res.text();
 
