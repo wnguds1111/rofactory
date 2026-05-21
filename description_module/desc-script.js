@@ -244,7 +244,8 @@ async function showDynamicDescPanel(pageNum, silent = false) {
                             sub: subStr,
                             top: top,
                             left: left,
-                            link: link
+                            link: link,
+                            selector: selector
                         });
                     }
                 });
@@ -253,7 +254,11 @@ async function showDynamicDescPanel(pageNum, silent = false) {
                 renderBuilderMarks();
             } catch (e) {
                 console.error(e);
-                document.getElementById('descContent').innerHTML = '초기 파일 파싱 에러: ' + e.message;
+                let errMsg = e.message;
+                if (window.location.protocol === 'file:') {
+                    errMsg = "로컬 파일(file://) 실행 환경에서는 브라우저 보안 정책(CORS)으로 인해 기획서 마크다운 파일(RO_Factory_Detailed_Features.md)을 직접 불러올 수 없습니다. VS Code의 Live Server 등의 로컬 웹 서버를 사용하시거나, 빌더 모드에서 수정한 뒤 브라우저 로컬 스토리지를 이용해 주세요.";
+                }
+                document.getElementById('descContent').innerHTML = '<div style="padding:15px; color:#ef4444; font-size:12px; line-height:1.6; word-break:break-all;">초기 파일 로드 에러: ' + errMsg + '</div>';
             }
         }
     }
@@ -268,6 +273,27 @@ function saveBuilderMarks(re_render = true) {
     localStorage.setItem('rofactory_marks_builder_p' + getTargetKey(), JSON.stringify(obj));
     if (re_render) renderBuilderMarks();
 }
+
+window.copyMarkdownText = function() {
+    const targetKey = getTargetKey();
+    let md = `## PAGE ${targetKey}: ${window.pageTitle || '페이지 제목'}\n`;
+    md += `${window.pageOverview ? window.pageOverview.trim() : '페이지 개요 설명'}\n\n`;
+    
+    window.currentMarks.forEach((m, idx) => {
+        let suffix = '';
+        if (m.selector && m.selector.trim()) {
+            suffix += ` {selector:${m.selector.trim()}}`;
+        }
+        md += `${idx + 1}. **${m.title || '제목'}**: ${m.sub || '설명'}${suffix}\n`;
+    });
+    
+    navigator.clipboard.writeText(md).then(() => {
+        alert("현재 페이지의 기획서 MD 텍스트가 클립보드에 복사되었습니다!\nRO_Factory_Detailed_Features.md 파일의 해당 영역에 붙여넣고 저장하세요.");
+    }).catch(err => {
+        console.error("복사 실패:", err);
+        alert("클립보드 복사 실패. 아래 내용을 직접 복사하세요:\n\n" + md);
+    });
+};
 
 window.updatePageMeta = function (type, txt) {
     if (type === 'title') window.pageTitle = txt;
@@ -327,15 +353,18 @@ function renderBuilderMarks() {
         let subHTML = !window.isBuilderLocked ?
             `<div class="mark-sub editable" contenteditable="true" onblur="updateMarkText('${m.id}', 'sub', this.innerText)" style="margin-top:4px;" placeholder="상세 설명 입력">${m.sub}</div>` :
             `<div class="mark-sub">${m.sub}</div>`;
+        let selectorHTML = !window.isBuilderLocked ?
+            `<div style="margin-top:6px; display:flex; align-items:center; gap:5px;"><span style="font-size:11px; color:#64748b; font-weight:bold;">선택자:</span><input type="text" value="${m.selector || ''}" onblur="updateMarkText('${m.id}', 'selector', this.value)" style="flex:1; border:1px solid #cbd5e1; border-radius:6px; padding:4px 8px; font-size:11px; outline:none;" placeholder="예: .hero-section"></div>` : '';
 
-        html += `<div class="md-line" onmouseenter="highlightBadge('${m.id}')" onmouseleave="resetBadge('${m.id}')" style="position:relative; padding-right:30px; display:flex;">
+        html += `<div class="md-line" onmouseenter="highlightBadge('${m.id}')" onmouseleave="resetBadge('${m.id}')" style="position:relative; padding-right:30px; display:flex; margin-bottom:12px; border-bottom:1px dashed #e2e8f0; padding-bottom:10px;">
             <span class="badgenum" style="color:#0ea5e9; font-weight:900; margin-right:10px; vertical-align:top; font-size:16px;">${m.num}.</span>
-            <div style="flex:1; display:flex; flex-direction:column;">${titleHTML}${subHTML}</div>
+            <div style="flex:1; display:flex; flex-direction:column;">${titleHTML}${subHTML}${selectorHTML}</div>
             ${deleteBtn}
         </div>`;
     });
 
     if (!window.isBuilderLocked) {
+        html += `<button onclick="copyMarkdownText()" style="margin-top:10px; width:100%; padding:10px; background:#0f172a; border:none; border-radius:12px; color:#fff; font-weight:900; font-size:13px; cursor:pointer; transition:0.2s;" onmouseover="this.style.background='#1e293b';" onmouseout="this.style.background='#0f172a';">📋 현재 페이지 기획서 MD 복사</button>`;
         html += `<button onclick="addMark()" style="margin-top:15px; width:100%; padding:14px; background:#f8fafc; border:2px dashed #94a3b8; border-radius:12px; color:#475569; font-weight:900; font-size:15px; cursor:pointer; transition:0.2s;" onmouseover="this.style.background='#f1f5f9';" onmouseout="this.style.background='#f8fafc';">+ 새 마커 뱃지 추가하기</button>`;
     }
 
@@ -378,6 +407,7 @@ function addMark() {
         title: "새 뱃지 제목",
         sub: "상세 기획 설명을 입력하세요.",
         link: "",
+        selector: "",
         top: window.scrollY + window.innerHeight / 2,
         left: window.scrollX + window.innerWidth / 2
     });
