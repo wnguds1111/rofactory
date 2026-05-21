@@ -143,6 +143,28 @@ setInterval(() => {
     }
 }, 500);
 
+// GitHub API 설정
+const GITHUB_REPO_OWNER = 'wnguds1111';
+const GITHUB_REPO_NAME = 'rofactory';
+const GITHUB_DATA_PATH = 'description_module/desc-data.json';
+
+// 전체 페이지 데이터 캐시 (모든 페이지 데이터를 한 번에 로드)
+window.descAllPagesData = null;
+
+async function loadDescData() {
+    const jsonUrl = window.descModuleBasePath + 'description_module/desc-data.json';
+    try {
+        const res = await fetch(jsonUrl + '?t=' + new Date().getTime());
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        window.descAllPagesData = data;
+        return data;
+    } catch (e) {
+        console.error('desc-data.json 로드 실패:', e);
+        return null;
+    }
+}
+
 async function showDynamicDescPanel(pageNum, silent = false) {
     const panel = document.getElementById('pageDescPanel');
     if (!silent) {
@@ -151,162 +173,149 @@ async function showDynamicDescPanel(pageNum, silent = false) {
     }
 
     const targetKey = getTargetKey();
-    const savedStateStr = localStorage.getItem('rofactory_marks_builder_p' + targetKey);
-    let savedStateObj = savedStateStr ? JSON.parse(savedStateStr) : null;
 
-    if (savedStateObj && !Array.isArray(savedStateObj)) {
-        window.currentMarks = savedStateObj.marks || [];
-        window.pageTitle = savedStateObj.title || "";
-        window.pageOverview = savedStateObj.overview || "";
-        renderBuilderMarks();
-    } else {
+    // 데이터 로드 (캐시가 없으면 서버에서 fetch)
+    if (!window.descAllPagesData) {
         document.getElementById('descContent').innerHTML = '<div style="text-align:center; padding:20px;">로딩 중...</div>';
-            const targetUrl = window.descModuleBasePath + 'RO_Factory_Detailed_Features.md';
-            try {
-                const res = await fetch(targetUrl + '?t=' + new Date().getTime());
-                if (!res.ok) throw new Error(`HTTP ${res.status} (${res.statusText || 'Not Found'})`);
-                const text = await res.text();
-
-                const searchStr = '## PAGE ' + targetKey;
-                const startIdx = text.indexOf(searchStr);
-                if (startIdx === -1) {
-                    document.getElementById('descContent').innerHTML = '<div style="text-align:center; padding:40px 20px; color:#94a3b8; font-weight:700;">해당 뷰(PAGE ' + targetKey + ')에 작성된 데이터가 없습니다.<br>빌더 모드를 켜고 직접 기획서를 생성하세요.</div>';
-                    window.currentMarks = [];
-                    window.pageTitle = "";
-                    window.pageOverview = "";
-                    renderBuilderMarks();
-                    return;
-                }
-
-                let endIdx = text.indexOf('---', startIdx + 1);
-                let endIdx2 = text.indexOf('## PAGE', startIdx + 1);
-                endIdx = endIdx === -1 ? endIdx2 : (endIdx2 === -1 ? endIdx : Math.min(endIdx, endIdx2));
-                if (endIdx === -1) endIdx = text.length;
-
-                window.currentMarks = [];
-                window.pageTitle = "";
-                window.pageOverview = "";
-
-                const rawLines = text.substring(startIdx, endIdx).split('\n');
-                let isParsingList = false;
-
-                rawLines.forEach(line => {
-                    line = line.trim();
-                    if (line.startsWith(searchStr)) {
-                        const colonIdx = line.indexOf(':');
-                        if (colonIdx !== -1) {
-                            window.pageTitle = line.substring(colonIdx + 1).trim();
-                        }
-                    } else if (line.length > 0 && !line.match(/^\d+\./) && !isParsingList && !line.startsWith('##')) {
-                        window.pageOverview += line + " ";
-                    } else if (line.match(/^\d+\./)) {
-                        isParsingList = true;
-                        const num = parseInt(line.substring(0, line.indexOf('.')));
-                        let content = line.substring(line.indexOf('.') + 1).trim();
-
-                        let selector = '';
-                        let top = window.scrollY + 100 + (num * 40);
-                        let left = window.scrollX + 100 + (num * 40);
-
-                        const selMatch = content.match(/\{selector:(.*?)\}/);
-                        if (selMatch) {
-                            selector = selMatch[1].trim();
-                            content = content.replace(selMatch[0], '').trim();
-                            const el = document.querySelector(selector);
-                            if (el && el.offsetParent !== null) {
-                                const rect = el.getBoundingClientRect();
-                                top = window.scrollY + Math.max(0, rect.top - 10);
-                                left = window.scrollX + Math.max(0, rect.left - 10);
-                            }
-                        }
-
-                        let link = '';
-                        const linkMatch = content.match(/\{link:(.*?)\}/);
-                        if (linkMatch) {
-                            link = linkMatch[1].trim();
-                            content = content.replace(linkMatch[0], '').trim();
-                        }
-
-                        content = content.replace(/\*\*(.*?)\*\*/g, '$1');
-
-                        let titleStr = "설명없음";
-                        let subStr = content;
-
-                        if (content.includes(':')) {
-                            let splitIdx = content.indexOf(':');
-                            titleStr = content.substring(0, splitIdx).trim();
-                            subStr = content.substring(splitIdx + 1).trim();
-                        }
-
-                        window.currentMarks.push({
-                            id: 'id_' + Date.now() + Math.random().toString(36).substr(2, 5),
-                            num: num,
-                            title: titleStr,
-                            sub: subStr,
-                            top: top,
-                            left: left,
-                            link: link,
-                            selector: selector
-                        });
-                    }
-                });
-
-                saveBuilderMarks(false);
-                renderBuilderMarks();
-            } catch (e) {
-                console.error(e);
-                let errMsg = e.message;
-                if (window.location.protocol === 'file:') {
-                    errMsg = "로컬 파일(file://) 실행 환경에서는 브라우저 보안 정책(CORS)으로 인해 기획서 마크다운 파일(RO_Factory_Detailed_Features.md)을 직접 불러올 수 없습니다. VS Code의 Live Server 등의 로컬 웹 서버를 사용하시거나, 빌더 모드에서 수정한 뒤 브라우저 로컬 스토리지를 이용해 주세요.";
-                } else {
-                    errMsg = `대상 URL: ${new URL(targetUrl, window.location.href).href}\n에러 정보: ${errMsg}`;
-                }
-                document.getElementById('descContent').innerHTML = '<div style="padding:15px; color:#ef4444; font-size:12px; line-height:1.6; word-break:break-all; white-space:pre-line;">초기 파일 로드 에러:\n' + errMsg + '</div>';
-            }
-        }
+        await loadDescData();
     }
+
+    if (!window.descAllPagesData || !window.descAllPagesData.pages) {
+        document.getElementById('descContent').innerHTML = '<div style="padding:15px; color:#ef4444; font-size:12px;">데이터 로드 실패. 새로고침 해주세요.</div>';
+        return;
+    }
+
+    const pageData = window.descAllPagesData.pages[targetKey];
+
+    if (!pageData) {
+        window.currentMarks = [];
+        window.pageTitle = "";
+        window.pageOverview = "";
+        renderBuilderMarks();
+        return;
+    }
+
+    window.pageTitle = pageData.title || "";
+    window.pageOverview = pageData.overview || "";
+    window.currentMarks = (pageData.marks || []).map((m, idx) => {
+        let top = window.scrollY + 100 + ((idx + 1) * 40);
+        let left = window.scrollX + 100 + ((idx + 1) * 40);
+
+        if (m.selector) {
+            try {
+                const el = document.querySelector(m.selector);
+                if (el && el.offsetParent !== null) {
+                    const rect = el.getBoundingClientRect();
+                    top = window.scrollY + Math.max(0, rect.top - 10);
+                    left = window.scrollX + Math.max(0, rect.left - 10);
+                }
+            } catch (e) { /* invalid selector */ }
+        }
+
+        return {
+            id: m.id || ('id_' + Date.now() + Math.random().toString(36).substr(2, 5)),
+            num: m.num || (idx + 1),
+            title: m.title || '',
+            sub: m.sub || '',
+            top: m.top || top,
+            left: m.left || left,
+            selector: m.selector || ''
+        };
+    });
+
+    renderBuilderMarks();
+}
 
 function saveBuilderMarks(re_render = true) {
     window.currentMarks.forEach((m, i) => m.num = i + 1);
     const pageKey = getTargetKey();
-    const obj = {
+
+    // 메모리 내 전체 데이터 캐시에도 즉시 반영
+    if (!window.descAllPagesData) window.descAllPagesData = { pages: {} };
+    window.descAllPagesData.pages[pageKey] = {
         title: window.pageTitle,
         overview: window.pageOverview.trim(),
-        marks: window.currentMarks
+        marks: window.currentMarks.map(m => ({
+            id: m.id, num: m.num, title: m.title, sub: m.sub,
+            top: m.top, left: m.left, selector: m.selector || ''
+        }))
     };
-    localStorage.setItem('rofactory_marks_builder_p' + pageKey, JSON.stringify(obj));
-    if (re_render) renderBuilderMarks();
 
-    // 로컬 개발 서버가 켜져있는 경우 기획서 파일(RO_Factory_Detailed_Features.md)에 자동 저장 시도
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        fetch('/api/save', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+    if (re_render) renderBuilderMarks();
+}
+
+// GitHub API를 통해 desc-data.json을 원격 저장소에 커밋
+async function syncToGitHub() {
+    let token = localStorage.getItem('rofactory_github_token');
+    if (!token) {
+        token = prompt(
+            '📌 GitHub Personal Access Token을 입력해주세요.\n\n' +
+            '이 토큰은 디스크립션 데이터를 GitHub 저장소에 자동 저장하기 위해 필요합니다.\n' +
+            '최초 1회만 입력하면 브라우저에 안전하게 저장됩니다.\n\n' +
+            '📋 토큰 생성 방법:\n' +
+            'GitHub → Settings → Developer settings →\n' +
+            'Personal access tokens → Fine-grained tokens → Generate\n' +
+            '→ Repository: rofactory 선택 → Contents: Read and write 권한 부여'
+        );
+        if (!token) {
+            showSaveToast(false, '토큰 미입력으로 원격 동기화가 취소되었습니다.');
+            return false;
+        }
+        localStorage.setItem('rofactory_github_token', token.trim());
+    }
+
+    const apiBase = `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${GITHUB_DATA_PATH}`;
+    const headers = {
+        'Authorization': 'token ' + token,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github.v3+json'
+    };
+
+    try {
+        // 1단계: 현재 파일의 SHA 값 조회 (업데이트에 필수)
+        const getRes = await fetch(apiBase, { headers });
+        if (getRes.status === 401 || getRes.status === 403) {
+            localStorage.removeItem('rofactory_github_token');
+            showSaveToast(false, '토큰이 만료되었거나 권한이 없습니다. 다시 시도해주세요.');
+            return false;
+        }
+        const fileInfo = await getRes.json();
+        const currentSha = fileInfo.sha;
+
+        // 2단계: 업데이트된 JSON 데이터를 base64로 인코딩
+        const jsonStr = JSON.stringify(window.descAllPagesData, null, 2);
+        const contentBase64 = btoa(unescape(encodeURIComponent(jsonStr)));
+
+        // 3단계: GitHub Content API로 파일 업데이트 커밋
+        const putRes = await fetch(apiBase, {
+            method: 'PUT',
+            headers: headers,
             body: JSON.stringify({
-                pageKey: pageKey,
-                title: window.pageTitle,
-                overview: window.pageOverview,
-                marks: window.currentMarks
+                message: 'sync: update description data via browser editor',
+                content: contentBase64,
+                sha: currentSha
             })
-        })
-        .then(res => {
-            if (res.ok) {
-                console.log("로컬 기획서 MD 파일(RO_Factory_Detailed_Features.md)에 자동 저장되었습니다.");
-                showSaveToast(true);
-            } else {
-                console.warn("로컬 기획서 파일 저장 실패:", res.statusText);
-                showSaveToast(false);
-            }
-        })
-        .catch(err => {
-            console.log("로컬 서버 미작동 또는 파일 저장 실패 (로컬 스토리지에만 저장됨).");
         });
+
+        if (putRes.ok) {
+            showSaveToast(true, '모든 PC에서 동일하게 보이도록 원격 동기화 완료!');
+            // 캐시 무효화 - 다음 로드 시 최신 데이터를 서버에서 가져옴
+            window.descAllPagesData = null;
+            return true;
+        } else {
+            const errData = await putRes.json();
+            console.error('GitHub API 에러:', errData);
+            showSaveToast(false, 'GitHub 저장 실패: ' + (errData.message || putRes.statusText));
+            return false;
+        }
+    } catch (e) {
+        console.error('GitHub 동기화 오류:', e);
+        showSaveToast(false, '네트워크 오류: ' + e.message);
+        return false;
     }
 }
 
-function showSaveToast(isSuccess) {
+function showSaveToast(isSuccess, message) {
     let toast = document.getElementById('desc-save-toast');
     if (!toast) {
         toast = document.createElement('div');
@@ -315,10 +324,10 @@ function showSaveToast(isSuccess) {
         document.body.appendChild(toast);
     }
     if (isSuccess) {
-        toast.innerHTML = '✨ 로컬 기획서 파일(MD)에 실시간 자동 동기화되었습니다!';
+        toast.innerHTML = '✅ ' + (message || '원격 저장소에 동기화 완료!');
         toast.style.background = '#0f172a';
     } else {
-        toast.innerHTML = '⚠️ 로컬 파일 자동 동기화 실패 (로컬 스토리지에만 임시 저장됨)';
+        toast.innerHTML = '⚠️ ' + (message || '동기화 실패');
         toast.style.background = '#ef4444';
     }
     toast.style.opacity = '1';
@@ -327,29 +336,8 @@ function showSaveToast(isSuccess) {
     setTimeout(() => {
         toast.style.opacity = '0';
         toast.style.transform = 'translateX(-50%) translateY(0)';
-    }, 3000);
+    }, 4000);
 }
-
-window.copyMarkdownText = function() {
-    const targetKey = getTargetKey();
-    let md = `## PAGE ${targetKey}: ${window.pageTitle || '페이지 제목'}\n`;
-    md += `${window.pageOverview ? window.pageOverview.trim() : '페이지 개요 설명'}\n\n`;
-    
-    window.currentMarks.forEach((m, idx) => {
-        let suffix = '';
-        if (m.selector && m.selector.trim()) {
-            suffix += ` {selector:${m.selector.trim()}}`;
-        }
-        md += `${idx + 1}. **${m.title || '제목'}**: ${m.sub || '설명'}${suffix}\n`;
-    });
-    
-    navigator.clipboard.writeText(md).then(() => {
-        alert("현재 페이지의 기획서 MD 텍스트가 클립보드에 복사되었습니다!\nRO_Factory_Detailed_Features.md 파일의 해당 영역에 붙여넣고 저장하세요.");
-    }).catch(err => {
-        console.error("복사 실패:", err);
-        alert("클립보드 복사 실패. 아래 내용을 직접 복사하세요:\n\n" + md);
-    });
-};
 
 window.updatePageMeta = function (type, txt) {
     if (type === 'title') window.pageTitle = txt;
@@ -420,7 +408,6 @@ function renderBuilderMarks() {
     });
 
     if (!window.isBuilderLocked) {
-        html += `<button onclick="copyMarkdownText()" style="margin-top:10px; width:100%; padding:10px; background:#0f172a; border:none; border-radius:12px; color:#fff; font-weight:900; font-size:13px; cursor:pointer; transition:0.2s;" onmouseover="this.style.background='#1e293b';" onmouseout="this.style.background='#0f172a';">📋 현재 페이지 기획서 MD 복사</button>`;
         html += `<button onclick="addMark()" style="margin-top:15px; width:100%; padding:14px; background:#f8fafc; border:2px dashed #94a3b8; border-radius:12px; color:#475569; font-weight:900; font-size:15px; cursor:pointer; transition:0.2s;" onmouseover="this.style.background='#f1f5f9';" onmouseout="this.style.background='#f8fafc';">+ 새 마커 뱃지 추가하기</button>`;
     }
 
@@ -554,11 +541,32 @@ function hideTooltip(id) {
     }
 }
 
-function toggleLock() {
+async function toggleLock() {
     if (!window.hasEditPermission) {
         alert("편집 권한이 없습니다. (지정된 관리자 IP에서만 편집할 수 있습니다)");
         return;
     }
+
+    // 편집 모드 → 잠금 모드로 전환할 때 GitHub에 자동 동기화
+    if (!window.isBuilderLocked) {
+        // 현재 편집 중이었으므로 저장 후 잠금
+        saveBuilderMarks(false);
+        const lockBtn = document.getElementById('lockToggleBtn');
+        if (lockBtn) {
+            lockBtn.innerHTML = '⏳ 동기화 중...';
+            lockBtn.style.background = '#f59e0b';
+            lockBtn.disabled = true;
+        }
+        const success = await syncToGitHub();
+        if (lockBtn) {
+            lockBtn.disabled = false;
+        }
+        if (!success) {
+            // 동기화 실패해도 잠금은 진행
+            console.warn('GitHub 동기화 실패, 로컬에만 저장됩니다.');
+        }
+    }
+
     window.isBuilderLocked = !window.isBuilderLocked;
     localStorage.setItem('rofactory_desc_panel_locked', window.isBuilderLocked ? 'true' : 'false');
     renderBuilderMarks();
