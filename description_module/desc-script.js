@@ -248,7 +248,6 @@ async function showDynamicDescPanel(pageNum, silent = false) {
             }
         }
     }
-}
 
 function saveBuilderMarks(re_render = true) {
     window.currentMarks.forEach((m, i) => m.num = i + 1);
