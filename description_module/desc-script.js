@@ -225,7 +225,21 @@ async function showDynamicDescPanel(pageNum, silent = false) {
 }
 
 function saveBuilderMarks(re_render = true) {
-    window.currentMarks.forEach((m, i) => m.num = i + 1);
+    // 계층형 넘버링 자동 계산 (1, 1-1, 1-2, 2, 2-1...)
+    let mainNum = 0;
+    let subNum = 0;
+    window.currentMarks.forEach(m => {
+        if (!m.depth || m.depth === 0) {
+            mainNum++;
+            subNum = 0;
+            m.num = mainNum;
+            m.label = String(mainNum);
+        } else {
+            subNum++;
+            m.num = mainNum;
+            m.label = mainNum + '-' + subNum;
+        }
+    });
     const pageKey = getTargetKey();
 
     if (!window.descAllPagesData) window.descAllPagesData = { pages: {} };
@@ -233,7 +247,8 @@ function saveBuilderMarks(re_render = true) {
         title: window.pageTitle,
         overview: window.pageOverview.trim(),
         marks: window.currentMarks.map(m => ({
-            id: m.id, num: m.num, title: m.title, sub: m.sub,
+            id: m.id, num: m.num, label: m.label, depth: m.depth || 0,
+            title: m.title, sub: m.sub,
             top: m.top, left: m.left, selector: m.selector || ''
         }))
     };
@@ -295,7 +310,7 @@ function renderBuilderMarks() {
     window.currentMarks.forEach(m => {
         const mark = document.createElement('div');
         mark.className = 'coach-mark-badge';
-        mark.innerText = m.num;
+        mark.innerText = m.label || m.num;
         mark.id = 'coach-badge-' + m.id;
         mark.style.top = m.top + 'px';
         mark.style.left = m.left + 'px';
@@ -340,6 +355,8 @@ function renderBuilderMarks() {
     }
 
     window.currentMarks.forEach(m => {
+        const isSubItem = m.depth && m.depth > 0;
+        const displayLabel = m.label || String(m.num);
         let deleteBtn = !window.isBuilderLocked ? `<button onclick="event.stopPropagation(); deleteMark('${m.id}')" style="position:absolute; right:5px; top:10px; background:#fee2e2; border:none; color:#ef4444; font-weight:900; width:24px; height:24px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="삭제">×</button>` : '';
         let titleHTML = !window.isBuilderLocked ?
             `<div class="mark-title editable" contenteditable="true" onclick="event.stopPropagation()" onblur="updateMarkText('${m.id}', 'title', this.innerText)" placeholder="제목 입력">${m.title}</div>` :
@@ -347,10 +364,15 @@ function renderBuilderMarks() {
         let subHTML = !window.isBuilderLocked ?
             `<div class="mark-sub editable" contenteditable="true" onclick="event.stopPropagation()" onblur="updateMarkText('${m.id}', 'sub', this.innerText)" style="margin-top:4px;" placeholder="상세 설명 입력">${m.sub}</div>` :
             `<div class="mark-sub">${m.sub}</div>`;
+        let addSubBtn = (!window.isBuilderLocked && !isSubItem) ? `<button onclick="event.stopPropagation(); addSubMark('${m.id}')" style="margin-top:6px; background:none; border:1px dashed #cbd5e1; color:#64748b; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; cursor:pointer; transition:0.2s;" onmouseover="this.style.borderColor='#0ea5e9'; this.style.color='#0ea5e9'" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#64748b'">+ 하위 항목 추가</button>` : '';
 
-        html += `<div class="md-line" onclick="scrollToBadge('${m.id}')" onmouseenter="highlightBadge('${m.id}')" onmouseleave="resetBadge('${m.id}')" style="position:relative; padding-right:30px; display:flex; align-items:flex-start;">
-            <span style="background:#0ea5e9; color:#fff; min-width:26px; height:26px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:12px; margin-right:12px; margin-top:1px; flex-shrink:0;">${m.num}</span>
-            <div style="flex:1; display:flex; flex-direction:column;">${titleHTML}${subHTML}</div>
+        const badgeSize = isSubItem ? 'min-width:32px; height:22px; border-radius:6px; font-size:10px;' : 'min-width:26px; height:26px; border-radius:8px; font-size:12px;';
+        const badgeBg = isSubItem ? 'background:#94a3b8;' : 'background:#0ea5e9;';
+        const indent = isSubItem ? 'margin-left:28px;' : '';
+
+        html += `<div class="md-line" onclick="scrollToBadge('${m.id}')" onmouseenter="highlightBadge('${m.id}')" onmouseleave="resetBadge('${m.id}')" style="position:relative; padding-right:30px; display:flex; align-items:flex-start; ${indent}">
+            <span style="${badgeBg} color:#fff; ${badgeSize} display:flex; align-items:center; justify-content:center; font-weight:900; margin-right:12px; margin-top:1px; flex-shrink:0;">${displayLabel}</span>
+            <div style="flex:1; display:flex; flex-direction:column;">${titleHTML}${subHTML}${addSubBtn}</div>
             ${deleteBtn}
         </div>`;
     });
@@ -398,16 +420,39 @@ function deleteMark(id) {
 }
 
 function addMark() {
-    const newNum = window.currentMarks.length + 1;
     window.currentMarks.push({
         id: 'id_' + Date.now(),
-        num: newNum,
-        title: "새 뱃지 제목",
+        num: 0,
+        depth: 0,
+        title: "새 항목 제목",
         sub: "상세 기획 설명을 입력하세요.",
         link: "",
         selector: "",
         top: window.scrollY + window.innerHeight / 2,
         left: window.scrollX + window.innerWidth / 2
+    });
+    saveBuilderMarks();
+}
+
+function addSubMark(parentId) {
+    const parentIdx = window.currentMarks.findIndex(x => x.id === parentId);
+    if (parentIdx === -1) return;
+    // 부모 항목 바로 다음에 삽입 (기존 하위 항목들 뒤에)
+    let insertIdx = parentIdx + 1;
+    while (insertIdx < window.currentMarks.length && window.currentMarks[insertIdx].depth > 0) {
+        insertIdx++;
+    }
+    const parent = window.currentMarks[parentIdx];
+    window.currentMarks.splice(insertIdx, 0, {
+        id: 'id_' + Date.now(),
+        num: 0,
+        depth: 1,
+        title: "하위 항목 제목",
+        sub: "하위 설명을 입력하세요.",
+        link: "",
+        selector: "",
+        top: (parent.top || 0) + 50,
+        left: (parent.left || 0) + 30
     });
     saveBuilderMarks();
 }
