@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!document.querySelector('link[href*="desc-styles.css"]')) {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = window.descModuleBasePath + 'description_module/desc-styles.css';
+        link.href = window.descModuleBasePath + 'description_module/desc-styles.css?v=' + Date.now();
         document.head.appendChild(link);
     }
 
@@ -93,7 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
         panel.innerHTML = `
             <style>
                 .mark-title { font-size: 14px; font-weight: 800; color: #0f172a; margin-bottom: 3px; letter-spacing: -0.2px; }
-                .mark-sub { font-size: 12.5px; color: #64748b; line-height: 1.55; white-space: pre-wrap; }
+                .mark-sub { font-size: 12.5px; color: #64748b; line-height: 1.55; white-space: pre-wrap !important; }
+                .pdp-top-overview { white-space: pre-wrap !important; }
+                #coach-mark-tooltip { white-space: pre-wrap !important; }
             </style>
             <div class="pdp-header">
                 <span style="font-weight:900; font-size:18px; letter-spacing:1px; color:#0f172a;">DESCRIPTION</span>
@@ -532,11 +534,31 @@ async function toggleLock() {
         return;
     }
 
-    // 편집 완료 → 저장 시 GitHub에 자동 반영
+    // 편집 완료 → 저장 시 GitHub에 자동 반영 및 로컬 저장
     if (!window.isBuilderLocked) {
         saveBuilderMarks(false);
         const lockBtn = document.getElementById('lockToggleBtn');
         if (lockBtn) { lockBtn.innerHTML = '⏳ 저장 중...'; lockBtn.disabled = true; }
+
+        // 로컬 개발 서버가 켜져있는 경우 로컬 기획서 파일(MD) 및 desc-data.json 파일에도 함께 저장 시도
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            try {
+                const pageKey = getTargetKey();
+                await fetch('/api/save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        pageKey: pageKey,
+                        title: window.pageTitle,
+                        overview: window.pageOverview,
+                        marks: window.currentMarks
+                    })
+                });
+                console.log("로컬 서버 파일에 자동 동기화되었습니다.");
+            } catch (e) {
+                console.warn("로컬 서버 저장 실패:", e);
+            }
+        }
 
         const ok = await syncToGitHub();
 

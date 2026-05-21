@@ -83,6 +83,34 @@ const server = http.createServer(async (req, res) => {
             const newContent = sections.join('');
             fs.writeFileSync(MD_FILE_PATH, newContent, 'utf-8');
 
+            // Also save to desc-data.json locally
+            const jsonPath = path.join(__dirname, 'description_module', 'desc-data.json');
+            let jsonData = { pages: {} };
+            if (fs.existsSync(jsonPath)) {
+                try {
+                    jsonData = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
+                } catch (jsonErr) {
+                    console.error('Error parsing local desc-data.json:', jsonErr);
+                }
+            }
+            jsonData.pages = jsonData.pages || {};
+            jsonData.pages[data.pageKey] = {
+                title: data.title || '',
+                overview: (data.overview || '').trim(),
+                marks: (data.marks || []).map(m => ({
+                    id: m.id,
+                    num: m.num,
+                    label: m.label,
+                    depth: m.depth || 0,
+                    title: m.title,
+                    sub: m.sub,
+                    top: m.top,
+                    left: m.left,
+                    selector: m.selector || ''
+                }))
+            };
+            fs.writeFileSync(jsonPath, JSON.stringify(jsonData, null, 2), 'utf-8');
+
             res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             return res.end(JSON.stringify({ success: true }));
         } catch (e) {
