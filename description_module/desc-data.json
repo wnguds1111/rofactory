@@ -16,6 +16,28 @@
           "selector": ".hero-section"
         },
         {
+          "id": "id_1779348243717",
+          "num": 1,
+          "label": "1-1",
+          "depth": 1,
+          "title": "하위 항목 제목",
+          "sub": "하위 설명을 입력하세요.",
+          "top": 426,
+          "left": 402.5,
+          "selector": ""
+        },
+        {
+          "id": "id_1779348250356",
+          "num": 1,
+          "label": "1-2",
+          "depth": 1,
+          "title": "하위 항목 제목",
+          "sub": "하위 설명을 입력하세요.",
+          "top": 413,
+          "left": 369.5,
+          "selector": ""
+        },
+        {
           "id": "id_1779343500855vppzf",
           "num": 2,
           "label": "2",
