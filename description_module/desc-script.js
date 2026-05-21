@@ -308,8 +308,10 @@ window.updatePageMeta = function (type, txt) {
 function renderBuilderMarks() {
     document.querySelectorAll('.coach-mark-badge').forEach(e => e.remove());
     window.currentMarks.forEach(m => {
+        const isSubItem = m.depth && m.depth > 0;
         const mark = document.createElement('div');
         mark.className = 'coach-mark-badge';
+        if (isSubItem) mark.classList.add('sub-badge');
         mark.innerText = m.label || m.num;
         mark.id = 'coach-badge-' + m.id;
         mark.style.top = m.top + 'px';
