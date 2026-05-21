@@ -96,10 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
         panel.id = 'pageDescPanel';
         panel.innerHTML = `
             <style>
-                .mark-title { font-size: 14px; font-weight: 800; color: #0f172a; margin-bottom: 3px; letter-spacing: -0.2px; }
-                .mark-sub { font-size: 12.5px; color: #64748b; line-height: 1.55; white-space: pre-wrap !important; }
-                .pdp-top-overview { white-space: pre-wrap !important; }
-                #coach-mark-tooltip { white-space: pre-wrap !important; }
+                .mark-title { font-size: 14px; font-weight: 800; color: #0f172a; margin-bottom: 3px; letter-spacing: -0.3px; font-family: 'Pretendard', -apple-system, sans-serif; }
+                .mark-sub { font-size: 12.5px; color: #64748b; line-height: 1.55; white-space: pre-wrap !important; letter-spacing: -0.3px; font-family: 'Pretendard', -apple-system, sans-serif; }
+                .pdp-top-overview { white-space: pre-wrap !important; letter-spacing: -0.3px; font-family: 'Pretendard', -apple-system, sans-serif; }
+                #coach-mark-tooltip { white-space: pre-wrap !important; letter-spacing: -0.4px !important; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', sans-serif !important; }
             </style>
             <div class="pdp-header">
                 <span style="font-weight:900; font-size:18px; letter-spacing:1px; color:#0f172a;">DESCRIPTION</span>

@@ -43,11 +43,13 @@
     user-select: none;
     transition: 0.3s transform, 0.3s box-shadow;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    letter-spacing: -0.5px;
 }
 .coach-mark-badge.draggable { cursor: grab; }
 .coach-mark-badge.draggable:active { cursor: grabbing; }
 .coach-mark-badge.pulsing { animation: ui-pulse 1.5s infinite; }
-.coach-mark-badge.sub-badge { width: 34px; height: 20px; border-radius: 6px; font-size: 10px; background: #f59e0b; border-width: 1.5px; }
+.coach-mark-badge.sub-badge { width: 34px; height: 20px; border-radius: 6px; font-size: 10px; background: #f59e0b; border-width: 1.5px; letter-spacing: -0.5px; }
 
 /* Tooltip style */
 #coach-mark-tooltip {
@@ -57,7 +59,9 @@
     padding: 12px 16px;
     border-radius: 12px;
     font-size: 13px;
-    line-height: 1.6;
+    line-height: 1.5;
+    letter-spacing: -0.4px;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
     box-shadow: 0 10px 25px rgba(0,0,0,0.25);
     z-index: 2000000002;
     pointer-events: none;
