@@ -268,13 +268,66 @@ async function showDynamicDescPanel(pageNum, silent = false) {
 
 function saveBuilderMarks(re_render = true) {
     window.currentMarks.forEach((m, i) => m.num = i + 1);
+    const pageKey = getTargetKey();
     const obj = {
         title: window.pageTitle,
         overview: window.pageOverview.trim(),
         marks: window.currentMarks
     };
-    localStorage.setItem('rofactory_marks_builder_p' + getTargetKey(), JSON.stringify(obj));
+    localStorage.setItem('rofactory_marks_builder_p' + pageKey, JSON.stringify(obj));
     if (re_render) renderBuilderMarks();
+
+    // 로컬 개발 서버가 켜져있는 경우 기획서 파일(RO_Factory_Detailed_Features.md)에 자동 저장 시도
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        fetch('/api/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                pageKey: pageKey,
+                title: window.pageTitle,
+                overview: window.pageOverview,
+                marks: window.currentMarks
+            })
+        })
+        .then(res => {
+            if (res.ok) {
+                console.log("로컬 기획서 MD 파일(RO_Factory_Detailed_Features.md)에 자동 저장되었습니다.");
+                showSaveToast(true);
+            } else {
+                console.warn("로컬 기획서 파일 저장 실패:", res.statusText);
+                showSaveToast(false);
+            }
+        })
+        .catch(err => {
+            console.log("로컬 서버 미작동 또는 파일 저장 실패 (로컬 스토리지에만 저장됨).");
+        });
+    }
+}
+
+function showSaveToast(isSuccess) {
+    let toast = document.getElementById('desc-save-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'desc-save-toast';
+        toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0f172a; color:#fff; padding:12px 24px; border-radius:30px; font-size:13px; font-weight:bold; z-index:100002; box-shadow:0 10px 25px rgba(0,0,0,0.2); transition:0.3s opacity, 0.3s transform; opacity:0; pointer-events:none; display:flex; align-items:center; gap:8px; border: 1px solid rgba(255,255,255,0.1);';
+        document.body.appendChild(toast);
+    }
+    if (isSuccess) {
+        toast.innerHTML = '✨ 로컬 기획서 파일(MD)에 실시간 자동 동기화되었습니다!';
+        toast.style.background = '#0f172a';
+    } else {
+        toast.innerHTML = '⚠️ 로컬 파일 자동 동기화 실패 (로컬 스토리지에만 임시 저장됨)';
+        toast.style.background = '#ef4444';
+    }
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(-10px)';
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+    }, 3000);
 }
 
 window.copyMarkdownText = function() {
