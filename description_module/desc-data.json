@@ -5,29 +5,29 @@
       "overview": "게임과 RO Factory 세계관을 연결하는 가장 첫 번째 관문 역할의 포털 페이지입니다.",
       "marks": [
         {
-          "id": "id_1779343493985ggy2x",
+          "id": "id_1779343500855ynpum",
           "num": 1,
           "title": "상단 히어로 배너",
           "sub": "게임 캐릭터 포링과 슬로건을 통해 신규 기능에 대한 직관적 안내",
-          "top": 1054,
+          "top": 1055,
           "left": 342.5,
           "selector": ".hero-section"
         },
         {
-          "id": "id_1779343493985g4nvn",
+          "id": "id_1779343500855vppzf",
           "num": 2,
           "title": "제작 가이드 프로세스 뷰",
           "sub": "유저가 등록하게 될 4가지 필수 프로세스에 대한 사전 브리핑",
-          "top": 1234,
+          "top": 1235,
           "left": 180,
           "selector": ".market-process"
         },
         {
-          "id": "id_1779343493985zldr1",
+          "id": "id_1779343500855tl2rm",
           "num": 3,
           "title": "인기 작품 스크롤러",
           "sub": "현재 마켓에서 가장 인기 있는 베스트 3 등록 작품 롤링 홍보 뷰",
-          "top": 1274,
+          "top": 1275,
           "left": 220,
           "selector": ".hot-works"
         }
