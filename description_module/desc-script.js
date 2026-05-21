@@ -237,6 +237,49 @@ function saveBuilderMarks(re_render = true) {
     if (re_render) renderBuilderMarks();
 }
 
+// GitHub 자동 동기화 (저장 버튼 누르면 자동 실행)
+async function syncToGitHub() {
+    let token = localStorage.getItem('rofactory_github_token');
+    if (!token) {
+        token = prompt(
+            'GitHub 토큰을 입력해주세요 (최초 1회만 입력)\n\n' +
+            'GitHub.com → Settings → Developer settings →\n' +
+            'Personal access tokens → Tokens (classic) → Generate\n' +
+            '→ repo 권한 체크 후 생성'
+        );
+        if (!token) return false;
+        localStorage.setItem('rofactory_github_token', token.trim());
+    }
+
+    const apiUrl = 'https://api.github.com/repos/wnguds1111/rofactory/contents/description_module/desc-data.json';
+    const headers = { 'Authorization': 'token ' + token, 'Content-Type': 'application/json' };
+
+    try {
+        const getRes = await fetch(apiUrl, { headers });
+        if (getRes.status === 401 || getRes.status === 403) {
+            localStorage.removeItem('rofactory_github_token');
+            alert('토큰이 만료되었습니다. 다시 저장해주세요.');
+            return false;
+        }
+        const sha = (await getRes.json()).sha;
+        const content = btoa(unescape(encodeURIComponent(JSON.stringify(window.descAllPagesData, null, 2))));
+
+        const putRes = await fetch(apiUrl, {
+            method: 'PUT', headers,
+            body: JSON.stringify({ message: 'update description', content, sha })
+        });
+
+        if (putRes.ok) {
+            window.descAllPagesData = null; // 캐시 초기화
+            return true;
+        }
+        return false;
+    } catch (e) {
+        console.error('sync error:', e);
+        return false;
+    }
+}
+
 window.updatePageMeta = function (type, txt) {
     if (type === 'title') window.pageTitle = txt;
     if (type === 'overview') window.pageOverview = txt;
@@ -439,14 +482,28 @@ function hideTooltip(id) {
     }
 }
 
-function toggleLock() {
+async function toggleLock() {
     if (!window.hasEditPermission) {
         alert("편집 권한이 없습니다. (지정된 관리자 IP에서만 편집할 수 있습니다)");
         return;
     }
+
+    // 편집 완료 → 저장 시 GitHub에 자동 반영
     if (!window.isBuilderLocked) {
         saveBuilderMarks(false);
+        const lockBtn = document.getElementById('lockToggleBtn');
+        if (lockBtn) { lockBtn.innerHTML = '⏳ 저장 중...'; lockBtn.disabled = true; }
+
+        const ok = await syncToGitHub();
+
+        if (lockBtn) { lockBtn.disabled = false; }
+        if (ok) {
+            alert('✅ 저장 완료! 모든 PC에서 동일하게 보입니다.');
+        } else {
+            alert('⚠️ 저장 실패. 토큰을 확인해주세요.');
+        }
     }
+
     window.isBuilderLocked = !window.isBuilderLocked;
     localStorage.setItem('rofactory_desc_panel_locked', window.isBuilderLocked ? 'true' : 'false');
     renderBuilderMarks();
