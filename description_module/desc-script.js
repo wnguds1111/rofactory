@@ -24,6 +24,7 @@ window.pageOverview = "";
 // 로컬 스토리지에 저장된 잠금 상태 로드 (기본값: 잠금 상태인 true)
 window.isBuilderLocked = localStorage.getItem('rofactory_desc_panel_locked') !== 'false';
 window.hasEditPermission = false;
+window.isLocalEnv = false;
 
 // 허용된 관리자 IP 목록 (사용자 IP 및 로컬/사설 네트워크 환경 포함)
 const ALLOWED_IPS = ['119.192.146.202', 'localhost', '127.0.0.1', '::1'];
@@ -40,10 +41,13 @@ const ALLOWED_IPS = ['119.192.146.202', 'localhost', '127.0.0.1', '::1'];
     // 로컬 개발 환경 또는 사설 IP 대역 체크
     const isLocal = hostname === 'localhost' || 
                     hostname === '127.0.0.1' || 
+                    hostname === '::1' || 
                     hostname === '' || 
                     hostname.startsWith('192.168.') || 
                     hostname.startsWith('10.') || 
                     hostname.startsWith('172.');
+
+    window.isLocalEnv = isLocal;
 
     if (isLocal) {
         window.hasEditPermission = true;
@@ -449,7 +453,7 @@ function highlightBadge(id) {
     if (badge) {
         badge.classList.add('pulsing');
         badge.style.transform = 'scale(1.5)';
-        badge.style.zIndex = '999999';
+        badge.style.zIndex = '10000';
         badge.style.boxShadow = '0 0 0 10px rgba(239,68,68,0.3)';
     }
 }
@@ -459,7 +463,7 @@ function resetBadge(id) {
     if (badge) {
         badge.classList.remove('pulsing');
         badge.style.transform = '';
-        badge.style.zIndex = '99999';
+        badge.style.zIndex = '9999';
         badge.style.boxShadow = '';
     }
 }
@@ -540,11 +544,12 @@ async function toggleLock() {
         const lockBtn = document.getElementById('lockToggleBtn');
         if (lockBtn) { lockBtn.innerHTML = '⏳ 저장 중...'; lockBtn.disabled = true; }
 
+        let localOk = false;
         // 로컬 개발 서버가 켜져있는 경우 로컬 기획서 파일(MD) 및 desc-data.json 파일에도 함께 저장 시도
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        if (window.isLocalEnv) {
             try {
                 const pageKey = getTargetKey();
-                await fetch('/api/save', {
+                const res = await fetch('/api/save', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -554,19 +559,32 @@ async function toggleLock() {
                         marks: window.currentMarks
                     })
                 });
-                console.log("로컬 서버 파일에 자동 동기화되었습니다.");
+                if (res.ok) {
+                    localOk = true;
+                    console.log("로컬 서버 파일에 자동 동기화되었습니다.");
+                }
             } catch (e) {
                 console.warn("로컬 서버 저장 실패:", e);
             }
         }
 
-        const ok = await syncToGitHub();
+        const githubOk = await syncToGitHub();
 
         if (lockBtn) { lockBtn.disabled = false; }
-        if (ok) {
-            alert('✅ 저장 완료! 모든 PC에서 동일하게 보입니다.');
+        if (window.isLocalEnv) {
+            if (localOk && githubOk) {
+                alert('✅ 저장 완료! 로컬 파일 및 GitHub에 모두 반영되었습니다.');
+            } else if (localOk && !githubOk) {
+                alert('✅ 로컬 저장 완료! (단, GitHub 동기화는 실패했습니다. 토큰을 확인해주세요.)');
+            } else {
+                alert('⚠️ 저장 실패. 로컬 서버 상태 또는 권한을 확인해주세요.');
+            }
         } else {
-            alert('⚠️ 저장 실패. 토큰을 확인해주세요.');
+            if (githubOk) {
+                alert('✅ 저장 완료! GitHub에 정상 반영되었습니다.');
+            } else {
+                alert('⚠️ 저장 실패. GitHub 토큰을 확인해주세요.');
+            }
         }
     }
 
@@ -575,23 +593,23 @@ async function toggleLock() {
     renderBuilderMarks();
 }
 
-// Drag support for badges
+// Drag support for badges (scroll-proof using pageX/pageY)
 let draggedBadge = null;
 let badgeOffsetX = 0, badgeOffsetY = 0;
 
 document.addEventListener('mousedown', function (e) {
     if (e.target.classList.contains('coach-mark-badge') && e.target.classList.contains('draggable')) {
         draggedBadge = e.target;
-        badgeOffsetX = e.clientX - parseFloat(draggedBadge.style.left || 0);
-        badgeOffsetY = e.clientY - parseFloat(draggedBadge.style.top || 0);
+        badgeOffsetX = e.pageX - parseFloat(draggedBadge.style.left || 0);
+        badgeOffsetY = e.pageY - parseFloat(draggedBadge.style.top || 0);
         draggedBadge.classList.remove('pulsing');
         e.preventDefault();
     }
 });
 document.addEventListener('mousemove', function (e) {
     if (draggedBadge) {
-        draggedBadge.style.left = (e.clientX - badgeOffsetX) + 'px';
-        draggedBadge.style.top = (e.clientY - badgeOffsetY) + 'px';
+        draggedBadge.style.left = (e.pageX - badgeOffsetX) + 'px';
+        draggedBadge.style.top = (e.pageY - badgeOffsetY) + 'px';
     }
 });
 document.addEventListener('mouseup', function (e) {
