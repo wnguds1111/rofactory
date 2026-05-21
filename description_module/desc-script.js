@@ -161,9 +161,10 @@ async function showDynamicDescPanel(pageNum, silent = false) {
         renderBuilderMarks();
     } else {
         document.getElementById('descContent').innerHTML = '<div style="text-align:center; padding:20px;">로딩 중...</div>';
+            const targetUrl = window.descModuleBasePath + 'RO_Factory_Detailed_Features.md';
             try {
-                const res = await fetch(window.descModuleBasePath + 'RO_Factory_Detailed_Features.md?t=' + new Date().getTime());
-                if (!res.ok) throw new Error("Failed to load MD file");
+                const res = await fetch(targetUrl + '?t=' + new Date().getTime());
+                if (!res.ok) throw new Error(`HTTP ${res.status} (${res.statusText || 'Not Found'})`);
                 const text = await res.text();
 
                 const searchStr = '## PAGE ' + targetKey;
@@ -257,8 +258,10 @@ async function showDynamicDescPanel(pageNum, silent = false) {
                 let errMsg = e.message;
                 if (window.location.protocol === 'file:') {
                     errMsg = "로컬 파일(file://) 실행 환경에서는 브라우저 보안 정책(CORS)으로 인해 기획서 마크다운 파일(RO_Factory_Detailed_Features.md)을 직접 불러올 수 없습니다. VS Code의 Live Server 등의 로컬 웹 서버를 사용하시거나, 빌더 모드에서 수정한 뒤 브라우저 로컬 스토리지를 이용해 주세요.";
+                } else {
+                    errMsg = `대상 URL: ${new URL(targetUrl, window.location.href).href}\n에러 정보: ${errMsg}`;
                 }
-                document.getElementById('descContent').innerHTML = '<div style="padding:15px; color:#ef4444; font-size:12px; line-height:1.6; word-break:break-all;">초기 파일 로드 에러: ' + errMsg + '</div>';
+                document.getElementById('descContent').innerHTML = '<div style="padding:15px; color:#ef4444; font-size:12px; line-height:1.6; word-break:break-all; white-space:pre-line;">초기 파일 로드 에러:\n' + errMsg + '</div>';
             }
         }
     }
