@@ -91,6 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
         panel.className = 'page-desc-panel';
         panel.id = 'pageDescPanel';
         panel.innerHTML = `
+            <style>
+                .mark-title { font-size: 14px; font-weight: 800; color: #0f172a; margin-bottom: 3px; letter-spacing: -0.2px; }
+                .mark-sub { font-size: 12.5px; color: #64748b; line-height: 1.55; }
+            </style>
             <div class="pdp-header">
                 <span style="font-weight:900; font-size:18px; letter-spacing:1px; color:#0f172a;">DESCRIPTION</span>
                 <div style="display:flex; gap:10px; align-items:center;">
@@ -311,7 +315,12 @@ function renderBuilderMarks() {
     });
 
     const target = document.getElementById('descContent');
-    let html = '';
+    let html = `
+        <style>
+            .md-line { margin-bottom:2px; cursor: pointer; transition: 0.25s; padding: 14px 14px; border-radius: 12px; border: 1px solid transparent; }
+            .md-line:hover { background: #f0f9ff; border: 1px solid #bae6fd; transform: translateX(4px); }
+        </style>
+    `;
 
     if (window.pageTitle || !window.isBuilderLocked) {
         let titleHtml = !window.isBuilderLocked
@@ -331,19 +340,19 @@ function renderBuilderMarks() {
     }
 
     window.currentMarks.forEach(m => {
-        let deleteBtn = !window.isBuilderLocked ? `<button onclick="deleteMark('${m.id}')" style="position:absolute; right:5px; top:10px; background:#fee2e2; border:none; color:#ef4444; font-weight:900; width:24px; height:24px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="삭제">×</button>` : '';
+        let deleteBtn = !window.isBuilderLocked ? `<button onclick="event.stopPropagation(); deleteMark('${m.id}')" style="position:absolute; right:5px; top:10px; background:#fee2e2; border:none; color:#ef4444; font-weight:900; width:24px; height:24px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="삭제">×</button>` : '';
         let titleHTML = !window.isBuilderLocked ?
-            `<div class="mark-title editable" contenteditable="true" onblur="updateMarkText('${m.id}', 'title', this.innerText)" placeholder="제목 입력">${m.title}</div>` :
+            `<div class="mark-title editable" contenteditable="true" onclick="event.stopPropagation()" onblur="updateMarkText('${m.id}', 'title', this.innerText)" placeholder="제목 입력">${m.title}</div>` :
             `<div class="mark-title">${m.title}</div>`;
         let subHTML = !window.isBuilderLocked ?
-            `<div class="mark-sub editable" contenteditable="true" onblur="updateMarkText('${m.id}', 'sub', this.innerText)" style="margin-top:4px;" placeholder="상세 설명 입력">${m.sub}</div>` :
+            `<div class="mark-sub editable" contenteditable="true" onclick="event.stopPropagation()" onblur="updateMarkText('${m.id}', 'sub', this.innerText)" style="margin-top:4px;" placeholder="상세 설명 입력">${m.sub}</div>` :
             `<div class="mark-sub">${m.sub}</div>`;
-        let selectorHTML = !window.isBuilderLocked ?
-            `<div style="margin-top:6px; display:flex; align-items:center; gap:5px;"><span style="font-size:11px; color:#64748b; font-weight:bold;">선택자:</span><input type="text" value="${m.selector || ''}" onblur="updateMarkText('${m.id}', 'selector', this.value)" style="flex:1; border:1px solid #cbd5e1; border-radius:6px; padding:4px 8px; font-size:11px; outline:none;" placeholder="예: .hero-section"></div>` : '';
 
-        html += `<div class="md-line" onmouseenter="highlightBadge('${m.id}')" onmouseleave="resetBadge('${m.id}')" style="position:relative; padding-right:30px; display:flex; margin-bottom:12px; border-bottom:1px dashed #e2e8f0; padding-bottom:10px;">
-            <span class="badgenum" style="color:#0ea5e9; font-weight:900; margin-right:10px; vertical-align:top; font-size:16px;">${m.num}.</span>
-            <div style="flex:1; display:flex; flex-direction:column;">${titleHTML}${subHTML}${selectorHTML}</div>
+        const clickAction = m.selector ? `scrollToSelector('${m.selector.replace(/'/g, "\\'") }')` : '';
+
+        html += `<div class="md-line" onclick="${clickAction}" onmouseenter="highlightBadge('${m.id}')" onmouseleave="resetBadge('${m.id}')" style="position:relative; padding-right:30px; display:flex; align-items:flex-start;">
+            <span style="background:#0ea5e9; color:#fff; min-width:26px; height:26px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:12px; margin-right:12px; margin-top:1px; flex-shrink:0;">${m.num}</span>
+            <div style="flex:1; display:flex; flex-direction:column;">${titleHTML}${subHTML}</div>
             ${deleteBtn}
         </div>`;
     });
@@ -374,6 +383,23 @@ function updateMarkText(id, field, newText) {
         m[field] = newText;
         saveBuilderMarks(field === 'link');
     }
+}
+
+function scrollToSelector(selector) {
+    try {
+        const el = document.querySelector(selector);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // 하이라이트 효과
+            el.style.outline = '3px solid #0ea5e9';
+            el.style.outlineOffset = '4px';
+            el.style.transition = 'outline 0.3s';
+            setTimeout(() => {
+                el.style.outline = '';
+                el.style.outlineOffset = '';
+            }, 2000);
+        }
+    } catch (e) { /* invalid selector */ }
 }
 
 function deleteMark(id) {
