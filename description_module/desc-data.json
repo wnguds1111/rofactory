@@ -780,6 +780,45 @@
           "selector": "#listInventory"
         }
       ]
+    },
+    "2-complete": {
+      "title": "마켓 > 결제 완료",
+      "overview": "",
+      "marks": [
+        {
+          "id": "id_1779426258720",
+          "num": 1,
+          "label": "1",
+          "depth": 0,
+          "title": "결제 정보 노출",
+          "sub": "└ 결제 작품명, 결제 금액",
+          "top": 575.5,
+          "left": 683,
+          "selector": ""
+        },
+        {
+          "id": "id_1779426281791",
+          "num": 2,
+          "label": "2",
+          "depth": 0,
+          "title": "마켓 더 구경하기",
+          "sub": "- 클릭 시 마켓 리스트 페이지 이동",
+          "top": 748.5,
+          "left": 682,
+          "selector": ""
+        },
+        {
+          "id": "id_1779426299543",
+          "num": 3,
+          "label": "3",
+          "depth": 0,
+          "title": "마이 스튜디오 이동",
+          "sub": "- 클릭 시 마이 스튜디오 페이지 이동",
+          "top": 746.5,
+          "left": 952,
+          "selector": ""
+        }
+      ]
     }
   }
 }
