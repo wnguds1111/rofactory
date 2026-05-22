@@ -526,7 +526,7 @@
                             <div class="d-price-lbl"><span data-en="Price" data-ko="판매 금액">Price</span></div>
                             <div class="d-price-val" id="detail-price">0 <span>KP</span></div>
                         </div>
-                        <button class="btn-buy" onclick="openPaymentModal()"><span data-en="Purchase" data-ko="구매하기">Purchase</span></button>
+                        <button class="btn-buy" onclick="openPaymentModal()"><span data-en="Pay" data-ko="결제하기">Pay</span></button>
                     </div>
                 </div>
             </div>
@@ -547,7 +547,7 @@
                 <div class="c-desc"><span data-en="The item has been successfully transferred to your Studio.<br>You can also check your in-game mailbox." data-ko="아이템이 내 스튜디오로 정상적으로 전송되었습니다.<br>인게임 우편함에서도 확인하실 수 있습니다.">The item has been successfully transferred to your Studio.<br>You can also check your in-game mailbox.</span></div>
                 
                 <div class="c-box">
-                    <div class="c-item"><span>구매 <span data-en="Item Name" data-ko="작품명">Item Name</span></span> <span id="c-item-name"><span data-en="Item Name" data-ko="상품명">Item Name</span></span></div>
+                    <div class="c-item"><span>결제 <span data-en="Item Name" data-ko="작품명">Item Name</span></span> <span id="c-item-name"><span data-en="Item Name" data-ko="상품명">Item Name</span></span></div>
                     <div class="c-item"><span><span data-en="Payment Amount" data-ko="결제 금액">Payment Amount</span></span> <span id="c-item-price" style="font-weight:900; color:#10b981;">FREE</span></div>
                 </div>
 
@@ -750,10 +750,6 @@
             
             // Update Completion Page UI variables
             document.getElementById('c-item-name').innerHTML = p.title;
-            document.getElementById('c-item-price').innerText = `${p.price.toLocaleString()} KP`;
-            
-            currentPoints -= p.price;
-            document.getElementById('c-item-balance').innerText = `${currentPoints.toLocaleString()} KP`;
             
             closePaymentModal();
             goToStep('complete');
