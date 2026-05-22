@@ -121,62 +121,6 @@
       "overview": "",
       "marks": []
     },
-    "1-0": {
-      "title": "작품 등록 페이지",
-      "overview": "등록 페이지 기본 정책 \n1) 로그인 후 접근 가능\n2) 에이전트 체크 후 PC에서만 접근 가능",
-      "marks": [
-        {
-          "id": "id_1779408381682",
-          "num": 1,
-          "label": "1",
-          "depth": 0,
-          "title": "등록 프로세스 가이드 영역",
-          "sub": "- STEP 01 ~ 04 소개",
-          "top": 387,
-          "left": 374,
-          "selector": ""
-        },
-        {
-          "id": "id_1779408451045",
-          "num": 2,
-          "label": "2",
-          "depth": 0,
-          "title": "Back 버튼",
-          "sub": "- 클릭 시 History Back",
-          "top": 827,
-          "left": 54,
-          "selector": ""
-        },
-        {
-          "id": "id_1779408777304",
-          "num": 3,
-          "label": "3",
-          "depth": 0,
-          "title": "Next 버튼",
-          "sub": "- 클릭 시 STEP 1 이동",
-          "top": 821,
-          "left": 1721,
-          "selector": ""
-        }
-      ]
-    },
-    "1-1": {
-      "title": "등록 > STEP 01",
-      "overview": "",
-      "marks": [
-        {
-          "id": "id_1779408822573",
-          "num": 1,
-          "label": "1",
-          "depth": 0,
-          "title": "편집 툴 다운로드",
-          "sub": "- 편집툴 다운로드는 클릭 시 관리자에서 등록된\n   클라이언트 다운로드",
-          "top": 642,
-          "left": 854,
-          "selector": ""
-        }
-      ]
-    },
     "1-2": {
       "title": "등록 > STEP02",
       "overview": "",
@@ -249,6 +193,62 @@
         }
       ]
     },
+    "1-0": {
+      "title": "작품 등록 페이지",
+      "overview": "등록 페이지 기본 정책 \n1) 로그인 후 접근 가능\n2) 에이전트 체크 후 PC에서만 접근 가능",
+      "marks": [
+        {
+          "id": "id_1779408381682",
+          "num": 1,
+          "label": "1",
+          "depth": 0,
+          "title": "등록 프로세스 가이드 영역",
+          "sub": "- STEP 01 ~ 04 소개",
+          "top": 387,
+          "left": 374,
+          "selector": ""
+        },
+        {
+          "id": "id_1779408451045",
+          "num": 2,
+          "label": "2",
+          "depth": 0,
+          "title": "Back 버튼",
+          "sub": "- 클릭 시 History Back",
+          "top": 827,
+          "left": 54,
+          "selector": ""
+        },
+        {
+          "id": "id_1779408777304",
+          "num": 3,
+          "label": "3",
+          "depth": 0,
+          "title": "Next 버튼",
+          "sub": "- 클릭 시 STEP 1 이동",
+          "top": 821,
+          "left": 1721,
+          "selector": ""
+        }
+      ]
+    },
+    "1-1": {
+      "title": "등록 > STEP 01",
+      "overview": "",
+      "marks": [
+        {
+          "id": "id_1779408822573",
+          "num": 1,
+          "label": "1",
+          "depth": 0,
+          "title": "편집 툴 다운로드",
+          "sub": "- 편집툴 다운로드는 클릭 시 관리자에서 등록된\n   클라이언트 다운로드",
+          "top": 642,
+          "left": 854,
+          "selector": ""
+        }
+      ]
+    },
     "1-3": {
       "title": "등록 > STEP03",
       "overview": "",
@@ -259,7 +259,7 @@
           "label": "1",
           "depth": 0,
           "title": "마켓 정보 입력 란",
-          "sub": "└ 작품 카테고리 , ",
+          "sub": "└ 작품 카테고리 , 판매금액, 작품 게재기간, 작품명, 작품타입,\n     색상\n- 작품 카테고리, 판매금액, 작품 게제기간은 고정 수정 불가",
           "top": 455.5,
           "left": 960,
           "selector": ""
