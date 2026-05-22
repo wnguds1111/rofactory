@@ -389,6 +389,35 @@
                     </div>
 
                     <div class="filter-group">
+                        <div class="filter-title"><span data-en="Price" data-ko="가격">가격</span></div>
+                        <div class="filter-btns filter-price">
+                            <button class="f-btn" data-val="0"><span data-en="Free" data-ko="무료">무료</span></button>
+                        </div>
+                        <div style="display:none;">
+                            <div class="range-labels" style="margin-top: 25px;">
+                                <span id="priceMinLabel">0 KP</span>
+                                <span id="priceMaxLabel">20,000+ KP</span>
+                            </div>
+                            <div class="range-wrapper">
+                                <div class="range-track"></div>
+                                <div class="range-fill" id="rangeFill"></div>
+                                <input type="range" class="dual-range" id="minRange" min="0" max="20000" step="500" value="0">
+                                <input type="range" class="dual-range" id="maxRange" min="0" max="20000" step="500" value="20000">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="filter-group">
+                        <div class="filter-title"><span data-en="Sort" data-ko="정렬">정렬</span></div>
+                        <div class="filter-btns filter-sort">
+                            <button class="f-btn" data-val="new" data-en="NEW" data-ko="신상품">신상품</button>
+                            <button class="f-btn" data-val="trending" data-en="Trending" data-ko="인기순">인기순</button>
+                            <button class="f-btn" data-val="best" data-en="Best" data-ko="추천순">추천순</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
                         <div class="filter-title"><span data-en="Type" data-ko="타입">타입</span></div>
                         <div class="filter-btns filter-type">
                             <button class="f-btn" data-val="cute" data-en="#Cute" data-ko="#큐티">#큐티</button>
@@ -409,33 +438,6 @@
                         </div>
                     </div>
 
-                    <div class="filter-group">
-                        <div class="filter-title"><span data-en="Price" data-ko="가격">가격</span></div>
-                        <div class="filter-btns filter-price">
-                            <button class="f-btn" data-val="0"><span data-en="Free" data-ko="무료">무료</span></button>
-                        </div>
-                        <div style="display:none;">
-                            <div class="range-labels" style="margin-top: 25px;">
-                                <span id="priceMinLabel">0 KP</span>
-                                <span id="priceMaxLabel">20,000+ KP</span>
-                            </div>
-                            <div class="range-wrapper">
-                                <div class="range-track"></div>
-                                <div class="range-fill" id="rangeFill"></div>
-                                <input type="range" class="dual-range" id="minRange" min="0" max="20000" step="500" value="0">
-                                <input type="range" class="dual-range" id="maxRange" min="0" max="20000" step="500" value="20000">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <div class="filter-title"><span data-en="Sort" data-ko="정렬">정렬</span></div>
-                        <div class="filter-btns filter-sort">
-                            <button class="f-btn" data-val="new" data-en="NEW" data-ko="신상품">신상품</button>
-                            <button class="f-btn" data-val="trending" data-en="Trending" data-ko="인기순">인기순</button>
-                            <button class="f-btn" data-val="best" data-en="Best" data-ko="추천순">추천순</button>
-                        </div>
-                    </div>
                 </aside>
 
                 <!-- Main Content -->
