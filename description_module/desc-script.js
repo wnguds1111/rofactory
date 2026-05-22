@@ -30,7 +30,7 @@ window.isLocalEnv = false;
 const ALLOWED_IPS = ['119.192.146.202', 'localhost', '127.0.0.1', '::1'];
 
 // 초기 권한 확인 및 스타일 처리
-(async function initPermission() {
+window.permissionCheckPromise = (async function initPermission() {
     // 일단 버튼을 기본적으로 보이지 않게 처리하는 스타일 동적 삽입
     const styleEl = document.createElement('style');
     styleEl.id = 'desc-edit-lock-style';
@@ -170,7 +170,39 @@ setInterval(() => {
 // 전체 페이지 데이터 캐시 (모든 페이지 데이터를 한 번에 로드)
 window.descAllPagesData = null;
 
+function isPageEmpty(page) {
+    if (!page) return true;
+    const hasTitle = !!(page.title && page.title.trim());
+    const hasOverview = !!(page.overview && page.overview.trim());
+    const hasMarks = !!(page.marks && page.marks.length > 0);
+    return !hasTitle && !hasOverview && !hasMarks;
+}
+
+function arePagesEqual(p1, p2) {
+    if (!p1 || !p2) return false;
+    if ((p1.title || '') !== (p2.title || '')) return false;
+    if ((p1.overview || '').trim() !== (p2.overview || '').trim()) return false;
+    const m1 = p1.marks || [];
+    const m2 = p2.marks || [];
+    if (m1.length !== m2.length) return false;
+    for (let i = 0; i < m1.length; i++) {
+        const a = m1[i];
+        const b = m2[i];
+        if (a.title !== b.title) return false;
+        if (a.sub !== b.sub) return false;
+        if (a.top !== b.top) return false;
+        if (a.left !== b.left) return false;
+        if (a.depth !== b.depth) return false;
+        if (a.selector !== b.selector) return false;
+    }
+    return true;
+}
+
 async function loadDescData() {
+    if (window.permissionCheckPromise) {
+        await window.permissionCheckPromise;
+    }
+
     const jsonUrl = window.descModuleBasePath + 'description_module/desc-data.json';
     let serverData = null;
     try {
@@ -184,12 +216,31 @@ async function loadDescData() {
 
     let localData = null;
     try {
-        const localStr = localStorage.getItem('rofactory_desc_all_pages_data');
-        if (localStr) {
-            localData = JSON.parse(localStr);
+        const draftsStr = localStorage.getItem('rofactory_desc_drafts');
+        if (draftsStr) {
+            localData = JSON.parse(draftsStr);
+        } else {
+            const oldStr = localStorage.getItem('rofactory_desc_all_pages_data');
+            if (oldStr) {
+                const oldData = JSON.parse(oldStr);
+                if (oldData && oldData.pages) {
+                    // Migrate to drafts
+                    const newDrafts = { pages: {} };
+                    for (const key in oldData.pages) {
+                        const page = oldData.pages[key];
+                        const serverPage = serverData && serverData.pages ? serverData.pages[key] : null;
+                        if (!isPageEmpty(page) && (!serverPage || !arePagesEqual(page, serverPage))) {
+                            newDrafts.pages[key] = page;
+                        }
+                    }
+                    localStorage.setItem('rofactory_desc_drafts', JSON.stringify(newDrafts));
+                    localData = newDrafts;
+                }
+                localStorage.removeItem('rofactory_desc_all_pages_data');
+            }
         }
     } catch (e) {
-        console.error('로컬스토리지 데이터 로드 실패:', e);
+        console.error('로컬스토리지 데이터 로드/마이그레이션 실패:', e);
     }
 
     // Merge logic: serverData가 기본이며 localData(최신 로컬 편집)가 있으면 덮어씁니다.
@@ -199,8 +250,24 @@ async function loadDescData() {
         Object.assign(mergedData.pages, serverData.pages);
     }
     
-    if (localData && localData.pages) {
-        Object.assign(mergedData.pages, localData.pages);
+    if (window.hasEditPermission && localData && localData.pages) {
+        for (const key in localData.pages) {
+            const localPage = localData.pages[key];
+            const serverPage = serverData && serverData.pages ? serverData.pages[key] : null;
+            
+            // Skip empty pages
+            if (isPageEmpty(localPage)) {
+                continue;
+            }
+            
+            // Skip pages that are identical to the server
+            if (serverPage && arePagesEqual(localPage, serverPage)) {
+                continue;
+            }
+            
+            // Otherwise, override
+            mergedData.pages[key] = localPage;
+        }
     }
 
     window.descAllPagesData = mergedData;
@@ -278,7 +345,7 @@ function saveBuilderMarks(re_render = true) {
     const pageKey = getTargetKey();
 
     if (!window.descAllPagesData) window.descAllPagesData = { pages: {} };
-    window.descAllPagesData.pages[pageKey] = {
+    const pageData = {
         title: window.descPageTitle,
         overview: window.descPageOverview.trim(),
         marks: window.currentMarks.map(m => ({
@@ -287,10 +354,18 @@ function saveBuilderMarks(re_render = true) {
             top: m.top, left: m.left, selector: m.selector || ''
         }))
     };
+    window.descAllPagesData.pages[pageKey] = pageData;
 
-    // 로컬스토리지 캐시 저장
+    // 로컬스토리지 캐시 저장 (드래프트 키에만 변경 사항 저장)
     try {
-        localStorage.setItem('rofactory_desc_all_pages_data', JSON.stringify(window.descAllPagesData));
+        let drafts = { pages: {} };
+        const draftsStr = localStorage.getItem('rofactory_desc_drafts');
+        if (draftsStr) {
+            drafts = JSON.parse(draftsStr);
+        }
+        if (!drafts.pages) drafts.pages = {};
+        drafts.pages[pageKey] = pageData;
+        localStorage.setItem('rofactory_desc_drafts', JSON.stringify(drafts));
     } catch (e) {
         console.error('로컬스토리지 캐시 저장 실패:', e);
     }
@@ -619,12 +694,12 @@ async function toggleLock() {
         const pageKey = getTargetKey();
         if (localOk || githubOk) {
             try {
-                const localStr = localStorage.getItem('rofactory_desc_all_pages_data');
-                if (localStr) {
-                    const localData = JSON.parse(localStr);
-                    if (localData && localData.pages) {
-                        delete localData.pages[pageKey];
-                        localStorage.setItem('rofactory_desc_all_pages_data', JSON.stringify(localData));
+                const draftsStr = localStorage.getItem('rofactory_desc_drafts');
+                if (draftsStr) {
+                    const drafts = JSON.parse(draftsStr);
+                    if (drafts && drafts.pages) {
+                        delete drafts.pages[pageKey];
+                        localStorage.setItem('rofactory_desc_drafts', JSON.stringify(drafts));
                     }
                 }
             } catch (e) {
@@ -720,6 +795,7 @@ window.promptGithubToken = function() {
 
 window.resetDescCache = async function() {
     if (confirm('로컬 캐시를 초기화하고 서버의 최신 기획 데이터로 새로고침 하시겠습니까?\n(저장하지 않은 편집 내용은 사라집니다.)')) {
+        localStorage.removeItem('rofactory_desc_drafts');
         localStorage.removeItem('rofactory_desc_all_pages_data');
         window.descAllPagesData = null;
         await loadDescData();
