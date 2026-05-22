@@ -250,7 +250,7 @@ async function loadDescData() {
         Object.assign(mergedData.pages, serverData.pages);
     }
     
-    if (window.hasEditPermission && localData && localData.pages) {
+    if (localData && localData.pages) {
         for (const key in localData.pages) {
             const localPage = localData.pages[key];
             const serverPage = serverData && serverData.pages ? serverData.pages[key] : null;
@@ -262,6 +262,18 @@ async function loadDescData() {
             
             // Skip pages that are identical to the server
             if (serverPage && arePagesEqual(localPage, serverPage)) {
+                try {
+                    const draftsStr = localStorage.getItem('rofactory_desc_drafts');
+                    if (draftsStr) {
+                        const drafts = JSON.parse(draftsStr);
+                        if (drafts && drafts.pages) {
+                            delete drafts.pages[key];
+                            localStorage.setItem('rofactory_desc_drafts', JSON.stringify(drafts));
+                        }
+                    }
+                } catch (e) {
+                    console.error("로컬 스토리지 캐시 자동 삭제 실패:", e);
+                }
                 continue;
             }
             
@@ -693,17 +705,24 @@ async function toggleLock() {
 
         const pageKey = getTargetKey();
         if (localOk || githubOk) {
-            try {
-                const draftsStr = localStorage.getItem('rofactory_desc_drafts');
-                if (draftsStr) {
-                    const drafts = JSON.parse(draftsStr);
-                    if (drafts && drafts.pages) {
-                        delete drafts.pages[pageKey];
-                        localStorage.setItem('rofactory_desc_drafts', JSON.stringify(drafts));
+            // 로컬 환경이고 로컬 저장이 완료된 경우에만 즉시 캐시를 비웁니다.
+            // GitHub Pages의 경우 배포 지연(1~2분)이 있으므로, 즉시 캐시를 지우면
+            // 서버에서 이전 데이터를 다시 불러와 수정한 내용이 일시적으로 사라지는 문제가 발생합니다.
+            // 따라서 배포가 완료되어 서버 데이터가 캐시와 완전히 일치할 때 loadDescData() 내의
+            // 자동 캐시 삭제 기능(arePagesEqual 비교)에 의해 안전하게 정리되도록 합니다.
+            if (window.isLocalEnv && localOk) {
+                try {
+                    const draftsStr = localStorage.getItem('rofactory_desc_drafts');
+                    if (draftsStr) {
+                        const drafts = JSON.parse(draftsStr);
+                        if (drafts && drafts.pages) {
+                            delete drafts.pages[pageKey];
+                            localStorage.setItem('rofactory_desc_drafts', JSON.stringify(drafts));
+                        }
                     }
+                } catch (e) {
+                    console.error("로컬 스토리지 캐시 삭제 실패:", e);
                 }
-            } catch (e) {
-                console.error("로컬 스토리지 캐시 삭제 실패:", e);
             }
             window.descAllPagesData = null;
             await loadDescData();
