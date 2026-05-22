@@ -369,8 +369,8 @@
             <!-- Search Bar -->
             <div class="market-search-bar">
                 <input type="text" class="market-search-input" placeholder="발자국을 검색해보세요." data-ko="발자국을 검색해보세요." data-en="Search for footprints.">
-                <button class="market-search-btn" style="font-size: 12px;">&#10006;</button>
-                <button class="market-search-btn search-submit-btn" style="font-weight:700; font-size:13px; padding:0 18px; color:#025DD0; border-left:1px solid #e2e8f0;">검색</button>
+                <button class="market-search-btn" style="font-size: 12px; display:none;">&#10006;</button>
+                <button class="market-search-btn search-submit-btn" style="font-weight:700; font-size:13px; padding:0 18px; color:#025DD0; border-left:1px solid #e2e8f0;"><span style="display:none;">검색</span></button>
             </div>
 
             <div class="market-layout">
@@ -732,17 +732,17 @@
         let mockProducts = [
             { id: 1,  title: '포링의 벚꽃 <span data-en="Footprints" data-ko="발자국">Footprints</span>', type: 'cute',  color: 'red',    price: 0,     isFree: true,  tag: 'NEW',  hearts: 21,   img: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)', icon: '🌸', pubDate: '10.01.2026' },
 
-            { id: 2,  title: '<span data-en="Ice Crystal Footprints" data-ko="얼음 수정 발자국">Ice Crystal Footprints</span>', type: 'fancy', color: 'blue',   price: 1200,  isFree: false, tag: 'BEST', hearts: 350,  img: 'linear-gradient(to top, #00c6fb 0%, #005bea 100%)', icon: '❄️', pubDate: '15.01.2026' },
-            { id: 3,  title: '<span data-en="Steps of Dark Abyss" data-ko="어둠의 심연의 걸음">Steps of Dark Abyss</span>', type: 'dark',  color: 'black',  price: 5500,  isFree: false, tag: 'HOT',  hearts: 140,  img: 'linear-gradient(to right, #434343 0%, black 100%)', icon: '🌑', pubDate: '20.01.2026' },
-            { id: 4,  title: '<span data-en="Green Umbrella Step" data-ko="초록우산 아이의 스텝">Green Umbrella Step</span>', type: 'cute',  color: 'green',  price: 300,   isFree: false, tag: '',     hearts: 5,    img: 'linear-gradient(to top, #0ba360 0%, #3cba92 100%)', icon: '☂️', pubDate: '22.01.2026' },
-            { id: 5,  title: '<span data-en="Golden Elf Trajectory" data-ko="황금빛 엘프의 궤적">Golden Elf Trajectory</span>', type: 'fancy', color: 'yellow', price: 9000,  isFree: false, tag: 'BEST', hearts: 1000, img: 'linear-gradient(to right, #f83600 0%, #f9d423 100%)', icon: '✨', pubDate: '25.01.2026' },
+            { id: 2,  title: '<span data-en="Ice Crystal Footprints" data-ko="얼음 수정 발자국">Ice Crystal Footprints</span>', type: 'fancy', color: 'blue',   price: 0,     isFree: true, tag: 'BEST', hearts: 350,  img: 'linear-gradient(to top, #00c6fb 0%, #005bea 100%)', icon: '❄️', pubDate: '15.01.2026' },
+            { id: 3,  title: '<span data-en="Steps of Dark Abyss" data-ko="어둠의 심연의 걸음">Steps of Dark Abyss</span>', type: 'dark',  color: 'black',  price: 0,     isFree: true, tag: 'HOT',  hearts: 140,  img: 'linear-gradient(to right, #434343 0%, black 100%)', icon: '🌑', pubDate: '20.01.2026' },
+            { id: 4,  title: '<span data-en="Green Umbrella Step" data-ko="초록우산 아이의 스텝">Green Umbrella Step</span>', type: 'cute',  color: 'green',  price: 0,     isFree: true, tag: '',     hearts: 5,    img: 'linear-gradient(to top, #0ba360 0%, #3cba92 100%)', icon: '☂️', pubDate: '22.01.2026' },
+            { id: 5,  title: '<span data-en="Golden Elf Trajectory" data-ko="황금빛 엘프의 궤적">Golden Elf Trajectory</span>', type: 'fancy', color: 'yellow', price: 0,     isFree: true, tag: 'BEST', hearts: 1000, img: 'linear-gradient(to right, #f83600 0%, #f9d423 100%)', icon: '✨', pubDate: '25.01.2026' },
             { id: 6,  title: `<span data-en="Dark Mage's Trace" data-ko="다크메이지의 잿빛흔적">Dark Mage's Trace</span>`, type: 'dark',  color: 'black',  price: 0,     isFree: true,  tag: '',     hearts: 89,   img: 'linear-gradient(to bottom, #8e9eab, #eef2f3)', icon: '🔮', pubDate: '01.02.2026' },
-            { id: 7,  title: '<span data-en="Burning Lava Fragment" data-ko="불타는 용암 조각">Burning Lava Fragment</span>', type: 'fancy', color: 'red',    price: 15000, isFree: false, tag: 'NEW',  hearts: 12,   img: 'linear-gradient(to right, #ff0844 0%, #ffb199 100%)', icon: '🔥', pubDate: '05.02.2026' },
+            { id: 7,  title: '<span data-en="Burning Lava Fragment" data-ko="불타는 용암 조각">Burning Lava Fragment</span>', type: 'fancy', color: 'red',    price: 0,     isFree: true, tag: 'NEW',  hearts: 12,   img: 'linear-gradient(to right, #ff0844 0%, #ffb199 100%)', icon: '🔥', pubDate: '05.02.2026' },
             { id: 8,  title: '<span data-en="Pure Snow Footsteps" data-ko="퓨어 스노우 발걸음">Pure Snow Footsteps</span>', type: 'cute',  color: 'white',  price: 0,     isFree: true,  tag: '',     hearts: 60,   img: 'linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)', icon: '⛄', pubDate: '10.02.2026' },
-            { id: 9,  title: '<span data-en="Aqua Marine Slide" data-ko="아쿠아 마린 슬라이드">Aqua Marine Slide</span>', type: 'fancy', color: 'blue',   price: 4200,  isFree: false, tag: 'HOT',  hearts: 220,  img: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)', icon: '🌊', pubDate: '15.02.2026' },
-            { id: 10, title: '<span data-en="Necromancer Skull Dance" data-ko="네크로맨서의 해골 춤">Necromancer Skull Dance</span>', type: 'dark',  color: 'black',  price: 8500,  isFree: false, tag: '',     hearts: 44,   img: 'linear-gradient(to right, #000000, #434343)', icon: '💀', pubDate: '18.02.2026' },
-            { id: 11, title: '<span data-en="Rabbit Jump Step" data-ko="토끼의 점프 스텝">Rabbit Jump Step</span>', type: 'cute',  color: 'white',  price: 500,   isFree: false, tag: 'BEST', hearts: 402,  img: 'linear-gradient(to right, #74ebd5 0%, #9face6 100%)', icon: '🐰', pubDate: '20.02.2026' },
-            { id: 12, title: '<span data-en="Dazzling Angel Feather" data-ko="눈부신 천사의 깃털">Dazzling Angel Feather</span>', type: 'fancy', color: 'white',  price: 20000, isFree: false, tag: 'NEW',  hearts: 300,  img: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)', icon: '🕊️', pubDate: '01.03.2026' }
+            { id: 9,  title: '<span data-en="Aqua Marine Slide" data-ko="아쿠아 마린 슬라이드">Aqua Marine Slide</span>', type: 'fancy', color: 'blue',   price: 0,     isFree: true, tag: 'HOT',  hearts: 220,  img: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)', icon: '🌊', pubDate: '15.02.2026' },
+            { id: 10, title: '<span data-en="Necromancer Skull Dance" data-ko="네크로맨서의 해골 춤">Necromancer Skull Dance</span>', type: 'dark',  color: 'black',  price: 0,     isFree: true, tag: '',     hearts: 44,   img: 'linear-gradient(to right, #000000, #434343)', icon: '💀', pubDate: '18.02.2026' },
+            { id: 11, title: '<span data-en="Rabbit Jump Step" data-ko="토끼의 점프 스텝">Rabbit Jump Step</span>', type: 'cute',  color: 'white',  price: 0,     isFree: true, tag: 'BEST', hearts: 402,  img: 'linear-gradient(to right, #74ebd5 0%, #9face6 100%)', icon: '🐰', pubDate: '20.02.2026' },
+            { id: 12, title: '<span data-en="Dazzling Angel Feather" data-ko="눈부신 천사의 깃털">Dazzling Angel Feather</span>', type: 'fancy', color: 'white',  price: 0,     isFree: true, tag: 'NEW',  hearts: 300,  img: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)', icon: '🕊️', pubDate: '01.03.2026' }
         ];
 
 
