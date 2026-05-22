@@ -702,6 +702,7 @@
             const p = mockProducts.find(x => x.id === currentProductId);
             if (!p) return;
             
+            /*
             // Populate the payment modal UI
             document.getElementById('modal-current-balance').innerText = `${currentPoints.toLocaleString()} KP`;
             document.getElementById('modal-item-name').innerHTML = p.title;
@@ -736,6 +737,8 @@
             }
             
             document.getElementById('paymentModal').classList.add('active');
+            */
+            executePayment();
         }
 
         function closePaymentModal() {
