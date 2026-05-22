@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RO FACTORY 작품 등록 - 나만의 발자국 에셋을 글로벌 마켓에 등록하세요.">
+    <meta name="description" content="RO FACTORY ?�품 ?�록 - ?�만??발자�??�셋??글로벌 마켓???�록?�세??">
     <title>RO FACTORY</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=3.0">
     <style type="text/tailwindcss">
-        /* ── Terms Modal (JS 동적 클래스 제어 필요) ── */
+        /* ?�?� Terms Modal (JS ?�적 ?�래???�어 ?�요) ?�?� */
         .terms-modal-overlay { @apply hidden fixed inset-0 bg-black/60 z-[9999] opacity-0 transition-opacity duration-300 items-center justify-center p-5; }
         .terms-modal-overlay.show { @apply flex opacity-100; }
         .terms-modal { @apply bg-white rounded-[20px] md:p-9 p-6 max-w-[560px] w-full max-h-[80vh] flex flex-col md:gap-5 gap-4 shadow-[0_24px_60px_rgba(0,0,0,0.25)]; }
@@ -17,7 +17,7 @@
         .btn-close-modal { @apply bg-gradient-to-br from-blue-500 to-blue-700 text-white border-none p-[14px] rounded-[12px] text-[14px] font-extrabold cursor-pointer w-full transition-colors duration-200; }
         .btn-close-modal:disabled { @apply bg-slate-300 !from-slate-300 !to-slate-300 cursor-not-allowed opacity-70; }
 
-        /* ── 모바일 반응형 (Tailwind @media로 처리 불가한 부분만) ── */
+        /* ?�?� 모바??반응??(Tailwind @media�?처리 불�???부분만) ?�?� */
         @media (max-width: 767px) {
             .gnb .container { height: 50px !important; }
             .gnb { box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
@@ -34,112 +34,112 @@
     <div class="w-full overflow-hidden">
         <div class="w-full relative max-w-[1200px] mx-auto">
             <div class="char-sticker char-left hidden xl:block">
-                    <img src="images/register_cha1.png" alt="상인_알케미스트_남">
+                    <img src="images/register_cha1.png" alt="?�인_?��?미스????>
                 </div>
                 
                 <div class="char-sticker char-right hidden xl:block">
-                    <img src="images/register_cha2.png" alt="프리스트_여">
+                    <img src="images/register_cha2.png" alt="?�리?�트_??>
                 </div>
 
                 <div class="char-sticker char-top-right hidden xl:block">
-                    <img src="images/register_cha3.png" alt="픽키">
+                    <img src="images/register_cha3.png" alt="?�키">
                 </div>
             <!-- STEP 0: INTRO OVERVIEW -->
             <div class="step-panel active text-center" id="step0">            
                 <h2 class="step-title">
-                    <span data-en="Welcome!" data-ko="환영합니다!">환영합니다!</span>
+                    <span data-en="Welcome!" data-ko="?�영?�니??">?�영?�니??</span>
                     <br>
                     <span data-en="Shall we start registering my own Footprints?">
-                        나만의 발자국등록을 시작해볼까요?
+                        ?�만??발자�?��록을 ?�작?�볼까요?
                     </span>
                 </h2>
-                <p class="step-desc" data-en="It only takes 4 steps to create my own Footprints.">단 4개의 과정만 거치면 나만의 발자국 이 탄생합니다.</p>
+                <p class="step-desc" data-en="It only takes 4 steps to create my own Footprints.">??4개의 과정�?거치�??�만??발자�????�생?�니??</p>
 
                 <div class="intro-steps-list">
                     <div class="intro-card">
                         <span class="font-pixel step-tag">STEP 1</span>            
                         <div class="step-icon flex justify-center"><img src="images/1.png" style="width: 60px; height: auto; display: block;" alt=""></div>
-                        <h4 data-en="Prepare files">파일 준비</h4>
-                        <p data-en="Extract the foot original and video clips to the PC using the dedicated editing tool.">전용 편집툴에서 .foot 원본과 영상 클립을 PC로 추출합니다.</p>
+                        <h4 data-en="Prepare files">?�일 준�?/h4>
+                        <p data-en="Extract the foot original and video clips to the PC using the dedicated editing tool.">?�용 ?�집?�에??.foot ?�본�??�상 ?�립??PC�?추출?�니??</p>
                     </div>
                     <div class="intro-card">
                         <span class="font-pixel step-tag">STEP 2</span>
                         <div class="step-icon flex justify-center"><img src="images/2.png" style="width: 60px; height: auto; display: block;" alt=""></div>
-                        <h4 data-en="Upload assets">에셋 업로드</h4>
-                        <p data-en="Safely register the extracted files and thumbnails on the server.">추출하신 파일들과 썸네일을 안전하게 서버에 등록합니다.</p>
+                        <h4 data-en="Upload assets">?�셋 ?�로??/h4>
+                        <p data-en="Safely register the extracted files and thumbnails on the server.">추출?�신 ?�일?�과 ?�네?�을 ?�전?�게 ?�버???�록?�니??</p>
                     </div>
                     <div class="intro-card">
                         <span class="font-pixel step-tag">STEP 3</span>
                         <div class="step-icon flex justify-center"><img src="images/3.png" style="width: 60px; height: auto; display: block;" alt=""></div>
-                        <h4 data-en="Enter market information">마켓 정보 입력</h4>
-                        <p data-en="Decide and input detailed data such as title, price, and tags.">작품명과 가격, 태그 등 상세 데이터를 결정하고 기입합니다.</p>
+                        <h4 data-en="Enter market information">마켓 ?�보 ?�력</h4>
+                        <p data-en="Decide and input detailed data such as title, price, and tags.">?�품명과 가�? ?�그 ???�세 ?�이?��? 결정?�고 기입?�니??</p>
                     </div>
                     <div class="intro-card">
                         <span class="font-pixel step-tag">STEP 4</span>
                         <div class="step-icon flex justify-center"><img src="images/3.png" style="width: 60px; height: auto; display: block;" alt=""></div>
-                        <h4 data-en="File conversion complete">파일 변환 완료</h4>
-                        <p data-en="Uploaded files will be automatically listed in the global market after conversion!">업로드 파일이 변환을 거쳐 글로벌 마켓에 자동 등재됩니다!</p>
+                        <h4 data-en="File conversion complete">?�일 변???�료</h4>
+                        <p data-en="Uploaded files will be automatically listed in the global market after conversion!">?�로???�일??변?�을 거쳐 글로벌 마켓???�동 ?�재?�니??</p>
                     </div>
                 </div>
 
                 <div class="alert-notice" style="margin-top:32px; background:#fef9c3; border:1px solid #fde68a; border-radius:12px; padding:16px 24px; font-size:14px; color:#78350f; font-weight:600; max-width:640px; margin-left:auto; margin-right:auto; text-align:left;">
-                    ⚠️ <strong>중요 안내:</strong> 판매대기 상태의 발자국은 <strong>수정 및 삭제가 불가합니다.</strong> 등록 내용에 변동이 있을 경우 판매대기 전인 변환 중 상태에서만 삭제 및 신규 등록이 가능합니다.
+                    ?�️ <strong>중요 ?�내:</strong> ?�매?��??�태??발자�?? <strong>?�정 �???��가 불�??�니??</strong> ?�록 ?�용??변?�이 ?�을 경우 ?�매?��??�인 변??�??�태?�서�???�� �??�규 ?�록??가?�합?�다.
                 </div>
             </div>
 
             <!-- STEP 1: TOOL INSTRUCTION -->
             <div class="step-panel text-center" id="step1">
                 <div class="step-sub">STEP 1.</div>
-                <h2 class="step-title" data-en="Please prepare the file first in the editing tool.">편집툴에서 파일을 먼저 준비해주세요.</h2>
+                <h2 class="step-title" data-en="Please prepare the file first in the editing tool.">?�집?�에???�일??먼�? 준비해주세??</h2>
                 <p class="step-desc mb-30" data-en="After running ROFactory official editing tools,<br>
-    Please save the original file foot and video preview file foot and video preview files.">RO Factory 공식 편집툴을 실행한 뒤,<br>제작하신 작품의 <strong>원본 파일(.foot)</strong>과 <strong>동영상 미리보기 파일</strong>을 미리 저장해주세요.</p>
+    Please save the original file foot and video preview file foot and video preview files.">RO Factory 공식 ?�집?�을 ?�행????<br>?�작?�신 ?�품??<strong>?�본 ?�일(.foot)</strong>�?<strong>?�영??미리보기 ?�일</strong>??미리 ?�?�해주세??</p>
 
                 <div class="tool-guide-box">
                     <div class="anim-icon flex justify-center"><img src="images/step1_img.png" style="width: 140px; height: auto; display: block;" alt=""></div>
-                    <h3 data-en="Are you not ready for the file yet?">아직 파일 준비가 안되셨나요?</h3>
-                    <p data-en="Create your own footprints by downloading the editing tool.">편집툴을 다운하여 나만의 발자국을 만들어보세요.</p>
-                    <button class="btn-tool-download" onclick="alert('UGC 편집 툴 다운로드 (준비 중)')" data-en="Download UGC Edit Tool">UGC 편집 툴 다운로드</button>
+                    <h3 data-en="Are you not ready for the file yet?">?�직 ?�일 준비�? ?�되?�나??</h3>
+                    <p data-en="Create your own footprints by downloading the editing tool.">?�집?�을 ?�운?�여 ?�만??발자�?�� 만들?�보?�요.</p>
+                    <button class="btn-tool-download" onclick="alert('UGC ?�집 ???�운로드 (준�?�?')" data-en="Download UGC Edit Tool">UGC ?�집 ???�운로드</button>
                 </div>
             </div>
 
             <!-- STEP 2: FILE UPLOAD + TERMS -->
             <div class="step-panel" id="step2">
                 <div class="step-sub text-center">STEP 2.</div>
-                <h2 class="step-title text-center" data-en="Register Footprint File">발자국 파일 등록</h2>
-                <p class="step-desc text-center mb-30" data-en="Upload the asset files extracted from the editing tool and agree to the terms and conditions">편집툴에서 추출해둔 에셋 파일들을 업로드하고 약관에 동의합니다.</p>
+                <h2 class="step-title text-center" data-en="Register Footprint File">발자�??�일 ?�록</h2>
+                <p class="step-desc text-center mb-30" data-en="Upload the asset files extracted from the editing tool and agree to the terms and conditions">?�집?�에??추출?�둔 ?�셋 ?�일?�을 ?�로?�하�??��????�의?�니??</p>
                 
                 <div class="form-container-clean">
-                    <!-- 1x4 파일 그리드 -->
+                    <!-- 1x4 ?�일 그리??-->
                     <div class="file-grid" style="grid-template-columns:repeat(4,1fr); gap:14px;">
                         <div class="file-box" onclick="document.getElementById('f1').click()">
-                            <div class="icon">📁</div>
-                            <h4 data-en="Footprint Source Data">발자국 원본 데이터</h4><span>(.foot 확장자 필수)</span>
+                            <div class="icon">?��</div>
+                            <h4 data-en="Footprint Source Data">발자�??�본 ?�이??/h4><span>(.foot ?�장???�수)</span>
                             <input type="file" id="f1" style="display:none" accept=".foot" onchange="handleFileSelect(this, 'f1_name')">
                             <span id="f1_name" style="display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;"></span>
                         </div>
                         <div class="file-box" onclick="document.getElementById('f2').click()">
-                            <div class="icon">🎬</div>
-                            <h4 data-en="Video Preview File">동영상 미리보기 파일</h4><span>(.mp4 / .mov 권장)</span>
+                            <div class="icon">?��</div>
+                            <h4 data-en="Video Preview File">?�영??미리보기 ?�일</h4><span>(.mp4 / .mov 권장)</span>
                             <input type="file" id="f2" style="display:none" accept="video/*" onchange="handleFileSelect(this, 'f2_name')">
                             <span id="f2_name" style="display:block; margin-top:10px; font-weight:900; color:#3b82f6; word-break: break-all;"></span>
                         </div>
                         <div class="file-box" id="f3_box" onclick="document.getElementById('f3').click()">
-                            <div class="icon" style="color: #6366f1;">💎</div>
-                            <h4 data-en="Collection Thumbnail">콜렉션 썸네일</h4><span>(<span data-en="Market" data-ko="마켓">마켓</span> 노출용 누끼 .png)</span>
+                            <div class="icon" style="color: #6366f1;">?��</div>
+                            <h4 data-en="Collection Thumbnail">콜렉???�네??/h4><span>(<span data-en="Market" data-ko="마켓">마켓</span> ?�출???�끼 .png)</span>
                             <input type="file" id="f3" style="display:none" accept=".png" onchange="handleImageSelect(this, 'f3_box', 'f3_name')">
                         </div>
                         <div class="file-box" id="f4_box" onclick="document.getElementById('f4').click()">
-                            <div class="icon" style="color: #d97706;">🎒</div>
-                            <h4 data-en="Item thumbnail">아이템 썸네일</h4><span>(인게임 아이템 적용 가능 이미지)</span>
+                            <div class="icon" style="color: #d97706;">?��</div>
+                            <h4 data-en="Item thumbnail">?�이???�네??/h4><span>(?�게???�이???�용 가???��?지)</span>
                             <input type="file" id="f4" style="display:none" accept=".png,.jpg,.jpeg" onchange="handleImageSelect(this, 'f4_box', 'f4_name')">
                         </div>
                     </div>
 
-                    <div class="section-divider" data-en="Agree to Terms and Conditions">약관 동의 <span style="color:#ef4444; ">*필수</span></div>
+                    <div class="section-divider" data-en="Agree to Terms and Conditions">?��? ?�의 <span style="color:#ef4444; ">*?�수</span></div>
                     <label class="custom-chk" onclick="forceOpenTerms(event)">
                         <input type="checkbox" id="termsChk" onclick="return false;">
                         <div class="chk-box"></div>
-                        <span class="chk-text">제3자의 저작권, 초상권 등 제반 권리를 침해하지 않으며 분쟁 시 당사자가 법적 책임을 지는 것에 동의합니다. <a href="#" onclick="forceOpenTerms(event)" style="font-weight:600;" data-en="(view)">(약관 보기)</a></span>
+                        <span class="chk-text">???�의 ?�?�권, 초상�????�반 권리�?침해?��? ?�으�?분쟁 ???�사?��? 법적 책임??지??것에 ?�의?�니?? <a href="#" onclick="forceOpenTerms(event)" style="font-weight:600;" data-en="(view)">(?��? 보기)</a></span>
                     </label>
                 </div>
             </div>
@@ -147,35 +147,35 @@
             <!-- STEP 3: MARKET INFO -->
             <div class="step-panel" id="step3" style="padding-top:24px;">
                 <div class="step-sub text-center">STEP 3.</div>
-                <h2 class="step-title text-center" style="margin-bottom:6px;"><span data-en="Market" data-ko="마켓">마켓</span> 정보 입력</h2>
-                <p class="step-desc text-center" style="margin-bottom:20px; font-size:14px;">글로벌 <span data-en="Market" data-ko="마켓">마켓</span>에 노출될 기초 데이터를 기입해주세요.</p>
+                <h2 class="step-title text-center" style="margin-bottom:6px;"><span data-en="Market" data-ko="마켓">마켓</span> ?�보 ?�력</h2>
+                <p class="step-desc text-center" style="margin-bottom:20px; font-size:14px;">글로벌 <span data-en="Market" data-ko="마켓">마켓</span>???�출??기초 ?�이?��? 기입?�주?�요.</p>
 
                 <div class="form-container-clean">
                     <div class="form-row" style="margin-bottom:16px;">
                         <div class="form-group half">
-                            <label>작품 카테고리</label>
-                            <input type="text" class="form-control" value="발자국" readonly>
+                            <label>?�품 카테고리</label>
+                            <input type="text" class="form-control" value="발자�? readonly>
                         </div>
                         <div class="form-group half">
-                            <label>판매 금액</label>
+                            <label>?�매 금액</label>
                             <input type="text" class="form-control" value="FREE" readonly>
                         </div>
                     </div>
                     <div class="form-row" style="margin-bottom:16px;">
                         <div class="form-group half">
-                            <label>작품 게재기간</label>
-                            <input type="text" class="form-control" value="상점 게시 시점 기준 90일" readonly style="background-color: #f8fafc; color: #64748b; font-weight: 500;">
+                            <label>?�품 게재기간</label>
+                            <input type="text" class="form-control" value="?�점 게시 ?�점 기�? 90?? readonly style="background-color: #f8fafc; color: #64748b; font-weight: 500;">
                         </div>
                         <div class="form-group half">
-                            <label>작품명 <span style="color:#ef4444;">*필수</span></label>
+                            <label>?�품�?<span style="color:#ef4444;">*?�수</span></label>
                             <input type="text" class="form-control" id="workTitle" placeholder="Enter title in English (max 20 chars)" maxlength="20" oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')">
                         </div>
                     </div>
 
-                    <!-- 작품 타입 + 메인 색상 나란히 -->
+                    <!-- ?�품 ?�??+ 메인 ?�상 ?��???-->
                     <div class="s3-bottom-row">
                         <div class="s3-card">
-                            <div class="s3-card-label">작품 타입 <span>최대 2개 선택</span></div>
+                            <div class="s3-card-label">?�품 ?�??<span>최�? 2�??�택</span></div>
                             <div class="tag-group" id="typeTags">
                                 <label class="tag-pill type-pill"><input type="checkbox" value="c1"> Cute</label>
                                 <label class="tag-pill type-pill"><input type="checkbox" value="c2"> Fancy</label>
@@ -186,7 +186,7 @@
                         </div>
                         <div class="s3-divider"></div>
                         <div class="s3-card">
-                            <div class="s3-card-label"><span data-en="Color" data-ko="색상">색상</span> <span>1개 선택 (선택)</span></div>
+                            <div class="s3-card-label"><span data-en="Color" data-ko="?�상">?�상</span> <span>1�??�택 (?�택)</span></div>
                             <div class="tag-group" id="colorTags">
                                 <label class="tag-pill color-pill">
                                     <input type="radio" name="mainColor" value="red">
@@ -221,13 +221,13 @@
             <!-- STEP 4: COMPLETION -->
             <div class="step-panel text-center" id="step4">
                 <div class="step-sub">STEP 4.</div>
-                <h2 class="step-title" style="margin-bottom: 40px;">성공적으로 마무리되었습니다!</h2>
+                <h2 class="step-title" style="margin-bottom: 40px;">?�공?�으�?마무리되?�습?�다!</h2>
                 <div class="completion-box">
                     <div class="anim-icon flex justify-center"><img src="images/step4_img.png" style="width: 260px; height: auto; display: block;" alt=""></div>
-                    <p>등록된 발자국은 차후 업데이트에서 상점에 순차적으로 등록됩니다.</p>
+                    <p>?�록??발자�?? 차후 ?�데?�트?�서 ?�점???�차?�으�??�록?�니??</p>
                     <div class="limit-box" style="background:#eff6ff; border:1px solid #bfdbfe;">
-                        <span style="color:#1e40af;">현재 보유 이용권</span>
-                        <strong style="color:#025DD0;">1 장</strong>
+                        <span style="color:#1e40af;">?�재 보유 ?�용�?/span>
+                        <strong style="color:#025DD0;">1 ??/strong>
                     </div>
                 </div>
             </div>
@@ -243,11 +243,11 @@
         <div style="display:flex; align-items:center; justify-content:space-between; width:100%; gap:12px;">
             <button class="btn-back" id="btnBack" onclick="handleBack()"
                 style="min-width:110px; display:flex; align-items:center; gap:6px; justify-content:center;">
-                ← <span id="btnBackLabel">BACK</span>
+                ??<span id="btnBackLabel">BACK</span>
             </button>
             <button class="btn-next" id="btnNext" onclick="nextStep()"
                 style="min-width:140px;">
-                <span id="btnNextLabel">NEXT →</span>
+                <span id="btnNextLabel">NEXT ??/span>
             </button>
         </div>
     </footer>
@@ -255,19 +255,19 @@
     <!-- Terms Modal -->
     <div id="termsModal" class="terms-modal-overlay" onclick="closeTerms(event)">
         <div class="terms-modal" onclick="event.stopPropagation()">
-            <h2>RO Factory 이용 약관</h2>
+            <h2>RO Factory ?�용 ?��?</h2>
             <div class="terms-content" id="termsContent" onscroll="checkTermsScroll()">
-                제 1장 총칙<br><br>
-                제 1조 목적<br>
-                이 약관은 사용자가 RO Factory 스튜디오를 통해 에셋(UGC)을 시장에 등록함에 있어 지적재산권 및 타인의 권리를 침해하지 않았음을 보증하며, 분쟁 발생 시 모든 1차적 법적 책임이 사용자 본인에게 있음을 명시합니다.<br><br>
-                제 2조 권리 보증<br>
-                등록하는 작품 내 포함된 모든 이미지, 모델링, 효과음 등은 제3자의 저작권을 침해하지 아니한 순수 창작물이거나 합법적으로 사용 권한을 획득한 에셋 포맷이어야 합니다.<br><br>
-                제 3조 법적 책임의 귀속<br>
-                만일 본인이 등록한 콘텐츠로 인하여 제 3자가 이의를 제기하거나 저작권법, 상표법 위반 등의 법적 분쟁이 발생할 경우, 업로더는 전적으로 당사자 간의 책임 아래 해결해야 하며 Gravity는 이로 인한 2차적 피해에 연루되지 않음을 원칙으로 합니다.<br><br>
-                해당 조항에 서명(체크박스 활성화)함으로써 사용자는 모든 규칙을 준수할 것을 인증하며 동의 절차를 갈음합니다.<br><br>
-                (본 약관의 동의 버튼 활성화를 위해 스크롤을 최하단으로 내려주세요)
+                ??1??총칙<br><br>
+                ??1�?목적<br>
+                ???��??� ?�용?��? RO Factory ?�튜?�오�??�해 ?�셋(UGC)???�장???�록?�에 ?�어 지?�재?�권 �??�?�의 권리�?침해?��? ?�았?�을 보증?�며, 분쟁 발생 ??모든 1차적 법적 책임???�용??본인?�게 ?�음??명시?�니??<br><br>
+                ??2�?권리 보증<br>
+                ?�록?�는 ?�품 ???�함??모든 ?��?지, 모델�? ?�과???��? ???�의 ?�?�권??침해?��? ?�니???�수 창작물이거나 ?�법?�으�??�용 권한???�득???�셋 ?�맷?�어???�니??<br><br>
+                ??3�?법적 책임??귀??br>
+                만일 본인???�록??콘텐츠로 ?�하????3?��? ?�의�??�기?�거???�?�권�? ?�표�??�반 ?�의 법적 분쟁??발생??경우, ?�로?�는 ?�적?�로 ?�사??간의 책임 ?�래 ?�결?�야 ?�며 Gravity???�로 ?�한 2차적 ?�해???�루?��? ?�음???�칙?�로 ?�니??<br><br>
+                ?�당 조항???�명(체크박스 ?�성???�으로써 ?�용?�는 모든 규칙??준?�할 것을 ?�증?�며 ?�의 ?�차�?갈음?�니??<br><br>
+                (�??��????�의 버튼 ?�성?��? ?�해 ?�크롤을 최하?�으�??�려주세??
             </div>
-            <button type="button" class="btn-close-modal" id="btnAgree" onclick="agreeTerms(event)" disabled style="opacity:0.5; cursor:not-allowed;">스크롤을 끝까지 내려주세요</button>
+            <button type="button" class="btn-close-modal" id="btnAgree" onclick="agreeTerms(event)" disabled style="opacity:0.5; cursor:not-allowed;">?�크롤을 ?�까지 ?�려주세??/button>
         </div>
     </div>
 </div>
@@ -287,7 +287,7 @@
             btn.disabled = false;
             btn.style.opacity = 1;
             btn.style.cursor = 'pointer';
-            btn.innerText = '확인 및 약관 동의하기';
+            btn.innerText = '?�인 �??��? ?�의?�기';
         }
     }
     function agreeTerms(e) {
@@ -304,7 +304,7 @@
             nameEl.style.overflow = 'hidden';
             nameEl.style.textOverflow = 'ellipsis';
             nameEl.style.maxWidth = '100%';
-            // 이모지 숨기기
+            // ?�모지 ?�기�?
             var box = input.closest('.file-box');
             if (box) {
                 var icon = box.querySelector('.icon');
@@ -318,7 +318,7 @@
             reader.onload = function(e) {
                 var box = document.getElementById(boxId);
 
-                // 썸네일 프리뷰
+                // ?�네???�리�?
                 var preview = box.querySelector('.preview-img');
                 if (!preview) {
                     preview = document.createElement('div');
@@ -331,7 +331,7 @@
                 preview.style.backgroundPosition = 'center';
                 preview.style.backgroundRepeat = 'no-repeat';
 
-                // 파일명 (한 줄 ellipsis)
+                // ?�일�?(??�?ellipsis)
                 var nameSpan = document.getElementById(nameId);
                 if (!nameSpan) {
                     nameSpan = document.createElement('span');
@@ -341,7 +341,7 @@
                 }
                 nameSpan.innerText = input.files[0].name;
 
-                // 이모지(.icon) 숨기기
+                // ?�모지(.icon) ?�기�?
                 var icon = box.querySelector('.icon');
                 if (icon) icon.style.display = 'none';
 
@@ -369,44 +369,44 @@
         const backLabel   = document.getElementById('btnBackLabel');
         const nextLabel   = document.getElementById('btnNextLabel');
 
-        // ── BACK 버튼 ──────────────────────────────────
+        // ?�?� BACK 버튼 ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
         if (currentStep === 0) {
-            // 첫 진입: 메인으로 가는 BACK 버튼 표시
+            // �?진입: 메인?�로 가??BACK 버튼 ?�시
             btnBack.style.visibility = 'visible';
             backLabel.textContent = 'BACK';
             btnBack.style.background = '';
             btnBack.style.color = '';
         } else if (currentStep === totalSteps) {
-            // 완료 화면: BACK 숨김
+            // ?�료 ?�면: BACK ?��?
             btnBack.style.visibility = 'hidden';
         } else {
-            // 중간 스텝: PREV 버튼
+            // 중간 ?�텝: PREV 버튼
             btnBack.style.visibility = 'visible';
             backLabel.textContent = 'PREV';
         }
 
-        // ── NEXT 버튼 ──────────────────────────────────
+        // ?�?� NEXT 버튼 ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
         if (currentStep === totalSteps - 1) {
-            // 마지막 입력 스텝: REGISTER
-            nextLabel.textContent = 'REGISTER →';
+            // 마�?�??�력 ?�텝: REGISTER
+            nextLabel.textContent = 'REGISTER ??;
             btnNext.style.background = 'linear-gradient(to right, #025dd0, #54b0e1)';
             btnNext.style.color = '#fff';
         } else if (currentStep === totalSteps) {
-            // 완료 화면: MY STUDIO
-            nextLabel.textContent = 'MY STUDIO ↗';
+            // ?�료 ?�면: MY STUDIO
+            nextLabel.textContent = 'MY STUDIO ??;
             btnNext.style.background = '#fff';
             btnNext.style.color = '#012553';
             btnNext.style.border = '1.5px solid #012553';
         } else {
-            // 일반 스텝: NEXT
-            nextLabel.textContent = 'NEXT →';
+            // ?�반 ?�텝: NEXT
+            nextLabel.textContent = 'NEXT ??;
             btnNext.style.background = 'var(--primary-bright)';
             btnNext.style.color = '#fff';
             btnNext.style.border = '';
         }
     }
 
-    // BACK 버튼 핸들러: step0 이면 메인, 그 외엔 prevStep
+    // BACK 버튼 ?�들?? step0 ?�면 메인, �??�엔 prevStep
     function handleBack() {
         if (currentStep === 0) {
             window.location.href = 'main2.html';
@@ -464,7 +464,7 @@
 </script>
     <!-- PRD DESCRIPTION INJECTION -->
     <script>window.currentPrdPageNum = 1;</script>
-    <script src="description_module/desc-script.js?v=3.0"></script>
+    <script src="description_module/desc-script.js?v=3.1"></script>
     <!-- // PRD DESCRIPTION INJECTION -->
 </body>
 </html>

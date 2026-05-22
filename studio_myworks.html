@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -82,7 +82,7 @@
         .footer { @apply mt-12; }
         .footer img { @apply w-full h-auto block; }
 
-        /* â”€â”€â”€ Mobile Compact UI â”€â”€â”€ */
+        /* ¦¡¦¡¦¡ Mobile Compact UI ¦¡¦¡¦¡ */
         @media (max-width: 767px) {
             .studio-layout { margin-top: 10px; gap: 8px; }
             /* Profile card */
@@ -123,44 +123,44 @@
     <script src="gnb.js"></script>
 
 <div class="studio-layout">
-    <!-- ì‚¬ì´ë“œë°” -->
+    <!-- »çÀÌµå¹Ù -->
     <aside class="studio-sidebar">
         <div class="profile-card">
-            <div class="avatar"><img src="images/poring_hero.png" alt="í¬ë§" onerror="this.outerHTML='<span style=\'font-size:32px;\'>ğŸ§™</span>'"></div>
+            <div class="avatar"><img src="images/poring_hero.png" alt="Æ÷¸µ" onerror="this.outerHTML='<span style=\'font-size:32px;\'>??</span>'"></div>
             <div class="user-info-wrap">
                 <div class="user-name">GravityUser</div>
                 <div class="user-kp" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; background:#f0fdf4;">
-                    <span data-en="Tickets" data-ko="ì´ìš©ê¶Œ" style="color:#166534; font-weight:700;">ì´ìš©ê¶Œ</span>
-                    <span style="color:#166534; font-weight:700;"><span style="color:#15803d; font-size:16px; font-weight:900;">1</span> ì¥</span>
+                    <span data-en="Tickets" data-ko="ÀÌ¿ë±Ç" style="color:#166534; font-weight:700;">ÀÌ¿ë±Ç</span>
+                    <span style="color:#166534; font-weight:700;"><span style="color:#15803d; font-size:16px; font-weight:900;">1</span> Àå</span>
                 </div>
             </div>
         </div>
         <ul class="studio-nav">
-            <li onclick="location.href='studio_myworks.html'" class="s-nav-item active"><span class="s-nav-icon">ğŸª„</span><span data-en="Manage Assets" data-ko="ë‚˜ì˜ ì‘í’ˆ ê´€ë¦¬">ë‚˜ì˜ ì‘í’ˆ ê´€ë¦¬</span></li>
-            <li onclick="location.href='studio_inventory.html'" class="s-nav-item"><span class="s-nav-icon">ğŸ’</span><span data-en="Purchase History" data-ko="êµ¬ë§¤ ì‘í’ˆ ê´€ë¦¬">êµ¬ë§¤ ì‘í’ˆ ê´€ë¦¬</span></li>
-            <li onclick="location.href='studio_wishlist.html'" class="s-nav-item"><span class="s-nav-icon" style="color:#ef4444;">ğŸ’–</span><span data-en="Wishlist" data-ko="ì°œí•œ ìƒí’ˆ ë³´ê¸°">ì°œí•œ ìƒí’ˆ ë³´ê¸°</span></li>
+            <li onclick="location.href='studio_myworks.html'" class="s-nav-item active"><span class="s-nav-icon">??</span><span data-en="Manage Assets" data-ko="³ªÀÇ ÀÛÇ° °ü¸®">³ªÀÇ ÀÛÇ° °ü¸®</span></li>
+            <li onclick="location.href='studio_inventory.html'" class="s-nav-item"><span class="s-nav-icon">??</span><span data-en="Purchase History" data-ko="±¸¸Å ÀÛÇ° °ü¸®">±¸¸Å ÀÛÇ° °ü¸®</span></li>
+            <li onclick="location.href='studio_wishlist.html'" class="s-nav-item"><span class="s-nav-icon" style="color:#ef4444;">??</span><span data-en="Wishlist" data-ko="ÂòÇÑ »óÇ° º¸±â">ÂòÇÑ »óÇ° º¸±â</span></li>
         </ul>
     </aside>
 
-    <!-- ë©”ì¸ -->
+    <!-- ¸ŞÀÎ -->
     <main class="studio-main">
         <div class="panel-header">
-            <h2 class="panel-title" data-en="Manage Assets" data-ko="ë‚˜ì˜ ì‘í’ˆ ê´€ë¦¬">ë‚˜ì˜ ì‘í’ˆ ê´€ë¦¬</h2>
-            <a href="register.html" class="btn-register" data-en="âœ¨ Register New Asset" data-ko="âœ¨ ìƒˆ ì‘í’ˆ ë“±ë¡í•˜ê¸°">âœ¨ ìƒˆ ì‘í’ˆ ë“±ë¡í•˜ê¸°</a>
+            <h2 class="panel-title" data-en="Manage Assets" data-ko="³ªÀÇ ÀÛÇ° °ü¸®">³ªÀÇ ÀÛÇ° °ü¸®</h2>
+            <a href="register.html" class="btn-register" data-en="? Register New Asset" data-ko="? »õ ÀÛÇ° µî·ÏÇÏ±â">? »õ ÀÛÇ° µî·ÏÇÏ±â</a>
         </div>
         <div class="search-bar">
             <div class="search-bar-wrap">
-                <input type="text" id="searchInput" oninput="applyFilter()" placeholder="ì‘í’ˆëª… ê²€ìƒ‰" data-en="Search assets..." data-ko="ì‘í’ˆëª… ê²€ìƒ‰">
-                <button class="sb-btn" onclick="document.getElementById('searchInput').value=''; applyFilter();" title="ì§€ìš°ê¸°">&#10006;</button>
-                <button class="sb-btn sb-btn-search" onclick="applyFilter()">ê²€ìƒ‰</button>
+                <input type="text" id="searchInput" oninput="applyFilter()" placeholder="ÀÛÇ°¸í °Ë»ö" data-en="Search assets..." data-ko="ÀÛÇ°¸í °Ë»ö">
+                <button class="sb-btn" onclick="document.getElementById('searchInput').value=''; applyFilter();" title="Áö¿ì±â">&#10006;</button>
+                <button class="sb-btn sb-btn-search" onclick="applyFilter()">°Ë»ö</button>
             </div>
         </div>
         <div class="sub-tabs">
-            <div class="sub-tab active" id="tab-all"       onclick="setTab('all')" data-en="All" data-ko="ì „ì²´">ì „ì²´</div>
-            <div class="sub-tab"       id="tab-converting" onclick="setTab('converting')" data-en="Converting" data-ko="ë³€í™˜ ì¤‘">ë³€í™˜ ì¤‘</div>
-            <div class="sub-tab"       id="tab-completed"  onclick="setTab('completed')" data-en="Completed" data-ko="ë³€í™˜ ì™„ë£Œ">ë³€í™˜ ì™„ë£Œ</div>
-            <div class="sub-tab"       id="tab-failed"     onclick="setTab('failed')" data-en="Failed" data-ko="ë³€í™˜ ì‹¤íŒ¨">ë³€í™˜ ì‹¤íŒ¨</div>
-            <div class="sub-tab"       id="tab-expired"    onclick="setTab('expired')" data-en="Expired" data-ko="ì‘í’ˆ ë§Œë£Œ">ì‘í’ˆ ë§Œë£Œ</div>
+            <div class="sub-tab active" id="tab-all"       onclick="setTab('all')" data-en="All" data-ko="ÀüÃ¼">ÀüÃ¼</div>
+            <div class="sub-tab"       id="tab-converting" onclick="setTab('converting')" data-en="Converting" data-ko="º¯È¯ Áß">º¯È¯ Áß</div>
+            <div class="sub-tab"       id="tab-completed"  onclick="setTab('completed')" data-en="Completed" data-ko="º¯È¯ ¿Ï·á">º¯È¯ ¿Ï·á</div>
+            <div class="sub-tab"       id="tab-failed"     onclick="setTab('failed')" data-en="Failed" data-ko="º¯È¯ ½ÇÆĞ">º¯È¯ ½ÇÆĞ</div>
+            <div class="sub-tab"       id="tab-expired"    onclick="setTab('expired')" data-en="Expired" data-ko="ÀÛÇ° ¸¸·á">ÀÛÇ° ¸¸·á</div>
         </div>
         <div class="item-list" id="workList"></div>
     </main>
@@ -172,22 +172,22 @@
 
 <script>
 const works = [
-    { id:7,  title:"ì²œì‚¬ì˜ ë‚ ê°œ ê¹ƒí„¸ ë°œìêµ­", tag:"ë°œìêµ­", status:"converting",  bg:"linear-gradient(120deg,#e0c3fc,#8ec5fc)",   icon:"ğŸª½", price:"9,900 KP",  sales:0,    regDate:"19.03.2026" },
-    { id:15, title:"í™©ê¸ˆë¹› ì¬í™” ë°œìêµ­",       tag:"ë°œìêµ­", status:"converting",  bg:"linear-gradient(to right,#f6d365,#fda085)", icon:"ğŸ’°", price:"15,000 KP", sales:0,    regDate:"15.03.2026" },
+    { id:7,  title:"Ãµ»çÀÇ ³¯°³ ±êÅĞ ¹ßÀÚ±¹", tag:"¹ßÀÚ±¹", status:"converting",  bg:"linear-gradient(120deg,#e0c3fc,#8ec5fc)",   icon:"??", price:"9,900 KP",  sales:0,    regDate:"19.03.2026" },
+    { id:15, title:"È²±İºû ÀçÈ­ ¹ßÀÚ±¹",       tag:"¹ßÀÚ±¹", status:"converting",  bg:"linear-gradient(to right,#f6d365,#fda085)", icon:"??", price:"15,000 KP", sales:0,    regDate:"15.03.2026" },
 
-    { id:3,  title:"í† ë¼ ê·€ ë°œìêµ­",           tag:"ë°œìêµ­", status:"completed",   completedSub:"wait", bg:"linear-gradient(to right,#74ebd5,#9face6)", icon:"ğŸ°", price:"1,200 KP", sales:0,    pubDate:"01.04.2026" },
-    { id:8,  title:"ê³ ì–‘ì´ ê¾¹ê¾¹ì´ ë°œìêµ­",     tag:"ë°œìêµ­", status:"completed",   completedSub:"wait", bg:"linear-gradient(to right,#fa709a,#fee140)", icon:"ğŸ¾", price:"4,500 KP", sales:0,    pubDate:"05.04.2026" },
-    { id:18, title:"í¬ë¦¬ìŠ¤íƒˆ ì¡°ê° ë°œìêµ­",     tag:"ë°œìêµ­", status:"completed",   completedSub:"sale", bg:"linear-gradient(to right,#e0c3fc,#8ec5fc)", icon:"ğŸ’", price:"6,000 KP", sales:142,  pubDate:"20.03.2026" },
-    { id:1,  title:"í¬ë§ì˜ ë²šê½ƒ ë°œìêµ­",       tag:"ë°œìêµ­", status:"completed",   completedSub:"sale", bg:"linear-gradient(135deg,#ff9a9e,#fecfef)",   icon:"ğŸŒ¸", price:"FREE",     sales:1420, pubDate:"11.03.2026" },
-    { id:5,  title:"ì´ˆë³´ìì˜ ì²« ë°œìêµ­",       tag:"ë°œìêµ­", status:"completed",   completedSub:"sale", bg:"linear-gradient(135deg,#a18cd1,#fbc2eb)",   icon:"ğŸ‘£", price:"FREE",     sales:5302, pubDate:"10.01.2026" },
+    { id:3,  title:"Åä³¢ ±Í ¹ßÀÚ±¹",           tag:"¹ßÀÚ±¹", status:"completed",   completedSub:"wait", bg:"linear-gradient(to right,#74ebd5,#9face6)", icon:"??", price:"1,200 KP", sales:0,    pubDate:"01.04.2026" },
+    { id:8,  title:"°í¾çÀÌ ²Ú²ÚÀÌ ¹ßÀÚ±¹",     tag:"¹ßÀÚ±¹", status:"completed",   completedSub:"wait", bg:"linear-gradient(to right,#fa709a,#fee140)", icon:"??", price:"4,500 KP", sales:0,    pubDate:"05.04.2026" },
+    { id:18, title:"Å©¸®½ºÅ» Á¶°¢ ¹ßÀÚ±¹",     tag:"¹ßÀÚ±¹", status:"completed",   completedSub:"sale", bg:"linear-gradient(to right,#e0c3fc,#8ec5fc)", icon:"??", price:"6,000 KP", sales:142,  pubDate:"20.03.2026" },
+    { id:1,  title:"Æ÷¸µÀÇ º¢²É ¹ßÀÚ±¹",       tag:"¹ßÀÚ±¹", status:"completed",   completedSub:"sale", bg:"linear-gradient(135deg,#ff9a9e,#fecfef)",   icon:"??", price:"FREE",     sales:1420, pubDate:"11.03.2026" },
+    { id:5,  title:"ÃÊº¸ÀÚÀÇ Ã¹ ¹ßÀÚ±¹",       tag:"¹ßÀÚ±¹", status:"completed",   completedSub:"sale", bg:"linear-gradient(135deg,#a18cd1,#fbc2eb)",   icon:"??", price:"FREE",     sales:5302, pubDate:"10.01.2026" },
 
-    { id:4,  title:"ê²¨ìš¸ëˆˆ ì¥ì‹ ë°œìêµ­",       tag:"ë°œìêµ­", status:"expired",     bg:"linear-gradient(to right,#ccc,#aaa)",         icon:"â„ï¸", price:"800 KP",   sales:830,  expDate:"28.02.2026" },
-    { id:9,  title:"ë³„ë¹› ë°œìêµ­",              tag:"ë°œìêµ­", status:"expired",     bg:"linear-gradient(135deg,#667eea,#764ba2)",     icon:"â­", price:"1,000 KP", sales:2150, expDate:"31.12.2025" },
-    { id:19, title:"ë‚™ì—½ ë°”ìŠ¤ë½ ë°œìêµ­",       tag:"ë°œìêµ­", status:"expired",     bg:"linear-gradient(to right,#d4fc79,#96e6a1)",  icon:"ğŸ‚", price:"1,500 KP", sales:1200, expDate:"30.11.2025" },
+    { id:4,  title:"°Ü¿ï´« Àå½Ä ¹ßÀÚ±¹",       tag:"¹ßÀÚ±¹", status:"expired",     bg:"linear-gradient(to right,#ccc,#aaa)",         icon:"??", price:"800 KP",   sales:830,  expDate:"28.02.2026" },
+    { id:9,  title:"º°ºû ¹ßÀÚ±¹",              tag:"¹ßÀÚ±¹", status:"expired",     bg:"linear-gradient(135deg,#667eea,#764ba2)",     icon:"?", price:"1,000 KP", sales:2150, expDate:"31.12.2025" },
+    { id:19, title:"³«¿± ¹Ù½º¶ô ¹ßÀÚ±¹",       tag:"¹ßÀÚ±¹", status:"expired",     bg:"linear-gradient(to right,#d4fc79,#96e6a1)",  icon:"??", price:"1,500 KP", sales:1200, expDate:"30.11.2025" },
 
-    { id:10, title:"ë¶ˆíƒ€ëŠ” ìš©ì•” ë°œìêµ­",       tag:"ë°œìêµ­", status:"failed",      bg:"linear-gradient(to right,#fca5a5,#fef08a)", icon:"ğŸ”¥", price:"2,000 KP", sales:0, regDate:"25.03.2026", failReason:"ë³€í™˜ ì‹¤íŒ¨" },
-    { id:12, title:"ê¹¨ì§„ ìœ ë¦¬ ì¡°ê° ë°œìêµ­",    tag:"ë°œìêµ­", status:"failed",      bg:"linear-gradient(to right,#9ca3af,#d1d5db)", icon:"ğŸ§ª", price:"500 KP",   sales:0, regDate:"26.03.2026", failReason:"ë³€í™˜ ì‹¤íŒ¨" },
-    { id:13, title:"ë…ì˜ ëŠªì§€ëŒ€ ë°œìêµ­",       tag:"ë°œìêµ­", status:"failed",      bg:"linear-gradient(to right,#86efac,#4ade80)", icon:"â˜ ï¸", price:"3,000 KP", sales:0, regDate:"27.03.2026", failReason:"ë³€í™˜ ì‹¤íŒ¨" }
+    { id:10, title:"ºÒÅ¸´Â ¿ë¾Ï ¹ßÀÚ±¹",       tag:"¹ßÀÚ±¹", status:"failed",      bg:"linear-gradient(to right,#fca5a5,#fef08a)", icon:"??", price:"2,000 KP", sales:0, regDate:"25.03.2026", failReason:"º¯È¯ ½ÇÆĞ" },
+    { id:12, title:"±úÁø À¯¸® Á¶°¢ ¹ßÀÚ±¹",    tag:"¹ßÀÚ±¹", status:"failed",      bg:"linear-gradient(to right,#9ca3af,#d1d5db)", icon:"??", price:"500 KP",   sales:0, regDate:"26.03.2026", failReason:"º¯È¯ ½ÇÆĞ" },
+    { id:13, title:"µ¶ÀÇ ´ËÁö´ë ¹ßÀÚ±¹",       tag:"¹ßÀÚ±¹", status:"failed",      bg:"linear-gradient(to right,#86efac,#4ade80)", icon:"??", price:"3,000 KP", sales:0, regDate:"27.03.2026", failReason:"º¯È¯ ½ÇÆĞ" }
 ];
 
 let currentTab = 'all';
@@ -208,7 +208,7 @@ function applyFilter(){
     });
     container.innerHTML = rows.length
         ? rows.join('')
-        : `<div class="empty-state"><div class="empty-icon">ğŸ“­</div><div class="empty-text" data-en="No assets match the conditions." data-ko="í•´ë‹¹ ì¡°ê±´ì˜ ì‘í’ˆì´ ì—†ìŠµë‹ˆë‹¤.">í•´ë‹¹ ì¡°ê±´ì˜ ì‘í’ˆì´ ì—†ìŠµë‹ˆë‹¤.</div></div>`;
+        : `<div class="empty-state"><div class="empty-icon">??</div><div class="empty-text" data-en="No assets match the conditions." data-ko="ÇØ´ç Á¶°ÇÀÇ ÀÛÇ°ÀÌ ¾ø½À´Ï´Ù.">ÇØ´ç Á¶°ÇÀÇ ÀÛÇ°ÀÌ ¾ø½À´Ï´Ù.</div></div>`;
     
     if(window.changeLang) {
         window.changeLang(localStorage.getItem('roz_lang') || 'kr');
@@ -224,30 +224,30 @@ function buildRow(w){
 
     let badge = '';
     if(w.status === 'converting'){
-        badge = `<span class="item-status s-converting" data-en="Converting" data-ko="ë³€í™˜ ì¤‘">ë³€í™˜ ì¤‘</span>`;
+        badge = `<span class="item-status s-converting" data-en="Converting" data-ko="º¯È¯ Áß">º¯È¯ Áß</span>`;
     } else if(w.status === 'completed'){
         badge = w.completedSub === 'wait'
-            ? `<span class="item-status s-completed-wait" data-en="Pending" data-ko="íŒë§¤ëŒ€ê¸°">íŒë§¤ëŒ€ê¸°</span>`
-            : `<span class="item-status s-completed-sale" data-en="On Sale" data-ko="íŒë§¤ ì¤‘">íŒë§¤ ì¤‘</span>`;
+            ? `<span class="item-status s-completed-wait" data-en="Pending" data-ko="ÆÇ¸Å´ë±â">ÆÇ¸Å´ë±â</span>`
+            : `<span class="item-status s-completed-sale" data-en="On Sale" data-ko="ÆÇ¸Å Áß">ÆÇ¸Å Áß</span>`;
     } else if(w.status === 'expired'){
-        badge = `<span class="item-status s-expired" data-en="Expired" data-ko="ì‘í’ˆ ë§Œë£Œ">ì‘í’ˆ ë§Œë£Œ</span>`;
+        badge = `<span class="item-status s-expired" data-en="Expired" data-ko="ÀÛÇ° ¸¸·á">ÀÛÇ° ¸¸·á</span>`;
     } else if(w.status === 'failed'){
-        badge = `<span class="item-status s-failed" data-en="Failed" data-ko="ë³€í™˜ ì‹¤íŒ¨">ë³€í™˜ ì‹¤íŒ¨</span>`;
+        badge = `<span class="item-status s-failed" data-en="Failed" data-ko="º¯È¯ ½ÇÆĞ">º¯È¯ ½ÇÆĞ</span>`;
     }
 
-    let meta = `<span><span data-en="Price: " data-ko="ê°€ê²©: ">ê°€ê²©: </span>${w.price}</span>`;
+    let meta = `<span><span data-en="Price: " data-ko="°¡°İ: ">°¡°İ: </span>${w.price}</span>`;
     if(w.status === 'converting'){
-        meta += `<span><span data-en="Reg: " data-ko="ë“±ë¡ì¼: ">ë“±ë¡ì¼: </span>${w.regDate}</span><span><span data-en="Sales: " data-ko="íŒë§¤ìˆ˜: ">íŒë§¤ìˆ˜: </span>0</span>`;
+        meta += `<span><span data-en="Reg: " data-ko="µî·ÏÀÏ: ">µî·ÏÀÏ: </span>${w.regDate}</span><span><span data-en="Sales: " data-ko="ÆÇ¸Å¼ö: ">ÆÇ¸Å¼ö: </span>0</span>`;
     } else if(w.status === 'completed'){
         const c = w.completedSub === 'sale' ? '#166534' : '#1d4ed8';
-        meta += `<span style="color:${c};font-weight:800;"><span data-en="Sale Date: " data-ko="íŒë§¤ ì‹œì‘ì¼: ">íŒë§¤ ì‹œì‘ì¼: </span>${w.pubDate}</span>`;
-        if(w.completedSub === 'sale') meta += `<span><span data-en="Sales: " data-ko="íŒë§¤ìˆ˜: ">íŒë§¤ìˆ˜: </span><b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
+        meta += `<span style="color:${c};font-weight:800;"><span data-en="Sale Date: " data-ko="ÆÇ¸Å ½ÃÀÛÀÏ: ">ÆÇ¸Å ½ÃÀÛÀÏ: </span>${w.pubDate}</span>`;
+        if(w.completedSub === 'sale') meta += `<span><span data-en="Sales: " data-ko="ÆÇ¸Å¼ö: ">ÆÇ¸Å¼ö: </span><b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
     } else if(w.status === 'expired'){
-        meta += `<span style="color:#64748b;"><span data-en="Exp: " data-ko="ë§Œë£Œì¼: ">ë§Œë£Œì¼: </span>${w.expDate}</span>`;
-        meta += `<span><span data-en="Sales: " data-ko="íŒë§¤ìˆ˜: ">íŒë§¤ìˆ˜: </span><b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
+        meta += `<span style="color:#64748b;"><span data-en="Exp: " data-ko="¸¸·áÀÏ: ">¸¸·áÀÏ: </span>${w.expDate}</span>`;
+        meta += `<span><span data-en="Sales: " data-ko="ÆÇ¸Å¼ö: ">ÆÇ¸Å¼ö: </span><b style="color:#0f172a;">${w.sales.toLocaleString()}</b></span>`;
     } else if(w.status === 'failed'){
-        meta += `<span><span data-en="Reg: " data-ko="ë“±ë¡ì¼: ">ë“±ë¡ì¼: </span>${w.regDate}</span>`;
-        meta += `<span style="color:#dc2626;" data-en="Reason: Failed" data-ko="ì‚¬ìœ : ë³€í™˜ ì‹¤íŒ¨">ì‚¬ìœ : ë³€í™˜ ì‹¤íŒ¨</span>`;
+        meta += `<span><span data-en="Reg: " data-ko="µî·ÏÀÏ: ">µî·ÏÀÏ: </span>${w.regDate}</span>`;
+        meta += `<span style="color:#dc2626;" data-en="Reason: Failed" data-ko="»çÀ¯: º¯È¯ ½ÇÆĞ">»çÀ¯: º¯È¯ ½ÇÆĞ</span>`;
     }
 
     return `
@@ -260,7 +260,7 @@ function buildRow(w){
         </div>
         ${badge}
         <div class="item-actions">
-            <button class="btn-action" onclick="event.stopPropagation();location.href='${detailLink}'" data-en="Details" data-ko="ìƒì„¸ ë³´ê¸°">ìƒì„¸ ë³´ê¸°</button>
+            <button class="btn-action" onclick="event.stopPropagation();location.href='${detailLink}'" data-en="Details" data-ko="»ó¼¼ º¸±â">»ó¼¼ º¸±â</button>
         </div>
     </div>`;
 }
@@ -269,7 +269,7 @@ applyFilter();
 </script>
     <!-- PRD DESCRIPTION INJECTION -->
     <script>window.currentPrdPageNum = 3;</script>
-    <script src="description_module/desc-script.js?v=3.0"></script>
+    <script src="description_module/desc-script.js?v=3.1"></script>
     <!-- // PRD DESCRIPTION INJECTION -->
 </body>
 </html>
