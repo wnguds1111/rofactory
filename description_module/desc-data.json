@@ -1,7 +1,7 @@
 {
   "pages": {
     "2-detail": {
-      "title": "마켓 > 리스트",
+      "title": "마켓 > 상세",
       "overview": "",
       "marks": [
         {
@@ -135,6 +135,206 @@
           "top": 830.5,
           "left": 844,
           "selector": ""
+        }
+      ]
+    },
+    "3-myworks": {
+      "title": "마이 스튜디오 (나의 작품)",
+      "overview": "내 활동 요약과 내가 창작한 작품들의 생애주기 전체를 관할하는 관리 탭입니다.",
+      "marks": [
+        {
+          "id": "id_1779430000001",
+          "num": 1,
+          "label": "1",
+          "depth": 0,
+          "title": "프로필 패널",
+          "sub": "- 좌측 상단 로그인된 유저의 아이디, 프로필 썸네일 노출",
+          "top": 200,
+          "left": 100,
+          "selector": ".profile-card"
+        },
+        {
+          "id": "id_1779430000002",
+          "num": 2,
+          "label": "2",
+          "depth": 0,
+          "title": "인앱 액수 표기",
+          "sub": "- 현재 마이월렛 등에서 불러온 실 보유 `KP` 화폐 재화 노출란",
+          "top": 250,
+          "left": 100,
+          "selector": ".user-kp"
+        },
+        {
+          "id": "id_1779430000003",
+          "num": 3,
+          "label": "3",
+          "depth": 0,
+          "title": "KP 충전 모달 버튼",
+          "sub": "- 보유액 우측 하단에 `[KP 충전하기]` 버튼을 분리 표기하여 원활한 과금 동선 유도",
+          "top": 300,
+          "left": 100,
+          "selector": ".profile-card a"
+        },
+        {
+          "id": "id_1779430000004",
+          "num": 4,
+          "label": "4",
+          "depth": 0,
+          "title": "목록 검색 폼",
+          "sub": "- 탭 내에서 연동/유지되는 내 작품 전용 검색창",
+          "top": 200,
+          "left": 400,
+          "selector": "#searchMyWorks"
+        },
+        {
+          "id": "id_1779430000005",
+          "num": 5,
+          "label": "5",
+          "depth": 0,
+          "title": "서브 탭 동적 스크롤뷰 필터",
+          "sub": "- 전체, 변환 완료 등 클릭 액션마다 하단 아이템 강제 필터링",
+          "top": 260,
+          "left": 400,
+          "selector": "#tabMyWorks"
+        },
+        {
+          "id": "id_1779430000006",
+          "num": 6,
+          "label": "6",
+          "depth": 0,
+          "title": "파라미터 링크 쏘기",
+          "sub": "- 단일 상품 클릭 시 상태를 파라미터로 인코딩하여 상세보기 창에 패스",
+          "top": 350,
+          "left": 400,
+          "selector": "#listMyWorks"
+        }
+      ]
+    },
+    "3-inventory": {
+      "title": "마이 스튜디오 (인벤토리)",
+      "overview": "내가 마켓에서 구매한 에셋 아이템들을 확인하고 유효기간을 체크하는 탭입니다.",
+      "marks": [
+        {
+          "id": "id_1779430000007",
+          "num": 1,
+          "label": "1",
+          "depth": 0,
+          "title": "구매 내역 필터 탭",
+          "sub": "- 전체 목록이나 구매 완료, 만료된 작품만 따로 소팅할 수 있는 필터바",
+          "top": 260,
+          "left": 400,
+          "selector": "#tabInventory"
+        },
+        {
+          "id": "id_1779430000008",
+          "num": 2,
+          "label": "2",
+          "depth": 0,
+          "title": "유효기간 뱃지 알고리즘",
+          "sub": "- 시스템 시간과 대조하여 만료됨/활성화 배지 색상을 치환하는 UI",
+          "top": 350,
+          "left": 400,
+          "selector": "#listInventory"
+        }
+      ]
+    },
+    "4": {
+      "title": "작품 상세 보기",
+      "overview": "단일 아이템의 정보 및 지난 상태 로그들을 역추적하여 살펴보는 페이지입니다.",
+      "marks": [
+        {
+          "id": "id_1779430000009",
+          "num": 1,
+          "label": "1",
+          "depth": 0,
+          "title": "다이내믹 뷰 디코딩",
+          "sub": "- URL 파라미터를 기반으로 화면의 이미지 썸네일과 텍스트 즉시 로딩",
+          "top": 200,
+          "left": 200,
+          "selector": ".dt-left"
+        },
+        {
+          "id": "id_1779430000010",
+          "num": 2,
+          "label": "2",
+          "depth": 0,
+          "title": "상위 상태 뱃지 라벨",
+          "sub": "- 상태 값 파라미터에 맞춰 \"변환 대기 중\", \"판매 중\" 시스템 전용 배지 노출",
+          "top": 200,
+          "left": 600,
+          "selector": ".dt-status"
+        },
+        {
+          "id": "id_1779430000011",
+          "num": 3,
+          "label": "3",
+          "depth": 0,
+          "title": "수정 보안 권한 분기",
+          "sub": "- 상태가 `변환 대기 중`일 때만 유일하게 `[삭제하기]` 와 `[수정하기]` 작동",
+          "top": 250,
+          "left": 600,
+          "selector": "#actionContainer"
+        },
+        {
+          "id": "id_1779430000012",
+          "num": 4,
+          "label": "4",
+          "depth": 0,
+          "title": "타임라인 트리 구조 트래커",
+          "sub": "- 등록 시작부터 진화되어 온 거쳐온 모든 단계별 시간순 트리 로그 정렬",
+          "top": 400,
+          "left": 600,
+          "selector": ".timeline"
+        }
+      ]
+    },
+    "5": {
+      "title": "정보 수정 모드",
+      "overview": "초기 반려 및 정보 변경 요청이 왔을 때 사용되는 전용 수정 모드 폼입니다.",
+      "marks": [
+        {
+          "id": "id_1779430000013",
+          "num": 1,
+          "label": "1",
+          "depth": 0,
+          "title": "수정 불가 종속 필드 (Lock)",
+          "sub": "- 바꿀 수 없는 필드는 ReadOnly(읽기 전용 회색 칸) 처리 방어",
+          "top": 200,
+          "left": 400,
+          "selector": "input[readonly]"
+        },
+        {
+          "id": "id_1779430000014",
+          "num": 2,
+          "label": "2",
+          "depth": 0,
+          "title": "태깅 최적화 일원화",
+          "sub": "- 가장 먼저 누른 것을 해제하는 알고리즘 검증",
+          "top": 300,
+          "left": 400,
+          "selector": "#editTagGroup"
+        },
+        {
+          "id": "id_1779430000015",
+          "num": 3,
+          "label": "3",
+          "depth": 0,
+          "title": "숫자 기입 무결성 검증",
+          "sub": "- HTML5 폼 검증과 음수 배제 Number 특수기능",
+          "top": 400,
+          "left": 400,
+          "selector": "input[type=\"number\"]"
+        },
+        {
+          "id": "id_1779430000016",
+          "num": 4,
+          "label": "4",
+          "depth": 0,
+          "title": "결정 액션 기능 버튼 UI 제한",
+          "sub": "- 하단에만 버튼 액션을 배치하여 직관적 인터페이스를 제공",
+          "top": 500,
+          "left": 400,
+          "selector": ".form-actions"
         }
       ]
     }

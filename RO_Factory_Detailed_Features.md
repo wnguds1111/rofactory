@@ -13,15 +13,26 @@
 
 ---
 
-## PAGE 1-0: Cached Test Title!
-Cached Test Overview Description!
+## PAGE 1-0: 작품 등록 페이지
+등록 페이지 기본 정책 
+1) 로그인 후 접근 가능
+2) 에이전트 체크 후 PC에서만 접근 가능
 
-1. **새 항목 제목**: 상세 기획 설명을 입력하세요.
-2. **새 항목 제목**: 상세 기획 설명을 입력하세요.
-3. **새 항목 제목**: 상세 기획 설명을 입력하세요.
-## PAGE 1-1: 페이지 제목
+1. **등록 프로세스 가이드 영역**: 
+2. **Back 버튼**: - 클릭 시 History Back
+3. **Next 버튼**: - 클릭 시 Next Step 이동
+- 현재 일일 갯수 제한 X 
+- 주간 최대 100개 제한 기준: UTC+0 월요일 00:00:00 ~ 
+   일요일 23:59:59
+- 갯수 제한 초과 후 NEXT 버튼 클릭 시  
+   Alert("Registration limit exceeded. You can 
+    register again next Monday at 00:00:00
+    (UTC+0).")
 
-1. **새 항목 제목**: 상세 기획 설명을 입력하세요.
+## PAGE 1-1: 등록 > STEP 01
+
+1. **편집 툴 다운로드**: - 편집툴 다운로드는 클릭 시 관리자에서 등록된
+   클라이언트 다운로드 {selector:.tool-guide-box}
 ## PAGE 1-2: 파일 업로드 (STEP 2)
 실제 파일을 업로드하고 약관에 동의하는 페이지입니다.
 

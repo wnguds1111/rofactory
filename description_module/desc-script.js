@@ -19,8 +19,8 @@ if (currentScriptEl) {
     }
 }
 window.currentMarks = [];
-window.pageTitle = "";
-window.pageOverview = "";
+window.descPageTitle = "";
+window.descPageOverview = "";
 // 로컬 스토리지에 저장된 잠금 상태 로드 (기본값: 잠금 상태인 true)
 window.isBuilderLocked = localStorage.getItem('rofactory_desc_panel_locked') !== 'false';
 window.hasEditPermission = false;
@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span style="font-weight:900; font-size:18px; letter-spacing:1px; color:#0f172a;">DESCRIPTION</span>
                 <div style="display:flex; gap:8px; align-items:center;">
                     <button id="tokenSettingBtn" onclick="window.promptGithubToken()" style="border:none; cursor:pointer; background:#e2e8f0; color:#475569; font-size:14px; padding:6px 10px; border-radius:20px; transition:0.2s; display:flex; align-items:center; justify-content:center;" title="GitHub 토큰 설정">🔑</button>
+                    <button id="resetCacheBtn" onclick="window.resetDescCache()" style="border:none; cursor:pointer; background:#e2e8f0; color:#475569; font-size:14px; padding:6px 10px; border-radius:20px; transition:0.2s; display:flex; align-items:center; justify-content:center;" title="캐시 초기화">🔄</button>
                     <button id="lockToggleBtn" onclick="toggleLock()" style="border:none; cursor:pointer; background:#0f172a; color:#fff; font-size:12px; font-weight:900; padding:8px 16px; border-radius:20px; transition:0.2s; box-shadow:0 4px 10px rgba(0,0,0,0.1);">🔒 편집 자물쇠 풀기</button>
                     <button onclick="showDynamicDescPanel(window.currentPrdPageNum)" style="border:none; background:transparent; font-size:24px; font-weight:900; color:#64748b; cursor:pointer; line-height:1; padding:0 5px; transition:0.2s; display:flex; align-items:center;" onmouseover="this.style.color='#0f172a'" onmouseout="this.style.color='#64748b'">\u00d7</button>
                 </div>
@@ -142,9 +143,16 @@ function getTargetKey() {
     } else if (key === '2') {
         const activePanel = document.querySelector('.market-panel.active');
         if (activePanel) key = '2-' + activePanel.id.replace('panel-', '');
+        else key = '2-list';
     } else if (key === '3') {
-        const activePanel = document.querySelector('.studio-main .panel.active');
-        if (activePanel) key = '3-' + activePanel.id.replace('panel-', '');
+        if (window.location.pathname.includes('studio_inventory.html')) {
+            key = '3-inventory';
+        } else if (window.location.pathname.includes('studio_myworks.html')) {
+            key = '3-myworks';
+        } else {
+            const activePanel = document.querySelector('.studio-main .panel.active');
+            if (activePanel) key = '3-' + activePanel.id.replace('panel-', '');
+        }
     }
     return key;
 }
@@ -222,14 +230,14 @@ async function showDynamicDescPanel(pageNum, silent = false) {
 
     if (!pageData) {
         window.currentMarks = [];
-        window.pageTitle = "";
-        window.pageOverview = "";
+        window.descPageTitle = "";
+        window.descPageOverview = "";
         renderBuilderMarks();
         return;
     }
 
-    window.pageTitle = pageData.title || "";
-    window.pageOverview = pageData.overview || "";
+    window.descPageTitle = pageData.title || "";
+    window.descPageOverview = pageData.overview || "";
     window.currentMarks = (pageData.marks || []).map((m, idx) => {
         // 저장된 위치가 있으면 그대로 사용, 없으면 selector 기반으로 계산
         let top = (m.top !== undefined && m.top !== null) ? m.top : (window.scrollY + 100 + ((idx + 1) * 40));
@@ -271,8 +279,8 @@ function saveBuilderMarks(re_render = true) {
 
     if (!window.descAllPagesData) window.descAllPagesData = { pages: {} };
     window.descAllPagesData.pages[pageKey] = {
-        title: window.pageTitle,
-        overview: window.pageOverview.trim(),
+        title: window.descPageTitle,
+        overview: window.descPageOverview.trim(),
         marks: window.currentMarks.map(m => ({
             id: m.id, num: m.num, label: m.label, depth: m.depth || 0,
             title: m.title, sub: m.sub,
@@ -325,8 +333,8 @@ async function syncToGitHub() {
 }
 
 window.updatePageMeta = function (type, txt) {
-    if (type === 'title') window.pageTitle = txt;
-    if (type === 'overview') window.pageOverview = txt;
+    if (type === 'title') window.descPageTitle = txt;
+    if (type === 'overview') window.descPageOverview = txt;
     saveBuilderMarks(false);
 };
 
@@ -364,20 +372,20 @@ function renderBuilderMarks() {
         </style>
     `;
 
-    if (window.pageTitle || !window.isBuilderLocked) {
+    if (window.descPageTitle || !window.isBuilderLocked) {
         let titleHtml = !window.isBuilderLocked
-            ? `<div class="pdp-top-title editable" contenteditable="true" onblur="window.updatePageMeta('title', this.innerText)" placeholder="페이지 제목을 입력하세요">${window.pageTitle || ''}</div>`
-            : `<div class="pdp-top-title">${window.pageTitle}</div>`;
+            ? `<div class="pdp-top-title editable" contenteditable="true" onblur="window.updatePageMeta('title', this.innerText)" placeholder="페이지 제목을 입력하세요">${window.descPageTitle || ''}</div>`
+            : `<div class="pdp-top-title">${window.descPageTitle}</div>`;
         html += titleHtml;
     }
-    if (window.pageOverview || !window.isBuilderLocked) {
+    if (window.descPageOverview || !window.isBuilderLocked) {
         let overviewHtml = !window.isBuilderLocked
-            ? `<div class="pdp-top-overview editable" contenteditable="true" onblur="window.updatePageMeta('overview', this.innerText)" placeholder="페이지 개요를 입력하세요">${(window.pageOverview || '').replace(/\n/g, '<br>')}</div>`
-            : `<div class="pdp-top-overview">${(window.pageOverview || '').replace(/\n/g, '<br>')}</div>`;
+            ? `<div class="pdp-top-overview editable" contenteditable="true" onblur="window.updatePageMeta('overview', this.innerText)" placeholder="페이지 개요를 입력하세요">${(window.descPageOverview || '').replace(/\n/g, '<br>')}</div>`
+            : `<div class="pdp-top-overview">${(window.descPageOverview || '').replace(/\n/g, '<br>')}</div>`;
         html += overviewHtml;
     }
 
-    if (window.currentMarks.length === 0 && window.isBuilderLocked && !window.pageTitle) {
+    if (window.currentMarks.length === 0 && window.isBuilderLocked && !window.descPageTitle) {
         html += '<div style="text-align:center; padding:40px 20px; color:#94a3b8; font-weight:700;">해당 뷰에 설정된 정보가 없습니다.<br>자물쇠를 풀고 항목을 추가하세요.</div>';
     }
 
@@ -590,8 +598,8 @@ async function toggleLock() {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         pageKey: pageKey,
-                        title: window.pageTitle,
-                        overview: window.pageOverview,
+                        title: window.descPageTitle,
+                        overview: window.descPageOverview,
                         marks: window.currentMarks
                     })
                 });
@@ -607,17 +615,36 @@ async function toggleLock() {
         const githubOk = await syncToGitHub();
 
         if (lockBtn) { lockBtn.disabled = false; }
+
+        const pageKey = getTargetKey();
+        if (localOk || githubOk) {
+            try {
+                const localStr = localStorage.getItem('rofactory_desc_all_pages_data');
+                if (localStr) {
+                    const localData = JSON.parse(localStr);
+                    if (localData && localData.pages) {
+                        delete localData.pages[pageKey];
+                        localStorage.setItem('rofactory_desc_all_pages_data', JSON.stringify(localData));
+                    }
+                }
+            } catch (e) {
+                console.error("로컬 스토리지 캐시 삭제 실패:", e);
+            }
+            window.descAllPagesData = null;
+            await loadDescData();
+        }
+
         if (window.isLocalEnv) {
             if (localOk && githubOk) {
                 alert('✅ 저장 완료! 로컬 파일 및 GitHub에 모두 반영되었습니다.');
             } else if (localOk && !githubOk) {
-                alert('✅ 로컬 저장 완료! (단, GitHub 동기화는 실패했습니다. 토큰을 확인해주세요.)\n* 브라우저 로컬 스토리지에도 임시 보관되었습니다.');
+                alert('✅ 로컬 저장 완료! (단, GitHub 동기화는 실패했습니다. 토큰을 확인해주세요.)\n* 브라우저 로컬 스토리지 캐시가 초기화되고 서버 데이터로 갱신되었습니다.');
             } else {
                 alert('ℹ️ 브라우저 임시 저장 완료!\n(로컬 서버가 꺼져 있거나 권한 문제로 파일 저장 및 GitHub 동기화에는 실패했으나, 현재 브라우저의 로컬 스토리지에 안전하게 보관되었습니다.)');
             }
         } else {
             if (githubOk) {
-                alert('✅ 저장 완료! GitHub에 정상 반영되었습니다.');
+                alert('✅ 저장 완료! GitHub에 정상 반영되었습니다.\n* 브라우저 로컬 스토리지 캐시가 초기화되고 서버 데이터로 갱신되었습니다.');
             } else {
                 alert('ℹ️ 브라우저 임시 저장 완료!\n(GitHub 동기화에는 실패했으나, 현재 브라우저의 로컬 스토리지에 안전하게 보관되었습니다. GitHub 토큰을 확인해주세요.)');
             }
@@ -688,6 +715,16 @@ window.promptGithubToken = function() {
     // 리렌더링하여 UI 반영
     if (typeof renderBuilderMarks === 'function') {
         renderBuilderMarks();
+    }
+};
+
+window.resetDescCache = async function() {
+    if (confirm('로컬 캐시를 초기화하고 서버의 최신 기획 데이터로 새로고침 하시겠습니까?\n(저장하지 않은 편집 내용은 사라집니다.)')) {
+        localStorage.removeItem('rofactory_desc_all_pages_data');
+        window.descAllPagesData = null;
+        await loadDescData();
+        showDynamicDescPanel(window.currentPrdPageNum, true);
+        alert('캐시가 초기화되었습니다.');
     }
 };
 
