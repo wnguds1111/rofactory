@@ -489,7 +489,7 @@ function highlightBadge(id) {
     if (badge) {
         badge.classList.add('pulsing');
         badge.style.transform = 'scale(1.5)';
-        badge.style.zIndex = '10000';
+        badge.style.zIndex = '2000000020';
         badge.style.boxShadow = '0 0 0 10px rgba(239,68,68,0.3)';
     }
 }
@@ -499,7 +499,7 @@ function resetBadge(id) {
     if (badge) {
         badge.classList.remove('pulsing');
         badge.style.transform = '';
-        badge.style.zIndex = '9999';
+        badge.style.zIndex = '2000000010';
         badge.style.boxShadow = '';
     }
 }
