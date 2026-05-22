@@ -37,7 +37,7 @@
     font-weight: 900;
     font-size: 12px;
     border: 2px solid #fff;
-    z-index: 9999;
+    z-index: 2000000010;
     pointer-events: auto;
     cursor: pointer;
     user-select: none;
@@ -66,7 +66,7 @@
     letter-spacing: -0.4px;
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
     box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-    z-index: 2000000002;
+    z-index: 2000000030;
     pointer-events: none;
     max-width: 300px;
     display: none;
