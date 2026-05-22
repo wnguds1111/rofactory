@@ -153,7 +153,7 @@
           "label": "3",
           "depth": 0,
           "title": "Next 버튼",
-          "sub": "- STEP 2 이동",
+          "sub": "- STEP 1 이동",
           "top": 300,
           "left": 400,
           "selector": ""
@@ -161,7 +161,7 @@
       ]
     },
     "1-1": {
-      "title": "",
+      "title": "STEP 01",
       "overview": "",
       "marks": [
         {
