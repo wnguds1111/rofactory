@@ -121,20 +121,20 @@
     <div class="studio-detail-container">
         <div class="breadcrumb" style="font-size:16px; margin-bottom:24px;">
             <a href="studio_inventory.html" style="display:inline-flex; align-items:center; gap:6px; color:#1e293b; transition:color 0.2s;" onmouseover="this.style.color='#025DD0'" onmouseout="this.style.color='#1e293b'">
-                <span style="font-size:20px;">??/span> <span data-en="Purchase History" data-ko="구매 ?�품 관�?>구매 ?�품 관�?/span>
+                <span style="font-size:20px;">←</span> <span data-en="Purchase History" data-ko="구매 작품 관리">구매 작품 관리</span>
             </a>
         </div>
 
         <div class="detail-card">
             <div class="detail-top">
-                <div class="dt-left" id="dtThumb">?��</div>
+                <div class="dt-left" id="dtThumb">🪄</div>
                 <div class="dt-right">
-                    <div id="statusBadge" class="dt-status">?�태</div>
-                    <div class="dt-category" data-en="Footprint" data-ko="발자�?>발자�?/div>
-                    <div id="pageTitle" class="dt-title">?�품�?/div>
+                    <div id="statusBadge" class="dt-status">상태</div>
+                    <div class="dt-category" data-en="Footprint" data-ko="발자국">발자국</div>
+                    <div id="pageTitle" class="dt-title">작품명</div>
 
                     <div class="dt-info-grid" id="infoGrid">
-                        <!-- JS �?채�? -->
+                        <!-- JS 로 채움 -->
                     </div>
 
                     <div class="dt-tags" id="tagArea" style="display:none;"></div>
@@ -146,22 +146,22 @@
             <div class="detail-bottom" style="display:none;"></div>
         </div>
 
-        <!-- 미리보기 ?�상 모달 -->
+        <!-- 미리보기 영상 모달 -->
         <div id="previewModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:9999;align-items:center;justify-content:center;">
             <div style="background:#0f172a;border-radius:12px;padding:28px;max-width:660px;width:90%;position:relative;">
-                <button onclick="closePreview()" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:20px;width:36px;height:36px;border-radius:50%;cursor:pointer;font-weight:700;">??/button>
-                <div style="font-size:14px;font-weight:800;color:#94a3b8;margin-bottom:14px;" id="modalTitle">미리보기 ?�상</div>
-                <!-- ?�제 ?�상 ?�일???�으므�??�모 비디???�용 -->
+                <button onclick="closePreview()" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:20px;width:36px;height:36px;border-radius:50%;cursor:pointer;font-weight:700;">✕</button>
+                <div style="font-size:14px;font-weight:800;color:#94a3b8;margin-bottom:14px;" id="modalTitle">미리보기 영상</div>
+                <!-- 실제 영상 파일이 없으므로 데모 비디오 사용 -->
                 <video id="previewVideo" controls autoplay loop style="width:100%;border-radius:12px;background:#1e293b;aspect-ratio:16/9;outline:none;"
                     src="" poster="">
-                    <div style="color:#fff;text-align:center;padding:60px 0;">??미리보기 ?�상 (게임 ???�용 ?��??�이??</div>
+                    <div style="color:#fff;text-align:center;padding:60px 0;">▶ 미리보기 영상 (게임 내 적용 시뮬레이션)</div>
                 </video>
-                <p style="color:#64748b;font-size:12px;font-weight:600;margin-top:12px;text-align:center;">?�� ?�게??발자�??�용 미리보기 ?�상?�니?? ?�제 게임 ?�경?�서 ?��? ???�습?�다.</p>
+                <p style="color:#64748b;font-size:12px;font-weight:600;margin-top:12px;text-align:center;">🎮 인게임 발자국 적용 미리보기 영상입니다. 실제 게임 환경에서 다를 수 있습니다.</p>
             </div>
         </div>
     </div>
 
-    <!-- ?�터 (main2 ?�일) -->
+    <!-- 푸터 (main2 동일) -->
     <footer class="footer">
         <img src="images/FOOTER.png" alt="Footer">
     </footer>
@@ -170,13 +170,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const p = new URLSearchParams(window.location.search);
     const status       = p.get('status')       || 'purchased';
-    const title        = p.get('title')        || '구매 ?�세 ?�역';
-    const icon         = p.get('icon')         || '?��';
+    const title        = p.get('title')        || '구매 상세 내역';
+    const icon         = p.get('icon')         || '🐾';
     const bg           = p.get('bg')           || '#e2e8f0';
-    const buyDate      = p.get('buyDate')      || '??;
-    const state        = p.get('state')        || '??;
-    const expDate      = p.get('expDate')      || '??;
-    const price        = p.get('price')        || '??;
+    const buyDate      = p.get('buyDate')      || '—';
+    const state        = p.get('state')        || '—';
+    const expDate      = p.get('expDate')      || '—';
+    const price        = p.get('price')        || '—';
 
     document.getElementById('pageTitle').innerText = title;
     const thumb = document.getElementById('dtThumb');
@@ -186,30 +186,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const badge = document.getElementById('statusBadge');
     if (status === 'expired') {
-        badge.innerHTML = '<span data-en="Expired" data-ko="?�품 만료??>?�품 만료??/span>';
+        badge.innerHTML = '<span data-en="Expired" data-ko="작품 만료됨">작품 만료됨</span>';
         badge.className = 'dt-status s-expired';
     } else {
-        badge.innerHTML = '<span data-en="Purchased" data-ko="구매 ?�료">구매 ?�료</span>';
+        badge.innerHTML = '<span data-en="Purchased" data-ko="구매 완료">구매 완료</span>';
         badge.className = 'dt-status s-completed-wait';
     }
 
     let gridHTML = `
         <div class="info-box">
-            <div class="info-label" data-en="Purchase Date" data-ko="구매??>구매??/div>
+            <div class="info-label" data-en="Purchase Date" data-ko="구매일">구매일</div>
             <div class="info-val" style="font-size:15px;">${buyDate}</div>
         </div>`;
     
     if (status === 'expired') {
         gridHTML += `
         <div class="info-box" style="border-color:#fca5a5;background:#fff5f5;">
-            <div class="info-label" style="color:#dc2626;" data-en="Status" data-ko="?�태">?�태</div>
-            <div class="info-val" style="font-size:15px;color:#dc2626;font-weight:700;"><span data-en="Expired" data-ko="만료??>만료??/span> (${expDate})</div>
+            <div class="info-label" style="color:#dc2626;" data-en="Status" data-ko="상태">상태</div>
+            <div class="info-val" style="font-size:15px;color:#dc2626;font-weight:700;"><span data-en="Expired" data-ko="만료됨">만료됨</span> (${expDate})</div>
         </div>`;
     } else {
         gridHTML += `
         <div class="info-box">
-            <div class="info-label" data-en="Purchase Status" data-ko="구매 ?�태">구매 ?�태</div>
-            <div class="info-val" style="font-size:15px;color:#166534;font-weight:700;" data-en="Purchased" data-ko="구매 ?�료">구매 ?�료</div>
+            <div class="info-label" data-en="Purchase Status" data-ko="구매 상태">구매 상태</div>
+            <div class="info-val" style="font-size:15px;color:#166534;font-weight:700;" data-en="Purchased" data-ko="구매 완료">구매 완료</div>
         </div>`;
     }
 
