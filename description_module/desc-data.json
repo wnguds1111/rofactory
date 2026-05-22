@@ -132,8 +132,8 @@
           "depth": 0,
           "title": "등록 프로세스 가이드 영역",
           "sub": "상세 기획 설명을 입력하세요.",
-          "top": 300,
-          "left": 400,
+          "top": 387,
+          "left": 374,
           "selector": ""
         },
         {
@@ -143,8 +143,8 @@
           "depth": 0,
           "title": "Back 버튼",
           "sub": "- 클릭 시 History Back",
-          "top": 300,
-          "left": 400,
+          "top": 827,
+          "left": 54,
           "selector": ""
         },
         {
@@ -154,8 +154,8 @@
           "depth": 0,
           "title": "Next 버튼",
           "sub": "- 클릭 시 STEP 1 이동",
-          "top": 734,
-          "left": 1527,
+          "top": 821,
+          "left": 1721,
           "selector": ""
         }
       ]
