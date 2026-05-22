@@ -1069,7 +1069,7 @@ a {
 
 .wizard-footer {
     position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(21, 21, 21, 0.3); border-top: 1px solid #e2e8f0;
-    padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; z-index: 20;
+    padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; z-index: 2000000005;
     backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
 }
 .progress-track { position: absolute; top: -1px; left: 0; width: 100%; height: 4px; background: #f1f5f9; }

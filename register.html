@@ -6,7 +6,7 @@
     <meta name="description" content="RO FACTORY 작품 등록 - 나만의 발자국 에셋을 글로벌 마켓에 등록하세요.">
     <title>RO FACTORY</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=3.0">
     <style type="text/tailwindcss">
         /* ── Terms Modal (JS 동적 클래스 제어 필요) ── */
         .terms-modal-overlay { @apply hidden fixed inset-0 bg-black/60 z-[9999] opacity-0 transition-opacity duration-300 items-center justify-center p-5; }
@@ -136,8 +136,8 @@
                     </div>
 
                     <div class="section-divider" data-en="Agree to Terms and Conditions">약관 동의 <span style="color:#ef4444; ">*필수</span></div>
-                    <label class="custom-chk "onclick="forceOpenTerms(event)">
-                        <input type="checkbox" id="termsChk" disabled>
+                    <label class="custom-chk" onclick="forceOpenTerms(event)">
+                        <input type="checkbox" id="termsChk" onclick="return false;">
                         <div class="chk-box"></div>
                         <span class="chk-text">제3자의 저작권, 초상권 등 제반 권리를 침해하지 않으며 분쟁 시 당사자가 법적 책임을 지는 것에 동의합니다. <a href="#" onclick="forceOpenTerms(event)" style="font-weight:600;" data-en="(view)">(약관 보기)</a></span>
                     </label>
@@ -274,6 +274,7 @@
 
 <script>
     function forceOpenTerms(e) {
+        console.log("forceOpenTerms called!");
         e.preventDefault();
         document.getElementById('termsModal').classList.add('show');
         checkTermsScroll();
@@ -351,7 +352,7 @@
     }
 
     // Wizard logic
-    let currentStep = 0;
+    var currentStep = 0;
     const totalSteps = 4;
 
     function updateWizard() {
@@ -460,6 +461,7 @@
     });
 
     updateWizard();
+</script>
     <!-- PRD DESCRIPTION INJECTION -->
     <script>window.currentPrdPageNum = 1;</script>
     <script src="description_module/desc-script.js"></script>

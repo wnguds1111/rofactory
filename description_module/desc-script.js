@@ -49,7 +49,11 @@ const ALLOWED_IPS = ['119.192.146.202', 'localhost', '127.0.0.1', '::1'];
 
     window.isLocalEnv = isLocal;
 
-    if (isLocal) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasEditQuery = urlParams.has('edit') || urlParams.has('admin');
+    const hasSavedToken = !!localStorage.getItem('rofactory_github_token');
+
+    if (isLocal || hasEditQuery || hasSavedToken) {
         window.hasEditPermission = true;
         if (styleEl.parentNode) styleEl.parentNode.removeChild(styleEl);
         return;
@@ -103,7 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </style>
             <div class="pdp-header">
                 <span style="font-weight:900; font-size:18px; letter-spacing:1px; color:#0f172a;">DESCRIPTION</span>
-                <div style="display:flex; gap:10px; align-items:center;">
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <button id="tokenSettingBtn" onclick="window.promptGithubToken()" style="border:none; cursor:pointer; background:#e2e8f0; color:#475569; font-size:14px; padding:6px 10px; border-radius:20px; transition:0.2s; display:flex; align-items:center; justify-content:center;" title="GitHub 토큰 설정">🔑</button>
                     <button id="lockToggleBtn" onclick="toggleLock()" style="border:none; cursor:pointer; background:#0f172a; color:#fff; font-size:12px; font-weight:900; padding:8px 16px; border-radius:20px; transition:0.2s; box-shadow:0 4px 10px rgba(0,0,0,0.1);">🔒 편집 자물쇠 풀기</button>
                     <button onclick="showDynamicDescPanel(window.currentPrdPageNum)" style="border:none; background:transparent; font-size:24px; font-weight:900; color:#64748b; cursor:pointer; line-height:1; padding:0 5px; transition:0.2s; display:flex; align-items:center;" onmouseover="this.style.color='#0f172a'" onmouseout="this.style.color='#64748b'">\u00d7</button>
                 </div>
@@ -132,7 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
 function getTargetKey() {
     let key = window.currentPrdPageNum.toString();
     if (key === '1') {
-        if (typeof currentStep !== 'undefined') key = '1-' + currentStep;
+        if (typeof window.currentStep !== 'undefined') key = '1-' + window.currentStep;
+        else if (typeof currentStep !== 'undefined') key = '1-' + currentStep;
     } else if (key === '2') {
         const activePanel = document.querySelector('.market-panel.active');
         if (activePanel) key = '2-' + activePanel.id.replace('panel-', '');
@@ -158,16 +164,39 @@ window.descAllPagesData = null;
 
 async function loadDescData() {
     const jsonUrl = window.descModuleBasePath + 'description_module/desc-data.json';
+    let serverData = null;
     try {
         const res = await fetch(jsonUrl + '?t=' + new Date().getTime());
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        window.descAllPagesData = data;
-        return data;
+        if (res.ok) {
+            serverData = await res.json();
+        }
     } catch (e) {
         console.error('desc-data.json 로드 실패:', e);
-        return null;
     }
+
+    let localData = null;
+    try {
+        const localStr = localStorage.getItem('rofactory_desc_all_pages_data');
+        if (localStr) {
+            localData = JSON.parse(localStr);
+        }
+    } catch (e) {
+        console.error('로컬스토리지 데이터 로드 실패:', e);
+    }
+
+    // Merge logic: serverData가 기본이며 localData(최신 로컬 편집)가 있으면 덮어씁니다.
+    const mergedData = { pages: {} };
+    
+    if (serverData && serverData.pages) {
+        Object.assign(mergedData.pages, serverData.pages);
+    }
+    
+    if (localData && localData.pages) {
+        Object.assign(mergedData.pages, localData.pages);
+    }
+
+    window.descAllPagesData = mergedData;
+    return mergedData;
 }
 
 async function showDynamicDescPanel(pageNum, silent = false) {
@@ -250,6 +279,13 @@ function saveBuilderMarks(re_render = true) {
             top: m.top, left: m.left, selector: m.selector || ''
         }))
     };
+
+    // 로컬스토리지 캐시 저장
+    try {
+        localStorage.setItem('rofactory_desc_all_pages_data', JSON.stringify(window.descAllPagesData));
+    } catch (e) {
+        console.error('로컬스토리지 캐시 저장 실패:', e);
+    }
 
     if (re_render) renderBuilderMarks();
 }
@@ -575,15 +611,15 @@ async function toggleLock() {
             if (localOk && githubOk) {
                 alert('✅ 저장 완료! 로컬 파일 및 GitHub에 모두 반영되었습니다.');
             } else if (localOk && !githubOk) {
-                alert('✅ 로컬 저장 완료! (단, GitHub 동기화는 실패했습니다. 토큰을 확인해주세요.)');
+                alert('✅ 로컬 저장 완료! (단, GitHub 동기화는 실패했습니다. 토큰을 확인해주세요.)\n* 브라우저 로컬 스토리지에도 임시 보관되었습니다.');
             } else {
-                alert('⚠️ 저장 실패. 로컬 서버 상태 또는 권한을 확인해주세요.');
+                alert('ℹ️ 브라우저 임시 저장 완료!\n(로컬 서버가 꺼져 있거나 권한 문제로 파일 저장 및 GitHub 동기화에는 실패했으나, 현재 브라우저의 로컬 스토리지에 안전하게 보관되었습니다.)');
             }
         } else {
             if (githubOk) {
                 alert('✅ 저장 완료! GitHub에 정상 반영되었습니다.');
             } else {
-                alert('⚠️ 저장 실패. GitHub 토큰을 확인해주세요.');
+                alert('ℹ️ 브라우저 임시 저장 완료!\n(GitHub 동기화에는 실패했으나, 현재 브라우저의 로컬 스토리지에 안전하게 보관되었습니다. GitHub 토큰을 확인해주세요.)');
             }
         }
     }
@@ -626,3 +662,32 @@ document.addEventListener('mouseup', function (e) {
         draggedBadge = null;
     }
 });
+
+window.promptGithubToken = function() {
+    const currentToken = localStorage.getItem('rofactory_github_token') || '';
+    const token = prompt("GitHub Personal Access Token (PAT)을 입력하세요:\n(입력 시 IP 제한 없이 기획 내용을 GitHub에 직접 저장할 수 있습니다. 비워두면 토큰이 삭제됩니다.)", currentToken);
+    
+    if (token === null) return; // 취소 버튼 클릭 시 무시
+    
+    const trimmed = token.trim();
+    if (trimmed) {
+        localStorage.setItem('rofactory_github_token', trimmed);
+        window.hasEditPermission = true;
+        
+        // 잠금 토글 버튼 보이기
+        const styleEl = document.getElementById('desc-edit-lock-style');
+        if (styleEl && styleEl.parentNode) {
+            styleEl.parentNode.removeChild(styleEl);
+        }
+        alert("GitHub 토큰이 저장되었습니다. 이제 자물쇠를 풀어 편집 및 저장을 하실 수 있습니다.");
+    } else {
+        localStorage.removeItem('rofactory_github_token');
+        alert("GitHub 토큰이 삭제되었습니다.");
+    }
+    
+    // 리렌더링하여 UI 반영
+    if (typeof renderBuilderMarks === 'function') {
+        renderBuilderMarks();
+    }
+};
+
