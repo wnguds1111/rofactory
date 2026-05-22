@@ -627,7 +627,7 @@
 
         // Global state mapping for Detail and Checkout
         let currentProductId = null;
-        let currentKafraPoints = 0; // Set default Kafra Points to 0
+        let currentPoints = 0; // Set default points to 0
 
         function goToDetail(id) {
             currentProductId = id;
@@ -703,7 +703,7 @@
             if (!p) return;
             
             // Populate the payment modal UI
-            document.getElementById('modal-current-balance').innerText = `${currentKafraPoints.toLocaleString()} KP`;
+            document.getElementById('modal-current-balance').innerText = `${currentPoints.toLocaleString()} KP`;
             document.getElementById('modal-item-name').innerHTML = p.title;
             
             if (p.isFree) {
@@ -726,7 +726,7 @@
             if(alertBox) alertBox.style.display = 'none';
             btn.onclick = executePayment;
             
-            if (!p.isFree && currentKafraPoints < p.price) {
+            if (!p.isFree && currentPoints < p.price) {
                 // Not enough funds UI
                 btn.style.background = '#cbd5e1';
                 btn.style.cursor = 'not-allowed';
@@ -750,8 +750,8 @@
             document.getElementById('c-item-name').innerHTML = p.title;
             document.getElementById('c-item-price').innerText = `${p.price.toLocaleString()} KP`;
             
-            currentKafraPoints -= p.price;
-            document.getElementById('c-item-balance').innerText = `${currentKafraPoints.toLocaleString()} KP`;
+            currentPoints -= p.price;
+            document.getElementById('c-item-balance').innerText = `${currentPoints.toLocaleString()} KP`;
             
             closePaymentModal();
             goToStep('complete');

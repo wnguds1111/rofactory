@@ -10,6 +10,109 @@
         /* Shared Market Layout */
         body { background-color: #F6F6F7; color: #151515; font-family: 'Poppins', 'Noto Sans', sans-serif; }
         .market-container { max-width: 1200px; margin: 40px auto; padding: 0; min-height: 80vh; }
+
+        /* ── Mobile Filter Toggle Button ── */
+        .mobile-filter-btn {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 500;
+            background: #025DD0;
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(2,93,208,0.35);
+            gap: 8px;
+            align-items: center;
+            white-space: nowrap;
+        }
+        /* ── Mobile Filter Drawer Overlay ── */
+        .filter-drawer-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 800;
+            backdrop-filter: blur(3px);
+        }
+        .filter-drawer-overlay.open { display: block; }
+        .filter-drawer {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: #fff;
+            border-radius: 24px 24px 0 0;
+            max-height: 85vh;
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 900;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+            overflow: hidden;
+        }
+        .filter-drawer-overlay.open .filter-drawer {
+            transform: translateY(0);
+        }
+        /* 드로워 상단 고정 헤더 */
+        .filter-drawer-header {
+            flex-shrink: 0;
+            padding: 16px 20px 0;
+            background: #fff;
+        }
+        .filter-drawer-handle {
+            width: 40px; height: 4px;
+            background: #cbd5e1;
+            border-radius: 2px;
+            margin: 0 auto 16px;
+        }
+        .filter-drawer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 14px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        .filter-drawer-title { font-size: 16px; font-weight: 900; color: #0f172a; }
+        .filter-drawer-close {
+            background: #f1f5f9; border: none;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            font-size: 16px; cursor: pointer; color: #64748b;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s;
+        }
+        .filter-drawer-close:hover { background: #e2e8f0; }
+        /* 드로워 스크롤 영역 */
+        .filter-drawer-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 20px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+        /* 드로워 하단 고정 버튼 */
+        .filter-drawer-footer {
+            flex-shrink: 0;
+            padding: 12px 20px 20px;
+            background: #fff;
+            border-top: 1px solid #f1f5f9;
+        }
+        .filter-apply-btn {
+            width: 100%; padding: 15px;
+            background: #025DD0; color: #fff;
+            border: none; border-radius: 14px;
+            font-size: 15px; font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .filter-apply-btn:hover { background: #012553; }
         .market-panel { display: none; animation: fadeIn 0.4s ease forwards; }
         .market-panel.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -22,11 +125,15 @@
         .breadcrumb strong { color: #1e3a8a; }
 
         /* PANEL 1: Market Search Layout */
-        .market-search-bar { background: #f1f5f9; display: flex; align-items: center; max-width: 900px; margin: 0 auto 40px; border-radius: 4px; border: 1px solid #e2e8f0; overflow: hidden; height: 50px; }
+        .market-search-bar { background: #fff; display: flex; align-items: center; max-width: 900px; margin: 0 auto 40px; border-radius: 6px; border: 1px solid #e2e8f0; overflow: hidden; height: 50px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .market-search-cat { padding: 0 20px; font-weight: 700; color: #1e293b; border-right: 1px solid #e2e8f0; height: 100%; display: flex; align-items: center; cursor: pointer; }
         .market-search-cat select { background: transparent; border: none; outline: none; font-weight: 700; cursor: pointer; font-family: 'Pretendard'; }
-        .market-search-input { flex: 1; border: none; background: transparent; padding: 0 20px; outline: none; font-size: 15px; font-family: 'Pretendard'; }
-        .market-search-btn { background: transparent; border: none; padding: 0 15px; font-size: 16px; cursor: pointer; color: #64748b; }
+        .market-search-input { flex: 1; border: none; background: transparent; padding: 0 20px; outline: none; font-size: 15px; font-family: 'Pretendard'; color: #0f172a; }
+        .market-search-input::placeholder { color: #94a3b8; }
+        .market-search-btn { background: transparent; border: none; padding: 0 14px; font-size: 13px; cursor: pointer; color: #64748b; height: 100%; display: flex; align-items: center; transition: color 0.15s; }
+        .market-search-btn:hover { color: #025DD0; }
+        .search-submit-btn { font-weight: 800; color: #025DD0 !important; border-left: 1px solid #e2e8f0; padding: 0 20px; font-size: 13px; }
+        .search-submit-btn:hover { background: #eff6ff; }
         
         .market-layout { display: flex; gap: 40px; padding-top: 10px; border-top: 1px solid #e2e8f0; }
         .market-sidebar { width: 240px; flex-shrink: 0; padding: 20px 20px 0 0; border-right: 1px solid #e2e8f0; }
@@ -53,13 +160,17 @@
         .market-main { flex: 1; padding: 20px 0 0; }
         .market-count { font-size: 13px; font-weight: 800; color: #0f172a; margin-bottom: 20px; display: block; }
         
+        /* Grid Layout */
+        .market-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .market-card { cursor: pointer; display: flex; flex-direction: column; transition: transform 0.2s; }
+        .market-card:hover { transform: translateY(-4px); }
         .card-img-wrap { width: 100%; aspect-ratio: 1; background: url('images/main_thumb_bg.jpg') center/cover; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 80px; margin-bottom: 8px; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(2,93,208,0.10); }
         .card-img-icon { position: relative; z-index: 2; text-shadow: 0 6px 20px rgba(0,0,0,0.25); line-height: 1; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.18)); }
         .card-img-tag { position: absolute; top: 8px; left: 8px; z-index: 4; background: var(--primary-bright); color: #fff; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .card-heart { position: absolute; bottom: 8px; right: 10px; font-size: 16px; color: #025DD0; text-shadow: 0 1px 3px rgba(255,255,255,0.8); z-index: 3; }
-        .card-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 800; }
-        .card-name { color: #151515; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75%; }
-        .card-price { color: #025DD0; }
+        .card-bottom { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding-top: 4px; }
+        .card-name { font-size: 13px; font-weight: 700; color: #151515; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; text-align: left; }
+        .card-price { font-size: 14px; font-weight: 900; color: #025DD0; text-align: left; }
 
         /* PANEL 2: Detail View */
         .detail-wrapper { display: flex; gap: 40px; background: #fff; border-radius: 24px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
@@ -98,7 +209,7 @@
         .kp-modal-body { padding: 30px; }
         .kp-balance-box { background: #f1f5f9; border-radius: 12px; padding: 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
         .kp-balance-box span { font-size: 14px; font-weight: 700; color: #475569; }
-        .kp-balance-box strong { font-size: 20px; font-weight: 900; color: #0ea5e9; }
+        .kp-balance-box strong { font-size: 20px; font-weight: 900; color: #025DD0; }
         
         .kp-receipt { margin-bottom: 30px; }
         .receipt-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 15px; font-weight: 600; color: #475569; }
@@ -131,68 +242,198 @@
         .btn-heart.hearted { background: #eff6ff; border-color: #025DD0; }
         .btn-heart span { color: #0f172a; }
         .d-tag { display: inline-block; background: #f8fafc; border: 1px solid #cbd5e1; color: #475569; font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 6px; margin-right: 4px; }
-        /* PC: 모바???�터 버튼 ?��? */
-        @media (min-width: 901px) { .mobile-filter-btn { display: none !important; } }
+        /* ── PC: 모바일 필터 버튼 숨김 ── */
+        @media (min-width: 901px) {
+            .mobile-filter-btn { display: none !important; }
+        }
+        /* ── Responsive Breakpoints ── */
+        @media (max-width: 900px) {
+            .market-container { margin: 12px auto; padding: 0 16px; }
+            .mobile-filter-btn { display: flex; }
+            .market-sidebar { display: none !important; }
+            .market-layout { border-top: none; padding-top: 0; }
+
+            /* ── 검색바: 가로 한 줄 유지 (styles.css flex-direction:column 덮어쓰기) ── */
+            .market-search-bar {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                max-width: 100% !important;
+                margin: 0 0 14px !important;
+                height: 48px !important;
+                border-radius: 12px !important;
+                border: 1.5px solid #e2e8f0 !important;
+                background: #f8fafc !important;
+                overflow: hidden !important;
+            }
+            .market-search-cat {
+                width: auto !important;
+                flex-shrink: 0 !important;
+                border-right: 1px solid #e2e8f0 !important;
+                border-bottom: none !important;
+                padding: 0 14px !important;
+                height: 100% !important;
+                font-size: 13px !important;
+                justify-content: center !important;
+            }
+            .market-search-cat select { font-size: 13px !important; }
+            .market-search-input {
+                flex: 1 !important;
+                width: auto !important;
+                padding: 0 12px !important;
+                font-size: 14px !important;
+                text-align: left !important;
+            }
+            .market-search-btn {
+                padding: 0 12px !important;
+                font-size: 15px !important;
+                height: 100%;
+                flex-shrink: 0;
+            }
+
+            .market-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .card-img-wrap { font-size: 50px; }
+            .card-name { font-size: 12px; }
+            .card-price { font-size: 12px; }
+            /* Detail Panel mobile */
+            .detail-wrapper { flex-direction: column; gap: 24px; padding: 20px 16px; border-radius: 16px; }
+            .detail-left { min-height: 280px; font-size: 80px; }
+            .d-title { font-size: 24px; }
+            .d-price-val { font-size: 26px; }
+            .btn-buy { padding: 16px; font-size: 16px; }
+            /* KP Modal mobile */
+            .kp-modal { width: calc(100vw - 32px); border-radius: 20px; }
+            /* Complete view mobile */
+            .complete-wrapper { padding: 48px 20px; }
+            .c-icon { font-size: 60px; }
+            .c-title { font-size: 24px; }
+        }
+        @media (max-width: 480px) {
+            .market-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .card-img-wrap { border-radius: 6px; }
+        }
+
+        /* ── 드로워 내 range slider 터치 충돌 방지 ── */
+        #drawerFilterContent .range-wrapper {
+            touch-action: none;
+            padding: 8px 0;
+        }
+        #drawerFilterContent input[type="range"].dual-range {
+            touch-action: none;
+            height: 24px !important;
+        }
+        #drawerFilterContent input[type="range"].dual-range::-webkit-slider-thumb {
+            width: 28px !important;
+            height: 28px !important;
+            margin-top: -11px !important;
+        }
+        /* 드로워 내 슬라이더 구역 전체 스크롤 방지 */
+        .drawer-slider-zone {
+            overflow: hidden;
+            padding: 4px 0;
+        }
+
+        /* ── Pagination Style ── */
+        .page-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background: #fff;
+            color: #475569;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .page-btn:hover:not(:disabled) {
+            border-color: #025DD0;
+            color: #025DD0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(2,93,208,0.15);
+        }
+        .page-btn.active {
+            background: #025DD0;
+            color: #fff;
+            border-color: #025DD0;
+            box-shadow: 0 4px 12px rgba(2,93,208,0.25);
+        }
+        .page-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+        @media (max-width: 480px) {
+            .page-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 12px;
+                border-radius: 6px;
+            }
+        }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="tailwind-init.js"></script>
 </head>
 <body>
     <script src="gnb.js"></script>
+
+<!-- Mobile Filter Drawer Overlay -->
+<div class="filter-drawer-overlay" id="filterDrawerOverlay" onclick="closeMobileFilter(event)">
+    <div class="filter-drawer" id="filterDrawer">
+        <!-- ① 고정 헤더 -->
+        <div class="filter-drawer-header">
+            <div class="filter-drawer-handle"></div>
+            <div class="filter-drawer-top">
+                <span class="filter-drawer-title" data-en="🎛️ Filter & Sort" data-ko="🎛️ 필터 & 정렬">🎛️ 필터 & 정렬</span>
+                <button class="filter-drawer-close" onclick="event.stopPropagation(); window.closeMobileFilter()">✕</button>
+            </div>
+        </div>
+        <!-- ② 스크롤 콘텐츠 영역 -->
+        <div class="filter-drawer-body" id="drawerFilterContent"></div>
+        <!-- ③ 고정 하단 적용버튼 -->
+        <div class="filter-drawer-footer">
+            <button class="filter-apply-btn" onclick="event.stopPropagation(); window.closeMobileFilter()" data-en="Apply Filters ✓" data-ko="필터 적용하기 ✓">필터 적용하기 ✓</button>
+        </div>
+    </div>
 </div>
+
+<!-- Mobile Filter Floating Button (마켓 리스트에서만 표시) -->
+<button class="mobile-filter-btn" id="mobileFilterBtn" onclick="openMobileFilter()" data-en="🎛️ Filter & Sort" data-ko="🎛️ 필터 & 정렬">🎛️ 필터 & 정렬</button>
+
 <div class="market-container">
         
         <!-- STEP 1: MARKET LIST -->
         <div id="panel-list" class="market-panel active">
             <!-- Search Bar -->
             <div class="market-search-bar">
-                <input type="text" class="market-search-input" placeholder="발자?�을 검?�해보세??" data-ko="발자?�을 검?�해보세??" data-en="Search for footprints.">
-                <button class="market-search-btn" style="font-size: 12px;">&#10006;</button>
-                <button class="market-search-btn search-submit-btn" style="font-weight:700; font-size:13px; padding:0 18px; color:#025DD0; border-left:1px solid #e2e8f0;">검??/button>
+                <input type="text" class="market-search-input" placeholder="발자국을 검색해보세요." data-ko="발자국을 검색해보세요." data-en="Search for footprints.">
+                <button class="market-search-btn" style="font-size: 12px; display:none;">&#10006;</button>
+                <button class="market-search-btn search-submit-btn" style="font-weight:700; font-size:13px; padding:0 18px; color:#025DD0; border-left:1px solid #e2e8f0;"><span style="display:none;">검색</span></button>
             </div>
 
             <div class="market-layout">
                 <!-- Sidebar -->
                 <aside class="market-sidebar">
                     <div class="filter-header">
-                        <span><span data-en="Option Filter" data-ko="?�션 ?�터">Option Filter</span></span>
-                        <span class="filter-reset" onclick="resetFilters()">??/span>
+                        <span><span data-en="Option Filter" data-ko="옵션 필터">옵션 필터</span></span>
+                        <span class="filter-reset" onclick="resetFilters()">↺</span>
                     </div>
 
-                    <div class="filter-group filter-category">
-                        <div class="filter-title"><span data-en="Category" data-ko="카테고리">Category</span></div>
+                    <div class="filter-group filter-category" style="display:none;">
+                        <div class="filter-title"><span data-en="Category" data-ko="카테고리">카테고리</span></div>
                         <div class="filter-btns">
-                            <button class="f-btn active"><span data-en="Footprints" data-ko="발자�?>Footprints</span></button>
+                            <button class="f-btn active"><span data-en="Footprints" data-ko="발자국">발자국</span></button>
                         </div>
                     </div>
 
-                    <div class="filter-group">
-                        <div class="filter-title"><span data-en="Type" data-ko="?�??>Type</span></div>
-                        <div class="filter-btns filter-type">
-                            <button class="f-btn" data-val="cute">#Cute</button>
-                            <button class="f-btn" data-val="fancy">#Fancy</button>
-                            <button class="f-btn" data-val="dark">#Dark</button>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <div class="filter-title"><span data-en="Color" data-ko="?�상">Color</span></div>
-                        <div class="filter-btns filter-color">
-                            <button class="f-btn" data-val="red"><span class="f-color-dot" style="background:red;"></span> Red</button>
-                            <button class="f-btn" data-val="blue"><span class="f-color-dot" style="background:blue;"></span> Blue</button>
-                            <button class="f-btn" data-val="green"><span class="f-color-dot" style="background:green;"></span> Green</button>
-                            <button class="f-btn" data-val="yellow"><span class="f-color-dot" style="background:gold;"></span> Yellow</button>
-                            <button class="f-btn" data-val="black"><span class="f-color-dot" style="background:black;"></span> Black</button>
-                            <button class="f-btn" data-val="white"><span class="f-color-dot" style="background:#fff; border:1px solid #ccc;"></span> White</button>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <div class="filter-title"><span data-en="Price" data-ko="가�?>Price</span></div>
+                    <div class="filter-group" style="display:none;">
+                        <div class="filter-title"><span data-en="Price" data-ko="가격">가격</span></div>
                         <div class="filter-btns filter-price">
-                            <button class="f-btn" data-val="0"><span data-en="Free" data-ko="무료">Free</span></button>
+                            <button class="f-btn active" data-val="0"><span data-en="Free" data-ko="무료">무료</span></button>
                         </div>
-                        <!-- range slider: hidden but kept for JS -->
                         <div style="display:none;">
                             <div class="range-labels" style="margin-top: 25px;">
                                 <span id="priceMinLabel">0 KP</span>
@@ -207,25 +448,48 @@
                         </div>
                     </div>
 
+
                     <div class="filter-group">
-                        <div class="filter-title"><span data-en="Sort" data-ko="?�렬">Sort</span></div>
+                        <div class="filter-title"><span data-en="Sort" data-ko="정렬">정렬</span></div>
                         <div class="filter-btns filter-sort">
                             <button class="f-btn" data-val="new">NEW</button>
-                            <button class="f-btn" data-val="trending">Trending</button>
-                            <button class="f-btn" data-val="best">Best</button>
+                            <button class="f-btn" data-val="trending">BEST</button>
+                            <button class="f-btn" data-val="best">TREND</button>
                         </div>
                     </div>
+
+                    <div class="filter-group">
+                        <div class="filter-title"><span data-en="Type" data-ko="타입">타입</span></div>
+                        <div class="filter-btns filter-type">
+                            <button class="f-btn" data-val="cute" data-en="#Cute" data-ko="#큐티">#큐티</button>
+                            <button class="f-btn" data-val="fancy" data-en="#Fancy" data-ko="#화려">#화려</button>
+                            <button class="f-btn" data-val="dark" data-en="#Dark" data-ko="#다크">#다크</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-title"><span data-en="Color" data-ko="색상">색상</span></div>
+                        <div class="filter-btns filter-color">
+                            <button class="f-btn" data-val="red"><span class="f-color-dot" style="background:red;"></span> <span data-en="Red" data-ko="레드">레드</span></button>
+                            <button class="f-btn" data-val="blue"><span class="f-color-dot" style="background:blue;"></span> <span data-en="Blue" data-ko="블루">블루</span></button>
+                            <button class="f-btn" data-val="green"><span class="f-color-dot" style="background:green;"></span> <span data-en="Green" data-ko="그린">그린</span></button>
+                            <button class="f-btn" data-val="yellow"><span class="f-color-dot" style="background:gold;"></span> <span data-en="Yellow" data-ko="옐로우">옐로우</span></button>
+                            <button class="f-btn" data-val="black"><span class="f-color-dot" style="background:black;"></span> <span data-en="Black" data-ko="블랙">블랙</span></button>
+                            <button class="f-btn" data-val="white"><span class="f-color-dot" style="background:#fff; border:1px solid #ccc;"></span> <span data-en="White" data-ko="화이트">화이트</span></button>
+                        </div>
+                    </div>
+
                 </aside>
 
                 <!-- Main Content -->
                 <main class="market-main">
-                    <span class="market-count" id="marketCountLabel">0개의 <span data-en="Footprints" data-ko="발자�?>Footprints</span></span>
+                    <span class="market-count" id="marketCountLabel">0<span data-en=" Items" data-ko="개의 발자국">개의 발자국</span></span>
                     <div class="market-grid" id="marketGridContainer">
                         <!-- Loaded through JS -->
                     </div>
                 </main>
             </div>
-        </div>
+            </div>
 
         <!-- STEP 2: MARKET DETAIL -->
         <div id="panel-detail" class="market-panel">
@@ -233,16 +497,16 @@
             <div class="detail-wrapper">
                 <div class="detail-left" id="detail-img-wrap" style="position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 12px; background: url('images/main_thumb_bg.jpg') center/cover;">
                     <span id="detail-tag" style="position:absolute; top:16px; left:16px; color:#fff; font-size:12px; font-weight:800; padding:4px 10px; border-radius:6px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); letter-spacing:0.5px;">NEW</span>
-                    <span id="detail-icon" style="font-size: 140px; text-shadow: 0 10px 30px rgba(0,0,0,0.2);">?��</span>
+                    <span id="detail-icon" style="font-size: 140px; text-shadow: 0 10px 30px rgba(0,0,0,0.2);">🐾</span>
                     <!-- Bottom Overlay Buttons -->
                     <div style="position:absolute; bottom:20px; right:20px; display:flex; gap:10px;">
-                        <button class="btn-preview" onclick="openVideoModal()">?�� <span data-en="Video Preview" data-ko="?�상 미리보기">Video Preview</span></button>
-                        <button class="btn-heart" id="detail-heart" onclick="toggleHeart()">??<span id="detail-heart-count">0</span></button>
+                        <button class="btn-preview" onclick="openVideoModal()">🎬 <span data-en="Video Preview" data-ko="영상 미리보기">Video Preview</span></button>
+                        <button class="btn-heart" id="detail-heart" onclick="toggleHeart()">♡ <span id="detail-heart-count">0</span></button>
                     </div>
                 </div>
                 <div class="detail-right">
-                    <div class="d-cat"><span data-en="Footprints" data-ko="발자�?>Footprints</span></div>
-                    <h2 class="d-title" id="detail-title" style="margin-bottom: 15px;"><span data-en="Item Name" data-ko="?�품�?>Item Name</span></h2>
+                    <div class="d-cat"><span data-en="Footprints" data-ko="발자국">Footprints</span></div>
+                    <h2 class="d-title" id="detail-title" style="margin-bottom: 15px;"><span data-en="Item Name" data-ko="상품명">Item Name</span></h2>
                     
                     <div class="d-tags-wrap" id="detail-tags-wrap" style="margin-bottom: 30px;">
                         <span class="d-tag" id="detail-type-tag" style="font-size: 14px; padding: 8px 16px; background:#f8fafc; color:#1e293b; border-color:#cbd5e1; margin-right:6px;"></span>
@@ -252,13 +516,14 @@
                     <div class="d-info-list" style="margin-bottom: 30px; border-top: 1px solid #e2e8f0; padding-top: 25px;">
                         <div class="d-info-item">
                             <div class="d-info-lbl"><span data-en="Listing Expiry" data-ko="마켓 게재 만료">마켓 게재 만료</span></div>
-                            <div class="d-info-val" id="detail-expiry" style="font-size:15px; font-weight:800; color:#025DD0;">??/div>
+                            <div class="d-info-val" id="detail-expiry" style="font-size:15px; font-weight:800; color:#025DD0;">—</div>
                         </div>
                     </div>
 
+
                     <div class="d-buy-box">
                         <div class="d-price-wrap">
-                            <div class="d-price-lbl"><span data-en="Price" data-ko="?�매 ?�인??>Price</span></div>
+                            <div class="d-price-lbl"><span data-en="Price" data-ko="판매 금액">Price</span></div>
                             <div class="d-price-val" id="detail-price">0 <span>KP</span></div>
                         </div>
                         <button class="btn-buy" onclick="openPaymentModal()"><span data-en="Acquire" data-ko="획득하기">Acquire</span></button>
@@ -268,7 +533,7 @@
             
             <!-- Bottom Navigation -->
             <div style="text-align:center; padding: 40px 0; border-top: 1px dashed #e2e8f0; margin-top: 50px;">
-                <button onclick="location.href='market.html'" class="btn-back-to-list" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 14px 40px; font-size: 15px; font-weight: 800; color: #475569; border-radius: 8px; cursor: pointer; transition: 0.2s;"><span data-en="Back to List" data-ko="목록?�로 ?�아가�?>Back to List</span></button>
+                <button onclick="goToStep('list')" class="btn-back-to-list" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 14px 40px; font-size: 15px; font-weight: 800; color: #475569; border-radius: 8px; cursor: pointer; transition: 0.2s;"><span data-en="Back to List" data-ko="목록으로 돌아가기">Back to List</span></button>
             </div>
         </div>
 
@@ -278,18 +543,18 @@
                 <div class="c-icon" style="font-size:0; margin-bottom:20px;">
                     <img src="images/step4_img.png" style="width:220px; height:auto; display:block; margin:0 auto;" alt="">
                 </div>
-                <h2 class="c-title"><span data-en="Payment Complete!" data-ko="결제가 ?�료?�었?�니??">Payment Complete!</span></h2>
-                <div class="c-desc"><span data-en="The item has been successfully transferred to your Studio.<br>You can also check your in-game mailbox." data-ko="?�이?�이 ???�튜?�오�??�상?�으�??�송?�었?�니??<br>?�게???�편?�에?�도 ?�인?�실 ???�습?�다.">The item has been successfully transferred to your Studio.<br>You can also check your in-game mailbox.</span></div>
+                <h2 class="c-title"><span data-en="Payment Complete!" data-ko="결제가 완료되었습니다!">Payment Complete!</span></h2>
+                <div class="c-desc"><span data-en="The item has been successfully transferred to your Studio.<br>You can also check your in-game mailbox." data-ko="아이템이 내 스튜디오로 정상적으로 전송되었습니다.<br>인게임 우편함에서도 확인하실 수 있습니다.">The item has been successfully transferred to your Studio.<br>You can also check your in-game mailbox.</span></div>
                 
                 <div class="c-box">
-                    <div class="c-item"><span>구매 <span data-en="Item Name" data-ko="?�품�?>Item Name</span></span> <span id="c-item-name"><span data-en="Item Name" data-ko="?�품�?>Item Name</span></span></div>
+                    <div class="c-item"><span>획득 <span data-en="Item Name" data-ko="작품명">Item Name</span></span> <span id="c-item-name"><span data-en="Item Name" data-ko="상품명">Item Name</span></span></div>
                     <div class="c-item"><span><span data-en="Payment Amount" data-ko="결제 금액">Payment Amount</span></span> <span id="c-item-price">0 KP</span></div>
-                    <div class="c-item"><span><span data-en="Remaining Balance" data-ko="?�여 ?�인??>Remaining Balance</span></span> <span id="c-item-balance">0 KP</span></div>
+                    <div class="c-item"><span><span data-en="Remaining Balance" data-ko="잔여 포인트">Remaining Balance</span></span> <span id="c-item-balance">0 KP</span></div>
                 </div>
 
                 <div class="c-btns">
-                    <button class="c-btn-go-market" onclick="location.href='market.html'"><span data-en="Market" data-ko="마켓">Market</span> <span data-en="Continue Browsing" data-ko="??구경?�기">Continue Browsing</span></button>
-                    <button class="c-btn-go-studio" onclick="location.href='studio_inventory.html'"><span data-en="My Studio" data-ko="마이 ?�튜?�오">My Studio</span> <span data-en="Go" data-ko="?�동">Go</span></button>
+                    <button class="c-btn-go-market" onclick="goToStep('list')"><span data-en="Market" data-ko="마켓">Market</span> <span data-en="Continue Browsing" data-ko="더 구경하기">Continue Browsing</span></button>
+                    <button class="c-btn-go-studio" onclick="location.href='studio_inventory.html'"><span data-en="My Studio" data-ko="마이 스튜디오">My Studio</span> <span data-en="Go" data-ko="이동">Go</span></button>
                 </div>
             </div>
         </div>
@@ -302,21 +567,21 @@
             <div class="kp-modal">
                 <div class="kp-modal-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0; padding:24px 30px;">
                     <h3 style="font-size:20px; font-weight:900; color:#0f172a;"><span data-en="Point Payment" data-ko="포인트 결제">Point Payment</span></h3>
-                    <button class="btn-close" style="background:none; border:none; font-size:22px; cursor:pointer;" onclick="closePaymentModal()">??/button>
+                    <button class="btn-close" style="background:none; border:none; font-size:22px; cursor:pointer;" onclick="closePaymentModal()">✖</button>
                 </div>
                 <div class="kp-modal-body" style="padding: 30px;">
                     <div class="kp-balance-box" style="background:#f8fafc; padding:22px 24px; border-radius:14px; display:flex; justify-content:space-between; margin-bottom:24px; border:1px solid #e2e8f0;">
                         <span style="font-size:16px; font-weight:700; color:#64748b;"><span data-en="My Points" data-ko="나의 보유 포인트">My Points</span></span>
-                        <strong style="font-size:20px; color:#3b82f6;" id="modal-current-balance">5,000 KP</strong>
+                        <strong style="font-size:20px; color:#025DD0;" id="modal-current-balance">5,000 KP</strong>
                     </div>
                     
                     <div class="kp-receipt" style="background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:24px;">
                         <div class="receipt-row" style="display:flex; justify-content:space-between; margin-bottom:14px; font-size:15px; font-weight:700; color:#475569;">
-                            <span><span data-en="Item Name" data-ko="?�품�?>Item Name</span></span>
-                            <span id="modal-item-name">불�????�?�장</span>
+                            <span><span data-en="Item Name" data-ko="상품명">Item Name</span></span>
+                            <span id="modal-item-name">불타는 대장장</span>
                         </div>
                         <div class="receipt-row" style="display:flex; justify-content:space-between; margin-bottom:14px; font-size:15px; font-weight:700; color:#475569;">
-                            <span><span data-en="Item Price" data-ko="?�품 금액">Item Price</span></span>
+                            <span><span data-en="Item Price" data-ko="상품 금액">Item Price</span></span>
                             <span id="modal-item-price">50 KP</span>
                         </div>
                         <div class="receipt-row total" style="display:flex; justify-content:space-between; margin-top:18px; padding-top:18px; border-top:1px dashed #cbd5e1; font-size:18px; font-weight:900; color:#0f172a;">
@@ -334,7 +599,7 @@
                 </div>
                 <div class="modal-btns" style="display:flex; padding:24px 30px; border-top:1px solid #e2e8f0; gap:15px; background:#fff; border-bottom-left-radius:24px; border-bottom-right-radius:24px;">
                     <button class="btn-modal-cancel" style="flex:1; padding:18px; background:transparent; color:#64748b; font-weight:800; font-size:17px; border:none; cursor:pointer;" onclick="closePaymentModal()"><span data-en="Cancel" data-ko="취소">Cancel</span></button>
-                    <button class="btn-modal-confirm" id="btn-modal-confirm" style="flex:1; padding:18px; background:#3b82f6; color:#fff; font-weight:800; font-size:17px; border:none; border-radius:14px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#3b82f6'" onclick="executePayment()"><span data-en="Pay 50 KP" data-ko="50 KP 결제?�기">Pay 50 KP</span></button>
+                    <button class="btn-modal-confirm" id="btn-modal-confirm" style="flex:1; padding:18px; background:#025DD0; color:#fff; font-weight:800; font-size:17px; border:none; border-radius:14px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#012553'" onmouseout="this.style.background='#025DD0'" onclick="executePayment()"><span data-en="Pay 50 KP" data-ko="50 KP 결제하기">Pay 50 KP</span></button>
                 </div>
             </div>
         </div>
@@ -352,61 +617,69 @@
     <!-- Scripts -->
     <script>
         function goToStep(step) {
+            if (step === 'list') {
+                location.href = 'market.html';
+                return;
+            }
             document.querySelectorAll('.market-panel').forEach(el => el.classList.remove('active'));
             document.getElementById('panel-' + step).classList.add('active');
             window.scrollTo(0, 0);
+            // 마켓 리스트일 때만 모바일 필터 버튼 표시
+            const filterBtn = document.getElementById('mobileFilterBtn');
+            if (filterBtn) filterBtn.style.display = step === 'list' ? 'flex' : 'none';
         }
 
         // Global state mapping for Detail and Checkout
         let currentProductId = null;
-        let currentKafraPoints = 0; // Set default Kafra Points to 0
+        let currentPoints = 0; // Set default points to 0
 
         function goToDetail(id) {
-            const p = mockProducts.find(x => x.id === id);
-            if(!p) return;
             currentProductId = id;
-            
-            // Populate Detail View
-            document.getElementById('detail-bread-title').innerHTML = p.title;
+            const p = mockProducts.find(x => x.id === id);
+            if (!p) return;
+
             document.getElementById('detail-title').innerHTML = p.title;
-            // background ?�거: main_thumb_bg.jpg 고정 (HTML???��? ?�정??
+            const priceLabel = p.isFree ? '<span style="color:#22c55e;">FREE</span>' : p.price.toLocaleString() + ' <span>KP</span>';
+            document.getElementById('detail-price').innerHTML = priceLabel;
+            
+            const detailImgWrap = document.getElementById('detail-img-wrap');
+            // background는 main_thumb_bg.jpg 고정 - inline style 덮어쓰지 않음
             document.getElementById('detail-icon').innerText = p.icon;
             
-            const tagEl = document.getElementById('detail-tag');
-            if(p.tag) {
-                tagEl.style.display = 'inline-block';
-                tagEl.innerHTML = p.tag;
-                // 메인�??�일???��? ?�상 ?�스??
+            const tagElem = document.getElementById('detail-tag');
+            if (p.tag) {
+                tagElem.style.display = 'block';
+                tagElem.innerText = p.tag;
+                // 메인과 동일한 뇱지 색상 시스템
                 const tagColors = { 'BEST': '#ED322B', 'NEW': '#025DD0', 'HOT': '#f97316' };
-                tagEl.style.background = tagColors[p.tag] || '#025DD0';
+                tagElem.style.background = tagColors[p.tag] || '#025DD0';
+            } else {
+                tagElem.style.display = 'none';
             }
-            else { tagEl.style.display = 'none'; }
             
-            const typeMap = { 'cute': '<span data-en="??Cute" data-ko="??귀?�운">??Cute</span>', 'fancy': '<span data-en="?�� Fancy" data-ko="?�� ?�려??>?�� Fancy</span>', 'dark': '<span data-en="?�� Dark" data-ko="?�� ?�크">?�� Dark</span>' };
-            const colorMap = { 'red': '<span data-en="?�� Red" data-ko="?�� 빨강">?�� Red</span>', 'blue': '<span data-en="?�� Blue" data-ko="?�� ?�랑">?�� Blue</span>', 'green': '<span data-en="?�� Green" data-ko="?�� 초록">?�� Green</span>', 'yellow': '<span data-en="?�� Yellow" data-ko="?�� ?�랑">?�� Yellow</span>', 'black': '<span data-en="??Black" data-ko="??검??>??Black</span>', 'white': '<span data-en="??White" data-ko="???�색">??White</span>' };
-            document.getElementById('detail-type-tag').innerHTML = typeMap[p.type] || '';
-            document.getElementById('detail-color-tag').innerHTML = colorMap[p.color] || '';
+            document.getElementById('detail-type-tag').innerText = '#' + p.type.toUpperCase();
+            document.getElementById('detail-color-tag').innerText = '#' + p.color.toUpperCase();
 
-            // 마켓 게재 만료?? pubDate + 90??계산
+            // 마켓 게재 만료일: pubDate + 90일 계산
             const expEl = document.getElementById('detail-expiry');
             if (expEl && p.pubDate) {
                 const parts = p.pubDate.split('.');
                 const pub = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
                 pub.setDate(pub.getDate() + 90);
                 const expStr = `${String(pub.getDate()).padStart(2,'0')}.${String(pub.getMonth()+1).padStart(2,'0')}.${pub.getFullYear()}`;
-                expEl.textContent = expStr + ' (게시 ??90??';
+                expEl.textContent = expStr + ' (게시 후 90일)';
             }
+
             
             updateDetailHeartUI(p);
             
-            document.getElementById('detail-price').innerHTML = p.isFree ? '<span style="color:#22c55e;">FREE</span>' : `${p.price.toLocaleString()} <span>KP</span>`;
-            
             goToStep('detail');
+            window.history.pushState({ panel: 'detail', id }, '', `?productId=${id}`);
         }
 
         function updateDetailHeartUI(p) {
             const btn = document.getElementById('detail-heart');
-            const icon = p.isHearted ? '?? : '??;
+            const icon = p.isHearted ? '♥' : '♡';
             btn.innerHTML = `<span style="color:#025DD0; font-size:18px;">${icon}</span> <span id="detail-heart-count" style="color:#0f172a;">${p.hearts.toLocaleString()}</span>`;
             btn.classList.toggle('hearted', !!p.isHearted);
         }
@@ -425,7 +698,6 @@
             if (!p) return;
             p.isHearted = !p.isHearted;
             p.hearts += p.isHearted ? 1 : -1;
-            // ?�재 ?�세 ?�이지가 같�? ?�품?�면 ?�기??
             if (currentProductId === id) updateDetailHeartUI(p);
             renderProducts();
         }
@@ -435,13 +707,13 @@
             if (!p) return;
             
             // Populate the payment modal UI
-            document.getElementById('modal-current-balance').innerText = `${currentKafraPoints.toLocaleString()} KP`;
+            document.getElementById('modal-current-balance').innerText = `${currentPoints.toLocaleString()} KP`;
             document.getElementById('modal-item-name').innerHTML = p.title;
             
             if (p.isFree) {
                 document.getElementById('modal-item-price').innerText = `FREE`;
                 document.getElementById('modal-payment-amount').innerHTML = `0 KP (<span data-en="Free" data-ko="무료">Free</span>)`;
-                document.getElementById('modal-payment-amount').style.color = '#3b82f6';
+                document.getElementById('modal-payment-amount').style.color = '#025DD0';
             } else {
                 document.getElementById('modal-item-price').innerText = `${p.price.toLocaleString()} KP`;
                 document.getElementById('modal-payment-amount').innerText = `- ${p.price.toLocaleString()} KP`;
@@ -452,13 +724,13 @@
             const alertBox = document.getElementById('modal-warning');
             
             // Reset state
-            btn.style.background = '#3b82f6';
+            btn.style.background = '#025DD0';
             btn.style.cursor = 'pointer';
-            btn.innerHTML = p.isFree ? '<span data-en="Free" data-ko="무료">Free</span> <span data-en="Proceed to Checkout" data-ko="결제 진행">Proceed to Checkout</span>' : `${p.price.toLocaleString()} KP <span data-en="Pay" data-ko="결제?�기">Pay</span>`;
+            btn.innerHTML = p.isFree ? '<span data-en="Free" data-ko="무료">Free</span> <span data-en="Proceed to Checkout" data-ko="결제 진행">Proceed to Checkout</span>' : `${p.price.toLocaleString()} KP <span data-en="Pay" data-ko="결제하기">Pay</span>`;
             if(alertBox) alertBox.style.display = 'none';
             btn.onclick = executePayment;
             
-            if (!p.isFree && currentKafraPoints < p.price) {
+            if (!p.isFree && currentPoints < p.price) {
                 // Not enough funds UI
                 btn.style.background = '#cbd5e1';
                 btn.style.cursor = 'not-allowed';
@@ -482,8 +754,8 @@
             document.getElementById('c-item-name').innerHTML = p.title;
             document.getElementById('c-item-price').innerText = `${p.price.toLocaleString()} KP`;
             
-            currentKafraPoints -= p.price;
-            document.getElementById('c-item-balance').innerText = `${currentKafraPoints.toLocaleString()} KP`;
+            currentPoints -= p.price;
+            document.getElementById('c-item-balance').innerText = `${currentPoints.toLocaleString()} KP`;
             
             closePaymentModal();
             goToStep('complete');
@@ -501,20 +773,21 @@
             document.getElementById('previewVideo').currentTime = 0;
         }
 
-        /* ----- MARKET DATA ----- */
+        /* ----- MARKET FILTER & DATA LOGIC ----- */
         let mockProducts = [
-            { id: 1,  title: '?�링??벚꽃 <span data-en="Footprints" data-ko="발자�?>Footprints</span>', type: 'cute',  color: 'red',    price: 0,     isFree: true,  tag: 'NEW',  hearts: 21,   img: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)', icon: '?��', pubDate: '10.01.2026' },
-            { id: 2,  title: '<span data-en="Ice Crystal Footprints" data-ko="?�음 ?�정 발자�?>Ice Crystal Footprints</span>', type: 'fancy', color: 'blue',   price: 1200,  isFree: false, tag: 'BEST', hearts: 350,  img: 'linear-gradient(to top, #00c6fb 0%, #005bea 100%)', icon: '?�️', pubDate: '15.01.2026' },
-            { id: 3,  title: '<span data-en="Steps of Dark Abyss" data-ko="?�둠???�연??걸음">Steps of Dark Abyss</span>', type: 'dark',  color: 'black',  price: 5500,  isFree: false, tag: 'HOT',  hearts: 140,  img: 'linear-gradient(to right, #434343 0%, black 100%)', icon: '?��', pubDate: '20.01.2026' },
-            { id: 4,  title: '<span data-en="Green Umbrella Step" data-ko="초록?�산 ?�이???�텝">Green Umbrella Step</span>', type: 'cute',  color: 'green',  price: 300,   isFree: false, tag: '',     hearts: 5,    img: 'linear-gradient(to top, #0ba360 0%, #3cba92 100%)', icon: '?�️', pubDate: '22.01.2026' },
-            { id: 5,  title: '<span data-en="Golden Elf Trajectory" data-ko="?�금�??�프??궤적">Golden Elf Trajectory</span>', type: 'fancy', color: 'yellow', price: 9000,  isFree: false, tag: 'BEST', hearts: 1000, img: 'linear-gradient(to right, #f83600 0%, #f9d423 100%)', icon: '??, pubDate: '25.01.2026' },
-            { id: 6,  title: `<span data-en="Dark Mage's Trace" data-ko="?�크메이지???�빛?�적">Dark Mage's Trace</span>`, type: 'dark',  color: 'black',  price: 0,     isFree: true,  tag: '',     hearts: 89,   img: 'linear-gradient(to bottom, #8e9eab, #eef2f3)', icon: '?��', pubDate: '01.02.2026' },
-            { id: 7,  title: '<span data-en="Burning Lava Fragment" data-ko="불�????�암 조각">Burning Lava Fragment</span>', type: 'fancy', color: 'red',    price: 15000, isFree: false, tag: 'NEW',  hearts: 12,   img: 'linear-gradient(to right, #ff0844 0%, #ffb199 100%)', icon: '?��', pubDate: '05.02.2026' },
-            { id: 8,  title: '<span data-en="Pure Snow Footsteps" data-ko="?�어 ?�노??발걸??>Pure Snow Footsteps</span>', type: 'cute',  color: 'white',  price: 0,     isFree: true,  tag: '',     hearts: 60,   img: 'linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)', icon: '??, pubDate: '10.02.2026' },
-            { id: 9,  title: '<span data-en="Aqua Marine Slide" data-ko="?�쿠??마린 ?�라?�드">Aqua Marine Slide</span>', type: 'fancy', color: 'blue',   price: 4200,  isFree: false, tag: 'HOT',  hearts: 220,  img: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)', icon: '?��', pubDate: '15.02.2026' },
-            { id: 10, title: '<span data-en="Necromancer Skull Dance" data-ko="?�크로맨?�의 ?�골 �?>Necromancer Skull Dance</span>', type: 'dark',  color: 'black',  price: 8500,  isFree: false, tag: '',     hearts: 44,   img: 'linear-gradient(to right, #000000, #434343)', icon: '??', pubDate: '18.02.2026' },
-            { id: 11, title: '<span data-en="Rabbit Jump Step" data-ko="?�끼???�프 ?�텝">Rabbit Jump Step</span>', type: 'cute',  color: 'white',  price: 500,   isFree: false, tag: 'BEST', hearts: 402,  img: 'linear-gradient(to right, #74ebd5 0%, #9face6 100%)', icon: '?��', pubDate: '20.02.2026' },
-            { id: 12, title: '<span data-en="Dazzling Angel Feather" data-ko="?��???천사??깃털">Dazzling Angel Feather</span>', type: 'fancy', color: 'white',  price: 20000, isFree: false, tag: 'NEW',  hearts: 300,  img: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)', icon: '?���?, pubDate: '01.03.2026' }
+            { id: 1,  title: '포링의 벚꽃 <span data-en="Footprints" data-ko="발자국">Footprints</span>', type: 'cute',  color: 'red',    price: 0,     isFree: true,  tag: 'NEW',  hearts: 21,   img: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)', icon: '🌸', pubDate: '10.01.2026' },
+
+            { id: 2,  title: '<span data-en="Ice Crystal Footprints" data-ko="얼음 수정 발자국">Ice Crystal Footprints</span>', type: 'fancy', color: 'blue',   price: 0,     isFree: true, tag: 'BEST', hearts: 350,  img: 'linear-gradient(to top, #00c6fb 0%, #005bea 100%)', icon: '❄️', pubDate: '15.01.2026' },
+            { id: 3,  title: '<span data-en="Steps of Dark Abyss" data-ko="어둠의 심연의 걸음">Steps of Dark Abyss</span>', type: 'dark',  color: 'black',  price: 0,     isFree: true, tag: 'HOT',  hearts: 140,  img: 'linear-gradient(to right, #434343 0%, black 100%)', icon: '🌑', pubDate: '20.01.2026' },
+            { id: 4,  title: '<span data-en="Green Umbrella Step" data-ko="초록우산 아이의 스텝">Green Umbrella Step</span>', type: 'cute',  color: 'green',  price: 0,     isFree: true, tag: '',     hearts: 5,    img: 'linear-gradient(to top, #0ba360 0%, #3cba92 100%)', icon: '☂️', pubDate: '22.01.2026' },
+            { id: 5,  title: '<span data-en="Golden Elf Trajectory" data-ko="황금빛 엘프의 궤적">Golden Elf Trajectory</span>', type: 'fancy', color: 'yellow', price: 0,     isFree: true, tag: 'BEST', hearts: 1000, img: 'linear-gradient(to right, #f83600 0%, #f9d423 100%)', icon: '✨', pubDate: '25.01.2026' },
+            { id: 6,  title: `<span data-en="Dark Mage's Trace" data-ko="다크메이지의 잿빛흔적">Dark Mage's Trace</span>`, type: 'dark',  color: 'black',  price: 0,     isFree: true,  tag: '',     hearts: 89,   img: 'linear-gradient(to bottom, #8e9eab, #eef2f3)', icon: '🔮', pubDate: '01.02.2026' },
+            { id: 7,  title: '<span data-en="Burning Lava Fragment" data-ko="불타는 용암 조각">Burning Lava Fragment</span>', type: 'fancy', color: 'red',    price: 0,     isFree: true, tag: 'NEW',  hearts: 12,   img: 'linear-gradient(to right, #ff0844 0%, #ffb199 100%)', icon: '🔥', pubDate: '05.02.2026' },
+            { id: 8,  title: '<span data-en="Pure Snow Footsteps" data-ko="퓨어 스노우 발걸음">Pure Snow Footsteps</span>', type: 'cute',  color: 'white',  price: 0,     isFree: true,  tag: '',     hearts: 60,   img: 'linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)', icon: '⛄', pubDate: '10.02.2026' },
+            { id: 9,  title: '<span data-en="Aqua Marine Slide" data-ko="아쿠아 마린 슬라이드">Aqua Marine Slide</span>', type: 'fancy', color: 'blue',   price: 0,     isFree: true, tag: 'HOT',  hearts: 220,  img: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)', icon: '🌊', pubDate: '15.02.2026' },
+            { id: 10, title: '<span data-en="Necromancer Skull Dance" data-ko="네크로맨서의 해골 춤">Necromancer Skull Dance</span>', type: 'dark',  color: 'black',  price: 0,     isFree: true, tag: '',     hearts: 44,   img: 'linear-gradient(to right, #000000, #434343)', icon: '💀', pubDate: '18.02.2026' },
+            { id: 11, title: '<span data-en="Rabbit Jump Step" data-ko="토끼의 점프 스텝">Rabbit Jump Step</span>', type: 'cute',  color: 'white',  price: 0,     isFree: true, tag: 'BEST', hearts: 402,  img: 'linear-gradient(to right, #74ebd5 0%, #9face6 100%)', icon: '🐰', pubDate: '20.02.2026' },
+            { id: 12, title: '<span data-en="Dazzling Angel Feather" data-ko="눈부신 천사의 깃털">Dazzling Angel Feather</span>', type: 'fancy', color: 'white',  price: 0,     isFree: true, tag: 'NEW',  hearts: 300,  img: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)', icon: '🕊️', pubDate: '01.03.2026' }
         ];
 
 
@@ -667,11 +940,12 @@
             // Simple default UI Sort
             filtered.sort((a,b) => b.hearts - a.hearts);
             
-            document.getElementById('marketCountLabel').innerHTML = `${filtered.length}개의 <span data-en="Footprints" data-ko="발자�?>Footprints</span>`;
+            document.getElementById('marketCountLabel').innerHTML = `${filtered.length}<span data-en=" Items" data-ko="개의 발자국">개의 발자국</span>`;
             
             if(filtered.length === 0) {
-                grid.innerHTML = `<div style="grid-column:1/-1; padding:40px; text-align:center; color:#64748b; font-weight:700;"><span data-en="No matching search results." data-ko="조건??맞는 검??결과가 ?�습?�다.">No matching search results.</span></div>`;
+                grid.innerHTML = `<div style="grid-column:1/-1; padding:40px; text-align:center; color:#64748b; font-weight:700;"><span data-en="No matching search results." data-ko="조건에 맞는 검색 결과가 없습니다.">조건에 맞는 검색 결과가 없습니다.</span></div>`;
                 document.getElementById('paginationWrap').innerHTML = '';
+                if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
                 return;
             }
 
@@ -690,7 +964,6 @@
                 
                 const card = document.createElement('div');
                 card.className = 'market-card';
-                // ?�트�??�르�??�동 ?�함 ??target 체크 방식 (stopPropagation 보다 ?�정??
                 card.addEventListener('click', function(e) {
                     if (!e.target.classList.contains('card-heart')) {
                         goToDetail(p.id);
@@ -702,14 +975,13 @@
                     <div class="card-img-wrap">
                         <span class="card-img-icon">${p.icon}</span>
                         ${p.tag ? `<span class="card-img-tag">${p.tag}</span>` : ''}
-                        <span class="card-heart" data-id="${p.id}" style="color:#025DD0; font-size:19px; font-weight:900; cursor:pointer; padding:6px; line-height:1;">${p.isHearted ? '?? : '??}</span>
+                        <span class="card-heart" data-id="${p.id}" style="color:#025DD0; font-size:19px; font-weight:900; cursor:pointer; padding:6px; line-height:1;">${p.isHearted ? '♥' : '♡'}</span>
                     </div>
                     <div class="card-bottom">
                         <span class="card-name">${p.title}</span>
                         <span class="card-price">${pLabel}</span>
                     </div>
                 `;
-                // ?�트 ?�릭 ?�들??
                 card.querySelector('.card-heart').addEventListener('click', function(e) {
                     e.stopPropagation();
                     toggleHeartFromList(p.id);
@@ -718,6 +990,7 @@
             });
             
             renderPagination(totalPages);
+            if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
         }
 
         function renderPagination(totalPages) {
@@ -729,45 +1002,188 @@
                 document.getElementById('marketGridContainer').insertAdjacentElement('afterend', wrap);
             }
             wrap.innerHTML = '';
-            for(let i=1; i<=totalPages; i++) {
+
+            if (totalPages <= 1) return;
+
+            const PAGE_BLOCK_SIZE = 10;
+            const currentBlock = Math.ceil(currentPage / PAGE_BLOCK_SIZE);
+            const startPage = (currentBlock - 1) * PAGE_BLOCK_SIZE + 1;
+            let endPage = currentBlock * PAGE_BLOCK_SIZE;
+            if (endPage > totalPages) endPage = totalPages;
+
+            // ≪ (첫 페이지)
+            const firstBtn = document.createElement('button');
+            firstBtn.className = 'page-btn';
+            firstBtn.innerHTML = '«';
+            firstBtn.title = '첫 페이지';
+            firstBtn.disabled = currentPage === 1;
+            firstBtn.onclick = () => { currentPage = 1; renderProducts(); window.scrollTo(0,0); };
+            wrap.appendChild(firstBtn);
+
+            // ＜ (이전 페이지)
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'page-btn';
+            prevBtn.innerHTML = '‹';
+            prevBtn.title = '이전 페이지';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = () => { currentPage = Math.max(1, currentPage - 1); renderProducts(); window.scrollTo(0,0); };
+            wrap.appendChild(prevBtn);
+
+            // 숫자 페이지
+            for (let i = startPage; i <= endPage; i++) {
                 const btn = document.createElement('button');
-                btn.style.cssText = `width: 36px; height: 36px; border-radius: 8px; border: 1px solid #cbd5e1; font-weight: 800; cursor: pointer; transition: 0.2s; ${i===currentPage ? 'background:#1e3a8a; color:#fff; border-color:#1e3a8a;' : 'background:#fff; color:#475569;'}`;
+                btn.className = `page-btn${i === currentPage ? ' active' : ''}`;
                 btn.innerText = i;
                 btn.onclick = () => { currentPage = i; renderProducts(); window.scrollTo(0,0); };
                 wrap.appendChild(btn);
             }
+
+            // ＞ (다음 페이지)
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'page-btn';
+            nextBtn.innerHTML = '›';
+            nextBtn.title = '다음 페이지';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = () => { currentPage = Math.min(totalPages, currentPage + 1); renderProducts(); window.scrollTo(0,0); };
+            wrap.appendChild(nextBtn);
+
+            // ≫ (마지막 페이지)
+            const lastBtn = document.createElement('button');
+            lastBtn.className = 'page-btn';
+            lastBtn.innerHTML = '»';
+            lastBtn.title = '마지막 페이지';
+            lastBtn.disabled = currentPage === totalPages;
+            lastBtn.onclick = () => { currentPage = totalPages; renderProducts(); window.scrollTo(0,0); };
+            wrap.appendChild(lastBtn);
         }
         
         // Initial setup
-        // updateSlider();
+        updateSlider();
         
-        // URL Parameter Handler for opening detail views from Index
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.market-panel').forEach(el => el.classList.remove('active'));
-            // Default show detail panel
-            document.getElementById('panel-detail').classList.add('active');
+        // URL Parameter Handler - 즉시 상세뷰 진입 (깜빡임 방지)
+        const _urlParams = new URLSearchParams(window.location.search);
+        const _detailId = _urlParams.get('id') || _urlParams.get('detail') || _urlParams.get('productId') || 1;
+        // 리스트 패널을 즉시 숨겨 flash 방지
+        document.getElementById('panel-list').style.display = 'none';
+        goToDetail(parseInt(_detailId));
+        document.getElementById('panel-list').style.display = '';
 
-            const urlParams = new URLSearchParams(window.location.search);
-            const detailId = urlParams.get('id') || urlParams.get('detail') || 1; 
-            goToDetail(parseInt(detailId));
-        });
+        /* ── Mobile Filter Drawer Logic ── */
+        function openMobileFilter() {
+            // Clone sidebar content into drawer
+            const sidebar = document.querySelector('.market-sidebar');
+            const drawerContent = document.getElementById('drawerFilterContent');
+            drawerContent.innerHTML = sidebar.innerHTML;
+
+            // Sync active states from sidebar buttons to drawer
+            document.querySelectorAll('.market-sidebar .f-btn').forEach((btn, i) => {
+                if (btn.classList.contains('active')) {
+                    drawerContent.querySelectorAll('.f-btn')[i]?.classList.add('active');
+                }
+            });
+
+            // Attach filter events to drawer buttons
+            drawerContent.querySelectorAll('.filter-btns').forEach(group => {
+                group.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.f-btn');
+                    if (!btn) return;
+                    if (btn.classList.contains('active')) {
+                        btn.classList.remove('active');
+                    } else {
+                        group.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                    }
+                    // Sync to real sidebar
+                    const allDrawerBtns = [...drawerContent.querySelectorAll('.f-btn')];
+                    const allSidebarBtns = [...document.querySelectorAll('.market-sidebar .f-btn')];
+                    allDrawerBtns.forEach((db, idx) => {
+                        if (allSidebarBtns[idx]) {
+                            db.classList.contains('active')
+                                ? allSidebarBtns[idx].classList.add('active')
+                                : allSidebarBtns[idx].classList.remove('active');
+                        }
+                    });
+                    activeFilters.type = document.querySelector('.filter-type .f-btn.active')?.dataset.val || null;
+                    activeFilters.color = document.querySelector('.filter-color .f-btn.active')?.dataset.val || null;
+                    activeFilters.btnPrice = document.querySelector('.filter-price .f-btn.active')?.dataset.val || null;
+                    activeFilters.sort = document.querySelector('.filter-sort .f-btn.active')?.dataset.val || null;
+                    renderProducts();
+                });
+            });
+
+            // ── Range Slider: 드로워 스크롤 충돌 방지 + 독립 이벤트 ──
+            const drawerWrapper = drawerContent.querySelector('.range-wrapper');
+            if (drawerWrapper) {
+                // slider-zone으로 감싸 overflow:hidden 처리
+                const zone = document.createElement('div');
+                zone.className = 'drawer-slider-zone';
+                drawerWrapper.parentNode.insertBefore(zone, drawerWrapper);
+                zone.appendChild(drawerWrapper);
+
+                const dMin = drawerContent.querySelector('#minRange');
+                const dMax = drawerContent.querySelector('#maxRange');
+                const dFill = drawerContent.querySelector('#rangeFill');
+                const dMinLbl = drawerContent.querySelector('#priceMinLabel');
+                const dMaxLbl = drawerContent.querySelector('#priceMaxLabel');
+
+                // 원본과 ID 충돌 방지
+                if (dMin) dMin.id = 'drawerMinRange';
+                if (dMax) dMax.id = 'drawerMaxRange';
+                if (dFill) dFill.id = 'drawerRangeFill';
+                if (dMinLbl) dMinLbl.id = 'drawerPriceMinLabel';
+                if (dMaxLbl) dMaxLbl.id = 'drawerPriceMaxLabel';
+
+                // 현재 필터값 동기화
+                if (dMin) dMin.value = activeFilters.minPrice;
+                if (dMax) dMax.value = activeFilters.maxPrice;
+
+                function syncDrawerSlider() {
+                    let minVal = parseInt(dMin?.value || 0);
+                    let maxVal = parseInt(dMax?.value || 20000);
+                    if (minVal > maxVal) { let t = minVal; minVal = maxVal; maxVal = t; }
+                    const maxTotal = 20000;
+                    if (dFill) {
+                        dFill.style.left = (minVal / maxTotal * 100) + '%';
+                        dFill.style.width = ((maxVal - minVal) / maxTotal * 100) + '%';
+                    }
+                    if (dMinLbl) dMinLbl.innerText = minVal.toLocaleString() + ' KP';
+                    if (dMaxLbl) dMaxLbl.innerText = maxVal === maxTotal
+                        ? maxVal.toLocaleString() + '+ KP'
+                        : maxVal.toLocaleString() + ' KP';
+                    // 원본 슬라이더 + 필터 동기화
+                    activeFilters.minPrice = minVal;
+                    activeFilters.maxPrice = maxVal;
+                    document.getElementById('minRange').value = minVal;
+                    document.getElementById('maxRange').value = maxVal;
+                    renderProducts();
+                }
+
+                [dMin, dMax].forEach(el => {
+                    if (!el) return;
+                    el.addEventListener('input', syncDrawerSlider);
+                    // 슬라이더 터치 시 드로워 스크롤 막기
+                    el.addEventListener('touchstart', e => e.stopPropagation(), { passive: false });
+                    el.addEventListener('touchmove',  e => e.stopPropagation(), { passive: false });
+                });
+
+                syncDrawerSlider();
+            }
+
+            document.getElementById('filterDrawerOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 드로워 닫기
+        window.closeMobileFilter = function(e) {
+            // e가 있으면 오버레이 직접 클릭인지 확인 (드로워 내부 클릭은 무시)
+            if (e && e.target && e.target.id !== 'filterDrawerOverlay') return;
+            document.getElementById('filterDrawerOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        };
     </script>
-
-
-</html>
-
-
-
-
-
-
-
-
-
-
-
     <!-- PRD DESCRIPTION INJECTION -->
     <script>window.currentPrdPageNum = 4;</script>
     <script src="description_module/desc-script.js?v=3.1"></script>
     <!-- // PRD DESCRIPTION INJECTION -->
 </body>
+</html>
