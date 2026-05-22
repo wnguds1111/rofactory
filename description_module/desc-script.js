@@ -372,8 +372,8 @@ function renderBuilderMarks() {
     }
     if (window.pageOverview || !window.isBuilderLocked) {
         let overviewHtml = !window.isBuilderLocked
-            ? `<div class="pdp-top-overview editable" contenteditable="true" onblur="window.updatePageMeta('overview', this.innerText)" placeholder="페이지 개요를 입력하세요">${window.pageOverview || ''}</div>`
-            : `<div class="pdp-top-overview">${window.pageOverview || ''}</div>`;
+            ? `<div class="pdp-top-overview editable" contenteditable="true" onblur="window.updatePageMeta('overview', this.innerText)" placeholder="페이지 개요를 입력하세요">${(window.pageOverview || '').replace(/\n/g, '<br>')}</div>`
+            : `<div class="pdp-top-overview">${(window.pageOverview || '').replace(/\n/g, '<br>')}</div>`;
         html += overviewHtml;
     }
 
@@ -389,8 +389,8 @@ function renderBuilderMarks() {
             `<div class="mark-title editable" contenteditable="true" onclick="event.stopPropagation()" onblur="updateMarkText('${m.id}', 'title', this.innerText)" placeholder="제목 입력">${m.title}</div>` :
             `<div class="mark-title">${m.title}</div>`;
         let subHTML = !window.isBuilderLocked ?
-            `<div class="mark-sub editable" contenteditable="true" onclick="event.stopPropagation()" onblur="updateMarkText('${m.id}', 'sub', this.innerText)" style="margin-top:4px;" placeholder="상세 설명 입력">${m.sub || ''}</div>` :
-            `<div class="mark-sub">${m.sub || ''}</div>`;
+            `<div class="mark-sub editable" contenteditable="true" onclick="event.stopPropagation()" onblur="updateMarkText('${m.id}', 'sub', this.innerText)" style="margin-top:4px;" placeholder="상세 설명 입력">${(m.sub || '').replace(/\n/g, '<br>')}</div>` :
+            `<div class="mark-sub">${(m.sub || '').replace(/\n/g, '<br>')}</div>`;
         let addSubBtn = (!window.isBuilderLocked && !isSubItem) ? `<button onclick="event.stopPropagation(); addSubMark('${m.id}')" style="margin-top:6px; background:none; border:1px dashed #cbd5e1; color:#64748b; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; cursor:pointer; transition:0.2s;" onmouseover="this.style.borderColor='#0ea5e9'; this.style.color='#0ea5e9'" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#64748b'">+ 하위 항목 추가</button>` : '';
 
         const badgeSize = isSubItem ? 'min-width:36px; height:22px; border-radius:6px; font-size:10px;' : 'min-width:26px; height:26px; border-radius:8px; font-size:12px;';
@@ -489,7 +489,7 @@ function highlightBadge(id) {
     if (badge) {
         badge.classList.add('pulsing');
         badge.style.transform = 'scale(1.5)';
-        badge.style.zIndex = '2000000020';
+        badge.style.zIndex = '10000';
         badge.style.boxShadow = '0 0 0 10px rgba(239,68,68,0.3)';
     }
 }
@@ -499,7 +499,7 @@ function resetBadge(id) {
     if (badge) {
         badge.classList.remove('pulsing');
         badge.style.transform = '';
-        badge.style.zIndex = '2000000010';
+        badge.style.zIndex = '9999';
         badge.style.boxShadow = '';
     }
 }
@@ -511,8 +511,8 @@ function showTooltip(e, m) {
     if (!tooltip) return;
 
     tooltip.innerHTML = `
-        <div style="font-weight:900; font-size:14px; color:#38bdf8; margin-bottom:2px;">${m.num}. ${m.title}</div>
-        <div style="color:#e2e8f0; font-size:12px; line-height:1.5;">${(m.sub || '').trim()}</div>
+        <div style="font-weight:900; font-size:14px; color:#38bdf8; margin-bottom:4px;">${m.num}. ${m.title}</div>
+        <div style="color:#e2e8f0; font-size:12px; line-height:1.5;">${(m.sub || '').replace(/\n/g, '<br>')}</div>
     `;
 
     tooltip.style.display = 'block';

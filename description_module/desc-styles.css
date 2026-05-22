@@ -1,7 +1,7 @@
 /* ==================== PRD DESCRIPTION MODULE ==================== */
-.page-desc-btn { position: fixed; top: 30px; right: 40px; z-index: 2000000026; background: #1e293b; color: #fff; border-radius: 30px; padding: 12px 24px; font-size: 15px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.1); transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+.page-desc-btn { position: fixed; top: 30px; right: 40px; z-index: 2000000001; background: #1e293b; color: #fff; border-radius: 30px; padding: 12px 24px; font-size: 15px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.1); transition: 0.3s; display: flex; align-items: center; gap: 8px; }
 .page-desc-btn:hover { background: #0f172a; color: #fff; transform: translateY(-3px); }
-.page-desc-panel { position: fixed; top: 90px; right: 40px; width: 450px; background: #fff; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; z-index: 2000000025; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: 0.3s; overflow: hidden; text-align: left; display:flex; flex-direction:column; max-height:calc(100vh - 210px); }
+.page-desc-panel { position: fixed; top: 90px; right: 40px; width: 450px; background: #fff; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; z-index: 2000000000; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: 0.3s; overflow: hidden; text-align: left; display:flex; flex-direction:column; max-height:calc(100vh - 210px); }
 .page-desc-panel.active { opacity: 1; visibility: visible; transform: translateY(0); }
 .pdp-header { background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 20px 25px; font-weight: 900; color: #0ea5e9; font-size: 16px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; text-transform: uppercase; letter-spacing: 1px; }
 .pdp-body { padding: 25px; font-size: 14px; color: #475569; line-height: 1.8; overflow-y: auto; flex: 1; }
@@ -37,7 +37,7 @@
     font-weight: 900;
     font-size: 12px;
     border: 2px solid #fff;
-    z-index: 2000000010;
+    z-index: 9999;
     pointer-events: auto;
     cursor: pointer;
     user-select: none;
@@ -66,7 +66,7 @@
     letter-spacing: -0.4px;
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
     box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-    z-index: 2000000030;
+    z-index: 2000000002;
     pointer-events: none;
     max-width: 300px;
     display: none;
