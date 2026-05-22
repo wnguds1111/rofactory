@@ -253,7 +253,7 @@
           "label": "3",
           "depth": 0,
           "title": "Next 버튼",
-          "sub": "- 클릭 시 Next Step 이동\n- 현재 일일 갯수 제한 X \n- 주간 최대 100개 제한 기준: UTC+0 월요일 00:00:00 ~ \n   일요일 23:59:59\n- 갯수 제한 초과 후 NEXT 버튼 클릭 시  \n   Alert(\"Registration limit exceeded. You can \n    register again next Monday at 00:00:00\n    (UTC+0).\") 노출\n- 보유 등록 티켓이 없을 경우 Alert(\"There are no tickets available for registration) 노출",
+          "sub": "- 클릭 시 Next Step 이동\n- 현재 일일 갯수 제한 X \n- 주간 최대 100개 제한 기준: UTC+0 월요일 00:00:00 ~ \n   일요일 23:59:59\n- 갯수 제한 초과 후 NEXT 버튼 클릭 시  \n   Alert(\"Registration limit exceeded. You can \n    register again next Monday at 00:00:00\n    (UTC+0).\") 노출\n- 보유 등록 티켓이 없을 경우 Alert(\"There are no tickets  \n   available for registration) 노출",
           "top": 821,
           "left": 1721,
           "selector": ""
