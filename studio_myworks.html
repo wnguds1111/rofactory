@@ -190,12 +190,23 @@ const works = [
 ];
 
 let currentTab = 'all';
-function setTab(tab){
+function setTab(tab, skipPush = false){
     currentTab = tab;
+    if (!skipPush) {
+        const url = new URL(window.location);
+        url.searchParams.set('tab', tab);
+        window.history.pushState({}, '', url);
+    }
     document.querySelectorAll('.sub-tab').forEach(el => el.classList.remove('active'));
-    document.getElementById('tab-' + tab).classList.add('active');
+    const el = document.getElementById('tab-' + tab);
+    if (el) el.classList.add('active');
     applyFilter();
 }
+window.addEventListener('popstate', () => {
+    const params = new URLSearchParams(window.location.search);
+    const t = params.get('tab') || 'all';
+    setTab(t, true);
+});
 function applyFilter(){
     const kw = document.getElementById('searchInput').value.trim().toUpperCase();
     const container = document.getElementById('workList');
@@ -264,7 +275,9 @@ function buildRow(w){
     </div>`;
 }
 
-applyFilter();
+const initialParams = new URLSearchParams(window.location.search);
+const initialTab = initialParams.get('tab') || 'all';
+setTab(initialTab, true);
 </script>
     <!-- PRD DESCRIPTION INJECTION -->
     <script>window.currentPrdPageNum = 3;</script>

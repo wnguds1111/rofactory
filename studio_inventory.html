@@ -164,12 +164,23 @@ const inventory = [
     { title:"거미줄 망토 발자국",   tag:"발자국", status:"expired",   buyDate:"05.09.2025",       expDate:"05.10.2025",       price:"2,000 KP", icon:"🕸️" },
 ];
 let currentTab = 'all';
-function setTab(tab){
+function setTab(tab, skipPush = false){
     currentTab = tab;
-    document.querySelectorAll('.sub-tab').forEach(el=>el.classList.remove('active'));
-    document.getElementById('tab-'+tab).classList.add('active');
+    if (!skipPush) {
+        const url = new URL(window.location);
+        url.searchParams.set('tab', tab);
+        window.history.pushState({}, '', url);
+    }
+    document.querySelectorAll('.sub-tab').forEach(el => el.classList.remove('active'));
+    const el = document.getElementById('tab-' + tab);
+    if (el) el.classList.add('active');
     applyFilter();
 }
+window.addEventListener('popstate', () => {
+    const params = new URLSearchParams(window.location.search);
+    const t = params.get('tab') || 'all';
+    setTab(t, true);
+});
 function applyFilter(){
     const kw = document.getElementById('searchInput').value.trim().toUpperCase();
     const list = document.getElementById('invList');
@@ -206,7 +217,11 @@ function applyFilter(){
         window.changeLang(localStorage.getItem('roz_lang') || 'kr');
     }
 }
-document.addEventListener('DOMContentLoaded', applyFilter);
+document.addEventListener('DOMContentLoaded', () => {
+    const initialParams = new URLSearchParams(window.location.search);
+    const initialTab = initialParams.get('tab') || 'all';
+    setTab(initialTab, true);
+});
 </script>
     <!-- PRD DESCRIPTION INJECTION -->
     <script>window.currentPrdPageNum = 3;</script>
