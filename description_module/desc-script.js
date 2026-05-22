@@ -511,8 +511,8 @@ function showTooltip(e, m) {
     if (!tooltip) return;
 
     tooltip.innerHTML = `
-        <div style="font-weight:900; font-size:14px; color:#38bdf8; margin-bottom:4px;">${m.num}. ${m.title}</div>
-        <div style="color:#e2e8f0; font-size:12px; line-height:1.5;">${m.sub || ''}</div>
+        <div style="font-weight:900; font-size:14px; color:#38bdf8; margin-bottom:2px;">${m.num}. ${m.title}</div>
+        <div style="color:#e2e8f0; font-size:12px; line-height:1.5;">${(m.sub || '').trim()}</div>
     `;
 
     tooltip.style.display = 'block';
