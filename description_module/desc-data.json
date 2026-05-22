@@ -54,7 +54,7 @@
           "label": "2",
           "depth": 0,
           "title": "메뉴 이동 영역",
-          "sub": "└ 작품 등록, 마이 스튜디오, RO FACTORY 란, 마켓\n- 클릭 시 각 페이지 이동\n- (공통)작품 등록, 마이스튜디오페이지 접근 시 비로그인 시 \n   로그인 페이지 이동 이후 로그인 후 이동\n- 모바일 상태에서 (공통)작품 등록 접근 시 Alert(\"It can only be registered on PC.\") 노출",
+          "sub": "└ 작품 등록, 마이 스튜디오, RO FACTORY 란, 마켓\n- 클릭 시 각 페이지 이동\n- (공통)작품 등록, 마이스튜디오페이지 접근 시 비로그인 시 \n   로그인 페이지 이동 이후 로그인 후 이동",
           "top": 535,
           "left": 339.5,
           "selector": ""
@@ -116,9 +116,14 @@
         }
       ]
     },
-    "1-0": {
-      "title": "",
+    "1": {
+      "title": "등록 페이지",
       "overview": "",
+      "marks": []
+    },
+    "1-0": {
+      "title": "Cached Test Title!",
+      "overview": "Cached Test Overview Description!",
       "marks": [
         {
           "id": "id_1779408381682",
