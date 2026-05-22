@@ -122,15 +122,15 @@
       "marks": []
     },
     "1-0": {
-      "title": "Cached Test Title!",
-      "overview": "Cached Test Overview Description!",
+      "title": "작품 등록 페이지",
+      "overview": "등록 페이지 기본 정책 \n1) 로그인 후 접근 가능\n2) 에이전트 체크 후 PC에서만 접근 가능",
       "marks": [
         {
           "id": "id_1779408381682",
           "num": 1,
           "label": "1",
           "depth": 0,
-          "title": "새 항목 제목",
+          "title": "등록 프로세스 가이드 영역",
           "sub": "상세 기획 설명을 입력하세요.",
           "top": 300,
           "left": 400,
@@ -141,8 +141,8 @@
           "num": 2,
           "label": "2",
           "depth": 0,
-          "title": "새 항목 제목",
-          "sub": "상세 기획 설명을 입력하세요.",
+          "title": "Back 버튼",
+          "sub": "- 클릭 시 History Back",
           "top": 300,
           "left": 400,
           "selector": ""
@@ -152,8 +152,8 @@
           "num": 3,
           "label": "3",
           "depth": 0,
-          "title": "새 항목 제목",
-          "sub": "상세 기획 설명을 입력하세요.",
+          "title": "Next 버튼",
+          "sub": "- STEP 2 이동",
           "top": 300,
           "left": 400,
           "selector": ""
