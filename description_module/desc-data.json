@@ -10,7 +10,7 @@
           "label": "1",
           "depth": 0,
           "title": "발자국 파일 등록",
-          "sub": "└ Foot 파일, 동영상 미리보기 파일, 콜렉션 썸네일, \n     아이템 썸네일 등록\n* 유효성 정책\n1) 확장자 이외 파일 등록 시  Alert(\"Only .foot files can be registered.\") 호출\n2) 용량 초과 등록 시 Aelrt(\"File size is too large.\")\n3) 빈 파일 등록 시 Alert(\"Empty files cannot be uploaded.\")",
+          "sub": "└ Foot 파일, 동영상 미리보기 파일, 콜렉션 썸네일, \n     아이템 썸네일 등록\n\n* 유효성 정책\n1) 확장자 이외 파일 등록 시  Alert(\"Only .foot files can be registered.\") 호출\n2) 용량 초과 등록 시 Aelrt(\"File size is too large.\")\n3) 빈 파일 등록 시 Alert(\"Empty files cannot be uploaded.\")",
           "top": 372.5,
           "left": 390,
           "selector": ""
