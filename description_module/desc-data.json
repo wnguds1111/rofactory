@@ -130,19 +130,41 @@
           "num": 1,
           "label": "1",
           "depth": 0,
-          "title": "다이내믹 뷰 디코딩",
-          "sub": "- URL 파라미터를 기반으로 화면의 이미지 썸네일과 텍스트 즉시 로딩",
+          "title": "발자국 정보 노출",
+          "sub": "└ 변환 상태, 카테고리, 발자국명, 가격, 등록일, 필터, \n    영상 미리보기, 수정하기, 삭제하기",
           "top": 200,
           "left": 200,
           "selector": ".dt-left"
+        },
+        {
+          "id": "id_1779838697758",
+          "num": 1,
+          "label": "1-1",
+          "depth": 1,
+          "title": "수정하기 ",
+          "sub": "- 클릭 시 수정 페이지 이동",
+          "top": 250,
+          "left": 230,
+          "selector": ""
+        },
+        {
+          "id": "id_1779838731326",
+          "num": 1,
+          "label": "1-2",
+          "depth": 1,
+          "title": "삭제하기",
+          "sub": "- 클릭 시 confirm (\"Are you sure you want \n  to delete this?\")\n  └ [confirm] 선택 시 삭제 처리",
+          "top": 250,
+          "left": 230,
+          "selector": ""
         },
         {
           "id": "id_1779430000010",
           "num": 2,
           "label": "2",
           "depth": 0,
-          "title": "상위 상태 뱃지 라벨",
-          "sub": "- 상태 값 파라미터에 맞춰 \"변환 대기 중\", \"판매 중\" 시스템 전용 배지 노출",
+          "title": "작품 변환 로그 (변환 중)",
+          "sub": "- 작품 최초 등록 / 변환 작업 진행 중 노출 \n   ┗ 해당 시간은 동일 ",
           "top": 200,
           "left": 600,
           "selector": ".dt-status"
@@ -152,22 +174,11 @@
           "num": 3,
           "label": "3",
           "depth": 0,
-          "title": "수정 보안 권한 분기",
-          "sub": "- 상태가 `변환 대기 중`일 때만 유일하게 `[삭제하기]` 와 `[수정하기]` 작동",
+          "title": "목록으로",
+          "sub": "- 클릭 시 history back",
           "top": 250,
           "left": 600,
           "selector": "#actionContainer"
-        },
-        {
-          "id": "id_1779430000012",
-          "num": 4,
-          "label": "4",
-          "depth": 0,
-          "title": "타임라인 트리 구조 트래커",
-          "sub": "- 등록 시작부터 진화되어 온 거쳐온 모든 단계별 시간순 트리 로그 정렬",
-          "top": 400,
-          "left": 600,
-          "selector": ".timeline"
         }
       ]
     },
