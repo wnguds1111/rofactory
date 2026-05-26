@@ -153,6 +153,17 @@ function getTargetKey() {
             const activePanel = document.querySelector('.studio-main .panel.active');
             if (activePanel) key = '3-' + activePanel.id.replace('panel-', '');
         }
+    } else if (key === '4') {
+        const p = new URLSearchParams(window.location.search);
+        const status = p.get('status');
+        if (status) {
+            if (status === 'completed') {
+                const sub = p.get('completedSub');
+                key = '4-' + (sub === 'sale' ? 'completed_sale' : 'completed_wait');
+            } else {
+                key = '4-' + status;
+            }
+        }
     }
     return key;
 }
