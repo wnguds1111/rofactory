@@ -88,7 +88,7 @@
         .dt-category { @apply text-sm text-blue-600 font-black mb-1; }
         .dt-title { @apply text-2xl md:text-3xl font-black text-slate-900 mb-6; }
         
-        .dt-info-grid { @apply grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6; }
+        .dt-info-grid { @apply grid grid-cols-2 lg:grid-cols-2 gap-4 mb-6; }
         .info-box { @apply bg-slate-50 p-4 rounded-xl border border-slate-100; }
         .info-label { @apply text-xs font-bold text-slate-400 mb-1; }
         .info-val { @apply text-lg font-black text-slate-800; }
@@ -144,6 +144,13 @@
             <div class="detail-bottom">
                 <h3 class="bottom-title" data-en="Asset Conversion Log" data-ko="작품 변환 로그">작품 변환 로그</h3>
                 <div id="timelineContainer" class="timeline"></div>
+                
+                <div style="margin-top:40px; text-align:center;">
+                    <a href="studio_myworks.html" class="dt-btn dt-btn-secondary" style="display:inline-flex; align-items:center; justify-content:center; gap:8px; text-decoration:none; padding:12px 30px; font-size:14px; border-radius:12px;">
+                        <span style="font-size:18px;">←</span>
+                        <span data-en="Back to List" data-ko="목록으로">목록으로</span>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -159,8 +166,6 @@
                 </video>
                 <p style="color:#64748b;font-size:12px;font-weight:600;margin-top:12px;text-align:center;">🎮 인게임 발자국 적용 미리보기 영상입니다. 실제 게임 환경에서 다를 수 있습니다.</p>
             </div>
-        <div style="text-align:center; margin-top:30px;">
-            <button onclick="location.href='studio_myworks.html'" class="dt-btn" style="background:#e2e8f0;color:#334155;border:none;font-weight:700;padding:12px 40px;border-radius:12px;cursor:pointer;" data-en="Back to List" data-ko="목록으로">목록으로</button>
         </div>
     </div>
 
