@@ -245,18 +245,7 @@ function buildRow(w){
         badge = `<span class="item-status s-failed" data-en="Failed" data-ko="변환 실패">변환 실패</span>`;
     }
 
-    let meta = `<span><span data-en="Price: " data-ko="가격: ">가격: </span><span style="color:#166534;font-weight:900;">${w.price}</span></span>`;
-    if(w.status === 'converting'){
-        meta += `<span><span data-en="Reg: " data-ko="등록일: ">등록일: </span>${w.regDate}</span>`;
-    } else if(w.status === 'completed'){
-        const c = '#1d4ed8';
-        meta += `<span style="color:${c};font-weight:800;"><span data-en="Sale Date: " data-ko="판매 시작일: ">판매 시작일: </span>${w.pubDate}</span>`;
-    } else if(w.status === 'expired'){
-        meta += `<span style="color:#64748b;"><span data-en="Exp: " data-ko="만료일: ">만료일: </span>${w.expDate}</span>`;
-    } else if(w.status === 'failed'){
-        meta += `<span><span data-en="Reg: " data-ko="등록일: ">등록일: </span>${w.regDate}</span>`;
-        meta += `<span style="color:#dc2626;" data-en="Reason: Failed" data-ko="사유: 변환 실패">사유: 변환 실패</span>`;
-    }
+    let meta = '';
 
     return `
     <div class="item-row" onclick="location.href='${detailLink}'" style="opacity:${opacity};">
@@ -264,7 +253,7 @@ function buildRow(w){
         <div class="item-info">
             <span class="item-tag" data-en="Footprint" data-ko="${w.tag}">${w.tag}</span>
             <div class="item-title" style="${strike}">${w.title}</div>
-            <div class="item-meta">${meta}</div>
+
         </div>
         ${badge}
         <div class="item-actions">
