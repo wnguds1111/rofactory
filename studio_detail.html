@@ -222,10 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="info-box">
             <div class="info-label" data-en="Price" data-ko="가격">가격</div>
             <div class="info-val">${priceDisplay}</div>
-        </div>
-        <div class="info-box">
-            <div class="info-label" data-en="Sales" data-ko="판매수">판매수</div>
-            <div class="info-val">${status==='converting'||status==='failed'?'—':sales.toLocaleString()+'<span data-en="" data-ko="건">건</span>'}</div>
         </div>`;
 
     if(status === 'converting'){
