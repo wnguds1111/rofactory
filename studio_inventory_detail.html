@@ -213,10 +213,14 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>`;
     }
 
+    const priceDisplay = price === 'FREE'
+        ? '<span style="color:#166534;font-weight:900;">FREE</span>'
+        : `<span style="color:#025DD0;">${price}</span>`;
+
     gridHTML += `
         <div class="info-box">
             <div class="info-label" data-en="Price" data-ko="구매 금액">구매 금액</div>
-            <div class="info-val" style="font-size:15px;font-weight:700;color:#025DD0;">${price}</div>
+            <div class="info-val" style="font-size:15px;font-weight:700;">${priceDisplay}</div>
         </div>`;
     document.getElementById('infoGrid').innerHTML = gridHTML;
 
