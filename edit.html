@@ -25,7 +25,7 @@
         .form-group label { display: block; font-size: 14px; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
         .form-control { width: 100%; padding: 15px 20px; font-size: 15px; font-weight: 600; border: 2px solid #e2e8f0; border-radius: 12px; background: #f8fafc; color: #0f172a; transition: 0.2s; outline: none; font-family: 'Pretendard'; }
         .form-control:focus { border-color: #3b82f6; background: #fff; box-shadow: 0 0 0 4px rgba(59,130,246,0.1); }
-        .form-control:read-only { background: #e2e8f0; color: #64748b; border-color: #cbd5e1; cursor: not-allowed; }
+
         
         .tag-group { display: flex; flex-wrap: wrap; gap: 8px; padding: 5px 0; }
         .tag-pill { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: #fff; border: 2px solid #cbd5e1; border-radius: 12px; font-size: 14px; font-weight: 700; color: #475569; cursor: pointer; transition: 0.2s; }
@@ -59,23 +59,23 @@
         <form class="form-container-clean" onsubmit="event.preventDefault(); alert('수정된 정보가 저장되었습니다.'); location.href='studio_detail.html?status=pending&title=' + encodeURIComponent(document.getElementById('editTitle').value);">
             <div class="form-row">
                 <div class="form-group half">
-                    <label>카테고리 분류 <span style="color:#ef4444;">*</span> (수정 불가)</label>
-                    <input type="text" class="form-control" value="발자국" readonly required>
+                    <label>작품 카테고리</label>
+                    <input type="text" class="form-control" value="발자국" readonly>
                 </div>
                 <div class="form-group half">
-                    <label>가격 (KP) <span style="font-size:12px; color:#64748b;">(Alpha 기간 무료 고정)</span></label>
-                    <input type="text" class="form-control" value="FREE" readonly style="background-color: #f8fafc; color: #64748b;">
+                    <label>판매 금액</label>
+                    <input type="text" class="form-control" value="FREE" readonly>
                 </div>
             </div>
             
             <div class="form-row">
                 <div class="form-group half">
-                    <label>작품 게재기간 <span style="color:#3b82f6; font-weight:700;">*자동 적용</span></label>
-                    <input type="text" class="form-control" value="상점 게시 시점 기준 90일" readonly style="background-color: #f8fafc; color: #64748b;">
+                    <label>작품 게재기간</label>
+                    <input type="text" class="form-control" value="상점 게시 시점 기준 90일" readonly style="background-color: #f8fafc; color: #64748b; font-weight: 500;">
                 </div>
                 <div class="form-group half">
-                    <label>작품 명칭 <span style="color:#ef4444;">*</span> <span style="font-size:12px; color:#64748b;">(영문만 입력 가능)</span></label>
-                    <input type="text" class="form-control" id="editTitle" value="Dark Abyss Walk" required placeholder="Enter title in English" maxlength="20" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s\-_.!?']/g, '')">
+                    <label>작품명 <span style="color:#ef4444;">*필수</span></label>
+                    <input type="text" class="form-control" id="editTitle" value="Dark Abyss Walk" required placeholder="Enter title in English (max 20 chars)" maxlength="20" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s\-_.!?']/g, '')">
                 </div>
             </div>
 
@@ -92,43 +92,65 @@
             </div>
 
             <div class="form-group" style="margin-top:30px;">
-                <label>메인 색상 (선택)</label>
-                <select class="form-control" id="editColorSelect">
-                    <option value="">색상을 선택해주세요</option>
-                    <option value="red">🔴 Red</option>
-                    <option value="blue">🔵 Blue</option>
-                    <option value="green">🟢 Green</option>
-                    <option value="yellow">🟡 Yellow</option>
-                    <option value="black" selected>⚫ Black</option>
-                </select>
+                <label>색상 <span>1개 선택 (선택)</span></label>
+                <div class="tag-group" id="editColorTags">
+                    <label class="tag-pill color-pill">
+                        <input type="radio" name="mainColor" value="red">
+                        <span class="color-dot" style="background:#ef4444;"></span> Red
+                    </label>
+                    <label class="tag-pill color-pill">
+                        <input type="radio" name="mainColor" value="blue">
+                        <span class="color-dot" style="background:#3b82f6;"></span> Blue
+                    </label>
+                    <label class="tag-pill color-pill">
+                        <input type="radio" name="mainColor" value="green">
+                        <span class="color-dot" style="background:#22c55e;"></span> Green
+                    </label>
+                    <label class="tag-pill color-pill">
+                        <input type="radio" name="mainColor" value="yellow">
+                        <span class="color-dot" style="background:#eab308;"></span> Yellow
+                    </label>
+                    <label class="tag-pill color-pill">
+                        <input type="radio" name="mainColor" value="black" checked>
+                        <span class="color-dot" style="background:#0f172a;"></span> Black
+                    </label>
+                    <label class="tag-pill color-pill">
+                        <input type="radio" name="mainColor" value="white">
+                        <span class="color-dot" style="background:#f1f5f9; border:1px solid #cbd5e1;"></span> White
+                    </label>
+                </div>
             </div>
 
             <div style="margin-top:30px; padding-top:30px; border-top:2px dashed #e2e8f0;">
                 <label style="display:block; font-size:14px; font-weight:800; color:#1e293b; margin-bottom:15px;">파일 수정 <span style="font-size:12px; color:#64748b; font-weight:600;">(변경할 파일만 선택)</span></label>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
                     <div style="background:#f8fafc; border:2px dashed #e2e8f0; border-radius:12px; padding:20px; text-align:center; cursor:pointer;" onclick="document.getElementById('ef1').click()">
+                        <div style="font-size:12px; font-weight:800; color:#10b981; margin-bottom:4px;">✅ 등록 완료</div>
                         <div style="font-size:24px; margin-bottom:8px;">📁</div>
                         <div style="font-size:13px; font-weight:700; color:#475569;">발자국 원본 (.foot)</div>
                         <input type="file" id="ef1" style="display:none" accept=".foot" onchange="document.getElementById('ef1_name').innerText=this.files[0].name">
-                        <span id="ef1_name" style="display:block; margin-top:8px; font-size:12px; font-weight:800; color:#3b82f6;"></span>
+                        <span id="ef1_name" style="display:block; margin-top:8px; font-size:12px; font-weight:800; color:#3b82f6;">dark_abyss_walk.foot</span>
                     </div>
                     <div style="background:#f8fafc; border:2px dashed #e2e8f0; border-radius:12px; padding:20px; text-align:center; cursor:pointer;" onclick="document.getElementById('ef2').click()">
+                        <div style="font-size:12px; font-weight:800; color:#10b981; margin-bottom:4px;">✅ 등록 완료</div>
                         <div style="font-size:24px; margin-bottom:8px;">🎬</div>
                         <div style="font-size:13px; font-weight:700; color:#475569;">동영상 미리보기 (.mp4)</div>
                         <input type="file" id="ef2" style="display:none" accept="video/*" onchange="document.getElementById('ef2_name').innerText=this.files[0].name">
-                        <span id="ef2_name" style="display:block; margin-top:8px; font-size:12px; font-weight:800; color:#3b82f6;"></span>
+                        <span id="ef2_name" style="display:block; margin-top:8px; font-size:12px; font-weight:800; color:#3b82f6;">dark_abyss_walk_prev.mp4</span>
                     </div>
                     <div style="background:#f8fafc; border:2px dashed #e2e8f0; border-radius:12px; padding:20px; text-align:center; cursor:pointer;" onclick="document.getElementById('ef3').click()">
+                        <div style="font-size:12px; font-weight:800; color:#10b981; margin-bottom:4px;">✅ 등록 완료</div>
                         <div style="font-size:24px; margin-bottom:8px;">💎</div>
                         <div style="font-size:13px; font-weight:700; color:#475569;">콜렉션 썸네일 (.png)</div>
                         <input type="file" id="ef3" style="display:none" accept=".png" onchange="document.getElementById('ef3_name').innerText=this.files[0].name">
-                        <span id="ef3_name" style="display:block; margin-top:8px; font-size:12px; font-weight:800; color:#3b82f6;"></span>
+                        <span id="ef3_name" style="display:block; margin-top:8px; font-size:12px; font-weight:800; color:#3b82f6;">dark_abyss_walk_col.png</span>
                     </div>
                     <div style="background:#f8fafc; border:2px dashed #e2e8f0; border-radius:12px; padding:20px; text-align:center; cursor:pointer;" onclick="document.getElementById('ef4').click()">
+                        <div style="font-size:12px; font-weight:800; color:#10b981; margin-bottom:4px;">✅ 등록 완료</div>
                         <div style="font-size:24px; margin-bottom:8px;">🎒</div>
                         <div style="font-size:13px; font-weight:700; color:#475569;">아이템 썸네일 (.png/.jpg)</div>
                         <input type="file" id="ef4" style="display:none" accept=".png,.jpg" onchange="document.getElementById('ef4_name').innerText=this.files[0].name">
-                        <span id="ef4_name" style="display:block; margin-top:8px; font-size:12px; font-weight:800; color:#3b82f6;"></span>
+                        <span id="ef4_name" style="display:block; margin-top:8px; font-size:12px; font-weight:800; color:#3b82f6;">dark_abyss_walk_item.png</span>
                     </div>
                 </div>
             </div>
