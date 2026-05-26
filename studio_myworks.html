@@ -245,11 +245,11 @@ function buildRow(w){
         badge = `<span class="item-status s-failed" data-en="Failed" data-ko="변환 실패">변환 실패</span>`;
     }
 
-    let meta = `<span><span data-en="Price: " data-ko="가격: ">가격: </span>${w.price}</span>`;
+    let meta = '';
     if(w.status === 'converting'){
         meta += `<span><span data-en="Reg: " data-ko="등록일: ">등록일: </span>${w.regDate}</span>`;
     } else if(w.status === 'completed'){
-        const c = w.completedSub === 'sale' ? '#166534' : '#1d4ed8';
+        const c = '#1d4ed8';
         meta += `<span style="color:${c};font-weight:800;"><span data-en="Sale Date: " data-ko="판매 시작일: ">판매 시작일: </span>${w.pubDate}</span>`;
     } else if(w.status === 'expired'){
         meta += `<span style="color:#64748b;"><span data-en="Exp: " data-ko="만료일: ">만료일: </span>${w.expDate}</span>`;
