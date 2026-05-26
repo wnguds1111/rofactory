@@ -119,14 +119,7 @@
 </head>
 <body>
     <script src="gnb.js"></script>
-    <div class="studio-detail-container">
-        <div class="breadcrumb" style="font-size:16px; margin-bottom:24px;">
-            <a href="studio_myworks.html" style="display:inline-flex; align-items:center; gap:6px; color:#1e293b; transition:color 0.2s;" onmouseover="this.style.color='#025DD0'" onmouseout="this.style.color='#1e293b'">
-                <span style="font-size:20px;">←</span> <span data-en="Manage Assets" data-ko="나의 작품 관리">나의 작품 관리</span>
-            </a>
-        </div>
-
-        <div class="detail-card">
+    <div class="studio-detail-container">        <div class="detail-card">
             <div class="detail-top">
                 <div class="dt-left" id="dtThumb">🪄</div>
                 <div class="dt-right">
@@ -166,6 +159,8 @@
                 </video>
                 <p style="color:#64748b;font-size:12px;font-weight:600;margin-top:12px;text-align:center;">🎮 인게임 발자국 적용 미리보기 영상입니다. 실제 게임 환경에서 다를 수 있습니다.</p>
             </div>
+        <div style="text-align:center; margin-top:30px;">
+            <button onclick="location.href='studio_myworks.html'" class="dt-btn" style="background:#e2e8f0;color:#334155;border:none;font-weight:700;padding:12px 40px;border-radius:12px;cursor:pointer;" data-en="Back to List" data-ko="목록으로">목록으로</button>
         </div>
     </div>
 
@@ -229,10 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="info-box">
             <div class="info-label" data-en="Reg Date" data-ko="등록일">등록일</div>
             <div class="info-val" style="font-size:15px;">${regDate||'—'}</div>
-        </div>
-        <div class="info-box">
-            <div class="info-label" data-en="Conversion Status" data-ko="변환 상태">변환 상태</div>
-            <div class="info-val" style="font-size:13px;color:#92400e;" data-en="Processing..." data-ko="처리 중…">처리 중…</div>
         </div>`;
     } else if(status === 'completed'){
         const pubColor = '#1d4ed8';
@@ -290,7 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="tl-item${isActive?' active':''}">
             <div class="tl-date">${date}${isActive?' <span style="color:#1d4ed8;font-size:11px;" data-en="(Current)" data-ko="(현재)">(현재)</span>':''}</div>
             <div class="tl-title" style="color:${titleColor||'#1e293b'};">${titleText}</div>
-            <div class="tl-desc">${desc}</div>
         </div>`;
 
     const tReg       = tlItem(false,'2026.03.10 10:00','<span data-en="Initial Registration" data-ko="작품 최초 등록">작품 최초 등록</span>','','<span data-en="Registered via RO Factory." data-ko="RO Factory 폼을 통해 최초로 정보가 등록되었습니다.">RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</span>');
