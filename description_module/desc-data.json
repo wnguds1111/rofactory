@@ -183,18 +183,18 @@
       ]
     },
     "5": {
-      "title": "정보 수정 모드",
-      "overview": "초기 반려 및 정보 변경 요청이 왔을 때 사용되는 전용 수정 모드 폼입니다.",
+      "title": "변환중 > 수정 페이지",
+      "overview": "",
       "marks": [
         {
           "id": "id_1779430000013",
           "num": 1,
           "label": "1",
           "depth": 0,
-          "title": "수정 불가 종속 필드 (Lock)",
-          "sub": "- 바꿀 수 없는 필드는 ReadOnly(읽기 전용 회색 칸) 처리 방어",
-          "top": 200,
-          "left": 400,
+          "title": "수정 가능 항목",
+          "sub": "└ 작품명, 작품 타입태그, 색상, 파일 수정\n- 유효성은 등록 폼이랑 동일",
+          "top": 439,
+          "left": 635,
           "selector": "input[readonly]"
         },
         {
@@ -202,10 +202,10 @@
           "num": 2,
           "label": "2",
           "depth": 0,
-          "title": "태깅 최적화 일원화",
-          "sub": "- 가장 먼저 누른 것을 해제하는 알고리즘 검증",
-          "top": 300,
-          "left": 400,
+          "title": "변경 사항 저장하기",
+          "sub": "- 클릭 시 유효성 체크 후 Alert(\"Changes have been \n   saved\") 호출 후 저장",
+          "top": 1481,
+          "left": 872,
           "selector": "#editTagGroup"
         },
         {
@@ -213,22 +213,11 @@
           "num": 3,
           "label": "3",
           "depth": 0,
-          "title": "숫자 기입 무결성 검증",
-          "sub": "- HTML5 폼 검증과 음수 배제 Number 특수기능",
-          "top": 400,
-          "left": 400,
+          "title": "취소하고 돌아가기",
+          "sub": "- 클릭 시 변환 중 상세페이지 이동",
+          "top": 1485,
+          "left": 642,
           "selector": "input[type=\"number\"]"
-        },
-        {
-          "id": "id_1779430000016",
-          "num": 4,
-          "label": "4",
-          "depth": 0,
-          "title": "결정 액션 기능 버튼 UI 제한",
-          "sub": "- 하단에만 버튼 액션을 배치하여 직관적 인터페이스를 제공",
-          "top": 500,
-          "left": 400,
-          "selector": ".form-actions"
         }
       ]
     },
