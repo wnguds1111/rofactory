@@ -143,7 +143,7 @@
             </div>
             <div class="search-bar">
                 <div class="search-bar-wrap">
-                    <input type="text" id="searchInput" oninput="renderList()" placeholder="발자국 검색" data-en="Search wishlist..." data-ko="발자국 검색">
+                    <input type="text" id="searchInput" oninput="currentPage=1; renderList()" placeholder="발자국 검색" data-en="Search wishlist..." data-ko="발자국 검색">
                 </div>
             </div>
             <div class="wish-count"><span data-en="Total " data-ko="전체 ">전체 </span><b id="wishCount">0</b><span data-en=" items" data-ko="개">개</span></div>
@@ -159,6 +159,8 @@ let wishlist = [
     { id:9,  title:"아쿠아 마린 슬라이드", tag:"발자국", status:"onsale", bg:"linear-gradient(to right,#4facfe,#00f2fe)",  icon:"🌊", price:"FREE" },
     { id:8,  title:"퓨어 스노우 발걸음",   tag:"발자국", status:"expired", bg:"linear-gradient(to top,#e6e9f0,#eef1f5)",  icon:"⛄", price:"FREE" },
 ];
+let currentPage = 1;
+const ITEMS_PER_PAGE = 10;
 function renderList(){
     const kw = document.getElementById('searchInput').value.trim().toUpperCase();
     const container = document.getElementById('wishList');
@@ -166,10 +168,21 @@ function renderList(){
     document.getElementById('wishCount').textContent = filtered.length;
     if(!filtered.length){
         container.innerHTML = `<div class="empty-state"><div class="empty-icon">💖</div><div class="empty-text" data-en="Your wishlist is empty." data-ko="찜한 상품이 없습니다.">찜한 상품이 없습니다.</div></div>`;
+        let wrap = document.getElementById('paginationWrap');
+        if(wrap) wrap.innerHTML = '';
         if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
         return;
     }
-    container.innerHTML = filtered.map((w,i)=>{
+
+    const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+    if(currentPage > totalPages) currentPage = totalPages;
+    if(currentPage < 1) currentPage = 1;
+
+    const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIdx = startIdx + ITEMS_PER_PAGE;
+    const pageData = filtered.slice(startIdx, endIdx);
+
+    container.innerHTML = pageData.map((w,i)=>{
         const isExp = w.status==='expired';
         const gs = isExp?'filter:grayscale(1);':'';
         const op = isExp?'0.7':'1';
@@ -182,12 +195,74 @@ function renderList(){
             <div class="item-info">
                 <span class="item-tag" data-en="💖 Wishlist" data-ko="💖 찜 목록">💖 찜 목록</span>
                 <div class="item-title" style="${strike}">${w.title}</div>
-
             </div>
             <div class="item-actions">
                 <button class="btn-action" style="color:#ef4444;border-color:#fca5a5;" onclick="event.stopPropagation();removeFav(${w.id})" data-en="💖 Remove" data-ko="💖 찜 해제">💖 찜 해제</button>
                 ${!isExp
                     ? `<button class="btn-action primary" onclick="event.stopPropagation();location.href='${detailLink}'" data-en="Details" data-ko="상세 보기">상세 보기</button>`
+                    : `<button class="btn-action" disabled style="opacity:0.4;" data-en="Ended" data-ko="판매 종료">판매 종료</button>`}
+            </div>
+        </div>`;
+    }).join('');
+
+    renderPagination(totalPages, 'wishList');
+
+    if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
+}
+
+function renderPagination(totalPages, containerId) {
+    let wrap = document.getElementById('paginationWrap');
+    if(!wrap) {
+        wrap = document.createElement('div');
+        wrap.id = 'paginationWrap';
+        wrap.style.cssText = 'display:flex; justify-content:center; gap:8px; margin-top:20px; padding-bottom:40px;';
+        document.getElementById(containerId).insertAdjacentElement('afterend', wrap);
+    }
+    wrap.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    const PAGE_BLOCK_SIZE = 10;
+    const currentBlock = Math.ceil(currentPage / PAGE_BLOCK_SIZE);
+    const startPage = (currentBlock - 1) * PAGE_BLOCK_SIZE + 1;
+    let endPage = currentBlock * PAGE_BLOCK_SIZE;
+    if (endPage > totalPages) endPage = totalPages;
+
+    const firstBtn = document.createElement('button');
+    firstBtn.className = 'page-btn';
+    firstBtn.innerHTML = '«';
+    firstBtn.disabled = (currentPage === 1);
+    firstBtn.onclick = () => { currentPage = 1; renderList(); window.scrollTo({top:0, behavior:'smooth'}); };
+    wrap.appendChild(firstBtn);
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'page-btn';
+    prevBtn.innerHTML = '‹';
+    prevBtn.disabled = (currentPage === 1);
+    prevBtn.onclick = () => { currentPage--; renderList(); window.scrollTo({top:0, behavior:'smooth'}); };
+    wrap.appendChild(prevBtn);
+
+    for (let i = startPage; i <= endPage; i++) {
+        const btn = document.createElement('button');
+        btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+        btn.innerText = i;
+        btn.onclick = () => { currentPage = i; renderList(); window.scrollTo({top:0, behavior:'smooth'}); };
+        wrap.appendChild(btn);
+    }
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'page-btn';
+    nextBtn.innerHTML = '›';
+    nextBtn.disabled = (currentPage === totalPages);
+    nextBtn.onclick = () => { currentPage++; renderList(); window.scrollTo({top:0, behavior:'smooth'}); };
+    wrap.appendChild(nextBtn);
+
+    const lastBtn = document.createElement('button');
+    lastBtn.className = 'page-btn';
+    lastBtn.innerHTML = '»';
+    lastBtn.disabled = (currentPage === totalPages);
+    lastBtn.onclick = () => { currentPage = totalPages; renderList(); window.scrollTo({top:0, behavior:'smooth'}); };
+    wrap.appendChild(lastBtn);
+}class="btn-action primary" onclick="event.stopPropagation();location.href='${detailLink}'" data-en="Details" data-ko="상세 보기">상세 보기</button>`
                     : `<button class="btn-action" disabled style="opacity:0.4;" data-en="Ended" data-ko="판매 종료">판매 종료</button>`}
             </div>
         </div>`;

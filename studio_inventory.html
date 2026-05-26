@@ -143,7 +143,7 @@
             </div>
             <div class="search-bar">
                 <div class="search-bar-wrap">
-                    <input type="text" id="searchInput" oninput="applyFilter()" placeholder="발자국 검색" data-en="Search purchases..." data-ko="발자국 검색">
+                    <input type="text" id="searchInput" oninput="currentPage=1; applyFilter()" placeholder="발자국 검색" data-en="Search footprints..." data-ko="발자국 검색">
                 </div>
             </div>
             <div class="sub-tabs">
@@ -151,21 +151,25 @@
                 <div class="sub-tab"        id="tab-purchased" onclick="setTab('purchased')" data-en="Purchased" data-ko="구매 완료">구매 완료</div>
                 <div class="sub-tab"        id="tab-expired"   onclick="setTab('expired')" data-en="Expired" data-ko="작품 만료">작품 만료</div>
             </div>
-            <div class="item-list" id="invList"></div>
+            <div class="item-list" id="inventoryList"></div>
         </main>
     </div>
 
     <footer class="footer"><img src="images/FOOTER.png" alt="Footer"></footer>
 
 <script>
-const inventory = [
+const works = [
     { title:"불꽃 스니커즈 발자국", tag:"발자국", status:"purchased", buyDate:"19.03.2026 08:15", state:"인게임 대기",       price:"FREE", icon:"🔥" },
     { title:"얼음 수정 발자국",     tag:"발자국", status:"purchased", buyDate:"14.03.2026 13:40", state:"인게임 전송 완료",  price:"FREE",   icon:"❄️" },
     { title:"거미줄 망토 발자국",   tag:"발자국", status:"expired",   buyDate:"05.09.2025",       expDate:"05.10.2025",       price:"FREE", icon:"🕸️" },
 ];
 let currentTab = 'all';
+let currentPage = 1;
+const ITEMS_PER_PAGE = 10;
+
 function setTab(tab, skipPush = false){
     currentTab = tab;
+    currentPage = 1;
     if (!skipPush) {
         const url = new URL(window.location);
         url.searchParams.set('tab', tab);
@@ -176,18 +180,42 @@ function setTab(tab, skipPush = false){
     if (el) el.classList.add('active');
     applyFilter();
 }
+
 window.addEventListener('popstate', () => {
     const params = new URLSearchParams(window.location.search);
     const t = params.get('tab') || 'all';
     setTab(t, true);
 });
+
 function applyFilter(){
     const kw = document.getElementById('searchInput').value.trim().toUpperCase();
-    const list = document.getElementById('invList');
-    let rows = [];
-    inventory.forEach(w=>{
-        if(currentTab!=='all' && w.status!==currentTab) return;
+    const container = document.getElementById('inventoryList');
+    let filtered = [];
+    works.forEach(w => {
+        if(currentTab === 'purchased' && w.status === 'expired') return;
+        if(currentTab === 'expired' && w.status !== 'expired') return;
         if(kw && !w.title.toUpperCase().includes(kw)) return;
+        filtered.push(w);
+    });
+
+    if(filtered.length === 0) {
+        container.innerHTML = `<div class="empty-state"><div class="empty-icon">🎒</div><div class="empty-text" data-en="No purchase history matching the conditions." data-ko="해당 조건의 구매 내역이 없습니다.">해당 조건의 구매 내역이 없습니다.</div></div>`;
+        let wrap = document.getElementById('paginationWrap');
+        if(wrap) wrap.innerHTML = '';
+        if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
+        return;
+    }
+
+    const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+    if(currentPage > totalPages) currentPage = totalPages;
+    if(currentPage < 1) currentPage = 1;
+
+    const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIdx = startIdx + ITEMS_PER_PAGE;
+    const pageData = filtered.slice(startIdx, endIdx);
+
+    let rows = [];
+    pageData.forEach(w => {
         const isExpired = w.status==='expired';
         const gs = isExpired?'filter:grayscale(1);':'';
         const op = isExpired?'0.7':'1';
@@ -195,7 +223,6 @@ function applyFilter(){
         const badge = isExpired
             ? `<span class="item-status" style="background:#f1f5f9;color:#64748b;" data-en="Expired" data-ko="만료됨">만료됨</span>`
             : `<span class="item-status" style="background:#dbeafe;color:#1d4ed8;" data-en="Purchased" data-ko="구매 완료">구매 완료</span>`;
-        let meta = '';
         const detailLink = `studio_inventory_detail.html?status=${isExpired?'expired':'purchased'}&title=${encodeURIComponent(w.title)}&icon=${encodeURIComponent(w.icon)}&buyDate=${encodeURIComponent(w.buyDate)}&state=${encodeURIComponent(w.state||'')}&expDate=${encodeURIComponent(w.expDate||'')}&price=${encodeURIComponent(w.price||'0 KP')}`;
         rows.push(`
         <div class="item-row" style="opacity:${op};cursor:pointer;" onclick="location.href='${detailLink}'">
@@ -203,18 +230,72 @@ function applyFilter(){
             <div class="item-info">
                 <span class="item-tag" data-en="Footprint" data-ko="${w.tag}">${w.tag}</span>
                 <div class="item-title" style="${strike}">${w.title}</div>
-
             </div>
             ${badge}
             <div class="item-actions"><button class="btn-action" onclick="event.stopPropagation();location.href='${detailLink}'" data-en="Details" data-ko="구매 상세 내역">구매 상세 내역</button></div>
         </div>`);
     });
-    list.innerHTML = rows.length ? rows.join('') : `<div class="empty-state"><div class="empty-icon">🎒</div><div class="empty-text" data-en="No purchase history found." data-ko="구매 내역이 없습니다.">구매 내역이 없습니다.</div></div>`;
 
-    if(window.changeLang) {
-        window.changeLang(localStorage.getItem('roz_lang') || 'kr');
-    }
+    container.innerHTML = rows.join('');
+    renderPagination(totalPages, 'inventoryList');
+    
+    if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
 }
+
+function renderPagination(totalPages, containerId) {
+    let wrap = document.getElementById('paginationWrap');
+    if(!wrap) {
+        wrap = document.createElement('div');
+        wrap.id = 'paginationWrap';
+        wrap.style.cssText = 'display:flex; justify-content:center; gap:8px; margin-top:20px; padding-bottom:40px;';
+        document.getElementById(containerId).insertAdjacentElement('afterend', wrap);
+    }
+    wrap.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    const PAGE_BLOCK_SIZE = 10;
+    const currentBlock = Math.ceil(currentPage / PAGE_BLOCK_SIZE);
+    const startPage = (currentBlock - 1) * PAGE_BLOCK_SIZE + 1;
+    let endPage = currentBlock * PAGE_BLOCK_SIZE;
+    if (endPage > totalPages) endPage = totalPages;
+
+    const firstBtn = document.createElement('button');
+    firstBtn.className = 'page-btn';
+    firstBtn.innerHTML = '«';
+    firstBtn.disabled = (currentPage === 1);
+    firstBtn.onclick = () => { currentPage = 1; applyFilter(); window.scrollTo({top:0, behavior:'smooth'}); };
+    wrap.appendChild(firstBtn);
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'page-btn';
+    prevBtn.innerHTML = '‹';
+    prevBtn.disabled = (currentPage === 1);
+    prevBtn.onclick = () => { currentPage--; applyFilter(); window.scrollTo({top:0, behavior:'smooth'}); };
+    wrap.appendChild(prevBtn);
+
+    for (let i = startPage; i <= endPage; i++) {
+        const btn = document.createElement('button');
+        btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+        btn.innerText = i;
+        btn.onclick = () => { currentPage = i; applyFilter(); window.scrollTo({top:0, behavior:'smooth'}); };
+        wrap.appendChild(btn);
+    }
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'page-btn';
+    nextBtn.innerHTML = '›';
+    nextBtn.disabled = (currentPage === totalPages);
+    nextBtn.onclick = () => { currentPage++; applyFilter(); window.scrollTo({top:0, behavior:'smooth'}); };
+    wrap.appendChild(nextBtn);
+
+    const lastBtn = document.createElement('button');
+    lastBtn.className = 'page-btn';
+    lastBtn.innerHTML = '»';
+    lastBtn.disabled = (currentPage === totalPages);
+    lastBtn.onclick = () => { currentPage = totalPages; applyFilter(); window.scrollTo({top:0, behavior:'smooth'}); };
+    wrap.appendChild(lastBtn);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const initialParams = new URLSearchParams(window.location.search);
     const initialTab = initialParams.get('tab') || 'all';
