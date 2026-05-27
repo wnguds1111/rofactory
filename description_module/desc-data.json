@@ -121,6 +121,45 @@
       "overview": "",
       "marks": []
     },
+    "5": {
+      "title": "변환중 > 수정 페이지",
+      "overview": "",
+      "marks": [
+        {
+          "id": "id_1779430000013",
+          "num": 1,
+          "label": "1",
+          "depth": 0,
+          "title": "수정 가능 항목",
+          "sub": "└ 작품명, 작품 타입태그, 색상, 파일 수정\n- 유효성은 등록 폼이랑 동일",
+          "top": 439,
+          "left": 635,
+          "selector": "input[readonly]"
+        },
+        {
+          "id": "id_1779430000014",
+          "num": 2,
+          "label": "2",
+          "depth": 0,
+          "title": "변경 사항 저장하기",
+          "sub": "- 클릭 시 유효성 체크 후 Alert(\"Changes have been \n   saved\") 호출 후 저장",
+          "top": 1481,
+          "left": 872,
+          "selector": "#editTagGroup"
+        },
+        {
+          "id": "id_1779430000015",
+          "num": 3,
+          "label": "3",
+          "depth": 0,
+          "title": "취소하고 돌아가기",
+          "sub": "- 클릭 시 변환 중 상세페이지 이동",
+          "top": 1485,
+          "left": 642,
+          "selector": "input[type=\"number\"]"
+        }
+      ]
+    },
     "4-converting": {
       "title": "나의 작품 관리 > 변환중",
       "overview": "유저가 등록을 마친 상태 (S3에 적재)",
@@ -179,45 +218,6 @@
           "top": 831,
           "left": 869,
           "selector": "#actionContainer"
-        }
-      ]
-    },
-    "5": {
-      "title": "변환중 > 수정 페이지",
-      "overview": "",
-      "marks": [
-        {
-          "id": "id_1779430000013",
-          "num": 1,
-          "label": "1",
-          "depth": 0,
-          "title": "수정 가능 항목",
-          "sub": "└ 작품명, 작품 타입태그, 색상, 파일 수정\n- 유효성은 등록 폼이랑 동일",
-          "top": 439,
-          "left": 635,
-          "selector": "input[readonly]"
-        },
-        {
-          "id": "id_1779430000014",
-          "num": 2,
-          "label": "2",
-          "depth": 0,
-          "title": "변경 사항 저장하기",
-          "sub": "- 클릭 시 유효성 체크 후 Alert(\"Changes have been \n   saved\") 호출 후 저장",
-          "top": 1481,
-          "left": 872,
-          "selector": "#editTagGroup"
-        },
-        {
-          "id": "id_1779430000015",
-          "num": 3,
-          "label": "3",
-          "depth": 0,
-          "title": "취소하고 돌아가기",
-          "sub": "- 클릭 시 변환 중 상세페이지 이동",
-          "top": 1485,
-          "left": 642,
-          "selector": "input[type=\"number\"]"
         }
       ]
     },
@@ -827,6 +827,34 @@
           "sub": "- 클릭 시 마이 스튜디오 페이지 이동",
           "top": 746.5,
           "left": 952,
+          "selector": ""
+        }
+      ]
+    },
+    "4-completed_wait": {
+      "title": "나의 작품 관리 > 판매대기",
+      "overview": "",
+      "marks": [
+        {
+          "id": "id_1779840980695",
+          "num": 1,
+          "label": "1",
+          "depth": 0,
+          "title": "판매 시작일",
+          "sub": "- 변환 작업이 성공적으로 이루어진 발자국에 대해 판매시작일 노출",
+          "top": 455.5,
+          "left": 960,
+          "selector": ""
+        },
+        {
+          "id": "id_1779841013921",
+          "num": 2,
+          "label": "2",
+          "depth": 0,
+          "title": "작품 변환 로그",
+          "sub": "- 변환 완료 ",
+          "top": 555.5,
+          "left": 960,
           "selector": ""
         }
       ]
