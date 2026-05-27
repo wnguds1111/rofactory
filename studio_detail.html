@@ -274,12 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     } else if(status === 'expired'){
         acts.innerHTML = `<button class="dt-btn dt-btn-secondary" onclick="alert('만료된 작품입니다. 새로 등록해주세요.')" data-en="&#x1f504; Cannot re-register" data-ko="&#x1f504; 재등록 불가">&#x1f504; 재등록 불가</button>`;
-    } else if(status === 'completed'){
-        if (completedSub === 'sale') {
-            acts.innerHTML = `<button class="dt-btn dt-btn-primary" onclick="downloadFoot('${title.replace(/'/g,"\\'")}')" data-en="&#x1F4E5; Download (.foot)" data-ko="&#x1F4E5; 작품 내려받기 (.foot)">&#x1F4E5; 작품 내려받기 (.foot)</button>`;
-        } else {
-            acts.innerHTML = '';
-        }
     } else {
         acts.innerHTML = '';
     }
