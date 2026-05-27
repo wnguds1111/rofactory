@@ -237,7 +237,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('infoGrid').innerHTML = gridHTML;
 
     const acts = document.getElementById('actionContainer');
-    acts.innerHTML = ``;
+    if(status === 'expired'){
+        acts.innerHTML = `<div style="width:100%; text-align:center; padding: 14px; background: #f1f5f9; border-radius: 12px; color: #64748b; font-size: 14px; font-weight: 700;" data-en="Automatically deleted 7 days after expiration." data-ko="만료 7일 후 자동 삭제됩니다.">만료 7일 후 자동 삭제됩니다.</div>`;
+    } else {
+        acts.innerHTML = '';
+    }
 
     if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
 });
