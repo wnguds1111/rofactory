@@ -886,6 +886,23 @@
           "selector": ""
         }
       ]
+    },
+    "4-expired": {
+      "title": "나의 작품 관리 > 작품 만료",
+      "overview": "",
+      "marks": [
+        {
+          "id": "id_1779842147512",
+          "num": 1,
+          "label": "1",
+          "depth": 0,
+          "title": "작품 변환 로그",
+          "sub": "작품 만료",
+          "top": 712.5,
+          "left": 532,
+          "selector": ""
+        }
+      ]
     }
   }
 }
