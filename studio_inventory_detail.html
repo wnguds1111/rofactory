@@ -199,17 +199,30 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="info-val" style="font-size:15px;">${buyDate}</div>
         </div>`;
     
+    let finalExpDate = expDate;
+    if (finalExpDate === '—' && buyDate !== '—') {
+        const parts = buyDate.split(' ')[0].split('.');
+        if (parts.length === 3) {
+            const d = new Date(parts[2], parts[1] - 1, parts[0]);
+            d.setDate(d.getDate() + 90);
+            const edd = String(d.getDate()).padStart(2, '0');
+            const emm = String(d.getMonth() + 1).padStart(2, '0');
+            const eyyyy = d.getFullYear();
+            finalExpDate = `${edd}.${emm}.${eyyyy}`;
+        }
+    }
+
     if (status === 'expired') {
         gridHTML += `
         <div class="info-box" style="border-color:#fca5a5;background:#fff5f5;">
             <div class="info-label" style="color:#dc2626;" data-en="Status" data-ko="상태">상태</div>
-            <div class="info-val" style="font-size:15px;color:#dc2626;font-weight:700;"><span data-en="Expired" data-ko="만료됨">만료됨</span> (${expDate})</div>
+            <div class="info-val" style="font-size:15px;color:#dc2626;font-weight:700;"><span data-en="Expired" data-ko="만료됨">만료됨</span> (${finalExpDate})</div>
         </div>`;
     } else {
         gridHTML += `
         <div class="info-box">
-            <div class="info-label" data-en="Purchase Status" data-ko="구매 상태">구매 상태</div>
-            <div class="info-val" style="font-size:15px;color:#166534;font-weight:700;" data-en="Purchased" data-ko="구매 완료">구매 완료</div>
+            <div class="info-label" data-en="Exp Date" data-ko="만료일">만료일</div>
+            <div class="info-val" style="font-size:15px;color:#1d4ed8;font-weight:700;">${finalExpDate}</div>
         </div>`;
     }
 
