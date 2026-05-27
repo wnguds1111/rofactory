@@ -155,11 +155,12 @@
             </div>
         </div>
         <div class="sub-tabs">
-            <div class="sub-tab active" id="tab-all"       onclick="setTab('all')" data-en="All" data-ko="전체">전체</div>
-            <div class="sub-tab"       id="tab-converting" onclick="setTab('converting')" data-en="Converting" data-ko="변환 중">변환 중</div>
-            <div class="sub-tab"       id="tab-completed"  onclick="setTab('completed')" data-en="Completed" data-ko="변환 완료">변환 완료</div>
-            <div class="sub-tab"       id="tab-failed"     onclick="setTab('failed')" data-en="Failed" data-ko="변환 실패">변환 실패</div>
-            <div class="sub-tab"       id="tab-expired"    onclick="setTab('expired')" data-en="Expired" data-ko="작품 만료">작품 만료</div>
+            <div class="sub-tab active" id="tab-all" onclick="setTab('all')" data-en="All" data-ko="전체">전체</div>
+            <div class="sub-tab" id="tab-converting" onclick="setTab('converting')" data-en="Converting" data-ko="⏳ 변환 중">⏳ 변환 중</div>
+            <div class="sub-tab" id="tab-completed_wait" onclick="setTab('completed_wait')" data-en="Pending" data-ko="⏸ 판매대기">⏸ 판매대기</div>
+            <div class="sub-tab" id="tab-completed_sale" onclick="setTab('completed_sale')" data-en="On Sale" data-ko="🟢 판매 중">🟢 판매 중</div>
+            <div class="sub-tab" id="tab-expired" onclick="setTab('expired')" data-en="Expired" data-ko="🟣 작품만료">🟣 작품만료</div>
+            <div class="sub-tab" id="tab-failed" onclick="setTab('failed')" data-en="Failed" data-ko="❌ 변환실패">❌ 변환실패</div>
         </div>
         <div class="item-list" id="workList"></div>
     </main>
@@ -215,7 +216,15 @@ function applyFilter(){
     const container = document.getElementById('workList');
     let filtered = [];
     works.forEach(w => {
-        if(currentTab !== 'all' && w.status !== currentTab) return;
+        if(currentTab !== 'all') {
+            if(currentTab === 'completed_wait') {
+                if(w.status !== 'completed' || w.completedSub !== 'wait') return;
+            } else if (currentTab === 'completed_sale') {
+                if(w.status !== 'completed' || w.completedSub !== 'sale') return;
+            } else {
+                if(w.status !== currentTab) return;
+            }
+        }
         if(kw && !w.title.toUpperCase().includes(kw)) return;
         filtered.push(w);
     });
