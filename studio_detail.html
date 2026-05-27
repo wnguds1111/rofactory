@@ -184,10 +184,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const bg           = p.get('bg')           || '#e2e8f0';
     const price        = p.get('price')        || '—';
     const sales        = parseInt(p.get('sales') || '0');
-    const regDate      = p.get('regDate')      || '';
-    const pubDate      = p.get('pubDate')      || '';
+    let regDate      = p.get('regDate')      || '';
+    let pubDate      = p.get('pubDate')      || '';
     const expDate      = p.get('expDate')      || '';
     const failReason   = p.get('failReason')   || '';
+
+    if (status === 'expired' && expDate && (!pubDate || !regDate)) {
+        const parts = expDate.split('.');
+        if (parts.length === 3) {
+            const d = new Date(parts[2], parts[1] - 1, parts[0]);
+            d.setDate(d.getDate() - 90);
+            const pdd = String(d.getDate()).padStart(2, '0');
+            const pmm = String(d.getMonth() + 1).padStart(2, '0');
+            const pyyyy = d.getFullYear();
+            if (!pubDate) pubDate = `${pdd}.${pmm}.${pyyyy}`;
+            
+            d.setDate(d.getDate() - 2);
+            const rdd = String(d.getDate()).padStart(2, '0');
+            const rmm = String(d.getMonth() + 1).padStart(2, '0');
+            const ryyyy = d.getFullYear();
+            if (!regDate) regDate = `${rdd}.${rmm}.${ryyyy}`;
+        }
+    }
 
     // ── 타이틀·썸네일 ──────────────────────────────
     document.getElementById('pageTitle').innerText = title;
