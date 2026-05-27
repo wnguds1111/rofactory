@@ -964,6 +964,11 @@
           "selector": ""
         }
       ]
+    },
+    "4-purchased": {
+      "title": "구매 작품 관리 > 구매 완료",
+      "overview": "",
+      "marks": []
     }
   }
 }
