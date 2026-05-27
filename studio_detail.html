@@ -235,12 +235,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const pubLabel = '<span data-en="Sale Start" data-ko="판매 시작일">판매 시작일</span>';
         gridHTML += `
         <div class="info-box">
-            <div class="info-label">${pubLabel}</div>
-            <div class="info-val" style="font-size:15px;color:${pubColor};">${pubDate||'—'}</div>
-        </div>
-        <div class="info-box">
             <div class="info-label" data-en="Reg Date" data-ko="등록일">등록일</div>
             <div class="info-val" style="font-size:15px;">${regDate||'—'}</div>
+        </div>
+        <div class="info-box">
+            <div class="info-label">${pubLabel}</div>
+            <div class="info-val" style="font-size:15px;color:${pubColor};">${pubDate||'—'}</div>
         </div>`;
     } else if(status === 'expired'){
         gridHTML += `
@@ -275,7 +275,11 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if(status === 'expired'){
         acts.innerHTML = `<button class="dt-btn dt-btn-secondary" onclick="alert('만료된 작품입니다. 새로 등록해주세요.')" data-en="&#x1f504; Cannot re-register" data-ko="&#x1f504; 재등록 불가">&#x1f504; 재등록 불가</button>`;
     } else if(status === 'completed'){
-        acts.innerHTML = `<button class="dt-btn dt-btn-primary" onclick="downloadFoot('${title.replace(/'/g,"\\'")}')" data-en="&#x1F4E5; Download (.foot)" data-ko="&#x1F4E5; 작품 내려받기 (.foot)">&#x1F4E5; 작품 내려받기 (.foot)</button>`;
+        if (completedSub === 'sale') {
+            acts.innerHTML = `<button class="dt-btn dt-btn-primary" onclick="downloadFoot('${title.replace(/'/g,"\\'")}')" data-en="&#x1F4E5; Download (.foot)" data-ko="&#x1F4E5; 작품 내려받기 (.foot)">&#x1F4E5; 작품 내려받기 (.foot)</button>`;
+        } else {
+            acts.innerHTML = '';
+        }
     } else {
         acts.innerHTML = '';
     }
