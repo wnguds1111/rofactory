@@ -233,6 +233,26 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if(status === 'completed'){
         const pubColor = '#1d4ed8';
         const pubLabel = '<span data-en="Sale Start" data-ko="판매 시작일">판매 시작일</span>';
+        let expBox = '';
+        if (completedSub === 'sale') {
+            let expDateStr = '—';
+            if (pubDate) {
+                const parts = pubDate.split('.');
+                if (parts.length === 3) {
+                    const d = new Date(parts[2], parts[1] - 1, parts[0]);
+                    d.setDate(d.getDate() + 90);
+                    const dd = String(d.getDate()).padStart(2, '0');
+                    const mm = String(d.getMonth() + 1).padStart(2, '0');
+                    const yyyy = d.getFullYear();
+                    expDateStr = `${dd}.${mm}.${yyyy}`;
+                }
+            }
+            expBox = `
+            <div class="info-box">
+                <div class="info-label" data-en="Exp Date" data-ko="만료 예정일">만료 예정일</div>
+                <div class="info-val" style="font-size:15px;color:#64748b;">${expDateStr}</div>
+            </div>`;
+        }
         gridHTML += `
         <div class="info-box">
             <div class="info-label" data-en="Reg Date" data-ko="등록일">등록일</div>
@@ -241,7 +261,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="info-box">
             <div class="info-label">${pubLabel}</div>
             <div class="info-val" style="font-size:15px;color:${pubColor};">${pubDate||'—'}</div>
-        </div>`;
+        </div>
+        ${expBox}`;
     } else if(status === 'expired'){
         gridHTML += `
         <div class="info-box">
@@ -286,12 +307,12 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="tl-title" style="color:${titleColor||'#1e293b'};">${titleText}</div>
         </div>`;
 
-    const tReg       = tlItem(false,'2026.03.10 10:00','<span data-en="Initial Registration" data-ko="작품 최초 등록">작품 최초 등록</span>','','<span data-en="Registered via RO Factory." data-ko="RO Factory 폼을 통해 최초로 정보가 등록되었습니다.">RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</span>');
-    const tConvert   = tlItem(status==='converting', '2026.03.13 14:00','<span data-en="🔄 Converting" data-ko="🔄 변환 작업 진행 중">🔄 변환 작업 진행 중</span>','#92400e','<span data-en="Simulating file conversion for in-game." data-ko="서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.">서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.</span>');
-    const tCompWait  = tlItem(status==='completed'&&completedSub==='wait', '2026.03.15 09:30','<span data-en="✅ Conversion Complete" data-ko="✅ 변환 완료">✅ 변환 완료</span>','#1d4ed8','<span data-en="Conversion finished. Awaiting requested patch date." data-ko="모든 변환이 성공적으로 끝났습니다. 차후 업데이트에서 상점에 순차적으로 등록할 예정입니다.">모든 변환이 성공적으로 끝났습니다. 차후 업데이트에서 상점에 순차적으로 등록할 예정입니다.</span>');
+    const tReg       = tlItem(false,'10/03/2026 10:00','<span data-en="Initial Registration" data-ko="작품 최초 등록">작품 최초 등록</span>','','<span data-en="Registered via RO Factory." data-ko="RO Factory 폼을 통해 최초로 정보가 등록되었습니다.">RO Factory 폼을 통해 최초로 정보가 등록되었습니다.</span>');
+    const tConvert   = tlItem(status==='converting', '13/03/2026 14:00','<span data-en="🔄 Converting" data-ko="🔄 변환 작업 진행 중">🔄 변환 작업 진행 중</span>','#92400e','<span data-en="Simulating file conversion for in-game." data-ko="서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.">서버 엔진에서 인게임 적용을 위한 파일 변환 시뮬레이션을 진행하고 있습니다.</span>');
+    const tCompWait  = tlItem(status==='completed'&&completedSub==='wait', '15/03/2026 09:30','<span data-en="✅ Conversion Complete" data-ko="✅ 변환 완료">✅ 변환 완료</span>','#1d4ed8','<span data-en="Conversion finished. Awaiting requested patch date." data-ko="모든 변환이 성공적으로 끝났습니다. 차후 업데이트에서 상점에 순차적으로 등록할 예정입니다.">모든 변환이 성공적으로 끝났습니다. 차후 업데이트에서 상점에 순차적으로 등록할 예정입니다.</span>');
     const tCompSale  = tlItem(status==='completed'&&completedSub==='sale', pubDate?pubDate.replace(/\./g,'/')+' 00:00':'—', '<span data-en="🎉 On Sale" data-ko="🎉 제품 판매 중">🎉 제품 판매 중</span>','#166634','<span data-en="Now available on the open market!" data-ko="오픈 마켓에 정상적으로 등록되어, 현재 유저들이 아이템을 구매하고 있습니다!">오픈 마켓에 정상적으로 등록되어, 현재 유저들이 아이템을 구매하고 있습니다!</span>');
-    const tExpired   = tlItem(true, expDate||'—', '<span data-en="⏹ Expired" data-ko="⏹ 작품 만료됨">⏹ 작품 만료됨</span>','#64748b','<span data-en="Sale period ended." data-ko="판매 기간이 종료되어 마켓 품절 처리되었습니다.">판매 기간이 종료되어 마켓 품절 처리되었습니다.</span>');
-    const tFailed    = tlItem(true, '2026.03.14 16:20','<span data-en="❗ Failed" data-ko="❗ 변환 실패">❗ 변환 실패</span>','#991b1b','<span data-en="Pipeline error. Retrying after deletion is possible." data-ko="변환 파이프라인 처리 중 오류가 발생했습니다. (7일 이내 자동 삭제 예정)">변환 파이프라인 처리 중 오류가 발생했습니다. (7일 이내 자동 삭제 예정)</span>');
+    const tExpired   = tlItem(true, expDate?expDate.replace(/\./g,'/')+' 00:00':'—', '<span data-en="⏹ Expired" data-ko="⏹ 작품 만료됨">⏹ 작품 만료됨</span>','#64748b','<span data-en="Sale period ended." data-ko="판매 기간이 종료되어 마켓 품절 처리되었습니다.">판매 기간이 종료되어 마켓 품절 처리되었습니다.</span>');
+    const tFailed    = tlItem(true, '14/03/2026 16:20','<span data-en="❗ Failed" data-ko="❗ 변환 실패">❗ 변환 실패</span>','#991b1b','<span data-en="Pipeline error. Retrying after deletion is possible." data-ko="변환 파이프라인 처리 중 오류가 발생했습니다. (7일 이내 자동 삭제 예정)">변환 파이프라인 처리 중 오류가 발생했습니다. (7일 이내 자동 삭제 예정)</span>');
 
     let logs = [];
     if(status === 'converting' || status === 'pending'){
