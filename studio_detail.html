@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="dt-btn dt-btn-danger" onclick="if(confirm('작품을 삭제하시겠습니까?')){alert('삭제되었습니다.');location.href='studio_myworks.html';}" data-en="&#x1F5D1; Delete" data-ko="&#x1F5D1; 삭제하기">&#x1F5D1; 삭제하기</button>
         `;
     } else if(status === 'expired'){
-        acts.innerHTML = '';
+        acts.innerHTML = `<div style="width:100%; text-align:center; padding: 14px; background: #f1f5f9; border-radius: 12px; color: #64748b; font-size: 14px; font-weight: 700;" data-en="Automatically deleted 7 days after expiration." data-ko="만료 7일 후 자동 삭제됩니다.">만료 7일 후 자동 삭제됩니다.</div>`;
     } else {
         acts.innerHTML = '';
     }
