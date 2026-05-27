@@ -946,6 +946,34 @@
       "title": "구매 작품 관리 > 구매 완료",
       "overview": "",
       "marks": []
+    },
+    "3-wishlist": {
+      "title": "마이 스튜디오 > 찜한 작품 관리",
+      "overview": "찜 상품 리스트 관리",
+      "marks": [
+        {
+          "id": "id_1779851655816",
+          "num": 1,
+          "label": "1",
+          "depth": 0,
+          "title": "찜 해제",
+          "sub": "- 클릭 시 Confirm(\"Are you sure you want to remove this from your favorites?\") 노출\n └ [Confirm] 클릭 시 찜 해제 후 해당 리스트에서 제거",
+          "top": 361.5,
+          "left": 1343,
+          "selector": ""
+        },
+        {
+          "id": "id_1779851734671",
+          "num": 2,
+          "label": "2",
+          "depth": 0,
+          "title": "상세 보기",
+          "sub": "- 클릭 시 발자국 상세 보기 페이지 이동",
+          "top": 359.5,
+          "left": 1441,
+          "selector": ""
+        }
+      ]
     }
   }
 }
