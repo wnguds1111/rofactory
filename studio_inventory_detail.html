@@ -214,9 +214,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (status === 'expired') {
         gridHTML += `
-        <div class="info-box" style="border-color:#fca5a5;background:#fff5f5;">
-            <div class="info-label" style="color:#dc2626;" data-en="Status" data-ko="상태">상태</div>
-            <div class="info-val" style="font-size:15px;color:#dc2626;font-weight:700;"><span data-en="Expired" data-ko="만료됨">만료됨</span> (${finalExpDate})</div>
+        <div class="info-box">
+            <div class="info-label" data-en="Exp Date" data-ko="만료일">만료일</div>
+            <div class="info-val" style="font-size:15px;color:#dc2626;font-weight:900;">${finalExpDate}</div>
         </div>`;
     } else {
         gridHTML += `
