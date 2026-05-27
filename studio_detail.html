@@ -264,14 +264,23 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         ${expBox}`;
     } else if(status === 'expired'){
+        const pubLabel = '<span data-en="Sale Start" data-ko="판매 시작일">판매 시작일</span>';
         gridHTML += `
         <div class="info-box">
-            <div class="info-label" data-en="Exp Date" data-ko="만료일">만료일</div>
-            <div class="info-val" style="font-size:15px;color:#64748b;">${expDate||'—'}</div>
+            <div class="info-label" data-en="Reg Date" data-ko="등록일">등록일</div>
+            <div class="info-val" style="font-size:15px;">${regDate||'—'}</div>
         </div>
         <div class="info-box">
-            <div class="info-label" data-en="Total Sales" data-ko="누적 판매수">누적 판매수</div>
-            <div class="info-val">${sales.toLocaleString()}<span data-en="" data-ko="건">건</span></div>
+            <div class="info-label">${pubLabel}</div>
+            <div class="info-val" style="font-size:15px;">${pubDate||'—'}</div>
+        </div>
+        <div class="info-box">
+            <div class="info-label" data-en="Exp Date" data-ko="만료일">만료일</div>
+            <div class="info-val" style="font-size:15px;color:#dc2626;font-weight:900;">${expDate||'—'}</div>
+        </div>
+        <div class="info-box" style="background:#fff8f8; border-color:#fecaca;">
+            <div class="info-label" data-en="Total Sales" data-ko="누적 판매수" style="color:#b91c1c;">누적 판매수</div>
+            <div class="info-val" style="color:#991b1b;">${sales.toLocaleString()}<span data-en="" data-ko="건">건</span></div>
         </div>`;
     } else if(status === 'failed'){
         gridHTML += `
