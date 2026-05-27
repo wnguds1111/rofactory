@@ -149,6 +149,8 @@ function getTargetKey() {
             key = '3-inventory';
         } else if (window.location.pathname.includes('studio_myworks.html')) {
             key = '3-myworks';
+        } else if (window.location.pathname.includes('studio_wishlist.html')) {
+            key = '3-wishlist';
         } else {
             const activePanel = document.querySelector('.studio-main .panel.active');
             if (activePanel) key = '3-' + activePanel.id.replace('panel-', '');

@@ -271,6 +271,7 @@ function renderPagination(totalPages, containerId) {
     lastBtn.disabled = (currentPage === totalPages);
     lastBtn.onclick = () => { currentPage = totalPages; renderList(); window.scrollTo({top:0, behavior:'smooth'}); };
     wrap.appendChild(lastBtn);
+    if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
 }
 function removeFav(id){
     const msg = (localStorage.getItem('roz_lang')==='en') ? 'Remove this item from your wishlist?' : '해당 상품의 찜을 해제하시겠습니까?';
@@ -280,5 +281,9 @@ function removeFav(id){
 }
 document.addEventListener('DOMContentLoaded', renderList);
 </script>
+    <!-- PRD DESCRIPTION INJECTION -->
+    <script>window.currentPrdPageNum = 3;</script>
+    <script src="description_module/desc-script.js?v=3.1"></script>
+    <!-- // PRD DESCRIPTION INJECTION -->
 </body>
 </html>
