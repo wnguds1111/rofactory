@@ -258,10 +258,19 @@ async function loadDescData() {
     const mergedData = { pages: {} };
     
     if (serverData && serverData.pages) {
+        if (serverData.pages["4"] && !serverData.pages["4-converting"]) {
+            serverData.pages["4-converting"] = serverData.pages["4"];
+            delete serverData.pages["4"];
+        }
         Object.assign(mergedData.pages, serverData.pages);
     }
     
     if (localData && localData.pages) {
+        if (localData.pages["4"] && !localData.pages["4-converting"]) {
+            localData.pages["4-converting"] = localData.pages["4"];
+            delete localData.pages["4"];
+            try { localStorage.setItem('rofactory_desc_drafts', JSON.stringify(localData)); } catch(e){}
+        }
         for (const key in localData.pages) {
             const localPage = localData.pages[key];
             const serverPage = serverData && serverData.pages ? serverData.pages[key] : null;
