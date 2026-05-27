@@ -271,12 +271,6 @@ function renderPagination(totalPages, containerId) {
     lastBtn.disabled = (currentPage === totalPages);
     lastBtn.onclick = () => { currentPage = totalPages; renderList(); window.scrollTo({top:0, behavior:'smooth'}); };
     wrap.appendChild(lastBtn);
-}class="btn-action primary" onclick="event.stopPropagation();location.href='${detailLink}'" data-en="Details" data-ko="상세 보기">상세 보기</button>`
-                    : `<button class="btn-action" disabled style="opacity:0.4;" data-en="Ended" data-ko="판매 종료">판매 종료</button>`}
-            </div>
-        </div>`;
-    }).join('');
-    if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
 }
 function removeFav(id){
     const msg = (localStorage.getItem('roz_lang')==='en') ? 'Remove this item from your wishlist?' : '해당 상품의 찜을 해제하시겠습니까?';
