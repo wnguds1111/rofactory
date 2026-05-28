@@ -255,7 +255,7 @@
                 <tbody>
                     <tr>
                         <td class="state-name">⏳ 변환 중</td>
-                        <td style="text-align:left;">유저가 등록을 마친 상태 (S3에 적재)</td>
+                        <td style="text-align:left;">유저가 등록을 마친 상태 (S3(.foot 파일, 콜렉션 썸네일, 작품명, 마켓ID, 어카운트넘버)에 적재)</td>
                         <td class="status-ok">가능</td>
                         <td class="status-ok">가능</td>
                     </tr>
@@ -334,19 +334,19 @@
                     <tr class="new-row">
                         <td style="font-weight:900; text-align:center; background:#f0fdf4;">1</td>
                         <td class="item" style="width:160px;">유저 등록</td>
-                        <td>유저가 발자국 등록을 마친다. → S3에 적재</td>
+                        <td>유저가 발자국 등록을 마친다. → S3(.foot 파일, 콜렉션 썸네일, 작품명, 마켓ID, 어카운트넘버)에 적재</td>
                         <td class="status-col"><span class="badge badge-ok">✅ 확정</span></td>
                     </tr>
                     <tr class="new-row">
                         <td style="font-weight:900; text-align:center; background:#f0fdf4;">2</td>
                         <td class="item" style="width:160px;">패치툴 취합</td>
-                        <td>패치툴로 등록된 발자국을 주 단위로 취합한다. → 취합된 WebID를 모아둔다.</td>
+                        <td>패치툴로 등록된 발자국을 주 단위로 취합한다. → 취합된 마켓ID를 모아둔다.</td>
                         <td class="status-col"><span class="badge badge-ok">✅ 확정</span></td>
                     </tr>
                     <tr class="new-row">
                         <td style="font-weight:900; text-align:center; background:#f0fdf4;">3</td>
                         <td class="item" style="width:160px;">업데이트 완료</td>
-                        <td>업데이트를 마친다. → 패치된 WebID를 운영에 전달한다.</td>
+                        <td>업데이트를 마친다. → 패치된 마켓ID를 운영에 전달한다.</td>
                         <td class="status-col"><span class="badge badge-ok">✅ 확정</span></td>
                     </tr>
                     <tr class="new-row">
@@ -382,12 +382,12 @@
                     <tr class="updated-row">
                         <td class="item">자동 삭제</td>
                         <td class="content">변환 실패 리스트 전달받은 시점으로부터 7일 이내 자동 삭제</td>
-                        <td class="decision">스튜디오에서 전달받은 변환 실패 WebID 리스트를 기반으로 7일 이내 자동 삭제 처리 적용 협의</td>
+                        <td class="decision">스튜디오에서 전달받은 변환 실패 마켓ID 리스트를 기반으로 7일 이내 자동 삭제 처리 적용 협의</td>
                         <td class="status-col"><span class="badge badge-ok">✅ 확정</span></td>
                     </tr>
                     <tr class="updated-row">
                         <td class="item">이용권 환급</td>
-                        <td class="content">변환 실패 시 이용권 환급 진행<br>처리: 스튜디오 → Admin WebID 전달 시 이용권 복구</td>
+                        <td class="content">변환 실패 시 이용권 환급 진행<br>처리: 스튜디오 → Admin 마켓ID 전달 시 이용권 복구</td>
                         <td class="decision">변환 실패 = 유저 입력 오류이나 정상 절차 수행으로 판단하여 이용권 환급 진행</td>
                         <td class="status-col"><span class="badge badge-ok">✅ 확정</span></td>
                     </tr>
@@ -496,7 +496,7 @@
                     <tr class="updated-row">
                         <td class="item">법적 이슈 발생</td>
                         <td class="content">운영: 상품 게시 즉시 중단 / 스튜디오: 차기 업데이트 시점에 회수 처리</td>
-                        <td class="decision">사업/운영 측에서 문제 있는 WebID 식별 후 스튜디오에 고지하여 [운영] 상점 하차, [스튜디오] 점검 시 회수 처리 분담</td>
+                        <td class="decision">사업/운영 측에서 문제 있는 마켓ID 식별 후 스튜디오에 고지하여 [운영] 상점 하차, [스튜디오] 점검 시 회수 처리 분담</td>
                         <td class="status-col"><span class="badge badge-ok">✅ 확정</span></td>
                     </tr>
                     <tr class="updated-row">
@@ -691,7 +691,7 @@
                 <tbody>
                     <tr>
                         <td class="state-name">⏳ 변환 중</td>
-                        <td style="text-align:left;">유저가 등록을 마친 상태 (S3에 적재)</td>
+                        <td style="text-align:left;">유저가 등록을 마친 상태 (S3(.foot 파일, 콜렉션 썸네일, 작품명, 마켓ID, 어카운트넘버)에 적재)</td>
                         <td class="status-ok">가능</td>
                         <td class="status-ok">가능</td>
                     </tr>
@@ -776,7 +776,7 @@
                     <tr class="new-row">
                         <td style="font-weight:900; text-align:center; background:#f0fdf4;">2</td>
                         <td class="item" style="width:160px;">패치툴 취합</td>
-                        <td>주 단위 취합 (WebID 기준)</td>
+                        <td>주 단위 취합 (마켓ID 기준)</td>
                         <td class="status-col"><span class="badge badge-ok">✅ 확정</span></td>
                     </tr>
                     <tr class="new-row">
@@ -787,8 +787,8 @@
                     </tr>
                     <tr class="new-row">
                         <td style="font-weight:900; text-align:center; background:#f0fdf4;">4</td>
-                        <td class="item" style="width:160px;">WebID 전달</td>
-                        <td>스튜디오 → 운영팀에 패치된 WebID 전달</td>
+                        <td class="item" style="width:160px;">마켓ID 전달</td>
+                        <td>스튜디오 → 운영팀에 패치된 마켓ID 전달</td>
                         <td class="status-col"><span class="badge badge-ok">✅ 확정</span></td>
                     </tr>
                     <tr class="new-row">
@@ -829,7 +829,7 @@
                     </tr>
                     <tr class="updated-row">
                         <td class="item">이용권 환급</td>
-                        <td class="content">변환 실패 시 이용권 환급 진행<br>처리: 스튜디오 → Admin WebID 전달 시 이용권 복구</td>
+                        <td class="content">변환 실패 시 이용권 환급 진행<br>처리: 스튜디오 → Admin 마켓ID 전달 시 이용권 복구</td>
                         <td class="decision">변환 실패 = 유저 입력 오류이나 정상 절차 수행으로 판단하여 이용권 환급 진행</td>
                         <td class="status-col"><span class="badge badge-ok">✅ 확정</span></td>
                     </tr>
