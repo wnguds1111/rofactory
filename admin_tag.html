@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO Factory 백오피스 – 태그 관리</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ===== OUTER NAV ===== -->
+<nav class="nav-outer">
+    <div class="nav-outer-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <a class="nav-outer-btn" href="#"><span class="icon">👤</span>MEM</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">🎮</span>GAME</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">💰</span>PAY</a>
+    <a class="nav-outer-btn active" href="#"><span class="icon">🌐</span>WEB</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">⚙️</span>SET</a>
+</nav>
+
+<!-- ===== INNER NAV ===== -->
+<nav class="nav-inner">
+    <div class="brand-header">
+        <div class="brand-title">GRAVITY<span>Admin</span></div>
+        <div class="brand-lang">🌐 KO ▾</div>
+    </div>
+    <div class="nav-tool-label">WEB Tool</div>
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>공통 관리</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>GNJOY 관리</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>ROZ</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+    <div class="menu-group">
+        <div class="menu-group-header open" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>RO Factory</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list expanded">
+            <a class="menu-sub-item" href="admin_banner.html">메인관리</a>
+            <a class="menu-sub-item" href="admin.html">작품관리</a>
+            <a class="menu-sub-item" href="admin_purchase.html">구매 내역</a>
+            <a class="menu-sub-item active" href="admin_tag.html">태그 관리</a>
+            <a class="menu-sub-item" href="admin_ticket.html">티켓 관리</a>
+        </div>
+    </div>
+    <div class="nav-inner-footer">
+        <span class="user-name">홍길동님</span>
+        <div style="display:flex;gap:4px;">
+            <button class="btn-icon">✏️</button>
+            <button class="btn-icon">🚪</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== MAIN WORKSPACE ===== -->
+<main class="main-workspace">
+    <div class="workspace-topbar">
+        <div class="breadcrumb">
+            포털 관리 <span class="sep">›</span> RO Factory <span class="sep">›</span> <span>태그 관리</span>
+        </div>
+    </div>
+
+    <div class="workspace-content">
+        <div class="page-title">태그 관리</div>
+
+        <!-- SUB TABS -->
+        <div class="sub-tabs">
+            <div class="sub-tab active" onclick="switchTab('type')" id="stab-type">작품 타입 관리</div>
+            <div class="sub-tab" onclick="switchTab('color')" id="stab-color">작품 색상 관리</div>
+        </div>
+
+        <!-- ===== TYPE TAB ===== -->
+        <div id="tab-type">
+            <div class="section-header">
+                <div class="section-title">작품 타입 리스트</div>
+            </div>
+
+            <!-- INLINE REGISTER -->
+            <div class="inline-register-bar">
+                <input type="text" class="form-control search-input" id="newTypeInput" placeholder="새로운 타입 입력 (예: #초보자용)" onkeypress="if(event.key==='Enter') addType()">
+                <button class="btn-navy" style="padding:9px 24px;" onclick="addType()">등록하기</button>
+            </div>
+
+            <div class="table-section">
+                <div class="table-toolbar">
+                    <span class="result-count" id="type-resultCount">조회 결과 : 0개</span>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:8%">번호</th>
+                                <th style="width:40%">타입명</th>
+                                <th style="width:22%">등록 일시</th>
+                                <th style="width:12%">등록자</th>
+                                <th style="width:18%">관리</th>
+                            </tr>
+                        </thead>
+                        <tbody id="type-tbody"></tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <div class="page-link">&#8249;</div>
+                    <div class="page-link active">1</div>
+                    <div class="page-link">&#8250;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== COLOR TAB ===== -->
+        <div id="tab-color" style="display:none;">
+            <div class="section-header">
+                <div class="section-title">작품 색상 리스트</div>
+            </div>
+
+            <!-- INLINE REGISTER -->
+            <div class="inline-register-bar">
+                <input type="text" class="form-control search-input" id="newColorNameInput" placeholder="색상명칭 입력 (예: 핑크)" style="max-width:280px;" onkeypress="if(event.key==='Enter') addColor()">
+                <div class="color-input-wrap">
+                    <label>색상코드</label>
+                    <input type="color" id="newColorHex" value="#3b82f6">
+                </div>
+                <button class="btn-navy" style="padding:9px 24px;" onclick="addColor()">등록하기</button>
+            </div>
+
+            <div class="table-section">
+                <div class="table-toolbar">
+                    <span class="result-count" id="color-resultCount">조회 결과 : 0개</span>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:8%">번호</th>
+                                <th style="width:15%">미리보기</th>
+                                <th style="width:35%">색상명칭</th>
+                                <th style="width:22%">등록 일시</th>
+                                <th style="width:12%">등록자</th>
+                                <th style="width:8%">관리</th>
+                            </tr>
+                        </thead>
+                        <tbody id="color-tbody"></tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <div class="page-link">&#8249;</div>
+                    <div class="page-link active">1</div>
+                    <div class="page-link">&#8250;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- DELETE MODAL -->
+<div class="modal-overlay" id="deleteModal">
+    <div class="modal modal-sm">
+        <div class="modal-header">
+            <h3>항목 삭제 및 대체 지정</h3>
+            <button class="modal-close" onclick="closeModal('deleteModal')">✕</button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-desc">
+                선택하신 항목을 영구 삭제하시겠습니까?<br>
+                <span class="warn">이 항목이 적용된 작품 데이터가 존재할 수 있습니다.<br>대체할 항목을 지정하면 관련 작품들의 속성이 일괄 변경됩니다.</span>
+            </p>
+            <div style="margin-bottom:14px;">
+                <div style="font-size:12px;font-weight:800;color:#777;margin-bottom:6px;">삭제 대상</div>
+                <input type="text" class="form-control readonly" id="deleteTargetName" readonly>
+            </div>
+            <div>
+                <div style="font-size:12px;font-weight:800;color:#777;margin-bottom:6px;">대체할 항목 선택 <span style="color:#ef4444;">*</span></div>
+                <select class="search-select" id="deleteSubSelect" style="width:100%;height:42px;"></select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-gray" onclick="closeModal('deleteModal')">취소</button>
+            <button class="btn-navy" style="background:#ef4444;" onclick="executeDelete()">삭제 및 대체 적용</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let typeList = [
+    { id:5, name:'#White', regDate:'22/09/2025 00:00:00', registrant:'test1' },
+    { id:4, name:'#Crystal', regDate:'21/09/2025 00:00:00', registrant:'test1' },
+    { id:3, name:'#Pink', regDate:'20/09/2025 00:00:00', registrant:'admin1' },
+    { id:2, name:'#Shining', regDate:'19/09/2025 00:00:00', registrant:'test1' },
+    { id:1, name:'#Cool', regDate:'18/09/2025 00:00:00', registrant:'test1' },
+];
+let colorList = [
+    { id:5, name:'Slate', hex:'#64748b', regDate:'22/09/2025 00:00:00', registrant:'test1' },
+    { id:4, name:'Blue', hex:'#3b82f6', regDate:'21/09/2025 00:00:00', registrant:'test1' },
+    { id:3, name:'Red', hex:'#ef4444', regDate:'20/09/2025 00:00:00', registrant:'admin1' },
+    { id:2, name:'Olive', hex:'#84cc16', regDate:'19/09/2025 00:00:00', registrant:'test1' },
+    { id:1, name:'Dark', hex:'#1e293b', regDate:'18/09/2025 00:00:00', registrant:'test1' },
+];
+let typeIdCnt = 6, colorIdCnt = 6;
+let pendingDelete = null;
+let currentDeleteTab = '';
+
+function toggleMenu(header) {
+    const sub = header.nextElementSibling;
+    const open = header.classList.contains('open');
+    header.classList.toggle('open', !open);
+    sub.classList.toggle('expanded', !open);
+    sub.classList.toggle('collapsed', open);
+}
+
+function switchTab(tab) {
+    ['type','color'].forEach(t => {
+        document.getElementById('stab-' + t).classList.toggle('active', t === tab);
+        document.getElementById('tab-' + t).style.display = t === tab ? 'block' : 'none';
+    });
+    if (tab === 'type') renderTypes();
+    else renderColors();
+}
+
+// ===== TYPE =====
+function renderTypes() {
+    document.getElementById('type-resultCount').textContent = `조회 결과 : ${typeList.length}개`;
+    const tbody = document.getElementById('type-tbody');
+    if (!typeList.length) {
+        tbody.innerHTML = `<tr><td colspan="5" style="padding:50px;color:#aaa;text-align:center;">등록된 타입이 없습니다.</td></tr>`;
+        return;
+    }
+    tbody.innerHTML = typeList.map((t, i) => `
+        <tr>
+            <td style="font-weight:700;">${typeList.length - i}</td>
+            <td><span class="type-name">${t.name}</span></td>
+            <td>${t.regDate}</td>
+            <td>${t.registrant}</td>
+            <td>
+                <button class="btn-detail" style="border-color:#ef4444;color:#ef4444;" onclick="openDeleteModal(${t.id},'type')">삭제</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function addType() {
+    let val = document.getElementById('newTypeInput').value.trim();
+    if (!val) return alert('타입명을 입력해주세요. (예: #초보자용)');
+    if (!val.startsWith('#')) val = '#' + val;
+    const now = new Date().toLocaleDateString('ko-KR').replace(/\. /g,'/').replace('.','');
+    typeList.unshift({ id: typeIdCnt++, name: val, regDate: now + ' 00:00:00', registrant: '관리자' });
+    document.getElementById('newTypeInput').value = '';
+    renderTypes();
+}
+
+// ===== COLOR =====
+function renderColors() {
+    document.getElementById('color-resultCount').textContent = `조회 결과 : ${colorList.length}개`;
+    const tbody = document.getElementById('color-tbody');
+    if (!colorList.length) {
+        tbody.innerHTML = `<tr><td colspan="6" style="padding:50px;color:#aaa;text-align:center;">등록된 색상이 없습니다.</td></tr>`;
+        return;
+    }
+    tbody.innerHTML = colorList.map((c, i) => `
+        <tr>
+            <td style="font-weight:700;">${colorList.length - i}</td>
+            <td><span class="color-preview" style="background:${c.hex};"></span></td>
+            <td style="font-weight:700;">${c.name}</td>
+            <td>${c.regDate}</td>
+            <td>${c.registrant}</td>
+            <td>
+                <button class="btn-detail" style="border-color:#ef4444;color:#ef4444;" onclick="openDeleteModal(${c.id},'color')">삭제</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function addColor() {
+    const name = document.getElementById('newColorNameInput').value.trim();
+    const hex = document.getElementById('newColorHex').value;
+    if (!name) return alert('색상명칭을 입력해주세요. (예: 핑크)');
+    const now = new Date().toLocaleDateString('ko-KR').replace(/\. /g,'/').replace('.','');
+    colorList.unshift({ id: colorIdCnt++, name, hex, regDate: now + ' 00:00:00', registrant: '관리자' });
+    document.getElementById('newColorNameInput').value = '';
+    renderColors();
+}
+
+// ===== DELETE MODAL =====
+function openDeleteModal(id, tab) {
+    currentDeleteTab = tab;
+    const list = tab === 'type' ? typeList : colorList;
+    const item = list.find(x => x.id === id);
+    if (!item) return;
+    pendingDelete = { id, tab };
+    document.getElementById('deleteTargetName').value = item.name;
+    const select = document.getElementById('deleteSubSelect');
+    const others = list.filter(x => x.id !== id);
+    select.innerHTML = '<option value="">선택해주세요</option>' + others.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
+    document.getElementById('deleteModal').classList.add('active');
+}
+
+function executeDelete() {
+    const sub = document.getElementById('deleteSubSelect').value;
+    if (!sub) return alert('대체할 항목을 반드시 선택해야 합니다.');
+    if (pendingDelete.tab === 'type') {
+        typeList = typeList.filter(t => t.id !== pendingDelete.id);
+        renderTypes();
+    } else {
+        colorList = colorList.filter(c => c.id !== pendingDelete.id);
+        renderColors();
+    }
+    alert('삭제 및 대체 적용이 완료되었습니다.');
+    closeModal('deleteModal');
+}
+
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+window.onload = () => { switchTab('type'); };
+</script>
+</body>
+</html>

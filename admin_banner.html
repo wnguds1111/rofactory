@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO Factory 백오피스 – 메인관리</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ===== OUTER NAV ===== -->
+<nav class="nav-outer">
+    <div class="nav-outer-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <a class="nav-outer-btn" href="#"><span class="icon">👤</span>MEM</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">🎮</span>GAME</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">💰</span>PAY</a>
+    <a class="nav-outer-btn active" href="#"><span class="icon">🌐</span>WEB</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">⚙️</span>SET</a>
+</nav>
+
+<!-- ===== INNER NAV ===== -->
+<nav class="nav-inner">
+    <div class="brand-header">
+        <div class="brand-title">GRAVITY<span>Admin</span></div>
+        <div class="brand-lang">🌐 KO ▾</div>
+    </div>
+    <div class="nav-tool-label">WEB Tool</div>
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>공통 관리</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>GNJOY 관리</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>ROZ</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+    <div class="menu-group">
+        <div class="menu-group-header open" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>RO Factory</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list expanded">
+            <a class="menu-sub-item active" href="admin_banner.html">메인관리</a>
+            <a class="menu-sub-item" href="admin.html">작품관리</a>
+            <a class="menu-sub-item" href="admin_purchase.html">구매 내역</a>
+            <a class="menu-sub-item" href="admin_tag.html">태그 관리</a>
+            <a class="menu-sub-item" href="admin_ticket.html">티켓 관리</a>
+        </div>
+    </div>
+    <div class="nav-inner-footer">
+        <span class="user-name">홍길동님</span>
+        <div style="display:flex;gap:4px;">
+            <button class="btn-icon">✏️</button>
+            <button class="btn-icon">🚪</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== MAIN WORKSPACE ===== -->
+<main class="main-workspace">
+    <div class="workspace-topbar">
+        <div class="breadcrumb">
+            포털 관리 <span class="sep">›</span> RO Factory <span class="sep">›</span> 메인관리 <span class="sep">›</span> <span>메인 롤링 배너</span>
+        </div>
+    </div>
+
+    <div class="workspace-content">
+
+        <!-- ===== LIST VIEW ===== -->
+        <div id="view-list">
+            <div class="page-title">메인 관리 › 메인 롤링 배너</div>
+
+            <!-- SEARCH -->
+            <div class="search-box">
+                <div class="search-row">
+                    <div class="search-label">검색 조건</div>
+                    <select class="search-select" id="searchUsage">
+                        <option value="">사용 (전체)</option>
+                        <option value="Y">사용</option>
+                        <option value="N">미사용</option>
+                    </select>
+                    <input type="text" class="search-input wide" id="searchTitle" placeholder="제목을 입력하세요.">
+                    <button class="btn-search" onclick="doSearch()">검색</button>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <div class="table-toolbar">
+                    <span class="result-count" id="resultCount">조회 결과 : 0개</span>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:6%">번호</th>
+                                <th style="width:6%">순서</th>
+                                <th style="width:28%">제목</th>
+                                <th style="width:22%">노출 기간</th>
+                                <th style="width:14%">등록 일시</th>
+                                <th style="width:8%">등록자</th>
+                                <th style="width:7%">사용여부</th>
+                                <th style="width:5%">수정</th>
+                                <th style="width:4%">순서</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bannerTableBody"></tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <div class="page-link">&#8249;</div>
+                    <div class="page-link active">1</div>
+                    <div class="page-link">&#8250;</div>
+                </div>
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;margin-top:16px;">
+                <button class="btn-navy" onclick="showForm('new')">등록</button>
+            </div>
+        </div>
+
+        <!-- ===== FORM VIEW ===== -->
+        <div id="view-form" style="display:none;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+                <button class="btn-outline" onclick="showList()">← 목록</button>
+                <div class="page-title" style="margin:0;" id="formTitle">메인 롤링 배너 등록</div>
+            </div>
+
+            <!-- 기본정보 -->
+            <div class="form-section">
+                <div class="form-section-title">기본 정보</div>
+                <div class="form-section-body">
+                    <div class="form-row">
+                        <label class="form-label">노출 기간 <span class="req">*</span></label>
+                        <div class="datetime-wrap">
+                            <input type="datetime-local" id="startDate" class="form-control" style="flex:unset;width:220px;">
+                            <span class="datetime-sep">~</span>
+                            <input type="datetime-local" id="endDate" class="form-control" style="flex:unset;width:220px;">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="form-label">노출 순서 <span class="req">*</span></label>
+                        <input type="number" class="form-control" id="dispOrder" placeholder="숫자만 입력해주세요" style="width:200px;flex:unset;" min="1" max="99999">
+                        <span style="font-size:12px;color:#999;margin-left:4px;">※ 숫자가 작을수록 상단 노출</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 언어정보 -->
+            <div class="form-section">
+                <div class="form-section-title">언어 정보</div>
+                <div class="form-section-body">
+                    <div class="lang-tabs" id="langTabs">
+                        <div class="lang-tab active" onclick="switchLang('EN')" id="ltab-EN">EN <span class="req">★</span></div>
+                        <div class="lang-tab" onclick="switchLang('ZH-CN')" id="ltab-ZH-CN">ZH-CN</div>
+                        <div class="lang-tab" onclick="switchLang('DE')" id="ltab-DE">DE</div>
+                        <div class="lang-tab" onclick="switchLang('FR')" id="ltab-FR">FR</div>
+                        <div class="lang-tab" onclick="switchLang('ID')" id="ltab-ID">ID</div>
+                        <div class="lang-tab" onclick="switchLang('TH')" id="ltab-TH">TH</div>
+                        <div class="lang-tab" onclick="switchLang('TR')" id="ltab-TR">TR</div>
+                    </div>
+
+                    <div id="lang-EN" class="lang-panel">
+                        <div class="form-row">
+                            <label class="form-label">제목 <span class="req">*</span></label>
+                            <input type="text" class="form-control" placeholder="최대 100자 까지 입력해주세요" maxlength="100" id="title-EN">
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label">메인 타이틀 <span class="req">*</span></label>
+                            <input type="text" class="form-control" placeholder="최대 30자 까지 입력해주세요" maxlength="30" id="mainTitle-EN">
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label">서브 타이틀</label>
+                            <input type="text" class="form-control" placeholder="최대 50자 까지 입력해주세요" maxlength="50" id="subTitle-EN">
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label">링크 URL</label>
+                            <input type="text" class="form-control" placeholder="https://" id="linkUrl-EN">
+                            <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">
+                                <input type="checkbox" id="newTab-EN"> 새창
+                            </label>
+                        </div>
+                        <div class="form-row" style="align-items:flex-start;">
+                            <label class="form-label" style="margin-top:10px;">PC 이미지 <span class="req">*</span></label>
+                            <div style="flex:1;">
+                                <div class="upload-area" onclick="document.getElementById('pcImg-EN').click()">
+                                    <input type="file" id="pcImg-EN" accept="image/*" onchange="previewFile(this,'pcPreview-EN')">
+                                    <button class="btn-file" type="button">파일 선택</button>
+                                    <span class="upload-hint" id="pcPreview-EN">선택된 파일 없음</span>
+                                </div>
+                                <div class="form-hint">※ jpg, jpeg, gif, png, bmp, webp 형식 5MB 이하를 첨부할 수 있습니다.</div>
+                            </div>
+                            <label class="form-label" style="margin-top:10px;">MO 이미지 <span class="req">*</span></label>
+                            <div style="flex:1;">
+                                <div class="upload-area" onclick="document.getElementById('moImg-EN').click()">
+                                    <input type="file" id="moImg-EN" accept="image/*" onchange="previewFile(this,'moPreview-EN')">
+                                    <button class="btn-file" type="button">파일 선택</button>
+                                    <span class="upload-hint" id="moPreview-EN">선택된 파일 없음</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other lang panels (ZH-CN, DE, FR, ID, TH, TR) -->
+                    <div id="lang-ZH-CN" class="lang-panel" style="display:none;">
+                        <div class="form-row"><label class="form-label">제목</label><input type="text" class="form-control" placeholder="최대 100자" maxlength="100"></div>
+                        <div class="form-row"><label class="form-label">메인 타이틀</label><input type="text" class="form-control" placeholder="최대 30자" maxlength="30"></div>
+                        <div class="form-row"><label class="form-label">서브 타이틀</label><input type="text" class="form-control" placeholder="최대 50자" maxlength="50"></div>
+                        <div class="form-row"><label class="form-label">링크 URL</label><input type="text" class="form-control" placeholder="https://"></div>
+                        <div class="form-row" style="align-items:flex-start;">
+                            <label class="form-label" style="margin-top:10px;">PC 이미지</label>
+                            <div style="flex:1;"><div class="upload-area" onclick="this.querySelector('input').click()"><input type="file" accept="image/*"><button class="btn-file" type="button">파일 선택</button><span class="upload-hint">선택된 파일 없음</span></div></div>
+                            <label class="form-label" style="margin-top:10px;">MO 이미지</label>
+                            <div style="flex:1;"><div class="upload-area" onclick="this.querySelector('input').click()"><input type="file" accept="image/*"><button class="btn-file" type="button">파일 선택</button><span class="upload-hint">선택된 파일 없음</span></div></div>
+                        </div>
+                    </div>
+                    <div id="lang-DE" class="lang-panel" style="display:none;">
+                        <div class="form-row"><label class="form-label">제목</label><input type="text" class="form-control" placeholder="최대 100자" maxlength="100"></div>
+                        <div class="form-row"><label class="form-label">메인 타이틀</label><input type="text" class="form-control" placeholder="최대 30자" maxlength="30"></div>
+                        <div class="form-row"><label class="form-label">서브 타이틀</label><input type="text" class="form-control" placeholder="최대 50자" maxlength="50"></div>
+                        <div class="form-row"><label class="form-label">링크 URL</label><input type="text" class="form-control" placeholder="https://"></div>
+                    </div>
+                    <div id="lang-FR" class="lang-panel" style="display:none;">
+                        <div class="form-row"><label class="form-label">제목</label><input type="text" class="form-control" placeholder="최대 100자" maxlength="100"></div>
+                        <div class="form-row"><label class="form-label">메인 타이틀</label><input type="text" class="form-control" placeholder="최대 30자" maxlength="30"></div>
+                        <div class="form-row"><label class="form-label">서브 타이틀</label><input type="text" class="form-control" placeholder="최대 50자" maxlength="50"></div>
+                    </div>
+                    <div id="lang-ID" class="lang-panel" style="display:none;">
+                        <div class="form-row"><label class="form-label">제목</label><input type="text" class="form-control" placeholder="최대 100자" maxlength="100"></div>
+                        <div class="form-row"><label class="form-label">메인 타이틀</label><input type="text" class="form-control" placeholder="최대 30자" maxlength="30"></div>
+                    </div>
+                    <div id="lang-TH" class="lang-panel" style="display:none;">
+                        <div class="form-row"><label class="form-label">제목</label><input type="text" class="form-control" placeholder="최대 100자" maxlength="100"></div>
+                        <div class="form-row"><label class="form-label">메인 타이틀</label><input type="text" class="form-control" placeholder="최대 30자" maxlength="30"></div>
+                    </div>
+                    <div id="lang-TR" class="lang-panel" style="display:none;">
+                        <div class="form-row"><label class="form-label">제목</label><input type="text" class="form-control" placeholder="최대 100자" maxlength="100"></div>
+                        <div class="form-row"><label class="form-label">메인 타이틀</label><input type="text" class="form-control" placeholder="최대 30자" maxlength="30"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 사용정보 -->
+            <div class="form-section">
+                <div class="form-section-title">사용 정보</div>
+                <div class="form-section-body">
+                    <div class="form-row">
+                        <label class="form-label">사용여부 <span class="req">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="usageYn" value="Y" checked><label>사용</label></label>
+                            <label class="radio-item"><input type="radio" name="usageYn" value="N"><label>미사용</label></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM ACTIONS -->
+            <div class="form-actions">
+                <div class="form-actions-left">
+                    <button class="btn-delete" id="btnDelete" style="display:none;" onclick="deleteBanner()">삭제</button>
+                </div>
+                <div class="form-actions-right">
+                    <button class="btn-cancel" onclick="showList()">취소</button>
+                    <button class="btn-submit" onclick="saveBanner()">등록</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<script>
+// ===== MOCK DATA =====
+let banners = [
+    { id:100, order:100, title:'RO Factory OPEN', period:'23.09.2025 01:02 ~ 23.12.2025 01:02', regDate:'22/09/2025 00:00', registrant:'test1', usage:'Y' },
+    { id:99,  order:99,  title:'신규 발자국 이벤트', period:'01.10.2025 00:00 ~ 31.12.2025 23:59', regDate:'01/09/2025 10:00', registrant:'test1', usage:'Y' },
+    { id:98,  order:98,  title:'할로윈 특별 발자국 출시', period:'20.10.2025 00:00 ~ 01.11.2025 23:59', regDate:'10/09/2025 09:00', registrant:'admin1', usage:'N' },
+    { id:97,  order:97,  title:'크리스마스 한정 이벤트', period:'01.12.2025 00:00 ~ 25.12.2025 23:59', regDate:'15/11/2025 14:00', registrant:'test1', usage:'Y' },
+    { id:96,  order:96,  title:'신년 새해 특집 배너', period:'01.01.2026 00:00 ~ 07.01.2026 23:59', regDate:'28/12/2025 10:00', registrant:'admin2', usage:'Y' },
+];
+let editingId = null;
+
+function toggleMenu(header) {
+    const sub = header.nextElementSibling;
+    const open = header.classList.contains('open');
+    header.classList.toggle('open', !open);
+    sub.classList.toggle('expanded', !open);
+    sub.classList.toggle('collapsed', open);
+}
+
+// ===== RENDER BANNER LIST =====
+function renderBanners(data) {
+    data = data || banners;
+    document.getElementById('resultCount').textContent = `조회 결과 : ${data.length}개`;
+    const tbody = document.getElementById('bannerTableBody');
+    if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="padding:50px;color:#aaa;text-align:center;">조회된 배너가 없습니다.</td></tr>`;
+        return;
+    }
+    tbody.innerHTML = data.map((b, i) => `
+        <tr>
+            <td style="font-weight:700;">${data.length - i}</td>
+            <td>${b.order}</td>
+            <td style="text-align:left;">${b.title}</td>
+            <td style="font-size:11px;">${b.period}</td>
+            <td style="font-size:11px;">${b.regDate}</td>
+            <td>${b.registrant}</td>
+            <td>
+                <span class="usage-badge">
+                    <span class="usage-dot ${b.usage === 'Y' ? 'on' : 'off'}"></span>
+                    ${b.usage === 'Y' ? '사용' : '미사용'}
+                </span>
+            </td>
+            <td><button class="btn-edit" onclick="showForm('edit',${b.id})">수정</button></td>
+            <td>
+                <button class="btn-sort" onclick="moveOrder(${b.id},-1)" title="위로">▲</button>
+                <button class="btn-sort" style="margin-left:2px;" onclick="moveOrder(${b.id},1)" title="아래로">▼</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+// ===== SEARCH =====
+function doSearch() {
+    const usage = document.getElementById('searchUsage').value;
+    const title = document.getElementById('searchTitle').value.toLowerCase();
+    let filtered = banners;
+    if (usage) filtered = filtered.filter(b => b.usage === usage);
+    if (title) filtered = filtered.filter(b => b.title.toLowerCase().includes(title));
+    renderBanners(filtered);
+}
+
+// ===== SHOW FORM =====
+function showForm(mode, id) {
+    editingId = mode === 'edit' ? id : null;
+    document.getElementById('view-list').style.display = 'none';
+    document.getElementById('view-form').style.display = 'block';
+    document.getElementById('formTitle').textContent = mode === 'new' ? '메인 롤링 배너 등록' : '메인 롤링 배너 수정';
+    document.getElementById('btnDelete').style.display = mode === 'edit' ? 'inline-flex' : 'none';
+    document.querySelector('.btn-submit').textContent = mode === 'new' ? '등록' : '수정';
+
+    if (mode === 'edit') {
+        const banner = banners.find(b => b.id === id);
+        if (banner) {
+            document.getElementById('dispOrder').value = banner.order;
+        }
+    } else {
+        document.getElementById('dispOrder').value = '';
+        document.getElementById('startDate').value = '';
+        document.getElementById('endDate').value = '';
+        document.getElementById('title-EN').value = '';
+        document.getElementById('mainTitle-EN').value = '';
+        document.getElementById('subTitle-EN').value = '';
+        document.getElementById('linkUrl-EN').value = '';
+    }
+    switchLang('EN');
+}
+
+function showList() {
+    document.getElementById('view-form').style.display = 'none';
+    document.getElementById('view-list').style.display = 'block';
+    renderBanners();
+}
+
+// ===== LANG TAB SWITCH =====
+function switchLang(lang) {
+    document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('ltab-' + lang).classList.add('active');
+    document.querySelectorAll('.lang-panel').forEach(p => p.style.display = 'none');
+    document.getElementById('lang-' + lang).style.display = 'block';
+}
+
+// ===== SAVE / DELETE =====
+function saveBanner() {
+    const title = document.getElementById('title-EN').value.trim();
+    const order = document.getElementById('dispOrder').value;
+    if (!title) return alert('제목(EN)을 입력해주세요.');
+    if (!order) return alert('노출 순서를 입력해주세요.');
+    if (!document.getElementById('startDate').value) return alert('노출 시작일을 입력해주세요.');
+
+    if (editingId) {
+        const idx = banners.findIndex(b => b.id === editingId);
+        if (idx > -1) { banners[idx].title = title; banners[idx].order = parseInt(order); }
+        alert('수정이 완료되었습니다.');
+    } else {
+        const newId = Math.max(...banners.map(b => b.id)) + 1;
+        banners.unshift({ id: newId, order: parseInt(order), title, period: '등록 완료', regDate: new Date().toLocaleDateString(), registrant: '관리자', usage: document.querySelector('input[name="usageYn"]:checked').value });
+        alert('등록이 완료되었습니다.');
+    }
+    showList();
+}
+
+function deleteBanner() {
+    if (!confirm('해당 배너를 삭제하시겠습니까?')) return;
+    banners = banners.filter(b => b.id !== editingId);
+    alert('삭제되었습니다.');
+    showList();
+}
+
+function moveOrder(id, dir) {
+    const idx = banners.findIndex(b => b.id === id);
+    const swapIdx = idx + dir;
+    if (swapIdx < 0 || swapIdx >= banners.length) return;
+    [banners[idx], banners[swapIdx]] = [banners[swapIdx], banners[idx]];
+    renderBanners();
+}
+
+function previewFile(input, labelId) {
+    document.getElementById(labelId).textContent = input.files[0] ? input.files[0].name : '선택된 파일 없음';
+}
+
+window.onload = () => renderBanners();
+</script>
+</body>
+</html>

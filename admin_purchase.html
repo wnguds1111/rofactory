@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO Factory 백오피스 – 구매 내역</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ===== OUTER NAV ===== -->
+<nav class="nav-outer">
+    <div class="nav-outer-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <a class="nav-outer-btn" href="#"><span class="icon">👤</span>MEM</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">🎮</span>GAME</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">💰</span>PAY</a>
+    <a class="nav-outer-btn active" href="#"><span class="icon">🌐</span>WEB</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">⚙️</span>SET</a>
+</nav>
+
+<!-- ===== INNER NAV ===== -->
+<nav class="nav-inner">
+    <div class="brand-header">
+        <div class="brand-title">GRAVITY<span>Admin</span></div>
+        <div class="brand-lang">🌐 KO ▾</div>
+    </div>
+    <div class="nav-tool-label">WEB Tool</div>
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>공통 관리</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>GNJOY 관리</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>ROZ</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+    <div class="menu-group">
+        <div class="menu-group-header open" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>RO Factory</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list expanded">
+            <a class="menu-sub-item" href="admin_banner.html">메인관리</a>
+            <a class="menu-sub-item" href="admin.html">작품관리</a>
+            <a class="menu-sub-item active" href="admin_purchase.html">구매 내역</a>
+            <a class="menu-sub-item" href="admin_tag.html">태그 관리</a>
+            <a class="menu-sub-item" href="admin_ticket.html">티켓 관리</a>
+        </div>
+    </div>
+    <div class="nav-inner-footer">
+        <span class="user-name">홍길동님</span>
+        <div style="display:flex;gap:4px;">
+            <button class="btn-icon">✏️</button>
+            <button class="btn-icon">🚪</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== MAIN WORKSPACE ===== -->
+<main class="main-workspace">
+    <div class="workspace-topbar">
+        <div class="breadcrumb">
+            포털 관리 <span class="sep">›</span> RO Factory <span class="sep">›</span> <span>구매 내역</span>
+        </div>
+    </div>
+
+    <div class="workspace-content">
+        <div class="page-title">구매 내역</div>
+
+        <!-- SUB TABS -->
+        <div class="sub-tabs">
+            <div class="sub-tab active" onclick="switchTab('purchase')" id="stab-purchase">구매 내역</div>
+            <div class="sub-tab" onclick="switchTab('grant')" id="stab-grant">지급 내역</div>
+        </div>
+
+        <!-- ===== PURCHASE TAB ===== -->
+        <div id="tab-purchase">
+            <!-- SEARCH -->
+            <div class="search-box">
+                <div class="search-row">
+                    <div class="search-label">검색 조건</div>
+                    <select class="search-select" id="pur-searchType">
+                        <option value="작품명">작품명</option>
+                        <option value="구매어카운트넘버">구매 어카운트넘버</option>
+                    </select>
+                    <input type="text" class="search-input wide" id="pur-searchInput" placeholder="검색어를 입력해주세요.">
+                    <button class="btn-search" onclick="doSearch('purchase')">검색</button>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <div class="table-toolbar">
+                    <span class="result-count" id="pur-resultCount">조회 결과 : 0개</span>
+                    <div class="table-actions">
+                        <button class="btn-outline" onclick="downloadCSV('purchase')">↓ 리스트 다운로드</button>
+                    </div>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:6%">번호</th>
+                                <th style="width:18%">작품명</th>
+                                <th style="width:14%">마켓 ID</th>
+                                <th style="width:16%">구매 어카운트넘버</th>
+                                <th style="width:18%">구매 일시</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pur-tableBody"></tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <div class="page-link">&#8249;</div>
+                    <div class="page-link active">1</div>
+                    <div class="page-link">2</div>
+                    <div class="page-link">&#8250;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== GRANT TAB ===== -->
+        <div id="tab-grant" style="display:none;">
+            <!-- SEARCH -->
+            <div class="search-box">
+                <div class="search-row">
+                    <div class="search-label">검색 조건</div>
+                    <select class="search-select" id="grant-searchType">
+                        <option value="작품명">작품명</option>
+                        <option value="어카운트넘버">어카운트넘버</option>
+                    </select>
+                    <input type="text" class="search-input wide" id="grant-searchInput" placeholder="검색어를 입력해주세요.">
+                    <button class="btn-search" onclick="doSearch('grant')">검색</button>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <div class="table-toolbar">
+                    <span class="result-count" id="grant-resultCount">조회 결과 : 0개</span>
+                    <div class="table-actions">
+                        <button class="btn-outline" onclick="downloadCSV('grant')">↓ 리스트 다운로드</button>
+                    </div>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:6%">번호</th>
+                                <th style="width:18%">작품명</th>
+                                <th style="width:14%">마켓 ID</th>
+                                <th style="width:16%">어카운트넘버</th>
+                                <th style="width:18%">지급 일시</th>
+                                <th style="width:10%">지급 수량</th>
+                            </tr>
+                        </thead>
+                        <tbody id="grant-tableBody"></tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <div class="page-link">&#8249;</div>
+                    <div class="page-link active">1</div>
+                    <div class="page-link">&#8250;</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<script>
+const purchaseData = [
+    { id:100, name:'골든 소드오라 발자국', marketId:'ASDF1234', account:'123456', date:'22/09/2025 00:00:00' },
+    { id:99,  name:'포링 벚꽃길', marketId:'ASDF1234', account:'123456', date:'21/09/2025 00:00:00' },
+    { id:98,  name:'얼음 수정 발자국', marketId:'ASDF1234', account:'789012', date:'20/09/2025 00:00:00' },
+    { id:97,  name:'불타는 용암 조각', marketId:'ASDF1235', account:'345678', date:'19/09/2025 00:00:00' },
+    { id:96,  name:'마녀의 뾰족 모자 길', marketId:'ASDF1236', account:'901234', date:'18/09/2025 00:00:00' },
+    { id:95,  name:'반짝이는 요정 가루', marketId:'ASDF1237', account:'123456', date:'17/09/2025 00:00:00' },
+    { id:94,  name:'기사단의 제복 발자국', marketId:'ASDF1238', account:'567890', date:'16/09/2025 00:00:00' },
+    { id:93,  name:'천사의 새하얀 깃털', marketId:'ASDF1239', account:'234567', date:'15/09/2025 00:00:00' },
+    { id:92,  name:'다크메이지 잿빛흔적', marketId:'ASDF1240', account:'890123', date:'14/09/2025 00:00:00' },
+    { id:91,  name:'우주 은하수 길', marketId:'ASDF1241', account:'456789', date:'13/09/2025 00:00:00' },
+];
+
+const grantData = [
+    { id:5, name:'골든 소드오라 발자국', marketId:'ASDF1234', account:'999999', date:'22/09/2025 10:00:00', qty:1 },
+    { id:4, name:'포링 벚꽃길', marketId:'ASDF1234', account:'888888', date:'20/09/2025 14:00:00', qty:1 },
+    { id:3, name:'기사단의 제복 발자국', marketId:'ASDF1238', account:'777777', date:'18/09/2025 11:30:00', qty:2 },
+];
+
+function toggleMenu(header) {
+    const sub = header.nextElementSibling;
+    const open = header.classList.contains('open');
+    header.classList.toggle('open', !open);
+    sub.classList.toggle('expanded', !open);
+    sub.classList.toggle('collapsed', open);
+}
+
+function switchTab(tab) {
+    ['purchase','grant'].forEach(t => {
+        document.getElementById('stab-' + t).classList.toggle('active', t === tab);
+        document.getElementById('tab-' + t).style.display = t === tab ? 'block' : 'none';
+    });
+    if (tab === 'purchase') renderTable('purchase', purchaseData);
+    else renderTable('grant', grantData);
+}
+
+function renderTable(type, data) {
+    const countEl = document.getElementById(type + '-resultCount');
+    const tbody = document.getElementById(type + '-tableBody');
+    countEl.textContent = `조회 결과 : ${data.length}개`;
+    if (data.length === 0) {
+        const cols = type === 'purchase' ? 5 : 6;
+        tbody.innerHTML = `<tr><td colspan="${cols}" style="padding:50px;color:#aaa;text-align:center;">조회된 내역이 없습니다.</td></tr>`;
+        return;
+    }
+    if (type === 'purchase') {
+        tbody.innerHTML = data.map((d, i) => `
+            <tr>
+                <td style="font-weight:700;">${data.length - i}</td>
+                <td>${d.name}</td>
+                <td>${d.marketId}</td>
+                <td>${d.account}</td>
+                <td>${d.date}</td>
+            </tr>
+        `).join('');
+    } else {
+        tbody.innerHTML = data.map((d, i) => `
+            <tr>
+                <td style="font-weight:700;">${data.length - i}</td>
+                <td>${d.name}</td>
+                <td>${d.marketId}</td>
+                <td>${d.account}</td>
+                <td>${d.date}</td>
+                <td><span class="ticket-count-badge">${d.qty}</span></td>
+            </tr>
+        `).join('');
+    }
+}
+
+function doSearch(type) {
+    const input = document.getElementById(type + '-searchInput').value.toLowerCase();
+    const data = type === 'purchase' ? purchaseData : grantData;
+    const filtered = input ? data.filter(d => d.name.toLowerCase().includes(input) || d.account.includes(input)) : data;
+    renderTable(type, filtered);
+}
+
+function downloadCSV(type) {
+    const data = type === 'purchase' ? purchaseData : grantData;
+    const esc = v => `"${String(v||'-').replace(/"/g,'""')}"`;
+    const header = (type === 'purchase' ? ['작품명','마켓ID','구매어카운트넘버','구매일시'] : ['작품명','마켓ID','어카운트넘버','지급일시','지급수량']).map(esc).join(',');
+    const rows = data.map(d => (type === 'purchase' ? [d.name,d.marketId,d.account,d.date] : [d.name,d.marketId,d.account,d.date,d.qty]).map(esc).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob(['\uFEFF' + header + '\n' + rows], { type:'text/csv;charset=utf-8;' }));
+    a.download = `ro_factory_${type}_list.csv`;
+    a.click();
+}
+
+window.onload = () => { switchTab('purchase'); };
+</script>
+</body>
+</html>

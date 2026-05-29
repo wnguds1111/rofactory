@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO Factory 백오피스 – 티켓 관리</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ===== OUTER NAV ===== -->
+<nav class="nav-outer">
+    <div class="nav-outer-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <a class="nav-outer-btn" href="#"><span class="icon">👤</span>MEM</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">🎮</span>GAME</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">💰</span>PAY</a>
+    <a class="nav-outer-btn active" href="#"><span class="icon">🌐</span>WEB</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">⚙️</span>SET</a>
+</nav>
+
+<!-- ===== INNER NAV ===== -->
+<nav class="nav-inner">
+    <div class="brand-header">
+        <div class="brand-title">GRAVITY<span>Admin</span></div>
+        <div class="brand-lang">🌐 KO ▾</div>
+    </div>
+    <div class="nav-tool-label">WEB Tool</div>
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>공통 관리</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>GNJOY 관리</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>ROZ</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+    <div class="menu-group">
+        <div class="menu-group-header open" onclick="toggleMenu(this)"><span><span class="checkbox-icon"></span>RO Factory</span><span class="arrow">▼</span></div>
+        <div class="menu-sub-list expanded">
+            <a class="menu-sub-item" href="admin_banner.html">메인관리</a>
+            <a class="menu-sub-item" href="admin.html">작품관리</a>
+            <a class="menu-sub-item" href="admin_purchase.html">구매 내역</a>
+            <a class="menu-sub-item" href="admin_tag.html">태그 관리</a>
+            <a class="menu-sub-item active" href="admin_ticket.html">티켓 관리</a>
+        </div>
+    </div>
+    <div class="nav-inner-footer">
+        <span class="user-name">홍길동님</span>
+        <div style="display:flex;gap:4px;">
+            <button class="btn-icon">✏️</button>
+            <button class="btn-icon">🚪</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== MAIN WORKSPACE ===== -->
+<main class="main-workspace">
+    <div class="workspace-topbar">
+        <div class="breadcrumb">
+            포털 관리 <span class="sep">›</span> RO Factory <span class="sep">›</span> <span>티켓 관리</span>
+        </div>
+    </div>
+
+    <div class="workspace-content">
+        <div class="page-title">티켓 관리</div>
+
+        <!-- SUB TABS -->
+        <div class="sub-tabs">
+            <div class="sub-tab active" onclick="switchTab('holder')" id="stab-holder">티켓 보유 회원</div>
+            <div class="sub-tab" onclick="switchTab('grant')" id="stab-grant">지급 내역</div>
+        </div>
+
+        <!-- ===== HOLDER TAB ===== -->
+        <div id="tab-holder">
+            <div class="search-box">
+                <div class="search-row">
+                    <div class="search-label">검색 조건</div>
+                    <select class="search-select" id="holder-searchType">
+                        <option value="어카운트넘버">어카운트넘버</option>
+                    </select>
+                    <input type="text" class="search-input wide" id="holder-searchInput" placeholder="검색어를 입력해주세요.">
+                    <button class="btn-search" onclick="doSearch('holder')">검색</button>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <div class="table-toolbar">
+                    <span class="result-count" id="holder-resultCount">조회 결과 : 0개</span>
+                    <div class="table-actions">
+                        <button class="btn-outline" onclick="openModal('modalBulkUpdate')">대량 업데이트</button>
+                    </div>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:8%">번호</th>
+                                <th style="width:24%">어카운트넘버</th>
+                                <th style="width:22%">획득 일시</th>
+                                <th style="width:16%">보유 티켓</th>
+                                <th style="width:10%">수정</th>
+                            </tr>
+                        </thead>
+                        <tbody id="holder-tbody"></tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <div class="page-link">&#8249;</div>
+                    <div class="page-link active">1</div>
+                    <div class="page-link">2</div>
+                    <div class="page-link">&#8250;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== GRANT TAB ===== -->
+        <div id="tab-grant" style="display:none;">
+            <div class="search-box">
+                <div class="search-row">
+                    <div class="search-label">검색 조건</div>
+                    <select class="search-select" id="grant-searchType">
+                        <option value="어카운트넘버">어카운트넘버</option>
+                    </select>
+                    <input type="text" class="search-input wide" id="grant-searchInput" placeholder="검색어를 입력해주세요.">
+                    <button class="btn-search" onclick="doSearch('grant')">검색</button>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <div class="table-toolbar">
+                    <span class="result-count" id="grant-resultCount">조회 결과 : 0개</span>
+                    <div class="table-actions">
+                        <button class="btn-outline" onclick="downloadCSV('grant')">↓ 리스트 다운로드</button>
+                    </div>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:6%">번호</th>
+                                <th style="width:20%">어카운트넘버</th>
+                                <th style="width:18%">지급 일시</th>
+                                <th style="width:10%">지급/차감</th>
+                                <th style="width:26%">지급 건 내역</th>
+                                <th style="width:8%">상세</th>
+                            </tr>
+                        </thead>
+                        <tbody id="grant-tbody"></tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <div class="page-link">&#8249;</div>
+                    <div class="page-link active">1</div>
+                    <div class="page-link">&#8250;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TICKET EDIT PANEL ===== -->
+        <div id="ticket-edit-panel" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:999;display:none;align-items:center;justify-content:center;">
+        </div>
+    </div>
+</main>
+
+<!-- ===== MODAL: BULK UPDATE ===== -->
+<div class="modal-overlay" id="modalBulkUpdate">
+    <div class="modal modal-md">
+        <div class="modal-header">
+            <h3>티켓 대량 업데이트</h3>
+            <button class="modal-close" onclick="closeModal('modalBulkUpdate')">✕</button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-desc">
+                엑셀 양식에 맞추어 <strong>어카운트넘버, 지급 티켓 수</strong>를 입력 후 업로드해주세요.<br>
+                <span class="warn">업로드가 완료되면 회원의 티켓 수량이 즉각 업데이트됩니다.</span>
+            </p>
+            <div class="sample-dl-btn">
+                <button onclick="downloadSample()">↓ 업로드용 샘플 파일(.csv) 다운로드</button>
+            </div>
+            <div class="file-drop-zone" onclick="document.getElementById('ticketFile').click()">
+                <input type="file" id="ticketFile" accept=".csv,.xlsx,.xls" onchange="onFileSelect(this,'ticketFileName')">
+                <div class="file-drop-icon">📂</div>
+                <div class="file-drop-text">파일을 드래그하거나 클릭하여 선택해주세요</div>
+                <div class="file-drop-text" style="font-size:11px;margin-top:4px;color:#bbb;">.csv, .xls, .xlsx</div>
+                <div class="file-selected" id="ticketFileName"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-gray" onclick="closeModal('modalBulkUpdate')">취소</button>
+            <button class="btn-navy" onclick="executeUpload()">업데이트 실행</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MODAL: TICKET EDIT ===== -->
+<div class="modal-overlay" id="modalTicketEdit">
+    <div class="modal modal-sm">
+        <div class="modal-header">
+            <h3>티켓 수정</h3>
+            <button class="modal-close" onclick="closeModal('modalTicketEdit')">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <label class="form-label">어카운트넘버</label>
+                <input type="text" class="form-control readonly" id="editAccount" readonly>
+            </div>
+            <div class="form-row">
+                <label class="form-label">현재 보유 티켓</label>
+                <input type="text" class="form-control readonly" id="editCurrentTicket" readonly>
+            </div>
+            <div class="form-row">
+                <label class="form-label">변경 수량 <span class="req">*</span></label>
+                <input type="number" class="form-control" id="editNewTicket" placeholder="변경할 티켓 수량 (음수: 차감)">
+            </div>
+            <div class="form-row">
+                <label class="form-label">사유</label>
+                <input type="text" class="form-control" id="editReason" placeholder="지급/차감 사유를 입력해주세요.">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-gray" onclick="closeModal('modalTicketEdit')">취소</button>
+            <button class="btn-navy" onclick="executeTicketEdit()">수정 완료</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let holderData = [
+    { id:100, account:'123456', acquireDate:'22/09/2025 00:00:00', tickets:1 },
+    { id:99,  account:'234567', acquireDate:'21/09/2025 00:00:00', tickets:3 },
+    { id:98,  account:'345678', acquireDate:'20/09/2025 00:00:00', tickets:1 },
+    { id:97,  account:'456789', acquireDate:'19/09/2025 00:00:00', tickets:2 },
+    { id:96,  account:'567890', acquireDate:'18/09/2025 00:00:00', tickets:1 },
+    { id:95,  account:'678901', acquireDate:'17/09/2025 00:00:00', tickets:5 },
+    { id:94,  account:'789012', acquireDate:'16/09/2025 00:00:00', tickets:1 },
+    { id:93,  account:'890123', acquireDate:'15/09/2025 00:00:00', tickets:2 },
+    { id:92,  account:'901234', acquireDate:'14/09/2025 00:00:00', tickets:1 },
+    { id:91,  account:'012345', acquireDate:'13/09/2025 00:00:00', tickets:4 },
+];
+
+const grantHistory = [
+    { id:10, account:'123456', grantDate:'22/09/2025 10:00:00', type:'+', qty:1, reason:'이벤트 지급' },
+    { id:9,  account:'234567', grantDate:'21/09/2025 14:00:00', type:'+', qty:3, reason:'운영자 지급' },
+    { id:8,  account:'345678', grantDate:'20/09/2025 09:30:00', type:'+', qty:1, reason:'이벤트 지급' },
+    { id:7,  account:'456789', grantDate:'19/09/2025 11:00:00', type:'+', qty:2, reason:'CS 보상' },
+    { id:6,  account:'567890', grantDate:'18/09/2025 08:00:00', type:'-', qty:1, reason:'오지급 회수' },
+];
+
+let editingHolder = null;
+
+function toggleMenu(header) {
+    const sub = header.nextElementSibling;
+    const open = header.classList.contains('open');
+    header.classList.toggle('open', !open);
+    sub.classList.toggle('expanded', !open);
+    sub.classList.toggle('collapsed', open);
+}
+
+function switchTab(tab) {
+    ['holder','grant'].forEach(t => {
+        document.getElementById('stab-' + t).classList.toggle('active', t === tab);
+        document.getElementById('tab-' + t).style.display = t === tab ? 'block' : 'none';
+    });
+    if (tab === 'holder') renderHolder(holderData);
+    else renderGrant(grantHistory);
+}
+
+function renderHolder(data) {
+    document.getElementById('holder-resultCount').textContent = `조회 결과 : ${data.length}개`;
+    const tbody = document.getElementById('holder-tbody');
+    if (!data.length) {
+        tbody.innerHTML = `<tr><td colspan="5" style="padding:50px;color:#aaa;text-align:center;">조회된 내역이 없습니다.</td></tr>`;
+        return;
+    }
+    tbody.innerHTML = data.map((d, i) => `
+        <tr>
+            <td style="font-weight:700;">${data.length - i}</td>
+            <td>${d.account}</td>
+            <td>${d.acquireDate}</td>
+            <td><span class="ticket-count-badge">${d.tickets}</span></td>
+            <td><button class="btn-edit" onclick="openTicketEdit(${d.id})">수정</button></td>
+        </tr>
+    `).join('');
+}
+
+function renderGrant(data) {
+    document.getElementById('grant-resultCount').textContent = `조회 결과 : ${data.length}개`;
+    const tbody = document.getElementById('grant-tbody');
+    if (!data.length) {
+        tbody.innerHTML = `<tr><td colspan="6" style="padding:50px;color:#aaa;text-align:center;">조회된 내역이 없습니다.</td></tr>`;
+        return;
+    }
+    tbody.innerHTML = data.map((d, i) => `
+        <tr>
+            <td style="font-weight:700;">${data.length - i}</td>
+            <td>${d.account}</td>
+            <td>${d.grantDate}</td>
+            <td style="color:${d.type === '+' ? '#059669' : '#ef4444'};font-weight:800;">${d.type}${d.qty}</td>
+            <td>${d.reason}</td>
+            <td><button class="btn-detail" onclick="alert('상세 보기 – 준비 중')">상세</button></td>
+        </tr>
+    `).join('');
+}
+
+function doSearch(tab) {
+    const input = document.getElementById(tab + '-searchInput').value.toLowerCase();
+    if (tab === 'holder') {
+        const filtered = input ? holderData.filter(d => d.account.includes(input)) : holderData;
+        renderHolder(filtered);
+    } else {
+        const filtered = input ? grantHistory.filter(d => d.account.includes(input)) : grantHistory;
+        renderGrant(filtered);
+    }
+}
+
+function openTicketEdit(id) {
+    const item = holderData.find(d => d.id === id);
+    if (!item) return;
+    editingHolder = id;
+    document.getElementById('editAccount').value = item.account;
+    document.getElementById('editCurrentTicket').value = item.tickets + '장';
+    document.getElementById('editNewTicket').value = '';
+    document.getElementById('editReason').value = '';
+    openModal('modalTicketEdit');
+}
+
+function executeTicketEdit() {
+    const qty = parseInt(document.getElementById('editNewTicket').value);
+    if (isNaN(qty)) return alert('변경 수량을 입력해주세요.');
+    const idx = holderData.findIndex(d => d.id === editingHolder);
+    if (idx > -1) {
+        holderData[idx].tickets = Math.max(0, holderData[idx].tickets + qty);
+    }
+    alert('티켓 수량이 업데이트되었습니다.');
+    closeModal('modalTicketEdit');
+    renderHolder(holderData);
+}
+
+function openModal(id) { document.getElementById(id).classList.add('active'); }
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+function onFileSelect(input, labelId) {
+    document.getElementById(labelId).textContent = input.files[0] ? input.files[0].name : '';
+}
+
+function executeUpload() {
+    const file = document.getElementById('ticketFile').files[0];
+    if (!file) return alert('업로드할 파일을 선택해주세요.');
+    alert(`[${file.name}] 티켓 대량 업데이트가 완료되었습니다.`);
+    closeModal('modalBulkUpdate');
+}
+
+function downloadSample() {
+    const csv = '\uFEFF어카운트넘버,지급티켓수\n123456,1\n234567,2\n';
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type:'text/csv;charset=utf-8;' }));
+    a.download = 'ticket_update_sample.csv';
+    a.click();
+}
+
+function downloadCSV(type) {
+    const data = grantHistory;
+    const esc = v => `"${String(v||'-').replace(/"/g,'""')}"`;
+    const header = ['어카운트넘버','지급일시','지급/차감','수량','사유'].map(esc).join(',');
+    const rows = data.map(d => [d.account,d.grantDate,d.type,d.qty,d.reason].map(esc).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob(['\uFEFF' + header + '\n' + rows], { type:'text/csv;charset=utf-8;' }));
+    a.download = `ticket_grant_list.csv`;
+    a.click();
+}
+
+window.onload = () => { switchTab('holder'); };
+</script>
+</body>
+</html>

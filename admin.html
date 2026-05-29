@@ -3,623 +3,488 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RO FACTORY 웹기획Unit 이주형 작성 - 작품 변환 대기열 관리, 만료, 판매 작품 상태 변경을 관리하는 통합 백오피스입니다.">
-    <title>RO FACTORY</title>
+    <title>RO Factory 백오피스 – 작품 관리</title>
     <link rel="stylesheet" href="admin.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="tailwind-init.js"></script>
 </head>
 <body>
 
-    <!-- Outer Nav (Blue) -->
-    <nav class="nav-outer">
-        <a href="#" class="nav-outer-btn"><span class="icon">👤</span>MEM</a>
-        <a href="#" class="nav-outer-btn active"><span class="icon">🌐</span>WEB</a>
-        <a href="#" class="nav-outer-btn"><span class="icon">⚙️</span>SET</a>
-    </nav>
-    
-    <!-- Inner Nav (Light Grey) -->
-    <nav class="nav-inner">
-        <div class="brand-header">
-            <span class="brand-logo">GRAVITY<span>Admin Tools</span></span> 
-            <span class="brand-lang">| 🌐 KO ▾</span>
-        </div>
-        
-        <div class="user-section">
-            TEST <button class="btn-logout">로그아웃</button>
-        </div>
-        
-        <div class="menu-list">
-            <div class="menu-group" style="box-shadow: 0 4px 10px rgba(0,0,0,0.05); border:none;">
-                <div class="menu-group-title" style="color:#0ea5e9;">라그나로크 제로 <span style="font-size:12px;">▲</span></div>
-                <div class="menu-sub-list">
-                    <a href="admin.html" class="menu-sub-item active">RO FACTORY</a>
-                </div>
-            </div>
-            
-            <a href="index.html" class="btn-logout" style="display:block; text-align:center; background:#fee2e2; color:#ef4444; margin-top:20px; text-decoration:none;">사이트 메인으로 이동</a>
-        </div>
-    </nav>
+<!-- ===== OUTER NAV ===== -->
+<nav class="nav-outer">
+    <div class="nav-outer-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <a class="nav-outer-btn" href="#"><span class="icon">👤</span>MEM</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">🎮</span>GAME</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">💰</span>PAY</a>
+    <a class="nav-outer-btn active" href="#"><span class="icon">🌐</span>WEB</a>
+    <a class="nav-outer-btn" href="#"><span class="icon">⚙️</span>SET</a>
+</nav>
 
-    <!-- Main Workspace -->
-    <main class="main-workspace">
-        <div class="workspace-header">
-            <div class="breadcrumb-title">라그나로크 제로 > RO FACTORY > 작품 관리</div>
-            <div class="tabs-primary">
-                <div class="tab-p active" onclick="switchTab('tab-item')" id="btn-tab-item">작품관리</div>
-                <div class="tab-p" onclick="switchTab('tab-type')" id="btn-tab-type">타입 관리</div>
-            </div>
+<!-- ===== INNER NAV ===== -->
+<nav class="nav-inner">
+    <div class="brand-header">
+        <div class="brand-title">GRAVITY<span>Admin</span></div>
+        <div class="brand-lang">🌐 KO ▾</div>
+    </div>
+    <div class="nav-tool-label">WEB Tool</div>
+
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)">
+            <span><span class="checkbox-icon"></span>공통 관리</span>
+            <span class="arrow">▼</span>
         </div>
-        
-        <div class="workspace-body" id="view-item">
-            <!-- 5 Stats Cards -->
-            <div class="dash-cards">
-                <div class="dash-card" onclick="filterList('변환 중')" style="cursor:pointer; background:#fff;" id="card-변환중">
-                    <div class="card-num olive">3</div>
-                    <div class="card-text" style="color:#555;">변환 중</div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)">
+            <span><span class="checkbox-icon"></span>GNJOY 관리</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+
+    <div class="menu-group">
+        <div class="menu-group-header" onclick="toggleMenu(this)">
+            <span><span class="checkbox-icon"></span>ROZ</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="menu-sub-list collapsed"></div>
+    </div>
+
+    <div class="menu-group">
+        <div class="menu-group-header open" onclick="toggleMenu(this)">
+            <span><span class="checkbox-icon"></span>RO Factory</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="menu-sub-list expanded">
+            <a class="menu-sub-item" href="admin_banner.html">메인관리</a>
+            <a class="menu-sub-item active" href="admin.html">작품관리</a>
+            <a class="menu-sub-item" href="admin_purchase.html">구매 내역</a>
+            <a class="menu-sub-item" href="admin_tag.html">태그 관리</a>
+            <a class="menu-sub-item" href="admin_ticket.html">티켓 관리</a>
+        </div>
+    </div>
+
+    <div class="nav-inner-footer">
+        <span class="user-name">홍길동님</span>
+        <div style="display:flex;gap:4px;">
+            <button class="btn-icon" title="프로필 수정">✏️</button>
+            <button class="btn-icon" title="로그아웃">🚪</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== MAIN WORKSPACE ===== -->
+<main class="main-workspace">
+    <div class="workspace-topbar">
+        <div class="breadcrumb">
+            포털 관리 <span class="sep">›</span> RO Factory <span class="sep">›</span> <span>작품 관리</span>
+        </div>
+    </div>
+
+    <div class="workspace-content">
+        <!-- LIST VIEW -->
+        <div id="view-list">
+            <div class="page-title">작품 관리</div>
+
+            <!-- STATUS TABS -->
+            <div class="status-tabs" id="statusTabs">
+                <div class="status-tab active" onclick="switchStatus('변환중')" id="tab-변환중">
+                    <span class="tab-count">100</span>
+                    <span class="tab-label">변환 중</span>
                 </div>
-                <div class="dash-card" onclick="filterList('판매대기')" style="cursor:pointer;" id="card-판매대기">
-                    <div class="card-num olive">2</div>
-                    <div class="card-text">판매대기</div>
+                <div class="status-tab" onclick="switchStatus('판매대기')" id="tab-판매대기">
+                    <span class="tab-count">50</span>
+                    <span class="tab-label">판매대기</span>
                 </div>
-                <div class="dash-card" onclick="filterList('판매 중')" style="cursor:pointer; background:#fff;" id="card-판매중">
-                    <div class="card-num" style="color:#111;">3</div>
-                    <div class="card-text" style="color:#555;">판매 중</div>
+                <div class="status-tab" onclick="switchStatus('판매중')" id="tab-판매중">
+                    <span class="tab-count">50</span>
+                    <span class="tab-label">판매 중</span>
                 </div>
-                <div class="dash-card" onclick="filterList('변환실패')" style="cursor:pointer;" id="card-변환실패">
-                    <div class="card-num red">1</div>
-                    <div class="card-text">변환실패</div>
+                <div class="status-tab" onclick="switchStatus('작품만료')" id="tab-작품만료">
+                    <span class="tab-count">50</span>
+                    <span class="tab-label">작품 만료</span>
                 </div>
-                <div class="dash-card" onclick="filterList('작품만료')" style="cursor:pointer;" id="card-작품만료">
-                    <div class="card-num red">1</div>
-                    <div class="card-text">작품만료</div>
+                <div class="status-tab" onclick="switchStatus('변환실패')" id="tab-변환실패">
+                    <span class="tab-count">100</span>
+                    <span class="tab-label">변환 실패</span>
+                </div>
+                <div class="status-tab" onclick="switchStatus('마켓삭제')" id="tab-마켓삭제">
+                    <span class="tab-count">100</span>
+                    <span class="tab-label">마켓 삭제</span>
                 </div>
             </div>
 
-            <!-- Search Box -->
+            <!-- SEARCH -->
             <div class="search-box">
-                <div class="search-box-title">검색조건</div>
-                
-                <div class="search-row">
-                    <div class="search-label">날짜 검색</div>
-                    <select class="search-select">
-                        <option>구분</option>
-                        <option>등록일</option>
-                        <option>유효기간</option>
-                        <option>판매 시작일</option>
-                    </select>
-                    <input type="datetime-local" class="search-input" style="width:190px;">
-                    <span style="font-weight:800; color:#555;">~</span>
-                    <input type="datetime-local" class="search-input" style="width:190px;">
-                    
-                    <button class="filter-btn">오늘</button>
-                    <button class="filter-btn">1주일</button>
-                    <button class="filter-btn">1개월</button>
-                    <button class="filter-btn">3개월</button>
-                    <button class="filter-btn">6개월</button>
-                </div>
-
-
-
                 <div class="search-row">
                     <div class="search-label">검색 키워드</div>
-                    <select class="search-select">
-                        <option>구분</option>
-                        <option>작품 이름</option>
-                        <option>작품 ID</option>
-                        <option>작품 카테고리</option>
+                    <select class="search-select" id="searchType">
+                        <option value="작품명">작품명</option>
+                        <option value="마켓ID">마켓ID</option>
+                        <option value="아이템ID">아이템ID</option>
+                        <option value="어카운트넘버">어카운트넘버</option>
                     </select>
-                    <input type="text" class="search-input wide" placeholder="검색어를 입력해주세요.">
-                    <button class="btn-search">조회하기</button>
+                    <input type="text" class="search-input wide" id="searchInput" placeholder="검색어를 입력해주세요.">
+                    <button class="btn-search" onclick="doSearch()">검색</button>
                 </div>
             </div>
 
-            <div class="table-header-info" id="tableHeaderInfo">조회 결과 : 10개</div>
-            
-            <div class="table-wrap">
-                <table class="data-table">
-                    <thead id="item-thead">
-                        <!-- Populated by JS -->
-                    </thead>
-                    <tbody id="item-tbody">
-                        <!-- Populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="pagination">
-                <div class="page-link">&lt;</div>
-                <div class="page-link active">1</div>
-                <div class="page-link">2</div>
-                <div class="page-link">3</div>
-                <div class="page-link">&gt;</div>
-            </div>
-        </div>
-
-        <div class="workspace-body" id="view-type" style="display:none;">
-            <div class="tabs-primary" style="margin-bottom: 20px;">
-                <div class="tab-p active" onclick="switchTypeTab('tag')" id="btn-type-tag">작품 타입 (해시태그) 관리</div>
-                <div class="tab-p" onclick="switchTypeTab('color')" id="btn-type-color">메인 색상 (배경색) 관리</div>
-            </div>
-
-            <div id="type-content-tag" style="background:#fff; padding:30px; border-radius:8px; min-height:500px;">
-                <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:15px;">
-                    <h2 style="font-size:18px; color:#1e293b; border-left:4px solid #2563eb; padding-left:12px; margin:0;">작품 타입 리스트</h2>
-                </div>
-                <div style="display:flex; gap:10px; margin-bottom:25px; background:#f8fafc; padding:20px; border-radius:8px;">
-                    <input type="text" id="newTagInput" class="search-input" placeholder="새로운 타입 입력 (예: #초보자용)" style="flex:1; border-color:#cbd5e1;" onkeypress="if(event.key==='Enter') addTypeTag()">
-                    <button class="btn-navy" style="width:120px; padding:12px; font-weight:800;" onclick="addTypeTag()">등록하기</button>
+            <!-- TABLE SECTION -->
+            <div class="table-section">
+                <div class="table-toolbar">
+                    <span class="result-count" id="resultCount">조회 결과 : 0개</span>
+                    <div class="table-actions">
+                        <button class="btn-outline" onclick="downloadCSV()">↓ 리스트 다운로드</button>
+                        <button class="btn-danger-outline" id="btn-convert-fail" onclick="openModal('modalConvertFail')" style="display:none;">변환 실패 업데이트 (EXCEL)</button>
+                        <button class="btn-primary-outline" id="btn-sale-update" onclick="openModal('modalSaleUpdate')" style="display:none;">판매 업데이트 (EXCEL)</button>
+                    </div>
                 </div>
                 <div class="table-wrap">
                     <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th style="width:10%;">번호</th>
-                                <th style="width:70%;">타입명</th>
-                                <th style="width:20%;">관리</th>
-                            </tr>
-                        </thead>
-                        <tbody id="type-tag-tbody">
-                            <!-- JS Generated -->
-                        </tbody>
+                        <thead id="tableHead"></thead>
+                        <tbody id="tableBody"></tbody>
                     </table>
                 </div>
+                <div class="pagination" id="pagination">
+                    <div class="page-link">&#8249;</div>
+                    <div class="page-link active">1</div>
+                    <div class="page-link">2</div>
+                    <div class="page-link">3</div>
+                    <div class="page-link">&#8250;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DETAIL VIEW -->
+        <div id="view-detail" style="display:none;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+                <button class="btn-outline" onclick="showList()" style="display:flex;align-items:center;gap:6px;">
+                    ← 목록
+                </button>
+                <div class="page-title" style="margin:0;">작품 상세 정보</div>
             </div>
 
-            <div id="type-content-color" style="display:none; background:#fff; padding:30px; border-radius:8px; min-height:500px;">
-                <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:15px;">
-                    <h2 style="font-size:18px; color:#1e293b; border-left:4px solid #ec4899; padding-left:12px; margin:0;">메인 색상 리스트</h2>
-                </div>
-                <div style="display:flex; gap:10px; margin-bottom:25px; background:#f8fafc; padding:20px; border-radius:8px;">
-                    <input type="text" id="newColorNameInput" class="search-input" placeholder="색상명칭 입력 (예: 핑크)" style="width:40%; border-color:#cbd5e1;" onkeypress="if(event.key==='Enter') addTypeColor()">
-                    <div style="width:30%; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; display:flex; align-items:center; gap:10px; background:#fff;">
-                        <span style="font-size:13px; color:#555; font-weight:700;">색상코드:</span>
-                        <input type="color" id="newColorHexInput" value="#ec4899" style="width:100%; height:30px; padding:0; border:none; cursor:pointer;">
+            <div class="detail-card">
+                <div class="detail-card-body">
+                    <div class="detail-thumb" id="detailThumb">
+                        <span style="font-size:40px;">🐾</span>
                     </div>
-                    <button class="btn-navy" style="background:#ec4899; width:120px; padding:12px; border-color:#ec4899; font-weight:800;" onclick="addTypeColor()">등록하기</button>
-                </div>
-                <div class="table-wrap">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th style="width:10%;">번호</th>
-                                <th style="width:30%;">미리보기</th>
-                                <th style="width:40%;">색상명칭</th>
-                                <th style="width:20%;">관리</th>
-                            </tr>
-                        </thead>
-                        <tbody id="type-color-tbody">
-                            <!-- JS Generated -->
-                        </tbody>
-                    </table>
+                    <div class="detail-info" id="detailInfo"></div>
                 </div>
             </div>
 
-        </div>
-    </main>
-
-    <!-- Upload Modal -->
-    <div class="modal-overlay" id="uploadModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h2>대량 변환 처리 업데이트 (Excel/CSV)</h2>
-                <button class="modal-close" onclick="closeUploadModal()">&times;</button>
-            </div>
-            <div class="modal-body" style="background:#f8fafc; padding:20px; border-radius:8px;">
-                <p style="font-size:13px; color:#475569; margin-bottom:15px; line-height:1.5;">
-                    엑셀 양식에 맞추어 <strong>작품 ID, 판매 시작일</strong> 데이터를 입력 후 업로드해주세요.<br>
-                    (주의: 업로드가 완료되면 목록의 상태가 즉각 갱신되며, 유저의 상태 정보도 동기화됩니다.)
-                </p>
-                <div style="display:flex; justify-content:center; margin-bottom:20px;">
-                    <button class="filter-btn" style="background:#fff; border:1px solid #10b981; color:#10b981; font-weight:800;" onclick="downloadSample()">↓ 업로드용 샘플 파일(.csv) 다운로드</button>
-                </div>
-                
-                <div style="border:2px dashed #cbd5e1; background:#fff; padding:30px; text-align:center; border-radius:8px;">
-                    <input type="file" id="excelFile" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="margin-bottom:10px;">
-                    <div style="font-size:12px; color:#888;">엑셀(.xls, .xlsx) 또는 CSV 파일을 선택해주세요.</div>
-                </div>
-            </div>
-            <div class="modal-actions">
-                <button class="btn-gray" onclick="closeUploadModal()">취소</button>
-                <button class="btn-navy" onclick="executeUpload()">업데이트 실행</button>
-            </div>
-        </div>
-        </div>
-    </div>
-
-    <!-- Type Delete Alternative Modal -->
-    <div class="modal-overlay" id="deleteTypeModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h2>항목 삭제 및 대체 지정</h2>
-                <button class="modal-close" onclick="closeDeleteTypeModal()">&times;</button>
-            </div>
-            <div class="modal-body" style="background:#f8fafc; padding:20px; border-radius:8px;">
-                <p style="font-size:14px; color:#333; margin-bottom:15px; line-height:1.5;">
-                    선택하신 항목을 영구 삭제하시겠습니까?<br>
-                    <span style="color:#ef4444; font-size:13px; font-weight:700;">이 항목을 이미 적용한 유저 작품 데이터가 존재할 수 있습니다. <br>대체할 항목을 지정하면 관련 작품들의 속성이 일괄 변경됩니다.</span>
-                </p>
-                <div style="margin-bottom:20px;">
-                    <div style="font-weight:700; margin-bottom:8px; font-size:13px; color:#475569;">삭제 대상</div>
-                    <input type="text" id="deleteTargetName" value="" class="search-input" readonly style="width:100%; background:#e2e8f0; color:#64748b; font-weight:700;">
-                </div>
-                <div>
-                    <div style="font-weight:700; margin-bottom:8px; font-size:13px; color:#475569;">대체할 항목 선택 (필수) <span style="color:#ef4444;">*</span></div>
-                    <select id="deleteSubstituteSelect" class="search-select" style="width:100%; height:45px; border-color:#94a3b8; font-weight:700;">
-                        <option value="">선택해주세요</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-actions">
-                <button class="btn-gray" onclick="closeDeleteTypeModal()">취소</button>
-                <button class="btn-navy" style="background:#ef4444; border-color:#ef4444;" onclick="executeDeleteType()">삭제 및 대체 적용</button>
+            <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px;">
+                <button class="btn-outline" onclick="showList()">목록</button>
             </div>
         </div>
     </div>
+</main>
 
-    <script>
-        // Mock DB Data matching Frontend My Studio realistic mock data (DD.MM.YYYY HH:MM:SS format)
-        const mockList = [
-            { id: 10, rid: 'RF00010', cat: '발자국', author: 'gravity_01',   name: '다크메이지 잿빛흔적',       price: 'FREE',  reg: '20.03.2026 14:05', exp: '-',                  start: '-',                  statusText: '변환 중' },
-            { id: 9,  rid: 'RF00009', cat: '발자국', author: 'roz_user22',   name: '골든 소드오라 발자국',      price: 'FREE',  reg: '19.03.2026 10:20', exp: '17.06.2026',         start: '20.03.2026 22:00',   statusText: '판매 중' },
-            { id: 8,  rid: 'RF00008', cat: '발자국', author: 'poring_fan',   name: '포링 벚꽃길',              price: 'FREE',  reg: '18.03.2026 09:12', exp: '16.06.2026',         start: '19.03.2026 15:30',   statusText: '판매 중' },
-            { id: 7,  rid: 'RF00007', cat: '발자국', author: 'ice_crafter',  name: '얼음 수정 발자국',         price: 'FREE',  reg: '18.03.2026 08:30', exp: '16.06.2026',         start: '18.03.2026 12:00',   statusText: '판매 중' },
-            { id: 6,  rid: 'RF00006', cat: '발자국', author: 'angel_step',   name: '천사의 새하얀 깃털',       price: 'FREE',  reg: '17.03.2026 16:45', exp: '-',                  start: '-',                  statusText: '변환실패' },
-            { id: 5,  rid: 'RF00005', cat: '발자국', author: 'witch_maker',  name: '마녀의 뾰족 모자 길',      price: 'FREE',  reg: '16.03.2026 11:22', exp: '-',                  start: '-',                  statusText: '판매대기' },
-            { id: 4,  rid: 'RF00004', cat: '발자국', author: 'sparkle_roz',  name: '반짝이는 요정 가루',        price: 'FREE',  reg: '15.03.2026 18:05', exp: '-',                  start: '-',                  statusText: '판매대기' },
-            { id: 3,  rid: 'RF00003', cat: '발자국', author: 'galaxy_walk',  name: '우주 은하수 길',           price: 'FREE',  reg: '10.02.2026 14:00', exp: '11.05.2026',         start: '11.02.2026 10:00',   statusText: '작품만료' },
-            { id: 2,  rid: 'RF00002', cat: '발자국', author: 'lava_step',    name: '불타는 용암 조각',         price: 'FREE',  reg: '13.03.2026 09:30', exp: '-',                  start: '-',                  statusText: '변환 중' },
-            { id: 1,  rid: 'RF00001', cat: '발자국', author: 'knight_ro',    name: '기사단의 제복 발자국',      price: 'FREE',  reg: '12.03.2026 10:10', exp: '-',                  start: '-',                  statusText: '변환 중' }
-        ];
+<!-- ===== MODAL: 변환 실패 업데이트 ===== -->
+<div class="modal-overlay" id="modalConvertFail">
+    <div class="modal modal-md">
+        <div class="modal-header">
+            <h3>변환 실패 업데이트</h3>
+            <button class="modal-close" onclick="closeModal('modalConvertFail')">✕</button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-desc">
+                엑셀 양식에 맞추어 <strong>작품명, 마켓ID, 어카운트넘버</strong>를 입력 후 업로드해주세요.<br>
+                <span class="warn">업로드가 완료되면 해당 작품들은 변환 실패 리스트로 이동됩니다.</span>
+            </p>
+            <div class="sample-dl-btn">
+                <button onclick="downloadSample('convert')">↓ 업로드용 샘플 파일(.csv) 다운로드</button>
+            </div>
+            <div class="file-drop-zone" onclick="document.getElementById('convertFile').click()">
+                <input type="file" id="convertFile" accept=".csv,.xlsx,.xls" onchange="onFileSelect(this,'convertFileName')">
+                <div class="file-drop-icon">📂</div>
+                <div class="file-drop-text">파일을 드래그하거나 클릭하여 선택해주세요</div>
+                <div class="file-drop-text" style="font-size:11px;margin-top:4px;color:#bbb;">.csv, .xls, .xlsx</div>
+                <div class="file-selected" id="convertFileName"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-gray" onclick="closeModal('modalConvertFail')">취소</button>
+            <button class="btn-navy" onclick="executeUpload('convert')">등록</button>
+        </div>
+    </div>
+</div>
 
-        let typeTags = [
-            { id: 5, name: '#White' },
-            { id: 4, name: '#Crystal' },
-            { id: 3, name: '#Pink' },
-            { id: 2, name: '#Shining' },
-            { id: 1, name: '#Cool' }
-        ];
+<!-- ===== MODAL: 판매 업데이트 ===== -->
+<div class="modal-overlay" id="modalSaleUpdate">
+    <div class="modal modal-md">
+        <div class="modal-header">
+            <h3>판매 업데이트</h3>
+            <button class="modal-close" onclick="closeModal('modalSaleUpdate')">✕</button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-desc">
+                엑셀 양식에 맞추어 <strong>작품명, 마켓ID, 아이템ID, 어카운트넘버, 마켓 게시일</strong>을 입력 후 업로드해주세요.<br>
+                <span class="warn">업로드가 완료되면 목록의 상태가 즉각 갱신되며, 마켓 게시일 기준으로 노출됩니다.</span>
+            </p>
+            <div class="sample-dl-btn">
+                <button onclick="downloadSample('sale')">↓ 업로드용 샘플 파일(.csv) 다운로드</button>
+            </div>
+            <div class="file-drop-zone" onclick="document.getElementById('saleFile').click()">
+                <input type="file" id="saleFile" accept=".csv,.xlsx,.xls" onchange="onFileSelect(this,'saleFileName')">
+                <div class="file-drop-icon">📂</div>
+                <div class="file-drop-text">파일을 드래그하거나 클릭하여 선택해주세요</div>
+                <div class="file-drop-text" style="font-size:11px;margin-top:4px;color:#bbb;">.csv, .xls, .xlsx</div>
+                <div class="file-selected" id="saleFileName"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-gray" onclick="closeModal('modalSaleUpdate')">취소</button>
+            <button class="btn-navy" onclick="executeUpload('sale')">등록</button>
+        </div>
+    </div>
+</div>
 
-        let typeColors = [
-            { id: 5, name: 'Slate', hex: '#64748b' },
-            { id: 4, name: 'Blue', hex: '#3b82f6' },
-            { id: 3, name: 'Red', hex: '#ef4444' },
-            { id: 2, name: 'Olive', hex: '#84cc16' },
-            { id: 1, name: 'Dark', hex: '#1e293b' }
-        ];
+<script>
+// ===== MOCK DATA =====
+const mockData = {
+    변환중: [
+        { id:10, name:'다크메이지 잿빛흔적', marketId:'-', itemId:'-', account:'gravity_01', regDate:'22/03/2026 14:05', tags:['#Dark','#Cool'] },
+        { id:9, name:'골든 소드오라 발자국', marketId:'-', itemId:'-', account:'roz_user22', regDate:'19/03/2026 10:20', tags:['#Gold','#Shining'] },
+        { id:8, name:'포링 벚꽃길', marketId:'-', itemId:'-', account:'poring_fan', regDate:'18/03/2026 09:12', tags:['#Pink','#Crystal'] },
+        { id:7, name:'얼음 수정 발자국', marketId:'-', itemId:'-', account:'ice_crafter', regDate:'17/03/2026 08:30', tags:['#Crystal','#Cool'] },
+        { id:6, name:'천사의 새하얀 깃털', marketId:'-', itemId:'-', account:'angel_step', regDate:'16/03/2026 16:45', tags:['#White'] },
+    ],
+    판매대기: [
+        { id:5, name:'마녀의 뾰족 모자 길', marketId:'ASDF1234', itemId:'ITEM5678', account:'witch_maker', regDate:'15/03/2026 11:22', pendingDate:'01/04/2026 22:00', expDate:'30/06/2026', tags:['#Dark'] },
+        { id:4, name:'반짝이는 요정 가루', marketId:'ASDF1235', itemId:'ITEM5679', account:'sparkle_roz', regDate:'14/03/2026 18:05', pendingDate:'02/04/2026 12:00', expDate:'01/07/2026', tags:['#Shining'] },
+        { id:3, name:'우주 은하수 길', marketId:'ASDF1236', itemId:'ITEM5680', account:'galaxy_walk', regDate:'13/03/2026 14:00', pendingDate:'03/04/2026 10:00', expDate:'02/07/2026', tags:['#Cool'] },
+    ],
+    판매중: [
+        { id:2, name:'불타는 용암 조각', marketId:'ASDF1237', itemId:'ITEM5681', account:'lava_step', regDate:'12/03/2026 09:30', saleDate:'20/03/2026 22:00', expDate:'19/06/2026', tags:['#Dark'] },
+        { id:1, name:'기사단의 제복 발자국', marketId:'ASDF1238', itemId:'ITEM5682', account:'knight_ro', regDate:'11/03/2026 10:10', saleDate:'18/03/2026 12:00', expDate:'17/06/2026', tags:['#Cool'] },
+    ],
+    작품만료: [
+        { id:15, name:'고대 비석의 흔적', marketId:'ASDF1239', itemId:'ITEM5683', account:'ancient_ro', regDate:'01/01/2026 10:00', saleDate:'05/01/2026 12:00', expDate:'05/04/2026', tags:['#Dark'] },
+    ],
+    변환실패: [
+        { id:20, name:'천사의 새하얀 깃털 Ver.2', marketId:'-', account:'angel_step2', regDate:'16/03/2026 16:45', failDate:'17/03/2026 08:00', tags:['#White'] },
+        { id:21, name:'별빛 드래곤 꼬리', marketId:'-', account:'star_dragon', regDate:'15/03/2026 13:22', failDate:'16/03/2026 09:30', tags:['#Shining'] },
+    ],
+    마켓삭제: [
+        { id:30, name:'구름 솜사탕 발자국', marketId:'ASDF1240', itemId:'ITEM5690', account:'cloud_ro', regDate:'10/01/2026 09:00', saleDate:'15/01/2026 12:00', deleteDate:'20/03/2026', tags:['#White'] },
+    ]
+};
 
-        let tagIdCounter = 6;
-        let colorIdCounter = 6;
-        let pendingDelete = null; // { id, name, category }
+const tabStatusMap = {
+    변환중: { columns: ['번호','작품명','마켓ID','어카운트넘버','등록일시','상세'], type:'converting' },
+    판매대기: { columns: ['번호','작품명','마켓ID','아이템ID','어카운트넘버','등록일시','마켓 게시예정일','게시 만료일','상세'], type:'pending' },
+    판매중: { columns: ['번호','작품명','마켓ID','아이템ID','어카운트넘버','등록일시','마켓 게시일','게시 만료일','상세'], type:'selling' },
+    작품만료: { columns: ['번호','작품명','마켓ID','아이템ID','어카운트넘버','등록일시','마켓 게시일','게시 만료일','상세'], type:'expired' },
+    변환실패: { columns: ['번호','작품명','마켓ID','어카운트넘버','등록일시','변환 실패일','상세'], type:'failed' },
+    마켓삭제: { columns: ['번호','작품명','마켓ID','아이템ID','어카운트넘버','등록일시','마켓 게시일','마켓 삭제일','상세'], type:'deleted' }
+};
 
-        let currentFilter = '변환 중'; // Default to "변환 중" (V2.0)
+let currentStatus = '변환중';
+let currentData = [];
 
-        function initDashboard() {
-            const counts = { '변환 중': 0, '판매대기': 0, '판매 중': 0, '변환실패': 0, '작품만료': 0 };
-            mockList.forEach(item => {
-                if(counts[item.statusText] !== undefined) {
-                    counts[item.statusText]++;
-                }
-            });
-            document.querySelector('#card-변환중 .card-num').innerText = counts['변환 중'];
-            document.querySelector('#card-판매대기 .card-num').innerText = counts['판매대기'];
-            document.querySelector('#card-판매중 .card-num').innerText = counts['판매 중'];
-            document.querySelector('#card-변환실패 .card-num').innerText = counts['변환실패'];
-            document.querySelector('#card-작품만료 .card-num').innerText = counts['작품만료'];
-        }
+// ===== MENU TOGGLE =====
+function toggleMenu(header) {
+    const subList = header.nextElementSibling;
+    const isOpen = header.classList.contains('open');
+    if (isOpen) {
+        header.classList.remove('open');
+        subList.classList.remove('expanded');
+        subList.classList.add('collapsed');
+    } else {
+        header.classList.add('open');
+        subList.classList.remove('collapsed');
+        subList.classList.add('expanded');
+    }
+}
 
-        function filterList(status) {
-            if(currentFilter === status) {
-                currentFilter = 'All'; // Toggle off
-            } else {
-                currentFilter = status;
-            }
-            
-            // Adjust card visual state (Blue fill on active, default on others)
-            document.querySelectorAll('.dash-card').forEach(card => {
-                card.style.background = '#fff';
-                card.style.borderColor = '#e2e8f0'; // original var(--border-color)
-                
-                // reset text colors to default based on internal classes
-                let num = card.querySelector('.card-num');
-                let txt = card.querySelector('.card-text');
-                if (num.classList.contains('olive')) num.style.color = '#84cc16';
-                else if (num.classList.contains('red')) num.style.color = '#ef4444';
-                else num.style.color = '#111'; // original default
-                
-                txt.style.color = '#555'; // original default
-            });
-            
-            if(currentFilter !== 'All') {
-                let cardId = 'card-' + currentFilter.replace(/ /g, '');
-                let activeCard = document.getElementById(cardId);
-                if(activeCard) {
-                    activeCard.style.background = '#2563eb'; // blue fill
-                    activeCard.style.borderColor = '#2563eb';
-                    activeCard.querySelector('.card-num').style.color = '#fff';
-                    activeCard.querySelector('.card-text').style.color = '#fff';
-                }
-            }
+// ===== STATUS TAB SWITCH =====
+function switchStatus(status) {
+    currentStatus = status;
+    document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + status).classList.add('active');
 
-            renderTable();
-        }
+    // Show/hide action buttons per tab
+    document.getElementById('btn-convert-fail').style.display = (status === '변환중') ? 'block' : 'none';
+    document.getElementById('btn-sale-update').style.display = (status === '변환중' || status === '판매대기') ? 'block' : 'none';
 
-        function renderTable() {
-            const thead = document.getElementById('item-thead');
-            const tbody = document.getElementById('item-tbody');
-            
-            let htmlBody = '';
-            
-            let filteredList = currentFilter === 'All' ? mockList : mockList.filter(item => item.statusText === currentFilter);
-            
-            // Header Info & Action Buttons
-            document.getElementById('tableHeaderInfo').innerHTML = `
-                <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-                    <span>조회 결과 : ${filteredList.length}개</span>
-                    <div style="display:flex; gap:8px;">
-                        <button class="filter-btn" onclick="downloadCSV()">↓ 리스트 다운로드</button>
-                        <button class="filter-btn" style="background:#f8fafc; color:#1e293b; border-color:#cbd5e1; font-weight:800;" onclick="downloadAssets()">📦 작품 내려받기</button>
-                        <button class="btn-navy" onclick="openUploadModal()">⬆ 변환 업데이트 (Excel)</button>
-                    </div>
-                </div>
-            `;
+    renderTable();
+}
 
-            // Dynamic Table Header (Hide columns if converting)
-            let isConverting = (currentFilter === '변환 중');
-            let isExpired = (currentFilter === '작품만료');
-            
-            let htmlHead = `
-                <tr>
-                    <th style="width:4%; white-space:nowrap;">번호</th>
-                    <th style="width:10%; white-space:nowrap;">작품 ID</th>
-                    <th style="width:8%; white-space:nowrap;">카테고리</th>
-                    <th style="width:10%; white-space:nowrap;">작성자 ID</th>
-                    <th style="width:${isConverting ? '36%' : '24%'}; white-space:nowrap;">작품 이름</th>
-                    <th style="width:5%; white-space:nowrap;">가격</th>
-                    <th style="width:11%; white-space:nowrap;">등록일</th>
-                    <th style="width:11%; white-space:nowrap;">게재 만료일</th>
-                    ${!isConverting ? '<th style="width:11%; white-space:nowrap;">판매 시작일</th>' : ''}
-                </tr>
-            `;
-            thead.innerHTML = htmlHead;
-            
-            // Dynamic Table Body (Index per page, conditionally hide columns)
-            let pageIndex = 1;
-            filteredList.forEach(item => {
-                htmlBody += `
-                <tr style="white-space:nowrap;">
-                    <td style="font-weight:700;">${pageIndex++}</td>
-                    <td>${item.rid}</td>
-                    <td>${item.cat}</td>
-                    <td style="font-weight:700; color:#1d4ed8;">${item.author || '-'}</td>
-                    <td>
-                        <div class="item-link-wrap">
-                            <span style="font-size:14px;">🌸</span>
-                            <a href="admin_detail.html?id=${item.id}&status=${item.statusText}" class="text-blue" style="text-decoration:none;">${item.name} <span style="font-size:11px; color:#64748b;">(${item.statusText})</span></a>
-                        </div>
-                    </td>
-                    <td>${item.price}</td>
-                    <td style="font-size:12px;">${item.reg}</td>
-                    <td style="font-size:12px;">${item.exp}</td>
-                    ${!isConverting ? `<td style="font-size:12px;">${item.start}</td>` : ''}
-                </tr>`;
-            });
-            if(filteredList.length === 0) {
-                let colSpan = isConverting ? 6 : 7;
-                htmlBody = `<tr><td colspan="${colSpan}" style="padding:40px; color:#888;">조회된 내역이 없습니다. (현재 필터: ${currentFilter})</td></tr>`;
-            }
-            tbody.innerHTML = htmlBody;
-        }
+// ===== RENDER TABLE =====
+function renderTable() {
+    const config = tabStatusMap[currentStatus];
+    const data = mockData[currentStatus] || [];
+    currentData = data;
 
-        // ==========================================
-        // Download & Modal Logic 
-        // ==========================================
-        function _downloadFileTemplate(content, filename, mimeType) {
-            const blob = new Blob([content], { type: mimeType });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.setAttribute('hidden', '');
-            a.setAttribute('href', url);
-            a.setAttribute('download', filename);
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
+    document.getElementById('resultCount').textContent = `조회 결과 : ${data.length}개`;
 
-        function downloadCSV() {
-            let filteredList = currentFilter === 'All' ? mockList : mockList.filter(item => item.statusText === currentFilter);
-            let isConverting = (currentFilter === '변환 중');
+    // Render head
+    const thead = document.getElementById('tableHead');
+    thead.innerHTML = `<tr>${config.columns.map(c => `<th>${c}</th>`).join('')}</tr>`;
 
-            // 현재 탭에 보이는 컬럼과 동일하게 헤더 구성
-            let headers = ['작품ID', '카테고리', '작성자ID', '작품이름', '가격', '등록일', '유효기간'];
-            if (!isConverting) headers.push('판매시작일');
+    // Render body
+    const tbody = document.getElementById('tableBody');
+    if (data.length === 0) {
+        tbody.innerHTML = `<tr class="empty-row"><td colspan="${config.columns.length}" style="padding:50px;color:#aaa;text-align:center;">조회된 내역이 없습니다.</td></tr>`;
+        return;
+    }
 
-            // CSV 안전 처리: 모든 필드를 따옴표로 감싸기
-            const esc = v => `"${String(v).replace(/"/g, '""')}"`;
+    tbody.innerHTML = data.map((item, i) => {
+        const cells = buildCells(currentStatus, item, i + 1);
+        return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;
+    }).join('');
+}
 
-            let csvContent = headers.map(esc).join(',') + '\n';
+function buildCells(status, item, idx) {
+    const detailBtn = `<button class="btn-detail" onclick="showDetail(${item.id})">상세</button>`;
+    switch(status) {
+        case '변환중':
+            return [idx, item.name, item.marketId, item.account, item.regDate, detailBtn];
+        case '판매대기':
+            return [idx, item.name, item.marketId, item.itemId||'-', item.account, item.regDate, item.pendingDate||'-', item.expDate||'-', detailBtn];
+        case '판매중':
+            return [idx, item.name, item.marketId, item.itemId||'-', item.account, item.regDate, item.saleDate||'-', item.expDate||'-', detailBtn];
+        case '작품만료':
+            return [idx, item.name, item.marketId, item.itemId||'-', item.account, item.regDate, item.saleDate||'-', item.expDate||'-', detailBtn];
+        case '변환실패':
+            return [idx, item.name, item.marketId, item.account, item.regDate, item.failDate||'-', detailBtn];
+        case '마켓삭제':
+            return [idx, item.name, item.marketId, item.itemId||'-', item.account, item.regDate, item.saleDate||'-', item.deleteDate||'-', detailBtn];
+        default:
+            return [idx, item.name, detailBtn];
+    }
+}
 
-            filteredList.forEach(item => {
-                let row = [
-                    esc(item.rid),
-                    esc(item.cat),
-                    esc(item.author || '-'),
-                    esc(item.name),
-                    esc(item.price),    // "1,500" → "\"1,500\"" 안전 처리
-                    esc(item.reg),
-                    esc(item.exp)
-                ];
-                if (!isConverting) row.push(esc(item.start));
-                csvContent += row.join(',') + '\n';
-            });
+// ===== DETAIL VIEW =====
+function showDetail(id) {
+    const allData = Object.values(mockData).flat();
+    const item = allData.find(d => d.id === id);
+    if (!item) return;
 
-            const filterLabel = currentFilter === 'All' ? '전체' : currentFilter.replace(' ', '_');
-            const filename = `ro_factory_${filterLabel}_list.csv`;
-            _downloadFileTemplate('\uFEFF' + csvContent, filename, 'text/csv;charset=utf-8;');
-            alert(`[${currentFilter}] 목록 다운로드가 완료되었습니다. (${filteredList.length}건)`);
-        }
+    const statusBadgeMap = {
+        변환중: '<span class="status-badge converting">변환 중</span>',
+        판매대기: '<span class="status-badge pending">판매대기</span>',
+        판매중: '<span class="status-badge selling">판매 중</span>',
+        작품만료: '<span class="status-badge expired">작품만료</span>',
+        변환실패: '<span class="status-badge failed">변환실패</span>',
+        마켓삭제: '<span class="status-badge deleted">마켓삭제</span>'
+    };
 
-        function downloadAssets() {
-            let content = "RO FACTORY 에셋 아카이브 정보\n============================\n";
-            let filteredList = currentFilter === 'All' ? mockList : mockList.filter(item => item.statusText === currentFilter);
-            filteredList.forEach(item => {
-                content += `파일: ${item.rid}_${item.author}_${item.name}.foot (작품이름: ${item.name})\n`;
-            });
-            _downloadFileTemplate(content, 'ro_factory_assets.txt', 'text/plain;charset=utf-8;');
-            alert('작품 이름 및 foot 파일 압축 다운로드(샘플)가 실행되었습니다.');
-        }
+    const tagsHtml = (item.tags || []).map(t => `<span class="tag-chip">${t}</span>`).join('');
 
-        function downloadSample() {
-            let csvContent = "\uFEFF작품 ID,판매 시작일\nRF00010,2026-05-15 14:05:00\nRF00009,2026-05-20 18:30:00\n";
-            _downloadFileTemplate(csvContent, 'upload_sample.csv', 'text/csv;charset=utf-8;');
-        }
+    document.getElementById('detailInfo').innerHTML = `
+        <div class="detail-row">
+            <div class="detail-key">작품명</div>
+            <div class="detail-val" style="display:flex;align-items:center;gap:10px;">
+                ${item.name} ${statusBadgeMap[currentStatus] || ''}
+            </div>
+        </div>
+        <div class="detail-row">
+            <div class="detail-key">태그 관리</div>
+            <div class="detail-val"><div class="tag-chips">${tagsHtml || '-'}</div></div>
+        </div>
+        <div class="detail-row">
+            <div class="detail-key">마켓 ID</div>
+            <div class="detail-val">${item.marketId || '-'}</div>
+        </div>
+        <div class="detail-row">
+            <div class="detail-key">아이템 ID</div>
+            <div class="detail-val">${item.itemId || '-'}</div>
+        </div>
+        <div class="detail-row">
+            <div class="detail-key">어카운트넘버</div>
+            <div class="detail-val">${item.account}</div>
+        </div>
+        <div class="detail-row">
+            <div class="detail-key">등록 일시</div>
+            <div class="detail-val">${item.regDate}</div>
+        </div>
+        <div class="detail-row">
+            <div class="detail-key">마켓 게시예정일</div>
+            <div class="detail-val">${item.pendingDate || item.saleDate || '-'}</div>
+        </div>
+        <div class="detail-row">
+            <div class="detail-key">게시 만료일</div>
+            <div class="detail-val">${item.expDate || '-'}</div>
+        </div>
+    `;
 
-        function openUploadModal() {
-            document.getElementById('uploadModal').classList.add('active');
-        }
+    document.getElementById('view-list').style.display = 'none';
+    document.getElementById('view-detail').style.display = 'block';
+}
 
-        function closeUploadModal() {
-            document.getElementById('uploadModal').classList.remove('active');
-            document.getElementById('excelFile').value = '';
-        }
+function showList() {
+    document.getElementById('view-detail').style.display = 'none';
+    document.getElementById('view-list').style.display = 'block';
+}
 
-        function executeUpload() {
-            let fileInput = document.getElementById('excelFile');
-            if(!fileInput.files.length) {
-                alert('업로드할 파일을 선택해주세요.');
-                return;
-            }
-            alert(`[${fileInput.files[0].name}] 대량 변환 및 DB 업데이트가 완료되었습니다.`);
-            closeUploadModal();
-        }
+// ===== SEARCH =====
+function doSearch() {
+    const keyword = document.getElementById('searchInput').value.toLowerCase();
+    const type = document.getElementById('searchType').value;
+    const raw = mockData[currentStatus] || [];
+    currentData = keyword ? raw.filter(item => (item.name||'').toLowerCase().includes(keyword) || (item.account||'').toLowerCase().includes(keyword)) : raw;
+    renderTableFromData(currentData);
+}
 
-        function switchTab(tabId) {
-            // Update Tab Classes
-            document.getElementById('btn-tab-item').classList.remove('active');
-            document.getElementById('btn-tab-type').classList.remove('active');
-            document.getElementById('btn-' + tabId).classList.add('active');
+function renderTableFromData(data) {
+    const config = tabStatusMap[currentStatus];
+    document.getElementById('resultCount').textContent = `조회 결과 : ${data.length}개`;
+    const tbody = document.getElementById('tableBody');
+    if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="${config.columns.length}" style="padding:50px;color:#aaa;text-align:center;">검색 결과가 없습니다.</td></tr>`;
+        return;
+    }
+    tbody.innerHTML = data.map((item, i) => {
+        const cells = buildCells(currentStatus, item, i + 1);
+        return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;
+    }).join('');
+}
 
-            // Hide all views
-            document.getElementById('view-item').style.display = 'none';
-            document.getElementById('view-type').style.display = 'none';
-            
-            // Show target view
-            document.getElementById('view-' + tabId.split('-')[1]).style.display = 'block';
-        }
+// ===== MODAL =====
+function openModal(id) { document.getElementById(id).classList.add('active'); }
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-        function switchTypeTab(type) {
-            document.getElementById('btn-type-tag').classList.remove('active');
-            document.getElementById('btn-type-color').classList.remove('active');
-            document.getElementById('btn-type-' + type).classList.add('active');
+function onFileSelect(input, labelId) {
+    document.getElementById(labelId).textContent = input.files[0] ? input.files[0].name : '';
+}
 
-            document.getElementById('type-content-tag').style.display = 'none';
-            document.getElementById('type-content-color').style.display = 'none';
-            document.getElementById('type-content-' + type).style.display = 'block';
-        }
+function executeUpload(type) {
+    const fileId = type === 'convert' ? 'convertFile' : 'saleFile';
+    const file = document.getElementById(fileId).files[0];
+    if (!file) return alert('업로드할 파일을 선택해주세요.');
+    alert(`[${file.name}] 업데이트가 완료되었습니다.`);
+    closeModal(type === 'convert' ? 'modalConvertFail' : 'modalSaleUpdate');
+}
 
-        // --- Types DOM Logic ---
-        function renderTypeTables() {
-            const tagTbody = document.getElementById('type-tag-tbody');
-            let tagHtml = '';
-            typeTags.forEach((t, i) => {
-                tagHtml += `<tr><td>${typeTags.length - i}</td><td style="font-weight:700; color:#2563eb;">${t.name}</td><td><button class="filter-btn" style="padding:6px 15px; font-size:12px; border-color:#ef4444; color:#ef4444;" onclick="openDeleteTypeModal(${t.id}, '${t.name}', 'tag')">삭제</button></td></tr>`;
-            });
-            if(typeTags.length === 0) tagHtml = '<tr><td colspan="3" style="text-align:center; padding:40px; color:#888;">등록된 타입이 없습니다.</td></tr>';
-            tagTbody.innerHTML = tagHtml;
+function downloadSample(type) {
+    let csv = type === 'convert'
+        ? '\uFEFF작품명,마켓ID,어카운트넘버\nfoot1,ASDF1234,123456\n'
+        : '\uFEFF작품명,마켓ID,아이템ID,어카운트넘버,마켓게시일\nfoot1,ASDF1234,ITEM001,123456,2026-04-01 22:00:00\n';
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
+    a.download = `sample_${type}.csv`;
+    a.click();
+}
 
-            const colorTbody = document.getElementById('type-color-tbody');
-            let colorHtml = '';
-            typeColors.forEach((c, i) => {
-                colorHtml += `<tr><td>${typeColors.length - i}</td><td><div style="width:24px; height:24px; background:${c.hex}; border-radius:4px; margin:0 auto; box-shadow:0 2px 4px rgba(0,0,0,0.1);"></div></td><td style="font-weight:700;">${c.name}</td><td><button class="filter-btn" style="padding:6px 15px; font-size:12px; border-color:#ef4444; color:#ef4444;" onclick="openDeleteTypeModal(${c.id}, '${c.name}', 'color')">삭제</button></td></tr>`;
-            });
-            if(typeColors.length === 0) colorHtml = '<tr><td colspan="4" style="text-align:center; padding:40px; color:#888;">등록된 색상이 없습니다.</td></tr>';
-            colorTbody.innerHTML = colorHtml;
-        }
+function downloadCSV() {
+    const data = currentData.length ? currentData : (mockData[currentStatus] || []);
+    const esc = v => `"${String(v||'-').replace(/"/g,'""')}"`;
+    const header = ['작품명','마켓ID','어카운트넘버','등록일시'].map(esc).join(',');
+    const rows = data.map(d => [d.name,d.marketId,d.account,d.regDate].map(esc).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob(['\uFEFF' + header + '\n' + rows], { type:'text/csv;charset=utf-8;' }));
+    a.download = `ro_factory_${currentStatus}_list.csv`;
+    a.click();
+}
 
-        function addTypeTag() {
-            let input = document.getElementById('newTagInput');
-            let val = input.value.trim();
-            if(!val) return alert('타입명을 입력해주세요.\n예: #초보자용');
-            if(!val.startsWith('#')) val = '#' + val;
-            
-            typeTags.unshift({ id: tagIdCounter++, name: val });
-            input.value = '';
-            renderTypeTables();
-        }
-
-        function addTypeColor() {
-            let nameInput = document.getElementById('newColorNameInput');
-            let hexInput = document.getElementById('newColorHexInput');
-            let name = nameInput.value.trim();
-            if(!name) return alert('색상명칭을 입력해주세요.\n예: 핑크 혹은 커스텀색상');
-            
-            typeColors.unshift({ id: colorIdCounter++, name: name, hex: hexInput.value });
-            nameInput.value = '';
-            renderTypeTables();
-        }
-
-        function openDeleteTypeModal(id, name, typeCategory) {
-            pendingDelete = { id, name, category: typeCategory };
-            document.getElementById('deleteTargetName').value = name;
-            
-            let select = document.getElementById('deleteSubstituteSelect');
-            let optionsHtml = '<option value="">선택해주세요</option>';
-            
-            if(typeCategory === 'tag') {
-                typeTags.filter(t => t.id !== id).forEach(t => {
-                    optionsHtml += `<option value="${t.id}">${t.name}</option>`;
-                });
-            } else {
-                typeColors.filter(c => c.id !== id).forEach(c => {
-                    optionsHtml += `<option value="${c.id}">${c.name}</option>`;
-                });
-            }
-            select.innerHTML = optionsHtml;
-            document.getElementById('deleteTypeModal').classList.add('active');
-        }
-
-        function closeDeleteTypeModal() {
-            document.getElementById('deleteTypeModal').classList.remove('active');
-            document.getElementById('deleteSubstituteSelect').value = '';
-            pendingDelete = null;
-        }
-
-        function executeDeleteType() {
-            let select = document.getElementById('deleteSubstituteSelect');
-            if(!select.value) {
-                alert('삭제를 위해 대체할 항목을 반드시 선택해야 합니다.');
-                return;
-            }
-            
-            let altName = select.options[select.selectedIndex].text;
-            let targetName = pendingDelete.name;
-            
-            if(pendingDelete.category === 'tag') {
-                typeTags = typeTags.filter(t => t.id !== pendingDelete.id);
-            } else {
-                typeColors = typeColors.filter(c => c.id !== pendingDelete.id);
-            }
-            
-            alert(`[${targetName}] 항목이 삭제되고, 과거 등록된 기능 및 작품들의 속성이 모두 [${altName}](으)로 일괄 변경 처리되었습니다.`);
-            closeDeleteTypeModal();
-            renderTypeTables();
-        }
-
-        window.onload = () => {
-            initDashboard();
-            renderTypeTables(); // Initialize Type Tables
-            
-            // Auto click '변환 대기' on load to enforce the "우선 변환대기 단계 부터 하자" rule visually
-            let cardId = 'card-변환대기';
-            let activeCard = document.getElementById(cardId);
-            if(activeCard) {
-                activeCard.style.background = '#2563eb'; 
-                activeCard.style.borderColor = '#2563eb';
-                activeCard.querySelector('.card-num').style.color = '#fff';
-                activeCard.querySelector('.card-text').style.color = '#fff';
-            }
-            renderTable();
-        };
-    </script>
+// ===== INIT =====
+window.onload = () => {
+    switchStatus('변환중');
+};
+</script>
 </body>
 </html>
