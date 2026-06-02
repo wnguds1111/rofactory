@@ -425,7 +425,7 @@
           "label": "3",
           "depth": 0,
           "title": "NEXT",
-          "sub": "- 유효성 체크 후 필수 값 미 입력 시 Alert(\"Please enter the work title.\") \n- 정상 등록 시 등록 완료 페이지 이동\n- 파일 검증 후 검증되지 않은 파일 등록 시 Alert(\"This file cannot be uploaded.\") 노출 ",
+          "sub": "- 유효성 체크 후 필수 값 미 입력 시 Alert(\"Please upload all files.\") \n- 정상 등록 시 등록 완료 페이지 이동\n- 파일 검증 후 검증되지 않은 파일 등록 시 Alert(\"This file cannot be uploaded.\") 노출 ",
           "top": 817.5,
           "left": 1720,
           "selector": ""
