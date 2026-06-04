@@ -556,6 +556,33 @@
                     <button class="c-btn-go-studio" onclick="location.href='studio_inventory.html'"><span data-en="My Studio" data-ko="마이 스튜디오">My Studio</span> <span data-en="Go" data-ko="이동">Go</span></button>
                 </div>
             </div>
+            <!-- 결제 실패 데모 버튼 -->
+            <div style="margin-top:24px; width:100%; max-width:600px; margin-left:auto; margin-right:auto; text-align:center; position:relative; z-index:100;">
+                <button onclick="switchToFailDemo()" style="background:#fef2f2; border:2px solid #fca5a5; color:#ef4444; font-size:14px; font-weight:800; padding:14px 32px; border-radius:10px; cursor:pointer; transition:all 0.2s; font-family:'Poppins',sans-serif;" onmouseover="this.style.background='#fee2e2';this.style.borderColor='#ef4444';" onmouseout="this.style.background='#fef2f2';this.style.borderColor='#fca5a5';">🔄 <span data-en="View Payment Failure Screen" data-ko="결제 실패 화면 보기">결제 실패 화면 보기</span></button>
+            </div>
+        </div>
+
+        <!-- STEP 4: PURCHASE FAILED -->
+        <div id="panel-fail" class="market-panel">
+            <div class="fail-wrapper" style="display:flex; flex-direction:column; align-items:center; justify-content:center; background:#fff; padding:80px 40px; border-radius:24px; box-shadow:0 10px 40px rgba(0,0,0,0.03); max-width:600px; margin:0 auto; text-align:center;">
+                <div style="font-size:0; margin-bottom:20px;">
+                    <div style="width:160px; height:160px; margin:0 auto; background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow: 0 8px 32px rgba(239,68,68,0.15);">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="36" stroke="#ef4444" stroke-width="4" fill="none" opacity="0.2"/>
+                            <circle cx="40" cy="40" r="28" stroke="#ef4444" stroke-width="3" fill="none" opacity="0.4"/>
+                            <line x1="28" y1="28" x2="52" y2="52" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+                            <line x1="52" y1="28" x2="28" y2="52" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <h2 style="font-size:32px; font-weight:900; color:#0f172a; margin-bottom:15px;"><span data-en="Payment Failed" data-ko="결제에 실패했습니다">Payment Failed</span></h2>
+                <div style="font-size:16px; font-weight:500; color:#64748b; margin-bottom:40px; line-height:1.6;"><span data-en="The payment could not be processed.<br>Please check your point balance or try again later." data-ko="결제를 처리할 수 없었습니다.<br>보유 포인트를 확인하시거나, 잠시 후 다시 시도해 주세요.">The payment could not be processed.<br>Please check your point balance or try again later.</span></div>
+
+                <div style="display:flex; gap:15px; width:100%;">
+                    <button onclick="goToStep('list')" style="flex:1; padding:18px; border-radius:12px; font-weight:800; font-size:16px; cursor:pointer; border:none; font-family:'Poppins',sans-serif; background:#fee2e2; color:#dc2626; transition:all 0.2s;" onmouseover="this.style.background='#fecaca'" onmouseout="this.style.background='#fee2e2'"><span data-en="Back to Market" data-ko="마켓으로 돌아가기">Back to Market</span></button>
+                    <button onclick="retryPayment()" style="flex:1; padding:18px; border-radius:12px; font-weight:800; font-size:16px; cursor:pointer; border:none; font-family:'Poppins',sans-serif; background:#dc2626; color:#fff; transition:all 0.2s;" onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='#dc2626'"><span data-en="Retry Payment" data-ko="다시 결제하기">Retry Payment</span></button>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -753,6 +780,21 @@
             
             closePaymentModal();
             goToStep('complete');
+        }
+
+        function retryPayment() {
+            goToStep('detail');
+        }
+
+        function showPaymentFail() {
+            closePaymentModal();
+            goToStep('fail');
+            if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
+        }
+
+        function switchToFailDemo() {
+            goToStep('fail');
+            if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
         }
 
         /* --- VIDEO MODAL LOGIC --- */
