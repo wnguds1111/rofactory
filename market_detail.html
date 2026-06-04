@@ -221,7 +221,7 @@
         .btn-modal-confirm:hover { background: #333; }
 
         /* Complete View (PANEL 4) */
-        .complete-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fff; padding: 80px 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); max-width: 600px; margin: 0 auto; text-align: center; }
+        .complete-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fff; padding: 80px 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); max-width: 600px; margin: 0 auto; text-align: center; overflow: visible; }
         .c-icon { font-size: 80px; margin-bottom: 30px; }
         .c-title { font-size: 32px; font-weight: 900; color: #0f172a; margin-bottom: 15px; }
         .c-desc { font-size: 16px; font-weight: 500; color: #64748b; margin-bottom: 40px; line-height: 1.6; }
@@ -575,9 +575,10 @@
                     <button class="c-btn-go-market" onclick="goToStep('list')"><span data-en="Market" data-ko="마켓">Market</span> <span data-en="Continue Browsing" data-ko="더 구경하기">Continue Browsing</span></button>
                     <button class="c-btn-go-studio" onclick="location.href='studio_inventory.html'"><span data-en="My Studio" data-ko="마이 스튜디오">My Studio</span> <span data-en="Go" data-ko="이동">Go</span></button>
                 </div>
-                <div style="margin-top:24px; width:100%; text-align:center;">
-                    <button onclick="switchToFailDemo()" style="background:none; border:1px dashed #cbd5e1; color:#94a3b8; font-size:13px; font-weight:700; padding:10px 24px; border-radius:8px; cursor:pointer; transition:all 0.2s; font-family:'Poppins',sans-serif;" onmouseover="this.style.borderColor='#ef4444';this.style.color='#ef4444';" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#94a3b8';">🔄 <span data-en="View Payment Failure Screen" data-ko="결제 실패 화면 보기">결제 실패 화면 보기</span></button>
-                </div>
+            </div>
+            <!-- 결제 실패 데모 버튼: complete-wrapper 밖에 배치하여 항상 보이도록 -->
+            <div style="margin-top:24px; width:100%; max-width:600px; margin-left:auto; margin-right:auto; text-align:center; position:relative; z-index:100;">
+                <button onclick="switchToFailDemo()" style="background:#fef2f2; border:2px solid #fca5a5; color:#ef4444; font-size:14px; font-weight:800; padding:14px 32px; border-radius:10px; cursor:pointer; transition:all 0.2s; font-family:'Poppins',sans-serif;" onmouseover="this.style.background='#fee2e2';this.style.borderColor='#ef4444';" onmouseout="this.style.background='#fef2f2';this.style.borderColor='#fca5a5';">🔄 <span data-en="View Payment Failure Screen" data-ko="결제 실패 화면 보기">결제 실패 화면 보기</span></button>
             </div>
         </div>
 
