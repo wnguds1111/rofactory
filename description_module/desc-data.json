@@ -674,7 +674,7 @@
           "label": "2-6",
           "depth": 1,
           "title": "획득하기",
-          "sub": "-  클릭 시  획득 완료 페이지 이동\n- 유저는 일일 총 3회까지 구매가능 이상 초과 시 \n    Alert(\"Max 3 purchases per day.\") 노출",
+          "sub": "-  클릭 시  획득 완료 페이지 이동\n- 유저는 일일 총 3회까지 구매가능 이상 초과 시 \n    Alert(\"Max 3 purchases per day.\") 노출\n- 이미 구매한 상품일 경우 Alert(\"You have already purchased this item.\") 노출",
           "top": 603.5,
           "left": 988,
           "selector": ""
