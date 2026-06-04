@@ -233,6 +233,22 @@
         .c-btn-go-studio { background: #012553; color: #fff; }
         .c-btn-go-market { background: #CCDFF6; color: #025DD0; }
 
+        /* Fail View (PANEL 5) */
+        .fail-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fff; padding: 80px 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); max-width: 600px; margin: 0 auto; text-align: center; }
+        .f-icon { font-size: 80px; margin-bottom: 30px; }
+        .f-title { font-size: 32px; font-weight: 900; color: #0f172a; margin-bottom: 15px; }
+        .f-desc { font-size: 16px; font-weight: 500; color: #64748b; margin-bottom: 40px; line-height: 1.6; }
+        .f-box { background: #fef2f2; width: 100%; border-radius: 12px; padding: 25px; margin-bottom: 40px; border: 1px solid #fecaca; }
+        .f-item { display: flex; justify-content: space-between; font-weight: 700; color: #1e293b; margin-bottom: 10px; }
+        .f-item:last-child { margin-bottom: 0; font-weight: 900; font-size: 18px; color: #ef4444; border-top: 1px dashed #fca5a5; padding-top: 15px; margin-top: 15px; }
+        .f-error-code { display: inline-block; background: #fef2f2; color: #dc2626; font-size: 13px; font-weight: 800; padding: 6px 14px; border-radius: 8px; border: 1px solid #fecaca; margin-bottom: 30px; }
+        .f-btns { display: flex; gap: 15px; width: 100%; }
+        .f-btns button { flex: 1; padding: 18px; border-radius: 12px; font-weight: 800; font-size: 16px; cursor: pointer; border: none; font-family: 'Poppins', sans-serif; transition: all 0.2s; }
+        .f-btn-retry { background: #dc2626; color: #fff; }
+        .f-btn-retry:hover { background: #b91c1c; }
+        .f-btn-go-market { background: #fee2e2; color: #dc2626; }
+        .f-btn-go-market:hover { background: #fecaca; }
+
         /* Video Modal & Detail Actions */
         .video-modal { background: #000; width: 500px; height: 500px; border-radius: 16px; padding: 0; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .btn-preview { background: rgba(255,255,255,0.9); color: #0f172a; border: 1px solid rgba(0,0,0,0.1); padding: 10px 20px; border-radius: 12px; font-weight: 800; font-size: 13px; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 8px; }
@@ -307,6 +323,10 @@
             .complete-wrapper { padding: 48px 20px; }
             .c-icon { font-size: 60px; }
             .c-title { font-size: 24px; }
+            /* Fail view mobile */
+            .fail-wrapper { padding: 48px 20px; }
+            .f-icon { font-size: 60px; }
+            .f-title { font-size: 24px; }
         }
         @media (max-width: 480px) {
             .market-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -555,6 +575,32 @@
                     <button class="c-btn-go-market" onclick="goToStep('list')"><span data-en="Market" data-ko="마켓">Market</span> <span data-en="Continue Browsing" data-ko="더 구경하기">Continue Browsing</span></button>
                     <button class="c-btn-go-studio" onclick="location.href='studio_inventory.html'"><span data-en="My Studio" data-ko="마이 스튜디오">My Studio</span> <span data-en="Go" data-ko="이동">Go</span></button>
                 </div>
+                <div style="margin-top:24px; width:100%; text-align:center;">
+                    <button onclick="switchToFailDemo()" style="background:none; border:1px dashed #cbd5e1; color:#94a3b8; font-size:13px; font-weight:700; padding:10px 24px; border-radius:8px; cursor:pointer; transition:all 0.2s; font-family:'Poppins',sans-serif;" onmouseover="this.style.borderColor='#ef4444';this.style.color='#ef4444';" onmouseout="this.style.borderColor='#cbd5e1';this.style.color='#94a3b8';">🔄 <span data-en="View Payment Failure Screen" data-ko="결제 실패 화면 보기">결제 실패 화면 보기</span></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: PURCHASE FAILED -->
+        <div id="panel-fail" class="market-panel">
+            <div class="fail-wrapper">
+                <div class="f-icon" style="font-size:0; margin-bottom:20px;">
+                    <div style="width:160px; height:160px; margin:0 auto; background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow: 0 8px 32px rgba(239,68,68,0.15);">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="36" stroke="#ef4444" stroke-width="4" fill="none" opacity="0.2"/>
+                            <circle cx="40" cy="40" r="28" stroke="#ef4444" stroke-width="3" fill="none" opacity="0.4"/>
+                            <line x1="28" y1="28" x2="52" y2="52" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+                            <line x1="52" y1="28" x2="28" y2="52" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <h2 class="f-title"><span data-en="Payment Failed" data-ko="결제에 실패했습니다">Payment Failed</span></h2>
+                <div class="f-desc"><span data-en="The payment could not be processed.<br>Please check your point balance or try again later." data-ko="결제를 처리할 수 없었습니다.<br>보유 포인트를 확인하시거나, 잠시 후 다시 시도해 주세요.">The payment could not be processed.<br>Please check your point balance or try again later.</span></div>
+
+                <div class="f-btns">
+                    <button class="f-btn-go-market" onclick="goToStep('list')"><span data-en="Back to Market" data-ko="마켓으로 돌아가기">Back to Market</span></button>
+                    <button class="f-btn-retry" onclick="retryPayment()"><span data-en="Retry Payment" data-ko="다시 결제하기">Retry Payment</span></button>
+                </div>
             </div>
         </div>
 
@@ -752,11 +798,36 @@
             const p = mockProducts.find(x => x.id === currentProductId);
             if (!p) return;
             
+            // Check if payment can proceed (balance check for non-free items)
+            if (!p.isFree && currentPoints < p.price) {
+                // Payment failed - insufficient balance
+                closePaymentModal();
+                goToStep('fail');
+                if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
+                return;
+            }
+            
             // Update Completion Page UI variables
             document.getElementById('c-item-name').innerHTML = p.title;
             
             closePaymentModal();
             goToStep('complete');
+        }
+
+        function retryPayment() {
+            // Go back to detail page to retry
+            goToStep('detail');
+        }
+
+        function showPaymentFail() {
+            closePaymentModal();
+            goToStep('fail');
+            if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
+        }
+
+        function switchToFailDemo() {
+            goToStep('fail');
+            if(window.changeLang) window.changeLang(localStorage.getItem('roz_lang') || 'kr');
         }
 
         /* --- VIDEO MODAL LOGIC --- */
