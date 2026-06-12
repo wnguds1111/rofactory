@@ -9,55 +9,72 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Pretendard', 'Poppins', sans-serif; background: #f1f5f9; color: #1e293b; min-height: 100vh; }
-
-        /* Sticky Header */
         .top-bar { background: #0f172a; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .top-bar h1 { font-size: 16px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 10px; margin: 0; }
-        .top-bar .ver { font-size: 10px; background: rgba(59, 130, 246, 0.7); color: #fff; padding: 3px 10px; border-radius: 12px; font-weight: 800; }
+        .top-bar .ver { font-size: 10px; background: rgba(59,130,246,0.7); color: #fff; padding: 3px 10px; border-radius: 12px; font-weight: 800; }
         .btn-home { text-decoration: none; color: #94a3b8; font-weight: 700; font-size: 12px; padding: 6px 14px; border: 1px solid #334155; border-radius: 6px; transition: 0.2s; }
         .btn-home:hover { color: #fff; border-color: #64748b; }
-
-        /* Layout */
-        .wrap { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
-
-        /* Hero */
-        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1d4ed8 100%); border-radius: 20px; padding: 40px 48px; margin-bottom: 36px; color: white; position: relative; overflow: hidden; }
+        .wrap { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1d4ed8 100%); border-radius: 20px; padding: 40px 48px; margin-bottom: 36px; color: white; }
         .hero h2 { font-size: 24px; font-weight: 900; margin-bottom: 8px; }
-        .hero p { font-size: 14px; color: #93c5fd; font-weight: 600; margin: 0; }
+        .hero p { font-size: 14px; color: #93c5fd; font-weight: 600; }
 
-        /* Section */
-        .section { background: #fff; border-radius: 16px; padding: 32px 36px; margin-bottom: 20px; box-shadow: 0 1px 8px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; }
-        .section-title { font-size: 17px; font-weight: 900; color: #0f172a; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .section-title .num { font-size: 11px; font-weight: 800; color: #fff; background: #3b82f6; width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .section-sub { font-size: 13px; color: #64748b; font-weight: 500; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9; line-height: 1.6; }
+        /* === FLOW DIAGRAM === */
+        .flow-diagram { background: #fff; border-radius: 16px; padding: 36px; border: 1px solid #e2e8f0; box-shadow: 0 1px 8px rgba(0,0,0,0.04); overflow-x: auto; }
+        .flow-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .flow-header .num { font-size: 11px; font-weight: 800; color: #fff; background: #3b82f6; width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+        .flow-header h3 { font-size: 17px; font-weight: 900; color: #0f172a; }
+        .flow-sub { font-size: 13px; color: #64748b; font-weight: 500; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9; }
 
-        /* Flow */
-        .pf { display: flex; flex-direction: column; align-items: center; max-width: 620px; margin: 0 auto; gap: 0; }
-        .pf-card { width: 100%; background: #fff; border-radius: 12px; padding: 22px 26px; border: 1.5px solid #e2e8f0; position: relative; transition: 0.2s; }
-        .pf-card:hover { border-color: #93c5fd; box-shadow: 0 4px 16px rgba(59,130,246,0.08); transform: translateY(-2px); }
-        .pf-step { position: absolute; top: -12px; left: 24px; width: 24px; height: 24px; border-radius: 6px; background: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; color: #fff; }
-        .pf-role { display: inline-block; font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 6px; background: #eff6ff; color: #1d4ed8; letter-spacing: 0.3px; margin-bottom: 8px; }
-        .pf-h { font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 5px; line-height: 1.4; }
-        .pf-p { font-size: 13px; font-weight: 500; color: #64748b; line-height: 1.65; }
-        .pf-tag { display: inline-block; background: #f8fafc; border: 1px solid #e2e8f0; color: #334155; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-top: 6px; margin-right: 4px; }
-        .pf-note { font-size: 11px; color: #94a3b8; font-weight: 600; margin-top: 8px; font-style: italic; }
+        /* Swim Lane Table */
+        .swim { min-width: 860px; border-collapse: collapse; width: 100%; }
+        
+        /* Lane labels (left column) */
+        .swim-label { width: 120px; min-width: 120px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 0; vertical-align: middle; text-align: center; }
+        .swim-label-inner { padding: 14px 10px; }
+        .swim-label-name { font-size: 12px; font-weight: 900; color: #0f172a; line-height: 1.3; }
+        .swim-label-sub { font-size: 10px; font-weight: 600; color: #94a3b8; margin-top: 2px; }
 
-        /* Arrow */
-        .pf-arrow { display: flex; flex-direction: column; align-items: center; padding: 4px 0; gap: 1px; }
-        .pf-arrow-bar { width: 2px; height: 18px; background: #cbd5e1; border-radius: 1px; }
-        .pf-arrow-tip { color: #94a3b8; font-size: 10px; font-weight: 900; }
-        .pf-arrow-lbl { font-size: 10px; font-weight: 700; color: #94a3b8; }
+        /* Lane body (right area) */
+        .swim-body { border: 1px solid #e2e8f0; padding: 20px 24px; vertical-align: middle; background: #fff; position: relative; min-height: 90px; }
+        .swim-body:hover { background: #fafbff; }
 
-        /* Badges */
-        .pf-badge { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 14px; border-radius: 20px; }
-        .pf-badge-g { background: #dcfce7; color: #166534; }
-        .pf-badge-y { background: #fef9c3; color: #854d0e; }
+        /* Flow nodes */
+        .f-node { display: inline-flex; align-items: flex-start; gap: 12px; background: #fff; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 14px 18px; max-width: 520px; transition: 0.2s; position: relative; }
+        .f-node:hover { border-color: #93c5fd; box-shadow: 0 2px 12px rgba(59,130,246,0.1); }
+        .f-node-num { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: #3b82f6; color: #fff; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+        .f-node-content { flex: 1; min-width: 0; }
+        .f-node-title { font-size: 13px; font-weight: 800; color: #0f172a; margin-bottom: 4px; line-height: 1.4; }
+        .f-node-desc { font-size: 12px; font-weight: 500; color: #64748b; line-height: 1.55; }
+        .f-node-tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+        .f-tag { display: inline-block; background: #f1f5f9; border: 1px solid #e2e8f0; color: #475569; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+        .f-note { font-size: 10px; color: #94a3b8; font-weight: 600; font-style: italic; margin-top: 6px; }
 
-        @media (max-width: 700px) {
-            .wrap { padding: 20px 16px; }
-            .section { padding: 24px 20px; }
-            .top-bar { padding: 12px 20px; }
+        /* Connector arrows between rows */
+        .swim-connector { border: none; height: 0; }
+        .swim-connector td { border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; padding: 0; height: 32px; position: relative; background: #fff; }
+        .swim-connector .swim-label { background: #f8fafc; border: 1px solid #e2e8f0; }
+        .conn-arrow { position: absolute; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0; }
+        .conn-line { width: 2px; height: 12px; background: #94a3b8; }
+        .conn-head { font-size: 10px; color: #94a3b8; font-weight: 900; line-height: 1; }
+        .conn-label { position: absolute; left: calc(50% + 14px); top: 50%; transform: translateY(-50%); font-size: 9px; font-weight: 700; color: #94a3b8; white-space: nowrap; background: #fff; padding: 0 4px; }
+
+        /* Status badges */
+        .f-badge { display: inline-block; font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 20px; margin-top: 6px; }
+        .f-badge-free { background: #dcfce7; color: #166534; }
+        .f-badge-plan { background: #fef9c3; color: #854d0e; }
+
+        /* Legend */
+        .legend { margin-top: 24px; padding: 16px 20px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+        .legend-title { font-size: 11px; font-weight: 800; color: #475569; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: #64748b; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+        @media (max-width: 900px) {
+            .wrap { padding: 20px 12px; }
+            .flow-diagram { padding: 20px 16px; }
             .hero { padding: 28px 24px; }
+            .top-bar { padding: 12px 20px; }
         }
     </style>
 </head>
@@ -73,108 +90,184 @@
             <p>RO FACTORY — 클라이언트 · 웹 · 어드민 연동 데이터 플로우</p>
         </div>
 
-        <div class="section">
-            <div class="section-title"><span class="num">1</span> 상세 프로세스</div>
-            <div class="section-sub">발자국 에셋이 제작되어 마켓에 판매되기까지의 전체 데이터 흐름입니다.</div>
+        <div class="flow-diagram">
+            <div class="flow-header">
+                <span class="num">1</span>
+                <h3>상세 프로세스</h3>
+            </div>
+            <div class="flow-sub">발자국 에셋이 제작되어 마켓에 판매되기까지의 전체 데이터 흐름</div>
 
-            <div class="pf">
+            <table class="swim">
+                <!-- ROW 1: Client -->
+                <tr>
+                    <td class="swim-label">
+                        <div class="swim-label-inner">
+                            <div class="swim-label-name">Client</div>
+                            <div class="swim-label-sub">편집툴 (Desktop)</div>
+                        </div>
+                    </td>
+                    <td class="swim-body">
+                        <div class="f-node">
+                            <div class="f-node-num">1</div>
+                            <div class="f-node-content">
+                                <div class="f-node-title">발자국 에셋 제작 및 파일 추출</div>
+                                <div class="f-node-desc">원본 파일(.foot), 영상 미리보기, 파일 식별을 위한 <strong>META 파일</strong>을 전용 UGC 편집툴을 통해 제작</div>
+                                <div class="f-node-tags">
+                                    <span class="f-tag">.foot</span>
+                                    <span class="f-tag">.mp4</span>
+                                    <span class="f-tag">.png</span>
+                                    <span class="f-tag">meta</span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
 
-                <!-- STEP 1 -->
-                <div class="pf-card">
-                    <div class="pf-step">1</div>
-                    <span class="pf-role">Client — 편집툴</span>
-                    <div class="pf-h">발자국 에셋 제작 및 파일 추출</div>
-                    <div class="pf-p">
-                        발자국 에셋 원본 파일(.foot) 및 영상 미리보기 파일, 파일 식별을 위한 <strong>META 파일</strong>은 전용 UGC 편집툴(데스크톱)을 통해 제작합니다.
-                    </div>
-                    <div style="margin-top:10px;">
-                        <span class="pf-tag">.foot (원본 에셋)</span>
-                        <span class="pf-tag">.mp4 (미리보기)</span>
-                        <span class="pf-tag">.png (썸네일)</span>
-                        <span class="pf-tag">meta (파일 식별)</span>
-                    </div>
-                </div>
+                <!-- CONNECTOR 1→2 -->
+                <tr class="swim-connector">
+                    <td class="swim-label"></td>
+                    <td style="border-left:1px solid #e2e8f0; border-right:1px solid #e2e8f0; background:#fff; position:relative;">
+                        <div class="conn-arrow" style="left:80px;">
+                            <div class="conn-line"></div>
+                            <div class="conn-head">▼</div>
+                        </div>
+                        <div class="conn-label" style="left:100px;">.foot + .mp4 + .png + meta 전달</div>
+                    </td>
+                </tr>
 
-                <div class="pf-arrow">
-                    <div class="pf-arrow-bar"></div>
-                    <div class="pf-arrow-tip">▼</div>
-                    <div class="pf-arrow-lbl">.foot + .mp4 + .png + meta 전달</div>
-                </div>
+                <!-- ROW 2: Web -->
+                <tr>
+                    <td class="swim-label">
+                        <div class="swim-label-inner">
+                            <div class="swim-label-name">Web</div>
+                            <div class="swim-label-sub">프론트 포털</div>
+                        </div>
+                    </td>
+                    <td class="swim-body">
+                        <div class="f-node">
+                            <div class="f-node-num">2</div>
+                            <div class="f-node-content">
+                                <div class="f-node-title">웹 포털 등록 폼에서 업로드 → S3 적재</div>
+                                <div class="f-node-desc">편집툴에서 추출한 리소스를 등록 폼에서 업로드. <strong>S3 스토리지에 적재</strong>되며 작품명·태그·유효기간 등 메타데이터 함께 저장</div>
+                                <div class="f-note">* PC 전용 · 로그인 필수 · 주간 100개 제한</div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
 
-                <!-- STEP 2 -->
-                <div class="pf-card">
-                    <div class="pf-step">2</div>
-                    <span class="pf-role">Web — 프론트 포털</span>
-                    <div class="pf-h">웹 포털 등록 폼에서 업로드 → S3 적재</div>
-                    <div class="pf-p">
-                        편집툴에서 추출한 리소스를 웹 포털 등록 폼에서 업로드합니다.<br>
-                        업로드된 파일은 <strong>S3 스토리지에 적재</strong>되며, 작품명·태그·유효기간 등 메타데이터도 함께 저장됩니다.
-                    </div>
-                    <div class="pf-note">* PC 전용 · 로그인 필수 · 주간 100개 제한</div>
-                </div>
+                <!-- CONNECTOR 2→3 -->
+                <tr class="swim-connector">
+                    <td class="swim-label"></td>
+                    <td style="border-left:1px solid #e2e8f0; border-right:1px solid #e2e8f0; background:#fff; position:relative;">
+                        <div class="conn-arrow" style="left:80px;">
+                            <div class="conn-line"></div>
+                            <div class="conn-head">▼</div>
+                        </div>
+                        <div class="conn-label" style="left:100px;">S3 스토리지 적재 완료</div>
+                    </td>
+                </tr>
 
-                <div class="pf-arrow">
-                    <div class="pf-arrow-bar"></div>
-                    <div class="pf-arrow-tip">▼</div>
-                    <div class="pf-arrow-lbl">S3 스토리지 적재 완료</div>
-                </div>
+                <!-- ROW 3: Studio -->
+                <tr>
+                    <td class="swim-label">
+                        <div class="swim-label-inner">
+                            <div class="swim-label-name">Studio</div>
+                            <div class="swim-label-sub">서버 (검증)</div>
+                        </div>
+                    </td>
+                    <td class="swim-body">
+                        <div class="f-node">
+                            <div class="f-node-num">3</div>
+                            <div class="f-node-content">
+                                <div class="f-node-title">S3 접근 → 등록 데이터 수집 → 아이템 ID 부여</div>
+                                <div class="f-node-desc">S3에 접근하여 유저 등록 데이터를 수집, 각 작품에 고유 <strong>아이템 ID 부여</strong> 및 .foot 파일 무결성 검증</div>
+                                <div class="f-node-tags">
+                                    <span class="f-tag">아이템 ID 발급</span>
+                                    <span class="f-tag">.foot 무결성 검증</span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
 
-                <!-- STEP 3 -->
-                <div class="pf-card">
-                    <div class="pf-step">3</div>
-                    <span class="pf-role">Studio — 서버</span>
-                    <div class="pf-h">S3 접근 → 등록 데이터 수집 → 아이템 ID 부여</div>
-                    <div class="pf-p">
-                        S3에 접근하여 유저가 등록한 발자국 등록 데이터를 수집한 뒤, 각 작품에 고유 <strong>아이템 ID를 부여</strong>합니다.
-                    </div>
-                    <div style="margin-top:10px;">
-                        <span class="pf-tag">아이템 ID 발급</span>
-                        <span class="pf-tag">.foot 무결성 검증</span>
-                    </div>
-                </div>
+                <!-- CONNECTOR 3→4 -->
+                <tr class="swim-connector">
+                    <td class="swim-label"></td>
+                    <td style="border-left:1px solid #e2e8f0; border-right:1px solid #e2e8f0; background:#fff; position:relative;">
+                        <div class="conn-arrow" style="left:80px;">
+                            <div class="conn-line"></div>
+                            <div class="conn-head">▼</div>
+                        </div>
+                        <div class="conn-label" style="left:100px;">아이템 ID + 검수 결과 전달</div>
+                    </td>
+                </tr>
 
-                <div class="pf-arrow">
-                    <div class="pf-arrow-bar"></div>
-                    <div class="pf-arrow-tip">▼</div>
-                    <div class="pf-arrow-lbl">아이템 ID + 검수 결과 전달</div>
-                </div>
+                <!-- ROW 4: Admin -->
+                <tr>
+                    <td class="swim-label">
+                        <div class="swim-label-inner">
+                            <div class="swim-label-name">Admin</div>
+                            <div class="swim-label-sub">백오피스</div>
+                        </div>
+                    </td>
+                    <td class="swim-body">
+                        <div class="f-node">
+                            <div class="f-node-num">4</div>
+                            <div class="f-node-content">
+                                <div class="f-node-title">백오피스 접근 → 게시할 발자국 업로드</div>
+                                <div class="f-node-desc">검수 완료된 발자국을 게시용으로 업로드. 엑셀(CSV) 일괄 업데이트를 통해 판매 시작일, 아이템 ID 반영</div>
+                                <div class="f-node-tags">
+                                    <span class="f-tag">CSV 일괄 업데이트</span>
+                                    <span class="f-tag">판매 시작일 설정</span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
 
-                <!-- STEP 4 -->
-                <div class="pf-card">
-                    <div class="pf-step">4</div>
-                    <span class="pf-role">Admin — 백오피스</span>
-                    <div class="pf-h">백오피스 접근 → 게시할 발자국 업로드</div>
-                    <div class="pf-p">
-                        백오피스에 접근하여 검수가 완료된 발자국을 게시용으로 업로드합니다.<br>
-                        엑셀(CSV) 일괄 업데이트를 통해 판매 시작일, 아이템 ID 등을 반영합니다.
-                    </div>
-                    <div style="margin-top:10px;">
-                        <span class="pf-tag">CSV 일괄 업데이트</span>
-                        <span class="pf-tag">판매 시작일 설정</span>
-                    </div>
-                </div>
+                <!-- CONNECTOR 4→5 -->
+                <tr class="swim-connector">
+                    <td class="swim-label"></td>
+                    <td style="border-left:1px solid #e2e8f0; border-right:1px solid #e2e8f0; background:#fff; position:relative;">
+                        <div class="conn-arrow" style="left:80px;">
+                            <div class="conn-line"></div>
+                            <div class="conn-head">▼</div>
+                        </div>
+                        <div class="conn-label" style="left:100px;">판매 시작일 도달 시 자동 노출</div>
+                    </td>
+                </tr>
 
-                <div class="pf-arrow">
-                    <div class="pf-arrow-bar"></div>
-                    <div class="pf-arrow-tip">▼</div>
-                    <div class="pf-arrow-lbl">판매 시작일 도달 시 자동 노출</div>
-                </div>
+                <!-- ROW 5: Market -->
+                <tr>
+                    <td class="swim-label">
+                        <div class="swim-label-inner">
+                            <div class="swim-label-name">Market</div>
+                            <div class="swim-label-sub">웹 스토어</div>
+                        </div>
+                    </td>
+                    <td class="swim-body">
+                        <div class="f-node">
+                            <div class="f-node-num">5</div>
+                            <div class="f-node-content">
+                                <div class="f-node-title">마켓 판매 시작</div>
+                                <div class="f-node-desc">마켓 스토어에 발자국 노출 및 판매 시작. 현재 <strong>FREE 버전</strong> 운영, 추후 유료화(KP 결제) 진행 예정</div>
+                                <div style="margin-top:8px; display:flex; gap:6px;">
+                                    <span class="f-badge f-badge-free">현재: FREE</span>
+                                    <span class="f-badge f-badge-plan">추후: KP 유료화 예정</span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
-                <!-- STEP 5 -->
-                <div class="pf-card">
-                    <div class="pf-step">5</div>
-                    <span class="pf-role">Market — 웹 스토어</span>
-                    <div class="pf-h">마켓 판매 시작</div>
-                    <div class="pf-p">
-                        마켓 스토어에 발자국이 노출되어 판매가 시작됩니다.<br>
-                        현재 <strong>FREE 버전</strong>으로 운영 중이며, 추후 유료화(KP 결제) 진행 예정입니다.
-                    </div>
-                    <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
-                        <span class="pf-badge pf-badge-g">현재: FREE</span>
-                        <span class="pf-badge pf-badge-y">추후: KP 유료화 예정</span>
-                    </div>
-                </div>
-
+            <!-- Legend -->
+            <div class="legend">
+                <span class="legend-title">LEGEND</span>
+                <div class="legend-item"><div class="legend-dot" style="background:#3b82f6;"></div> Process Step</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#cbd5e1;"></div> Data Transfer</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#dcfce7; border:1px solid #bbf7d0;"></div> Current Status</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#fef9c3; border:1px solid #fde68a;"></div> Planned</div>
             </div>
         </div>
     </div>
