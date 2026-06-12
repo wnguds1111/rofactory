@@ -14,7 +14,7 @@
         .top-bar .ver { font-size: 10px; background: rgba(59,130,246,0.7); color: #fff; padding: 3px 10px; border-radius: 12px; font-weight: 800; }
         .btn-home { text-decoration: none; color: #94a3b8; font-weight: 700; font-size: 12px; padding: 6px 14px; border: 1px solid #334155; border-radius: 6px; transition: 0.2s; }
         .btn-home:hover { color: #fff; border-color: #64748b; }
-        .wrap { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+        .wrap { max-width: 1400px; margin: 0 auto; padding: 40px 24px; }
         .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1d4ed8 100%); border-radius: 20px; padding: 40px 48px; margin-bottom: 36px; color: white; }
         .hero h2 { font-size: 24px; font-weight: 900; margin-bottom: 8px; }
         .hero p { font-size: 14px; color: #93c5fd; font-weight: 600; }
@@ -22,33 +22,33 @@
         /* === FLOW DIAGRAM === */
         .flow-diagram { background: #fff; border-radius: 16px; padding: 36px; border: 1px solid #e2e8f0; box-shadow: 0 1px 8px rgba(0,0,0,0.04); overflow-x: auto; }
         .flow-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .flow-header .num { font-size: 11px; font-weight: 800; color: #fff; background: #3b82f6; width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
-        .flow-header h3 { font-size: 17px; font-weight: 900; color: #0f172a; }
-        .flow-sub { font-size: 13px; color: #64748b; font-weight: 500; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9; }
+        .flow-header .num { font-size: 12px; font-weight: 800; color: #fff; background: #3b82f6; width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+        .flow-header h3 { font-size: 19px; font-weight: 900; color: #0f172a; }
+        .flow-sub { font-size: 14px; color: #64748b; font-weight: 500; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9; }
 
         /* Swim Lane Table */
         .swim { min-width: 860px; border-collapse: collapse; width: 100%; }
         
         /* Lane labels (left column) */
-        .swim-label { width: 120px; min-width: 120px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 0; vertical-align: middle; text-align: center; }
-        .swim-label-inner { padding: 14px 10px; }
-        .swim-label-name { font-size: 12px; font-weight: 900; color: #0f172a; line-height: 1.3; }
-        .swim-label-sub { font-size: 10px; font-weight: 600; color: #94a3b8; margin-top: 2px; }
+        .swim-label { width: 140px; min-width: 140px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 0; vertical-align: middle; text-align: center; }
+        .swim-label-inner { padding: 16px 12px; }
+        .swim-label-name { font-size: 14px; font-weight: 900; color: #0f172a; line-height: 1.3; }
+        .swim-label-sub { font-size: 11px; font-weight: 600; color: #94a3b8; margin-top: 3px; }
 
         /* Lane body (right area) */
-        .swim-body { border: 1px solid #e2e8f0; padding: 20px 24px; vertical-align: middle; background: #fff; position: relative; min-height: 90px; }
+        .swim-body { border: 1px solid #e2e8f0; padding: 22px 28px; vertical-align: middle; background: #fff; position: relative; min-height: 100px; }
         .swim-body:hover { background: #fafbff; }
 
         /* Flow nodes */
-        .f-node { display: inline-flex; align-items: flex-start; gap: 12px; background: #fff; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 14px 18px; max-width: 520px; transition: 0.2s; position: relative; }
+        .f-node { display: inline-flex; align-items: flex-start; gap: 14px; background: #fff; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 16px 22px; max-width: 680px; transition: 0.2s; position: relative; }
         .f-node:hover { border-color: #93c5fd; box-shadow: 0 2px 12px rgba(59,130,246,0.1); }
-        .f-node-num { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: #3b82f6; color: #fff; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+        .f-node-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: #3b82f6; color: #fff; font-size: 14px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
         .f-node-content { flex: 1; min-width: 0; }
-        .f-node-title { font-size: 13px; font-weight: 800; color: #0f172a; margin-bottom: 4px; line-height: 1.4; }
-        .f-node-desc { font-size: 12px; font-weight: 500; color: #64748b; line-height: 1.55; }
-        .f-node-tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
-        .f-tag { display: inline-block; background: #f1f5f9; border: 1px solid #e2e8f0; color: #475569; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
-        .f-note { font-size: 10px; color: #94a3b8; font-weight: 600; font-style: italic; margin-top: 6px; }
+        .f-node-title { font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 5px; line-height: 1.4; }
+        .f-node-desc { font-size: 13.5px; font-weight: 500; color: #64748b; line-height: 1.6; }
+        .f-node-tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+        .f-tag { display: inline-block; background: #f1f5f9; border: 1px solid #e2e8f0; color: #475569; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; }
+        .f-note { font-size: 11px; color: #94a3b8; font-weight: 600; font-style: italic; margin-top: 8px; }
 
         /* Connector arrows between rows */
         .swim-connector { border: none; height: 0; }
@@ -57,17 +57,17 @@
         .conn-arrow { position: absolute; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0; }
         .conn-line { width: 2px; height: 12px; background: #94a3b8; }
         .conn-head { font-size: 10px; color: #94a3b8; font-weight: 900; line-height: 1; }
-        .conn-label { position: absolute; left: calc(50% + 14px); top: 50%; transform: translateY(-50%); font-size: 9px; font-weight: 700; color: #94a3b8; white-space: nowrap; background: #fff; padding: 0 4px; }
+        .conn-label { position: absolute; left: calc(50% + 14px); top: 50%; transform: translateY(-50%); font-size: 11px; font-weight: 700; color: #94a3b8; white-space: nowrap; background: #fff; padding: 0 4px; }
 
         /* Status badges */
-        .f-badge { display: inline-block; font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 20px; margin-top: 6px; }
+        .f-badge { display: inline-block; font-size: 12px; font-weight: 800; padding: 4px 12px; border-radius: 20px; margin-top: 8px; }
         .f-badge-free { background: #dcfce7; color: #166534; }
         .f-badge-plan { background: #fef9c3; color: #854d0e; }
 
         /* Legend */
-        .legend { margin-top: 24px; padding: 16px 20px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
-        .legend-title { font-size: 11px; font-weight: 800; color: #475569; }
-        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: #64748b; }
+        .legend { margin-top: 28px; padding: 18px 24px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; display: flex; gap: 28px; flex-wrap: wrap; align-items: center; }
+        .legend-title { font-size: 12px; font-weight: 800; color: #475569; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #64748b; }
         .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
         @media (max-width: 900px) {
@@ -206,7 +206,7 @@
                 <tr>
                     <td class="swim-label">
                         <div class="swim-label-inner">
-                            <div class="swim-label-name">Admin</div>
+                            <div class="swim-label-name">Web</div>
                             <div class="swim-label-sub">백오피스</div>
                         </div>
                     </td>
@@ -241,8 +241,8 @@
                 <tr>
                     <td class="swim-label">
                         <div class="swim-label-inner">
-                            <div class="swim-label-name">Market</div>
-                            <div class="swim-label-sub">웹 스토어</div>
+                            <div class="swim-label-name">Web</div>
+                            <div class="swim-label-sub">마켓</div>
                         </div>
                     </td>
                     <td class="swim-body">
