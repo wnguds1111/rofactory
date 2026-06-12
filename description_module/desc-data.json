@@ -425,7 +425,7 @@
           "label": "3",
           "depth": 0,
           "title": "NEXT",
-          "sub": "- 유효성 체크 후 필수 값 미 입력 시 Alert(\"Please upload all files.\") \n- 정상 등록 시 등록 완료 페이지 이동\n- 파일 검증 후 검증되지 않은 파일 등록 시 Alert(\"This file cannot be uploaded.\") 노출 ",
+          "sub": "- 유효성 체크 후 필수 값 미 입력 시 Alert(\"Please upload all files.\") \n- 약관 미동의 시 체크박스 포커스\n- 정상 등록 시 등록 완료 페이지 이동\n- 파일 검증 후 검증되지 않은 파일 등록 시 Alert(\"This file cannot be uploaded.\") 노출 ",
           "top": 817.5,
           "left": 1720,
           "selector": ""
@@ -982,6 +982,34 @@
           "sub": "- 클릭 시 발자국 상세 보기 페이지 이동",
           "top": 359.5,
           "left": 1441,
+          "selector": ""
+        }
+      ]
+    },
+    "2-fail": {
+      "title": "마켓 > 결제실패",
+      "overview": "",
+      "marks": [
+        {
+          "id": "id_1780559996477",
+          "num": 1,
+          "label": "1",
+          "depth": 0,
+          "title": "마켓 이동",
+          "sub": "- 클릭 시 마켓 리스트 페이지 이동",
+          "top": 572.5,
+          "left": 686,
+          "selector": ""
+        },
+        {
+          "id": "id_1780560011399",
+          "num": 2,
+          "label": "2",
+          "depth": 0,
+          "title": "결제 재시도",
+          "sub": "- 클릭 시 해당 상품 상세 페이지 이동",
+          "top": 572.5,
+          "left": 950,
           "selector": ""
         }
       ]
