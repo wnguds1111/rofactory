@@ -129,116 +129,143 @@
             <h2>🔄 시스템 플로우차트 (Flow Map)</h2>
             <p>RO FACTORY 클라이언트 ↔ 웹 ↔ 어드민 시스템 서비스 전체 플로우</p>
         </div>
-            <!-- FLOW 1. Data Flow -->
-            <div class="section">
+
+            <!-- FLOW 1. Data Flow — Swim Lane Diagram -->
+            <div class="section" style="overflow-x:auto;">
                 <div class="section-title"><span class="num">1</span> 클라이언트 ↔ 웹 ↔ 어드민 연동 데이터 플로우</div>
-                <div style="font-size:14px; color:#64748b; margin-bottom:25px; font-weight:600;">클라이언트와 웹단 사이에서 에셋 파일이 어떻게 교환되고 적용되는지 디테일한 흐름을 나타냅니다.</div>
+                <div style="font-size:14px; color:#64748b; margin-bottom:30px; font-weight:600;">클라이언트 편집툴에서 시작하여, 웹 포털을 거쳐, 어드민에서 검수·게시하기까지의 전체 데이터 흐름입니다.</div>
 
-                <div class="flow-vertical">
-                    <!-- Step 1 -->
-                    <div class="d-card d-card-border-client">
-                        <span class="role-badge role-client">1. 클라이언트(툴)</span>
-                        <div class="d-title">발자국 생성</div>
-                        <div class="d-desc">UGC 툴을 이용하여 스킨/발자국 제작.<br>핵심 결과물인 <strong>.foot 파일</strong>과 미리보기 <strong>영상(MP4)</strong>을 추출합니다.<br><span style="color:#b45309;font-weight:700;font-size:11px;">* 영상은 500kb 이하로 추출</span></div>
-                    </div>
-                    
-                    <div class="arr-down"><span>⬇</span></div>
+                <!-- ====== SWIM LANE DIAGRAM ====== -->
+                <style>
+                    .swim-wrap { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; min-width:860px; position:relative; }
+                    .lane { position:relative; }
+                    .lane-head { text-align:center; padding:16px 12px; border-radius:14px 14px 0 0; font-size:13px; font-weight:900; letter-spacing:1px; }
+                    .lane-body { padding:16px 14px; border-left:2.5px dashed; border-right:2.5px dashed; min-height:100%; display:flex; flex-direction:column; align-items:center; gap:0; }
+                    .lane-client .lane-head { background:linear-gradient(135deg,#4338ca,#6366f1); color:#fff; }
+                    .lane-client .lane-body { border-color:#c7d2fe; background:#f5f3ff; }
+                    .lane-web .lane-head { background:linear-gradient(135deg,#15803d,#22c55e); color:#fff; }
+                    .lane-web .lane-body { border-color:#bbf7d0; background:#f0fdf4; }
+                    .lane-admin .lane-head { background:linear-gradient(135deg,#b91c1c,#ef4444); color:#fff; }
+                    .lane-admin .lane-body { border-color:#fecaca; background:#fef2f2; }
+                    .s-card { background:#fff; border-radius:14px; padding:18px 16px; border:2px solid #e2e8f0; width:100%; box-shadow:0 2px 10px rgba(0,0,0,0.04); transition:all 0.25s; }
+                    .s-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.08); }
+                    .s-card .s-step { font-size:10px; font-weight:900; color:#fff; background:#3b82f6; display:inline-block; padding:3px 10px; border-radius:20px; margin-bottom:8px; letter-spacing:1px; }
+                    .s-card .s-title { font-size:15px; font-weight:900; color:#0f172a; margin-bottom:6px; line-height:1.35; }
+                    .s-card .s-desc { font-size:12.5px; font-weight:500; color:#64748b; line-height:1.55; }
+                    .s-card .s-file { display:inline-block; background:#f1f5f9; border:1px solid #e2e8f0; color:#334155; font-size:11px; font-weight:800; padding:3px 8px; border-radius:6px; margin-top:6px; margin-right:4px; }
+                    .s-arrow { text-align:center; padding:8px 0; color:#cbd5e1; font-size:18px; font-weight:900; }
+                    .s-empty { min-height:60px; }
+                    .branch-y { display:inline-block; background:#dcfce7; color:#15803d; font-size:11px; font-weight:800; padding:4px 12px; border-radius:20px; border:1.5px solid #bbf7d0; }
+                    .branch-n { display:inline-block; background:#fee2e2; color:#b91c1c; font-size:11px; font-weight:800; padding:4px 12px; border-radius:20px; border:1.5px solid #fecaca; }
+                    @media (max-width:900px) {
+                        .swim-wrap { min-width:0; grid-template-columns:1fr; }
+                        .lane-body { border-left:none; border-right:none; border-bottom:2.5px dashed; }
+                    }
+                </style>
 
-                    <!-- Step 2 -->
-                    <div class="d-card d-card-border-web">
-                        <span class="role-badge role-web">2. 웹 (프론트/스튜디오)</span>
-                        <div class="d-title">마이 스튜디오 파일 업로드</div>
-                        <div class="d-desc">웹 발자국 등록 폼을 통해 <strong>.foot 파일, 미리보기 영상, 썸네일 이미지, 작품명, 유효기간, 타입 등록</strong><br><span style="color:#b45309;font-weight:700;font-size:11px;">* 로그인 필수</span></div>
-                    </div>
-                    
-                    <div class="arr-down"><span>⬇</span></div>
-
-                    <!-- Step 3 -->
-                    <div class="d-card d-card-border-admin">
-                        <span class="role-badge role-admin">3. 어드민 (웹)</span>
-                        <div class="d-title">발자국 일괄 다운로드 준비</div>
-                        <div class="d-desc">웹 서버 스토리지의 유저 에셋을 <code>작품_유저ID_작품명.foot</code> 압축 파일로 다운로드.</div>
-                    </div>
-                    
-                    <div class="arr-down"><span>⬇</span></div>
-
-                    <!-- Step 4 -->
-                    <div class="d-card d-card-border-server">
-                        <span class="role-badge role-server">4. 스튜디오</span>
-                        <div class="d-title">에셋 무결성 검증</div>
-                        <div class="d-desc">.foot 파일의 <strong>무결성 체크</strong> 후 인게임 게시될 날짜와 작품 ID를 CSV 형태로 어드민 갱신.</div>
-                    </div>
-
-                    <!-- Y/N Branch Split Visual (Desktop) -->
-                    <div class="hidden md:block relative w-full h-[45px] my-2">
-                        <!-- Center stem -->
-                        <div class="absolute top-0 left-1/2 w-[2.5px] h-[15px] bg-slate-200 transform -translate-x-1/2"></div>
-                        <!-- Horizontal bar -->
-                        <div class="absolute top-[15px] left-[25%] right-[25%] h-[2.5px] bg-slate-200"></div>
-                        
-                        <!-- Left drop (Y) -->
-                        <div class="absolute top-[15px] left-[25%] w-[2.5px] h-[30px] bg-slate-200 transform -translate-x-1/2"></div>
-                        <div class="absolute bottom-[-15px] left-[25%] transform -translate-x-1/2 text-slate-300 text-[16px] font-extrabold z-10">▼</div>
-                        <div class="absolute top-[21px] left-[25%] transform -translate-x-1/2 -ml-[45px] text-xs font-extrabold text-[#10b981] bg-emerald-50 px-2 py-[2px] rounded border border-emerald-100 z-10">Y (통과)</div>
-                        
-                        <!-- Right drop (N) -->
-                        <div class="absolute top-[15px] right-[25%] w-[2.5px] h-[30px] bg-slate-200 transform translate-x-1/2"></div>
-                        <div class="absolute bottom-[-15px] right-[25%] transform translate-x-1/2 text-slate-300 text-[16px] font-extrabold z-10">▼</div>
-                        <div class="absolute top-[21px] right-[25%] transform translate-x-1/2 ml-[45px] text-xs font-extrabold text-[#ef4444] bg-red-50 px-2 py-[2px] rounded border border-red-100 z-10">N (실패)</div>
-                    </div>
-                    
-                    <!-- Split Columns -->
-                    <div class="w-full flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-12 mt-2 md:mt-4 max-w-full justify-center">
-                        
-                        <!-- Y Branch Content (Left) -->
-                        <div class="flex-1 flex flex-col items-center order-1 w-full max-w-[500px] mx-auto">
-                            <!-- Mobile Y Indicator -->
-                            <div class="block md:hidden arr-down mb-2 mt-4">
-                                <span class="text-[13px] font-extrabold text-[#10b981] bg-emerald-50 px-4 py-1.5 rounded-full border border-emerald-100 shadow-sm">Y (통과 시) ⬇</span>
+                <div class="swim-wrap">
+                    <!-- CLIENT LANE -->
+                    <div class="lane lane-client">
+                        <div class="lane-head">🖥️ 클라이언트 (편집툴)</div>
+                        <div class="lane-body">
+                            <div class="s-card" style="border-color:#c7d2fe;">
+                                <span class="s-step" style="background:#6366f1;">STEP 1</span>
+                                <div class="s-title">발자국 에셋 제작</div>
+                                <div class="s-desc">전용 UGC 편집툴(데스크톱)에서 발자국 스킨 제작 후 파일 추출</div>
+                                <div style="margin-top:8px;">
+                                    <span class="s-file">📄 .foot (원본)</span>
+                                    <span class="s-file">🎬 .mp4 (미리보기)</span>
+                                    <span class="s-file">🖼️ .png (썸네일)</span>
+                                </div>
                             </div>
+                            <div class="s-arrow">⬇</div>
+                            <div class="s-empty"></div>
+                        </div>
+                    </div>
 
-                            <!-- Step 5 -->
-                            <div class="d-card d-card-border-admin w-full">
-                                <span class="role-badge role-admin">5. 어드민 (웹)</span>
-                                <div class="d-title">엑셀 변환 결과 일괄 반영</div>
-                                <div class="d-desc">업로드된 게시될 날짜에 <strong>판매 시작일 도달 시 실시간 마켓 노출.</strong></div>
+                    <!-- WEB LANE -->
+                    <div class="lane lane-web">
+                        <div class="lane-head">🌐 웹 (프론트 포털)</div>
+                        <div class="lane-body">
+                            <div class="s-empty" style="min-height:20px;"></div>
+                            <div class="s-card" style="border-color:#bbf7d0;">
+                                <span class="s-step" style="background:#22c55e;">STEP 2</span>
+                                <div class="s-title">웹 등록 폼에서 업로드</div>
+                                <div class="s-desc">로그인 후 작품 등록 폼에서 파일 업로드 + 메타데이터(작품명, 가격, 태그, 유효기간) 기입</div>
+                                <div style="margin-top:6px; font-size:11px; color:#b45309; font-weight:700;">* PC 전용 · 로그인 필수 · 주간 100개 제한</div>
                             </div>
-                            
-                            <div class="arr-down"><span>⬇</span></div>
-
-                            <!-- Step 6 -->
-                            <div class="d-card d-card-border-web w-full">
-                                <span class="role-badge role-web">6. 마켓 (웹)</span>
-                                <div class="d-title">발자국 판매 시작</div>
-                                <div class="d-desc"><strong>유저 결제 발생 시 IR CORE 통해 인게임 아이템 지급.</strong></div>
+                            <div class="s-arrow">⬇</div>
+                            <div class="s-card" style="border-color:#bbf7d0;">
+                                <span class="s-step" style="background:#22c55e;">STEP 5</span>
+                                <div class="s-title">마켓 판매 개시</div>
+                                <div class="s-desc">판매 시작일 도달 시 마켓 스토어에 자동 노출. 유저 KP 결제 → 인게임 아이템 지급</div>
+                                <div style="margin-top:6px;">
+                                    <span class="branch-y">✓ 판매중</span>
+                                </div>
                             </div>
-                            
-                            <div class="arr-down"><span>⬇</span></div>
-
-                            <!-- Step 7 -->
-                            <div class="d-card d-card-border-web w-full">
-                                <span class="role-badge role-web">7. 마켓(웹) / 인게임</span>
-                                <div class="d-title">작품 만료</div>
-                                <div class="d-desc">유효기간이 지난 작품은 플랫폼 마켓 및 <strong>인게임에서 삭제</strong> 처리.</div>
+                            <div class="s-arrow">⬇</div>
+                            <div class="s-card" style="border-color:#e2e8f0;">
+                                <span class="s-step" style="background:#64748b;">STEP 6</span>
+                                <div class="s-title">작품 만료</div>
+                                <div class="s-desc">유효기간 경과 시 마켓 노출 중단 및 인게임 삭제 처리</div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- N Branch Content (Right) -->
-                        <div class="flex-1 flex flex-col items-center order-2 w-full max-w-[500px] mx-auto">
-                            <!-- Mobile N Indicator -->
-                            <div class="block md:hidden arr-down mb-2 mt-8 md:mt-2">
-                                <span class="text-[13px] font-extrabold text-[#ef4444] bg-red-50 px-4 py-1.5 rounded-full border border-red-100 shadow-sm">N (무결성 실패 시) ⬇</span>
+                    <!-- ADMIN LANE -->
+                    <div class="lane lane-admin">
+                        <div class="lane-head">⚙️ 어드민 (백오피스)</div>
+                        <div class="lane-body">
+                            <div class="s-empty" style="min-height:20px;"></div>
+                            <div class="s-card" style="border-color:#fecaca;">
+                                <span class="s-step" style="background:#ef4444;">STEP 3</span>
+                                <div class="s-title">에셋 일괄 다운로드</div>
+                                <div class="s-desc">웹에 업로드된 .foot 파일을 일괄 다운로드하여 스튜디오(클라이언트)에서 무결성 검증</div>
+                                <div style="margin-top:6px;">
+                                    <span class="s-file">📦 작품_유저ID.zip</span>
+                                </div>
                             </div>
-
-                            <!-- Step 8 -->
-                            <div class="d-card d-card-border-server w-full h-full md:h-auto">
-                                <span class="role-badge role-server">8. 스튜디오 (예외)</span>
-                                <div class="d-title">파일 변환 실패</div>
-                                <div class="d-desc">적합하지 않은 파일 형식일 경우 <strong>변환 실패 처리</strong>하여 어드민(웹)에 안내 및 업데이트.</div>
+                            <div class="s-arrow">⬇</div>
+                            <div class="s-card" style="border-color:#fecaca;">
+                                <span class="s-step" style="background:#ef4444;">STEP 4</span>
+                                <div class="s-title">검수 결과 엑셀 반영</div>
+                                <div class="s-desc">무결성 검증 통과/실패 결과를 CSV 엑셀로 일괄 업데이트</div>
+                                <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+                                    <span class="branch-y">Y → 판매 업데이트</span>
+                                    <span class="branch-n">N → 변환 실패 처리</span>
+                                </div>
                             </div>
-                            
                         </div>
+                    </div>
+                </div>
 
+                <!-- Cross-lane flow summary -->
+                <div style="margin-top:28px; background:linear-gradient(135deg,#f8fafc,#f1f5f9); border:2px solid #e2e8f0; border-radius:16px; padding:24px 28px;">
+                    <div style="font-size:14px; font-weight:900; color:#0f172a; margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+                        🔀 데이터 이동 경로 요약
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                            <span style="background:#e0e7ff; color:#4338ca; font-size:12px; font-weight:800; padding:5px 12px; border-radius:8px; white-space:nowrap;">🖥️ 클라이언트</span>
+                            <span style="color:#94a3b8; font-weight:900;">→</span>
+                            <span style="font-size:12px; color:#64748b; font-weight:700;">.foot + .mp4 + .png 파일 전달</span>
+                            <span style="color:#94a3b8; font-weight:900;">→</span>
+                            <span style="background:#dcfce7; color:#15803d; font-size:12px; font-weight:800; padding:5px 12px; border-radius:8px; white-space:nowrap;">🌐 웹 포털</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                            <span style="background:#dcfce7; color:#15803d; font-size:12px; font-weight:800; padding:5px 12px; border-radius:8px; white-space:nowrap;">🌐 웹 포털</span>
+                            <span style="color:#94a3b8; font-weight:900;">→</span>
+                            <span style="font-size:12px; color:#64748b; font-weight:700;">등록 데이터(S3) 전달</span>
+                            <span style="color:#94a3b8; font-weight:900;">→</span>
+                            <span style="background:#fee2e2; color:#b91c1c; font-size:12px; font-weight:800; padding:5px 12px; border-radius:8px; white-space:nowrap;">⚙️ 어드민</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                            <span style="background:#fee2e2; color:#b91c1c; font-size:12px; font-weight:800; padding:5px 12px; border-radius:8px; white-space:nowrap;">⚙️ 어드민</span>
+                            <span style="color:#94a3b8; font-weight:900;">→</span>
+                            <span style="font-size:12px; color:#64748b; font-weight:700;">검수 결과 CSV 업데이트 (판매일 / 실패 처리)</span>
+                            <span style="color:#94a3b8; font-weight:900;">→</span>
+                            <span style="background:#dcfce7; color:#15803d; font-size:12px; font-weight:800; padding:5px 12px; border-radius:8px; white-space:nowrap;">🌐 웹 마켓</span>
+                        </div>
                     </div>
                 </div>
             </div>
