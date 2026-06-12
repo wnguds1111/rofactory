@@ -36,12 +36,12 @@
         .swim-label-sub { font-size: 11px; font-weight: 600; color: #94a3b8; margin-top: 3px; }
 
         /* Lane body (right area) */
-        .swim-body { border: 1px solid #e2e8f0; padding: 22px 28px; vertical-align: middle; background: #fff; position: relative; min-height: 100px; }
+        .swim-body { border: 1px solid #e2e8f0; padding: 22px 28px; vertical-align: middle; background: #fff; position: relative; min-height: 100px; border-left: 3px solid #3b82f6; }
         .swim-body:hover { background: #fafbff; }
 
         /* Flow nodes */
-        .f-node { display: inline-flex; align-items: flex-start; gap: 14px; background: #fff; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 16px 22px; max-width: 680px; transition: 0.2s; position: relative; }
-        .f-node:hover { border-color: #93c5fd; box-shadow: 0 2px 12px rgba(59,130,246,0.1); }
+        .f-node { display: inline-flex; align-items: flex-start; gap: 14px; padding: 4px 0; max-width: 680px; position: relative; }
+        .f-node:hover .f-node-title { color: #1d4ed8; }
         .f-node-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: #3b82f6; color: #fff; font-size: 14px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
         .f-node-content { flex: 1; min-width: 0; }
         .f-node-title { font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 5px; line-height: 1.4; }
@@ -52,12 +52,12 @@
 
         /* Connector arrows between rows */
         .swim-connector { border: none; height: 0; }
-        .swim-connector td { border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; padding: 0; height: 32px; position: relative; background: #fff; }
+        .swim-connector td { border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; padding: 0; height: 28px; position: relative; background: #fff; }
         .swim-connector .swim-label { background: #f8fafc; border: 1px solid #e2e8f0; }
-        .conn-arrow { position: absolute; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0; }
-        .conn-line { width: 2px; height: 12px; background: #94a3b8; }
+        .conn-arrow { position: absolute; left: 42px; display: flex; flex-direction: column; align-items: center; gap: 0; }
+        .conn-line { width: 2px; height: 10px; background: #94a3b8; }
         .conn-head { font-size: 10px; color: #94a3b8; font-weight: 900; line-height: 1; }
-        .conn-label { position: absolute; left: calc(50% + 14px); top: 50%; transform: translateY(-50%); font-size: 11px; font-weight: 700; color: #94a3b8; white-space: nowrap; background: #fff; padding: 0 4px; }
+        .conn-label { position: absolute; left: 60px; top: 50%; transform: translateY(-50%); font-size: 11px; font-weight: 700; color: #94a3b8; white-space: nowrap; background: #fff; padding: 0 4px; }
 
         /* Status badges */
         .f-badge { display: inline-block; font-size: 12px; font-weight: 800; padding: 4px 12px; border-radius: 20px; margin-top: 8px; }
@@ -65,10 +65,6 @@
         .f-badge-plan { background: #fef9c3; color: #854d0e; }
 
         /* Legend */
-        .legend { margin-top: 28px; padding: 18px 24px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; display: flex; gap: 28px; flex-wrap: wrap; align-items: center; }
-        .legend-title { font-size: 12px; font-weight: 800; color: #475569; }
-        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #64748b; }
-        .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
         @media (max-width: 900px) {
             .wrap { padding: 20px 12px; }
@@ -126,12 +122,12 @@
                 <!-- CONNECTOR 1→2 -->
                 <tr class="swim-connector">
                     <td class="swim-label"></td>
-                    <td style="border-left:1px solid #e2e8f0; border-right:1px solid #e2e8f0; background:#fff; position:relative;">
-                        <div class="conn-arrow" style="left:80px;">
+                    <td style="border-left:3px solid #3b82f6; border-right:1px solid #e2e8f0; background:#fff; position:relative;">
+                        <div class="conn-arrow">
                             <div class="conn-line"></div>
                             <div class="conn-head">▼</div>
                         </div>
-                        <div class="conn-label" style="left:100px;">.foot + .mp4 + .png + meta 전달</div>
+                        <div class="conn-label">.foot + .mp4 + .png + meta 전달</div>
                     </td>
                 </tr>
 
@@ -158,12 +154,12 @@
                 <!-- CONNECTOR 2→3 -->
                 <tr class="swim-connector">
                     <td class="swim-label"></td>
-                    <td style="border-left:1px solid #e2e8f0; border-right:1px solid #e2e8f0; background:#fff; position:relative;">
-                        <div class="conn-arrow" style="left:80px;">
+                    <td style="border-left:3px solid #3b82f6; border-right:1px solid #e2e8f0; background:#fff; position:relative;">
+                        <div class="conn-arrow">
                             <div class="conn-line"></div>
                             <div class="conn-head">▼</div>
                         </div>
-                        <div class="conn-label" style="left:100px;">S3 스토리지 적재 완료</div>
+                        <div class="conn-label">S3 스토리지 적재 완료</div>
                     </td>
                 </tr>
 
@@ -193,12 +189,12 @@
                 <!-- CONNECTOR 3→4 -->
                 <tr class="swim-connector">
                     <td class="swim-label"></td>
-                    <td style="border-left:1px solid #e2e8f0; border-right:1px solid #e2e8f0; background:#fff; position:relative;">
-                        <div class="conn-arrow" style="left:80px;">
+                    <td style="border-left:3px solid #3b82f6; border-right:1px solid #e2e8f0; background:#fff; position:relative;">
+                        <div class="conn-arrow">
                             <div class="conn-line"></div>
                             <div class="conn-head">▼</div>
                         </div>
-                        <div class="conn-label" style="left:100px;">아이템 ID + 검수 결과 전달</div>
+                        <div class="conn-label">아이템 ID + 검수 결과 전달</div>
                     </td>
                 </tr>
 
@@ -228,12 +224,12 @@
                 <!-- CONNECTOR 4→5 -->
                 <tr class="swim-connector">
                     <td class="swim-label"></td>
-                    <td style="border-left:1px solid #e2e8f0; border-right:1px solid #e2e8f0; background:#fff; position:relative;">
-                        <div class="conn-arrow" style="left:80px;">
+                    <td style="border-left:3px solid #3b82f6; border-right:1px solid #e2e8f0; background:#fff; position:relative;">
+                        <div class="conn-arrow">
                             <div class="conn-line"></div>
                             <div class="conn-head">▼</div>
                         </div>
-                        <div class="conn-label" style="left:100px;">판매 시작일 도달 시 자동 노출</div>
+                        <div class="conn-label">판매 시작일 도달 시 자동 노출</div>
                     </td>
                 </tr>
 
@@ -261,14 +257,6 @@
                 </tr>
             </table>
 
-            <!-- Legend -->
-            <div class="legend">
-                <span class="legend-title">LEGEND</span>
-                <div class="legend-item"><div class="legend-dot" style="background:#3b82f6;"></div> Process Step</div>
-                <div class="legend-item"><div class="legend-dot" style="background:#cbd5e1;"></div> Data Transfer</div>
-                <div class="legend-item"><div class="legend-dot" style="background:#dcfce7; border:1px solid #bbf7d0;"></div> Current Status</div>
-                <div class="legend-item"><div class="legend-dot" style="background:#fef9c3; border:1px solid #fde68a;"></div> Planned</div>
-            </div>
         </div>
     </div>
 
