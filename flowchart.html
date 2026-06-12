@@ -8,54 +8,56 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Pretendard', 'Poppins', sans-serif; background: #f8fafc; color: #1e293b; min-height: 100vh; }
+        body { font-family: 'Pretendard', 'Poppins', sans-serif; background: #f1f5f9; color: #1e293b; min-height: 100vh; }
 
-        /* Top Bar */
+        /* Sticky Header */
         .top-bar { background: #0f172a; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-        .top-bar h1 { font-size: 14px; font-weight: 800; color: #e2e8f0; letter-spacing: 0.5px; }
-        .top-bar .ver { font-size: 10px; background: rgba(148,163,184,0.2); color: #94a3b8; padding: 3px 10px; border-radius: 4px; font-weight: 700; margin-left: 10px; }
-        .btn-home { text-decoration: none; color: #64748b; font-weight: 700; font-size: 12px; padding: 6px 14px; border: 1px solid #334155; border-radius: 6px; transition: 0.2s; }
-        .btn-home:hover { color: #e2e8f0; border-color: #475569; }
+        .top-bar h1 { font-size: 16px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 10px; margin: 0; }
+        .top-bar .ver { font-size: 10px; background: rgba(59, 130, 246, 0.7); color: #fff; padding: 3px 10px; border-radius: 12px; font-weight: 800; }
+        .btn-home { text-decoration: none; color: #94a3b8; font-weight: 700; font-size: 12px; padding: 6px 14px; border: 1px solid #334155; border-radius: 6px; transition: 0.2s; }
+        .btn-home:hover { color: #fff; border-color: #64748b; }
 
         /* Layout */
-        .wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        .wrap { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
 
         /* Hero */
-        .hero { background: #0f172a; border-radius: 12px; padding: 32px 40px; margin-bottom: 32px; color: #e2e8f0; }
-        .hero h2 { font-size: 20px; font-weight: 800; margin-bottom: 4px; color: #fff; }
-        .hero p { font-size: 13px; color: #64748b; font-weight: 500; }
+        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1d4ed8 100%); border-radius: 20px; padding: 40px 48px; margin-bottom: 36px; color: white; position: relative; overflow: hidden; }
+        .hero h2 { font-size: 24px; font-weight: 900; margin-bottom: 8px; }
+        .hero p { font-size: 14px; color: #93c5fd; font-weight: 600; margin: 0; }
 
         /* Section */
-        .section { background: #fff; border-radius: 12px; padding: 32px 36px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
-        .section-title { font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
-        .section-sub { font-size: 13px; color: #64748b; font-weight: 500; margin-bottom: 28px; line-height: 1.6; }
+        .section { background: #fff; border-radius: 16px; padding: 32px 36px; margin-bottom: 20px; box-shadow: 0 1px 8px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; }
+        .section-title { font-size: 17px; font-weight: 900; color: #0f172a; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .section-title .num { font-size: 11px; font-weight: 800; color: #fff; background: #3b82f6; width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .section-sub { font-size: 13px; color: #64748b; font-weight: 500; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9; line-height: 1.6; }
 
         /* Flow */
-        .pf { display: flex; flex-direction: column; align-items: center; max-width: 600px; margin: 0 auto; gap: 0; }
-        .pf-card { width: 100%; background: #fff; border-radius: 8px; padding: 20px 24px; border: 1.5px solid #e2e8f0; position: relative; transition: box-shadow 0.2s; }
-        .pf-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
-        .pf-step { position: absolute; top: -11px; left: 22px; width: 22px; height: 22px; border-radius: 50%; background: #1e293b; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: #fff; }
-        .pf-role { display: inline-block; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 3px; background: #f1f5f9; color: #475569; letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase; }
-        .pf-h { font-size: 14px; font-weight: 800; color: #0f172a; margin-bottom: 4px; line-height: 1.4; }
-        .pf-p { font-size: 12.5px; font-weight: 500; color: #64748b; line-height: 1.65; }
-        .pf-tag { display: inline-block; background: #f8fafc; border: 1px solid #e2e8f0; color: #334155; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 3px; margin-top: 6px; margin-right: 3px; }
-        .pf-note { font-size: 11px; color: #94a3b8; font-weight: 600; margin-top: 6px; font-style: italic; }
+        .pf { display: flex; flex-direction: column; align-items: center; max-width: 620px; margin: 0 auto; gap: 0; }
+        .pf-card { width: 100%; background: #fff; border-radius: 12px; padding: 22px 26px; border: 1.5px solid #e2e8f0; position: relative; transition: 0.2s; }
+        .pf-card:hover { border-color: #93c5fd; box-shadow: 0 4px 16px rgba(59,130,246,0.08); transform: translateY(-2px); }
+        .pf-step { position: absolute; top: -12px; left: 24px; width: 24px; height: 24px; border-radius: 6px; background: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; color: #fff; }
+        .pf-role { display: inline-block; font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 6px; background: #eff6ff; color: #1d4ed8; letter-spacing: 0.3px; margin-bottom: 8px; }
+        .pf-h { font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 5px; line-height: 1.4; }
+        .pf-p { font-size: 13px; font-weight: 500; color: #64748b; line-height: 1.65; }
+        .pf-tag { display: inline-block; background: #f8fafc; border: 1px solid #e2e8f0; color: #334155; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-top: 6px; margin-right: 4px; }
+        .pf-note { font-size: 11px; color: #94a3b8; font-weight: 600; margin-top: 8px; font-style: italic; }
 
         /* Arrow */
-        .pf-arrow { display: flex; flex-direction: column; align-items: center; padding: 3px 0; gap: 1px; }
-        .pf-arrow-bar { width: 1px; height: 16px; background: #cbd5e1; }
-        .pf-arrow-tip { color: #94a3b8; font-size: 8px; font-weight: 900; }
-        .pf-arrow-lbl { font-size: 9px; font-weight: 600; color: #94a3b8; letter-spacing: 0.2px; }
+        .pf-arrow { display: flex; flex-direction: column; align-items: center; padding: 4px 0; gap: 1px; }
+        .pf-arrow-bar { width: 2px; height: 18px; background: #cbd5e1; border-radius: 1px; }
+        .pf-arrow-tip { color: #94a3b8; font-size: 10px; font-weight: 900; }
+        .pf-arrow-lbl { font-size: 10px; font-weight: 700; color: #94a3b8; }
 
         /* Badges */
-        .pf-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 3px; }
-        .pf-badge-g { background: #f0fdf4; color: #166534; border: 1px solid #dcfce7; }
-        .pf-badge-y { background: #fffbeb; color: #92400e; border: 1px solid #fef3c7; }
+        .pf-badge { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 14px; border-radius: 20px; }
+        .pf-badge-g { background: #dcfce7; color: #166534; }
+        .pf-badge-y { background: #fef9c3; color: #854d0e; }
 
         @media (max-width: 700px) {
             .wrap { padding: 20px 16px; }
-            .section { padding: 20px 18px; }
+            .section { padding: 24px 20px; }
             .top-bar { padding: 12px 20px; }
+            .hero { padding: 28px 24px; }
         }
     </style>
 </head>
@@ -72,7 +74,7 @@
         </div>
 
         <div class="section">
-            <div class="section-title">상세 프로세스</div>
+            <div class="section-title"><span class="num">1</span> 상세 프로세스</div>
             <div class="section-sub">발자국 에셋이 제작되어 마켓에 판매되기까지의 전체 데이터 흐름입니다.</div>
 
             <div class="pf">
@@ -85,7 +87,7 @@
                     <div class="pf-p">
                         발자국 에셋 원본 파일(.foot) 및 영상 미리보기 파일, 파일 식별을 위한 <strong>META 파일</strong>은 전용 UGC 편집툴(데스크톱)을 통해 제작합니다.
                     </div>
-                    <div style="margin-top:8px;">
+                    <div style="margin-top:10px;">
                         <span class="pf-tag">.foot (원본 에셋)</span>
                         <span class="pf-tag">.mp4 (미리보기)</span>
                         <span class="pf-tag">.png (썸네일)</span>
@@ -125,7 +127,7 @@
                     <div class="pf-p">
                         S3에 접근하여 유저가 등록한 발자국 등록 데이터를 수집한 뒤, 각 작품에 고유 <strong>아이템 ID를 부여</strong>합니다.
                     </div>
-                    <div style="margin-top:8px;">
+                    <div style="margin-top:10px;">
                         <span class="pf-tag">아이템 ID 발급</span>
                         <span class="pf-tag">.foot 무결성 검증</span>
                     </div>
@@ -146,7 +148,7 @@
                         백오피스에 접근하여 검수가 완료된 발자국을 게시용으로 업로드합니다.<br>
                         엑셀(CSV) 일괄 업데이트를 통해 판매 시작일, 아이템 ID 등을 반영합니다.
                     </div>
-                    <div style="margin-top:8px;">
+                    <div style="margin-top:10px;">
                         <span class="pf-tag">CSV 일괄 업데이트</span>
                         <span class="pf-tag">판매 시작일 설정</span>
                     </div>
@@ -167,7 +169,7 @@
                         마켓 스토어에 발자국이 노출되어 판매가 시작됩니다.<br>
                         현재 <strong>FREE 버전</strong>으로 운영 중이며, 추후 유료화(KP 결제) 진행 예정입니다.
                     </div>
-                    <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+                    <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
                         <span class="pf-badge pf-badge-g">현재: FREE</span>
                         <span class="pf-badge pf-badge-y">추후: KP 유료화 예정</span>
                     </div>
