@@ -15,16 +15,21 @@
         .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1d4ed8 100%); border-radius: 20px; padding: 36px 48px; margin-bottom: 28px; color: white; }
         .hero h2 { font-size: 24px; font-weight: 900; margin-bottom: 6px; }
         .hero p { font-size: 14px; color: #93c5fd; font-weight: 600; }
-        .card { background: #fff; border-radius: 16px; padding: 28px 32px; border: 1px solid #e2e8f0; overflow-x: auto; }
+        .card { background: #fff; border-radius: 16px; padding: 32px 36px; border: 1px solid #e2e8f0; overflow-x: auto; }
 
         table { width: 100%; border-collapse: collapse; }
-        th { background: #1e293b; color: #fff; font-size: 13px; font-weight: 700; padding: 10px 14px; border: 1px solid #334155; text-align: center; }
-        td { font-size: 13px; padding: 10px 14px; border: 1px solid #e2e8f0; color: #334155; line-height: 1.6; vertical-align: middle; }
-        .cycle { background: #f8fafc; font-weight: 800; text-align: center; color: #1e293b; }
+        th { background: #1e293b; color: #fff; font-size: 13px; font-weight: 700; padding: 14px 16px; border: 1px solid #334155; text-align: center; }
+        td { font-size: 13.5px; padding: 16px 18px; border: 1px solid #e2e8f0; color: #334155; line-height: 1.7; vertical-align: middle; }
+        .cycle { background: #f8fafc; font-weight: 800; text-align: center; color: #1e293b; font-size: 14px; }
         .date { font-weight: 700; color: #0f172a; white-space: nowrap; }
         .basis { text-align: center; color: #64748b; font-weight: 600; white-space: nowrap; }
         .time { color: #94a3b8; font-size: 12px; }
+
+        /* 싸이클 간 구분선 */
+        .cycle-gap td { padding: 0; height: 8px; background: #f1f5f9; border-left: none; border-right: none; }
+
         tbody tr:hover td { background: #fafbff; }
+        tbody tr:hover .cycle { background: #f0f4ff; }
     </style>
 </head>
 <body>
@@ -44,37 +49,43 @@
         <table>
             <thead>
                 <tr>
-                    <th>싸이클</th>
-                    <th>일정</th>
-                    <th>OBT 기준</th>
+                    <th style="width:90px;">싸이클</th>
+                    <th style="width:140px;">일정</th>
+                    <th style="width:100px;">OBT 기준</th>
                     <th>처리</th>
                     <th>각 부서별 업무</th>
                     <th>비고</th>
                 </tr>
             </thead>
             <tbody>
+                <!-- 1 싸이클 -->
                 <tr>
                     <td class="cycle" rowspan="3">1 싸이클</td>
-                    <td class="date">선 공개일자 ~ 7월 6일</td>
+                    <td class="date">7월 3일 (금) ~ 7월 6일</td>
                     <td class="basis">Pre 오픈</td>
-                    <td>클라이언트 툴 선 공개, 기간 동안 최대 100개를 받음</td>
+                    <td>클라이언트 툴 선 공개,<br>기간 동안 최대 100개를 받음</td>
                     <td>웹. 1차 100건 Foot 등록 가능</td>
-                    <td>늦어도 7월 3일 전에 툴 선 오픈 필요<br><span class="time">UTC 2026-07-06 00:00 까지</span></td>
+                    <td>7월 3일 툴 선 오픈<br><span class="time">UTC 2026-07-06 00:00 까지</span></td>
                 </tr>
                 <tr>
                     <td class="date">7월 6일</td>
                     <td class="basis">OBT 1일 전</td>
-                    <td>1차 취합 기준일 (7월 6일 9시 후 취합)</td>
-                    <td>스튜디오. 1차 100건 인게임 적용 (적용 후 유효성 검사)</td>
-                    <td>웹 → 스튜디오. 툴로 S3에서 땡겨받음.</td>
+                    <td>1차 취합 기준일<br>(7월 6일 9시 후 취합)</td>
+                    <td>스튜디오. 1차 100건 인게임 적용<br>(적용 후 유효성 검사)</td>
+                    <td>웹 → 스튜디오.<br>툴로 S3에서 땡겨받음.</td>
                 </tr>
                 <tr>
                     <td class="date">7월 7일</td>
                     <td class="basis">1일차</td>
                     <td>런칭과 동시에 상품 게재</td>
                     <td>웹. 1차 100건 상품 등록</td>
-                    <td>스튜디오 → 웹. 취합 리스트 전달. (방식 협의필요)</td>
+                    <td>스튜디오 → 웹.<br>취합 리스트 전달. (방식 협의필요)</td>
                 </tr>
+
+                <!-- 구분선 -->
+                <tr class="cycle-gap"><td colspan="6"></td></tr>
+
+                <!-- 2 싸이클 -->
                 <tr>
                     <td class="cycle" rowspan="3">2 싸이클</td>
                     <td class="date">7월 7 ~ 8일</td>
@@ -86,8 +97,8 @@
                 <tr>
                     <td class="date">7월 9일</td>
                     <td class="basis">3일차</td>
-                    <td>2차 취합 기준일 (7월 9일 9시 후 취합)</td>
-                    <td>스튜디오. 2차 100건 인게임 적용 (적용 후 유효성 검사)</td>
+                    <td>2차 취합 기준일<br>(7월 9일 9시 후 취합)</td>
+                    <td>스튜디오. 2차 100건 인게임 적용<br>(적용 후 유효성 검사)</td>
                     <td>웹(S3) → 스튜디오.</td>
                 </tr>
                 <tr>
@@ -97,6 +108,11 @@
                     <td>웹. 2차 100건 상품 등록</td>
                     <td>스튜디오 → 웹.</td>
                 </tr>
+
+                <!-- 구분선 -->
+                <tr class="cycle-gap"><td colspan="6"></td></tr>
+
+                <!-- 3 싸이클 -->
                 <tr>
                     <td class="cycle" rowspan="3">3 싸이클</td>
                     <td class="date">7월 10 ~ 11일</td>
@@ -108,8 +124,8 @@
                 <tr>
                     <td class="date">7월 12일</td>
                     <td class="basis">6일차</td>
-                    <td>3차 취합 기준일 (7월 12일 9시 후 취합)</td>
-                    <td>스튜디오. 3차 100건 인게임 적용 (적용 후 유효성 검사)</td>
+                    <td>3차 취합 기준일<br>(7월 12일 9시 후 취합)</td>
+                    <td>스튜디오. 3차 100건 인게임 적용<br>(적용 후 유효성 검사)</td>
                     <td>웹(S3) → 스튜디오.</td>
                 </tr>
                 <tr>
