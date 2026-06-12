@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RO FACTORY — OBT 운영 일정표</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Pretendard', 'Poppins', sans-serif; background: #f1f5f9; color: #1e293b; }
@@ -12,46 +11,29 @@
         .top-bar h1 { font-size: 16px; font-weight: 900; color: #fff; }
         .btn-home { text-decoration: none; color: #94a3b8; font-weight: 700; font-size: 12px; padding: 6px 14px; border: 1px solid #334155; border-radius: 6px; transition: 0.2s; }
         .btn-home:hover { color: #fff; border-color: #64748b; }
-        .wrap { max-width: 1400px; margin: 0 auto; padding: 32px 24px; }
+        .wrap { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
         .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1d4ed8 100%); border-radius: 20px; padding: 36px 48px; margin-bottom: 28px; color: white; }
         .hero h2 { font-size: 24px; font-weight: 900; margin-bottom: 6px; }
         .hero p { font-size: 14px; color: #93c5fd; font-weight: 600; }
 
-        .card { background: #fff; border-radius: 16px; padding: 28px 32px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
-        .card-title { font-size: 17px; font-weight: 900; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid #f1f5f9; }
-        .card-title .num { font-size: 11px; font-weight: 800; color: #fff; background: #3b82f6; width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+        .card { background: #fff; border-radius: 16px; padding: 32px 36px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
 
-        /* Table */
-        .schedule-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        .schedule-table th { background: #1e293b; color: #fff; font-weight: 800; text-align: center; padding: 12px 14px; border: 1px solid #334155; font-size: 12px; letter-spacing: 0.3px; }
-        .schedule-table td { padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155; line-height: 1.6; vertical-align: middle; }
+        .cycle { margin-bottom: 32px; }
+        .cycle:last-child { margin-bottom: 0; }
+        .cycle-title { font-size: 16px; font-weight: 900; color: #0f172a; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #e2e8f0; }
+        .cycle-title span { color: #3b82f6; }
 
-        /* Cycle label */
-        .cycle-label { background: #eff6ff; font-weight: 900; color: #1d4ed8; text-align: center; vertical-align: middle; font-size: 13px; }
-        .cycle-1 { border-left: 4px solid #3b82f6; }
-        .cycle-2 { border-left: 4px solid #22c55e; }
-        .cycle-3 { border-left: 4px solid #f59e0b; }
+        .step { margin-bottom: 16px; padding-left: 16px; border-left: 2px solid #e2e8f0; }
+        .step:last-child { margin-bottom: 0; }
+        .step-date { font-size: 14px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+        .step-label { font-size: 12px; font-weight: 700; color: #94a3b8; margin-bottom: 4px; }
+        .step-desc { font-size: 14px; font-weight: 500; color: #475569; line-height: 1.7; }
+        .step-time { font-size: 12px; color: #94a3b8; font-weight: 600; margin-top: 4px; }
 
-        /* Columns */
-        .col-date { font-weight: 700; color: #0f172a; white-space: nowrap; background: #fafbfc; }
-        .col-basis { text-align: center; font-weight: 600; color: #64748b; white-space: nowrap; }
-        .col-process { color: #334155; }
-        .col-dept { color: #334155; }
-        .col-note { color: #64748b; font-size: 12px; }
-
-        .dept-web { display: inline-block; background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px; margin-bottom: 4px; }
-        .dept-studio { display: inline-block; background: #e0e7ff; color: #4338ca; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px; margin-bottom: 4px; }
-        .dept-flow { display: inline-block; background: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
-        .highlight { font-weight: 800; color: #0f172a; }
-        .time-note { font-size: 11px; color: #94a3b8; font-weight: 600; margin-top: 4px; }
-
-        /* Row hover */
-        .schedule-table tbody tr:hover td { background: #fafbff; }
-
-        @media (max-width: 900px) {
+        @media (max-width: 700px) {
             .wrap { padding: 16px; }
-            .card { padding: 20px 16px; overflow-x: auto; }
-            .schedule-table { min-width: 900px; }
+            .card { padding: 24px 20px; }
+            .hero { padding: 28px 24px; }
             .top-bar { padding: 12px 20px; }
         }
     </style>
@@ -66,97 +48,107 @@
 <div class="wrap">
     <div class="hero">
         <h2>OBT 운영 일정표</h2>
-        <p>RO FACTORY — OBT 기간 발자국 등록 · 취합 · 게재 싸이클별 상세 일정</p>
+        <p>RO FACTORY — 발자국 등록 · 취합 · 게재 싸이클별 상세 일정</p>
     </div>
 
     <div class="card">
-        <div class="card-title"><span class="num">1</span> OBT 싸이클별 운영 일정</div>
 
-        <table class="schedule-table">
-            <thead>
-                <tr>
-                    <th style="width:80px;">싸이클</th>
-                    <th style="width:130px;">일정</th>
-                    <th style="width:90px;">OBT 기준</th>
-                    <th style="width:240px;">처리</th>
-                    <th style="width:280px;">각 부서별 업무</th>
-                    <th>비고</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 1 싸이클 -->
-                <tr>
-                    <td class="cycle-label cycle-1" rowspan="3">1 싸이클</td>
-                    <td class="col-date">OBT 2차 전<br><span style="font-weight:500; color:#64748b;">선 공개일자 ~ 7월 6일</span></td>
-                    <td class="col-basis">Pre 오픈</td>
-                    <td class="col-process">클라이언트 툴 선 공개<br>기간 동안 최대 100개를 받음</td>
-                    <td class="col-dept"><span class="dept-web">웹</span><br>1차 100건 Foot 등록 가능</td>
-                    <td class="col-note">늦어도 <span class="highlight">7월 3일</span> 전에 툴 선 오픈 필요<br><span class="time-note">UTC 2026-07-06 00:00 까지</span></td>
-                </tr>
-                <tr>
-                    <td class="col-date">7월 6일</td>
-                    <td class="col-basis">OBT 1일 전</td>
-                    <td class="col-process">1차 취합 기준일<br><span style="color:#94a3b8;">(7월 6일 9시 후 취합)</span></td>
-                    <td class="col-dept"><span class="dept-studio">스튜디오</span><br>1차 100건 인게임 적용<br><span style="color:#94a3b8;">(적용 후 유효성 검사)</span></td>
-                    <td class="col-note"><span class="dept-flow">웹 → 스튜디오</span><br>툴로 S3에서 땡겨받음.</td>
-                </tr>
-                <tr>
-                    <td class="col-date">7월 7일</td>
-                    <td class="col-basis">1일차</td>
-                    <td class="col-process">런칭과 동시에 상품 게재</td>
-                    <td class="col-dept"><span class="dept-web">웹</span><br>1차 100건 상품 등록</td>
-                    <td class="col-note"><span class="dept-flow">스튜디오 → 웹</span><br>취합 리스트 전달. <span style="color:#ef4444;">(방식 협의필요)</span></td>
-                </tr>
+        <!-- 1 싸이클 -->
+        <div class="cycle">
+            <div class="cycle-title"><span>1 싸이클</span> — 선 공개 ~ OBT 1일차</div>
 
-                <!-- 2 싸이클 -->
-                <tr>
-                    <td class="cycle-label cycle-2" rowspan="3">2 싸이클</td>
-                    <td class="col-date">7월 7 ~ 8일</td>
-                    <td class="col-basis">1~2일차</td>
-                    <td class="col-process">기간 동안 최대 100개를 받음</td>
-                    <td class="col-dept"><span class="dept-web">웹</span><br>2차 100건 Foot 등록 가능</td>
-                    <td class="col-note"><span class="time-note">UTC 2026-07-09 00:00 까지<br>KST 2026-07-09 09:00</span></td>
-                </tr>
-                <tr>
-                    <td class="col-date">7월 9일</td>
-                    <td class="col-basis">3일차</td>
-                    <td class="col-process">2차 취합 기준일<br><span style="color:#94a3b8;">(7월 9일 9시 후 취합)</span></td>
-                    <td class="col-dept"><span class="dept-studio">스튜디오</span><br>2차 100건 인게임 적용<br><span style="color:#94a3b8;">(적용 후 유효성 검사)</span></td>
-                    <td class="col-note"><span class="dept-flow">웹(S3) → 스튜디오</span></td>
-                </tr>
-                <tr>
-                    <td class="col-date">7월 10일</td>
-                    <td class="col-basis">4일차</td>
-                    <td class="col-process">점검을 통해 2차 100건 적용</td>
-                    <td class="col-dept"><span class="dept-web">웹</span><br>2차 100건 상품 등록</td>
-                    <td class="col-note"><span class="dept-flow">스튜디오 → 웹</span></td>
-                </tr>
+            <div class="step">
+                <div class="step-label">Pre 오픈 (선 공개일자 ~ 7월 6일)</div>
+                <div class="step-desc">
+                    클라이언트 툴 선 공개. 기간 동안 최대 100개를 받음.<br>
+                    웹에서 1차 100건 Foot 등록 가능.
+                </div>
+                <div class="step-time">늦어도 7월 3일 전에 툴 선 오픈 필요 / UTC 2026-07-06 00:00 까지</div>
+            </div>
 
-                <!-- 3 싸이클 -->
-                <tr>
-                    <td class="cycle-label cycle-3" rowspan="3">3 싸이클</td>
-                    <td class="col-date">7월 10 ~ 11일</td>
-                    <td class="col-basis">4~5일차</td>
-                    <td class="col-process">기간 동안 최대 100개를 받음</td>
-                    <td class="col-dept"><span class="dept-web">웹</span><br>3차 100건 Foot 등록 가능</td>
-                    <td class="col-note"><span class="time-note">UTC 2026-07-12 00:00 까지<br>KST 2026-07-12 09:00</span></td>
-                </tr>
-                <tr>
-                    <td class="col-date">7월 12일</td>
-                    <td class="col-basis">6일차</td>
-                    <td class="col-process">3차 취합 기준일<br><span style="color:#94a3b8;">(7월 12일 9시 후 취합)</span></td>
-                    <td class="col-dept"><span class="dept-studio">스튜디오</span><br>3차 100건 인게임 적용<br><span style="color:#94a3b8;">(적용 후 유효성 검사)</span></td>
-                    <td class="col-note"><span class="dept-flow">웹(S3) → 스튜디오</span></td>
-                </tr>
-                <tr>
-                    <td class="col-date">7월 13일</td>
-                    <td class="col-basis">7일차</td>
-                    <td class="col-process">점검을 통해 3차 100건 적용</td>
-                    <td class="col-dept"><span class="dept-web">웹</span><br>3차 100건 상품 등록</td>
-                    <td class="col-note"><span class="dept-flow">스튜디오 → 웹</span></td>
-                </tr>
-            </tbody>
-        </table>
+            <div class="step">
+                <div class="step-date">7월 6일 (OBT 1일 전)</div>
+                <div class="step-desc">
+                    1차 취합 기준일 (7월 6일 9시 후 취합).<br>
+                    스튜디오에서 1차 100건 인게임 적용 (적용 후 유효성 검사).<br>
+                    웹 → 스튜디오. 툴로 S3에서 땡겨받음.
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-date">7월 7일 (1일차)</div>
+                <div class="step-desc">
+                    런칭과 동시에 상품 게재.<br>
+                    웹에서 1차 100건 상품 등록.<br>
+                    스튜디오 → 웹. 취합 리스트 전달. (방식 협의필요)
+                </div>
+            </div>
+        </div>
+
+        <!-- 2 싸이클 -->
+        <div class="cycle">
+            <div class="cycle-title"><span>2 싸이클</span> — 1~4일차</div>
+
+            <div class="step">
+                <div class="step-date">7월 7 ~ 8일 (1~2일차)</div>
+                <div class="step-desc">
+                    기간 동안 최대 100개를 받음.<br>
+                    웹에서 2차 100건 Foot 등록 가능.
+                </div>
+                <div class="step-time">UTC 2026-07-09 00:00 까지 / KST 2026-07-09 09:00</div>
+            </div>
+
+            <div class="step">
+                <div class="step-date">7월 9일 (3일차)</div>
+                <div class="step-desc">
+                    2차 취합 기준일 (7월 9일 9시 후 취합).<br>
+                    스튜디오에서 2차 100건 인게임 적용 (적용 후 유효성 검사).<br>
+                    웹(S3) → 스튜디오.
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-date">7월 10일 (4일차)</div>
+                <div class="step-desc">
+                    점검을 통해 2차 100건 적용.<br>
+                    웹에서 2차 100건 상품 등록.<br>
+                    스튜디오 → 웹.
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 싸이클 -->
+        <div class="cycle">
+            <div class="cycle-title"><span>3 싸이클</span> — 4~7일차</div>
+
+            <div class="step">
+                <div class="step-date">7월 10 ~ 11일 (4~5일차)</div>
+                <div class="step-desc">
+                    기간 동안 최대 100개를 받음.<br>
+                    웹에서 3차 100건 Foot 등록 가능.
+                </div>
+                <div class="step-time">UTC 2026-07-12 00:00 까지 / KST 2026-07-12 09:00</div>
+            </div>
+
+            <div class="step">
+                <div class="step-date">7월 12일 (6일차)</div>
+                <div class="step-desc">
+                    3차 취합 기준일 (7월 12일 9시 후 취합).<br>
+                    스튜디오에서 3차 100건 인게임 적용 (적용 후 유효성 검사).<br>
+                    웹(S3) → 스튜디오.
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-date">7월 13일 (7일차)</div>
+                <div class="step-desc">
+                    점검을 통해 3차 100건 적용.<br>
+                    웹에서 3차 100건 상품 등록.<br>
+                    스튜디오 → 웹.
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
