@@ -130,143 +130,145 @@
             <p>RO FACTORY 클라이언트 ↔ 웹 ↔ 어드민 시스템 서비스 전체 플로우</p>
         </div>
 
-            <!-- FLOW 1. Data Flow — Swim Lane Diagram -->
-            <div class="section" style="overflow-x:auto;">
+            <!-- FLOW 1. Data Flow — 상세 프로세스 -->
+            <div class="section">
                 <div class="section-title"><span class="num">1</span> 클라이언트 ↔ 웹 ↔ 어드민 연동 데이터 플로우</div>
-                <div style="font-size:14px; color:#64748b; margin-bottom:30px; font-weight:600;">클라이언트 편집툴에서 시작하여, 웹 포털을 거쳐, 어드민에서 검수·게시하기까지의 전체 데이터 흐름입니다.</div>
+                <div style="font-size:14px; color:#64748b; margin-bottom:30px; font-weight:600;">발자국 에셋이 제작되어 마켓에 판매되기까지의 전체 상세 프로세스입니다.</div>
 
-                <!-- ====== SWIM LANE DIAGRAM ====== -->
                 <style>
-                    .swim-wrap { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; min-width:860px; position:relative; }
-                    .lane { position:relative; }
-                    .lane-head { text-align:center; padding:16px 12px; border-radius:14px 14px 0 0; font-size:13px; font-weight:900; letter-spacing:1px; }
-                    .lane-body { padding:16px 14px; border-left:2.5px dashed; border-right:2.5px dashed; min-height:100%; display:flex; flex-direction:column; align-items:center; gap:0; }
-                    .lane-client .lane-head { background:linear-gradient(135deg,#4338ca,#6366f1); color:#fff; }
-                    .lane-client .lane-body { border-color:#c7d2fe; background:#f5f3ff; }
-                    .lane-web .lane-head { background:linear-gradient(135deg,#15803d,#22c55e); color:#fff; }
-                    .lane-web .lane-body { border-color:#bbf7d0; background:#f0fdf4; }
-                    .lane-admin .lane-head { background:linear-gradient(135deg,#b91c1c,#ef4444); color:#fff; }
-                    .lane-admin .lane-body { border-color:#fecaca; background:#fef2f2; }
-                    .s-card { background:#fff; border-radius:14px; padding:18px 16px; border:2px solid #e2e8f0; width:100%; box-shadow:0 2px 10px rgba(0,0,0,0.04); transition:all 0.25s; }
-                    .s-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.08); }
-                    .s-card .s-step { font-size:10px; font-weight:900; color:#fff; background:#3b82f6; display:inline-block; padding:3px 10px; border-radius:20px; margin-bottom:8px; letter-spacing:1px; }
-                    .s-card .s-title { font-size:15px; font-weight:900; color:#0f172a; margin-bottom:6px; line-height:1.35; }
-                    .s-card .s-desc { font-size:12.5px; font-weight:500; color:#64748b; line-height:1.55; }
-                    .s-card .s-file { display:inline-block; background:#f1f5f9; border:1px solid #e2e8f0; color:#334155; font-size:11px; font-weight:800; padding:3px 8px; border-radius:6px; margin-top:6px; margin-right:4px; }
-                    .s-arrow { text-align:center; padding:8px 0; color:#cbd5e1; font-size:18px; font-weight:900; }
-                    .s-empty { min-height:60px; }
-                    .branch-y { display:inline-block; background:#dcfce7; color:#15803d; font-size:11px; font-weight:800; padding:4px 12px; border-radius:20px; border:1.5px solid #bbf7d0; }
-                    .branch-n { display:inline-block; background:#fee2e2; color:#b91c1c; font-size:11px; font-weight:800; padding:4px 12px; border-radius:20px; border:1.5px solid #fecaca; }
-                    @media (max-width:900px) {
-                        .swim-wrap { min-width:0; grid-template-columns:1fr; }
-                        .lane-body { border-left:none; border-right:none; border-bottom:2.5px dashed; }
-                    }
+                    .flow-line { display:flex; flex-direction:column; align-items:center; max-width:680px; margin:0 auto; gap:0; }
+                    .fl-card { width:100%; background:#fff; border-radius:16px; padding:24px 28px; border:2.5px solid #e2e8f0; position:relative; transition:all 0.3s; }
+                    .fl-card:hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(0,0,0,0.08); }
+                    .fl-num { position:absolute; top:-14px; left:28px; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:900; color:#fff; }
+                    .fl-role { display:inline-block; font-size:10px; font-weight:900; padding:4px 12px; border-radius:20px; letter-spacing:0.5px; margin-bottom:8px; }
+                    .fl-title { font-size:16px; font-weight:900; color:#0f172a; margin-bottom:6px; line-height:1.4; }
+                    .fl-desc { font-size:13px; font-weight:500; color:#64748b; line-height:1.65; }
+                    .fl-tag { display:inline-block; background:#f1f5f9; border:1px solid #e2e8f0; color:#334155; font-size:11px; font-weight:800; padding:3px 10px; border-radius:6px; margin-top:8px; margin-right:4px; }
+                    .fl-note { font-size:11px; color:#b45309; font-weight:700; margin-top:8px; }
+                    .fl-arrow { display:flex; flex-direction:column; align-items:center; padding:6px 0; gap:2px; }
+                    .fl-arrow-line { width:2.5px; height:18px; background:linear-gradient(180deg, #cbd5e1, #94a3b8); border-radius:2px; }
+                    .fl-arrow-head { color:#94a3b8; font-size:14px; font-weight:900; line-height:1; }
+                    .fl-arrow-label { font-size:10px; font-weight:800; color:#94a3b8; margin-top:0; }
+                    /* Role colors */
+                    .fl-client { border-color:#c7d2fe; }
+                    .fl-client .fl-num { background:linear-gradient(135deg,#4338ca,#6366f1); }
+                    .fl-client .fl-role { background:#e0e7ff; color:#4338ca; }
+                    .fl-web { border-color:#bbf7d0; }
+                    .fl-web .fl-num { background:linear-gradient(135deg,#15803d,#22c55e); }
+                    .fl-web .fl-role { background:#dcfce7; color:#15803d; }
+                    .fl-admin { border-color:#fecaca; }
+                    .fl-admin .fl-num { background:linear-gradient(135deg,#b91c1c,#ef4444); }
+                    .fl-admin .fl-role { background:#fee2e2; color:#b91c1c; }
+                    .fl-server { border-color:#e9d5ff; }
+                    .fl-server .fl-num { background:linear-gradient(135deg,#7e22ce,#a855f7); }
+                    .fl-server .fl-role { background:#f3e8ff; color:#7e22ce; }
+                    .fl-market { border-color:#fde68a; }
+                    .fl-market .fl-num { background:linear-gradient(135deg,#b45309,#f59e0b); }
+                    .fl-market .fl-role { background:#fef3c7; color:#b45309; }
                 </style>
 
-                <div class="swim-wrap">
-                    <!-- CLIENT LANE -->
-                    <div class="lane lane-client">
-                        <div class="lane-head">🖥️ 클라이언트 (편집툴)</div>
-                        <div class="lane-body">
-                            <div class="s-card" style="border-color:#c7d2fe;">
-                                <span class="s-step" style="background:#6366f1;">STEP 1</span>
-                                <div class="s-title">발자국 에셋 제작</div>
-                                <div class="s-desc">전용 UGC 편집툴(데스크톱)에서 발자국 스킨 제작 후 파일 추출</div>
-                                <div style="margin-top:8px;">
-                                    <span class="s-file">📄 .foot (원본)</span>
-                                    <span class="s-file">🎬 .mp4 (미리보기)</span>
-                                    <span class="s-file">🖼️ .png (썸네일)</span>
-                                </div>
-                            </div>
-                            <div class="s-arrow">⬇</div>
-                            <div class="s-empty"></div>
+                <div class="flow-line">
+
+                    <!-- STEP 1: 편집툴에서 에셋 제작 -->
+                    <div class="fl-card fl-client">
+                        <div class="fl-num">1</div>
+                        <span class="fl-role">🖥️ 클라이언트 (편집툴)</span>
+                        <div class="fl-title">발자국 에셋 제작 및 파일 추출</div>
+                        <div class="fl-desc">
+                            발자국 에셋 원본 파일(.foot) 및 영상 미리보기 파일, 파일 식별을 위한 <strong>META 파일</strong>은 전용 UGC 편집툴(데스크톱)을 통해 제작합니다.
+                        </div>
+                        <div style="margin-top:10px;">
+                            <span class="fl-tag">📄 .foot (원본 에셋)</span>
+                            <span class="fl-tag">🎬 .mp4 (미리보기 영상)</span>
+                            <span class="fl-tag">🖼️ .png (썸네일)</span>
+                            <span class="fl-tag">📋 meta (파일 식별 정보)</span>
                         </div>
                     </div>
 
-                    <!-- WEB LANE -->
-                    <div class="lane lane-web">
-                        <div class="lane-head">🌐 웹 (프론트 포털)</div>
-                        <div class="lane-body">
-                            <div class="s-empty" style="min-height:20px;"></div>
-                            <div class="s-card" style="border-color:#bbf7d0;">
-                                <span class="s-step" style="background:#22c55e;">STEP 2</span>
-                                <div class="s-title">웹 등록 폼에서 업로드</div>
-                                <div class="s-desc">로그인 후 작품 등록 폼에서 파일 업로드 + 메타데이터(작품명, 가격, 태그, 유효기간) 기입</div>
-                                <div style="margin-top:6px; font-size:11px; color:#b45309; font-weight:700;">* PC 전용 · 로그인 필수 · 주간 100개 제한</div>
-                            </div>
-                            <div class="s-arrow">⬇</div>
-                            <div class="s-card" style="border-color:#bbf7d0;">
-                                <span class="s-step" style="background:#22c55e;">STEP 5</span>
-                                <div class="s-title">마켓 판매 개시</div>
-                                <div class="s-desc">판매 시작일 도달 시 마켓 스토어에 자동 노출. 유저 KP 결제 → 인게임 아이템 지급</div>
-                                <div style="margin-top:6px;">
-                                    <span class="branch-y">✓ 판매중</span>
-                                </div>
-                            </div>
-                            <div class="s-arrow">⬇</div>
-                            <div class="s-card" style="border-color:#e2e8f0;">
-                                <span class="s-step" style="background:#64748b;">STEP 6</span>
-                                <div class="s-title">작품 만료</div>
-                                <div class="s-desc">유효기간 경과 시 마켓 노출 중단 및 인게임 삭제 처리</div>
-                            </div>
+                    <!-- Arrow -->
+                    <div class="fl-arrow">
+                        <div class="fl-arrow-line"></div>
+                        <div class="fl-arrow-head">▼</div>
+                        <div class="fl-arrow-label">.foot + .mp4 + .png + meta 전달</div>
+                    </div>
+
+                    <!-- STEP 2: 웹 포털에서 업로드 -->
+                    <div class="fl-card fl-web">
+                        <div class="fl-num">2</div>
+                        <span class="fl-role">🌐 웹 포털 (프론트)</span>
+                        <div class="fl-title">웹 포털 등록 폼에서 업로드 → S3 적재</div>
+                        <div class="fl-desc">
+                            편집툴에서 추출한 리소스를 웹 포털 등록 폼에서 업로드합니다.<br>
+                            업로드된 파일은 <strong>S3 스토리지에 적재</strong>되며, 작품명·태그·유효기간 등 메타데이터도 함께 저장됩니다.
+                        </div>
+                        <div class="fl-note">* PC 전용 · 로그인 필수 · 주간 100개 제한</div>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="fl-arrow">
+                        <div class="fl-arrow-line"></div>
+                        <div class="fl-arrow-head">▼</div>
+                        <div class="fl-arrow-label">S3 스토리지 적재 완료</div>
+                    </div>
+
+                    <!-- STEP 3: S3 접근 후 데이터 수집 -->
+                    <div class="fl-card fl-server">
+                        <div class="fl-num">3</div>
+                        <span class="fl-role">🔧 스튜디오 (서버)</span>
+                        <div class="fl-title">S3 접근 → 등록 데이터 수집 → 아이템 ID 부여</div>
+                        <div class="fl-desc">
+                            S3에 접근하여 유저가 등록한 발자국 등록 데이터를 수집한 뒤, 각 작품에 고유 <strong>아이템 ID를 부여</strong>합니다.
+                        </div>
+                        <div style="margin-top:10px;">
+                            <span class="fl-tag">🔑 아이템 ID 발급</span>
+                            <span class="fl-tag">📦 .foot 무결성 검증</span>
                         </div>
                     </div>
 
-                    <!-- ADMIN LANE -->
-                    <div class="lane lane-admin">
-                        <div class="lane-head">⚙️ 어드민 (백오피스)</div>
-                        <div class="lane-body">
-                            <div class="s-empty" style="min-height:20px;"></div>
-                            <div class="s-card" style="border-color:#fecaca;">
-                                <span class="s-step" style="background:#ef4444;">STEP 3</span>
-                                <div class="s-title">에셋 일괄 다운로드</div>
-                                <div class="s-desc">웹에 업로드된 .foot 파일을 일괄 다운로드하여 스튜디오(클라이언트)에서 무결성 검증</div>
-                                <div style="margin-top:6px;">
-                                    <span class="s-file">📦 작품_유저ID.zip</span>
-                                </div>
-                            </div>
-                            <div class="s-arrow">⬇</div>
-                            <div class="s-card" style="border-color:#fecaca;">
-                                <span class="s-step" style="background:#ef4444;">STEP 4</span>
-                                <div class="s-title">검수 결과 엑셀 반영</div>
-                                <div class="s-desc">무결성 검증 통과/실패 결과를 CSV 엑셀로 일괄 업데이트</div>
-                                <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
-                                    <span class="branch-y">Y → 판매 업데이트</span>
-                                    <span class="branch-n">N → 변환 실패 처리</span>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Arrow -->
+                    <div class="fl-arrow">
+                        <div class="fl-arrow-line"></div>
+                        <div class="fl-arrow-head">▼</div>
+                        <div class="fl-arrow-label">아이템 ID + 검수 결과 전달</div>
                     </div>
-                </div>
 
-                <!-- Cross-lane flow summary -->
-                <div style="margin-top:28px; background:linear-gradient(135deg,#f8fafc,#f1f5f9); border:2px solid #e2e8f0; border-radius:16px; padding:24px 28px;">
-                    <div style="font-size:14px; font-weight:900; color:#0f172a; margin-bottom:16px; display:flex; align-items:center; gap:8px;">
-                        🔀 데이터 이동 경로 요약
-                    </div>
-                    <div style="display:flex; flex-direction:column; gap:12px;">
-                        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                            <span style="background:#e0e7ff; color:#4338ca; font-size:12px; font-weight:800; padding:5px 12px; border-radius:8px; white-space:nowrap;">🖥️ 클라이언트</span>
-                            <span style="color:#94a3b8; font-weight:900;">→</span>
-                            <span style="font-size:12px; color:#64748b; font-weight:700;">.foot + .mp4 + .png 파일 전달</span>
-                            <span style="color:#94a3b8; font-weight:900;">→</span>
-                            <span style="background:#dcfce7; color:#15803d; font-size:12px; font-weight:800; padding:5px 12px; border-radius:8px; white-space:nowrap;">🌐 웹 포털</span>
+                    <!-- STEP 4: 백오피스에서 게시 -->
+                    <div class="fl-card fl-admin">
+                        <div class="fl-num">4</div>
+                        <span class="fl-role">⚙️ 어드민 (백오피스)</span>
+                        <div class="fl-title">백오피스 접근 → 게시할 발자국 업로드</div>
+                        <div class="fl-desc">
+                            백오피스에 접근하여 검수가 완료된 발자국을 게시용으로 업로드합니다.<br>
+                            엑셀(CSV) 일괄 업데이트를 통해 판매 시작일, 아이템 ID 등을 반영합니다.
                         </div>
-                        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                            <span style="background:#dcfce7; color:#15803d; font-size:12px; font-weight:800; padding:5px 12px; border-radius:8px; white-space:nowrap;">🌐 웹 포털</span>
-                            <span style="color:#94a3b8; font-weight:900;">→</span>
-                            <span style="font-size:12px; color:#64748b; font-weight:700;">등록 데이터(S3) 전달</span>
-                            <span style="color:#94a3b8; font-weight:900;">→</span>
-                            <span style="background:#fee2e2; color:#b91c1c; font-size:12px; font-weight:800; padding:5px 12px; border-radius:8px; white-space:nowrap;">⚙️ 어드민</span>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                            <span style="background:#fee2e2; color:#b91c1c; font-size:12px; font-weight:800; padding:5px 12px; border-radius:8px; white-space:nowrap;">⚙️ 어드민</span>
-                            <span style="color:#94a3b8; font-weight:900;">→</span>
-                            <span style="font-size:12px; color:#64748b; font-weight:700;">검수 결과 CSV 업데이트 (판매일 / 실패 처리)</span>
-                            <span style="color:#94a3b8; font-weight:900;">→</span>
-                            <span style="background:#dcfce7; color:#15803d; font-size:12px; font-weight:800; padding:5px 12px; border-radius:8px; white-space:nowrap;">🌐 웹 마켓</span>
+                        <div style="margin-top:10px;">
+                            <span class="fl-tag">📊 CSV 일괄 업데이트</span>
+                            <span class="fl-tag">📅 판매 시작일 설정</span>
                         </div>
                     </div>
+
+                    <!-- Arrow -->
+                    <div class="fl-arrow">
+                        <div class="fl-arrow-line"></div>
+                        <div class="fl-arrow-head">▼</div>
+                        <div class="fl-arrow-label">판매 시작일 도달 시 자동 노출</div>
+                    </div>
+
+                    <!-- STEP 5: 마켓 판매 시작 -->
+                    <div class="fl-card fl-market">
+                        <div class="fl-num">5</div>
+                        <span class="fl-role">🛒 마켓 (웹 스토어)</span>
+                        <div class="fl-title">마켓 판매 시작</div>
+                        <div class="fl-desc">
+                            마켓 스토어에 발자국이 노출되어 판매가 시작됩니다.<br>
+                            현재 <strong>FREE 버전</strong>으로 운영 중이며, 추후 유료화(KP 결제) 진행 예정입니다.
+                        </div>
+                        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+                            <span style="display:inline-block; background:#dcfce7; color:#15803d; font-size:12px; font-weight:800; padding:5px 14px; border-radius:20px; border:1.5px solid #bbf7d0;">🟢 현재: FREE</span>
+                            <span style="display:inline-block; background:#fef3c7; color:#b45309; font-size:12px; font-weight:800; padding:5px 14px; border-radius:20px; border:1.5px solid #fde68a;">📌 추후: KP 유료화 예정</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
