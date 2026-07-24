@@ -110,7 +110,7 @@
                 
                 <div class="form-container-clean">
                     <!-- 1x5 파일 그리드 -->
-                    <div class="file-grid" style="grid-template-columns:repeat(5,1fr); gap:14px;">
+                    <div class="file-grid" style="grid-template-columns:repeat(4,1fr); gap:14px;">
                         <div class="file-box" onclick="document.getElementById('f1').click()">
                             <div class="icon">📁</div>
                             <h4 data-en="Footprint Source Data">발자국 원본 데이터</h4><span>(.foot 확장자 필수)</span>
@@ -134,11 +134,7 @@
                             <h4 data-en="Collection Thumbnail">콜렉션 썸네일</h4><span>(<span data-en="Market" data-ko="마켓">마켓</span> 노출용 누끼 .png)</span>
                             <input type="file" id="f3" style="display:none" accept=".png" onchange="handleImageSelect(this, 'f3_box', 'f3_name')">
                         </div>
-                        <div class="file-box" id="f4_box" onclick="document.getElementById('f4').click()">
-                            <div class="icon" style="color: #d97706;">🎒</div>
-                            <h4 data-en="Item thumbnail">아이템 썸네일</h4><span>(인게임 아이템 적용 가능 이미지)</span>
-                            <input type="file" id="f4" style="display:none" accept=".png,.jpg,.jpeg" onchange="handleImageSelect(this, 'f4_box', 'f4_name')">
-                        </div>
+
                     </div>
 
                     <div class="section-divider" data-en="Agree to Terms and Conditions">약관 동의 <span style="color:#ef4444; ">*필수</span></div>
