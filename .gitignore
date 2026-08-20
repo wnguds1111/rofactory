@@ -32,3 +32,10 @@ extracted_texts.txt
 extracted_utf8.txt
 figma_extract.json
 parse_figma.js
+
+# Dependencies & Scratch
+node_modules/
+pdf_content*.txt
+pdf_images/
+read_pdf.py
+

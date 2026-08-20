@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO Factory 사용자 매뉴얼</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #f8f9fb;
+            color: #1a1a2e;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* ── Layout ── */
+        .layout { display: flex; min-height: 100vh; }
+        .sidebar {
+            width: 280px; flex-shrink:0;
+            background: #fff;
+            border-right: 1px solid #e8eaed;
+            position: sticky; top:0; height:100vh;
+            overflow-y: auto;
+            padding: 28px 0;
+            z-index: 100;
+        }
+        .sidebar::-webkit-scrollbar { width:4px; }
+        .sidebar::-webkit-scrollbar-thumb { background:#ddd; border-radius:4px; }
+        .sidebar-logo {
+            padding: 0 24px 20px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px; font-weight: 700;
+            color: #1a1a2e;
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 16px;
+        }
+        .sidebar-logo span { color: #4361ee; }
+        .toc-group { padding: 0 16px; margin-bottom: 6px; }
+        .toc-group-title {
+            font-size: 11px; font-weight: 700; color: #999;
+            text-transform: uppercase; letter-spacing: 1px;
+            padding: 8px 8px 4px; margin-bottom: 2px;
+        }
+        .toc-link {
+            display: block; padding: 6px 12px;
+            font-size: 13px; color: #555;
+            text-decoration: none; border-radius: 6px;
+            transition: all 0.15s;
+        }
+        .toc-link:hover { background: #f0f2ff; color: #4361ee; }
+        .toc-link.active { background: #eef0ff; color: #4361ee; font-weight: 600; }
+        .toc-link.sub { padding-left: 24px; font-size: 12.5px; color: #888; }
+
+        .main-content {
+            flex: 1; max-width: 960px;
+            margin: 0 auto; padding: 40px 48px 80px;
+        }
+
+        /* ── Typography ── */
+        .doc-header {
+            margin-bottom: 40px; padding-bottom: 24px;
+            border-bottom: 2px solid #e8eaed;
+        }
+        .doc-header h1 {
+            font-size: 32px; font-weight: 900; color: #1a1a2e;
+            margin-bottom: 12px;
+        }
+        .doc-meta {
+            display: flex; gap: 20px; flex-wrap: wrap;
+        }
+        .doc-meta span {
+            font-size: 13px; color: #888;
+            background: #f4f5f7; padding: 4px 12px; border-radius: 6px;
+        }
+        .doc-meta span strong { color: #555; font-weight: 600; }
+
+        h2 {
+            font-size: 24px; font-weight: 800; color: #1a1a2e;
+            margin: 48px 0 16px; padding-bottom: 10px;
+            border-bottom: 2px solid #4361ee;
+        }
+        h3 {
+            font-size: 19px; font-weight: 700; color: #2d2d44;
+            margin: 36px 0 12px;
+        }
+        h4 {
+            font-size: 15px; font-weight: 700; color: #444;
+            margin: 24px 0 8px;
+        }
+        p { margin: 8px 0; }
+        hr { border:none; border-top:1px solid #e8eaed; margin: 32px 0; }
+        ul, ol { padding-left: 20px; margin: 8px 0; }
+        li { margin: 4px 0; }
+
+        /* ── Blockquote ── */
+        blockquote {
+            background: #f8f9fb; border-left: 3px solid #4361ee;
+            padding: 14px 18px; margin: 12px 0; border-radius: 0 8px 8px 0;
+            color: #444; font-size: 14px;
+        }
+
+        /* ── Alert boxes ── */
+        .alert {
+            padding: 14px 18px; border-radius: 8px;
+            margin: 12px 0; font-size: 14px;
+            border-left: 4px solid;
+        }
+        .alert-important { background: #eef0ff; border-color: #4361ee; }
+        .alert-warning { background: #fff8f0; border-color: #f59e0b; }
+        .alert-tip { background: #f0fdf4; border-color: #22c55e; }
+        .alert-note { background: #f0f9ff; border-color: #0ea5e9; }
+        .alert-title { font-weight: 700; margin-bottom: 4px; font-size: 13px; }
+        .alert-important .alert-title { color: #4361ee; }
+        .alert-warning .alert-title { color: #d97706; }
+        .alert-tip .alert-title { color: #16a34a; }
+        .alert-note .alert-title { color: #0284c7; }
+
+        /* ── Table ── */
+        table {
+            width: 100%; border-collapse: collapse;
+            margin: 12px 0; font-size: 14px;
+        }
+        th {
+            background: #f4f5f7; font-weight: 600; text-align: left;
+            padding: 10px 14px; border-bottom: 2px solid #ddd;
+        }
+        td {
+            padding: 9px 14px; border-bottom: 1px solid #eee;
+        }
+        tr:hover td { background: #fafbfd; }
+
+        /* ── Code ── */
+        code {
+            background: #f0f2f5; padding: 2px 6px; border-radius: 4px;
+            font-size: 13px; font-family: 'Consolas', monospace;
+        }
+        pre {
+            background: #1e1e2e; color: #cdd6f4; padding: 18px 20px;
+            border-radius: 10px; overflow-x: auto; margin: 12px 0;
+            font-size: 13px; line-height: 1.6;
+        }
+        pre code { background: none; padding:0; color: inherit; }
+
+        /* ── Images ── */
+        .screenshot {
+            display: block; max-width: 100%;
+            border: 1px solid #e2e4e8; border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin: 16px 0;
+        }
+        .screenshot-placeholder {
+            display: block; padding: 32px;
+            background: #f8f9fb; border: 2px dashed #d0d4de;
+            border-radius: 10px; text-align: center;
+            color: #aaa; font-size: 13px; margin: 16px 0;
+        }
+
+        /* ── FAQ ── */
+        .faq-q {
+            font-size: 15px; font-weight: 700; color: #2d2d44;
+            margin: 20px 0 6px;
+        }
+        .faq-a {
+            background: #f8f9fb; border-left: 3px solid #4361ee;
+            padding: 12px 16px; border-radius: 0 8px 8px 0;
+            color: #444; font-size: 14px; margin-bottom: 16px;
+        }
+
+        /* ── Back to top ── */
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 42px; height: 42px; border-radius: 50%;
+            background: #4361ee; color: #fff; border: none;
+            font-size: 18px; cursor: pointer;
+            box-shadow: 0 4px 16px rgba(67,97,238,0.3);
+            display: none; align-items: center; justify-content: center;
+            transition: all 0.2s;
+            z-index: 999;
+        }
+        .back-to-top:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(67,97,238,0.4); }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .sidebar { display: none; }
+            .main-content { padding: 24px 20px 60px; }
+        }
+    </style>
+</head>
+<body>
+<div class="layout">
+
+<!-- ── Sidebar TOC ── -->
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">RO <span>Factory</span> <span style="font-size:12px;color:#aaa;font-weight:400;">Manual</span></div>
+
+    <div class="toc-group">
+        <div class="toc-group-title">개요</div>
+        <a class="toc-link" href="#sec-1">1. 서비스 개요</a>
+        <a class="toc-link" href="#sec-2">2. 접속 방법 및 환경</a>
+    </div>
+    <div class="toc-group">
+        <div class="toc-group-title">Front (유저)</div>
+        <a class="toc-link" href="#sec-3-1">3.1 메인 홈페이지</a>
+        <a class="toc-link" href="#sec-3-2">3.2 작품 등록</a>
+        <a class="toc-link" href="#sec-3-3">3.3 마켓 스토어</a>
+        <a class="toc-link" href="#sec-3-4">3.4 마이 스튜디오</a>
+        <a class="toc-link" href="#sec-3-5">3.5 작품 상세 보기</a>
+        <a class="toc-link" href="#sec-3-6">3.6 정보 수정</a>
+        <a class="toc-link" href="#sec-3-7">3.7 RO FACTORY 소개</a>
+    </div>
+    <div class="toc-group">
+        <div class="toc-group-title">Admin (백오피스)</div>
+        <a class="toc-link" href="#sec-4-1">4.1 네비게이션</a>
+        <a class="toc-link" href="#sec-4-2">4.2 작품 관리</a>
+        <a class="toc-link" href="#sec-4-3">4.3 배너 관리</a>
+        <a class="toc-link" href="#sec-4-4">4.4 구매 내역</a>
+        <a class="toc-link" href="#sec-4-5">4.5 태그 관리</a>
+        <a class="toc-link" href="#sec-4-6">4.6 티켓 관리</a>
+    </div>
+    <div class="toc-group">
+        <div class="toc-group-title">기타</div>
+        <a class="toc-link" href="#sec-5">5. 공통 기능</a>
+        <a class="toc-link" href="#sec-6">6. FAQ</a>
+        <a class="toc-link" href="#sec-7">7. 용어 정리</a>
+    </div>
+</nav>
+
+<!-- ── Main Content ── -->
+<div class="main-content" id="content">
+
+    <!-- Header -->
+    <div class="doc-header">
+        <h1>📘 RO Factory 사용자 매뉴얼</h1>
+        <div class="doc-meta">
+            <span><strong>버전</strong> v1.0 Draft</span>
+            <span><strong>최종 수정</strong> 2026-06-15</span>
+            <span><strong>작성</strong> 웹기획Unit</span>
+            <span><strong>대상</strong> 서비스 운영자, QA, 개발 관련자</span>
+        </div>
+    </div>
+
+    <!-- 1. 서비스 개요 -->
+    <h2 id="sec-1">1. 서비스 개요</h2>
+    <p><strong>RO Factory</strong>는 라그나로크 제로(ROZ) 게임 내에서 사용되는 <strong>UGC(User Generated Content) 에셋 — "발자국"</strong>을 유저가 직접 제작하고, 마켓에서 사고팔 수 있는 <strong>글로벌 크리에이터 마켓플레이스</strong>입니다.</p>
+
+    <h3>유저 핵심 사이클</h3>
+    <blockquote>
+        편집툴 다운로드 → 에셋 제작(.foot/영상/썸네일) → 작품 등록(파일 업로드 + 메타데이터 입력) → 변환 대기 → 변환 진행 → 변환 완료 → 마켓 판매 → 구매자 검색·구매 → 인벤토리 보관<br><br>
+        ※ 변환 진행 중 실패 시 → 변환 실패 (가이드 참조)
+    </blockquote>
+
+    <h3>관리자 핵심 사이클</h3>
+    <blockquote>
+        작품 관리(상태별 조회·검색) → 변환 실패 처리(Excel 업로드) / 판매 업데이트(Excel 업로드) / 마켓 삭제 처리<br><br>
+        그 외 운영: 배너 관리 · 태그 관리 · 구매 내역 조회 · 티켓 관리
+    </blockquote>
+
+    <table>
+        <thead><tr><th>구분</th><th>설명</th></tr></thead>
+        <tbody>
+        <tr><td><strong>발자국 (Footprint)</strong></td><td>게임 캐릭터가 이동할 때 남기는 시각 이펙트 에셋</td></tr>
+        <tr><td><strong>KP (Key Point)</strong></td><td>RO Factory 전용 포인트 (화폐)</td></tr>
+        <tr><td><strong>UGC 편집툴</strong></td><td>발자국 에셋을 제작하는 데스크톱 전용 소프트웨어</td></tr>
+        <tr><td><strong>.foot 파일</strong></td><td>편집툴에서 출력한 발자국 원본 소스 파일</td></tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <!-- 2. 접속 방법 -->
+    <h2 id="sec-2">2. 접속 방법 및 환경</h2>
+    <table>
+        <thead><tr><th>환경</th><th>URL</th></tr></thead>
+        <tbody>
+        <tr><td><strong>Front (유저 서비스)</strong></td><td><code>main2.html</code> 또는 포털 <code>index.html</code> → "Front 통합 메인 포털" 클릭</td></tr>
+        <tr><td><strong>Admin (백오피스)</strong></td><td><code>admin.html</code> 또는 포털 <code>index.html</code> → "Admin 운영 관리" 클릭</td></tr>
+        </tbody>
+    </table>
+    <ul>
+        <li><strong>PC 브라우저</strong>: Chrome, Edge, Safari (최신 버전 권장)</li>
+        <li><strong>모바일</strong>: 반응형 지원 (단, 작품 등록은 <strong>PC 전용</strong>)</li>
+        <li><strong>언어</strong>: 한국어(KO) / 영어(EN) 전환 지원</li>
+    </ul>
+    <div class="alert alert-important">
+        <div class="alert-title">⚠️ IMPORTANT</div>
+        <strong>작품 등록 페이지</strong>는 PC 환경에서만 접근 가능합니다. 모바일에서 접근 시 안내 메시지가 표시됩니다.
+    </div>
+
+    <hr>
+
+    <!-- 3. Front 서비스 -->
+    <h2 id="sec-3">3. Front (유저) 서비스</h2>
+
+    <!-- 3.1 -->
+    <h3 id="sec-3-1">3.1 메인 홈페이지</h3>
+    <p>파일: <code>main2.html</code></p>
+    <img class="screenshot" src="images/manual/main2_page_full.png" onerror="this.outerHTML='<div class=screenshot-placeholder>📸 메인 홈페이지 스크린샷</div>'" alt="메인 홈페이지">
+    <p>RO Factory에 진입하면 가장 먼저 보이는 <strong>포털 허브</strong> 페이지입니다.</p>
+
+    <h4>GNB (글로벌 네비게이션 바)</h4>
+    <table>
+        <thead><tr><th>영역</th><th>구성</th></tr></thead>
+        <tbody>
+        <tr><td><strong>상단 바 (GNJOY)</strong></td><td>GNJOY 로고 · 언어 전환(EN/KR) · Sign Up · Login</td></tr>
+        <tr><td><strong>메인 바 (ROZ)</strong></td><td>좌측 메뉴 4개 · 중앙 ROZ 로고 · 우측 메뉴 4개</td></tr>
+        </tbody>
+    </table>
+    <ul>
+        <li><strong>RO FACTORY</strong> 메뉴에 마우스를 올리면 드롭다운 서브메뉴: Register, Market, My Studio, RO FACTORY?</li>
+    </ul>
+
+    <h4>히어로 슬라이더</h4>
+    <ul>
+        <li><strong>4개의 슬라이드</strong>가 자동으로 롤링</li>
+        <li>하단 <strong>퀵 메뉴 카드</strong>(4개)를 통해 주요 페이지로 빠르게 이동</li>
+        <li>모바일에서는 퀵 메뉴 대신 <strong>도트 네비게이션</strong> 표시</li>
+    </ul>
+    <table>
+        <thead><tr><th>슬라이드</th><th>내용</th><th>이동 페이지</th></tr></thead>
+        <tbody>
+        <tr><td>1</td><td>나만의 발자국을 만들고 등록하세요</td><td><code>register.html</code></td></tr>
+        <tr><td>2</td><td>내 모든 작품을 한 곳에서 관리하세요</td><td><code>studio_myworks.html</code></td></tr>
+        <tr><td>3</td><td>RO FACTORY는 무엇인가요?</td><td><code>about.html</code></td></tr>
+        <tr><td>4</td><td>전 세계 크리에이터의 발자국을 만나보세요</td><td><code>market.html</code></td></tr>
+        </tbody>
+    </table>
+
+    <h4>인기 작품 / 신규 업데이트 슬라이더</h4>
+    <ul>
+        <li><strong>이달의 베스트 발자국</strong>: BEST 배지가 붙은 인기 상품 카드 슬라이더</li>
+        <li><strong>신규 업데이트 발자국</strong>: NEW 배지가 붙은 최신 등록 상품 카드 슬라이더</li>
+    </ul>
+
+    <h4>HOW IT WORKS (제작 가이드)</h4>
+    <table>
+        <thead><tr><th>단계</th><th>내용</th></tr></thead>
+        <tbody>
+        <tr><td><strong>STEP 1</strong></td><td>UGC 편집툴로 .foot 원본 파일과 영상 미리보기 파일 추출</td></tr>
+        <tr><td><strong>STEP 2</strong></td><td>파일 업로드 및 메타 데이터(가격, 태그 등) 입력</td></tr>
+        <tr><td><strong>STEP 3</strong></td><td>등록 완료 후 마이 스튜디오에서 변환 현황 확인</td></tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <!-- 3.2 -->
+    <h3 id="sec-3-2">3.2 작품 등록 (Register)</h3>
+    <p>파일: <code>register.html</code></p>
+    <img class="screenshot" src="images/manual/register_page.png" onerror="this.outerHTML='<div class=screenshot-placeholder>📸 작품 등록 페이지 스크린샷</div>'" alt="작품 등록">
+    <p>유저가 데스크톱 편집툴에서 제작한 발자국 에셋을 마켓에 등록하는 <strong>4단계 위자드(Wizard)</strong> 페이지입니다.</p>
+
+    <div class="alert alert-important">
+        <div class="alert-title">⚠️ IMPORTANT</div>
+        <ul style="margin:0;padding-left:16px;">
+            <li><strong>PC 전용</strong>: 모바일 접속 시 PC 접근 안내가 표시됩니다</li>
+            <li><strong>로그인 필수</strong>: 비로그인 상태에서는 접근 불가</li>
+            <li><strong>주간 등록 제한</strong>: 최대 100개/주 (UTC+0 기준 월~일)</li>
+        </ul>
+    </div>
+
+    <h4>STEP 1 — 편집툴 안내</h4>
+    <ul><li>UGC 편집툴 다운로드 버튼 제공</li><li>편집툴 사용 가이드 안내</li></ul>
+
+    <h4>STEP 2 — 파일 업로드</h4>
+    <table>
+        <thead><tr><th>업로드 항목</th><th>형식</th><th>필수 여부</th></tr></thead>
+        <tbody>
+        <tr><td>원본 파일</td><td><code>.foot</code></td><td>✅ 필수</td></tr>
+        <tr><td>미리보기 영상</td><td><code>.mp4</code></td><td>✅ 필수</td></tr>
+        <tr><td>썸네일 이미지</td><td><code>.png</code></td><td>✅ 필수</td></tr>
+        </tbody>
+    </table>
+    <div class="alert alert-warning">
+        <div class="alert-title">⚠️ WARNING</div>
+        약관 동의 체크 없이는 다음 단계로 진행할 수 없습니다.
+    </div>
+
+    <h4>STEP 3 — 메타 데이터 입력</h4>
+    <table>
+        <thead><tr><th>입력 항목</th><th>설명</th><th>유효성 검사</th></tr></thead>
+        <tbody>
+        <tr><td><strong>작품명</strong></td><td>마켓에 표시될 이름</td><td>필수 입력</td></tr>
+        <tr><td><strong>마켓 가격</strong></td><td>KP 단위 (0 이상의 정수)</td><td>최소 0 KP, 음수 불가</td></tr>
+        <tr><td><strong>게시 만료일</strong></td><td>마켓 노출 종료 날짜</td><td>최소 30일 이상</td></tr>
+        <tr><td><strong>태그 선택</strong></td><td>속성 태그 (예: Dark, Cool, Cute 등)</td><td>최대 2개까지 선택 가능</td></tr>
+        <tr><td><strong>메인 색상</strong></td><td>대표 색상 1개 선택</td><td>라디오 버튼(단일 선택)</td></tr>
+        </tbody>
+    </table>
+    <div class="alert alert-tip">
+        <div class="alert-title">💡 TIP</div>
+        <strong>태그 큐(Queue) 로직</strong>: 이미 2개의 태그를 선택한 상태에서 3번째를 클릭하면, 가장 먼저 선택했던 태그가 자동으로 해제됩니다.
+    </div>
+
+    <h4>STEP 4 — 등록 완료</h4>
+    <ul><li>등록 성공 메시지 표시</li><li><strong>"마이 스튜디오로 이동"</strong> 버튼 클릭 → 등록 현황 확인 가능</li></ul>
+
+    <hr>
+
+    <!-- 3.3 -->
+    <h3 id="sec-3-3">3.3 마켓 스토어 (Market)</h3>
+    <p>파일: <code>market.html</code></p>
+    <img class="screenshot" src="images/manual/market_page.png" onerror="this.outerHTML='<div class=screenshot-placeholder>📸 마켓 스토어 스크린샷</div>'" alt="마켓">
+    <p>변환이 완료되어 <strong>판매 중(On Sale)</strong> 상태인 모든 UGC 에셋을 검색하고 구매하는 스토어 페이지입니다.</p>
+
+    <h4>좌측 필터 사이드바</h4>
+    <table>
+        <thead><tr><th>필터</th><th>설명</th></tr></thead>
+        <tbody>
+        <tr><td><strong>카테고리</strong></td><td>에셋 종류별 분류 (현재: 발자국 단일)</td></tr>
+        <tr><td><strong>태그 속성</strong></td><td>Dark, Cool, Cute, Shining 등 복수 선택 가능</td></tr>
+        <tr><td><strong>색상 칩</strong></td><td>메인 색상별 필터링</td></tr>
+        <tr><td><strong>가격 범위</strong></td><td>듀얼 슬라이더로 최저~최대 KP 지정</td></tr>
+        </tbody>
+    </table>
+
+    <h4>구매 프로세스</h4>
+    <ol>
+        <li>상품 카드 클릭 → <strong>상품 상세 페이지</strong> 이동</li>
+        <li>"영상 미리보기" 버튼 클릭 → 모달 창에서 애니메이션 확인</li>
+        <li><strong>"구매하기"</strong> 버튼 클릭 → 구매 확인 팝업</li>
+    </ol>
+    <div class="alert alert-warning">
+        <div class="alert-title">⚠️ WARNING</div>
+        보유 KP가 부족한 경우 구매 버튼이 <strong>비활성화(Disabled)</strong> 됩니다.
+    </div>
+
+    <hr>
+
+    <!-- 3.4 -->
+    <h3 id="sec-3-4">3.4 마이 스튜디오 (My Studio)</h3>
+    <p>내가 창작한 작품과 구매한 수집품을 종합 관리하는 대시보드입니다.</p>
+
+    <h4>3.4.1 나의 작품 (My Works)</h4>
+    <p>파일: <code>studio_myworks.html</code></p>
+    <img class="screenshot" src="images/manual/studio_myworks.png" onerror="this.outerHTML='<div class=screenshot-placeholder>📸 나의 작품 스크린샷</div>'" alt="나의 작품">
+    <table>
+        <thead><tr><th>상태</th><th>배지</th><th>설명</th></tr></thead>
+        <tbody>
+        <tr><td>전체</td><td>—</td><td>모든 상태의 작품 표시</td></tr>
+        <tr><td>변환 대기 중</td><td>🟡</td><td>등록 후 변환 처리 대기 상태</td></tr>
+        <tr><td>변환 중</td><td>🔵</td><td>시스템에서 변환 처리 진행 중</td></tr>
+        <tr><td>변환 완료</td><td>🟢</td><td>변환이 완료되어 마켓 등록 준비</td></tr>
+        <tr><td>판매 중</td><td>🟣</td><td>마켓에서 판매 중인 상태</td></tr>
+        <tr><td>작품 만료</td><td>⚫</td><td>게시 기간이 만료된 상태</td></tr>
+        <tr><td>변환 실패</td><td>🔴</td><td>변환 처리에 실패한 상태</td></tr>
+        </tbody>
+    </table>
+
+    <h4>3.4.2 인벤토리 (Inventory)</h4>
+    <p>파일: <code>studio_inventory.html</code></p>
+    <img class="screenshot" src="images/manual/studio_inventory.png" onerror="this.outerHTML='<div class=screenshot-placeholder>📸 인벤토리 스크린샷</div>'" alt="인벤토리">
+    <p>마켓에서 <strong>구매한 에셋</strong>을 확인하고 유효기간을 체크합니다.</p>
+
+    <h4>3.4.3 위시리스트 (Wishlist)</h4>
+    <p>파일: <code>studio_wishlist.html</code> — 마켓에서 ♡ 좋아요를 누른 에셋 목록을 모아볼 수 있습니다.</p>
+
+    <hr>
+
+    <!-- 3.5 -->
+    <h3 id="sec-3-5">3.5 작품 상세 보기 (Detail)</h3>
+    <p>파일: <code>studio_detail.html</code></p>
+    <img class="screenshot" src="images/manual/studio_detail.png" onerror="this.outerHTML='<div class=screenshot-placeholder>📸 작품 상세 보기 스크린샷</div>'" alt="작품 상세">
+    <table>
+        <thead><tr><th>상태</th><th>사용 가능한 액션</th></tr></thead>
+        <tbody>
+        <tr><td><strong>변환 대기 중</strong></td><td>✏️ 수정하기 · 🗑️ 삭제하기</td></tr>
+        <tr><td><strong>변환 중 ~ 완료</strong></td><td>수정 버튼 숨김 (로그만 조회)</td></tr>
+        <tr><td><strong>판매 중</strong></td><td>판매 현황 조회만 가능</td></tr>
+        <tr><td><strong>변환 실패</strong></td><td>"변환 실패" 안내 + 공식 가이드 링크</td></tr>
+        </tbody>
+    </table>
+    <div class="alert alert-note">
+        <div class="alert-title">📝 NOTE</div>
+        <strong>수정/삭제는 "변환 대기 중" 상태에서만 가능합니다.</strong> 변환이 시작되면 메타 데이터 변경이 불가합니다.
+    </div>
+
+    <hr>
+
+    <!-- 3.6 -->
+    <h3 id="sec-3-6">3.6 정보 수정 (Edit)</h3>
+    <p>파일: <code>edit.html</code> — <strong>"변환 대기 중"</strong> 상태의 작품에 한해 메타 데이터를 수정하는 전용 폼입니다.</p>
+    <table>
+        <thead><tr><th>항목</th><th>수정 가능 여부</th></tr></thead>
+        <tbody>
+        <tr><td>작품명</td><td>✅ 수정 가능</td></tr>
+        <tr><td>카테고리</td><td>🔒 수정 불가 (ReadOnly)</td></tr>
+        <tr><td>가격 (KP)</td><td>✅ 수정 가능</td></tr>
+        <tr><td>태그</td><td>✅ 수정 가능 (큐 로직 동일 적용)</td></tr>
+        <tr><td>색상</td><td>✅ 수정 가능</td></tr>
+        <tr><td>게시 만료일</td><td>✅ 수정 가능 (30일 이상)</td></tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <!-- 3.7 -->
+    <h3 id="sec-3-7">3.7 RO FACTORY 소개 (About)</h3>
+    <p>파일: <code>about.html</code></p>
+    <img class="screenshot" src="images/manual/about_page.png" onerror="this.outerHTML='<div class=screenshot-placeholder>📸 About 페이지 스크린샷</div>'" alt="About">
+    <p>RO Factory 플랫폼에 대한 종합 소개 페이지입니다. 발자국이란 무엇인지, 크리에이터 경제 설명, 제작~판매 프로세스 가이드, UGC 편집툴 다운로드 CTA 등을 포함합니다.</p>
+
+    <hr>
+
+    <!-- 4. Admin -->
+    <h2 id="sec-4">4. Admin (백오피스) 서비스</h2>
+
+    <h3 id="sec-4-1">4.1 백오피스 접속 및 네비게이션</h3>
+    <p>파일: <code>admin.html</code></p>
+    <img class="screenshot" src="images/manual/admin_page.png" onerror="this.outerHTML='<div class=screenshot-placeholder>📸 백오피스 스크린샷</div>'" alt="백오피스">
+    <p>백오피스는 <strong>3단 레이아웃</strong> 구조입니다:</p>
+    <table>
+        <thead><tr><th>영역</th><th>설명</th></tr></thead>
+        <tbody>
+        <tr><td><strong>외부 네비 (아이콘 바)</strong></td><td>MEM · GAME · PAY · WEB · SET 아이콘 탭</td></tr>
+        <tr><td><strong>내부 사이드 메뉴</strong></td><td>선택한 도구(WEB)의 하위 메뉴 트리</td></tr>
+        <tr><td><strong>메인 워크스페이스</strong></td><td>실제 데이터 조회/관리 화면</td></tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h3 id="sec-4-2">4.2 작품 관리</h3>
+    <table>
+        <thead><tr><th>탭</th><th>설명</th><th>특수 기능</th></tr></thead>
+        <tbody>
+        <tr><td><strong>변환 중</strong></td><td>현재 변환 처리 중인 작품</td><td>변환 실패 업데이트(Excel), 판매 업데이트(Excel)</td></tr>
+        <tr><td><strong>판매대기</strong></td><td>변환 완료 후 마켓 게시 대기</td><td>판매 업데이트(Excel)</td></tr>
+        <tr><td><strong>판매 중</strong></td><td>마켓에서 판매 중</td><td>—</td></tr>
+        <tr><td><strong>작품 만료</strong></td><td>게시 기간이 만료된 작품</td><td>—</td></tr>
+        <tr><td><strong>변환 실패</strong></td><td>변환에 실패한 작품</td><td>—</td></tr>
+        <tr><td><strong>마켓 삭제</strong></td><td>마켓에서 삭제된 작품</td><td>—</td></tr>
+        </tbody>
+    </table>
+    <div class="alert alert-important">
+        <div class="alert-title">⚠️ IMPORTANT</div>
+        Excel 업로드 전 반드시 <strong>샘플 파일</strong>을 다운로드하여 양식에 맞게 데이터를 입력하세요.
+    </div>
+
+    <hr>
+
+    <h3 id="sec-4-3">4.3 메인(배너) 관리</h3>
+    <p>파일: <code>admin_banner.html</code> — 메인 홈페이지의 히어로 슬라이더 배너를 관리합니다. 배너 이미지 등록/수정/삭제, 노출 순서 변경, 이동 URL 설정, 노출 기간 설정.</p>
+
+    <h3 id="sec-4-4">4.4 구매 내역</h3>
+    <p>파일: <code>admin_purchase.html</code> — 유저들의 마켓 구매 이력을 조회하고 관리합니다. 기간별/상태별 필터링, CSV 다운로드.</p>
+
+    <h3 id="sec-4-5">4.5 태그 관리</h3>
+    <p>파일: <code>admin_tag.html</code> — 마켓 및 등록 폼에서 사용되는 태그 속성(Dark, Cool, Cute 등)을 관리합니다.</p>
+
+    <h3 id="sec-4-6">4.6 티켓 관리</h3>
+    <p>파일: <code>admin_ticket.html</code> — 유저의 문의/신고 티켓을 관리합니다. 상태별 분류(접수→처리 중→완료), 관리자 답변 기능.</p>
+
+    <hr>
+
+    <!-- 5. 공통 기능 -->
+    <h2 id="sec-5">5. 공통 기능</h2>
+    <h4>언어 전환 (EN / KR)</h4>
+    <ul>
+        <li>GNB 우측 상단의 <strong>언어 드롭다운</strong>에서 EN ↔ KR 전환</li>
+        <li>선택한 언어는 <strong>localStorage</strong>에 저장되어 다음 접속 시에도 유지</li>
+    </ul>
+    <h4>기획 패널 보기</h4>
+    <ul>
+        <li>모든 Front 페이지 우측 상단에 <strong>"💡 기획 패널 보기"</strong> 플로팅 버튼</li>
+        <li>클릭 시 현재 페이지 번호(ex. Page 1/5)와 주요 목적 설명 표시</li>
+    </ul>
+    <h4>반응형 레이아웃</h4>
+    <table>
+        <thead><tr><th>화면 크기</th><th>적용</th></tr></thead>
+        <tbody>
+        <tr><td><strong>PC (1200px+)</strong></td><td>4열 그리드, 전체 사이드바 표시</td></tr>
+        <tr><td><strong>태블릿 (768~1024px)</strong></td><td>2열 그리드, 메뉴 축소</td></tr>
+        <tr><td><strong>모바일 (~768px)</strong></td><td>1열 세로 배치, 햄버거 메뉴</td></tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <!-- 6. FAQ -->
+    <h2 id="sec-6">6. FAQ / 자주 묻는 질문</h2>
+
+    <div class="faq-q">Q1. 작품 등록은 모바일에서도 가능한가요?</div>
+    <div class="faq-a"><strong>아니요.</strong> 작품 등록은 <strong>PC 환경에서만</strong> 접근 가능합니다. 모바일 접속 시 PC 이용 안내가 표시됩니다.</div>
+
+    <div class="faq-q">Q2. 주간 등록 제한은 어떻게 계산되나요?</div>
+    <div class="faq-a"><strong>UTC+0 기준</strong> 월요일 00:00:00 ~ 일요일 23:59:59를 1주 단위로 계산하며, 주당 <strong>최대 100개</strong>까지 등록 가능합니다.</div>
+
+    <div class="faq-q">Q3. 태그를 3개 이상 선택하고 싶은데 안 되나요?</div>
+    <div class="faq-a">태그는 최대 <strong>2개</strong>까지만 선택 가능합니다. 3번째 태그 클릭 시 가장 먼저 선택했던 태그가 자동 해제되는 <strong>큐(Queue) 로직</strong>이 적용됩니다.</div>
+
+    <div class="faq-q">Q4. 변환 대기 중인 작품을 수정하려면?</div>
+    <div class="faq-a"><strong>마이 스튜디오 → 나의 작품 → 작품 클릭 → 상세 보기</strong>에서 "수정하기" 버튼을 누르면 정보 수정 페이지로 이동합니다.</div>
+
+    <div class="faq-q">Q5. KP가 부족할 때 마켓에서 구매할 수 있나요?</div>
+    <div class="faq-a"><strong>아니요.</strong> KP 잔액이 상품 가격 미만인 경우 구매 버튼이 비활성화됩니다. "KP 충전하기" 버튼을 통해 먼저 충전하세요.</div>
+
+    <div class="faq-q">Q6. 변환 실패 시 자세한 사유를 알 수 있나요?</div>
+    <div class="faq-a">변환 실패 상세 사유는 시스템 내에서 직접 표시하지 않습니다. <strong>공식 가이드 페이지</strong>를 통해 주요 실패 원인과 대처 방법을 확인하세요.</div>
+
+    <hr>
+
+    <!-- 7. 용어 -->
+    <h2 id="sec-7">7. 부록: 용어 정리</h2>
+    <table>
+        <thead><tr><th>용어</th><th>설명</th></tr></thead>
+        <tbody>
+        <tr><td><strong>UGC</strong></td><td>User Generated Content. 유저가 직접 제작한 콘텐츠</td></tr>
+        <tr><td><strong>발자국</strong></td><td>캐릭터 이동 시 남기는 시각 이펙트 에셋</td></tr>
+        <tr><td><strong>KP</strong></td><td>RO Factory 전용 포인트 화폐</td></tr>
+        <tr><td><strong>.foot</strong></td><td>UGC 편집툴에서 출력한 발자국 원본 소스 파일 형식</td></tr>
+        <tr><td><strong>변환</strong></td><td>업로드된 .foot 파일을 게임 서비스용으로 처리하는 과정</td></tr>
+        <tr><td><strong>GNB</strong></td><td>Global Navigation Bar. 사이트 최상단 고정 메뉴바</td></tr>
+        <tr><td><strong>LNB</strong></td><td>Local Navigation Bar. 좌측 사이드 메뉴바</td></tr>
+        <tr><td><strong>CTA</strong></td><td>Call To Action. 유저의 행동을 유도하는 버튼/링크</td></tr>
+        <tr><td><strong>ROZ</strong></td><td>Ragnarok Zero. 라그나로크 제로 게임</td></tr>
+        <tr><td><strong>GNJOY</strong></td><td>그라비티의 글로벌 게임 포털 플랫폼</td></tr>
+        <tr><td><strong>마켓 ID</strong></td><td>마켓에서 발급되는 상품 고유 식별자</td></tr>
+        <tr><td><strong>아이템 ID</strong></td><td>게임 서버 내 아이템 고유 식별자</td></tr>
+        <tr><td><strong>어카운트넘버</strong></td><td>유저 계정 고유 번호</td></tr>
+        <tr><td><strong>큐 로직</strong></td><td>태그 선택 시 FIFO 방식으로 초과분을 자동 해제하는 로직</td></tr>
+        </tbody>
+    </table>
+
+</div><!-- /main-content -->
+</div><!-- /layout -->
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0})">↑</button>
+
+<script>
+// Back to top visibility
+window.addEventListener('scroll', () => {
+    document.getElementById('backToTop').style.display = window.scrollY > 300 ? 'flex' : 'none';
+});
+
+// Active TOC highlight
+const tocLinks = document.querySelectorAll('.toc-link');
+const sections = [];
+tocLinks.forEach(link => {
+    const id = link.getAttribute('href')?.replace('#','');
+    if(id) { const el = document.getElementById(id); if(el) sections.push({el, link}); }
+});
+window.addEventListener('scroll', () => {
+    let current = sections[0];
+    for(const s of sections) {
+        if(s.el.getBoundingClientRect().top <= 120) current = s;
+    }
+    tocLinks.forEach(l => l.classList.remove('active'));
+    if(current) current.link.classList.add('active');
+});
+</script>
+</body>
+</html>

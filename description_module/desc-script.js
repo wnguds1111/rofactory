@@ -22,9 +22,17 @@ window.currentMarks = [];
 window.descPageTitle = "";
 window.descPageOverview = "";
 // 로컬 스토리지에 저장된 잠금 상태 로드 (기본값: 잠금 상태인 true)
-window.isBuilderLocked = localStorage.getItem('rofactory_desc_panel_locked') !== 'false';
+window.isBuilderLocked = localStorage.getItem(STORAGE_PREFIX + "desc_panel_locked") !== 'false';
 window.hasEditPermission = false;
 window.isLocalEnv = false;
+
+window.DescConfig = window.DescConfig || {};
+const STORAGE_PREFIX = window.DescConfig.storagePrefix || 'rofactory_';
+const GITHUB_REPO = window.DescConfig.githubRepo || 'wnguds1111/rofactory';
+const GITHUB_PATH = window.DescConfig.githubPath || 'description_module/desc-data.json';
+const FALLBACK_TOKEN_PARTS = window.DescConfig.githubTokenParts || ['ghp_Xxy', 'U1Po6oKHa', 'hLJyWS8t69', 'ooIzhpch0fgT4e'];
+const JSON_URL = window.DescConfig.jsonUrl || (window.descModuleBasePath + 'description_module/desc-data.json');
+
 
 // 허용된 관리자 IP 목록 (사용자 IP 및 로컬/사설 네트워크 환경 포함)
 const ALLOWED_IPS = ['119.192.146.202', 'localhost', '127.0.0.1', '::1'];
@@ -51,7 +59,7 @@ window.permissionCheckPromise = (async function initPermission() {
 
     const urlParams = new URLSearchParams(window.location.search);
     const hasEditQuery = urlParams.has('edit') || urlParams.has('admin');
-    const hasSavedToken = !!localStorage.getItem('rofactory_github_token');
+    const hasSavedToken = !!localStorage.getItem(STORAGE_PREFIX + "github_token");
 
     if (isLocal || hasEditQuery || hasSavedToken) {
         window.hasEditPermission = true;
@@ -127,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. 새로고침 후 이전 활성화 상태 복원 및 상시 디스크립션 로드
-    const wasActive = localStorage.getItem('rofactory_desc_panel_active') === 'true';
+    const wasActive = localStorage.getItem(STORAGE_PREFIX + "desc_panel_active") === 'true';
     const panel = document.getElementById('pageDescPanel');
     if (wasActive && panel) {
         panel.classList.add('active');
@@ -216,7 +224,7 @@ async function loadDescData() {
         await window.permissionCheckPromise;
     }
 
-    const jsonUrl = window.descModuleBasePath + 'description_module/desc-data.json';
+    const jsonUrl = JSON_URL;
     let serverData = null;
     try {
         const res = await fetch(jsonUrl + '?t=' + new Date().getTime());
@@ -229,11 +237,11 @@ async function loadDescData() {
 
     let localData = null;
     try {
-        const draftsStr = localStorage.getItem('rofactory_desc_drafts');
+        const draftsStr = localStorage.getItem(STORAGE_PREFIX + "desc_drafts");
         if (draftsStr) {
             localData = JSON.parse(draftsStr);
         } else {
-            const oldStr = localStorage.getItem('rofactory_desc_all_pages_data');
+            const oldStr = localStorage.getItem(STORAGE_PREFIX + "desc_all_pages_data");
             if (oldStr) {
                 const oldData = JSON.parse(oldStr);
                 if (oldData && oldData.pages) {
@@ -246,10 +254,10 @@ async function loadDescData() {
                             newDrafts.pages[key] = page;
                         }
                     }
-                    localStorage.setItem('rofactory_desc_drafts', JSON.stringify(newDrafts));
+                    localStorage.setItem(STORAGE_PREFIX + "desc_drafts", JSON.stringify(newDrafts));
                     localData = newDrafts;
                 }
-                localStorage.removeItem('rofactory_desc_all_pages_data');
+                localStorage.removeItem(STORAGE_PREFIX + "desc_all_pages_data");
             }
         }
     } catch (e) {
@@ -271,7 +279,7 @@ async function loadDescData() {
         if (localData.pages["4"] && !localData.pages["4-converting"]) {
             localData.pages["4-converting"] = localData.pages["4"];
             delete localData.pages["4"];
-            try { localStorage.setItem('rofactory_desc_drafts', JSON.stringify(localData)); } catch(e){}
+            try { localStorage.setItem(STORAGE_PREFIX + "desc_drafts", JSON.stringify(localData)); } catch(e){}
         }
         for (const key in localData.pages) {
             const localPage = localData.pages[key];
@@ -285,12 +293,12 @@ async function loadDescData() {
             // Skip pages that are identical to the server
             if (serverPage && arePagesEqual(localPage, serverPage)) {
                 try {
-                    const draftsStr = localStorage.getItem('rofactory_desc_drafts');
+                    const draftsStr = localStorage.getItem(STORAGE_PREFIX + "desc_drafts");
                     if (draftsStr) {
                         const drafts = JSON.parse(draftsStr);
                         if (drafts && drafts.pages) {
                             delete drafts.pages[key];
-                            localStorage.setItem('rofactory_desc_drafts', JSON.stringify(drafts));
+                            localStorage.setItem(STORAGE_PREFIX + "desc_drafts", JSON.stringify(drafts));
                         }
                     }
                 } catch (e) {
@@ -312,7 +320,7 @@ async function showDynamicDescPanel(pageNum, silent = false) {
     const panel = document.getElementById('pageDescPanel');
     if (!silent) {
         panel.classList.toggle('active');
-        localStorage.setItem('rofactory_desc_panel_active', panel.classList.contains('active') ? 'true' : 'false');
+        localStorage.setItem(STORAGE_PREFIX + "desc_panel_active", panel.classList.contains('active') ? 'true' : 'false');
     }
 
     const targetKey = getTargetKey();
@@ -393,13 +401,13 @@ function saveBuilderMarks(re_render = true) {
     // 로컬스토리지 캐시 저장 (드래프트 키에만 변경 사항 저장)
     try {
         let drafts = { pages: {} };
-        const draftsStr = localStorage.getItem('rofactory_desc_drafts');
+        const draftsStr = localStorage.getItem(STORAGE_PREFIX + "desc_drafts");
         if (draftsStr) {
             drafts = JSON.parse(draftsStr);
         }
         if (!drafts.pages) drafts.pages = {};
         drafts.pages[pageKey] = pageData;
-        localStorage.setItem('rofactory_desc_drafts', JSON.stringify(drafts));
+        localStorage.setItem(STORAGE_PREFIX + "desc_drafts", JSON.stringify(drafts));
     } catch (e) {
         console.error('로컬스토리지 캐시 저장 실패:', e);
     }
@@ -409,16 +417,15 @@ function saveBuilderMarks(re_render = true) {
 
 // GitHub 자동 동기화 (저장 버튼 누르면 자동 실행)
 async function syncToGitHub() {
-    const _a = 'ghp_Xxy', _b = 'U1Po6oKHa', _c = 'hLJyWS8t69', _d = 'ooIzhpch0fgT4e';
-    const token = localStorage.getItem('rofactory_github_token') || (_a + _b + _c + _d);
+    const token = localStorage.getItem(STORAGE_PREFIX + "github_token") || FALLBACK_TOKEN_PARTS.join('');
 
-    const apiUrl = 'https://api.github.com/repos/wnguds1111/rofactory/contents/description_module/desc-data.json';
+    const apiUrl = 'https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + GITHUB_PATH;
     const headers = { 'Authorization': 'token ' + token, 'Content-Type': 'application/json' };
 
     try {
         const getRes = await fetch(apiUrl, { headers });
         if (getRes.status === 401 || getRes.status === 403) {
-            localStorage.removeItem('rofactory_github_token');
+            localStorage.removeItem(STORAGE_PREFIX + "github_token");
             alert('토큰이 만료되었습니다. 다시 저장해주세요.');
             return false;
         }
@@ -734,12 +741,12 @@ async function toggleLock() {
             // 자동 캐시 삭제 기능(arePagesEqual 비교)에 의해 안전하게 정리되도록 합니다.
             if (window.isLocalEnv && localOk) {
                 try {
-                    const draftsStr = localStorage.getItem('rofactory_desc_drafts');
+                    const draftsStr = localStorage.getItem(STORAGE_PREFIX + "desc_drafts");
                     if (draftsStr) {
                         const drafts = JSON.parse(draftsStr);
                         if (drafts && drafts.pages) {
                             delete drafts.pages[pageKey];
-                            localStorage.setItem('rofactory_desc_drafts', JSON.stringify(drafts));
+                            localStorage.setItem(STORAGE_PREFIX + "desc_drafts", JSON.stringify(drafts));
                         }
                     }
                 } catch (e) {
@@ -768,7 +775,7 @@ async function toggleLock() {
     }
 
     window.isBuilderLocked = !window.isBuilderLocked;
-    localStorage.setItem('rofactory_desc_panel_locked', window.isBuilderLocked ? 'true' : 'false');
+    localStorage.setItem(STORAGE_PREFIX + "desc_panel_locked", window.isBuilderLocked ? 'true' : 'false');
     renderBuilderMarks();
 }
 
@@ -807,14 +814,14 @@ document.addEventListener('mouseup', function (e) {
 });
 
 window.promptGithubToken = function() {
-    const currentToken = localStorage.getItem('rofactory_github_token') || '';
+    const currentToken = localStorage.getItem(STORAGE_PREFIX + "github_token") || '';
     const token = prompt("GitHub Personal Access Token (PAT)을 입력하세요:\n(입력 시 IP 제한 없이 기획 내용을 GitHub에 직접 저장할 수 있습니다. 비워두면 토큰이 삭제됩니다.)", currentToken);
     
     if (token === null) return; // 취소 버튼 클릭 시 무시
     
     const trimmed = token.trim();
     if (trimmed) {
-        localStorage.setItem('rofactory_github_token', trimmed);
+        localStorage.setItem(STORAGE_PREFIX + "github_token", trimmed);
         window.hasEditPermission = true;
         
         // 잠금 토글 버튼 보이기
@@ -824,7 +831,7 @@ window.promptGithubToken = function() {
         }
         alert("GitHub 토큰이 저장되었습니다. 이제 자물쇠를 풀어 편집 및 저장을 하실 수 있습니다.");
     } else {
-        localStorage.removeItem('rofactory_github_token');
+        localStorage.removeItem(STORAGE_PREFIX + "github_token");
         alert("GitHub 토큰이 삭제되었습니다.");
     }
     
@@ -836,8 +843,8 @@ window.promptGithubToken = function() {
 
 window.resetDescCache = async function() {
     if (confirm('로컬 캐시를 초기화하고 서버의 최신 기획 데이터로 새로고침 하시겠습니까?\n(저장하지 않은 편집 내용은 사라집니다.)')) {
-        localStorage.removeItem('rofactory_desc_drafts');
-        localStorage.removeItem('rofactory_desc_all_pages_data');
+        localStorage.removeItem(STORAGE_PREFIX + "desc_drafts");
+        localStorage.removeItem(STORAGE_PREFIX + "desc_all_pages_data");
         window.descAllPagesData = null;
         await loadDescData();
         showDynamicDescPanel(window.currentPrdPageNum, true);
