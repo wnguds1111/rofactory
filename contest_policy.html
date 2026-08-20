@@ -411,12 +411,10 @@
 
         <!-- Sidebar Navigation (1~5번 항목 전용 메뉴) -->
         <nav class="sidebar">
-            <div class="sidebar-title">콘테스트 정책 및 명세 (1~5)</div>
-            <a href="#sec-cycle" class="nav-item active">📅 1. 공모전 운영 사이클 &amp; 일정</a>
-            <a href="#sec-selection" class="nav-item">🎨 2. 출품 &amp; 선정 정책 (10개 이원화)</a>
-            <a href="#sec-ticket" class="nav-item">🎟️ 3. 티켓 지급/소멸 &amp; 결제 체크</a>
-            <a href="#sec-risk" class="nav-item">🛡️ 4. 리스크 관리 &amp; 법적 고지</a>
-            <a href="#sec-automation" class="nav-item">🤖 5. 응모 ~ 마켓 개시 자동화 파이프라인</a>
+            <div class="sidebar-title">콘테스트 정책 및 명세 (1~3)</div>
+            <a href="#sec-automation" class="nav-item active">🤖 1. 공모전 운영 11단계 타임라인</a>
+            <a href="#sec-ticket" class="nav-item">🎟️ 2. 티켓 지급/소멸 &amp; 결제 체크</a>
+            <a href="#sec-risk" class="nav-item">🛡️ 3. 리스크 관리 &amp; 법적 고지</a>
 
             <div class="nav-divider"></div>
             <div class="sidebar-title">관련 웹 화면 (Mockups)</div>
@@ -434,315 +432,13 @@
                     RO Factory CDN 발자국(Footprint) 트래픽 비용 대응 및 유저 크리에이터 콘텐츠(UGC) 활성화를 위해 진행되는 시즌제 공모전의 세부 운영 정책서 입니다.</p>
             </div>
 
-            <!-- ===================== SECTION 1 ===================== -->
-            <div class="page-section" id="sec-cycle">
-                <div class="page-header">
-                    <div class="page-icon" style="background:#eff6ff;">📅</div>
-                    <h3>1. 공모전 운영 사이클 및 일정 스펙 (총 3개월 주기)</h3>
-                    <div class="section-edit-tools" style="display:none; margin-left:auto; gap:6px;">
-                        <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
-                    </div>
-                    <span class="page-tag" style="margin-left:10px;">Operation Cycle Spec</span>
-                </div>
-                <div class="page-body">
+            
 
-                    <div class="note-block" style="margin-bottom:18px;">
-                        • <strong>1~2개월 차 (접수 마감)</strong>: 유저 대상 크리에이터 티켓 지급 &amp; RO Factory 웹사이트를 통한 작품 접수 진행 후 마감<br>
-                        • <strong>3개월 차 (심사, 유저 투표 &amp; 발표)</strong>: 1~2주간 GM/개발진 1차 평가 + 유저 인기 투표(contest_vote.html) 진행 후 마지막 주 최종 당첨작 공개<br>
-                        • <strong>인게임 반영</strong>: 당첨작 공개 이후 첫 정기점검 시 인게임 패치 및 RO Factory 마켓 상점 등록
-                    </div>
-
-                    <div class="spec-group">
-                        <div class="spec-label-row">
-                            <div class="spec-label">운영 사이클 세부 일정 표</div>
-                            <div class="section-edit-tools" style="display:none; gap:6px;">
-                                <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
-                            </div>
-                        </div>
-                        <table class="spec-table">
-                            <thead>
-                                <tr>
-                                    <th style="width:180px;">구분</th>
-                                    <th style="width:280px;">기간 및 일정</th>
-                                    <th>세부 운영 스펙 및 설명</th>
-                                    <th style="width:110px; text-align:center;">상태</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="field">어드민 콘테스트 날짜 설정</td>
-                                    <td>
-                                        • <code>reg_start</code> ~ <code>reg_end</code> (작품 접수)<br>
-                                        • <code>vote_start</code> ~ <code>vote_end</code> (랭킹 선정)
-                                    </td>
-                                    <td>
-                                        어드민 백오피스(<code>admin.html</code>)에서 분 단위로 날짜 파라미터를 사전 세팅 관리.<br>
-                                        ① 유저 발자국 등록 시작/마감 시점 자동 제어 및 ② 유저 투표 랭킹 선정 시작/마감 시점 자동 연동.
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="field">런칭 1st 사이클 (예외)</td>
-                                    <td>
-                                        • <strong>접수</strong>: 2026.08.18 ~ 10.31 (약 2.5개월)<br>
-                                        • <strong>심사/투표/발표</strong>: 2026.11.01 ~ 11.30<br>
-                                        • <strong>패치</strong>: 2026.12.03 또는 12.10
-                                    </td>
-                                    <td>
-                                        런칭 첫 회차만 예외적으로 유저 작품 수량 확보를 위해 접수 기간을 2.5개월로 확장 적용.<br>
-                                        11월 한 달간 GM/개발진 내부 심사 및 유저 인기 투표를 동시 진행하여 12월 첫 정기점검 시 인게임 패치 및 마켓 반영.
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="field">2nd 정규 사이클</td>
-                                    <td>
-                                        • <strong>접수</strong>: 2026.12.01 ~ 2027.01.31 (2개월)<br>
-                                        • <strong>심사/발표</strong>: 2027.02.01 ~ 02.28<br>
-                                        • <strong>패치</strong>: 2027.03월 첫 점검
-                                    </td>
-                                    <td>
-                                        1차 사이클 발표 종료 직후 차기 사이클 작품 접수를 연속 개시하며, 이후 3개월 단위 정규 순환 체계로 상시 운용.
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- ===================== SECTION 2 ===================== -->
-            <div class="page-section" id="sec-selection">
-                <div class="page-header">
-                    <div class="page-icon" style="background:#fef9c3;">🎨</div>
-                    <h3>2. 출품 및 선정 정책 (당첨작 총 10개 이원화 평가)</h3>
-                    <div class="section-edit-tools" style="display:none; margin-left:auto; gap:6px;">
-                        <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
-                    </div>
-                    <span class="page-tag" style="margin-left:10px;">Submission &amp; Selection Spec</span>
-                </div>
-                <div class="page-body">
-
-                    <div class="spec-group">
-                        <div class="spec-label-row">
-                            <div class="spec-label">출품 조건 및 당첨작 선정 세부 규칙</div>
-                            <div class="section-edit-tools" style="display:none; gap:6px;">
-                                <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
-                            </div>
-                        </div>
-                        <table class="spec-table">
-                            <thead>
-                                <tr>
-                                    <th style="width:180px;">정책 항목</th>
-                                    <th style="width:300px;">세부 스펙</th>
-                                    <th>결정 사항 및 대응 방안</th>
-                                    <th style="width:110px; text-align:center;">상태</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="field">제출 기회 캡</td>
-                                    <td>정액제/결제 유저 대상 사이클 당 30회 기회 제공</td>
-                                    <td>
-                                        스팸성 무성의 업로드 방지 및 고품질 작품 출품 유도를 위해 회차당 30회 제출 캡 설정.
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="field">삭제 및 복구 정책</td>
-                                    <td>제출작 삭제 시 제출 기회(티켓) 및 삭제 파일 복구 불가</td>
-                                    <td>
-                                        유저가 제출한 작품을 삭제 시 사용된 티켓은 재발급되지 않음 (`⚠️ 2차 경고 팝업` 필수 적용).
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="field">선정 규모 &amp; 이원화 방식</td>
-                                    <td>
-                                        <strong>총 10개 작품 선정 (수량 변동 가능)</strong><br>
-                                        • 👑 <strong>GM/개발진 내부 평가: 5개</strong><br>
-                                        • 🗳️ <strong>유저 인기 투표 사이트: 5개</strong>
-                                    </td>
-                                    <td>
-                                        내부 전문성 평가 5개 + 유저 참여형 인기 투표 5개의 이원화 조합으로 심사 공정성 및 커뮤니티 참여 유도 극대화.<br>
-                                        특정 유저 독식을 방지하기 위해 <strong>계정당 최종 당첨은 1개로 제한</strong>.
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="field">접수 페이지 연동</td>
-                                    <td>이벤트 랜딩 내 `[작품 출품하기]` 클릭 시 <strong>register.html 활용</strong> 연동</td>
-                                    <td>
-                                        기존 구축된 팩토리 등록 UI/UX 및 업로드 파이프라인 재활용하여 개발 공수 최소화. 공모전 전용 상단 배너 및 아티스트 닉네임 설정 모달 추가.
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="field">전체 작품 갤러리 연동</td>
-                                    <td>응모된 전체 작품 모아보기 <strong>전체 출품작 갤러리 페이지</strong> 구축</td>
-                                    <td>
-                                        3D 실시간 WebGL 프리뷰 및 최신순/인기순 필터링 기능 탑재 전용 갤러리(`contest_gallery.html`) 연동.
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="field">당첨자 개별 통보</td>
-                                    <td>인게임 로덱스(RODEX) 편지 시스템을 통한 당첨 통보</td>
-                                    <td>
-                                        당첨작 발표 시 인게임 로덱스 알림 편지 발송 및 웹 당첨자 공지 게시판 동시 게시.
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- ===================== SECTION 3 ===================== -->
-            <div class="page-section" id="sec-ticket">
-                <div class="page-header">
-                    <div class="page-icon" style="background:#f0fdf4;">🎟️</div>
-                    <h3>3. 티켓 지급, 소멸 및 결제 체크 정책</h3>
-                    <div class="section-edit-tools" style="display:none; margin-left:auto; gap:6px;">
-                        <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
-                    </div>
-                    <span class="page-tag" style="margin-left:10px;">Ticket Lifecycle Spec</span>
-                </div>
-                <div class="page-body">
-
-                    <div class="spec-group">
-                        <div class="spec-label-row">
-                            <div class="spec-label">티켓 발급, 이월 소멸 및 정액제 상태별 처리 기준</div>
-                            <div class="section-edit-tools" style="display:none; gap:6px;">
-                                <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
-                            </div>
-                        </div>
-                        <table class="spec-table">
-                            <thead>
-                                <tr>
-                                    <th style="width:200px;">구분</th>
-                                    <th style="width:300px;">세부 정책 내용</th>
-                                    <th>기술 및 운영 처리 로직</th>
-                                    <th style="width:110px; text-align:center;">상태</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="field">① 사이클 종료 시 잔여 티켓</td>
-                                    <td>해당 회차 종료 시 잔여 티켓 차기 이월 불가, 전량 자동 소멸</td>
-                                    <td>
-                                        [1안 적용] 회차 종료 시점에 유저의 잔여 티켓 수량을 DB에서 일괄 초기화 (0으로 리셋).
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="field">② 신규 티켓 지급 대상</td>
-                                    <td>특정 이벤트 기간 내 [정액제 결제] OR [카프라 포인트(KP) 결제] 완료 유저</td>
-                                    <td>
-                                        결제 시도 및 완료 로그 이벤트 수신 시 티켓 30장 즉시 생성 발급하여 유저 참여 과금 혜택 유도 (당사 제안 반영).
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-blue">✅ 제안/확정</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="field">③ 정액제 만료 시 티켓 유지</td>
-                                    <td>기간 중 정액제 이용이 만료되어도 부여받은 회차 티켓 사용 유지</td>
-                                    <td>
-                                        정액제 유효 기간을 실시간 체크하지 않고, <strong>'유저가 결제 완료한 시도 액션' 자체를 기준</strong>으로 체크하여 당 회차 권한 보장.
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- ===================== SECTION 4 ===================== -->
-            <div class="page-section" id="sec-risk">
-                <div class="page-header">
-                    <div class="page-icon" style="background:#fef2f2;">🛡️</div>
-                    <h3>4. 리스크 관리 및 법적 고지 항목 (당사 보완안 반영)</h3>
-                    <div class="section-edit-tools" style="display:none; margin-left:auto; gap:6px;">
-                        <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
-                    </div>
-                    <span class="page-tag" style="margin-left:10px;">Risk &amp; Legal Spec</span>
-                </div>
-                <div class="page-body">
-
-                    <div class="spec-group">
-                        <div class="spec-label-row">
-                            <div class="spec-label warn">리스크 관리 및 법적 고지 세부 명세</div>
-                            <div class="section-edit-tools" style="display:none; gap:6px;">
-                                <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
-                            </div>
-                        </div>
-                        <table class="spec-table">
-                            <thead>
-                                <tr>
-                                    <th style="width:200px;">리스크 구분</th>
-                                    <th style="width:300px;">문제점 및 이슈</th>
-                                    <th>당사 제안 / 확정 대응 정책</th>
-                                    <th style="width:110px; text-align:center;">상태</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="field">프로필(이메일) 노출 방지</td>
-                                    <td>로그인 계정명이 이메일 주소이므로 외부에 노출될 경우 개인정보 보호법 위반 및 글로벌 사생활 침해 우려</td>
-                                    <td>
-                                        <strong>[당사 제안 반영]</strong> 작품 응모 시 <strong>'아티스트 명(닉네임)' 1회 필수 입력 모달</strong> 제공.<br>
-                                        최초 1회 입력 후 마케팅/프로모션/인게임 제작자 표기에 해당 닉네임으로 자동 매칭 및 노출.
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-blue">✅ 제안/확정</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="field">위반 적발 시 인게임 처리</td>
-                                    <td>표절, IP 침해, 유해 콘텐츠 등 선정/배포 후 위반 사항 클레임 접수 시 처리 기준</td>
-                                    <td>
-                                        <strong>[당사 안 준용]</strong> 마켓 판매 중단(Down) 조치와 함께, 이미 아이템을 소유한 유저는 <strong>아이템 자체는 보유하되 장착 시 이펙트 비노출(숨김) 처리</strong> (기존 구현 방식 준용).
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="field">권리 귀속 및 약관 고지</td>
-                                    <td>제출작 및 아티스트 명 마케팅 활용 동의, 사전 통보 없는 규칙 변경 고지</td>
-                                    <td>
-                                        구글 doc 약관 연동 및 웹 작품 응모 시 필수 체크 동의 절차 적용. 운영 상황에 따른 약관 사전 통보 없이 변경 가능성 명시.
-                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
-                                    </td>
-                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- ===================== SECTION 5 ===================== -->
+            <!-- ===================== SECTION 1 (파이프라인) ===================== -->
             <div class="page-section" id="sec-automation">
                 <div class="page-header">
-                    <div class="page-icon" style="background:#f1f5f9; color:#0f172a;">5</div>
-                    <h3>5. 공모전 운영 11단계 프로세스 타임라인 및 단계별 고려사항</h3>
+                    <div class="page-icon" style="background:#f1f5f9; color:#0f172a;">1</div>
+                    <h3>1. 공모전 운영 11단계 프로세스 타임라인 및 단계별 고려사항</h3>
                     <div class="section-edit-tools" style="display:none; margin-left:auto; gap:6px;">
                         <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
                     </div>
@@ -1023,6 +719,385 @@
 
         
     
+
+    <script>
+        // Smooth scroll for nav items
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    document.querySelectorAll('.nav-item').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Auto-highlight sidebar nav on scroll
+        const sections = document.querySelectorAll('.page-section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    document.querySelectorAll('.nav-item').forEach(l => {
+                        if (l.getAttribute('href') === '#' + id) {
+                            l.classList.add('active');
+                        } else if (l.getAttribute('href') && l.getAttribute('href').startsWith('#')) {
+                            l.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: '-80px 0px -50% 0px' });
+
+        sections.forEach(sec => observer.observe(sec));
+
+        // ================= EDIT MODE & REALTIME PERSISTENCE =================
+        let isEditingMode = false;
+
+        // Ensure latest server content is rendered by default
+        window.addEventListener('DOMContentLoaded', () => {
+            // Clear stale local draft backup on fresh page load
+            localStorage.removeItem('contest_policy_body_draft');
+        });
+
+        function toggleEditMode() {
+            isEditingMode = !isEditingMode;
+            const btnToggle = document.getElementById('btnEditToggle');
+            const btnSave = document.getElementById('btnSavePolicy');
+            const btnReset = document.getElementById('btnResetPolicy');
+
+            if (isEditingMode) {
+                document.body.classList.add('is-editing');
+                btnToggle.innerHTML = '✏️ 수정 모드 ON';
+                btnToggle.style.background = '#ea580c';
+                btnToggle.style.borderColor = '#ea580c';
+                btnSave.style.display = 'inline-block';
+                if (btnReset) btnReset.style.display = 'inline-block';
+                enableContentEditing(true);
+                showToast('✏️ 수정 모드가 활성화되었습니다. 내용을 편집하면 자동 임시저장됩니다.');
+            } else {
+                document.body.classList.remove('is-editing');
+                btnToggle.innerHTML = '✏️ 수정 모드 OFF';
+                btnToggle.style.background = '#2563eb';
+                btnToggle.style.borderColor = '#2563eb';
+                btnSave.style.display = 'none';
+                if (btnReset) btnReset.style.display = 'none';
+                enableContentEditing(false);
+                showToast('🔒 수정 모드가 해제되었습니다.');
+            }
+        }
+
+        function autoSaveDraft() {
+            const mainEl = document.querySelector('.main');
+            if (mainEl) {
+                // Clone main, strip editing attributes
+                const clone = mainEl.cloneNode(true);
+                clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+                clone.querySelectorAll('.badge').forEach(el => el.removeAttribute('onclick'));
+                localStorage.setItem('contest_policy_body_draft', clone.innerHTML);
+            }
+        }
+
+        function enableContentEditing(enable) {
+            const selectors = [
+                '.page-header h3', '.spec-label', '.spec-table td', '.spec-table th',
+                '.note-block', '.contest-hero h2', '.contest-hero p', '.wf-title', '.wf-box'
+            ];
+            document.querySelectorAll(selectors.join(',')).forEach(el => {
+                if (enable) {
+                    el.setAttribute('contenteditable', 'true');
+                    el.oninput = autoSaveDraft;
+                } else {
+                    el.removeAttribute('contenteditable');
+                    el.oninput = null;
+                }
+            });
+
+            document.querySelectorAll('.badge').forEach(badge => {
+                if (enable) {
+                    badge.setAttribute('onclick', 'cycleBadge(this)');
+                } else {
+                    badge.removeAttribute('onclick');
+                }
+            });
+        }
+
+        const badgeTypes = [
+            { text: '✅ 확정', class: 'badge badge-green' },
+            { text: '✅ 제안/확정', class: 'badge badge-blue' },
+            { text: '⚠️ 미확정', class: 'badge badge-warn' },
+            { text: '❌ 미정의', class: 'badge badge-red' }
+        ];
+
+        function cycleBadge(badgeEl) {
+            if (!isEditingMode) return;
+            const currentText = badgeEl.innerText.trim();
+            let currIndex = badgeTypes.findIndex(b => b.text === currentText);
+            if (currIndex === -1) currIndex = 0;
+            const nextIndex = (currIndex + 1) % badgeTypes.length;
+            const nextBadge = badgeTypes[nextIndex];
+            
+            badgeEl.className = nextBadge.class;
+            badgeEl.innerText = nextBadge.text;
+            autoSaveDraft();
+        }
+
+        function addTableRow(btnEl) {
+            const pageSection = btnEl.closest('.page-section');
+            const table = pageSection.querySelector('table.spec-table');
+            if (!table) return;
+
+            const tbody = table.querySelector('tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td class="field" contenteditable="true" oninput="autoSaveDraft()">신규 정책 항목</td>
+                <td contenteditable="true" oninput="autoSaveDraft()">세부 스펙 및 내용을 입력하세요.</td>
+                <td contenteditable="true" oninput="autoSaveDraft()">
+                    결정 사항 및 운영 대응 방안을 입력하세요.
+                    <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
+                </td>
+                <td style="text-align:center;"><span class="badge badge-green" onclick="cycleBadge(this)">✅ 확정</span></td>
+            `;
+            tbody.appendChild(newRow);
+            if (isEditingMode) enableContentEditing(true);
+            autoSaveDraft();
+            showToast('➕ 새로운 정책 행이 추가되었습니다.');
+        }
+
+        function deleteTableRow(btnEl) {
+            if (!confirm('이 정책 행을 삭제하시겠습니까?')) return;
+            const row = btnEl.closest('tr');
+            if (row) {
+                row.remove();
+                autoSaveDraft();
+                showToast('🗑️ 행이 삭제되었습니다.');
+            }
+        }
+
+        function addWireframeCard(btnEl) {
+            const grid = document.getElementById('wfGridContainer');
+            if (!grid) return;
+
+            const card = document.createElement('div');
+            card.className = 'wf-card';
+            card.innerHTML = `
+                <button class="btn-row-del" style="position:absolute; top:12px; right:12px;" onclick="deleteWfCard(this)">🗑️ 카드 삭제</button>
+                <span class="wf-badge">신규 페이지</span>
+                <div class="wf-title" contenteditable="true" oninput="autoSaveDraft()">🆕 신규 공모전 화면 (new_page.html)</div>
+                <div class="wf-box" contenteditable="true" oninput="autoSaveDraft()">
+                    <strong>레이아웃 명세</strong>: 신규 화면 구성을 자유롭게 작성해보세요.
+                </div>
+            `;
+            grid.appendChild(card);
+            if (isEditingMode) enableContentEditing(true);
+            autoSaveDraft();
+            showToast('📐 새로운 와이어프레임 카드가 추가되었습니다.');
+        }
+
+        function deleteWfCard(btnEl) {
+            if (!confirm('이 와이어프레임 카드를 삭제하시겠습니까?')) return;
+            const card = btnEl.closest('.wf-card');
+            if (card) {
+                card.remove();
+                autoSaveDraft();
+                showToast('🗑️ 카드가 삭제되었습니다.');
+            }
+        }
+
+        async function savePolicyChanges() {
+            enableContentEditing(false);
+            document.body.classList.remove('is-editing');
+            const btnToggle = document.getElementById('btnEditToggle');
+            const btnSave = document.getElementById('btnSavePolicy');
+            const btnReset = document.getElementById('btnResetPolicy');
+            btnToggle.innerHTML = '✏️ 수정 모드 OFF';
+            btnToggle.style.background = '#2563eb';
+            btnToggle.style.borderColor = '#2563eb';
+            btnSave.style.display = 'none';
+            if (btnReset) btnReset.style.display = 'none';
+            isEditingMode = false;
+
+            // Clear draft backup since we are committing to file
+            localStorage.removeItem('contest_policy_body_draft');
+
+            const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+            try {
+                const res = await fetch('/api/contest-policy/save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ htmlContent })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('💾 변경사항이 contest_policy.html 파일로 영구 저장되었습니다!');
+                } else {
+                    showToast('⚠️ 저장 실패: ' + (data.error || '알 수 없는 오류'));
+                }
+            } catch (err) {
+                console.error(err);
+                showToast('⚠️ 서버 통신 오류가 발생했습니다.');
+            }
+        }
+
+        function resetPolicyContent() {
+            if (!confirm('수정 중인 임시 내용을 초기화하고 서버 원본으로 되돌리시겠습니까?')) return;
+            localStorage.removeItem('contest_policy_body_draft');
+            location.reload();
+        }
+
+        function showToast(msg) {
+            let toast = document.getElementById('toastNotify');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toastNotify';
+                toast.className = 'toast-notify';
+                document.body.appendChild(toast);
+            }
+            toast.innerHTML = '<span>🔔</span> <span>' + msg + '</span>';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+    </script>
+
+
+
+<script type="text/javascript" src="chrome-extension://aefiepimkogajhddmhcekceihikjcabd/injected.min.js"></script><div id="toastNotify" class="toast-notify"><span>🔔</span> <span>✏️ 수정 모드가 활성화되었습니다. 내용을 편집하면 자동 임시저장됩니다.</span></div></body></html>
+
+            <!-- ===================== SECTION 2 ===================== -->
+            <div class="page-section" id="sec-ticket">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#f0fdf4;">🎟️</div>
+                    <h3>2. 티켓 지급, 소멸 및 결제 체크 정책</h3>
+                    <div class="section-edit-tools" style="display:none; margin-left:auto; gap:6px;">
+                        <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
+                    </div>
+                    <span class="page-tag" style="margin-left:10px;">Ticket Lifecycle Spec</span>
+                </div>
+                <div class="page-body">
+
+                    <div class="spec-group">
+                        <div class="spec-label-row">
+                            <div class="spec-label">티켓 발급, 이월 소멸 및 정액제 상태별 처리 기준</div>
+                            <div class="section-edit-tools" style="display:none; gap:6px;">
+                                <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
+                            </div>
+                        </div>
+                        <table class="spec-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:200px;">구분</th>
+                                    <th style="width:300px;">세부 정책 내용</th>
+                                    <th>기술 및 운영 처리 로직</th>
+                                    <th style="width:110px; text-align:center;">상태</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="field">① 사이클 종료 시 잔여 티켓</td>
+                                    <td>해당 회차 종료 시 잔여 티켓 차기 이월 불가, 전량 자동 소멸</td>
+                                    <td>
+                                        [1안 적용] 회차 종료 시점에 유저의 잔여 티켓 수량을 DB에서 일괄 초기화 (0으로 리셋).
+                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
+                                    </td>
+                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="field">② 신규 티켓 지급 대상</td>
+                                    <td>특정 이벤트 기간 내 [정액제 결제] OR [카프라 포인트(KP) 결제] 완료 유저</td>
+                                    <td>
+                                        결제 시도 및 완료 로그 이벤트 수신 시 티켓 30장 즉시 생성 발급하여 유저 참여 과금 혜택 유도 (당사 제안 반영).
+                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
+                                    </td>
+                                    <td style="text-align:center;"><span class="badge badge-blue">✅ 제안/확정</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="field">③ 정액제 만료 시 티켓 유지</td>
+                                    <td>기간 중 정액제 이용이 만료되어도 부여받은 회차 티켓 사용 유지</td>
+                                    <td>
+                                        정액제 유효 기간을 실시간 체크하지 않고, <strong>'유저가 결제 완료한 시도 액션' 자체를 기준</strong>으로 체크하여 당 회차 권한 보장.
+                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
+                                    </td>
+                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ===================== SECTION 3 ===================== -->
+            <div class="page-section" id="sec-risk">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#fef2f2;">🛡️</div>
+                    <h3>3. 리스크 관리 및 법적 고지 항목 (당사 보완안 반영)</h3>
+                    <div class="section-edit-tools" style="display:none; margin-left:auto; gap:6px;">
+                        <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
+                    </div>
+                    <span class="page-tag" style="margin-left:10px;">Risk &amp; Legal Spec</span>
+                </div>
+                <div class="page-body">
+
+                    <div class="spec-group">
+                        <div class="spec-label-row">
+                            <div class="spec-label warn">리스크 관리 및 법적 고지 세부 명세</div>
+                            <div class="section-edit-tools" style="display:none; gap:6px;">
+                                <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
+                            </div>
+                        </div>
+                        <table class="spec-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:200px;">리스크 구분</th>
+                                    <th style="width:300px;">문제점 및 이슈</th>
+                                    <th>당사 제안 / 확정 대응 정책</th>
+                                    <th style="width:110px; text-align:center;">상태</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="field">프로필(이메일) 노출 방지</td>
+                                    <td>로그인 계정명이 이메일 주소이므로 외부에 노출될 경우 개인정보 보호법 위반 및 글로벌 사생활 침해 우려</td>
+                                    <td>
+                                        <strong>[당사 제안 반영]</strong> 작품 응모 시 <strong>'아티스트 명(닉네임)' 1회 필수 입력 모달</strong> 제공.<br>
+                                        최초 1회 입력 후 마케팅/프로모션/인게임 제작자 표기에 해당 닉네임으로 자동 매칭 및 노출.
+                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
+                                    </td>
+                                    <td style="text-align:center;"><span class="badge badge-blue">✅ 제안/확정</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="field">위반 적발 시 인게임 처리</td>
+                                    <td>표절, IP 침해, 유해 콘텐츠 등 선정/배포 후 위반 사항 클레임 접수 시 처리 기준</td>
+                                    <td>
+                                        <strong>[당사 안 준용]</strong> 마켓 판매 중단(Down) 조치와 함께, 이미 아이템을 소유한 유저는 <strong>아이템 자체는 보유하되 장착 시 이펙트 비노출(숨김) 처리</strong> (기존 구현 방식 준용).
+                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
+                                    </td>
+                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="field">권리 귀속 및 약관 고지</td>
+                                    <td>제출작 및 아티스트 명 마케팅 활용 동의, 사전 통보 없는 규칙 변경 고지</td>
+                                    <td>
+                                        구글 doc 약관 연동 및 웹 작품 응모 시 필수 체크 동의 절차 적용. 운영 상황에 따른 약관 사전 통보 없이 변경 가능성 명시.
+                                        <button class="btn-row-del" onclick="deleteTableRow(this)">🗑️ 삭제</button>
+                                    </td>
+                                    <td style="text-align:center;"><span class="badge badge-green">✅ 확정</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <script>
         // Smooth scroll for nav items
