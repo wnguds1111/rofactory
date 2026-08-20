@@ -435,7 +435,7 @@
                             <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #7e22ce; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                                     <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 04. S3 유효성 파일 검증 (S3 File Verification)</div>
-                                    <span style="background:#f3e8ff; color:#6b21a8; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">S3 + Lambda</span>
+                                    <span style="background:#f3e8ff; color:#6b21a8; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">자동화 검증</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
                                     S3 유효성 파일 검증 (웹에서 접수된 발자국의 등록 마감 이후 다음 단계로 넘어가지 전 전체 파일을 대상으로 유효성 확인을 진행하는 과정 추가.)
@@ -483,13 +483,10 @@
                             <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #a855f7; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                                     <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 07. 패치 및 마켓 데이터 자동 생성</div>
-                                    <span style="background:#f3e8ff; color:#6b21a8; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">자동 빌드</span>
+                                    <span style="background:#f3e8ff; color:#6b21a8; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">자동화 검증</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
                                     선정된 발자국 리스트에 자동으로 아이템 ID 매핑
-                                </div>
-                                <div style="margin-top:12px; background:#f8fafc; border-left:3px solid #a855f7; padding:10px 14px; border-radius:0 6px 6px 0; font-size:14.5px; color:#475569; line-height:1.6;">
-                                    <strong>고려사항</strong>: 정기점검 당일 점검 시작 2시간 전 리소스 패치 파일 자동 컴파일 완료 및 RO 패처 CDN 스테이징 서버 자동 동기화.
                                 </div>
                             </div>
 
@@ -502,10 +499,7 @@
                                     <span style="background:#f4f4f5; color:#18181b; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">판매 대기</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
-                                    자동 매핑 이후 어드민에서 판매 대기 상태 전환
-                                </div>
-                                <div style="margin-top:12px; background:#f8fafc; border-left:3px solid #09090b; padding:10px 14px; border-radius:0 6px 6px 0; font-size:14.5px; color:#475569; line-height:1.6;">
-                                    <strong>고려사항</strong>: 당첨 크리에이터 유저에게 [영구 소유 귀속 아이템] 무상 발급 + 마켓 일반 구매 유저용 [무제한 영구 소유권] 상품 속성 최종 전달.
+                                    자동 매핑 이후 웹 어드민에서 자동 판매 대기 상태 전환
                                 </div>
                             </div>
 
@@ -541,47 +535,60 @@
                         </div>
 
                         <!-- Infographic Visual Process Flow -->
-                        <div style="background:#ffffff; border:1.5px solid #e9d5ff; border-radius:14px; padding:20px; margin-bottom:24px; box-shadow:0 4px 12px rgba(147, 51, 234, 0.05);">
-                            <div style="font-size:14px; font-weight:900; color:#581c87; margin-bottom:14px; border-left:3px solid #9333ea; padding-left:8px;">
-                                프리미엄 아티스트 회원제 메커니즘 인포그래픽
+                        <div style="background:#ffffff; border:1px solid #e9d5ff; border-radius:12px; padding:20px; margin-bottom:24px; box-shadow:0 2px 8px rgba(147, 51, 234, 0.04);">
+                            <div style="font-size:14px; font-weight:900; color:#581c87; margin-bottom:16px; padding-left:10px; border-left:4px solid #9333ea;">
+                                프리미엄 회원제 메커니즘 흐름도
                             </div>
-                            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; align-items:center;">
+
+                            <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;">
                                 
-                                <div style="background:#faf5ff; border:1px solid #d8b4fe; border-radius:10px; padding:14px; text-align:center;">
-                                    <div style="font-size:11px; font-weight:800; color:#9333ea; text-transform:uppercase;">1단계. 결제 &amp; 권한 부여</div>
-                                    <div style="font-size:14px; font-weight:900; color:#581c87; margin-top:4px;">이벤트 기간 결제</div>
-                                    <div style="font-size:12px; color:#6b21a8; margin-top:4px; line-height:1.4;">
-                                        정액제/KP 결제 시 <strong>[아티스트 권한]</strong> + 발자국 티켓 10회 동시 발급
+                                <!-- Step 1 -->
+                                <div style="flex:1; min-width:200px; background:#fcfaef; border:1.5px solid #fde047; border-radius:10px; padding:16px; box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+                                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                                        <span style="background:#ca8a04; color:#ffffff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:12px;">1단계</span>
+                                        <span style="font-size:14px; font-weight:900; color:#854d0e;">이벤트 결제</span>
+                                    </div>
+                                    <div style="font-size:13px; color:#713f12; line-height:1.5;">
+                                        정액제/KP 결제 시 <strong>[아티스트 권한]</strong> + <strong>티켓 10회</strong> 발급
                                     </div>
                                 </div>
 
-                                <div style="text-align:center; color:#a855f7; font-size:20px; font-weight:900;">→</div>
+                                <div style="font-size:22px; font-weight:900; color:#a855f7; padding:0 4px;">→</div>
 
-                                <div style="background:#faf5ff; border:1px solid #d8b4fe; border-radius:10px; padding:14px; text-align:center;">
-                                    <div style="font-size:11px; font-weight:800; color:#9333ea; text-transform:uppercase;">2단계. 정성 출품</div>
-                                    <div style="font-size:14px; font-weight:900; color:#581c87; margin-top:4px;">10회 집중 출품 캡</div>
-                                    <div style="font-size:12px; color:#6b21a8; margin-top:4px; line-height:1.4;">
-                                        30회 대량 스팸 방지 및 완성도 높은 3D 자산 집중 업로드
+                                <!-- Step 2 -->
+                                <div style="flex:1; min-width:200px; background:#faf5ff; border:1.5px solid #e9d5ff; border-radius:10px; padding:16px; box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+                                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                                        <span style="background:#9333ea; color:#ffffff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:12px;">2단계</span>
+                                        <span style="font-size:14px; font-weight:900; color:#581c87;">10회 정성 출품</span>
+                                    </div>
+                                    <div style="font-size:13.5px; color:#6b21a8; line-height:1.5;">
+                                        스팸 방지용 <strong>10회 집중 출품 캡</strong>으로 고품질 3D 자산 등록
                                     </div>
                                 </div>
 
-                                <div style="text-align:center; color:#a855f7; font-size:20px; font-weight:900;">→</div>
+                                <div style="font-size:22px; font-weight:900; color:#a855f7; padding:0 4px;">→</div>
 
-                                <div style="background:#faf5ff; border:1px solid #d8b4fe; border-radius:10px; padding:14px; text-align:center;">
-                                    <div style="font-size:11px; font-weight:800; color:#9333ea; text-transform:uppercase;">3단계. 공모전 당첨작 확정</div>
-                                    <div style="font-size:14px; font-weight:900; color:#581c87; margin-top:4px;">10개 최종 선정</div>
-                                    <div style="font-size:12px; color:#6b21a8; margin-top:4px; line-height:1.4;">
-                                        유저 투표 5개 + GM 평가 5개 ➔ 인게임 패치 &amp; 마켓 출시
+                                <!-- Step 3 -->
+                                <div style="flex:1; min-width:200px; background:#faf5ff; border:1.5px solid #e9d5ff; border-radius:10px; padding:16px; box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+                                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                                        <span style="background:#9333ea; color:#ffffff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:12px;">3단계</span>
+                                        <span style="font-size:14px; font-weight:900; color:#581c87;">유저 인기 투표</span>
+                                    </div>
+                                    <div style="font-size:13.5px; color:#6b21a8; line-height:1.5;">
+                                        100% 유저 인기 투표 결과 순위로 <strong>상위 10개 당첨작</strong> 선정
                                     </div>
                                 </div>
 
-                                <div style="text-align:center; color:#a855f7; font-size:20px; font-weight:900;">→</div>
+                                <div style="font-size:22px; font-weight:900; color:#a855f7; padding:0 4px;">→</div>
 
-                                <div style="background:#f3e8ff; border:2px solid #9333ea; border-radius:10px; padding:14px; text-align:center;">
-                                    <div style="font-size:11px; font-weight:800; color:#6b21a8; text-transform:uppercase;">4단계. 프리미엄 혜택</div>
-                                    <div style="font-size:14px; font-weight:900; color:#581c87; margin-top:4px;">아티스트 전용 소장</div>
-                                    <div style="font-size:12px; color:#581c87; font-weight:800; margin-top:4px; line-height:1.4;">
-                                        <strong>[아티스트 권한 보유자 전용 마켓 소장/구매 자격 제공]</strong>
+                                <!-- Step 4 -->
+                                <div style="flex:1; min-width:200px; background:#f3e8ff; border:2px solid #9333ea; border-radius:10px; padding:16px; box-shadow:0 2px 6px rgba(147,51,234,0.12);">
+                                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                                        <span style="background:#581c87; color:#ffffff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:12px;">4단계</span>
+                                        <span style="font-size:14px; font-weight:900; color:#3b0764;">독점 소장 자격</span>
+                                    </div>
+                                    <div style="font-size:13.5px; color:#581c87; font-weight:800; line-height:1.5;">
+                                        <strong>[아티스트 권한 보유 유저 전용 마켓 소장/구매 자격 제공]</strong>
                                     </div>
                                 </div>
 
