@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO FACTORY — 유저 인기 투표 사이트 (임시 레이아웃)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Pretendard', 'Poppins', sans-serif; background: #0f172a; color: #f8fafc; min-height: 100vh; }
+        
+        .top-bar { background: #1e293b; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
+        .top-bar h1 { font-size: 16px; font-weight: 900; color: #fff; }
+        .btn-back { background: #7e22ce; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 700; }
+        
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .header-box { background: linear-gradient(135deg, #3b0764, #581c87); border: 2px solid #a855f7; border-radius: 20px; padding: 36px; text-align: center; margin-bottom: 32px; }
+        .header-title { font-size: 28px; font-weight: 900; color: #fff; margin-bottom: 10px; }
+        .header-desc { font-size: 15px; color: #e9d5ff; max-width: 750px; margin: 0 auto; line-height: 1.6; }
+        
+        .vote-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+        .vote-card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; overflow: hidden; transition: all 0.2s; }
+        .vote-card:hover { border-color: #a855f7; transform: translateY(-4px); }
+        .preview-box { height: 180px; background: #09090b; display: flex; flex-direction:column; align-items: center; justify-content: center; color: #a1a1aa; font-size: 13px; font-weight: 700; border-bottom: 1px solid #334155; }
+        .card-body { padding: 20px; }
+        .item-title { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+        .artist-name { font-size: 12.5px; color: #a855f7; font-weight: 700; margin-bottom: 14px; }
+        
+        .btn-vote { display: block; width: 100%; text-align: center; background: #9333ea; color: #fff; border: none; padding: 10px 0; border-radius: 8px; font-size: 14px; font-weight: 800; cursor: pointer; transition: all 0.2s; }
+        .btn-vote:hover { background: #a855f7; }
+        
+        .temp-banner { background: rgba(168, 85, 247, 0.15); border: 1px dashed #a855f7; color: #e9d5ff; padding: 16px; border-radius: 12px; text-align: center; font-weight: 700; font-size: 14px; margin-top: 36px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>🗳️ RO FACTORY 시즌1 발자국 인기 투표 사이트 (임시 레이아웃)</h1>
+        <a href="contest_policy.html" class="btn-back">← 공모전 기획 명세서로 돌아가기</a>
+    </div>
+
+    <div class="container">
+        <div class="header-box">
+            <h2 class="header-title">시즌 1 발자국 크리에이터 공모전 유저 인기 투표</h2>
+            <p class="header-desc">
+                마음에 드는 3D 발자국 작품에 투표해주세요! <strong>로그인 계정당 1일 1회 투표 가능</strong>하며, 유저 인기 투표 상위 5개 작품은 12월 정기점검 시 라그나로크 공식 마켓 아이템으로 정식 출시됩니다.
+            </p>
+        </div>
+
+        <div class="vote-grid">
+            <div class="vote-card">
+                <div class="preview-box">
+                    <span style="font-size:32px; margin-bottom:8px;">👣</span>
+                    <span>3D WebGL Live Preview #01</span>
+                </div>
+                <div class="card-body">
+                    <div class="item-title">크리스탈 얼음 발자국 이펙트</div>
+                    <div class="artist-name">Artist: 룬미드가츠_마스터</div>
+                    <button class="btn-vote" onclick="alert('현재 화면은 투표 페이지 임시 와이어프레임 레이아웃입니다.')">🗳️ 투표하기 (1,240표)</button>
+                </div>
+            </div>
+
+            <div class="vote-card">
+                <div class="preview-box">
+                    <span style="font-size:32px; margin-bottom:8px;">🔥</span>
+                    <span>3D WebGL Live Preview #02</span>
+                </div>
+                <div class="card-body">
+                    <div class="item-title">화염 불꽃 스텝 Footprint</div>
+                    <div class="artist-name">Artist: 프론테라_대장장이</div>
+                    <button class="btn-vote" onclick="alert('현재 화면은 투표 페이지 임시 와이어프레임 레이아웃입니다.')">🗳️ 투표하기 (980표)</button>
+                </div>
+            </div>
+
+            <div class="vote-card">
+                <div class="preview-box">
+                    <span style="font-size:32px; margin-bottom:8px;">🌸</span>
+                    <span>3D WebGL Live Preview #03</span>
+                </div>
+                <div class="card-body">
+                    <div class="item-title">벚꽃 휘날리는 분홍 발자국</div>
+                    <div class="artist-name">Artist: 페이욘_아티스트</div>
+                    <button class="btn-vote" onclick="alert('현재 화면은 투표 페이지 임시 와이어프레임 레이아웃입니다.')">🗳️ 투표하기 (870표)</button>
+                </div>
+            </div>
+
+            <div class="vote-card">
+                <div class="preview-box">
+                    <span style="font-size:32px; margin-bottom:8px;">⚡</span>
+                    <span>3D WebGL Live Preview #04</span>
+                </div>
+                <div class="card-body">
+                    <div class="item-title">라이트닝 전뇌 발자국</div>
+                    <div class="artist-name">Artist: 알베르타_상인</div>
+                    <button class="btn-vote" onclick="alert('현재 화면은 투표 페이지 임시 와이어프레임 레이아웃입니다.')">🗳️ 투표하기 (720표)</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="temp-banner">
+            💡 본 화면은 기획 협의 및 와이어프레임 확인을 위한 [유저 인기 투표 사이트 임시 레이아웃] 화면입니다.
+        </div>
+    </div>
+</body>
+</html>
