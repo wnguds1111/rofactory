@@ -337,7 +337,7 @@
         <!-- Sidebar Navigation -->
         <nav class="sidebar">
             <div class="sidebar-title">콘테스트 정책 및 명세 (1~3)</div>
-            <a href="#sec-automation" class="nav-item active">1. 공모전 운영 10단계 프로세스</a>
+            <a href="#sec-automation" class="nav-item active">1. 공모전 운영 9단계 프로세스</a>
             <a href="#sec-ticket" class="nav-item">2. 티켓 지급/소멸 &amp; 결제 체크</a>
             <a href="#sec-risk" class="nav-item">3. 리스크 관리 &amp; 법적 고지</a>
 
@@ -365,7 +365,7 @@
             <div class="page-section" id="sec-automation">
                 <div class="page-header">
                     <div class="page-icon" style="background:#f1f5f9; color:#0f172a;">1</div>
-                    <h3>1. 공모전 운영 10단계 프로세스</h3>
+                    <h3>1. 공모전 운영 9단계 프로세스</h3>
                     <div class="section-edit-tools" style="display:none; margin-left:auto; gap:6px;">
                         <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
                     </div>
@@ -376,16 +376,17 @@
                         <span class="alert-icon">⚡</span>
                         <div>
                             <strong>RO Factory 공모전 운영 10단계 프로세스 타임라인</strong><br>
-                            1단계부터 10단계까지 <strong>위에서 아래로 한 줄씩 순차적으로 내려가는 프로세스 타임라인</strong> 명세입니다.
+                            1단계부터 9단계까지 <strong>위에서 아래로 한 줄씩 순차적으로 내려가는 프로세스 타임라인</strong> 명세입니다.
                         </div>
                     </div>
 
                     <!-- 10 Step Cards -->
                     <div class="spec-group">
                         <div class="spec-label-row">
-                            <div class="spec-label">공모전 운영 10단계 프로세스 세부 명세</div>
+                            <div class="spec-label">공모전 운영 9단계 프로세스 세부 명세</div>
                         </div>
 
+                        
                         <div style="display:flex; flex-direction:column; gap:6px; margin-top:16px;" id="verticalStepContainer">
                             
                             <!-- STEP 01 -->
@@ -446,42 +447,26 @@
 
                             <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
 
-                            <!-- STEP 05 -->
+                            <!-- STEP 05 (MERGED 05 + 06) -->
                             <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #ec4899; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 05. 투표 노출 (Vote Display)</div>
+                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 05. 투표 노출 및 유저 인기 투표 (Vote Display &amp; User Voting)</div>
                                     <span style="background:#fce7f3; color:#9d174d; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">투표 전용 웹</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
-                                    검수를 거친 응모작들이 전용 투표 사이트에 자동 노출 (어드민에서 설정한 기간 까지 투표 가능)
+                                    검수를 거친 응모작들이 전용 투표 사이트에 자동 노출되며, 로그인 유저는 매일 1회 마음에 드는 발자국 아이템에 투표 가능 (어드민에서 설정한 기간 까지 투표 가능)
                                 </div>
                                 <div style="margin-top:12px; background:#f8fafc; border-left:3px solid #ec4899; padding:10px 14px; border-radius:0 6px 6px 0; font-size:14.5px; color:#475569; line-height:1.6;">
-                                    <strong>고려사항</strong>: 반응형 3D 실시간 뷰어 최적화 및 이메일 노출 방지(아티스트 닉네임 표기).
+                                    <strong>고려사항</strong>: 실시간 투표 기능 웹사이트 제작
                                 </div>
                             </div>
 
                             <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
 
                             <!-- STEP 06 -->
-                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #8b5cf6; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 06. 유저 인기 투표 (User Voting)</div>
-                                    <span style="background:#f3e8ff; color:#6b21a8; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">유저 투표</span>
-                                </div>
-                                <div style="font-size:15px; color:#334155; line-height:1.6;">
-                                    로그인 유저는 매일 1회 마음에 드는 발자국 아이템에 투표 가능
-                                </div>
-                                <div style="margin-top:12px; background:#f8fafc; border-left:3px solid #8b5cf6; padding:10px 14px; border-radius:0 6px 6px 0; font-size:14.5px; color:#475569; line-height:1.6;">
-                                    <strong>고려사항</strong>: 계정당 1일 1회 투표 제한, 매크로 방지 CAPTCHA 검증 및 동일 IP 다계정 부당 득표 차단 필터링 적용.
-                                </div>
-                            </div>
-
-                            <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
-
-                            <!-- STEP 07 -->
                             <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #6366f1; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 07. 랭킹 선정 (Winner Ranking)</div>
+                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 06. 랭킹 선정 (Winner Ranking)</div>
                                     <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">당첨작 확정</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
@@ -494,10 +479,10 @@
 
                             <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
 
-                            <!-- STEP 08 -->
+                            <!-- STEP 07 -->
                             <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #a855f7; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 08. 패치 및 마켓 데이터 자동 생성</div>
+                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 07. 패치 및 마켓 데이터 자동 생성</div>
                                     <span style="background:#f3e8ff; color:#6b21a8; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">자동 빌드</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
@@ -510,10 +495,10 @@
 
                             <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
 
-                            <!-- STEP 09 -->
+                            <!-- STEP 08 -->
                             <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #09090b; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 09. 마켓 DB 전달</div>
+                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 08. 마켓 DB 전달</div>
                                     <span style="background:#f4f4f5; color:#18181b; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">판매 대기</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
@@ -526,10 +511,10 @@
 
                             <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
 
-                            <!-- STEP 10 (LAUNCHED HIGHLIGHT) -->
+                            <!-- STEP 09 (LAUNCHED HIGHLIGHT) -->
                             <div style="background:linear-gradient(135deg, #0f172a, #16a34a); border:2px solid #22c55e; border-radius:14px; padding:22px; color:#ffffff; box-shadow:0 6px 20px rgba(34, 197, 94, 0.2);">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                                    <div style="font-size:16px; font-weight:900; color:#ffffff;">STEP 10. 마켓 개시 (Admin 1-Click Launch)</div>
+                                    <div style="font-size:16px; font-weight:900; color:#ffffff;">STEP 09. 마켓 개시 (Admin 1-Click Launch)</div>
                                     <span style="background:#ffffff; color:#15803d; padding:4px 12px; border-radius:6px; font-size:11.5px; font-weight:900;">마켓 개시 (START)</span>
                                 </div>
                                 <div style="font-size:15px; color:#dcfce7; line-height:1.6;">
@@ -541,7 +526,6 @@
                             </div>
 
                         </div>
-                    </div>
 
                     <!-- Proposal Box: Ticket Distribution & Market Purchase Privileges -->
                     <div class="spec-group" style="margin-top:36px; background:#faf5ff; border:2px solid #c084fc; border-radius:16px; padding:28px;">
