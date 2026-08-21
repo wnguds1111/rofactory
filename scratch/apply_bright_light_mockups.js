@@ -1,0 +1,220 @@
+const fs = require('fs');
+const path = require('path');
+
+const eventPath = path.join(__dirname, '..', 'contest_event.html');
+const votePath = path.join(__dirname, '..', 'contest_vote.html');
+const policyPath = path.join(__dirname, '..', 'contest_policy.html');
+
+// 1. Write Bright Light Mode contest_event.html
+const eventHtml = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO FACTORY — 공모전 홍보 사이트 (밝은 약식 레이아웃)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Pretendard', 'Poppins', sans-serif; background: #f8fafc; color: #0f172a; min-height: 100vh; }
+        
+        .top-bar { background: #ffffff; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; }
+        .top-bar h1 { font-size: 16px; font-weight: 900; color: #0f172a; }
+        .btn-back { background: #2563eb; color: #ffffff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 700; }
+        
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .hero-card { background: #ffffff; border: 2px solid #3b82f6; border-radius: 16px; padding: 44px; text-align: center; box-shadow: 0 4px 16px rgba(59,130,246,0.08); margin-bottom: 32px; }
+        .badge-tag { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 12px; font-weight: 800; padding: 4px 14px; border-radius: 12px; display: inline-block; }
+        .hero-title { font-size: 28px; font-weight: 900; margin: 16px 0; color: #0f172a; }
+        .hero-desc { font-size: 15px; color: #475569; max-width: 720px; margin: 0 auto 24px; line-height: 1.7; }
+        
+        .cta-btn { display: inline-block; background: #2563eb; color: #ffffff; font-size: 15px; font-weight: 800; padding: 12px 28px; border-radius: 8px; text-decoration: none; transition: all 0.2s; }
+        .cta-btn:hover { background: #1d4ed8; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+        .card-title { font-size: 16px; font-weight: 800; color: #1e293b; margin-bottom: 12px; border-left: 3px solid #2563eb; padding-left: 8px; }
+        .card-desc { font-size: 14px; color: #475569; line-height: 1.6; }
+        
+        .temp-banner { background: #fff7ed; border: 1px solid #ffedd5; color: #c2410c; padding: 14px; border-radius: 10px; text-align: center; font-weight: 700; font-size: 13.5px; margin-top: 32px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>공모전 홍보 랜딩 사이트 (밝은 약식 레이아웃)</h1>
+        <a href="contest_policy.html" class="btn-back">← 기획 명세서로 돌아가기</a>
+    </div>
+
+    <div class="container">
+        <div class="hero-card">
+            <span class="badge-tag">시즌 1 크리에이터 공모전</span>
+            <h2 class="hero-title">당신의 3D 발자국 자산이 라그나로크 공식 마켓에 출시됩니다</h2>
+            <p class="hero-desc">
+                RO Factory 결제 유저에게 제공되는 발자국 등록 티켓(10회)을 활용하여 나만의 3D 발자국 아이템을 출품하고 공식 아티스트 권한을 획득하세요.
+            </p>
+            <a href="register.html" class="cta-btn">작품 출품 접수하기</a>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-title">참가 및 당첨 혜택</div>
+                <div class="card-desc">
+                    • <strong>최종 선정작 10개</strong>: 라그나로크 인게임 패치 및 웹 마켓 상품 등록<br>
+                    • <strong>당첨 크리에이터</strong>: 영구 소유 귀속 아이템 지급 및 아티스트 소장 자격 제공
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">공모전 주요 일정</div>
+                <div class="card-desc">
+                    • <strong>작품 접수</strong>: 2026.08.18 ~ 10.31 (약 2.5개월)<br>
+                    • <strong>심사 및 투표</strong>: 2026.11.01 ~ 11.30<br>
+                    • <strong>마켓 개시</strong>: 12월 정기점검 시 마켓 오픈
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">출품 조건 및 스펙</div>
+                <div class="card-desc">
+                    • 이벤트 기간 중 정액제/결제 유저 대상 10회 출품 캡 적용<br>
+                    • 3D 메시 용량 규격 및 헤더 검수 통과 데이터 대상
+                </div>
+            </div>
+        </div>
+
+        <div class="temp-banner">
+            본 화면은 와이어프레임 및 디자인 구조 검토용 공모전 홍보 사이트 약식 레이아웃입니다.
+        </div>
+    </div>
+</body>
+</html>`;
+
+fs.writeFileSync(eventPath, eventHtml, 'utf8');
+
+// 2. Write Bright Light Mode contest_vote.html
+const voteHtml = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RO FACTORY — 유저 인기 투표 사이트 (밝은 약식 레이아웃)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Pretendard', 'Poppins', sans-serif; background: #f8fafc; color: #0f172a; min-height: 100vh; }
+        
+        .top-bar { background: #ffffff; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; }
+        .top-bar h1 { font-size: 16px; font-weight: 900; color: #0f172a; }
+        .btn-back { background: #7e22ce; color: #ffffff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 700; }
+        
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .header-box { background: #ffffff; border: 2px solid #a855f7; border-radius: 16px; padding: 36px; text-align: center; margin-bottom: 32px; box-shadow: 0 4px 16px rgba(168,85,247,0.08); }
+        .header-title { font-size: 26px; font-weight: 900; color: #581c87; margin-bottom: 10px; }
+        .header-desc { font-size: 14.5px; color: #475569; max-width: 750px; margin: 0 auto; line-height: 1.6; }
+        
+        .vote-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+        .vote-card { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; overflow: hidden; transition: all 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+        .vote-card:hover { border-color: #a855f7; transform: translateY(-2px); }
+        .preview-box { height: 160px; background: #f1f5f9; display: flex; flex-direction:column; align-items: center; justify-content: center; color: #64748b; font-size: 13px; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
+        .card-body { padding: 18px; }
+        .item-title { font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+        .artist-name { font-size: 12.5px; color: #7e22ce; font-weight: 700; margin-bottom: 14px; }
+        
+        .btn-vote { display: block; width: 100%; text-align: center; background: #7e22ce; color: #ffffff; border: none; padding: 9px 0; border-radius: 6px; font-size: 13.5px; font-weight: 800; cursor: pointer; transition: all 0.2s; }
+        .btn-vote:hover { background: #6b21a8; }
+        
+        .temp-banner { background: #faf5ff; border: 1px solid #f3e8ff; color: #6b21a8; padding: 14px; border-radius: 10px; text-align: center; font-weight: 700; font-size: 13.5px; margin-top: 36px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>유저 인기 투표 사이트 (밝은 약식 레이아웃)</h1>
+        <a href="contest_policy.html" class="btn-back">← 기획 명세서로 돌아가기</a>
+    </div>
+
+    <div class="container">
+        <div class="header-box">
+            <h2 class="header-title">시즌 1 발자국 크리에이터 공모전 유저 인기 투표</h2>
+            <p class="header-desc">
+                마음에 드는 3D 발자국 작품에 투표해주세요! <strong>로그인 계정당 1일 1회 투표 가능</strong>하며, 유저 인기 투표 상위 5개 작품은 12월 정기점검 시 라그나로크 공식 마켓 아이템으로 정식 출시됩니다.
+            </p>
+        </div>
+
+        <div class="vote-grid">
+            <div class="vote-card">
+                <div class="preview-box">
+                    <span>3D WebGL 실시간 프리뷰 #01</span>
+                </div>
+                <div class="card-body">
+                    <div class="item-title">크리스탈 얼음 발자국 이펙트</div>
+                    <div class="artist-name">아티스트: 룬미드가츠_마스터</div>
+                    <button class="btn-vote" onclick="alert('현재 화면은 투표 페이지 약식 레이아웃입니다.')">투표하기 (1,240표)</button>
+                </div>
+            </div>
+
+            <div class="vote-card">
+                <div class="preview-box">
+                    <span>3D WebGL 실시간 프리뷰 #02</span>
+                </div>
+                <div class="card-body">
+                    <div class="item-title">화염 불꽃 스텝 Footprint</div>
+                    <div class="artist-name">아티스트: 프론테라_대장장이</div>
+                    <button class="btn-vote" onclick="alert('현재 화면은 투표 페이지 약식 레이아웃입니다.')">투표하기 (980표)</button>
+                </div>
+            </div>
+
+            <div class="vote-card">
+                <div class="preview-box">
+                    <span>3D WebGL 실시간 프리뷰 #03</span>
+                </div>
+                <div class="card-body">
+                    <div class="item-title">벚꽃 휘날리는 분홍 발자국</div>
+                    <div class="artist-name">아티스트: 페이욘_아티스트</div>
+                    <button class="btn-vote" onclick="alert('현재 화면은 투표 페이지 약식 레이아웃입니다.')">투표하기 (870표)</button>
+                </div>
+            </div>
+
+            <div class="vote-card">
+                <div class="preview-box">
+                    <span>3D WebGL 실시간 프리뷰 #04</span>
+                </div>
+                <div class="card-body">
+                    <div class="item-title">라이트닝 전뇌 발자국</div>
+                    <div class="artist-name">아티스트: 알베르타_상인</div>
+                    <button class="btn-vote" onclick="alert('현재 화면은 투표 페이지 약식 레이아웃입니다.')">투표하기 (720표)</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="temp-banner">
+            본 화면은 와이어프레임 및 디자인 구조 검토용 유저 인기 투표 사이트 약식 레이아웃입니다.
+        </div>
+    </div>
+</body>
+</html>`;
+
+fs.writeFileSync(votePath, voteHtml, 'utf8');
+
+// 3. Update contest_policy.html Sidebar Links & ensure clean iconless styling
+let policyHtml = fs.readFileSync(policyPath, 'utf8');
+
+const oldSidebarLinks = `<a href="contest_event.html" class="nav-item" style="color:#2563eb;">공모전 홍보 사이트 (임시)</a>
+            <a href="register.html" class="nav-item" style="color:#0284c7;">작품 접수 사이트 (임시)</a>
+            <a href="contest_vote.html" class="nav-item" style="color:#7e22ce;">유저 인기 투표 사이트 (임시)</a>
+            <a href="market.html" class="nav-item" style="color:#16a34a;">마켓 상점 사이트 (임시)</a>
+            <a href="policy_checklist.html" class="nav-item">오픈 정책 체크리스트</a>`;
+
+const newSidebarLinks = `<a href="contest_event.html" class="nav-item" style="color:#2563eb; background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:8px 12px; margin-bottom:6px;">공모전 홍보 사이트 (임시 약식)</a>
+            <a href="register.html" class="nav-item" style="color:#0284c7; background:#f0f9ff; border:1px solid #bae6fd; border-radius:6px; padding:8px 12px; margin-bottom:6px;">작품 접수 사이트 (임시 약식)</a>
+            <a href="contest_vote.html" class="nav-item" style="color:#7e22ce; background:#faf5ff; border:1px solid #e9d5ff; border-radius:6px; padding:8px 12px; margin-bottom:6px;">유저 인기 투표 사이트 (임시 약식)</a>
+            <a href="market.html" class="nav-item" style="color:#16a34a; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:8px 12px; margin-bottom:6px;">마켓 상점 사이트 (임시 약식)</a>
+            <a href="policy_checklist.html" class="nav-item" style="color:#475569; background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:8px 12px;">오픈 정책 체크리스트</a>`;
+
+if (policyHtml.includes('공모전 홍보 사이트')) {
+    const sidebarSectionStart = policyHtml.indexOf('<div class="sidebar-title">관련 웹 화면');
+    const sidebarSectionEnd = policyHtml.indexOf('</nav>', sidebarSectionStart);
+    if (sidebarSectionStart !== -1 && sidebarSectionEnd !== -1) {
+        const replacementBlock = `<div class="sidebar-title">관련 웹 화면 (밝은 약식 레이아웃)</div>\n            ` + newSidebarLinks;
+        policyHtml = policyHtml.substring(0, sidebarSectionStart) + replacementBlock + '\n        ' + policyHtml.substring(sidebarSectionEnd);
+    }
+}
+
+fs.writeFileSync(policyPath, policyHtml, 'utf8');
+console.log('Successfully applied bright light mode and iconless styling to all pages!');
