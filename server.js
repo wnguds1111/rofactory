@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = __dirname;
 const MD_FILE_PATH = path.join(__dirname, 'RO_Factory_Detailed_Features.md');
 

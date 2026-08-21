@@ -1,5 +1,13 @@
 {
+  "name": "ro_factory",
+  "version": "1.0.0",
+  "description": "RO Factory Contest Policy & Web Application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
   "dependencies": {
-    "puppeteer": "^25.0.4"
+    "puppeteer": "^24.0.0"
   }
 }
