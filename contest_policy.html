@@ -351,7 +351,8 @@
             <div class="sidebar-title">메뉴</div>
             <a href="#sec-automation" class="nav-item active">1. 콘테스트 프로세스</a>
             <a href="#sec-proposal" class="nav-item">2. 프리미엄 회원제 제안</a>
-            <a href="#sec-risk" class="nav-item">3. 리스크 관리 법적 고지 항목</a>
+            <a href="#sec-b2c-ui" class="nav-item">3. B2C 웹 노출 정책 &amp; 화면 설계</a>
+            <a href="#sec-risk" class="nav-item">4. 리스크 관리 법적 고지 항목</a>
         </nav>
 
         <!-- Main Content -->
@@ -638,10 +639,293 @@
             </div>
 
             <!-- ===================== SECTION 3 ===================== -->
+            <div class="page-section" id="sec-b2c-ui">
+                <div class="page-header">
+                    <div class="page-icon" style="background:#ecfdf5; color:#059669;">3</div>
+                    <h3>3. B2C 웹 메인 노출 정책 및 시즌별 화면 설계</h3>
+                </div>
+                <div class="page-body">
+
+                    <!-- Strategy Box -->
+                    <div style="background:#f0fdf4; border:1.5px solid #86efac; border-left:5px solid #16a34a; border-radius:14px; padding:24px; margin-bottom:28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+                        <div style="font-size:16.5px; font-weight:900; color:#14532d; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                            <span>B2C 메인 페이지 리뉴얼 및 시즌 주기별 노출 정책</span>
+                        </div>
+                        <div style="font-size:14.5px; color:#166534; line-height:1.8;">
+                            • <strong>일반 쇼핑몰 구조 탈피 ➔ 시즌제 콘테스트 허브로 전환</strong>: 기존 정적 상품 나열식 메인에서 탈피하여, 콘테스트 진행 상태(접수 ➔ 투표 ➔ 마켓 개시)에 따라 메인 비주얼, 핵심 CTA 버튼, 주요 콘텐츠가 실시간 동적 전환되는 사용자 경험(UX)을 제공합니다.<br>
+                            • <strong>명확한 유저 액션 유도</strong>: <br>
+                            &nbsp;&nbsp;1) <strong>접수 기간</strong>: 메인 배너 홍보 + <code>[지금 작품 출품하기]</code> 버튼 활성화 ➔ 클릭 시 기존 등록 페이지(<code>register.html</code>)로 즉시 이동<br>
+                            &nbsp;&nbsp;2) <strong>투표 기간</strong>: 메인에 실시간 인기 투표 그리드 노출 + <code>[유저 인기 투표 참여하기]</code> 버튼 활성화 ➔ 실시간 1일 1회 투표 참여(<code>contest_vote.html</code>)<br>
+                            &nbsp;&nbsp;3) <strong>마켓/선정작 기간</strong>: 최종 TOP 10 선정작 쇼케이스 + <code>[선정작 마켓 보러가기]</code> 버튼 활성화 ➔ 마켓 상점(<code>market.html</code>) 연동 및 아티스트 무료 소장/일반 1회 구매<br>
+                            &nbsp;&nbsp;4) <strong>다음 시즌 반복(Loop)</strong>: 어드민 일정 세팅에 따라 차기 시즌 시작 시 동일 프로세스로 자동 순환
+                        </div>
+                    </div>
+
+                    <!-- Comparison Table -->
+                    <div class="spec-group">
+                        <div class="spec-label-row">
+                            <div class="spec-label" style="border-left-color:#16a34a;">시즌 3단계 주기별 B2C 웹 메인 노출 정책 명세</div>
+                        </div>
+
+                        <table class="spec-table" style="margin-bottom:28px;">
+                            <thead>
+                                <tr style="background:#f8fafc;">
+                                    <th style="width:14%;">구분</th>
+                                    <th style="width:28%; background:#eff6ff; color:#1d4ed8;">① 접수 기간 (크리에이터 출품 집중기)</th>
+                                    <th style="width:29%; background:#faf5ff; color:#7e22ce;">② 투표 기간 (유저 인기 투표기)</th>
+                                    <th style="width:29%; background:#f0fdf4; color:#15803d;">③ 마켓 개시 (선정작 판매 &amp; 쇼케이스)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="field">주요 목표 (Goal)</td>
+                                    <td>유저 크리에이터 작품 출품 최대화 &amp; 결제 유도</td>
+                                    <td>일반 유저 1일 1회 인기 투표 참여 극대화</td>
+                                    <td>최종 당첨작 인게임 출시 홍보 &amp; 마켓 거래 활성화</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">헤더 GNB 강조</td>
+                                    <td><span class="badge badge-blue">작품 출품</span> 메뉴 활성화 &amp; 강조</td>
+                                    <td><span class="badge badge-warn" style="background:#f3e8ff; color:#7e22ce;">인기 투표</span> 메뉴 활성화 &amp; 실시간 LIVE 뱃지</td>
+                                    <td><span class="badge badge-green">마켓 상점</span> 메뉴 활성화 &amp; NEW 뱃지</td>
+                                </tr>
+                                <tr>
+                                    <td class="field">메인 히어로 배너 (Hero)</td>
+                                    <td>
+                                        <strong>"시즌 1 발자국 크리에이터 콘테스트 오픈!"</strong><br>
+                                        • 결제 시 10회 출품 캡 + 인게임 칭호 부여<br>
+                                        • 접수 마감 디데이(D-Day) 카운트다운 노출
+                                    </td>
+                                    <td>
+                                        <strong>"최고의 3D 발자국을 뽑아주세요!"</strong><br>
+                                        • 100% 유저 인기 투표로 상위 10개작 공식 출시<br>
+                                        • 매일 1회 투표권 지급 안내 + 투표 마감 D-Day
+                                    </td>
+                                    <td>
+                                        <strong>"시즌 1 최종 당첨작 마켓 정식 출시!"</strong><br>
+                                        • 유저 투표 1~10위 당첨작 마켓 판매 개시<br>
+                                        • 아티스트 무료 소장 &amp; 일반 회원 1회 무료권
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field">핵심 메인 CTA 버튼</td>
+                                    <td>
+                                        <div style="background:#2563eb; color:#fff; padding:8px 14px; border-radius:6px; font-weight:800; font-size:13px; text-align:center; display:inline-block;">
+                                            🪄 지금 발자국 출품하기 &rarr;
+                                        </div><br>
+                                        <span style="font-size:12px; color:#64748b; font-weight:700;">※ 클릭 시 register.html 등록 화면으로 즉시 이동</span>
+                                    </td>
+                                    <td>
+                                        <div style="background:#7e22ce; color:#fff; padding:8px 14px; border-radius:6px; font-weight:800; font-size:13px; text-align:center; display:inline-block;">
+                                            🗳️ 유저 인기 투표 참여하기 &rarr;
+                                        </div><br>
+                                        <span style="font-size:12px; color:#64748b; font-weight:700;">※ 클릭 시 contest_vote.html 또는 투표 그리드 이동</span>
+                                    </td>
+                                    <td>
+                                        <div style="background:#16a34a; color:#fff; padding:8px 14px; border-radius:6px; font-weight:800; font-size:13px; text-align:center; display:inline-block;">
+                                            🛍️ 당첨작 마켓 바로가기 &rarr;
+                                        </div><br>
+                                        <span style="font-size:12px; color:#64748b; font-weight:700;">※ 클릭 시 market.html 마켓 상세 화면으로 이동</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field">메인 본문 영역 구성</td>
+                                    <td>
+                                        • 콘테스트 운영 4단계 프로세스 안내 카드<br>
+                                        • 크리에이터 출품 규격/가이드 튜토리얼<br>
+                                        • 지난 시즌 명예의 전당 &amp; 인기 아티스트 소개
+                                    </td>
+                                    <td>
+                                        • <strong>3D WebGL 실시간 응모작 프리뷰 그리드</strong><br>
+                                        • 실시간 득표 수 Top 5 리더보드 순위표<br>
+                                        • 카드 내 즉시 1일 1회 [투표하기] 인터랙션
+                                    </td>
+                                    <td>
+                                        • <strong>최종 TOP 10 당첨작 쇼케이스 그리드</strong><br>
+                                        • 크리에이터 아티스트 명예의 전당<br>
+                                        • 인게임 실제 착용 샷 3D 프리뷰 &amp; 구매 버튼
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field">다음 시즌 순환 (Loop)</td>
+                                    <td colspan="3" style="background:#f8fafc; text-align:center; color:#334155; font-weight:700;">
+                                        마켓 판매 기간 종료 후 어드민 백오피스(STEP 01)에서 차기 시즌 일정이 활성화되면 자동으로 <strong>[① 접수 기간 모드]</strong>로 리셋 및 순환 반복됩니다.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Interactive Live UI Mockup / Simulator -->
+                    <div class="spec-group" style="margin-top:36px;">
+                        <div class="spec-label-row">
+                            <div class="spec-label" style="border-left-color:#0284c7;">B2C 메인 화면 실시간 인터랙티브 UI 시뮬레이터 (직접 클릭 테스트)</div>
+                            <a href="main2.html" target="_blank" style="font-size:13px; font-weight:800; color:#2563eb; text-decoration:none; display:flex; align-items:center; gap:4px; background:#eff6ff; padding:6px 14px; border-radius:6px; border:1px solid #bfdbfe;">
+                                <span>🔗 실제 B2C 메인(main2.html) 전체화면 열기</span>
+                            </a>
+                        </div>
+                        
+                        <div style="background:#0f172a; border-radius:16px; padding:20px; box-shadow:0 12px 30px rgba(15,23,42,0.25); color:#fff;">
+                            
+                            <!-- Simulator Control Bar -->
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid #334155;">
+                                <div style="display:flex; align-items:center; gap:8px;">
+                                    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#22c55e;"></span>
+                                    <span style="font-size:13.5px; font-weight:800; color:#e2e8f0;">시즌 상태 전환 탭을 클릭하여 각 기간별 화면 변화를 확인하세요:</span>
+                                </div>
+                                <div style="display:flex; gap:8px;" id="simTabContainer">
+                                    <button onclick="setSimPhase('register')" id="simTabRegister" style="background:#2563eb; color:#fff; border:none; padding:7px 16px; border-radius:8px; font-size:13px; font-weight:800; cursor:pointer; transition:all 0.2s;">① 접수 기간 모드</button>
+                                    <button onclick="setSimPhase('vote')" id="simTabVote" style="background:#1e293b; color:#94a3b8; border:1px solid #334155; padding:7px 16px; border-radius:8px; font-size:13px; font-weight:800; cursor:pointer; transition:all 0.2s;">② 투표 기간 모드</button>
+                                    <button onclick="setSimPhase('market')" id="simTabMarket" style="background:#1e293b; color:#94a3b8; border:1px solid #334155; padding:7px 16px; border-radius:8px; font-size:13px; font-weight:800; cursor:pointer; transition:all 0.2s;">③ 마켓/선정작 모드</button>
+                                </div>
+                            </div>
+
+                            <!-- Mockup Browser Container -->
+                            <div style="background:#ffffff; border-radius:10px; overflow:hidden; color:#1e293b; border:1px solid #cbd5e1;">
+                                
+                                <!-- Mockup Top GNB -->
+                                <div style="background:#ffffff; padding:12px 20px; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
+                                    <div style="display:flex; align-items:center; gap:16px;">
+                                        <div style="font-size:16px; font-weight:900; color:#0f172a; letter-spacing:-0.5px;">RO FACTORY</div>
+                                        <div id="simGnbBadge" style="background:#eff6ff; color:#1d4ed8; font-size:11px; font-weight:800; padding:2px 8px; border-radius:4px; border:1px solid #bfdbfe;">
+                                            SEASON 1 • 접수 진행 중 (D-12)
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; gap:16px; font-size:12.5px; font-weight:700; color:#64748b;">
+                                        <span id="simNav1" style="color:#2563eb; font-weight:900;">작품 접수</span>
+                                        <span id="simNav2">인기 투표</span>
+                                        <span id="simNav3">마켓 상점</span>
+                                        <span>마이 스튜디오</span>
+                                    </div>
+                                </div>
+
+                                <!-- Mockup Hero Banner -->
+                                <div id="simHeroBanner" style="background:linear-gradient(135deg, #1e3a8a, #0f172a); color:#fff; padding:32px 28px; transition:all 0.3s; position:relative; overflow:hidden;">
+                                    <div id="simHeroTag" style="display:inline-block; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); font-size:11.5px; font-weight:800; padding:3px 10px; border-radius:12px; margin-bottom:10px;">
+                                        🏆 크리에이터 콘테스트 오픈
+                                    </div>
+                                    <h3 id="simHeroTitle" style="font-size:22px; font-weight:900; margin-bottom:8px; letter-spacing:-0.5px;">
+                                        나만의 3D 발자국을 출품하고 공식 출시의 주인공이 되세요!
+                                    </h3>
+                                    <p id="simHeroDesc" style="font-size:13.5px; color:#cbd5e1; margin-bottom:18px; line-height:1.5;">
+                                        이벤트 기간 결제 시 10회 출품 캡 + 인게임 크리에이터 칭호 부여 + 최종 당첨작 전액 무료 소장!
+                                    </p>
+                                    <div style="display:flex; gap:10px; align-items:center;">
+                                        <a id="simHeroCta" href="register.html" style="background:#2563eb; color:#fff; text-decoration:none; padding:10px 22px; border-radius:8px; font-size:14px; font-weight:900; box-shadow:0 4px 12px rgba(37,99,235,0.4); display:inline-block; transition:all 0.2s;">
+                                            🪄 지금 발자국 출품하기 &rarr;
+                                        </a>
+                                        <span id="simHeroSub" style="font-size:12px; color:#94a3b8;">(등록 페이지 register.html 로 즉시 이동)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Mockup Body Section -->
+                                <div id="simBodyContent" style="padding:24px 28px; background:#f8fafc;">
+                                    
+                                    <!-- Step 1 View -->
+                                    <div id="simViewRegister" style="display:block;">
+                                        <div style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                                            <span>💡 콘테스트 참여 3단계 가이드</span>
+                                            <span style="font-size:12px; color:#2563eb; font-weight:700;">실시간 접수 현황: 428개 출품 완료</span>
+                                        </div>
+                                        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px;">
+                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:14px;">
+                                                <div style="font-size:20px; margin-bottom:4px;">🎨</div>
+                                                <div style="font-size:13px; font-weight:800; color:#0f172a;">1. UGC 에셋 제작</div>
+                                                <div style="font-size:11.5px; color:#64748b; margin-top:2px;">제공 툴로 .foot 3D 데이터 제작</div>
+                                            </div>
+                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:14px;">
+                                                <div style="font-size:20px; margin-bottom:4px;">📤</div>
+                                                <div style="font-size:13px; font-weight:800; color:#0f172a;">2. 온라인 접수</div>
+                                                <div style="font-size:11.5px; color:#64748b; margin-top:2px;">닉네임 입력 후 최대 10회 출품</div>
+                                            </div>
+                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:14px;">
+                                                <div style="font-size:20px; margin-bottom:4px;">👑</div>
+                                                <div style="font-size:13px; font-weight:800; color:#0f172a;">3. 유저 투표 &amp; 출시</div>
+                                                <div style="font-size:11.5px; color:#64748b; margin-top:2px;">100% 유저 투표 득표 순 공식 출시</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 2 View -->
+                                    <div id="simViewVote" style="display:none;">
+                                        <div style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                                            <span>🗳️ 실시간 유저 인기 투표 진행 중 (로그인 시 1일 1회)</span>
+                                            <span style="font-size:12px; color:#7e22ce; font-weight:700;">투표 종료까지 D-4</span>
+                                        </div>
+                                        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px;">
+                                            <div style="background:#ffffff; border:1.5px solid #a855f7; border-radius:8px; padding:12px; text-align:center;">
+                                                <div style="height:70px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">❄️</div>
+                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">크리스탈 얼음 발자국</div>
+                                                <div style="font-size:11px; color:#7e22ce; font-weight:700;">1,420 득표 (1위)</div>
+                                                <button style="margin-top:6px; width:100%; background:#7e22ce; color:#fff; border:none; padding:5px 0; border-radius:4px; font-size:11.5px; font-weight:800; cursor:pointer;">투표하기</button>
+                                            </div>
+                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:12px; text-align:center;">
+                                                <div style="height:70px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">🔥</div>
+                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">화염 불꽃 스텝</div>
+                                                <div style="font-size:11px; color:#64748b; font-weight:700;">1,180 득표 (2위)</div>
+                                                <button style="margin-top:6px; width:100%; background:#7e22ce; color:#fff; border:none; padding:5px 0; border-radius:4px; font-size:11.5px; font-weight:800; cursor:pointer;">투표하기</button>
+                                            </div>
+                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:12px; text-align:center;">
+                                                <div style="height:70px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">🌸</div>
+                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">벚꽃 분홍 발자국</div>
+                                                <div style="font-size:11px; color:#64748b; font-weight:700;">940 득표 (3위)</div>
+                                                <button style="margin-top:6px; width:100%; background:#7e22ce; color:#fff; border:none; padding:5px 0; border-radius:4px; font-size:11.5px; font-weight:800; cursor:pointer;">투표하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 3 View -->
+                                    <div id="simViewMarket" style="display:none;">
+                                        <div style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                                            <span>🏆 시즌 1 공식 마켓 출시 당첨작 TOP 10</span>
+                                            <span style="font-size:12px; color:#16a34a; font-weight:700;">아티스트 전액 무료 / 일반 1회 무료</span>
+                                        </div>
+                                        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px;">
+                                            <div style="background:#ffffff; border:1.5px solid #22c55e; border-radius:8px; padding:12px;">
+                                                <div style="height:70px; background:linear-gradient(135deg,#e0f2fe,#dcfce7); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">👑 ❄️</div>
+                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">[당첨작] 크리스탈 얼음</div>
+                                                <div style="font-size:11px; color:#15803d; font-weight:700;">아티스트: 룬미드가츠_마스터</div>
+                                                <div style="margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
+                                                    <span style="font-size:11px; color:#2563eb; font-weight:800;">FREE (무료 소장)</span>
+                                                    <a href="market.html" style="background:#16a34a; color:#fff; text-decoration:none; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:800;">구매/소장</a>
+                                                </div>
+                                            </div>
+                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:12px;">
+                                                <div style="height:70px; background:linear-gradient(135deg,#e0f2fe,#dcfce7); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">👑 🔥</div>
+                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">[당첨작] 화염 불꽃 스텝</div>
+                                                <div style="font-size:11px; color:#15803d; font-weight:700;">아티스트: 프론테라_대장장이</div>
+                                                <div style="margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
+                                                    <span style="font-size:11px; color:#2563eb; font-weight:800;">FREE (무료 소장)</span>
+                                                    <a href="market.html" style="background:#16a34a; color:#fff; text-decoration:none; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:800;">구매/소장</a>
+                                                </div>
+                                            </div>
+                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:12px;">
+                                                <div style="height:70px; background:linear-gradient(135deg,#e0f2fe,#dcfce7); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">👑 🌸</div>
+                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">[당첨작] 벚꽃 분홍 발자국</div>
+                                                <div style="font-size:11px; color:#15803d; font-weight:700;">아티스트: 페이욘_아티스트</div>
+                                                <div style="margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
+                                                    <span style="font-size:11px; color:#2563eb; font-weight:800;">FREE (무료 소장)</span>
+                                                    <a href="market.html" style="background:#16a34a; color:#fff; text-decoration:none; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:800;">구매/소장</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /simBodyContent -->
+
+                            </div><!-- /Mockup Browser Container -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ===================== SECTION 4 ===================== -->
             <div class="page-section" id="sec-risk">
                 <div class="page-header">
-                    <div class="page-icon" style="background:#fef2f2; color:#dc2626;">3</div>
-                    <h3>3. 리스크 관리 법적 고지 항목 (프리미엄 회원제 일 경우 리스크 처리 방안)</h3>
+                    <div class="page-icon" style="background:#fef2f2; color:#dc2626;">4</div>
+                    <h3>4. 리스크 관리 법적 고지 항목 (프리미엄 회원제 일 경우 리스크 처리 방안)</h3>
                     <div class="section-edit-tools" style="display:none; margin-left:auto; gap:6px;">
                         <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
                     </div>
@@ -911,6 +1195,106 @@
             toast.innerHTML = '<span>🔔</span> <span>' + msg + '</span>';
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+        function setSimPhase(phase) {
+            const btnReg = document.getElementById('simTabRegister');
+            const btnVote = document.getElementById('simTabVote');
+            const btnMkt = document.getElementById('simTabMarket');
+
+            const viewReg = document.getElementById('simViewRegister');
+            const viewVote = document.getElementById('simViewVote');
+            const viewMkt = document.getElementById('simViewMarket');
+
+            const gnbBadge = document.getElementById('simGnbBadge');
+            const nav1 = document.getElementById('simNav1');
+            const nav2 = document.getElementById('simNav2');
+            const nav3 = document.getElementById('simNav3');
+
+            const heroBanner = document.getElementById('simHeroBanner');
+            const heroTag = document.getElementById('simHeroTag');
+            const heroTitle = document.getElementById('simHeroTitle');
+            const heroDesc = document.getElementById('simHeroDesc');
+            const heroCta = document.getElementById('simHeroCta');
+            const heroSub = document.getElementById('simHeroSub');
+
+            // Reset tab styles
+            [btnReg, btnVote, btnMkt].forEach(b => {
+                b.style.background = '#1e293b';
+                b.style.color = '#94a3b8';
+                b.style.border = '1px solid #334155';
+            });
+            [nav1, nav2, nav3].forEach(n => {
+                n.style.color = '#64748b';
+                n.style.fontWeight = '700';
+            });
+            viewReg.style.display = 'none';
+            viewVote.style.display = 'none';
+            viewMkt.style.display = 'none';
+
+            if (phase === 'register') {
+                btnReg.style.background = '#2563eb';
+                btnReg.style.color = '#fff';
+                btnReg.style.border = 'none';
+                viewReg.style.display = 'block';
+
+                gnbBadge.innerText = 'SEASON 1 • 접수 진행 중 (D-12)';
+                gnbBadge.style.background = '#eff6ff';
+                gnbBadge.style.color = '#1d4ed8';
+                gnbBadge.style.borderColor = '#bfdbfe';
+                nav1.style.color = '#2563eb';
+                nav1.style.fontWeight = '900';
+
+                heroBanner.style.background = 'linear-gradient(135deg, #1e3a8a, #0f172a)';
+                heroTag.innerText = '🏆 크리에이터 콘테스트 오픈';
+                heroTitle.innerText = '나만의 3D 발자국을 출품하고 공식 출시의 주인공이 되세요!';
+                heroDesc.innerText = '이벤트 기간 결제 시 10회 출품 캡 + 인게임 크리에이터 칭호 부여 + 최종 당첨작 전액 무료 소장!';
+                heroCta.innerText = '🪄 지금 발자국 출품하기 →';
+                heroCta.style.background = '#2563eb';
+                heroCta.href = 'register.html';
+                heroSub.innerText = '(등록 페이지 register.html 로 즉시 이동)';
+            } else if (phase === 'vote') {
+                btnVote.style.background = '#7e22ce';
+                btnVote.style.color = '#fff';
+                btnVote.style.border = 'none';
+                viewVote.style.display = 'block';
+
+                gnbBadge.innerText = 'SEASON 1 • 인기 투표 진행 중 (D-4)';
+                gnbBadge.style.background = '#faf5ff';
+                gnbBadge.style.color = '#7e22ce';
+                gnbBadge.style.borderColor = '#e9d5ff';
+                nav2.style.color = '#7e22ce';
+                nav2.style.fontWeight = '900';
+
+                heroBanner.style.background = 'linear-gradient(135deg, #581c87, #0f172a)';
+                heroTag.innerText = '🗳️ 100% 유저 인기 투표 개시';
+                heroTitle.innerText = '최고의 3D 발자국을 뽑아주세요! 당신의 원픽이 공식 출시됩니다';
+                heroDesc.innerText = '로그인 계정당 1일 1회 투표 가능! 유저 득표 순 상위 10개 작품이 라그나로크 인게임 공식 상점에 정식 출시됩니다.';
+                heroCta.innerText = '🗳️ 유저 인기 투표 참여하기 →';
+                heroCta.style.background = '#7e22ce';
+                heroCta.href = 'contest_vote.html';
+                heroSub.innerText = '(투표 페이지 contest_vote.html 로 이동)';
+            } else if (phase === 'market') {
+                btnMkt.style.background = '#16a34a';
+                btnMkt.style.color = '#fff';
+                btnMkt.style.border = 'none';
+                viewMkt.style.display = 'block';
+
+                gnbBadge.innerText = 'SEASON 1 • 선정작 공식 마켓 판매 중';
+                gnbBadge.style.background = '#f0fdf4';
+                gnbBadge.style.color = '#15803d';
+                gnbBadge.style.borderColor = '#bbf7d0';
+                nav3.style.color = '#16a34a';
+                nav3.style.fontWeight = '900';
+
+                heroBanner.style.background = 'linear-gradient(135deg, #14532d, #0f172a)';
+                heroTag.innerText = '🎉 시즌 1 당첨작 마켓 정식 출시';
+                heroTitle.innerText = '시즌 1 영광의 TOP 10 당첨작 마켓 정식 출시!';
+                heroDesc.innerText = '아티스트 회원: 선정작 전액 무료 소장 / 일반 유저: 최종 선정작 중 1회 무료 구매권 지급!';
+                heroCta.innerText = '🛍️ 당첨작 마켓 바로가기 →';
+                heroCta.style.background = '#16a34a';
+                heroCta.href = 'market.html';
+                heroSub.innerText = '(마켓 페이지 market.html 로 이동)';
+            }
         }
     </script>
 </body>

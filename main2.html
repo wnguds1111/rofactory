@@ -588,7 +588,20 @@
 </head>
 <body>
     <script src="gnb.js"></script>
-</div>
+    <!-- ═══════ B2C 시즌 콘테스트 상태 전환 컨트롤 바 ═══════ -->
+    <div style="background:#0f172a; color:#fff; padding:10px 24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid #334155; position:sticky; top:44px; z-index:190; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <span style="display:inline-block; width:9px; height:9px; border-radius:50%; background:#22c55e;"></span>
+            <span style="font-size:13px; font-weight:800; color:#e2e8f0;">[시즌제 콘테스트 B2C 메인 UI 검토 모드]</span>
+            <span id="currentPhaseLabel" style="font-size:12px; background:rgba(37,99,235,0.3); color:#93c5fd; border:1px solid rgba(147,197,253,0.3); padding:2px 8px; border-radius:4px; font-weight:700;">현재: ① 접수 기간</span>
+        </div>
+        <div style="display:flex; gap:6px; align-items:center;">
+            <button onclick="setMainSeasonPhase('register')" id="btnMainPhaseReg" style="background:#2563eb; color:#fff; border:none; padding:5px 12px; border-radius:6px; font-size:12px; font-weight:800; cursor:pointer; transition:all 0.2s;">① 접수 기간 모드</button>
+            <button onclick="setMainSeasonPhase('vote')" id="btnMainPhaseVote" style="background:#1e293b; color:#94a3b8; border:1px solid #334155; padding:5px 12px; border-radius:6px; font-size:12px; font-weight:800; cursor:pointer; transition:all 0.2s;">② 투표 기간 모드</button>
+            <button onclick="setMainSeasonPhase('market')" id="btnMainPhaseMkt" style="background:#1e293b; color:#94a3b8; border:1px solid #334155; padding:5px 12px; border-radius:6px; font-size:12px; font-weight:800; cursor:pointer; transition:all 0.2s;">③ 마켓/선정작 모드</button>
+            <a href="contest_policy.html#sec-b2c-ui" style="background:#334155; color:#e2e8f0; text-decoration:none; padding:5px 12px; border-radius:6px; font-size:12px; font-weight:700; margin-left:8px; border:1px solid #475569;">📋 기획 명세서</a>
+        </div>
+    </div>
 
 <!-- 페이지 본문 -->
     <div class="page-body">
@@ -598,15 +611,28 @@
             <section class="hero-section">
                 <div class="hero-slider" id="heroSlider">
 
-                    <!-- Slide 1: 작품 등록 -->
-                    <div class="hero-slide active">
-                        <a href="register.html" style="position:absolute;inset:0;z-index:1;"></a>
-                        <div class="hero-slide-bg hero-slide-bg-1"></div>
-                        <div class="hero-overlay"></div>
-                        <div class="hero-content" style="z-index:2;">
-                            <h1 data-en="Create your own footprints<br>and start selling today" data-ko="나만의 발자국을 만들고<br>지금 바로 등록해보세요">나만의 발자국을 만들고<br>지금 바로 등록해보세요</h1>
-                            <p data-en="Upload your .foot files and register your asset on the global market." data-ko="UGC 편집툴로 만든 에셋 파일을<br>손쉽게 마켓에 등록할 수 있습니다.">UGC 편집툴로 만든 에셋 파일을<br>손쉽게 마켓에 등록할 수 있습니다.</p>
-                            <a href="register.html" class="btn-hero-outline" style="position:relative; z-index:10;" data-ko="등록하러 가기 &rarr;" data-en="Register &rarr;">등록하러 가기 &rarr;</a>
+                    <!-- Slide 1: 시즌제 콘테스트 메인 -->
+                    <div class="hero-slide active" id="mainHeroSlide1">
+                        <div class="hero-slide-bg hero-slide-bg-1" id="mainHeroBg1"></div>
+                        <div class="hero-overlay" id="mainHeroOverlay"></div>
+                        <div class="hero-content" style="z-index:2; max-width:640px;">
+                            <div class="slide-tag" id="mainHeroTag" style="background:rgba(37,99,235,0.4); border-color:rgba(147,197,253,0.5);">
+                                🏆 SEASON 1 CREATOR CONTEST
+                            </div>
+                            <h1 id="mainHeroTitle" style="font-size:30px; line-height:1.25;">
+                                나만의 3D 발자국을 출품하고<br>라그나로크 공식 출시의 주인공이 되세요!
+                            </h1>
+                            <p id="mainHeroDesc" style="font-size:14px; margin-bottom:20px; line-height:1.6; opacity:0.9;">
+                                이벤트 기간 결제 시 10회 출품 캡 + 인게임 크리에이터 칭호 부여 + 최종 당첨작 전액 무료 소장!
+                            </p>
+                            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                                <a href="register.html" id="mainHeroPrimaryCta" class="btn-hero-outline" style="background:#2563eb; border-color:#2563eb; font-weight:800; padding:10px 24px; font-size:14px;">
+                                    🪄 지금 발자국 출품하기 &rarr;
+                                </a>
+                                <a href="about.html" id="mainHeroSecondaryCta" class="btn-hero-outline" style="background:rgba(255,255,255,0.15); font-weight:700; padding:10px 20px; font-size:13px;">
+                                    📋 콘테스트 가이드 &rarr;
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -702,135 +728,259 @@
                 </div><!-- /hero-thumb-nav -->
             </section>
 
-            <!-- 이달의 베스트 -->
-            <section class="main-section">
-                <div class="section-head">
-                    <div>
-                        <div class="section-head-left">
-                            <h2 data-en="Best Footprints of the Month" data-ko="이달의 베스트 발자국" class="font-pixel">이달의 베스트 발자국</h2>
-                        </div>
-                        <!-- <div class="sub" data-en="Most loved assets by adventurers" data-ko="모험가들이 가장 사랑한 인기 에셋">모험가들이 가장 사랑한 인기 에셋</div> -->
-                    </div>
-                    <div class="nav-arrows">
-                        <button onclick="sl('bt',-1)">‹</button>
-                        <button onclick="sl('bt',1)">›</button>
-                    </div>
-                </div>
-                <div class="slider-wrap">
-                    <div class="slider-track" id="bt">
-                        <a href="market.html?productId=1" class="product-card"><div class="product-thumb">🌸<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Poring Cherry Blossom" data-ko="포링 벚꽃 발자국">포링 벚꽃 발자국</span><span class="price free">FREE</span></div></a>
-                        <a href="market.html?productId=2" class="product-card"><div class="product-thumb">❄️<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Ice Crystal Footprints" data-ko="얼음 수정 발자국">얼음 수정 발자국</span><span class="price">1,200 KP</span></div></a>
-                        <a href="market.html?productId=3" class="product-card"><div class="product-thumb">🌑<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Steps of Dark Abyss" data-ko="어둠의 심연의 걸음">어둠의 심연의 걸음</span><span class="price">5,500 KP</span></div></a>
-                        <a href="market.html?productId=4" class="product-card"><div class="product-thumb">☂️<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Green Umbrella Step" data-ko="초록우산 아이의 스텝">초록우산 아이의 스텝</span><span class="price">300 KP</span></div></a>
-                        <a href="market.html?productId=5" class="product-card"><div class="product-thumb">✨<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Golden Elf Trajectory" data-ko="황금빛 엘프의 궤적">황금빛 엘프의 궤적</span><span class="price">9,000 KP</span></div></a>
-                        <a href="market.html?productId=6" class="product-card"><div class="product-thumb">🔮<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Dark Mage's Trace" data-ko="다크메이지의 잿빛흔적">다크메이지의 잿빛흔적</span><span class="price free">FREE</span></div></a>
-                        <a href="market.html?productId=11" class="product-card"><div class="product-thumb">🐰<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Rabbit Jump Step" data-ko="토끼의 점프 스텝">토끼의 점프 스텝</span><span class="price">500 KP</span></div></a>
-                        <a href="market.html?productId=9" class="product-card"><div class="product-thumb">🌊<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Aqua Marine Slide" data-ko="아쿠아 마린 슬라이드">아쿠아 마린 슬라이드</span><span class="price">4,200 KP</span></div></a>
-                        <a href="market.html?productId=12" class="product-card"><div class="product-thumb">🕊️<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Dazzling Angel Feather" data-ko="눈부신 천사의 깃털">눈부신 천사의 깃털</span><span class="price">20,000 KP</span></div></a>
-                        <a href="market.html?productId=8" class="product-card"><div class="product-thumb">⛄<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Pure Snow Footsteps" data-ko="퓨어 스노우 발걸음">퓨어 스노우 발걸음</span><span class="price free">FREE</span></div></a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 신규 업데이트 -->
-            <section class="main-section">
-                <div class="section-head">
-                    <div>
-                        <div class="section-head-left">
-                            <h2 data-en="Newly Updated Footprints" data-ko="신규 업데이트 발자국" class="font-pixel".section-head>신규 업데이트 발자국</h2>
-                        </div>
-                        <!-- <div class="sub" data-en="Fresh assets just registered" data-ko="방금 등록된 따끈따끈한 신상 에셋">방금 등록된 따끈따끈한 신상 에셋</div> -->
-                    </div>
-                    <div class="nav-arrows">
-                        <button onclick="sl('nt',-1)">‹</button>
-                        <button onclick="sl('nt',1)">›</button>
-                    </div>
-                </div>
-                <div class="slider-wrap">
-                    <div class="slider-track" id="nt">
-                        <a href="market.html?productId=7" class="product-card"><div class="product-thumb">🔥<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Burning Lava Fragment" data-ko="불타는 용암 조각">불타는 용암 조각</span><span class="price">15,000 KP</span></div></a>
-                        <a href="market.html?productId=8" class="product-card"><div class="product-thumb">⛄<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Pure Snow Footsteps" data-ko="퓨어 스노우 발걸음">퓨어 스노우 발걸음</span><span class="price free">FREE</span></div></a>
-                        <a href="market.html?productId=9" class="product-card"><div class="product-thumb">🌊<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Aqua Marine Slide" data-ko="아쿠아 마린 슬라이드">아쿠아 마린 슬라이드</span><span class="price">4,200 KP</span></div></a>
-                        <a href="market.html?productId=10" class="product-card"><div class="product-thumb">💀<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Necromancer Skull Dance" data-ko="네크로맨서의 해골 춤">네크로맨서의 해골 춤</span><span class="price">8,500 KP</span></div></a>
-                        <a href="market.html?productId=11" class="product-card"><div class="product-thumb">🐰<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Rabbit Jump Step" data-ko="토끼의 점프 스텝">토끼의 점프 스텝</span><span class="price">500 KP</span></div></a>
-                        <a href="market.html?productId=12" class="product-card"><div class="product-thumb">🕊️<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Dazzling Angel Feather" data-ko="눈부신 천사의 깃털">눈부신 천사의 깃털</span><span class="price">20,000 KP</span></div></a>
-                        <a href="market.html?productId=1" class="product-card"><div class="product-thumb">🌸<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Poring Cherry Blossom" data-ko="포링 벚꽃 발자국">포링 벚꽃 발자국</span><span class="price free">FREE</span></div></a>
-                        <a href="market.html?productId=2" class="product-card"><div class="product-thumb">❄️<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Ice Crystal Footprints" data-ko="얼음 수정 발자국">얼음 수정 발자국</span><span class="price">1,200 KP</span></div></a>
-                        <a href="market.html?productId=4" class="product-card"><div class="product-thumb">☂️<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Green Umbrella Step" data-ko="초록우산 아이의 스텝">초록우산 아이의 스텝</span><span class="price">300 KP</span></div></a>
-                        <a href="market.html?productId=5" class="product-card"><div class="product-thumb">✨<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Golden Elf Trajectory" data-ko="황금빛 엘프의 궤적">황금빛 엘프의 궤적</span><span class="price">9,000 KP</span></div></a>
-                    </div>
-                </div>
-            </section>
-
-        </div><!-- /container -->
-
-        <!-- HOW IT WORKS Section -->
-        <section id="custom-step-section" class="mt-[80px] pt-0 pb-[50px] container mx-auto block w-full relative overflow-hidden">
-            <!-- Background decorative lighting -->
-            <div class="absolute -top-24 -left-12 w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(14,165,233,0.06),transparent_70%)] rounded-full -z-10"></div>
-            <div class="absolute -bottom-24 right-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(59,130,246,0.04),transparent_70%)] rounded-full -z-10"></div>
-
-            <div class="step-fade-up text-center mb-12 relative z-[10]">
-                <span class="font-pixel inline-block px-4 py-1.5 rounded-[20px] bg-white text-slate-900 text-s font-extrabold mb-2">HOW IT WORKS</span>
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- 1. 접수 기간 전용 블록 (PHASE 1: REGISTER) -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <div id="seasonRegisterBlock" style="display:block;">
                 
-                <div class="flex items-center justify-center gap-3 mb-2.5">
-                    <img src="images/star.png" style="width: 28px; height: auto; display: block;" alt="star">
+                <!-- 이벤트 혜택 안내 배너 -->
+                <div style="background:#ffffff; border:1px solid #bfdbfe; border-left:5px solid #2563eb; border-radius:12px; padding:20px 24px; margin-top:36px; box-shadow:0 4px 14px rgba(37,99,235,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+                    <div>
+                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                            <span style="background:#dbeafe; color:#1e40af; font-size:11px; font-weight:800; padding:2px 8px; border-radius:4px;">아티스트 프리미엄 회원 혜택</span>
+                            <span style="font-size:14px; font-weight:900; color:#0f172a;">이벤트 기간 결제 유저(KP/정액제) 대상 특별 혜택</span>
+                        </div>
+                        <div style="font-size:13px; color:#475569; line-height:1.5;">
+                            • 발자국 <strong>10회 집중 출품 슬롯</strong> 제공 &nbsp;|&nbsp; • 크리에이터 <strong>인게임 전용 칭호</strong> 즉시 부여 &nbsp;|&nbsp; • 콘테스트 <strong>최종 당첨작 전액 무료 소장권</strong> 지급
+                        </div>
+                    </div>
+                    <a href="register.html" style="background:#2563eb; color:#fff; text-decoration:none; padding:10px 20px; border-radius:8px; font-size:13px; font-weight:800; white-space:nowrap; box-shadow:0 4px 10px rgba(37,99,235,0.3);">
+                        🪄 작품 출품하러 가기 &rarr;
+                    </a>
+                </div>
+
+                <!-- 이달의 베스트 -->
+                <section class="main-section">
+                    <div class="section-head">
+                        <div>
+                            <div class="section-head-left">
+                                <h2 data-en="Best Footprints of the Month" data-ko="이달의 베스트 발자국" class="font-pixel">이달의 베스트 발자국</h2>
+                            </div>
+                        </div>
+                        <div class="nav-arrows">
+                            <button onclick="sl('bt',-1)">‹</button>
+                            <button onclick="sl('bt',1)">›</button>
+                        </div>
+                    </div>
+                    <div class="slider-wrap">
+                        <div class="slider-track" id="bt">
+                            <a href="market.html?productId=1" class="product-card"><div class="product-thumb">🌸<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Poring Cherry Blossom" data-ko="포링 벚꽃 발자국">포링 벚꽃 발자국</span><span class="price free">FREE</span></div></a>
+                            <a href="market.html?productId=2" class="product-card"><div class="product-thumb">❄️<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Ice Crystal Footprints" data-ko="얼음 수정 발자국">얼음 수정 발자국</span><span class="price">1,200 KP</span></div></a>
+                            <a href="market.html?productId=3" class="product-card"><div class="product-thumb">🌑<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Steps of Dark Abyss" data-ko="어둠의 심연의 걸음">어둠의 심연의 걸음</span><span class="price">5,500 KP</span></div></a>
+                            <a href="market.html?productId=4" class="product-card"><div class="product-thumb">☂️<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Green Umbrella Step" data-ko="초록우산 아이의 스텝">초록우산 아이의 스텝</span><span class="price">300 KP</span></div></a>
+                            <a href="market.html?productId=5" class="product-card"><div class="product-thumb">✨<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Golden Elf Trajectory" data-ko="황금빛 엘프의 궤적">황금빛 엘프의 궤적</span><span class="price">9,000 KP</span></div></a>
+                            <a href="market.html?productId=6" class="product-card"><div class="product-thumb">🔮<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Dark Mage's Trace" data-ko="다크메이지의 잿빛흔적">다크메이지의 잿빛흔적</span><span class="price free">FREE</span></div></a>
+                            <a href="market.html?productId=11" class="product-card"><div class="product-thumb">🐰<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Rabbit Jump Step" data-ko="토끼의 점프 스텝">토끼의 점프 스텝</span><span class="price">500 KP</span></div></a>
+                            <a href="market.html?productId=9" class="product-card"><div class="product-thumb">🌊<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Aqua Marine Slide" data-ko="아쿠아 마린 슬라이드">아쿠아 마린 슬라이드</span><span class="price">4,200 KP</span></div></a>
+                            <a href="market.html?productId=12" class="product-card"><div class="product-thumb">🕊️<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Dazzling Angel Feather" data-ko="눈부신 천사의 깃털">눈부신 천사의 깃털</span><span class="price">20,000 KP</span></div></a>
+                            <a href="market.html?productId=8" class="product-card"><div class="product-thumb">⛄<span class="badge badge-best">BEST</span></div><div class="product-info"><span class="name" data-en="Pure Snow Footsteps" data-ko="퓨어 스노우 발걸음">퓨어 스노우 발걸음</span><span class="price free">FREE</span></div></a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 신규 업데이트 -->
+                <section class="main-section">
+                    <div class="section-head">
+                        <div>
+                            <div class="section-head-left">
+                                <h2 data-en="Newly Updated Footprints" data-ko="신규 업데이트 발자국" class="font-pixel">신규 업데이트 발자국</h2>
+                            </div>
+                        </div>
+                        <div class="nav-arrows">
+                            <button onclick="sl('nt',-1)">‹</button>
+                            <button onclick="sl('nt',1)">›</button>
+                        </div>
+                    </div>
+                    <div class="slider-wrap">
+                        <div class="slider-track" id="nt">
+                            <a href="market.html?productId=7" class="product-card"><div class="product-thumb">🔥<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Burning Lava Fragment" data-ko="불타는 용암 조각">불타는 용암 조각</span><span class="price">15,000 KP</span></div></a>
+                            <a href="market.html?productId=8" class="product-card"><div class="product-thumb">⛄<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Pure Snow Footsteps" data-ko="퓨어 스노우 발걸음">퓨어 스노우 발걸음</span><span class="price free">FREE</span></div></a>
+                            <a href="market.html?productId=9" class="product-card"><div class="product-thumb">🌊<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Aqua Marine Slide" data-ko="아쿠아 마린 슬라이드">아쿠아 마린 슬라이드</span><span class="price">4,200 KP</span></div></a>
+                            <a href="market.html?productId=10" class="product-card"><div class="product-thumb">💀<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Necromancer Skull Dance" data-ko="네크로맨서의 해골 춤">네크로맨서의 해골 춤</span><span class="price">8,500 KP</span></div></a>
+                            <a href="market.html?productId=11" class="product-card"><div class="product-thumb">🐰<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Rabbit Jump Step" data-ko="토끼의 점프 스텝">토끼의 점프 스텝</span><span class="price">500 KP</span></div></a>
+                            <a href="market.html?productId=12" class="product-card"><div class="product-thumb">🕊️<span class="badge badge-new">NEW</span></div><div class="product-info"><span class="name" data-en="Dazzling Angel Feather" data-ko="눈부신 천사의 깃털">눈부신 천사의 깃털</span><span class="price">20,000 KP</span></div></a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- HOW IT WORKS Section -->
+                <section id="custom-step-section" class="mt-[80px] pt-0 pb-[50px] container mx-auto block w-full relative overflow-hidden">
+                    <div class="step-fade-up text-center mb-12 relative z-[10]">
+                        <span class="font-pixel inline-block px-4 py-1.5 rounded-[20px] bg-white text-slate-900 text-s font-extrabold mb-2">HOW IT WORKS</span>
+                        <div class="flex items-center justify-center gap-3 mb-2.5">
+                            <h2 class="font-pixel text-[30px] font-black text-slate-900 m-0">3단계로 완성되는 나만의 발자국 출품</h2>
+                        </div>
+                        <p class="text-slate-500 text-[15px] m-0">누구나 쉽게 제작하고 출품할 수 있어요</p>
+                    </div>
+
+                    <div class="custom-steps-container flex justify-center gap-6 box-border">
+                        <div class="custom-step-card step-fade-up flex-1 bg-white py-11 px-8 rounded-3xl text-slate-900 text-center relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+                            <div class="inline-block text-[11px] font-extrabold bg-sky-100 text-sky-700 py-1 px-3.5 rounded-[20px] mb-[18px]">STEP 1</div>
+                            <div class="mb-4 text-[48px]">🎨</div>
+                            <h3 class="text-xl font-extrabold mb-3">발자국 에셋 제작</h3>
+                            <p class="text-sm text-slate-600 mb-6 leading-relaxed">UGC 편집툴을 통해 .foot 3D 소스 파일과 미리보기를 추출합니다.</p>
+                            <a href="#" class="btn-step" onclick="alert('UGC 편집툴 다운로드가 시작됩니다.'); return false;">편집툴 다운로드 →</a>
+                        </div>
+
+                        <div class="custom-step-card step-fade-up flex-1 bg-white py-11 px-8 rounded-3xl text-slate-900 text-center relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+                            <div class="inline-block text-[11px] font-extrabold bg-sky-100 text-sky-700 py-1 px-3.5 rounded-[20px] mb-[18px]">STEP 2</div>
+                            <div class="mb-4 text-[48px]">📤</div>
+                            <h3 class="text-xl font-extrabold mb-3">온라인 콘테스트 출품</h3>
+                            <p class="text-sm text-slate-600 mb-6 leading-relaxed">아티스트 닉네임 입력 후 최대 10회까지 집중 출품합니다.</p>
+                            <a href="register.html" class="btn-step">발자국 작품 출품 →</a>
+                        </div>
+
+                        <div class="custom-step-card step-fade-up flex-1 bg-white py-11 px-8 rounded-3xl text-slate-900 text-center relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+                            <div class="inline-block text-[11px] font-extrabold bg-sky-100 text-sky-700 py-1 px-3.5 rounded-[20px] mb-[18px]">STEP 3</div>
+                            <div class="mb-4 text-[48px]">👑</div>
+                            <h3 class="text-xl font-extrabold mb-3">유저 투표 &amp; 인게임 출시</h3>
+                            <p class="text-sm text-slate-600 mb-6 leading-relaxed">100% 유저 득표 순 상위 10개 당첨작이 공식 상점에 정식 출시됩니다.</p>
+                            <a href="contest_policy.html" class="btn-step">콘테스트 정책 보기 →</a>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- /seasonRegisterBlock -->
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- 2. 투표 기간 전용 블록 (PHASE 2: VOTE) -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <div id="seasonVoteBlock" style="display:none; margin-top:40px;">
+                
+                <div style="background:#faf5ff; border:2px solid #c084fc; border-radius:16px; padding:28px 32px; margin-bottom:32px; box-shadow:0 8px 24px rgba(147,51,234,0.08); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+                    <div>
+                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                            <span style="background:#9333ea; color:#fff; font-size:11.5px; font-weight:900; padding:3px 10px; border-radius:6px;">LIVE 100% 유저 인기 투표</span>
+                            <span style="font-size:18px; font-weight:900; color:#581c87;">시즌 1 공식 인게임 출시 발자국을 직접 뽑아주세요!</span>
+                        </div>
+                        <div style="font-size:14px; color:#6b21a8;">
+                            • <strong>로그인 계정당 1일 1회 투표 가능</strong> &nbsp;|&nbsp; • 유저 유효 득표 순위 상위 10개 당첨작 100% 공식 출시 &nbsp;|&nbsp; • 투표 마감: <strong>D-4</strong>
+                        </div>
+                    </div>
+                    <a href="contest_vote.html" style="background:#7e22ce; color:#fff; text-decoration:none; padding:12px 24px; border-radius:8px; font-size:14px; font-weight:900; box-shadow:0 4px 14px rgba(126,34,206,0.35);">
+                        🗳️ 투표 전용 페이지 바로가기 &rarr;
+                    </a>
+                </div>
+
+                <!-- 실시간 투표 그리드 -->
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+                    <h2 class="font-pixel text-[22px] font-black text-slate-900 m-0">🗳️ 실시간 콘테스트 응모작 투표 (상위 후보)</h2>
+                    <span style="font-size:13px; color:#64748b; font-weight:700;">실시간 득표 수 기준 정렬</span>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:20px; margin-bottom:40px;">
                     
-                    <h2 class="font-pixel text-[32px] font-black text-slate-900 m-0" 
-                        data-en="Complete your footprints in 3 steps" 
-                        data-ko="3단계로 완성되는 나만의 발자국">
-                        3단계로 완성되는 나만의 발자국
-                    </h2>
+                    <div style="background:#fff; border:2px solid #a855f7; border-radius:14px; padding:18px; box-shadow:0 6px 18px rgba(168,85,247,0.1); position:relative;">
+                        <span style="position:absolute; top:12px; left:12px; background:#7e22ce; color:#fff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:4px;">1위 (1,420표)</span>
+                        <div style="height:140px; background:linear-gradient(135deg,#e0f2fe,#dbeafe); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:48px; margin-bottom:14px;">❄️</div>
+                        <div style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:2px;">크리스탈 얼음 발자국</div>
+                        <div style="font-size:12.5px; color:#7e22ce; font-weight:700; margin-bottom:14px;">아티스트: 룬미드가츠_마스터</div>
+                        <button onclick="castDemoVote(this, '크리스탈 얼음 발자국', 1420)" style="width:100%; background:#7e22ce; color:#fff; border:none; padding:10px 0; border-radius:8px; font-size:13.5px; font-weight:800; cursor:pointer; transition:all 0.2s;">🗳️ 1일 1회 투표하기</button>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #cbd5e1; border-radius:14px; padding:18px; box-shadow:0 4px 12px rgba(0,0,0,0.03); position:relative;">
+                        <span style="position:absolute; top:12px; left:12px; background:#475569; color:#fff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:4px;">2위 (1,180표)</span>
+                        <div style="height:140px; background:linear-gradient(135deg,#fee2e2,#fef3c7); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:48px; margin-bottom:14px;">🔥</div>
+                        <div style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:2px;">화염 불꽃 스텝 Footprint</div>
+                        <div style="font-size:12.5px; color:#64748b; font-weight:700; margin-bottom:14px;">아티스트: 프론테라_대장장이</div>
+                        <button onclick="castDemoVote(this, '화염 불꽃 스텝', 1180)" style="width:100%; background:#7e22ce; color:#fff; border:none; padding:10px 0; border-radius:8px; font-size:13.5px; font-weight:800; cursor:pointer; transition:all 0.2s;">🗳️ 1일 1회 투표하기</button>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #cbd5e1; border-radius:14px; padding:18px; box-shadow:0 4px 12px rgba(0,0,0,0.03); position:relative;">
+                        <span style="position:absolute; top:12px; left:12px; background:#475569; color:#fff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:4px;">3위 (940표)</span>
+                        <div style="height:140px; background:linear-gradient(135deg,#fce7f3,#ede9fe); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:48px; margin-bottom:14px;">🌸</div>
+                        <div style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:2px;">벚꽃 휘날리는 분홍 발자국</div>
+                        <div style="font-size:12.5px; color:#64748b; font-weight:700; margin-bottom:14px;">아티스트: 페이욘_아티스트</div>
+                        <button onclick="castDemoVote(this, '벚꽃 분홍 발자국', 940)" style="width:100%; background:#7e22ce; color:#fff; border:none; padding:10px 0; border-radius:8px; font-size:13.5px; font-weight:800; cursor:pointer; transition:all 0.2s;">🗳️ 1일 1회 투표하기</button>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #cbd5e1; border-radius:14px; padding:18px; box-shadow:0 4px 12px rgba(0,0,0,0.03); position:relative;">
+                        <span style="position:absolute; top:12px; left:12px; background:#475569; color:#fff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:4px;">4위 (860표)</span>
+                        <div style="height:140px; background:linear-gradient(135deg,#fef9c3,#e0f2fe); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:48px; margin-bottom:14px;">🕊️</div>
+                        <div style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:2px;">눈부신 천사의 깃털</div>
+                        <div style="font-size:12.5px; color:#64748b; font-weight:700; margin-bottom:14px;">아티스트: 게펜_마법학회</div>
+                        <button onclick="castDemoVote(this, '눈부신 천사의 깃털', 860)" style="width:100%; background:#7e22ce; color:#fff; border:none; padding:10px 0; border-radius:8px; font-size:13.5px; font-weight:800; cursor:pointer; transition:all 0.2s;">🗳️ 1일 1회 투표하기</button>
+                    </div>
+
+                </div>
+
+            </div><!-- /seasonVoteBlock -->
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- 3. 마켓/선정작 기간 전용 블록 (PHASE 3: MARKET) -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <div id="seasonMarketBlock" style="display:none; margin-top:40px;">
+                
+                <div style="background:#f0fdf4; border:2px solid #86efac; border-radius:16px; padding:28px 32px; margin-bottom:32px; box-shadow:0 8px 24px rgba(22,163,74,0.08); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+                    <div>
+                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                            <span style="background:#16a34a; color:#fff; font-size:11.5px; font-weight:900; padding:3px 10px; border-radius:6px;">OFFICIAL RELEASE</span>
+                            <span style="font-size:18px; font-weight:900; color:#14532d;">시즌 1 영광의 당첨작 TOP 10 마켓 정식 개시!</span>
+                        </div>
+                        <div style="font-size:14px; color:#166534;">
+                            • <strong>아티스트 회원</strong>: 최종 선정작 10종 <strong>전액 무료 소장</strong> &nbsp;|&nbsp; • <strong>일반 회원</strong>: 최종 선정작 중 <strong>1회 무료 구매권</strong> 지급!
+                        </div>
+                    </div>
+                    <a href="market.html" style="background:#16a34a; color:#fff; text-decoration:none; padding:12px 24px; border-radius:8px; font-size:14px; font-weight:900; box-shadow:0 4px 14px rgba(22,163,74,0.35);">
+                        🛍️ 마켓 상점 전체보기 &rarr;
+                    </a>
+                </div>
+
+                <!-- 당첨작 쇼케이스 그리드 -->
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+                    <h2 class="font-pixel text-[22px] font-black text-slate-900 m-0">👑 시즌 1 최종 당첨작 명예의 전당</h2>
+                    <span style="font-size:13px; color:#16a34a; font-weight:700;">인게임 공식 상점 동시 판매 중</span>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:20px; margin-bottom:40px;">
                     
-                    <img src="images/star.png" style="width: 28px; height: auto; display: block;" alt="star">
+                    <div style="background:#fff; border:2px solid #22c55e; border-radius:14px; padding:18px; box-shadow:0 6px 18px rgba(34,197,94,0.1); position:relative;">
+                        <span style="position:absolute; top:12px; left:12px; background:#16a34a; color:#fff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:4px;">👑 1위 당첨작</span>
+                        <div style="height:140px; background:linear-gradient(135deg,#e0f2fe,#dcfce7); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:48px; margin-bottom:14px;">❄️</div>
+                        <div style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:2px;">[당첨작] 크리스탈 얼음 발자국</div>
+                        <div style="font-size:12.5px; color:#15803d; font-weight:700; margin-bottom:14px;">아티스트: 룬미드가츠_마스터</div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-size:14px; font-weight:900; color:#2563eb;">FREE (무료 소장)</span>
+                            <a href="market.html" style="background:#16a34a; color:#fff; text-decoration:none; padding:8px 16px; border-radius:6px; font-size:12.5px; font-weight:800;">구매/소장하기</a>
+                        </div>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #cbd5e1; border-radius:14px; padding:18px; box-shadow:0 4px 12px rgba(0,0,0,0.03); position:relative;">
+                        <span style="position:absolute; top:12px; left:12px; background:#16a34a; color:#fff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:4px;">👑 2위 당첨작</span>
+                        <div style="height:140px; background:linear-gradient(135deg,#fee2e2,#dcfce7); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:48px; margin-bottom:14px;">🔥</div>
+                        <div style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:2px;">[당첨작] 화염 불꽃 스텝</div>
+                        <div style="font-size:12.5px; color:#15803d; font-weight:700; margin-bottom:14px;">아티스트: 프론테라_대장장이</div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-size:14px; font-weight:900; color:#2563eb;">FREE (무료 소장)</span>
+                            <a href="market.html" style="background:#16a34a; color:#fff; text-decoration:none; padding:8px 16px; border-radius:6px; font-size:12.5px; font-weight:800;">구매/소장하기</a>
+                        </div>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #cbd5e1; border-radius:14px; padding:18px; box-shadow:0 4px 12px rgba(0,0,0,0.03); position:relative;">
+                        <span style="position:absolute; top:12px; left:12px; background:#16a34a; color:#fff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:4px;">👑 3위 당첨작</span>
+                        <div style="height:140px; background:linear-gradient(135deg,#fce7f3,#dcfce7); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:48px; margin-bottom:14px;">🌸</div>
+                        <div style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:2px;">[당첨작] 벚꽃 분홍 발자국</div>
+                        <div style="font-size:12.5px; color:#15803d; font-weight:700; margin-bottom:14px;">아티스트: 페이욘_아티스트</div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-size:14px; font-weight:900; color:#2563eb;">FREE (무료 소장)</span>
+                            <a href="market.html" style="background:#16a34a; color:#fff; text-decoration:none; padding:8px 16px; border-radius:6px; font-size:12.5px; font-weight:800;">구매/소장하기</a>
+                        </div>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #cbd5e1; border-radius:14px; padding:18px; box-shadow:0 4px 12px rgba(0,0,0,0.03); position:relative;">
+                        <span style="position:absolute; top:12px; left:12px; background:#16a34a; color:#fff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:4px;">👑 4위 당첨작</span>
+                        <div style="height:140px; background:linear-gradient(135deg,#fef9c3,#dcfce7); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:48px; margin-bottom:14px;">🕊️</div>
+                        <div style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:2px;">[당첨작] 눈부신 천사의 깃털</div>
+                        <div style="font-size:12.5px; color:#15803d; font-weight:700; margin-bottom:14px;">아티스트: 게펜_마법학회</div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-size:14px; font-weight:900; color:#2563eb;">FREE (무료 소장)</span>
+                            <a href="market.html" style="background:#16a34a; color:#fff; text-decoration:none; padding:8px 16px; border-radius:6px; font-size:12.5px; font-weight:800;">구매/소장하기</a>
+                        </div>
+                    </div>
+
                 </div>
 
-                <p class="text-slate-500 text-[15px] m-0" data-en="Anyone can start easily" data-ko="누구나 쉽게 시작할 수 있어요">누구나 쉽게 시작할 수 있어요</p>
-            </div>
-
-            <!-- 3 Steps Layout -->
-            <div class="custom-steps-container flex justify-center gap-6 box-border">
-
-                <!-- STEP 1 -->
-                <div class="custom-step-card step-fade-up flex-1 bg-white py-11 px-8 rounded-3xl text-slate-900 text-center relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 z-[2]" style="animation-delay:0.1s;">
-                    <div class="inline-block text-[11px] font-extrabold bg-sky-100 text-sky-700 py-1 px-3.5 rounded-[20px] mb-[18px] border border-sky-200 tracking-widest">STEP 1</div>
-                    <div class="mb-4 text-[52px] leading-none flex justify-center"><img src="images/1.png" style="width: 120px; height: auto; display: block;" alt="star"></div>
-                    <h3 class="text-xl font-extrabold mb-3" data-en="Create Files" data-ko="발자국 파일 제작">발자국 파일 제작</h3>
-                    <p class="text-sm text-slate-600 mb-6 leading-relaxed" data-en="Export the .foot source and preview videos using the UGC Editor." data-ko="UGC 편집툴을 통해 .foot 원본 파일과 영상 미리보기 파일을 추출합니다.">UGC 편집툴을 통해 .foot 원본 파일과 영상 미리보기 파일을 추출합니다.</p>
-                    <a href="#" class="btn-step" onclick="alert('UGC 편집툴 다운로드가 시작됩니다.'); return false;" data-en="Download Editor →" data-ko="편집툴 다운로드 →">편집툴 다운로드 →</a>
-                </div>
-
-                <!-- STEP 2 -->
-                <div class="custom-step-card step-fade-up flex-1 bg-white py-11 px-8 rounded-3xl text-slate-900 text-center relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 z-[2]" style="animation-delay:0.22s;">
-                    <div class="inline-block text-[11px] font-extrabold bg-sky-100 text-sky-700 py-1 px-3.5 rounded-[20px] mb-[18px] border border-sky-200 tracking-widest">STEP 2</div>
-                    <div class="mb-4 text-[52px] leading-none flex justify-center"><img src="images/2.png" style="width: 120px; height: auto; display: block;" alt="star"></div>
-                    <h3 class="text-xl font-extrabold mb-3" data-en="Register Details" data-ko="마켓 세부 정보 등록">마켓 세부 정보 등록</h3>
-                    <p class="text-sm text-slate-600 mb-6 leading-relaxed" data-en="Upload the extracted assets and input the title, price, and comments." data-ko="추출한 에셋 파일을 업로드하고 작품명, 가격, 코멘트 등을 기입합니다.">추출한 에셋 파일을 업로드하고 작품명, 가격, 코멘트 등을 기입합니다.</p>
-                    <a href="register.html" class="btn-step" data-en="Register Footprint →" data-ko="발자국 작품 등록 →">발자국 작품 등록 →</a>
-                </div>
-
-                <!-- STEP 3 -->
-                <div class="custom-step-card step-fade-up flex-1 bg-white py-11 px-8 rounded-3xl text-slate-900 text-center relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 z-[2]" style="animation-delay:0.34s;">
-                    <div class="inline-block text-[11px] font-extrabold bg-sky-100 text-sky-700 py-1 px-3.5 rounded-[20px] mb-[18px] border border-sky-200 tracking-widest">STEP 3</div>
-                    <div class="mb-4 text-[52px] leading-none flex justify-center"><img src="images/3.png" style="width: 120px; height: auto; display: block;" alt="star"></div>
-                    <h3 class="text-xl font-extrabold mb-3" data-en="Convert &amp; Publish" data-ko="파일 변환 &amp; 마켓 등재">파일 변환 &amp; 마켓 등재</h3>
-                    <p class="text-sm text-slate-600 mb-6 leading-relaxed" data-en="Once converted, it will be automatically published on the global market." data-ko="파일 변환이 완료되면 글로벌 마켓에 자동으로 등재 및 노출됩니다.">파일 변환이 완료되면 글로벌 마켓에 자동으로 등재 및 노출됩니다.</p>
-                    <a href="studio_myworks.html" class="btn-step" data-en="MY STUDIO →" data-ko="MY STUDIO →">MY STUDIO →</a>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Bottom Hooking Banner -->
-        <section class="download-section mt-100 mb-100 container !bg-transparent">
-            <div class="download-banner">
-                <div class="text-center">
-                    <h2 data-en="Ready to create your own footprints?" data-ko="나만의 발자국을 만들 준비가 되셨나요?">나만의 발자국을 만들 준비가 되셨나요?</h2>
-                    <p data-en="Begin an extraordinary adventure using various assets." data-ko="다양한 에셋을 활용해 더욱 특별한 모험을 시작하세요.">다양한 에셋을 활용해 더욱 특별한 모험을 시작하세요.</p>
-                    <a href="register.html" class="btn-download" data-en="Register Footprint →" data-ko="발자국 등록하러가기 →">발자국 등록하러가기 →</a>
-                </div>
-            </div>
-        </section>
+            </div><!-- /seasonMarketBlock -->
 
         </div><!-- /container -->
     </div><!-- /page-body -->
@@ -841,6 +991,103 @@
     </footer>
 
     <script>
+        /* ─── B2C 시즌 상태 전환 함수 ─── */
+        function setMainSeasonPhase(phase) {
+            const btnReg = document.getElementById('btnMainPhaseReg');
+            const btnVote = document.getElementById('btnMainPhaseVote');
+            const btnMkt = document.getElementById('btnMainPhaseMkt');
+            const label = document.getElementById('currentPhaseLabel');
+
+            const blkReg = document.getElementById('seasonRegisterBlock');
+            const blkVote = document.getElementById('seasonVoteBlock');
+            const blkMkt = document.getElementById('seasonMarketBlock');
+
+            const heroTag = document.getElementById('mainHeroTag');
+            const heroTitle = document.getElementById('mainHeroTitle');
+            const heroDesc = document.getElementById('mainHeroDesc');
+            const heroPrimary = document.getElementById('mainHeroPrimaryCta');
+            const heroSecondary = document.getElementById('mainHeroSecondaryCta');
+            const heroBg = document.getElementById('mainHeroBg1');
+
+            [btnReg, btnVote, btnMkt].forEach(b => {
+                b.style.background = '#1e293b';
+                b.style.color = '#94a3b8';
+                b.style.border = '1px solid #334155';
+            });
+            blkReg.style.display = 'none';
+            blkVote.style.display = 'none';
+            blkMkt.style.display = 'none';
+
+            if (phase === 'register') {
+                btnReg.style.background = '#2563eb';
+                btnReg.style.color = '#fff';
+                btnReg.style.border = 'none';
+                label.innerText = '현재: ① 접수 기간';
+                label.style.background = 'rgba(37,99,235,0.3)';
+                label.style.color = '#93c5fd';
+                blkReg.style.display = 'block';
+
+                heroTag.innerText = '🏆 SEASON 1 CREATOR CONTEST';
+                heroTag.style.background = 'rgba(37,99,235,0.4)';
+                heroTag.style.borderColor = 'rgba(147,197,253,0.5)';
+                heroTitle.innerHTML = '나만의 3D 발자국을 출품하고<br>라그나로크 공식 출시의 주인공이 되세요!';
+                heroDesc.innerText = '이벤트 기간 결제 시 10회 출품 캡 + 인게임 크리에이터 칭호 부여 + 최종 당첨작 전액 무료 소장!';
+                heroPrimary.innerHTML = '🪄 지금 발자국 출품하기 &rarr;';
+                heroPrimary.href = 'register.html';
+                heroPrimary.style.background = '#2563eb';
+                heroPrimary.style.borderColor = '#2563eb';
+                heroSecondary.innerHTML = '📋 콘테스트 가이드 &rarr;';
+                heroSecondary.href = 'about.html';
+            } else if (phase === 'vote') {
+                btnVote.style.background = '#7e22ce';
+                btnVote.style.color = '#fff';
+                btnVote.style.border = 'none';
+                label.innerText = '현재: ② 투표 기간 (1일 1회)';
+                label.style.background = 'rgba(147,51,234,0.3)';
+                label.style.color = '#d8b4fe';
+                blkVote.style.display = 'block';
+
+                heroTag.innerText = '🗳️ 100% USER POPULARITY VOTE LIVE';
+                heroTag.style.background = 'rgba(147,51,234,0.4)';
+                heroTag.style.borderColor = 'rgba(216,180,254,0.5)';
+                heroTitle.innerHTML = '최고의 3D 발자국을 뽑아주세요!<br>당신의 원픽이 인게임에 공식 출시됩니다';
+                heroDesc.innerText = '로그인 유저 대상 매일 1회 투표권 지급! 유저 득표 순위 상위 10개 당첨작이 공식 상점에 출시됩니다.';
+                heroPrimary.innerHTML = '🗳️ 유저 인기 투표 참여하기 &rarr;';
+                heroPrimary.href = 'contest_vote.html';
+                heroPrimary.style.background = '#7e22ce';
+                heroPrimary.style.borderColor = '#7e22ce';
+                heroSecondary.innerHTML = '👑 실시간 랭킹 보기 &rarr;';
+                heroSecondary.href = '#seasonVoteBlock';
+            } else if (phase === 'market') {
+                btnMkt.style.background = '#16a34a';
+                btnMkt.style.color = '#fff';
+                btnMkt.style.border = 'none';
+                label.innerText = '현재: ③ 마켓 정식 개시';
+                label.style.background = 'rgba(22,163,74,0.3)';
+                label.style.color = '#86efac';
+                blkMkt.style.display = 'block';
+
+                heroTag.innerText = '🎉 TOP 10 WINNERS MARKET RELEASE';
+                heroTag.style.background = 'rgba(22,163,74,0.4)';
+                heroTag.style.borderColor = 'rgba(134,239,172,0.5)';
+                heroTitle.innerHTML = '시즌 1 영광의 TOP 10 당첨작<br>공식 마켓 정식 출시!';
+                heroDesc.innerText = '아티스트 회원: 선정작 전액 무료 소장 / 일반 유저: 최종 선정작 중 1회 무료 구매권 증정!';
+                heroPrimary.innerHTML = '🛍️ 당첨작 마켓 바로가기 &rarr;';
+                heroPrimary.href = 'market.html';
+                heroPrimary.style.background = '#16a34a';
+                heroPrimary.style.borderColor = '#16a34a';
+                heroSecondary.innerHTML = '🏆 명예의 전당 &rarr;';
+                heroSecondary.href = '#seasonMarketBlock';
+            }
+        }
+
+        function castDemoVote(btn, itemName, count) {
+            btn.innerHTML = '✅ 투표 완료 (' + (count + 1) + '표)';
+            btn.style.background = '#15803d';
+            btn.disabled = true;
+            alert('🎉 [' + itemName + '] 에 1일 1회 투표가 성공적으로 완료되었습니다!\n(현재 득표수: ' + (count + 1) + '표)');
+        }
+
         /* ─── 상품 슬라이더 (가로 스크롤) ─── */
         function sl(id,d){ var t=document.getElementById(id); if(t) t.parentElement.scrollBy({left:d*210,behavior:'smooth'}); }
         document.querySelectorAll('.slider-wrap').forEach(function(w){
@@ -852,7 +1099,6 @@
                 var dx=e.pageX-w.offsetLeft-sx;
                 if(Math.abs(dx)>5){ moved=true; e.preventDefault(); w.scrollLeft=sc-dx; }
             };
-            // 드래그가 있으면 링크 클릭 방지
             w.querySelectorAll('a.product-card').forEach(function(a){
                 a.addEventListener('click', function(e){ if(moved){ e.preventDefault(); moved=false; } });
             });
@@ -863,25 +1109,19 @@
             var slides   = document.querySelectorAll('.hero-slide');
             var dots     = document.querySelectorAll('.hero-dot');
             var TOTAL    = slides.length;
-            var INTERVAL = 3000;            // 3초
+            var INTERVAL = 4000;
             var cur      = 0;
             var timer;
 
-            /* 슬라이드 전환 */
             function goTo(idx) {
                 var next = (idx + TOTAL) % TOTAL;
-
                 slides[cur].classList.remove('active');
                 slides[next].classList.add('active');
-
-                // Dot sync
                 dots.forEach(function(d) { d.classList.remove('active'); });
                 if (dots[next]) dots[next].classList.add('active');
-
                 cur = next;
             }
 
-            /* 자동 재생 */
             function startAuto() {
                 clearInterval(timer);
                 timer = setInterval(function() {
@@ -889,7 +1129,6 @@
                 }, INTERVAL);
             }
 
-            /* Dot 클릭 */
             dots.forEach(function(dot) {
                 dot.addEventListener('click', function() {
                     var idx = parseInt(dot.getAttribute('data-dot'));
@@ -898,7 +1137,6 @@
                 });
             });
 
-            /* 초기 시작 */
             startAuto();
         })();
 
