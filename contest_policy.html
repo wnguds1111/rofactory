@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="RO FACTORY 웹기획Unit - 시즌제 크리에이터 콘테스트 전용 상세 기획 명세서입니다.">
     <title>RO FACTORY — 시즌제 콘테스트 상세 기획서</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -32,7 +33,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
         }
 
         .top-bar h1 {
@@ -175,7 +176,7 @@
             border: 1px solid #cbd5e1;
             padding: 36px;
             margin-bottom: 36px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         }
 
         .page-header {
@@ -277,10 +278,25 @@
             letter-spacing: 0.2px;
         }
 
-        .badge-green { background: #dcfce7; color: #15803d; }
-        .badge-blue { background: #dbeafe; color: #1e40af; }
-        .badge-warn { background: #fef3c7; color: #92400e; }
-        .badge-red { background: #fee2e2; color: #b91c1c; }
+        .badge-green {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .badge-blue {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-warn {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-red {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
 
         .btn-row-del {
             background: #fee2e2;
@@ -314,7 +330,7 @@
             border-radius: 10px;
             font-size: 14px;
             font-weight: 800;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -340,7 +356,9 @@
             <span style="color: #94a3b8; font-weight: 400; font-size: 13px;">| 시즌제 콘테스트 상세 기획 명세서</span>
         </h1>
         <div class="top-bar-links">
-            <div style="font-size:14px; font-weight:800; color:#e2e8f0; background:rgba(255,255,255,0.08); padding:6px 16px; border-radius:20px; border:1px solid rgba(255,255,255,0.15);">웹기획unit 이주형</div>
+            <div
+                style="font-size:14px; font-weight:800; color:#e2e8f0; background:rgba(255,255,255,0.08); padding:6px 16px; border-radius:20px; border:1px solid rgba(255,255,255,0.15);">
+                웹기획unit 이주형</div>
         </div>
     </div>
 
@@ -357,6 +375,7 @@
 
         <!-- Main Content -->
         <div class="main">
+
 
             <!-- Hero Banner -->
             <div class="contest-hero">
@@ -375,14 +394,22 @@
                 <div class="page-body">
 
                     <!-- Background & Process Summary Banner -->
-                    <div style="background:#f8fafc; border:1.5px solid #cbd5e1; border-left:5px solid #2563eb; border-radius:14px; padding:24px; margin-bottom:28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
-                        <div style="font-size:16.5px; font-weight:900; color:#0f172a; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                    <div
+                        style="background:#f8fafc; border:1.5px solid #cbd5e1; border-left:5px solid #2563eb; border-radius:14px; padding:24px; margin-bottom:28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+                        <div
+                            style="font-size:16.5px; font-weight:900; color:#0f172a; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
                             <span>RO Factory 콘테스트 프로세스 요약</span>
                         </div>
                         <div style="font-size:14.5px; color:#1e293b; line-height:1.8;">
-                            • <strong style="color:#1d4ed8;">프로세스 자동화</strong>: 콘테스트 사전 세팅(STEP 01)과 마켓 개시(STEP 09)를 제외한 유저 접수 ➔ S3 유효성 검증 ➔ 투표 노출 ➔ 인기 득표 랭킹 선정 ➔ ID 자동 매핑 ➔ 마켓 DB 전달까지의 전 과정이 사람이 개입하지 않는 <strong>프로세스 자동화</strong>로 처리됩니다.<br>
-                            • <strong style="color:#1d4ed8;">관리자 직접 개입 2회 최소화</strong>: 관리자의 직접 운영 개입은 <strong>① 콘테스트 회차별 사전 일정 세팅 (STEP 01)</strong> 및 <strong>② 최종 마켓 상점 판매 START 버튼 클릭 (STEP 09)</strong> 단 두 번으로 한정되며, 운영 공수를 최대로 절감합니다.<br>
-                            • <strong style="color:#dc2626;">이슈 작품 개별 삭제 기능 연동</strong>: 저작권/IP 침해, 표절, 유해 콘텐츠 등 추후 문제가 발생한 응모작 및 당첨작은 웹 어드민 백오피스에서 관리자가 <strong>'개별 작품 삭제'</strong> 클릭으로 마켓 노출 및 인게임 판매를 즉시 차단 처리할 수 있습니다.
+                            • <strong style="color:#1d4ed8;">프로세스 자동화</strong>: 콘테스트 사전 세팅(STEP 01)과 마켓 개시(STEP 09)를 제외한
+                            유저 접수 ➔ S3 유효성 검증 ➔ 투표 노출 ➔ 인기 득표 랭킹 선정 ➔ ID 자동 매핑 ➔ 마켓 DB 전달까지의 전 과정이 사람이 개입하지 않는
+                            <strong>프로세스 자동화</strong>로 처리됩니다.<br>
+                            • <strong style="color:#1d4ed8;">관리자 직접 개입 2회 최소화</strong>: 관리자의 직접 운영 개입은 <strong>① 콘테스트
+                                회차별 사전 일정 세팅 (STEP 01)</strong> 및 <strong>② 최종 마켓 상점 판매 START 버튼 클릭 (STEP 09)</strong> 단
+                            두 번으로 한정되며, 운영 공수를 최대로 절감합니다.<br>
+                            • <strong style="color:#dc2626;">이슈 작품 개별 삭제 기능 연동</strong>: 저작권/IP 침해, 표절, 유해 콘텐츠 등 추후 문제가
+                            발생한 응모작 및 당첨작은 웹 어드민 백오피스에서 관리자가 <strong>'개별 작품 삭제'</strong> 클릭으로 마켓 노출 및 인게임 판매를 즉시 차단 처리할
+                            수 있습니다.
                         </div>
                     </div>
 
@@ -391,132 +418,196 @@
                             <div class="spec-label">콘테스트 운영 9단계 프로세스 세부 명세</div>
                         </div>
 
-                        <div style="display:flex; flex-direction:column; gap:6px; margin-top:16px;" id="verticalStepContainer">
-                            
+                        <div style="display:flex; flex-direction:column; gap:6px; margin-top:16px;"
+                            id="verticalStepContainer">
+
                             <!-- STEP 01 -->
-                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #2563eb; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <div
+                                style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #2563eb; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                                     <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 01. 일정 세팅</div>
-                                    <span style="background:#dbeafe; color:#1e40af; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">어드민 세팅</span>
+                                    <span
+                                        style="background:#dbeafe; color:#1e40af; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">어드민
+                                        세팅</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
                                     어드민 백오피스에서 ① 유저 발자국 등록 시작/종료일 및 ② 랭킹 선정(투표) 시작/종료일을 회차별 사전 세팅 관리합니다.
                                 </div>
                             </div>
 
-                            <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
+                            <div
+                                style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">
+                                ↓</div>
 
                             <!-- STEP 02 -->
-                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #0284c7; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <div
+                                style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #0284c7; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                                     <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 02. 접수 개시</div>
-                                    <span style="background:#e0f2fe; color:#0369a1; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">유저 접수</span>
+                                    <span
+                                        style="background:#e0f2fe; color:#0369a1; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">유저
+                                        접수</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
                                     이벤트 랜딩 페이지가 오픈되고 결제 유저 대상 유저가 작품 등록 가능 (어드민에서 설정한 기간 까지 발자국 등록 가능)
                                 </div>
-                                <div style="margin-top:12px; background:#f8fafc; border-left:3px solid #0284c7; padding:10px 14px; border-radius:0 6px 6px 0; font-size:14.5px; color:#475569; line-height:1.6;">
+                                <div
+                                    style="margin-top:12px; background:#f8fafc; border-left:3px solid #0284c7; padding:10px 14px; border-radius:0 6px 6px 0; font-size:14.5px; color:#475569; line-height:1.6;">
                                     <strong>고려사항</strong>: 제출작 삭제 시 티켓 미재발급 경고 표기 및 아티스트 닉네임 1회 필수 입력 절차 적용.
                                 </div>
                             </div>
 
-                            <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
+                            <div
+                                style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">
+                                ↓</div>
 
                             <!-- STEP 03 -->
-                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #d97706; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <div
+                                style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #d97706; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                                     <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 03. 접수 마감</div>
-                                    <span style="background:#fef3c7; color:#92400e; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">자동 차단</span>
+                                    <span
+                                        style="background:#fef3c7; color:#92400e; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">자동
+                                        차단</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
                                     등록 종료 일시 도달 시 서버 타임스탬프 기반으로 신규 등록 및 수정/삭제가 자동 차단되며 수집작이 Lock 처리됩니다.
                                 </div>
                             </div>
 
-                            <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
+                            <div
+                                style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">
+                                ↓</div>
 
                             <!-- STEP 04 -->
-                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #7e22ce; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 04. S3 유효성 파일 검증</div>
-                                    <span style="background:#f3e8ff; color:#6b21a8; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">자동화 검증</span>
+                            <div
+                                style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #7e22ce; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 04. S3 유효성 파일 검증
+                                    </div>
+                                    <span
+                                        style="background:#f3e8ff; color:#6b21a8; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">자동화
+                                        검증</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
                                     S3 유효성 파일 검증 (웹에서 접수된 발자국의 등록 마감 이후 다음 단계로 넘어가지 전 전체 파일을 대상으로 유효성 확인을 진행하는 과정 추가.)
                                 </div>
                             </div>
 
-                            <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
+                            <div
+                                style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">
+                                ↓</div>
 
                             <!-- STEP 05 (MERGED 05 + 06) -->
-                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #ec4899; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 05. 투표 노출 및 유저 인기 투표</div>
-                                    <span style="background:#fce7f3; color:#9d174d; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">투표 전용 웹</span>
+                            <div
+                                style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #ec4899; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 05. 투표 노출 및 유저 인기
+                                        투표</div>
+                                    <span
+                                        style="background:#fce7f3; color:#9d174d; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">투표
+                                        전용 웹</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
-                                    검수를 거친 응모작들이 전용 투표 사이트에 자동 노출되며, 로그인 유저는 매일 1회 마음에 드는 발자국 아이템에 투표 가능 (어드민에서 설정한 기간 까지 투표 가능)
+                                    검수를 거친 응모작들이 전용 투표 사이트에 자동 노출되며, 로그인 유저는 매일 1회 마음에 드는 발자국 아이템에 투표 가능 (어드민에서 설정한 기간
+                                    까지 투표 가능)
                                 </div>
-                                <div style="margin-top:12px; background:#f8fafc; border-left:3px solid #ec4899; padding:10px 14px; border-radius:0 6px 6px 0; font-size:14.5px; color:#475569; line-height:1.6;">
+                                <div
+                                    style="margin-top:12px; background:#f8fafc; border-left:3px solid #ec4899; padding:10px 14px; border-radius:0 6px 6px 0; font-size:14.5px; color:#475569; line-height:1.6;">
                                     <strong>고려사항</strong>: 실시간 투표 기능 웹사이트 제작
                                 </div>
                             </div>
 
-                            <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
+                            <div
+                                style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">
+                                ↓</div>
 
                             <!-- STEP 06 -->
-                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #6366f1; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <div
+                                style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #6366f1; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                                     <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 06. 랭킹 선정</div>
-                                    <span style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">당첨작 확정</span>
+                                    <span
+                                        style="background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">당첨작
+                                        확정</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
                                     유저 인기 투표 유효 득표 순위 상위 10개 당첨작을 100% 오로지 유저 투표 결과로 확정합니다.
                                 </div>
                             </div>
 
-                            <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
+                            <div
+                                style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">
+                                ↓</div>
 
                             <!-- STEP 07 -->
-                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #a855f7; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 07. 패치 및 마켓 데이터 자동 생성</div>
-                                    <span style="background:#f3e8ff; color:#6b21a8; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">자동화 검증</span>
+                            <div
+                                style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #a855f7; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                    <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 07. 패치 및 마켓 데이터 자동
+                                        생성</div>
+                                    <span
+                                        style="background:#f3e8ff; color:#6b21a8; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">자동화
+                                        검증</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
                                     선정된 발자국 리스트에 자동으로 아이템 ID 매핑
                                 </div>
-                                <div style="margin-top:12px; background:#f8fafc; border-left:3px solid #a855f7; padding:10px 14px; border-radius:0 6px 6px 0; font-size:14.5px; color:#475569; line-height:1.6;">
-                                    <strong>고려사항</strong>: S3 데이터 기능 유효성 자동화 부분에서 OBT 당시 정보보안에서 수동으로 한 보안 검증 자동화까지도 가능한지 확인 필요.
+                                <div
+                                    style="margin-top:12px; background:#f8fafc; border-left:3px solid #a855f7; padding:10px 14px; border-radius:0 6px 6px 0; font-size:14.5px; color:#475569; line-height:1.6;">
+                                    <strong>고려사항</strong>: S3 데이터 기능 유효성 자동화 부분에서 OBT 당시 정보보안에서 수동으로 한 보안 검증 자동화까지도 가능한지
+                                    확인 필요.
                                 </div>
                             </div>
 
-                            <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
+                            <div
+                                style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">
+                                ↓</div>
 
                             <!-- STEP 08 -->
-                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #09090b; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <div
+                                style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid #09090b; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                                     <div style="font-size:16px; font-weight:900; color:#0f172a;">STEP 08. 마켓 DB 전달</div>
-                                    <span style="background:#f4f4f5; color:#18181b; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">판매 대기</span>
+                                    <span
+                                        style="background:#f4f4f5; color:#18181b; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800;">판매
+                                        대기</span>
                                 </div>
                                 <div style="font-size:15px; color:#334155; line-height:1.6;">
                                     자동 매핑 이후 웹 어드민에서 자동 판매 대기 상태 전환
                                 </div>
                             </div>
 
-                            <div style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">↓</div>
+                            <div
+                                style="text-align:center; color:#64748b; font-size:32px; font-weight:900; margin:8px 0; line-height:1;">
+                                ↓</div>
 
-                                                        <!-- STEP 09 (LAUNCHED HIGHLIGHT) -->
-                            <div style="background:#f0fdf4; border:2px solid #22c55e; border-left:5px solid #16a34a; border-radius:12px; padding:20px; box-shadow:0 4px 12px rgba(22, 163, 74, 0.08);">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <!-- STEP 09 (LAUNCHED HIGHLIGHT) -->
+                            <div
+                                style="background:#f0fdf4; border:2px solid #22c55e; border-left:5px solid #16a34a; border-radius:12px; padding:20px; box-shadow:0 4px 12px rgba(22, 163, 74, 0.08);">
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                                     <div style="font-size:16px; font-weight:900; color:#14532d;">STEP 09. 마켓 개시</div>
-                                    <span style="background:#16a34a; color:#ffffff; padding:4px 12px; border-radius:6px; font-size:11.5px; font-weight:900;">마켓 개시 (START)</span>
+                                    <span
+                                        style="background:#16a34a; color:#ffffff; padding:4px 12px; border-radius:6px; font-size:11.5px; font-weight:900;">마켓
+                                        개시 (START)</span>
                                 </div>
                                 <div style="font-size:15px; color:#166534; line-height:1.6;">
-                                    어드민 백오피스에서 관리자가 <strong style="color:#14532d; font-weight:900;">[마켓 상점 일괄 개시 (START)]</strong> 버튼을 클릭하는 즉시 웹 마켓과 인게임 상점이 100% 동시에 활성화되어 유저 대상 판매가 시작됩니다!
+                                    어드민 백오피스에서 관리자가 <strong style="color:#14532d; font-weight:900;">[마켓 상점 일괄 개시
+                                        (START)]</strong> 버튼을 클릭하는 즉시 웹 마켓과 인게임 상점이 100% 동시에 활성화되어 유저 대상 판매가 시작됩니다!
                                 </div>
-                                <div style="margin-top:12px; background:#ffffff; border:1px solid #bbf7d0; border-left:4px solid #16a34a; padding:10px 14px; border-radius:0 6px 6px 0; font-size:14.5px; color:#14532d; line-height:1.6;">
-                                    <strong style="color:#14532d; font-weight:900;">고려사항</strong>: 관리자 실수 클릭 방지용 2차 확인 모달 팝업 적용 및 개시 클릭 후 10초간 취소할 수 있는 카운트다운 롤백 타임아웃을 연동합니다.
+                                <div
+                                    style="margin-top:12px; background:#ffffff; border:1px solid #bbf7d0; border-left:4px solid #16a34a; padding:10px 14px; border-radius:0 6px 6px 0; font-size:14.5px; color:#14532d; line-height:1.6;">
+                                    <strong style="color:#14532d; font-weight:900;">고려사항</strong>: 관리자 실수 클릭 방지용 2차 확인
+                                    모달 팝업 적용 및 개시 클릭 후 10초간 취소할 수 있는 카운트다운 롤백 타임아웃을 연동합니다.
                                 </div>
                             </div>
 
@@ -535,85 +626,135 @@
                 <div class="page-body">
 
                     <!-- Proposal Master Box -->
-                    <div class="spec-group" style="background:#faf5ff; border:2px solid #c084fc; border-radius:16px; padding:28px; box-shadow:0 4px 16px rgba(147, 51, 234, 0.05);">
-                        
+                    <div class="spec-group"
+                        style="background:#faf5ff; border:2px solid #c084fc; border-radius:16px; padding:28px; box-shadow:0 4px 16px rgba(147, 51, 234, 0.05);">
+
                         <!-- Header & Badge -->
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
                             <div style="font-size:18px; font-weight:900; color:#581c87; letter-spacing:-0.3px;">
                                 발자국 티켓 지급 및 구매 권한 프리미엄 회원제 제안
                             </div>
-                            <span style="background:#9333ea; color:#fff; padding:5px 14px; border-radius:12px; font-size:12px; font-weight:800;">BM &amp; Membership Proposal</span>
+                            <span
+                                style="background:#9333ea; color:#fff; padding:5px 14px; border-radius:12px; font-size:12px; font-weight:800;">BM
+                                &amp; Membership Proposal</span>
                         </div>
 
                         <div style="font-size:14.5px; color:#6b21a8; line-height:1.7; margin-bottom:24px;">
-                            기존 유저에게 단순 출품 기회만 주던 방식을 탈피하여, 이벤트 기간 결제 시(카프라 포인트 / 정액제 결제 무관) <strong>[아티스트 권한]</strong>을 부여하고 <strong>최종 선정작 무제한 구매권 및 발자국 등록 슬롯 10개를 제공하는 기획안</strong>입니다.
+                            기존 유저에게 단순 출품 기회만 주던 방식을 탈피하여, 이벤트 기간 결제 시(카프라 포인트 / 정액제 결제 무관) <strong>[아티스트 권한]</strong>을
+                            부여하고 <strong>최종 선정작 무제한 구매권 및 발자국 등록 슬롯 10개를 제공하는 기획안</strong>입니다.
                         </div>
 
 
 
 
                         <!-- 3-Way Policy Comparison Table (Clean Minimalist 1-Line Layout) -->
-                        <div style="font-size:15px; font-weight:800; color:#1e293b; margin-bottom:12px; padding-left:10px; border-left:4px solid #6366f1;">
+                        <div
+                            style="font-size:15px; font-weight:800; color:#1e293b; margin-bottom:12px; padding-left:10px; border-left:4px solid #6366f1;">
                             발자국 운영 정책 3단 비교 (기본안 vs 제안안 아티스트 회원 vs 제안안 일반 회원)
                         </div>
 
-                        <table style="width:100%; border-collapse:collapse; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; overflow:hidden; margin-bottom:24px;">
+                        <table
+                            style="width:100%; border-collapse:collapse; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; overflow:hidden; margin-bottom:24px;">
                             <thead>
                                 <tr style="background:#f8fafc;">
-                                    <th style="width:15%; padding:12px 14px; border:1px solid #e2e8f0; font-size:14px; font-weight:800; color:#334155; text-align:left;">구분</th>
-                                    <th style="width:28%; padding:12px 14px; border:1px solid #e2e8f0; font-size:14px; font-weight:800; color:#334155; text-align:left;">① 기본안 (현재 런칭 스펙 기준)</th>
-                                    <th style="width:31%; padding:12px 14px; border:1px solid #e2e8f0; font-size:14px; font-weight:800; color:#4338ca; text-align:left; background:#eef2ff;">② 제안안: 아티스트 회원 (결제)</th>
-                                    <th style="width:26%; padding:12px 14px; border:1px solid #e2e8f0; font-size:14px; font-weight:800; color:#334155; text-align:left;">③ 제안안: 일반 회원 (미결제)</th>
+                                    <th
+                                        style="width:15%; padding:12px 14px; border:1px solid #e2e8f0; font-size:14px; font-weight:800; color:#334155; text-align:left;">
+                                        구분</th>
+                                    <th
+                                        style="width:28%; padding:12px 14px; border:1px solid #e2e8f0; font-size:14px; font-weight:800; color:#334155; text-align:left;">
+                                        ① 기본안 (현재 런칭 스펙 기준)</th>
+                                    <th
+                                        style="width:31%; padding:12px 14px; border:1px solid #e2e8f0; font-size:14px; font-weight:800; color:#4338ca; text-align:left; background:#eef2ff;">
+                                        ② 제안안: 아티스트 회원 (결제)</th>
+                                    <th
+                                        style="width:26%; padding:12px 14px; border:1px solid #e2e8f0; font-size:14px; font-weight:800; color:#334155; text-align:left;">
+                                        ③ 제안안: 일반 회원 (미결제)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; font-weight:800; color:#1e293b; background:#f8fafc;">자격 획득 조건</td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">정액제 결제 이력 보유 유저</td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#1e1b4b; background:#faf5ff;">
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; font-weight:800; color:#1e293b; background:#f8fafc;">
+                                        자격 획득 조건</td>
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">
+                                        정액제 결제 이력 보유 유저</td>
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#1e1b4b; background:#faf5ff;">
                                         <strong>이벤트 기간 내 결제 완료 유저</strong> (아티스트 권한)<br>
-                                        <span style="display:inline-block; margin-top:4px; font-size:12px; color:#6b21a8; font-weight:700;">※ 카프라 포인트(KP) / 정액제 결제 수단 무관</span>
+                                        <span
+                                            style="display:inline-block; margin-top:4px; font-size:12px; color:#6b21a8; font-weight:700;">※
+                                            카프라 포인트(KP) / 정액제 결제 수단 무관</span>
                                     </td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">이벤트 기간 내 미결제 일반 유저</td>
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">
+                                        이벤트 기간 내 미결제 일반 유저</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; font-weight:800; color:#1e293b; background:#f8fafc;">작품 출품 슬롯</td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">30회 출품 가능 (스팸 과다 우려)</td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#1e1b4b; background:#faf5ff;">
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; font-weight:800; color:#1e293b; background:#f8fafc;">
+                                        작품 출품 슬롯</td>
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">
+                                        30회 출품 가능 (스팸 과다 우려)</td>
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#1e1b4b; background:#faf5ff;">
                                         <strong>10회 집중 출품 캡</strong> (고품질 발자국 출품 기대)
                                     </td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">
                                         <strong>출품 불가 (0회)</strong>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; font-weight:800; color:#1e293b; background:#f8fafc;">투표 참여 권한</td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">로그인 계정당 1일 1회 투표</td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#1e1b4b; background:#faf5ff;">
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; font-weight:800; color:#1e293b; background:#f8fafc;">
+                                        투표 참여 권한</td>
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">
+                                        로그인 계정당 1일 1회 투표</td>
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#1e1b4b; background:#faf5ff;">
                                         <strong>로그인 계정당 1일 1회 투표 (동일)</strong>
                                     </td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#dc2626;">
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#dc2626;">
                                         <strong>투표 불가 (0회)</strong>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; font-weight:800; color:#1e293b; background:#f8fafc;">마켓 구매 권한</td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">모든 유저 1일 3회 구매 제한</td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#1e1b4b; background:#faf5ff;">
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; font-weight:800; color:#1e293b; background:#f8fafc;">
+                                        마켓 구매 권한</td>
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">
+                                        모든 유저 1일 3회 구매 제한</td>
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#1e1b4b; background:#faf5ff;">
                                         <strong>이벤트 기간 선정된 발자국 무료 구매</strong>
                                     </td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">
                                         <strong>[1회 구매권]</strong> 최종 선정작 중 1개 구매 가능
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; font-weight:800; color:#1e293b; background:#f8fafc;">BM 기획 가치</td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">단순 출품 제공 (결제 동기 부재)</td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#1e1b4b; background:#faf5ff;">
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; font-weight:800; color:#1e293b; background:#f8fafc;">
+                                        BM 기획 가치</td>
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">
+                                        단순 출품 제공 (결제 동기 부재)</td>
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#1e1b4b; background:#faf5ff;">
                                         <strong>결제 명분 극대화</strong> + 크리에이터 자부심 부여<br>
-                                        <span style="display:inline-block; margin-top:4px; font-size:12px; color:#6b21a8; font-weight:700;">(크리에이터 인게임 칭호 부여)</span>
+                                        <span
+                                            style="display:inline-block; margin-top:4px; font-size:12px; color:#6b21a8; font-weight:700;">(크리에이터
+                                            인게임 칭호 부여)</span>
                                     </td>
-                                    <td style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">
+                                    <td
+                                        style="padding:11px 14px; border:1px solid #e2e8f0; font-size:13.5px; color:#475569;">
                                         <strong>박탈감 완화</strong> + 차기 시즌 결제 전환 유도
                                     </td>
                                 </tr>
@@ -621,15 +762,20 @@
                         </table>
 
                         <!-- Detailed Strategic Intent -->
-                        <div style="background:#ffffff; border:1px solid #e9d5ff; border-radius:12px; padding:20px 22px;">
+                        <div
+                            style="background:#ffffff; border:1px solid #e9d5ff; border-radius:12px; padding:20px 22px;">
                             <div style="font-size:15.5px; font-weight:900; color:#581c87; margin-bottom:10px;">
                                 프리미엄 아티스트 회원제 기획 의도 및 기대 효과
                             </div>
                             <div style="font-size:14px; color:#475569; line-height:1.75;">
-                                • <strong>과금 유저 대상 프리미엄 가치 제공</strong>: 기존 유저가 이벤트 기간 내 결제 시(정액제 또는 카프라 포인트 결제 무관) 발자국 등록 기회(10회)뿐만 아니라 '아티스트 권한'을 획득하게 되어, 콘테스트 발표 후 최종 선정된 발자국 아이템을 무료 소장 할 수 있다는 동기 형성.<br>
-                                • <strong>작품 퀄리티 상승 및 스팸 차단</strong>: 무분별한 30회 등록 대신 10회 집중 등록을 유도하여 3D 메시 규격 및 완성도가 높은 양질의 크리에이터 데이터 수집을 도모합니다.<br>
-                                • <strong>유저 소속감 및 브랜드 가치 제고</strong>: 단순 소비자가 아닌 RO Factory 공식 크리에이터 아티스트 멤버십에 참여한다는 자부심을 제공합니다.<br>
-                                • <strong>비결제 유저 박탈감 완화 및 수용성 확보</strong>: 비결제 유저들에게는 최종 선정된 발자국 아이템 중 1회 구매권을 제공하여 박탈감을 완화하고 일반 유저의 마켓 참여를 유도합니다.
+                                • <strong>과금 유저 대상 프리미엄 가치 제공</strong>: 기존 유저가 이벤트 기간 내 결제 시(정액제 또는 카프라 포인트 결제 무관) 발자국
+                                등록 기회(10회)뿐만 아니라 '아티스트 권한'을 획득하게 되어, 콘테스트 발표 후 최종 선정된 발자국 아이템을 무료 소장 할 수 있다는 동기 형성.<br>
+                                • <strong>작품 퀄리티 상승 및 스팸 차단</strong>: 무분별한 30회 등록 대신 10회 집중 등록을 유도하여 3D 메시 규격 및 완성도가 높은
+                                양질의 크리에이터 데이터 수집을 도모합니다.<br>
+                                • <strong>유저 소속감 및 브랜드 가치 제고</strong>: 단순 소비자가 아닌 RO Factory 공식 크리에이터 아티스트 멤버십에 참여한다는
+                                자부심을 제공합니다.<br>
+                                • <strong>비결제 유저 박탈감 완화 및 수용성 확보</strong>: 비결제 유저들에게는 최종 선정된 발자국 아이템 중 1회 구매권을 제공하여 박탈감을
+                                완화하고 일반 유저의 마켓 참여를 유도합니다.
                             </div>
                         </div>
 
@@ -647,16 +793,22 @@
                 <div class="page-body">
 
                     <!-- Strategy Box -->
-                    <div style="background:#f0fdf4; border:1.5px solid #86efac; border-left:5px solid #16a34a; border-radius:14px; padding:24px; margin-bottom:28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
-                        <div style="font-size:16.5px; font-weight:900; color:#14532d; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                    <div
+                        style="background:#f0fdf4; border:1.5px solid #86efac; border-left:5px solid #16a34a; border-radius:14px; padding:24px; margin-bottom:28px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+                        <div
+                            style="font-size:16.5px; font-weight:900; color:#14532d; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
                             <span>B2C 메인 페이지 리뉴얼 및 시즌 주기별 노출 정책</span>
                         </div>
                         <div style="font-size:14.5px; color:#166534; line-height:1.8;">
-                            • <strong>일반 쇼핑몰 구조 탈피 ➔ 시즌제 콘테스트 허브로 전환</strong>: 기존 정적 상품 나열식 메인에서 탈피하여, 콘테스트 진행 상태(접수 ➔ 투표 ➔ 마켓 개시)에 따라 메인 비주얼, 핵심 CTA 버튼, 주요 콘텐츠가 실시간 동적 전환되는 사용자 경험(UX)을 제공합니다.<br>
+                            • <strong>일반 쇼핑몰 구조 탈피 ➔ 시즌제 콘테스트 허브로 전환</strong>: 기존 정적 상품 나열식 메인에서 탈피하여, 콘테스트 진행 상태(접수 ➔
+                            투표 ➔ 마켓 개시)에 따라 메인 비주얼, 핵심 CTA 버튼, 주요 콘텐츠가 실시간 동적 전환되는 사용자 경험(UX)을 제공합니다.<br>
                             • <strong>명확한 유저 액션 유도</strong>: <br>
-                            &nbsp;&nbsp;1) <strong>접수 기간</strong>: 메인 배너 홍보 + <code>[지금 작품 출품하기]</code> 버튼 활성화 ➔ 클릭 시 기존 등록 페이지(<code>register.html</code>)로 즉시 이동<br>
-                            &nbsp;&nbsp;2) <strong>투표 기간</strong>: 메인에 실시간 인기 투표 그리드 노출 + <code>[유저 인기 투표 참여하기]</code> 버튼 활성화 ➔ 실시간 1일 1회 투표 참여(<code>contest_vote.html</code>)<br>
-                            &nbsp;&nbsp;3) <strong>마켓/선정작 기간</strong>: 최종 TOP 10 선정작 쇼케이스 + <code>[선정작 마켓 보러가기]</code> 버튼 활성화 ➔ 마켓 상점(<code>market.html</code>) 연동 및 아티스트 무료 소장/일반 1회 구매<br>
+                            &nbsp;&nbsp;1) <strong>접수 기간</strong>: 메인 배너 홍보 + <code>[지금 작품 출품하기]</code> 버튼 활성화 ➔ 클릭 시 기존
+                            등록 페이지(<code>register.html</code>)로 즉시 이동<br>
+                            &nbsp;&nbsp;2) <strong>투표 기간</strong>: 메인에 실시간 인기 투표 그리드 노출 + <code>[유저 인기 투표 참여하기]</code>
+                            버튼 활성화 ➔ 실시간 1일 1회 투표 참여(<code>contest_vote.html</code>)<br>
+                            &nbsp;&nbsp;3) <strong>마켓/선정작 기간</strong>: 최종 TOP 10 선정작 쇼케이스 + <code>[선정작 마켓 보러가기]</code>
+                            버튼 활성화 ➔ 마켓 상점(<code>market.html</code>) 연동 및 아티스트 무료 소장/일반 1회 구매<br>
                             &nbsp;&nbsp;4) <strong>다음 시즌 반복(Loop)</strong>: 어드민 일정 세팅에 따라 차기 시즌 시작 시 동일 프로세스로 자동 순환
                         </div>
                     </div>
@@ -664,16 +816,19 @@
                     <!-- Comparison Table -->
                     <div class="spec-group">
                         <div class="spec-label-row">
-                            <div class="spec-label" style="border-left-color:#16a34a;">시즌 3단계 주기별 B2C 웹 메인 노출 정책 명세</div>
+                            <div class="spec-label" style="border-left-color:#16a34a;">시즌 3단계 주기별 B2C 웹 메인 노출 정책 명세
+                            </div>
                         </div>
 
                         <table class="spec-table" style="margin-bottom:28px;">
                             <thead>
                                 <tr style="background:#f8fafc;">
                                     <th style="width:14%;">구분</th>
-                                    <th style="width:28%; background:#eff6ff; color:#1d4ed8;">① 접수 기간 (크리에이터 출품 집중기)</th>
+                                    <th style="width:28%; background:#eff6ff; color:#1d4ed8;">① 접수 기간 (크리에이터 출품 집중기)
+                                    </th>
                                     <th style="width:29%; background:#faf5ff; color:#7e22ce;">② 투표 기간 (유저 인기 투표기)</th>
-                                    <th style="width:29%; background:#f0fdf4; color:#15803d;">③ 마켓 개시 (선정작 판매 &amp; 쇼케이스)</th>
+                                    <th style="width:29%; background:#f0fdf4; color:#15803d;">③ 마켓 개시 (선정작 판매 &amp;
+                                        쇼케이스)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -686,7 +841,8 @@
                                 <tr>
                                     <td class="field">헤더 GNB 강조</td>
                                     <td><span class="badge badge-blue">작품 출품</span> 메뉴 활성화 &amp; 강조</td>
-                                    <td><span class="badge badge-warn" style="background:#f3e8ff; color:#7e22ce;">인기 투표</span> 메뉴 활성화 &amp; 실시간 LIVE 뱃지</td>
+                                    <td><span class="badge badge-warn" style="background:#f3e8ff; color:#7e22ce;">인기
+                                            투표</span> 메뉴 활성화 &amp; 실시간 LIVE 뱃지</td>
                                     <td><span class="badge badge-green">마켓 상점</span> 메뉴 활성화 &amp; NEW 뱃지</td>
                                 </tr>
                                 <tr>
@@ -710,22 +866,28 @@
                                 <tr>
                                     <td class="field">핵심 메인 CTA 버튼</td>
                                     <td>
-                                        <div style="background:#2563eb; color:#fff; padding:8px 14px; border-radius:6px; font-weight:800; font-size:13px; text-align:center; display:inline-block;">
+                                        <div
+                                            style="background:#2563eb; color:#fff; padding:8px 14px; border-radius:6px; font-weight:800; font-size:13px; text-align:center; display:inline-block;">
                                             🪄 지금 발자국 출품하기 &rarr;
                                         </div><br>
-                                        <span style="font-size:12px; color:#64748b; font-weight:700;">※ 클릭 시 register.html 등록 화면으로 즉시 이동</span>
+                                        <span style="font-size:12px; color:#64748b; font-weight:700;">※ 클릭 시
+                                            register.html 등록 화면으로 즉시 이동</span>
                                     </td>
                                     <td>
-                                        <div style="background:#7e22ce; color:#fff; padding:8px 14px; border-radius:6px; font-weight:800; font-size:13px; text-align:center; display:inline-block;">
+                                        <div
+                                            style="background:#7e22ce; color:#fff; padding:8px 14px; border-radius:6px; font-weight:800; font-size:13px; text-align:center; display:inline-block;">
                                             🗳️ 유저 인기 투표 참여하기 &rarr;
                                         </div><br>
-                                        <span style="font-size:12px; color:#64748b; font-weight:700;">※ 클릭 시 contest_vote.html 또는 투표 그리드 이동</span>
+                                        <span style="font-size:12px; color:#64748b; font-weight:700;">※ 클릭 시
+                                            contest_vote.html 또는 투표 그리드 이동</span>
                                     </td>
                                     <td>
-                                        <div style="background:#16a34a; color:#fff; padding:8px 14px; border-radius:6px; font-weight:800; font-size:13px; text-align:center; display:inline-block;">
+                                        <div
+                                            style="background:#16a34a; color:#fff; padding:8px 14px; border-radius:6px; font-weight:800; font-size:13px; text-align:center; display:inline-block;">
                                             🛍️ 당첨작 마켓 바로가기 &rarr;
                                         </div><br>
-                                        <span style="font-size:12px; color:#64748b; font-weight:700;">※ 클릭 시 market.html 마켓 상세 화면으로 이동</span>
+                                        <span style="font-size:12px; color:#64748b; font-weight:700;">※ 클릭 시 market.html
+                                            마켓 상세 화면으로 이동</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -748,8 +910,10 @@
                                 </tr>
                                 <tr>
                                     <td class="field">다음 시즌 순환 (Loop)</td>
-                                    <td colspan="3" style="background:#f8fafc; text-align:center; color:#334155; font-weight:700;">
-                                        마켓 판매 기간 종료 후 어드민 백오피스(STEP 01)에서 차기 시즌 일정이 활성화되면 자동으로 <strong>[① 접수 기간 모드]</strong>로 리셋 및 순환 반복됩니다.
+                                    <td colspan="3"
+                                        style="background:#f8fafc; text-align:center; color:#334155; font-weight:700;">
+                                        마켓 판매 기간 종료 후 어드민 백오피스(STEP 01)에서 차기 시즌 일정이 활성화되면 자동으로 <strong>[① 접수 기간
+                                            모드]</strong>로 리셋 및 순환 반복됩니다.
                                     </td>
                                 </tr>
                             </tbody>
@@ -759,39 +923,57 @@
                     <!-- Interactive Live UI Mockup / Simulator -->
                     <div class="spec-group" style="margin-top:36px;">
                         <div class="spec-label-row">
-                            <div class="spec-label" style="border-left-color:#0284c7;">B2C 메인 화면 실시간 인터랙티브 UI 시뮬레이터 (직접 클릭 테스트)</div>
-                            <a href="main2.html" target="_blank" style="font-size:13px; font-weight:800; color:#2563eb; text-decoration:none; display:flex; align-items:center; gap:4px; background:#eff6ff; padding:6px 14px; border-radius:6px; border:1px solid #bfdbfe;">
+                            <div class="spec-label" style="border-left-color:#0284c7;">B2C 메인 화면 실시간 인터랙티브 UI 시뮬레이터 (직접
+                                클릭 테스트)</div>
+                            <a href="main2.html" target="_blank"
+                                style="font-size:13px; font-weight:800; color:#2563eb; text-decoration:none; display:flex; align-items:center; gap:4px; background:#eff6ff; padding:6px 14px; border-radius:6px; border:1px solid #bfdbfe;">
                                 <span>🔗 실제 B2C 메인(main2.html) 전체화면 열기</span>
                             </a>
                         </div>
-                        
-                        <div style="background:#0f172a; border-radius:16px; padding:20px; box-shadow:0 12px 30px rgba(15,23,42,0.25); color:#fff;">
-                            
+
+                        <div
+                            style="background:#0f172a; border-radius:16px; padding:20px; box-shadow:0 12px 30px rgba(15,23,42,0.25); color:#fff;">
+
                             <!-- Simulator Control Bar -->
-                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid #334155;">
+                            <div
+                                style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid #334155;">
                                 <div style="display:flex; align-items:center; gap:8px;">
-                                    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#22c55e;"></span>
-                                    <span style="font-size:13.5px; font-weight:800; color:#e2e8f0;">시즌 상태 전환 탭을 클릭하여 각 기간별 화면 변화를 확인하세요:</span>
+                                    <span
+                                        style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#22c55e;"></span>
+                                    <span style="font-size:13.5px; font-weight:800; color:#e2e8f0;">시즌 상태 전환 탭을 클릭하여 각
+                                        기간별 화면 변화를 확인하세요:</span>
                                 </div>
                                 <div style="display:flex; gap:8px;" id="simTabContainer">
-                                    <button onclick="setSimPhase('register')" id="simTabRegister" style="background:#2563eb; color:#fff; border:none; padding:7px 16px; border-radius:8px; font-size:13px; font-weight:800; cursor:pointer; transition:all 0.2s;">① 접수 기간 모드</button>
-                                    <button onclick="setSimPhase('vote')" id="simTabVote" style="background:#1e293b; color:#94a3b8; border:1px solid #334155; padding:7px 16px; border-radius:8px; font-size:13px; font-weight:800; cursor:pointer; transition:all 0.2s;">② 투표 기간 모드</button>
-                                    <button onclick="setSimPhase('market')" id="simTabMarket" style="background:#1e293b; color:#94a3b8; border:1px solid #334155; padding:7px 16px; border-radius:8px; font-size:13px; font-weight:800; cursor:pointer; transition:all 0.2s;">③ 마켓/선정작 모드</button>
+                                    <button onclick="setSimPhase('register')" id="simTabRegister"
+                                        style="background:#2563eb; color:#fff; border:none; padding:7px 16px; border-radius:8px; font-size:13px; font-weight:800; cursor:pointer; transition:all 0.2s;">①
+                                        접수 기간 모드</button>
+                                    <button onclick="setSimPhase('vote')" id="simTabVote"
+                                        style="background:#1e293b; color:#94a3b8; border:1px solid #334155; padding:7px 16px; border-radius:8px; font-size:13px; font-weight:800; cursor:pointer; transition:all 0.2s;">②
+                                        투표 기간 모드</button>
+                                    <button onclick="setSimPhase('market')" id="simTabMarket"
+                                        style="background:#1e293b; color:#94a3b8; border:1px solid #334155; padding:7px 16px; border-radius:8px; font-size:13px; font-weight:800; cursor:pointer; transition:all 0.2s;">③
+                                        마켓/선정작 모드</button>
                                 </div>
                             </div>
 
                             <!-- Mockup Browser Container -->
-                            <div style="background:#ffffff; border-radius:10px; overflow:hidden; color:#1e293b; border:1px solid #cbd5e1;">
-                                
+                            <div
+                                style="background:#ffffff; border-radius:10px; overflow:hidden; color:#1e293b; border:1px solid #cbd5e1;">
+
                                 <!-- Mockup Top GNB -->
-                                <div style="background:#ffffff; padding:12px 20px; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
+                                <div
+                                    style="background:#ffffff; padding:12px 20px; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
                                     <div style="display:flex; align-items:center; gap:16px;">
-                                        <div style="font-size:16px; font-weight:900; color:#0f172a; letter-spacing:-0.5px;">RO FACTORY</div>
-                                        <div id="simGnbBadge" style="background:#eff6ff; color:#1d4ed8; font-size:11px; font-weight:800; padding:2px 8px; border-radius:4px; border:1px solid #bfdbfe;">
+                                        <div
+                                            style="font-size:16px; font-weight:900; color:#0f172a; letter-spacing:-0.5px;">
+                                            RO FACTORY</div>
+                                        <div id="simGnbBadge"
+                                            style="background:#eff6ff; color:#1d4ed8; font-size:11px; font-weight:800; padding:2px 8px; border-radius:4px; border:1px solid #bfdbfe;">
                                             SEASON 1 • 접수 진행 중 (D-12)
                                         </div>
                                     </div>
-                                    <div style="display:flex; gap:16px; font-size:12.5px; font-weight:700; color:#64748b;">
+                                    <div
+                                        style="display:flex; gap:16px; font-size:12.5px; font-weight:700; color:#64748b;">
                                         <span id="simNav1" style="color:#2563eb; font-weight:900;">작품 접수</span>
                                         <span id="simNav2">인기 투표</span>
                                         <span id="simNav3">마켓 상점</span>
@@ -800,112 +982,175 @@
                                 </div>
 
                                 <!-- Mockup Hero Banner -->
-                                <div id="simHeroBanner" style="background:linear-gradient(135deg, #1e3a8a, #0f172a); color:#fff; padding:32px 28px; transition:all 0.3s; position:relative; overflow:hidden;">
-                                    <div id="simHeroTag" style="display:inline-block; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); font-size:11.5px; font-weight:800; padding:3px 10px; border-radius:12px; margin-bottom:10px;">
+                                <div id="simHeroBanner"
+                                    style="background:linear-gradient(135deg, #1e3a8a, #0f172a); color:#fff; padding:32px 28px; transition:all 0.3s; position:relative; overflow:hidden;">
+                                    <div id="simHeroTag"
+                                        style="display:inline-block; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); font-size:11.5px; font-weight:800; padding:3px 10px; border-radius:12px; margin-bottom:10px;">
                                         🏆 크리에이터 콘테스트 오픈
                                     </div>
-                                    <h3 id="simHeroTitle" style="font-size:22px; font-weight:900; margin-bottom:8px; letter-spacing:-0.5px;">
+                                    <h3 id="simHeroTitle"
+                                        style="font-size:22px; font-weight:900; margin-bottom:8px; letter-spacing:-0.5px;">
                                         나만의 3D 발자국을 출품하고 공식 출시의 주인공이 되세요!
                                     </h3>
-                                    <p id="simHeroDesc" style="font-size:13.5px; color:#cbd5e1; margin-bottom:18px; line-height:1.5;">
+                                    <p id="simHeroDesc"
+                                        style="font-size:13.5px; color:#cbd5e1; margin-bottom:18px; line-height:1.5;">
                                         이벤트 기간 결제 시 10회 출품 캡 + 인게임 크리에이터 칭호 부여 + 최종 당첨작 전액 무료 소장!
                                     </p>
                                     <div style="display:flex; gap:10px; align-items:center;">
-                                        <a id="simHeroCta" href="register.html" style="background:#2563eb; color:#fff; text-decoration:none; padding:10px 22px; border-radius:8px; font-size:14px; font-weight:900; box-shadow:0 4px 12px rgba(37,99,235,0.4); display:inline-block; transition:all 0.2s;">
+                                        <a id="simHeroCta" href="register.html"
+                                            style="background:#2563eb; color:#fff; text-decoration:none; padding:10px 22px; border-radius:8px; font-size:14px; font-weight:900; box-shadow:0 4px 12px rgba(37,99,235,0.4); display:inline-block; transition:all 0.2s;">
                                             🪄 지금 발자국 출품하기 &rarr;
                                         </a>
-                                        <span id="simHeroSub" style="font-size:12px; color:#94a3b8;">(등록 페이지 register.html 로 즉시 이동)</span>
+                                        <span id="simHeroSub" style="font-size:12px; color:#94a3b8;">(등록 페이지
+                                            register.html 로 즉시 이동)</span>
                                     </div>
                                 </div>
 
                                 <!-- Mockup Body Section -->
                                 <div id="simBodyContent" style="padding:24px 28px; background:#f8fafc;">
-                                    
+
                                     <!-- Step 1 View -->
                                     <div id="simViewRegister" style="display:block;">
-                                        <div style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                                        <div
+                                            style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
                                             <span>💡 콘테스트 참여 3단계 가이드</span>
-                                            <span style="font-size:12px; color:#2563eb; font-weight:700;">실시간 접수 현황: 428개 출품 완료</span>
+                                            <span style="font-size:12px; color:#2563eb; font-weight:700;">실시간 접수 현황:
+                                                428개 출품 완료</span>
                                         </div>
                                         <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px;">
-                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:14px;">
+                                            <div
+                                                style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:14px;">
                                                 <div style="font-size:20px; margin-bottom:4px;">🎨</div>
-                                                <div style="font-size:13px; font-weight:800; color:#0f172a;">1. UGC 에셋 제작</div>
-                                                <div style="font-size:11.5px; color:#64748b; margin-top:2px;">제공 툴로 .foot 3D 데이터 제작</div>
+                                                <div style="font-size:13px; font-weight:800; color:#0f172a;">1. UGC 에셋
+                                                    제작</div>
+                                                <div style="font-size:11.5px; color:#64748b; margin-top:2px;">제공 툴로
+                                                    .foot 3D 데이터 제작</div>
                                             </div>
-                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:14px;">
+                                            <div
+                                                style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:14px;">
                                                 <div style="font-size:20px; margin-bottom:4px;">📤</div>
-                                                <div style="font-size:13px; font-weight:800; color:#0f172a;">2. 온라인 접수</div>
-                                                <div style="font-size:11.5px; color:#64748b; margin-top:2px;">닉네임 입력 후 최대 10회 출품</div>
+                                                <div style="font-size:13px; font-weight:800; color:#0f172a;">2. 온라인 접수
+                                                </div>
+                                                <div style="font-size:11.5px; color:#64748b; margin-top:2px;">닉네임 입력 후
+                                                    최대 10회 출품</div>
                                             </div>
-                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:14px;">
+                                            <div
+                                                style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:14px;">
                                                 <div style="font-size:20px; margin-bottom:4px;">👑</div>
-                                                <div style="font-size:13px; font-weight:800; color:#0f172a;">3. 유저 투표 &amp; 출시</div>
-                                                <div style="font-size:11.5px; color:#64748b; margin-top:2px;">100% 유저 투표 득표 순 공식 출시</div>
+                                                <div style="font-size:13px; font-weight:800; color:#0f172a;">3. 유저 투표
+                                                    &amp; 출시</div>
+                                                <div style="font-size:11.5px; color:#64748b; margin-top:2px;">100% 유저 투표
+                                                    득표 순 공식 출시</div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- Step 2 View -->
                                     <div id="simViewVote" style="display:none;">
-                                        <div style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                                        <div
+                                            style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
                                             <span>🗳️ 실시간 유저 인기 투표 진행 중 (로그인 시 1일 1회)</span>
-                                            <span style="font-size:12px; color:#7e22ce; font-weight:700;">투표 종료까지 D-4</span>
+                                            <span style="font-size:12px; color:#7e22ce; font-weight:700;">투표 종료까지
+                                                D-4</span>
                                         </div>
                                         <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px;">
-                                            <div style="background:#ffffff; border:1.5px solid #a855f7; border-radius:8px; padding:12px; text-align:center;">
-                                                <div style="height:70px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">❄️</div>
-                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">크리스탈 얼음 발자국</div>
-                                                <div style="font-size:11px; color:#7e22ce; font-weight:700;">1,420 득표 (1위)</div>
-                                                <button style="margin-top:6px; width:100%; background:#7e22ce; color:#fff; border:none; padding:5px 0; border-radius:4px; font-size:11.5px; font-weight:800; cursor:pointer;">투표하기</button>
+                                            <div
+                                                style="background:#ffffff; border:1.5px solid #a855f7; border-radius:8px; padding:12px; text-align:center;">
+                                                <div
+                                                    style="height:70px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">
+                                                    ❄️</div>
+                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">크리스탈 얼음
+                                                    발자국</div>
+                                                <div style="font-size:11px; color:#7e22ce; font-weight:700;">1,420 득표
+                                                    (1위)</div>
+                                                <button
+                                                    style="margin-top:6px; width:100%; background:#7e22ce; color:#fff; border:none; padding:5px 0; border-radius:4px; font-size:11.5px; font-weight:800; cursor:pointer;">투표하기</button>
                                             </div>
-                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:12px; text-align:center;">
-                                                <div style="height:70px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">🔥</div>
-                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">화염 불꽃 스텝</div>
-                                                <div style="font-size:11px; color:#64748b; font-weight:700;">1,180 득표 (2위)</div>
-                                                <button style="margin-top:6px; width:100%; background:#7e22ce; color:#fff; border:none; padding:5px 0; border-radius:4px; font-size:11.5px; font-weight:800; cursor:pointer;">투표하기</button>
+                                            <div
+                                                style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:12px; text-align:center;">
+                                                <div
+                                                    style="height:70px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">
+                                                    🔥</div>
+                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">화염 불꽃 스텝
+                                                </div>
+                                                <div style="font-size:11px; color:#64748b; font-weight:700;">1,180 득표
+                                                    (2위)</div>
+                                                <button
+                                                    style="margin-top:6px; width:100%; background:#7e22ce; color:#fff; border:none; padding:5px 0; border-radius:4px; font-size:11.5px; font-weight:800; cursor:pointer;">투표하기</button>
                                             </div>
-                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:12px; text-align:center;">
-                                                <div style="height:70px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">🌸</div>
-                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">벚꽃 분홍 발자국</div>
-                                                <div style="font-size:11px; color:#64748b; font-weight:700;">940 득표 (3위)</div>
-                                                <button style="margin-top:6px; width:100%; background:#7e22ce; color:#fff; border:none; padding:5px 0; border-radius:4px; font-size:11.5px; font-weight:800; cursor:pointer;">투표하기</button>
+                                            <div
+                                                style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:12px; text-align:center;">
+                                                <div
+                                                    style="height:70px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">
+                                                    🌸</div>
+                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">벚꽃 분홍 발자국
+                                                </div>
+                                                <div style="font-size:11px; color:#64748b; font-weight:700;">940 득표 (3위)
+                                                </div>
+                                                <button
+                                                    style="margin-top:6px; width:100%; background:#7e22ce; color:#fff; border:none; padding:5px 0; border-radius:4px; font-size:11.5px; font-weight:800; cursor:pointer;">투표하기</button>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- Step 3 View -->
                                     <div id="simViewMarket" style="display:none;">
-                                        <div style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                                        <div
+                                            style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
                                             <span>🏆 시즌 1 공식 마켓 출시 당첨작 TOP 10</span>
-                                            <span style="font-size:12px; color:#16a34a; font-weight:700;">아티스트 전액 무료 / 일반 1회 무료</span>
+                                            <span style="font-size:12px; color:#16a34a; font-weight:700;">아티스트 전액 무료 /
+                                                일반 1회 무료</span>
                                         </div>
                                         <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px;">
-                                            <div style="background:#ffffff; border:1.5px solid #22c55e; border-radius:8px; padding:12px;">
-                                                <div style="height:70px; background:linear-gradient(135deg,#e0f2fe,#dcfce7); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">👑 ❄️</div>
-                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">[당첨작] 크리스탈 얼음</div>
-                                                <div style="font-size:11px; color:#15803d; font-weight:700;">아티스트: 룬미드가츠_마스터</div>
-                                                <div style="margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
-                                                    <span style="font-size:11px; color:#2563eb; font-weight:800;">FREE (무료 소장)</span>
-                                                    <a href="market.html" style="background:#16a34a; color:#fff; text-decoration:none; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:800;">구매/소장</a>
+                                            <div
+                                                style="background:#ffffff; border:1.5px solid #22c55e; border-radius:8px; padding:12px;">
+                                                <div
+                                                    style="height:70px; background:linear-gradient(135deg,#e0f2fe,#dcfce7); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">
+                                                    👑 ❄️</div>
+                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">[당첨작]
+                                                    크리스탈 얼음</div>
+                                                <div style="font-size:11px; color:#15803d; font-weight:700;">아티스트:
+                                                    룬미드가츠_마스터</div>
+                                                <div
+                                                    style="margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
+                                                    <span style="font-size:11px; color:#2563eb; font-weight:800;">FREE
+                                                        (무료 소장)</span>
+                                                    <a href="market.html"
+                                                        style="background:#16a34a; color:#fff; text-decoration:none; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:800;">구매/소장</a>
                                                 </div>
                                             </div>
-                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:12px;">
-                                                <div style="height:70px; background:linear-gradient(135deg,#e0f2fe,#dcfce7); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">👑 🔥</div>
-                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">[당첨작] 화염 불꽃 스텝</div>
-                                                <div style="font-size:11px; color:#15803d; font-weight:700;">아티스트: 프론테라_대장장이</div>
-                                                <div style="margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
-                                                    <span style="font-size:11px; color:#2563eb; font-weight:800;">FREE (무료 소장)</span>
-                                                    <a href="market.html" style="background:#16a34a; color:#fff; text-decoration:none; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:800;">구매/소장</a>
+                                            <div
+                                                style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:12px;">
+                                                <div
+                                                    style="height:70px; background:linear-gradient(135deg,#e0f2fe,#dcfce7); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">
+                                                    👑 🔥</div>
+                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">[당첨작] 화염
+                                                    불꽃 스텝</div>
+                                                <div style="font-size:11px; color:#15803d; font-weight:700;">아티스트:
+                                                    프론테라_대장장이</div>
+                                                <div
+                                                    style="margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
+                                                    <span style="font-size:11px; color:#2563eb; font-weight:800;">FREE
+                                                        (무료 소장)</span>
+                                                    <a href="market.html"
+                                                        style="background:#16a34a; color:#fff; text-decoration:none; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:800;">구매/소장</a>
                                                 </div>
                                             </div>
-                                            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:12px;">
-                                                <div style="height:70px; background:linear-gradient(135deg,#e0f2fe,#dcfce7); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">👑 🌸</div>
-                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">[당첨작] 벚꽃 분홍 발자국</div>
-                                                <div style="font-size:11px; color:#15803d; font-weight:700;">아티스트: 페이욘_아티스트</div>
-                                                <div style="margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
-                                                    <span style="font-size:11px; color:#2563eb; font-weight:800;">FREE (무료 소장)</span>
-                                                    <a href="market.html" style="background:#16a34a; color:#fff; text-decoration:none; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:800;">구매/소장</a>
+                                            <div
+                                                style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:12px;">
+                                                <div
+                                                    style="height:70px; background:linear-gradient(135deg,#e0f2fe,#dcfce7); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;">
+                                                    👑 🌸</div>
+                                                <div style="font-size:12.5px; font-weight:800; color:#0f172a;">[당첨작] 벚꽃
+                                                    분홍 발자국</div>
+                                                <div style="font-size:11px; color:#15803d; font-weight:700;">아티스트:
+                                                    페이욘_아티스트</div>
+                                                <div
+                                                    style="margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
+                                                    <span style="font-size:11px; color:#2563eb; font-weight:800;">FREE
+                                                        (무료 소장)</span>
+                                                    <a href="market.html"
+                                                        style="background:#16a34a; color:#fff; text-decoration:none; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:800;">구매/소장</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -927,16 +1172,21 @@
                     <div class="page-icon" style="background:#fef2f2; color:#dc2626;">4</div>
                     <h3>4. 리스크 관리 법적 고지 항목 (프리미엄 회원제 일 경우 리스크 처리 방안)</h3>
                     <div class="section-edit-tools" style="display:none; margin-left:auto; gap:6px;">
-                        <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
+                        <button onclick="addTableRow(this)"
+                            style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+
+                            행 추가</button>
                     </div>
                 </div>
                 <div class="page-body">
 
                     <div class="spec-group">
                         <div class="spec-label-row">
-                            <div class="spec-label" style="border-left-color:#dc2626;">프리미엄 회원제 적용 시 리스크 처리 방안 및 법적 고지 명세</div>
+                            <div class="spec-label" style="border-left-color:#dc2626;">프리미엄 회원제 적용 시 리스크 처리 방안 및 법적 고지
+                                명세</div>
                             <div class="section-edit-tools" style="display:none; gap:6px;">
-                                <button onclick="addTableRow(this)" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+ 행 추가</button>
+                                <button onclick="addTableRow(this)"
+                                    style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:700; cursor:pointer;">+
+                                    행 추가</button>
                             </div>
                         </div>
                         <table class="spec-table">
@@ -963,7 +1213,8 @@
                                     <td class="field">위반 적발 시 인게임 처리</td>
                                     <td>표절, IP 침해, 유해 콘텐츠 등 선정/배포 후 위반 사항 클레임 접수 시 처리 기준</td>
                                     <td>
-                                        마켓 판매 중단 조치와 함께, 이미 아이템을 소유한 유저는 <strong>아이템 자체는 보유하되 장착 시 이펙트 비노출(숨김) 처리</strong> (기존 구현 방식 준용).
+                                        마켓 판매 중단 조치와 함께, 이미 아이템을 소유한 유저는 <strong>아이템 자체는 보유하되 장착 시 이펙트 비노출(숨김)
+                                            처리</strong> (기존 구현 방식 준용).
                                         <button class="btn-row-del" onclick="deleteTableRow(this)">삭제</button>
                                     </td>
                                     <td style="text-align:center;"><span class="badge badge-warn">사업 확인 필요</span></td>
@@ -1105,7 +1356,7 @@
             if (currIndex === -1) currIndex = 0;
             const nextIndex = (currIndex + 1) % badgeTypes.length;
             const nextBadge = badgeTypes[nextIndex];
-            
+
             badgeEl.className = nextBadge.class;
             badgeEl.innerText = nextBadge.text;
             autoSaveDraft();
