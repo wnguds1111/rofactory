@@ -21,7 +21,7 @@
         a { text-decoration: none; color: inherit; }
         .container { max-width: 1200px !important; margin: 0 auto; padding: 0 20px; }
 
-        /* ═══════ 1. GNB 최상단 고정 컨트롤 바 (GNB 위, 절대 안움직임) ═══════ */
+        /* ═══════ 1. GNB 최상단 검토 모드 컨트롤 바 (GNB 위, 비스티키 고정) ═══════ */
         .phase-control-bar {
             background: #0f172a;
             color: #fff;
@@ -185,7 +185,7 @@
         .hero-content {
             position: absolute; top: 50%; left: 50px;
             transform: translateY(-50%);
-            z-index: 2; max-width: 620px;
+            z-index: 2; max-width: 640px;
         }
         .slide-tag {
             display: inline-flex; align-items: center; gap: 6px;
@@ -219,7 +219,7 @@
         }
         .btn-hero-outline:hover { background: rgba(255,255,255,0.25); border-color: #fff; }
 
-        /* ═══════ 3. 티켓 획득 기준 & 운영 정책 (확실하고 직관적인 인포그래픽) ═══════ */
+        /* ═══════ 3. 티켓 획득 5대 조건 & 운영 정책 (큼직한 5대 카드 인포그래픽) ═══════ */
         .ticket-policy-container {
             margin-top: 36px;
             background: #ffffff;
@@ -231,92 +231,116 @@
         .ticket-policy-topbar {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: #fff;
-            padding: 18px 28px;
+            padding: 20px 28px;
             display: flex; justify-content: space-between; align-items: center;
             flex-wrap: wrap; gap: 12px;
         }
         .ticket-policy-topbar h2 {
-            font-size: 16px; font-weight: 900; display: flex; align-items: center; gap: 8px; margin: 0;
+            font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; margin: 0;
         }
         .ticket-policy-topbar .period-tag {
             background: rgba(37,99,235,0.4); border: 1px solid rgba(147,197,253,0.3);
-            color: #93c5fd; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 6px;
+            color: #93c5fd; font-size: 12.5px; font-weight: 800; padding: 4px 12px; border-radius: 6px;
         }
 
-        /* 획득 공식 요약 배너 (뭐하면 몇개 확실하게!) */
-        .ticket-formula-strip {
-            background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
-            border-bottom: 1px solid #e2e8f0;
-            padding: 16px 24px;
+        /* 5대 조건 큼직한 카드 그리드 (5 Cards) */
+        .ticket-5ways-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 14px;
-        }
-        .formula-card {
+            padding: 24px 24px 16px;
             background: #ffffff;
-            border-radius: 12px;
-            padding: 12px 14px;
-            border: 1px solid #dbeafe;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 2px 8px rgba(37,99,235,0.04);
         }
-        .formula-icon {
-            width: 36px; height: 36px; border-radius: 8px;
-            background: #dbeafe; display: flex; align-items: center; justify-content: center;
-            font-size: 18px; flex-shrink: 0;
-        }
-        .formula-text { flex: 1; }
-        .formula-cond { font-size: 11px; color: #64748b; font-weight: 700; }
-        .formula-result { font-size: 13.5px; font-weight: 900; color: #1d4ed8; }
-
-        /* 3대 핵심 운영 규정 상세 카드 */
-        .ticket-rules-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding: 24px 28px;
-        }
-        .ticket-rule-card {
+        .ticket-5way-card {
             background: #f8fafc;
             border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            padding: 22px 20px;
-            transition: all 0.25s;
+            border: 1.5px solid #e2e8f0;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
-        .ticket-rule-card:hover {
+        .ticket-5way-card:hover {
             background: #ffffff;
+            border-color: #3b82f6;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 24px rgba(37, 99, 235, 0.12);
+        }
+        .ticket-5way-card.featured {
+            background: linear-gradient(180deg, #eff6ff 0%, #ffffff 60%);
             border-color: #93c5fd;
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
-            transform: translateY(-3px);
         }
-        .rule-card-badge {
-            display: inline-block;
-            font-size: 11px; font-weight: 900;
-            padding: 3px 10px; border-radius: 20px;
-            margin-bottom: 12px;
+        .way-num-badge {
+            font-size: 10.5px;
+            font-weight: 900;
+            color: #2563eb;
+            background: #dbeafe;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-bottom: 10px;
         }
-        .badge-blue { background: #dbeafe; color: #1d4ed8; }
-        .badge-purple { background: #f3e8ff; color: #7e22ce; }
-        .badge-green { background: #dcfce7; color: #15803d; }
+        .way-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        .way-title {
+            font-size: 14px;
+            font-weight: 900;
+            color: #0f172a;
+            margin-bottom: 6px;
+            line-height: 1.35;
+        }
+        .way-desc {
+            font-size: 11.5px;
+            color: #64748b;
+            line-height: 1.45;
+            margin-bottom: 14px;
+            flex: 1;
+        }
+        .way-reward-badge {
+            width: 100%;
+            background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+            color: #fff;
+            font-size: 12.5px;
+            font-weight: 900;
+            padding: 8px 6px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+        .way-reward-badge.exchange {
+            background: linear-gradient(135deg, #7e22ce 0%, #9333ea 100%);
+            box-shadow: 0 2px 8px rgba(126, 34, 206, 0.25);
+        }
 
-        .ticket-rule-card h3 {
-            font-size: 16px; font-weight: 900; color: #0f172a; margin-bottom: 8px;
+        /* 하단 3대 핵심 운영 규정 상세 카드 */
+        .ticket-rules-footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding: 16px 24px 24px;
+            background: #ffffff;
+            border-top: 1px solid #f1f5f9;
         }
-        .ticket-rule-card p {
-            font-size: 13px; color: #475569; line-height: 1.6; margin-bottom: 12px;
+        .ticket-footer-rule-card {
+            background: #f8fafc;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            padding: 16px 18px;
         }
-        .rule-sub-points {
-            list-style: none;
-            padding: 0; margin: 0;
-            font-size: 12px; color: #64748b; line-height: 1.6;
+        .ticket-footer-rule-card h4 {
+            font-size: 13.5px; font-weight: 900; color: #0f172a; margin-bottom: 6px;
+            display: flex; align-items: center; gap: 6px;
         }
-        .rule-sub-points li {
-            position: relative; padding-left: 14px; margin-bottom: 4px;
-        }
-        .rule-sub-points li::before {
-            content: '•'; position: absolute; left: 0; color: #2563eb; font-weight: bold;
+        .ticket-footer-rule-card p {
+            font-size: 12px; color: #64748b; line-height: 1.55; margin: 0;
         }
 
         /* ═══════ 결제 유저 3대 프리미엄 혜택 배너 ═══════ */
@@ -614,13 +638,13 @@
         .footer img { width: 100%; height: auto; display: block; }
 
         /* ═══════ 반응형 ═══════ */
-        @media (max-width: 1024px) {
-            .ticket-formula-strip { grid-template-columns: repeat(2, 1fr); }
-            .ticket-rules-grid { grid-template-columns: 1fr; }
-            .floating-quick-wing { display: none; } /* 모바일/태블릿에서는 숨김 */
+        @media (max-width: 1100px) {
+            .ticket-5ways-grid { grid-template-columns: repeat(3, 1fr); }
+            .ticket-rules-footer-grid { grid-template-columns: 1fr; }
+            .floating-quick-wing { display: none; }
         }
         @media (max-width: 768px) {
-            .ticket-formula-strip { grid-template-columns: 1fr; }
+            .ticket-5ways-grid { grid-template-columns: 1fr; }
             .hero-content { left: 24px; right: 24px; max-width: 100%; }
             .hero-content h1 { font-size: 22px; }
             .vote-candidate-grid { grid-template-columns: 1fr; }
@@ -679,7 +703,7 @@
     <div class="page-body-wrap">
         <div class="container">
 
-            <!-- HERO SLIDER SECTION -->
+            <!-- HERO BANNER SECTION -->
             <section class="hero-section">
                 <div class="hero-slider" id="heroSlider">
 
@@ -695,7 +719,7 @@
                                 나만의 3D 발자국을 출품하고<br>라그나로크 공식 출시의 주인공이 되세요!
                             </h1>
                             <p id="mainHeroDesc">
-                                결제 유저 대상 10회 출품 캡 제공 + 인게임 크리에이터 칭호 부여 + 최종 당첨작 전액 무료 소장!
+                                5대 획득 경로 지원 + 계정당 최대 50개 등록 + 크리에이터 칭호 부여 + 당첨작 무료 소장!
                             </p>
                             <div style="display:flex; align-items:center; flex-wrap:wrap; gap:10px;">
                                 <a href="register.html" id="mainHeroPrimaryCta" class="btn-hero-primary" style="background:#2563eb;">
@@ -717,86 +741,89 @@
             <!-- ═════════════════════════════════════════════════════════════ -->
             <div id="seasonRegisterBlock" style="display:block;">
 
-                <!-- 🎫 시즌 1 발자국 출품 티켓 획득 기준 & 운영 정책 (대폭 강화된 가독성) -->
+                <!-- 🎫 시즌 1 발자국 출품 티켓 5대 획득 조건 & 운영 정책 (큼직하고 정확한 인포그래픽) -->
                 <div class="ticket-policy-container">
                     <div class="ticket-policy-topbar">
                         <h2>
-                            <span>🎫 시즌 1 발자국 출품 티켓 획득 기준 &amp; 운영 정책</span>
+                            <span>🎫 시즌 1 발자국 등록 티켓 5대 획득 기준 &amp; 운영 정책</span>
                         </h2>
-                        <span class="period-tag">접수 마감: 2025.10.31 (D-14) · 계정당 최대 40장</span>
+                        <span class="period-tag">접수 기간: 2025.08.18 ~ 10.31 · 계정당 최대 50개 등록 가능</span>
                     </div>
 
-                    <!-- 1) 한눈에 보는 획득 공식 요약 바 (뭐하면 몇개 확실하게!) -->
-                    <div class="ticket-formula-strip">
-                        <div class="formula-card">
-                            <div class="formula-icon">💰</div>
-                            <div class="formula-text">
-                                <div class="formula-cond">KP 5만원 충전 결제 시</div>
-                                <div class="formula-result">🎫 티켓 5장 지급</div>
-                            </div>
-                        </div>
-
-                        <div class="formula-card">
-                            <div class="formula-icon">💎</div>
-                            <div class="formula-text">
-                                <div class="formula-cond">KP 10만원 충전 결제 시</div>
-                                <div class="formula-result">🎫 티켓 10장 (완충)</div>
-                            </div>
-                        </div>
-
-                        <div class="formula-card">
-                            <div class="formula-icon">👑</div>
-                            <div class="formula-text">
-                                <div class="formula-cond">ROZ 정액제 구독 시</div>
-                                <div class="formula-result">🎫 10장 + 크리에이터 칭호</div>
-                            </div>
-                        </div>
-
-                        <div class="formula-card">
-                            <div class="formula-icon">🔄</div>
-                            <div class="formula-text">
-                                <div class="formula-cond">출품 후 남은 잔여 티켓</div>
-                                <div class="formula-result">🎁 웹 환전소 100% 교환</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2) 3대 핵심 운영 규정 상세 안내 카드 -->
-                    <div class="ticket-rules-grid">
+                    <!-- 5대 조건 큼직한 카드 그리드 -->
+                    <div class="ticket-5ways-grid">
                         
-                        <div class="ticket-rule-card">
-                            <span class="rule-card-badge badge-blue">RULE 01. 획득 &amp; 충전</span>
-                            <h3>결제 즉시 티켓 자동 지급</h3>
-                            <p>이벤트 기간 내 유료 결제 건에 대해 크리에이터 출품 티켓이 실시간으로 계정에 지급됩니다.</p>
-                            <ul class="rule-sub-points">
-                                <li><strong>KP 충전 결제</strong>: 1만원당 티켓 1장 (최대 10장/회)</li>
-                                <li><strong>정액제 30일/90일</strong>: 1회당 티켓 10장 즉시 지급</li>
-                                <li><strong>누적 보유 한도</strong>: 계정당 최대 40장까지 보관 가능</li>
-                            </ul>
+                        <!-- 조건 1 -->
+                        <div class="ticket-5way-card featured">
+                            <span class="way-num-badge">조건 ①</span>
+                            <div class="way-icon">👑</div>
+                            <div class="way-title">유효 정액제<br>보유 계정</div>
+                            <div class="way-desc">이벤트 시작일 기준<br><strong>정액제 잔여 일수</strong>가 활성화된 계정</div>
+                            <div class="way-reward-badge">
+                                <span>🎫 티켓 10개 지급</span>
+                            </div>
                         </div>
 
-                        <div class="ticket-rule-card">
-                            <span class="rule-card-badge badge-purple">RULE 02. 출품 &amp; 차감</span>
-                            <h3>티켓 1장당 1개 작품 출품</h3>
-                            <p>UGC 편집툴로 추출한 3D 발자국 파일(.foot)을 업로드할 때마다 티켓 1장이 차감됩니다.</p>
-                            <ul class="rule-sub-points">
-                                <li><strong>출품 집중 캡</strong>: 시즌당 최대 10개 작품 출품 가능</li>
-                                <li><strong>출품 즉시</strong>: 콘테스트 후보작으로 자동 접수</li>
-                                <li><strong>주의사항</strong>: 출품작 삭제 시 사용된 티켓은 반환 불가</li>
-                            </ul>
+                        <!-- 조건 2 -->
+                        <div class="ticket-5way-card">
+                            <span class="way-num-badge">조건 ②</span>
+                            <div class="way-icon">🔗</div>
+                            <div class="way-title">기존 겟포링<br>연동 회원</div>
+                            <div class="way-desc">이벤트 기간 중<br><strong>겟포링 GNJOY 계정</strong> 연동 상태 유지 유저</div>
+                            <div class="way-reward-badge">
+                                <span>🎫 티켓 10개 지급</span>
+                            </div>
                         </div>
 
-                        <div class="ticket-rule-card">
-                            <span class="rule-card-badge badge-green">RULE 03. 잔여 티켓 보장</span>
-                            <h3>미사용 티켓 웹 환전소 교환</h3>
-                            <p>출품 후 남은 티켓은 소멸되지 않고 투표 기간 웹 환전소에서 인게임 아이템으로 100% 교환됩니다.</p>
-                            <ul class="rule-sub-points">
-                                <li><strong>교환 품목</strong>: 생명의 물, 버프 스크롤, 보물상자 등</li>
-                                <li><strong>교환 기간</strong>: 11월 1일 ~ 11월 30일 (투표 기간 내)</li>
-                                <li><strong>가치 보존</strong>: 출품하지 않아도 결제 가치 100% 보장</li>
-                            </ul>
+                        <!-- 조건 3 -->
+                        <div class="ticket-5way-card featured">
+                            <span class="way-num-badge">조건 ③</span>
+                            <div class="way-icon">🌟</div>
+                            <div class="way-title">신규 겟포링<br>연동 회원</div>
+                            <div class="way-desc">이벤트 기간 내<br><strong>겟포링 신규 가입 &amp; GNJOY 연동</strong> 완료 유저</div>
+                            <div class="way-reward-badge">
+                                <span>🎫 티켓 10개 지급</span>
+                            </div>
                         </div>
 
+                        <!-- 조건 4 -->
+                        <div class="ticket-5way-card">
+                            <span class="way-num-badge">조건 ④</span>
+                            <div class="way-icon">💳</div>
+                            <div class="way-title">기간 내<br>결제 유저</div>
+                            <div class="way-desc">이벤트 기간 내<br><strong>유료 결제 완료</strong> 유저 (KP/정액제 무관)</div>
+                            <div class="way-reward-badge">
+                                <span>🎫 티켓 10개 지급</span>
+                            </div>
+                        </div>
+
+                        <!-- 조건 5 -->
+                        <div class="ticket-5way-card">
+                            <span class="way-num-badge">조건 ⑤</span>
+                            <div class="way-icon">📅</div>
+                            <div class="way-title">웹 페이지<br>출석 체크</div>
+                            <div class="way-desc">RO Factory 웹사이트<br><strong>일일 출석체크</strong> 완료 유저</div>
+                            <div class="way-reward-badge exchange">
+                                <span>🎫 최대 10개 교환</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 하단 3대 핵심 운영 규정 상세 안내 바 -->
+                    <div class="ticket-rules-footer-grid">
+                        <div class="ticket-footer-rule-card">
+                            <h4><span>📌</span> 최대 50개 누적 등록</h4>
+                            <p>5가지 조건을 모두 충족할 경우 <strong>계정당 최대 50개</strong>까지 자유롭게 발자국 작품을 출품할 수 있습니다.</p>
+                        </div>
+                        <div class="ticket-footer-rule-card">
+                            <h4><span>🎨</span> 티켓 1장당 1개 작품</h4>
+                            <p>UGC 편집툴로 제작한 3D 발자국 파일(.foot) 1개 등록 시 티켓 1장이 차감되며 즉시 접수됩니다.</p>
+                        </div>
+                        <div class="ticket-footer-rule-card">
+                            <h4><span>🔄</span> 미사용 티켓 100% 교환</h4>
+                            <p>출품 후 남은 잔여 티켓은 <strong>투표 기간 웹 환전소</strong>에서 인게임 고급 아이템으로 100% 교환됩니다.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -808,7 +835,7 @@
                             <span style="font-size:11.5px; font-weight:800; background:#3b82f6; color:#fff; padding:2px 8px; border-radius:4px;">전원 지급</span>
                         </h3>
                         <p>
-                            • 10회 집중 출품 슬롯 제공 &nbsp;|&nbsp; • 인게임 크리에이터 전용 특별 칭호 부여 &nbsp;|&nbsp; • 콘테스트 최종 당첨작 10종 전액 무료 소장권 지급!
+                            • 최대 50개 출품 슬롯 지원 &nbsp;|&nbsp; • 인게임 크리에이터 전용 특별 칭호 부여 &nbsp;|&nbsp; • 콘테스트 최종 당첨작 10종 전액 무료 소장권 지급!
                         </p>
                     </div>
                     <a href="register.html" class="btn-go-register">
@@ -835,7 +862,7 @@
                             <span style="display:inline-block; font-size:11px; font-weight:800; background:#dbeafe; color:#1d4ed8; padding:3px 10px; border-radius:20px; margin-bottom:12px;">STEP 2</span>
                             <div style="font-size:42px; margin-bottom:12px;">📤</div>
                             <h3 style="font-size:17px; font-weight:800; color:#0f172a; margin-bottom:8px;">온라인 콘테스트 출품</h3>
-                            <p style="font-size:12.5px; color:#64748b; line-height:1.6; margin-bottom:16px;">아티스트 닉네임 입력 후 최대 10회까지 집중 출품합니다.</p>
+                            <p style="font-size:12.5px; color:#64748b; line-height:1.6; margin-bottom:16px;">아티스트 닉네임 입력 후 최대 50개까지 작품을 출품합니다.</p>
                             <a href="register.html" style="display:inline-block; padding:8px 18px; font-size:12.5px; font-weight:800; color:#fff; background:#2563eb; border-radius:6px; text-decoration:none;">작품 출품하기 →</a>
                         </div>
                         <div class="custom-step-card">
@@ -1119,7 +1146,7 @@
                 heroTag.style.background = 'rgba(37,99,235,0.4)';
                 heroTag.style.borderColor = 'rgba(147,197,253,0.5)';
                 heroTitle.innerHTML = '나만의 3D 발자국을 출품하고<br>라그나로크 공식 출시의 주인공이 되세요!';
-                heroDesc.innerText = '결제 유저 대상 10회 출품 캡 제공 + 인게임 크리에이터 칭호 부여 + 최종 당첨작 전액 무료 소장!';
+                heroDesc.innerText = '5대 획득 경로 지원 + 계정당 최대 50개 등록 + 크리에이터 칭호 부여 + 당첨작 무료 소장!';
                 heroPrimary.innerHTML = '🪄 지금 작품 출품하기 →';
                 heroPrimary.href = 'register.html';
                 heroPrimary.style.background = '#2563eb';
