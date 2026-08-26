@@ -16,11 +16,12 @@
             min-height: 100vh;
             color: #1e293b;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
         a { text-decoration: none; color: inherit; }
         .container { max-width: 1200px !important; margin: 0 auto; padding: 0 20px; }
 
-        /* ═══════ 상단 시즌 검토 모드 컨트롤 바 ═══════ */
+        /* ═══════ 1. GNB 최상단 고정 컨트롤 바 (GNB 위, 절대 안움직임) ═══════ */
         .phase-control-bar {
             background: #0f172a;
             color: #fff;
@@ -30,11 +31,10 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 10px;
-            position: sticky;
-            top: 44px;
-            z-index: 190;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-            border-bottom: 1px solid #334155;
+            position: relative; /* GNB 위에 고정되어 스크롤 시 화면을 가리지 않음 */
+            z-index: 500;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            border-bottom: 1px solid #1e293b;
         }
         .phase-control-left {
             display: flex;
@@ -69,7 +69,79 @@
         }
         .btn-spec-link:hover { background: #475569; color: #fff; }
 
-        /* ═══════ 페이지 본문 래퍼 (안정적인 배경) ═══════ */
+        /* ═══════ 2. 우측 플로팅 퀵 메뉴 (Floating Wing Menu) ═══════ */
+        .floating-quick-wing {
+            position: fixed;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 250;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 14px 10px;
+            border-radius: 18px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 12px 36px rgba(15, 23, 42, 0.12);
+        }
+        .floating-wing-header {
+            font-size: 10.5px;
+            font-weight: 900;
+            color: #64748b;
+            text-align: center;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #f1f5f9;
+            letter-spacing: 0.5px;
+        }
+        .floating-wing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 64px;
+            border-radius: 12px;
+            background: #f8fafc;
+            border: 1px solid #f1f5f9;
+            text-decoration: none;
+            color: #1e293b;
+            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .floating-wing-item:hover {
+            background: #eff6ff;
+            border-color: #93c5fd;
+            transform: translateX(-4px);
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.15);
+        }
+        .floating-wing-icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+        .floating-wing-label {
+            font-size: 11px;
+            font-weight: 800;
+            color: #0f172a;
+            white-space: nowrap;
+        }
+        .floating-wing-item:hover .floating-wing-label {
+            color: #2563eb;
+        }
+        .floating-wing-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 900;
+            padding: 1px 5px;
+            border-radius: 10px;
+        }
+
+        /* ═══════ 페이지 본문 래퍼 (안정적인 라이트 배경) ═══════ */
         .page-body-wrap {
             padding: 40px 0 80px;
             background: 
@@ -78,14 +150,14 @@
             min-height: calc(100vh - 124px);
         }
 
-        /* ═══════ HERO SLIDER ═══════ */
+        /* ═══════ HERO BANNER SECTION ═══════ */
         .hero-section { margin-bottom: 0; }
         .hero-slider {
-            border-radius: 16px;
+            border-radius: 18px;
             overflow: hidden;
             position: relative;
-            height: 350px;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+            height: 340px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
         }
         .hero-slide {
             position: absolute; inset: 0; opacity: 0;
@@ -99,7 +171,6 @@
         .hero-slide-bg-1 { background-image: url('images/visual_img.jpg'); background-color: #8b4a2a; }
         .hero-slide-bg-2 { background-image: url('images/visual_img2.jpg'); background-color: #2e1065; }
         .hero-slide-bg-3 { background-image: url('images/visual_img3.jpg'); background-color: #064e3b; }
-        .hero-slide-bg-4 { background-image: url('images/visual_img4.jpg'); background-color: #500f5e; }
         
         .hero-overlay {
             position: absolute; inset: 0;
@@ -114,7 +185,7 @@
         .hero-content {
             position: absolute; top: 50%; left: 50px;
             transform: translateY(-50%);
-            z-index: 2; max-width: 580px;
+            z-index: 2; max-width: 620px;
         }
         .slide-tag {
             display: inline-flex; align-items: center; gap: 6px;
@@ -148,146 +219,146 @@
         }
         .btn-hero-outline:hover { background: rgba(255,255,255,0.25); border-color: #fff; }
 
-        /* ═══════ 퀵 메뉴 4종 카드 (하단) ═══════ */
-        .hero-thumb-nav {
-            position: relative; z-index: 10;
-            display: flex; gap: 12px; padding: 14px 0 0; margin-top: 4px;
-        }
-        .hero-thumb-item {
-            flex: 1 0 0; display: flex; flex-direction: column;
-            background: #ffffff; border: 1px solid #e2e8f0;
-            border-radius: 14px; text-decoration: none; color: #0f172a;
-            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-        }
-        .hero-thumb-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(37, 99, 235, 0.08);
-            border-color: #93c5fd;
-        }
-        .hero-thumb-body {
-            display: flex; align-items: center; padding: 14px 18px; gap: 12px;
-        }
-        .hero-thumb-icon {
-            width: 44px; height: 44px; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 22px; flex-shrink: 0;
-        }
-        .hero-thumb-text strong {
-            display: block; font-size: 13px; font-weight: 800;
-            line-height: 1.3; color: #0f172a;
-        }
-        .hero-thumb-text span {
-            display: block; font-size: 11px; font-weight: 500;
-            color: #64748b; margin-top: 2px;
-        }
-
-        /* ═══════ 티켓 획득 기준 & 운영 가이드 박스 ═══════ */
-        .ticket-policy-section {
+        /* ═══════ 3. 티켓 획득 기준 & 운영 정책 (확실하고 직관적인 인포그래픽) ═══════ */
+        .ticket-policy-container {
             margin-top: 36px;
             background: #ffffff;
-            border-radius: 16px;
+            border-radius: 20px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.04);
             overflow: hidden;
         }
-        .ticket-policy-header {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        .ticket-policy-topbar {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: #fff;
+            padding: 18px 28px;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 12px;
+        }
+        .ticket-policy-topbar h2 {
+            font-size: 16px; font-weight: 900; display: flex; align-items: center; gap: 8px; margin: 0;
+        }
+        .ticket-policy-topbar .period-tag {
+            background: rgba(37,99,235,0.4); border: 1px solid rgba(147,197,253,0.3);
+            color: #93c5fd; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 6px;
+        }
+
+        /* 획득 공식 요약 배너 (뭐하면 몇개 확실하게!) */
+        .ticket-formula-strip {
+            background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+            border-bottom: 1px solid #e2e8f0;
             padding: 16px 24px;
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
         }
-        .ticket-policy-header h3 {
-            font-size: 15px; font-weight: 800; display: flex; align-items: center; gap: 8px;
+        .formula-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 12px 14px;
+            border: 1px solid #dbeafe;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(37,99,235,0.04);
         }
-        .ticket-policy-header .badge {
-            background: #2563eb; color: #fff; font-size: 11px; font-weight: 800;
-            padding: 2px 8px; border-radius: 4px;
+        .formula-icon {
+            width: 36px; height: 36px; border-radius: 8px;
+            background: #dbeafe; display: flex; align-items: center; justify-content: center;
+            font-size: 18px; flex-shrink: 0;
         }
-        .ticket-policy-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            divide-x: 1px solid #f1f5f9;
+        .formula-text { flex: 1; }
+        .formula-cond { font-size: 11px; color: #64748b; font-weight: 700; }
+        .formula-result { font-size: 13.5px; font-weight: 900; color: #1d4ed8; }
+
+        /* 3대 핵심 운영 규정 상세 카드 */
+        .ticket-rules-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 24px 28px;
         }
-        .ticket-step-item {
+        .ticket-rule-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
             padding: 22px 20px;
-            text-align: left;
-            position: relative;
-            border-right: 1px solid #f1f5f9;
+            transition: all 0.25s;
         }
-        .ticket-step-item:last-child { border-right: none; }
-        .ticket-step-num {
-            font-size: 11px; font-weight: 900; color: #2563eb; margin-bottom: 6px;
-            display: flex; align-items: center; gap: 6px;
+        .ticket-rule-card:hover {
+            background: #ffffff;
+            border-color: #93c5fd;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+            transform: translateY(-3px);
         }
-        .ticket-step-title {
-            font-size: 14px; font-weight: 800; color: #0f172a; margin-bottom: 6px;
+        .rule-card-badge {
+            display: inline-block;
+            font-size: 11px; font-weight: 900;
+            padding: 3px 10px; border-radius: 20px;
+            margin-bottom: 12px;
         }
-        .ticket-step-desc {
-            font-size: 12px; color: #64748b; line-height: 1.55;
+        .badge-blue { background: #dbeafe; color: #1d4ed8; }
+        .badge-purple { background: #f3e8ff; color: #7e22ce; }
+        .badge-green { background: #dcfce7; color: #15803d; }
+
+        .ticket-rule-card h3 {
+            font-size: 16px; font-weight: 900; color: #0f172a; margin-bottom: 8px;
         }
-        .ticket-highlight {
-            color: #1d4ed8; font-weight: 700;
+        .ticket-rule-card p {
+            font-size: 13px; color: #475569; line-height: 1.6; margin-bottom: 12px;
+        }
+        .rule-sub-points {
+            list-style: none;
+            padding: 0; margin: 0;
+            font-size: 12px; color: #64748b; line-height: 1.6;
+        }
+        .rule-sub-points li {
+            position: relative; padding-left: 14px; margin-bottom: 4px;
+        }
+        .rule-sub-points li::before {
+            content: '•'; position: absolute; left: 0; color: #2563eb; font-weight: bold;
         }
 
-        /* ═══════ 섹션 공통 헤더 ═══════ */
-        .main-section { margin-top: 48px; }
-        .section-head {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 16px;
+        /* ═══════ 결제 유저 3대 프리미엄 혜택 배너 ═══════ */
+        .contest-benefits-banner {
+            margin-top: 28px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 18px;
+            padding: 24px 30px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
         }
-        .section-head-left { display: flex; align-items: center; gap: 10px; }
-        .section-head h2 {
-            font-size: 20px; font-weight: 900; color: #0f172a; letter-spacing: -0.5px;
+        .benefits-banner-left h3 {
+            font-size: 17px; font-weight: 900; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
         }
-        .section-head .sub-tag {
-            font-size: 12px; font-weight: 700; color: #64748b; background: #e2e8f0;
-            padding: 2px 8px; border-radius: 6px;
+        .benefits-banner-left p {
+            font-size: 13px; color: #94a3b8; line-height: 1.5;
         }
-        .nav-arrows { display: flex; gap: 6px; }
-        .nav-arrows button {
-            width: 32px; height: 32px; border-radius: 50%;
-            border: 1px solid #cbd5e1; background: #fff;
-            font-size: 14px; color: #475569; cursor: pointer; transition: all 0.2s;
-            display: flex; align-items: center; justify-content: center;
+        .btn-go-register {
+            background: #2563eb; color: #fff; text-decoration: none; padding: 12px 26px;
+            border-radius: 10px; font-size: 14px; font-weight: 800; transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(37,99,235,0.4); display: flex; align-items: center; gap: 6px;
         }
-        .nav-arrows button:hover { border-color: #2563eb; color: #2563eb; background: #eff6ff; }
+        .btn-go-register:hover {
+            background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,99,235,0.6);
+        }
 
-        /* ═══════ 상품 슬라이더 ═══════ */
-        .slider-wrap {
-            overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 6px;
+        /* ═══════ HOW IT WORKS ═══════ */
+        .custom-step-card {
+            flex: 1; background: #fff; border-radius: 18px; padding: 32px 24px;
+            border: 1px solid #e2e8f0; text-align: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+            transition: all 0.25s;
         }
-        .slider-wrap::-webkit-scrollbar { display: none; }
-        .slider-track { display: flex; gap: 18px; }
-        .product-card {
-            flex: 0 0 180px; background: #fff; border-radius: 12px;
-            overflow: hidden; transition: all 0.25s; cursor: pointer;
-            border: 1px solid #e2e8f0; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            text-decoration: none;
-        }
-        .product-card:hover {
-            transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        .custom-step-card:hover {
+            transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08);
             border-color: #93c5fd;
         }
-        .product-thumb {
-            height: 140px; display: flex; align-items: center; justify-content: center;
-            font-size: 46px; position: relative;
-            background: linear-gradient(180deg, #e0f2fe 0%, #f0fdf4 100%);
-        }
-        .product-thumb .badge {
-            position: absolute; top: 8px; left: 8px; font-size: 10px; font-weight: 800;
-            padding: 2px 6px; border-radius: 4px; color: #fff;
-        }
-        .badge-best { background-color: #ef4444; }
-        .badge-new  { background-color: #2563eb; }
-        .product-info { padding: 12px 14px; }
-        .product-info .name {
-            font-size: 13px; font-weight: 700; color: #0f172a; display: block;
-            margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-        .product-info .price { font-size: 13.5px; font-weight: 800; color: #2563eb; }
-        .product-info .price.free { color: #059669; }
 
         /* ═════════════════════════════════════════════════════════════ */
         /* 투표 기간 전용 스타일 (VOTE PERIOD UI)                         */
@@ -480,7 +551,7 @@
             color: #fff; padding: 20px 24px;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .modal-header h3 { font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+        .modal-header h3 { font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 8px; margin: 0; }
         .modal-close-btn {
             background: rgba(255,255,255,0.15); border: none; color: #fff;
             width: 32px; height: 32px; border-radius: 50%; font-size: 16px;
@@ -539,43 +610,28 @@
             font-size: 12px; color: #64748b; text-align: center;
         }
 
-        /* ═══════ HOW IT WORKS ═══════ */
-        .custom-step-card {
-            flex: 1; background: #fff; border-radius: 18px; padding: 32px 24px;
-            border: 1px solid #e2e8f0; text-align: center;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
-            transition: all 0.25s;
-        }
-        .custom-step-card:hover {
-            transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-            border-color: #93c5fd;
-        }
-
         /* ═══════ 푸터 ═══════ */
         .footer img { width: 100%; height: auto; display: block; }
 
         /* ═══════ 반응형 ═══════ */
         @media (max-width: 1024px) {
-            .ticket-policy-grid { grid-template-columns: repeat(2, 1fr); divide-x: none; gap: 12px; padding: 16px; }
-            .ticket-step-item { border-right: none; border-bottom: 1px solid #f1f5f9; padding: 14px 10px; }
-            .hero-thumb-nav { flex-wrap: wrap; }
-            .hero-thumb-item { flex: 1 1 calc(50% - 6px); }
+            .ticket-formula-strip { grid-template-columns: repeat(2, 1fr); }
+            .ticket-rules-grid { grid-template-columns: 1fr; }
+            .floating-quick-wing { display: none; } /* 모바일/태블릿에서는 숨김 */
         }
         @media (max-width: 768px) {
-            .ticket-policy-grid { grid-template-columns: 1fr; }
+            .ticket-formula-strip { grid-template-columns: 1fr; }
             .hero-content { left: 24px; right: 24px; max-width: 100%; }
             .hero-content h1 { font-size: 22px; }
-            .hero-thumb-nav { display: none; }
             .vote-candidate-grid { grid-template-columns: 1fr; }
             .exchange-highlight-banner { flex-direction: column; text-align: center; }
+            .contest-benefits-banner { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <!-- GNB 컴포넌트 호출 -->
-    <script src="gnb.js"></script>
 
-    <!-- ═══════ B2C 시즌 콘테스트 상태 전환 컨트롤 바 ═══════ -->
+    <!-- ═══════ 1. GNB 최상단 검토 모드 컨트롤 바 (GNB 위, 비스티키 고정) ═══════ -->
     <div class="phase-control-bar">
         <div class="phase-control-left">
             <span class="phase-pulse-dot"></span>
@@ -590,6 +646,35 @@
         </div>
     </div>
 
+    <!-- GNB 컴포넌트 호출 (컨트롤 바 바로 아래 위치) -->
+    <script src="gnb.js"></script>
+
+    <!-- ═══════ 2. 우측 플로팅 퀵 메뉴 (Floating Quick Wing) ═══════ -->
+    <div class="floating-quick-wing">
+        <div class="floating-wing-header">QUICK</div>
+        
+        <a href="register.html" class="floating-wing-item" title="작품 출품하기">
+            <span class="floating-wing-badge">HOT</span>
+            <div class="floating-wing-icon">🪄</div>
+            <div class="floating-wing-label">작품 등록</div>
+        </a>
+
+        <a href="studio_myworks.html" class="floating-wing-item" title="마이 스튜디오">
+            <div class="floating-wing-icon">📋</div>
+            <div class="floating-wing-label">스튜디오</div>
+        </a>
+
+        <a href="about.html" class="floating-wing-item" title="RO FACTORY 소개">
+            <div class="floating-wing-icon">📖</div>
+            <div class="floating-wing-label">가이드</div>
+        </a>
+
+        <a href="market.html" class="floating-wing-item" title="발자국 마켓">
+            <div class="floating-wing-icon">🛍️</div>
+            <div class="floating-wing-label">마켓</div>
+        </a>
+    </div>
+
     <!-- ═══════ 페이지 본문 래퍼 ═══════ -->
     <div class="page-body-wrap">
         <div class="container">
@@ -598,7 +683,7 @@
             <section class="hero-section">
                 <div class="hero-slider" id="heroSlider">
 
-                    <!-- Slide 1: 시즌 콘테스트 메인 슬라이드 (페이즈에 따라 텍스트 및 CTA 변경) -->
+                    <!-- Slide: 시즌 콘테스트 메인 슬라이드 (페이즈에 따라 텍스트 및 CTA 변경) -->
                     <div class="hero-slide active" id="mainHeroSlide1">
                         <div class="hero-slide-bg hero-slide-bg-1" id="mainHeroBg"></div>
                         <div class="hero-overlay"></div>
@@ -623,88 +708,6 @@
                         </div>
                     </div>
 
-                    <!-- Slide 2: 마이 스튜디오 -->
-                    <div class="hero-slide">
-                        <div class="hero-slide-bg hero-slide-bg-2"></div>
-                        <div class="hero-overlay"></div>
-                        <div class="hero-content">
-                            <div class="slide-tag" style="background:rgba(16,185,129,0.4); border:1px solid rgba(110,231,183,0.5);">
-                                🎨 MY STUDIO
-                            </div>
-                            <h1>내 모든 작품을<br>한 곳에서 관리하세요</h1>
-                            <p>등록 현황부터 변환 진행, 마켓 노출까지 마이 스튜디오에서 한눈에 확인하세요.</p>
-                            <a href="studio_myworks.html" class="btn-hero-primary" style="background:#059669;">마이 스튜디오 바로가기 →</a>
-                        </div>
-                    </div>
-
-                    <!-- Slide 3: RO FACTORY 소개 -->
-                    <div class="hero-slide">
-                        <div class="hero-slide-bg hero-slide-bg-3"></div>
-                        <div class="hero-overlay"></div>
-                        <div class="hero-content">
-                            <div class="slide-tag" style="background:rgba(234,179,8,0.4); border:1px solid rgba(253,224,71,0.5);">
-                                📖 ABOUT PLATFORM
-                            </div>
-                            <h1>RO FACTORY는 무엇인가요?<br>크리에이터를 위한 플랫폼</h1>
-                            <p>발자국 에셋 제작부터 글로벌 마켓 등록까지 모든 것을 안내합니다.</p>
-                            <a href="about.html" class="btn-hero-primary" style="background:#d97706;">자세히 알아보기 →</a>
-                        </div>
-                    </div>
-
-                    <!-- Slide 4: 마켓 -->
-                    <div class="hero-slide">
-                        <div class="hero-slide-bg hero-slide-bg-4"></div>
-                        <div class="hero-overlay"></div>
-                        <div class="hero-content">
-                            <div class="slide-tag" style="background:rgba(59,130,246,0.4); border:1px solid rgba(147,197,253,0.5);">
-                                🛍️ MARKETPLACE
-                            </div>
-                            <h1>전 세계 크리에이터의<br>발자국을 만나보세요</h1>
-                            <p>BEST &amp; NEW 발자국 에셋을 자유롭게 구매하고 인벤토리를 채워보세요.</p>
-                            <a href="market.html" class="btn-hero-primary" style="background:#2563eb;">마켓 구경하기 →</a>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- 퀵 메뉴 4종 카드 -->
-                <div class="hero-thumb-nav">
-                    <a href="register.html" class="hero-thumb-item">
-                        <div class="hero-thumb-body">
-                            <div class="hero-thumb-icon" style="background:rgba(37,99,235,0.1); color:#2563eb;">🪄</div>
-                            <div class="hero-thumb-text">
-                                <strong>작품 등록</strong>
-                                <span>나만의 에셋을 등록하세요</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="studio_myworks.html" class="hero-thumb-item">
-                        <div class="hero-thumb-body">
-                            <div class="hero-thumb-icon" style="background:rgba(16,185,129,0.1); color:#059669;">📋</div>
-                            <div class="hero-thumb-text">
-                                <strong>마이 스튜디오</strong>
-                                <span>등록 현황과 수익 관리</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="about.html" class="hero-thumb-item">
-                        <div class="hero-thumb-body">
-                            <div class="hero-thumb-icon" style="background:rgba(234,179,8,0.1); color:#d97706;">📖</div>
-                            <div class="hero-thumb-text">
-                                <strong>RO FACTORY 란?</strong>
-                                <span>플랫폼 소개 안내</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="market.html" class="hero-thumb-item">
-                        <div class="hero-thumb-body">
-                            <div class="hero-thumb-icon" style="background:rgba(99,102,241,0.1); color:#4f46e5;">🛍️</div>
-                            <div class="hero-thumb-text">
-                                <strong>마켓</strong>
-                                <span>모험가들의 빛나는 거래소</span>
-                            </div>
-                        </div>
-                    </a>
                 </div>
             </section>
 
@@ -714,144 +717,110 @@
             <!-- ═════════════════════════════════════════════════════════════ -->
             <div id="seasonRegisterBlock" style="display:block;">
 
-                <!-- 티켓 획득 기준 & 운영 가이드 4단계 박스 -->
-                <div class="ticket-policy-section">
-                    <div class="ticket-policy-header">
-                        <h3>
+                <!-- 🎫 시즌 1 발자국 출품 티켓 획득 기준 & 운영 정책 (대폭 강화된 가독성) -->
+                <div class="ticket-policy-container">
+                    <div class="ticket-policy-topbar">
+                        <h2>
                             <span>🎫 시즌 1 발자국 출품 티켓 획득 기준 &amp; 운영 정책</span>
-                            <span class="badge">안내</span>
-                        </h3>
-                        <span style="font-size:12.5px; color:#cbd5e1;">접수 마감: 2025.10.31 (D-14)</span>
+                        </h2>
+                        <span class="period-tag">접수 마감: 2025.10.31 (D-14) · 계정당 최대 40장</span>
                     </div>
-                    <div class="ticket-policy-grid">
-                        <div class="ticket-step-item">
-                            <div class="ticket-step-num">STEP 01. 티켓 획득</div>
-                            <div class="ticket-step-title">결제 유저 자동 지급</div>
-                            <div class="ticket-step-desc">
-                                이벤트 기간 내 <span class="ticket-highlight">KP 충전 또는 정액제 구독</span> 시 크리에이터 출품 티켓이 계정으로 자동 지급됩니다.
+
+                    <!-- 1) 한눈에 보는 획득 공식 요약 바 (뭐하면 몇개 확실하게!) -->
+                    <div class="ticket-formula-strip">
+                        <div class="formula-card">
+                            <div class="formula-icon">💰</div>
+                            <div class="formula-text">
+                                <div class="formula-cond">KP 5만원 충전 결제 시</div>
+                                <div class="formula-result">🎫 티켓 5장 지급</div>
                             </div>
                         </div>
-                        <div class="ticket-step-item">
-                            <div class="ticket-step-num">STEP 02. 보유 한도</div>
-                            <div class="ticket-step-title">최대 10회 출품 캡</div>
-                            <div class="ticket-step-desc">
-                                계정당 <span class="ticket-highlight">기본 10회 출품 슬롯</span>이 주어지며, 최대 40장까지 누적 보유 가능합니다.
+
+                        <div class="formula-card">
+                            <div class="formula-icon">💎</div>
+                            <div class="formula-text">
+                                <div class="formula-cond">KP 10만원 충전 결제 시</div>
+                                <div class="formula-result">🎫 티켓 10장 (완충)</div>
                             </div>
                         </div>
-                        <div class="ticket-step-item">
-                            <div class="ticket-step-num">STEP 03. 작품 출품</div>
-                            <div class="ticket-step-title">티켓 1장 = 1개 출품</div>
-                            <div class="ticket-step-desc">
-                                UGC 편집툴로 제작한 <span class="ticket-highlight">.foot 파일 1개당 티켓 1장</span>이 차감되며 즉시 콘테스트에 접수됩니다.
+
+                        <div class="formula-card">
+                            <div class="formula-icon">👑</div>
+                            <div class="formula-text">
+                                <div class="formula-cond">ROZ 정액제 구독 시</div>
+                                <div class="formula-result">🎫 10장 + 크리에이터 칭호</div>
                             </div>
                         </div>
-                        <div class="ticket-step-item">
-                            <div class="ticket-step-num">STEP 04. 잔여 티켓</div>
-                            <div class="ticket-step-title">웹 환전소 교환 지원</div>
-                            <div class="ticket-step-desc">
-                                출품 후 남은 미사용 티켓은 <span class="ticket-highlight">투표 기간 웹 환전소</span>에서 인게임 고급 아이템으로 100% 교환 가능합니다.
+
+                        <div class="formula-card">
+                            <div class="formula-icon">🔄</div>
+                            <div class="formula-text">
+                                <div class="formula-cond">출품 후 남은 잔여 티켓</div>
+                                <div class="formula-result">🎁 웹 환전소 100% 교환</div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- 2) 3대 핵심 운영 규정 상세 안내 카드 -->
+                    <div class="ticket-rules-grid">
+                        
+                        <div class="ticket-rule-card">
+                            <span class="rule-card-badge badge-blue">RULE 01. 획득 &amp; 충전</span>
+                            <h3>결제 즉시 티켓 자동 지급</h3>
+                            <p>이벤트 기간 내 유료 결제 건에 대해 크리에이터 출품 티켓이 실시간으로 계정에 지급됩니다.</p>
+                            <ul class="rule-sub-points">
+                                <li><strong>KP 충전 결제</strong>: 1만원당 티켓 1장 (최대 10장/회)</li>
+                                <li><strong>정액제 30일/90일</strong>: 1회당 티켓 10장 즉시 지급</li>
+                                <li><strong>누적 보유 한도</strong>: 계정당 최대 40장까지 보관 가능</li>
+                            </ul>
+                        </div>
+
+                        <div class="ticket-rule-card">
+                            <span class="rule-card-badge badge-purple">RULE 02. 출품 &amp; 차감</span>
+                            <h3>티켓 1장당 1개 작품 출품</h3>
+                            <p>UGC 편집툴로 추출한 3D 발자국 파일(.foot)을 업로드할 때마다 티켓 1장이 차감됩니다.</p>
+                            <ul class="rule-sub-points">
+                                <li><strong>출품 집중 캡</strong>: 시즌당 최대 10개 작품 출품 가능</li>
+                                <li><strong>출품 즉시</strong>: 콘테스트 후보작으로 자동 접수</li>
+                                <li><strong>주의사항</strong>: 출품작 삭제 시 사용된 티켓은 반환 불가</li>
+                            </ul>
+                        </div>
+
+                        <div class="ticket-rule-card">
+                            <span class="rule-card-badge badge-green">RULE 03. 잔여 티켓 보장</span>
+                            <h3>미사용 티켓 웹 환전소 교환</h3>
+                            <p>출품 후 남은 티켓은 소멸되지 않고 투표 기간 웹 환전소에서 인게임 아이템으로 100% 교환됩니다.</p>
+                            <ul class="rule-sub-points">
+                                <li><strong>교환 품목</strong>: 생명의 물, 버프 스크롤, 보물상자 등</li>
+                                <li><strong>교환 기간</strong>: 11월 1일 ~ 11월 30일 (투표 기간 내)</li>
+                                <li><strong>가치 보존</strong>: 출품하지 않아도 결제 가치 100% 보장</li>
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- 이달의 베스트 발자국 -->
-                <section class="main-section">
-                    <div class="section-head">
-                        <div class="section-head-left">
-                            <h2>이달의 베스트 발자국</h2>
-                            <span class="sub-tag">인기 에셋 TOP 10</span>
-                        </div>
-                        <div class="nav-arrows">
-                            <button onclick="scrollSlider('bt', -1)">‹</button>
-                            <button onclick="scrollSlider('bt', 1)">›</button>
-                        </div>
+                <!-- 결제 유저 3대 프리미엄 혜택 배너 -->
+                <div class="contest-benefits-banner">
+                    <div class="benefits-banner-left">
+                        <h3>
+                            <span>✨ 시즌 1 크리에이터 콘테스트 참여 특별 혜택</span>
+                            <span style="font-size:11.5px; font-weight:800; background:#3b82f6; color:#fff; padding:2px 8px; border-radius:4px;">전원 지급</span>
+                        </h3>
+                        <p>
+                            • 10회 집중 출품 슬롯 제공 &nbsp;|&nbsp; • 인게임 크리에이터 전용 특별 칭호 부여 &nbsp;|&nbsp; • 콘테스트 최종 당첨작 10종 전액 무료 소장권 지급!
+                        </p>
                     </div>
-                    <div class="slider-wrap">
-                        <div class="slider-track" id="bt">
-                            <a href="market.html?productId=1" class="product-card">
-                                <div class="product-thumb">🌸<span class="badge badge-best">BEST</span></div>
-                                <div class="product-info"><span class="name">포링 벚꽃 발자국</span><span class="price free">FREE</span></div>
-                            </a>
-                            <a href="market.html?productId=2" class="product-card">
-                                <div class="product-thumb">❄️<span class="badge badge-best">BEST</span></div>
-                                <div class="product-info"><span class="name">얼음 수정 발자국</span><span class="price">1,200 KP</span></div>
-                            </a>
-                            <a href="market.html?productId=3" class="product-card">
-                                <div class="product-thumb">🌑<span class="badge badge-best">BEST</span></div>
-                                <div class="product-info"><span class="name">어둠의 심연의 걸음</span><span class="price">5,500 KP</span></div>
-                            </a>
-                            <a href="market.html?productId=4" class="product-card">
-                                <div class="product-thumb">☂️<span class="badge badge-best">BEST</span></div>
-                                <div class="product-info"><span class="name">초록우산 아이의 스텝</span><span class="price">300 KP</span></div>
-                            </a>
-                            <a href="market.html?productId=5" class="product-card">
-                                <div class="product-thumb">✨<span class="badge badge-best">BEST</span></div>
-                                <div class="product-info"><span class="name">황금빛 엘프의 궤적</span><span class="price">9,000 KP</span></div>
-                            </a>
-                            <a href="market.html?productId=6" class="product-card">
-                                <div class="product-thumb">🔮<span class="badge badge-best">BEST</span></div>
-                                <div class="product-info"><span class="name">다크메이지의 잿빛흔적</span><span class="price free">FREE</span></div>
-                            </a>
-                            <a href="market.html?productId=11" class="product-card">
-                                <div class="product-thumb">🐰<span class="badge badge-best">BEST</span></div>
-                                <div class="product-info"><span class="name">토끼의 점프 스텝</span><span class="price">500 KP</span></div>
-                            </a>
-                            <a href="market.html?productId=9" class="product-card">
-                                <div class="product-thumb">🌊<span class="badge badge-best">BEST</span></div>
-                                <div class="product-info"><span class="name">아쿠아 마린 슬라이드</span><span class="price">4,200 KP</span></div>
-                            </a>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 신규 업데이트 발자국 -->
-                <section class="main-section">
-                    <div class="section-head">
-                        <div class="section-head-left">
-                            <h2>신규 업데이트 발자국</h2>
-                            <span class="sub-tag">NEW ASSETS</span>
-                        </div>
-                        <div class="nav-arrows">
-                            <button onclick="scrollSlider('nt', -1)">‹</button>
-                            <button onclick="scrollSlider('nt', 1)">›</button>
-                        </div>
-                    </div>
-                    <div class="slider-wrap">
-                        <div class="slider-track" id="nt">
-                            <a href="market.html?productId=7" class="product-card">
-                                <div class="product-thumb">🔥<span class="badge badge-new">NEW</span></div>
-                                <div class="product-info"><span class="name">불타는 용암 조각</span><span class="price">15,000 KP</span></div>
-                            </a>
-                            <a href="market.html?productId=8" class="product-card">
-                                <div class="product-thumb">⛄<span class="badge badge-new">NEW</span></div>
-                                <div class="product-info"><span class="name">퓨어 스노우 발걸음</span><span class="price free">FREE</span></div>
-                            </a>
-                            <a href="market.html?productId=9" class="product-card">
-                                <div class="product-thumb">🌊<span class="badge badge-new">NEW</span></div>
-                                <div class="product-info"><span class="name">아쿠아 마린 슬라이드</span><span class="price">4,200 KP</span></div>
-                            </a>
-                            <a href="market.html?productId=10" class="product-card">
-                                <div class="product-thumb">💀<span class="badge badge-new">NEW</span></div>
-                                <div class="product-info"><span class="name">네크로맨서의 해골 춤</span><span class="price">8,500 KP</span></div>
-                            </a>
-                            <a href="market.html?productId=11" class="product-card">
-                                <div class="product-thumb">🐰<span class="badge badge-new">NEW</span></div>
-                                <div class="product-info"><span class="name">토끼의 점프 스텝</span><span class="price">500 KP</span></div>
-                            </a>
-                            <a href="market.html?productId=12" class="product-card">
-                                <div class="product-thumb">🕊️<span class="badge badge-new">NEW</span></div>
-                                <div class="product-info"><span class="name">눈부신 천사의 깃털</span><span class="price">20,000 KP</span></div>
-                            </a>
-                        </div>
-                    </div>
-                </section>
+                    <a href="register.html" class="btn-go-register">
+                        <span>🪄 작품 출품하러 가기 →</span>
+                    </a>
+                </div>
 
                 <!-- HOW IT WORKS Section -->
-                <section class="main-section" style="margin-bottom: 30px;">
+                <section class="main-section" style="margin-top: 48px; margin-bottom: 30px;">
                     <div class="section-head" style="justify-content:center; text-align:center; flex-direction:column; gap:4px; margin-bottom:24px;">
                         <span style="font-size:11px; font-weight:900; color:#2563eb; letter-spacing:1.5px;">HOW IT WORKS</span>
-                        <h2>3단계로 완성되는 나만의 발자국 출품</h2>
+                        <h2 style="font-size:22px; font-weight:900; color:#0f172a;">3단계로 완성되는 나만의 발자국 출품</h2>
                         <p style="font-size:13.5px; color:#64748b;">누구나 쉽게 제작하고 공식 콘테스트에 출품할 수 있습니다</p>
                     </div>
                     <div style="display:flex; gap:20px; flex-wrap:wrap;">
@@ -905,10 +874,10 @@
                 </div>
 
                 <!-- 투표 섹션 헤더 & 필터/정렬 -->
-                <div class="section-head" style="margin-top: 10px;">
+                <div class="section-head" style="margin-top: 10px; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div class="section-head-left">
-                        <h2>🗳️ 시즌 1 유저 실시간 인기 투표</h2>
-                        <span class="sub-tag" style="background:#f3e8ff; color:#7e22ce;">LIVE · 총 24개 응모작</span>
+                        <h2 style="font-size:20px; font-weight:900; color:#0f172a;">🗳️ 시즌 1 유저 실시간 인기 투표</h2>
+                        <span style="font-size:12px; font-weight:700; background:#f3e8ff; color:#7e22ce; padding:2px 8px; border-radius:6px;">LIVE · 총 24개 응모작</span>
                     </div>
                     <div style="font-size:13px; color:#64748b; font-weight:700;">
                         득표 수 순위 정렬 기준 · 1일 1회 투표권
@@ -951,10 +920,10 @@
                 </div>
 
                 <!-- 당첨작 명예의 전당 그리드 -->
-                <div class="section-head">
+                <div class="section-head" style="margin-bottom:16px;">
                     <div class="section-head-left">
-                        <h2>👑 시즌 1 최종 당첨작 명예의 전당 (TOP 10)</h2>
-                        <span class="sub-tag" style="background:#dcfce7; color:#15803d;">인게임 공식 상점 판매 중</span>
+                        <h2 style="font-size:20px; font-weight:900; color:#0f172a;">👑 시즌 1 최종 당첨작 명예의 전당 (TOP 10)</h2>
+                        <span style="font-size:12px; font-weight:700; background:#dcfce7; color:#15803d; padding:2px 8px; border-radius:6px;">인게임 공식 상점 판매 중</span>
                     </div>
                 </div>
 
@@ -1316,25 +1285,6 @@
             document.getElementById('modalUserTicketCount').innerText = userTickets;
             alert(`🎁 [${itemName}] 아이템 교환이 완료되었습니다!\n인게임 우편함을 확인해 주세요. (남은 티켓: ${userTickets}장)`);
         }
-
-        /* ─── 4. 상품 슬라이더 가로 스크롤 ─── */
-        function scrollSlider(id, dir) {
-            const target = document.getElementById(id);
-            if (target && target.parentElement) {
-                target.parentElement.scrollBy({ left: dir * 220, behavior: 'smooth' });
-            }
-        }
-
-        /* ─── 5. 히어로 자동 롤링 슬라이더 ─── */
-        (function(){
-            const slides = document.querySelectorAll('.hero-slide');
-            let cur = 0;
-            if (slides.length <= 1) return;
-
-            setInterval(() => {
-                // 검토 모드 중에는 슬라이드 자동전환이 혼선을 주지 않도록 Slide 1 고정 우선
-            }, 5000);
-        })();
     </script>
 </body>
 </html>
