@@ -156,14 +156,14 @@
             min-height: calc(100vh - 124px);
         }
 
-        /* ═══════ HERO BANNER SECTION ═══════ */
+        /* ═══════ HERO BANNER SECTION (길고 웅장한 히어로 배너) ═══════ */
         .hero-section { margin-bottom: 0; }
         .hero-slider {
-            border-radius: 18px;
+            border-radius: 20px;
             overflow: hidden;
             position: relative;
-            height: 340px;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            height: 380px; /* 높이를 더 길고 웅장하게 확장 */
+            box-shadow: 0 12px 36px rgba(15, 23, 42, 0.1);
         }
         .hero-slide {
             position: absolute; inset: 0; opacity: 0;
@@ -182,28 +182,43 @@
             position: absolute; inset: 0;
             background: linear-gradient(
                 to right,
-                rgba(15, 23, 42, 0.92) 0%,
-                rgba(15, 23, 42, 0.75) 45%,
-                rgba(15, 23, 42, 0.3) 70%,
+                rgba(15, 23, 42, 0.94) 0%,
+                rgba(15, 23, 42, 0.8) 48%,
+                rgba(15, 23, 42, 0.35) 75%,
                 transparent 100%
             );
         }
         .hero-content {
-            position: absolute; top: 50%; left: 50px;
+            position: absolute; top: 50%; left: 54px;
             transform: translateY(-50%);
-            z-index: 2; max-width: 640px;
+            z-index: 2; max-width: 660px;
         }
         .slide-tag {
             display: inline-flex; align-items: center; gap: 6px;
             backdrop-filter: blur(8px);
             color: #fff; font-size: 11.5px; font-weight: 800;
-            padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+            padding: 5px 14px; border-radius: 20px; margin-bottom: 12px;
             letter-spacing: 0.5px;
         }
         .hero-content h1 {
-            font-size: clamp(26px, 3.2vw, 36px);
-            font-weight: 900; color: #fff; line-height: 1.28; margin-bottom: 12px;
+            font-size: clamp(28px, 3.4vw, 38px);
+            font-weight: 900; color: #fff; line-height: 1.25; margin-bottom: 14px;
             letter-spacing: -0.8px;
+        }
+        .hero-period-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(147, 197, 253, 0.4);
+            border-radius: 10px;
+            padding: 8px 16px;
+            font-size: 13.5px;
+            font-weight: 800;
+            color: #93c5fd;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         .hero-content p {
             font-size: 13.5px; color: rgba(255,255,255,0.85);
@@ -718,6 +733,9 @@
                             <h1 id="mainHeroTitle">
                                 나만의 3D 발자국을 출품하고<br>라그나로크 공식 출시의 주인공이 되세요!
                             </h1>
+                            <div class="hero-period-badge" id="mainHeroPeriod">
+                                접수 기간: 2026.08.18 ~ 10.31 · 계정당 최대 50개 등록 가능
+                            </div>
                             <p id="mainHeroDesc">
                                 5대 획득 경로 지원 + 계정당 최대 50개 등록 + 크리에이터 칭호 부여 + 당첨작 무료 소장!
                             </p>
@@ -883,7 +901,7 @@
                     <div class="exchange-banner-left">
                         <h3>
                             <span>🎁 시즌 1 웹 환전소 OPEN</span>
-                            <span style="font-size:11.5px; font-weight:800; background:#818cf8; color:#1e1b4b; padding:2px 8px; border-radius:4px;">기간 한정</span>
+                            <span style="font-size:11.5px; font-weight:800; background:#818cf8; color:#1e1b4b; padding:2px 8px; border-radius:4px;">투표 &amp; 환전 기간: 2026.11.01 ~ 11.30</span>
                         </h3>
                         <p>
                             출품 후 남은 <strong>미사용 크리에이터 티켓</strong>을 인게임 고급 소모품, 보물상자, 버프 스크롤로 교환하세요!<br>
@@ -899,7 +917,7 @@
                 <div class="section-head" style="margin-top: 10px; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <div class="section-head-left">
                         <h2 style="font-size:20px; font-weight:900; color:#0f172a;">🗳️ 시즌 1 유저 실시간 인기 투표</h2>
-                        <span style="font-size:12px; font-weight:700; background:#f3e8ff; color:#7e22ce; padding:2px 8px; border-radius:6px;">LIVE · 총 24개 응모작</span>
+                        <span style="font-size:12px; font-weight:700; background:#f3e8ff; color:#7e22ce; padding:2px 8px; border-radius:6px;">LIVE · 2026.11.01 ~ 11.30 · 총 24개 응모작</span>
                     </div>
                     <div style="font-size:13px; color:#64748b; font-weight:700;">
                         득표 수 순위 정렬 기준 · 1일 1회 투표권
@@ -928,7 +946,7 @@
                 <div style="background:#f0fdf4; border:2px solid #86efac; border-radius:16px; padding:24px 30px; margin-bottom:32px; box-shadow:0 8px 24px rgba(22,163,74,0.08); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
                     <div>
                         <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-                            <span style="background:#16a34a; color:#fff; font-size:11.5px; font-weight:900; padding:3px 10px; border-radius:6px;">OFFICIAL RELEASE</span>
+                            <span style="background:#16a34a; color:#fff; font-size:11.5px; font-weight:900; padding:3px 10px; border-radius:6px;">정식 출시: 2026.12.01 ~ 상시 판매</span>
                             <span style="font-size:18px; font-weight:900; color:#14532d;">시즌 1 영광의 당첨작 TOP 10 마켓 정식 개시!</span>
                         </div>
                         <div style="font-size:13.5px; color:#166534; line-height:1.5;">
@@ -1120,6 +1138,7 @@
             const heroPrimary = document.getElementById('mainHeroPrimaryCta');
             const heroSecondary = document.getElementById('mainHeroSecondaryCta');
             const heroBg = document.getElementById('mainHeroBg');
+            const heroPeriod = document.getElementById('mainHeroPeriod');
 
             [btnReg, btnVote, btnMkt].forEach(b => {
                 b.className = 'btn-phase-toggle';
@@ -1141,6 +1160,11 @@
                 heroTag.style.background = 'rgba(37,99,235,0.4)';
                 heroTag.style.borderColor = 'rgba(147,197,253,0.5)';
                 heroTitle.innerHTML = '나만의 3D 발자국을 출품하고<br>라그나로크 공식 출시의 주인공이 되세요!';
+                if (heroPeriod) {
+                    heroPeriod.innerText = '접수 기간: 2026.08.18 ~ 10.31 · 계정당 최대 50개 등록 가능';
+                    heroPeriod.style.borderColor = 'rgba(147, 197, 253, 0.4)';
+                    heroPeriod.style.color = '#93c5fd';
+                }
                 heroDesc.innerText = '5대 획득 경로 지원 + 계정당 최대 50개 등록 + 크리에이터 칭호 부여 + 당첨작 무료 소장!';
                 heroPrimary.innerHTML = '🪄 지금 작품 출품하기 →';
                 heroPrimary.href = 'register.html';
@@ -1160,6 +1184,11 @@
                 heroTag.style.background = 'rgba(147,51,234,0.4)';
                 heroTag.style.borderColor = 'rgba(216,180,254,0.5)';
                 heroTitle.innerHTML = '게임에 출시할 발자국을<br>직접 투표해주세요!';
+                if (heroPeriod) {
+                    heroPeriod.innerText = '투표 기간: 2026.11.01 ~ 11.30 · 1일 1회 투표권 & 웹 환전소 오픈';
+                    heroPeriod.style.borderColor = 'rgba(216, 180, 254, 0.4)';
+                    heroPeriod.style.color = '#d8b4fe';
+                }
                 heroDesc.innerText = '로그인 유저 대상 매일 1회 투표권 지급! 유저 득표 순위 상위 10개 당첨작이 공식 상점에 출시됩니다.';
                 heroPrimary.innerHTML = '🗳️ 유저 인기 투표 참여하기 →';
                 heroPrimary.href = '#seasonVoteBlock';
@@ -1182,6 +1211,11 @@
                 heroTag.style.background = 'rgba(22,163,74,0.4)';
                 heroTag.style.borderColor = 'rgba(134,239,172,0.5)';
                 heroTitle.innerHTML = '시즌 1 영광의 TOP 10 당첨작<br>공식 마켓 정식 출시!';
+                if (heroPeriod) {
+                    heroPeriod.innerText = '정식 마켓 개시: 2026.12.01 ~ 상시 판매 · 선정작 무료 소장권 지급';
+                    heroPeriod.style.borderColor = 'rgba(134, 239, 172, 0.4)';
+                    heroPeriod.style.color = '#86efac';
+                }
                 heroDesc.innerText = '아티스트 회원: 선정작 전액 무료 소장 / 일반 유저: 최종 선정작 중 1회 무료 구매권 증정!';
                 heroPrimary.innerHTML = '🛍️ 당첨작 마켓 바로가기 →';
                 heroPrimary.href = 'market.html';
