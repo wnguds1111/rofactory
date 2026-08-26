@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RO FACTORY — 정책 확인 체크리스트 v3.0</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Pretendard', 'Poppins', sans-serif; background: #f1f5f9; color: #1e293b; }
+        body { font-family: 'Pretendard', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif; background: #f1f5f9; color: #1e293b; }
+
+        code {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #1d4ed8;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 2px 7px;
+            border-radius: 6px;
+            letter-spacing: -0.2px;
+            display: inline-block;
+            line-height: 1.4;
+            vertical-align: baseline;
+            margin: 0 2px;
+        }
 
         /* ─── TOP BAR ─── */
         .top-bar { background: #0f172a; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
@@ -208,7 +225,7 @@
                     </tr>
                     <tr class="new-row">
                         <td class="item">접수 페이지 연동</td>
-                        <td class="content">이벤트 페이지 내 `[작품 출품하기]` 클릭 시 기존 <strong>팩토리 등록 페이지(register.html) 활용</strong> 연동</td>
+                        <td class="content">이벤트 페이지 내 <code>[작품 출품하기]</code> 클릭 시 기존 <strong>팩토리 등록 페이지(register.html) 활용</strong> 연동</td>
                         <td class="decision">기존 구축된 팩토리 등록 UI/UX 및 업로드 파이프라인 재활용으로 개발 공수 최소화</td>
                         <td class="status-col"><span class="badge badge-ok">✅ 확정</span></td>
                     </tr>
@@ -323,7 +340,7 @@
                     <tr class="new-row">
                         <td class="item">② 작품 접수 페이지</td>
                         <td class="content"><strong>register.html 활용</strong><br>팩토리 기존 등록 UI 연동, 잔여 티켓(30회) 표시</td>
-                        <td class="decision">이벤트 페이지에서 `[출품하기]` 클릭 시 이동. 아티스트 닉네임 설정 + 4종 파일 업로드</td>
+                        <td class="decision">이벤트 페이지에서 <code>[출품하기]</code> 클릭 시 이동. 아티스트 닉네임 설정 + 4종 파일 업로드</td>
                         <td class="status-col"><span class="badge badge-ok">✅ 확정</span></td>
                     </tr>
                     <tr class="new-row">
