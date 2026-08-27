@@ -95,6 +95,74 @@
             background: #334155;
         }
 
+        .btn-sidebar-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .btn-sidebar-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .btn-sidebar-inner-toggle {
+            background: #f1f5f9;
+            color: #64748b;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 3px 8px;
+            font-size: 11.5px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-sidebar-inner-toggle:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        .floating-menu-btn {
+            position: fixed;
+            top: 75px;
+            left: 16px;
+            background: #0f172a;
+            color: #ffffff;
+            border: 1.5px solid #334155;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            z-index: 95;
+            display: none;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .floating-menu-btn:hover {
+            background: #2563eb;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+        }
+        .sidebar.collapsed ~ .main .floating-menu-btn {
+            display: inline-flex;
+        }
+
         .layout {
             display: flex;
             width: 100%;
@@ -102,18 +170,32 @@
             padding: 0 24px;
             margin: 0 auto;
             min-height: calc(100vh - 65px);
+            position: relative;
         }
 
         .sidebar {
             width: 290px;
             background: #ffffff;
             border-right: 1px solid #cbd5e1;
-            padding: 28px 18px;
+            padding: 24px 16px;
             position: sticky;
             top: 65px;
             height: calc(100vh - 65px);
             overflow-y: auto;
             flex-shrink: 0;
+            transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), padding 0.25s ease, opacity 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .sidebar.collapsed {
+            width: 0 !important;
+            min-width: 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border-right: none !important;
+            overflow: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
         }
 
         .sidebar-title {
@@ -400,11 +482,17 @@
 
 <body>
     <div class="top-bar">
-        <h1>
-            <span>RO FACTORY</span>
-            <span class="ver">v4.0</span>
-            <span style="color: #94a3b8; font-weight: 400; font-size: 13px;">| 시즌제 콘테스트 상세 기획 명세서</span>
-        </h1>
+        <div style="display:flex; align-items:center; gap:14px;">
+            <button id="btnTopSidebarToggle" class="btn-sidebar-toggle" onclick="toggleSidebar()" title="좌측 메뉴 접기/열기">
+                <span id="sidebarToggleIconTop">☰</span>
+                <span id="sidebarToggleTextTop">메뉴 접기</span>
+            </button>
+            <h1>
+                <span>RO FACTORY</span>
+                <span class="ver">v4.0</span>
+                <span style="color: #94a3b8; font-weight: 400; font-size: 13px;">| 시즌제 콘테스트 상세 기획 명세서</span>
+            </h1>
+        </div>
         <div class="top-bar-links">
             <div
                 style="font-size:14px; font-weight:800; color:#e2e8f0; background:rgba(255,255,255,0.08); padding:6px 16px; border-radius:20px; border:1px solid rgba(255,255,255,0.15);">
@@ -412,11 +500,14 @@
         </div>
     </div>
 
-    <div class="layout">
+    <div class="layout" id="mainLayout">
 
         <!-- Sidebar Navigation -->
-        <nav class="sidebar">
-            <div class="sidebar-title">메뉴</div>
+        <nav class="sidebar" id="sidebarNav">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; padding-left:8px;">
+                <div class="sidebar-title" style="margin-bottom:0; padding-left:0;">메뉴</div>
+                <button class="btn-sidebar-inner-toggle" onclick="toggleSidebar()" title="메뉴 접기">◀ 접기</button>
+            </div>
             <a href="#sec-proposal" class="nav-item active">1. 발자국 콘테스트 운영 안 <span style="color:#9333ea; font-weight:900;">제안</span></a>
             <div class="nav-sub-group">
                 <a href="#sec-1-1" class="nav-sub-item">1-1. 운영 정책 비교</a>
@@ -427,7 +518,13 @@
         </nav>
 
         <!-- Main Content -->
-        <div class="main">
+        <div class="main" id="mainContent">
+
+            <!-- Floating Menu Open Button (Visible when sidebar collapsed) -->
+            <button class="floating-menu-btn" onclick="toggleSidebar()" title="메뉴 열기">
+                <span>☰</span>
+                <span>메뉴 열기</span>
+            </button>
 
             <!-- Hero Banner -->
             <div class="contest-hero">
@@ -1297,6 +1394,42 @@
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 3500);
         }
+
+        /* ═══════ 사이드바 메뉴 접기/펼치기 기능 ═══════ */
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebarNav');
+            const layout = document.getElementById('mainLayout');
+            const toggleTextTop = document.getElementById('sidebarToggleTextTop');
+            const toggleIconTop = document.getElementById('sidebarToggleIconTop');
+            
+            if (!sidebar) return;
+            const isCollapsed = sidebar.classList.toggle('collapsed');
+            if (layout) layout.classList.toggle('sidebar-collapsed', isCollapsed);
+            
+            if (toggleTextTop) {
+                toggleTextTop.innerText = isCollapsed ? '메뉴 열기' : '메뉴 접기';
+            }
+            if (toggleIconTop) {
+                toggleIconTop.innerText = isCollapsed ? '▶' : '☰';
+            }
+            
+            localStorage.setItem('contest_policy_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+        }
+
+        // 페이지 로드 시 사이드바 상태 복원
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedState = localStorage.getItem('contest_policy_sidebar_collapsed');
+            if (savedState === 'true') {
+                const sidebar = document.getElementById('sidebarNav');
+                const layout = document.getElementById('mainLayout');
+                const toggleTextTop = document.getElementById('sidebarToggleTextTop');
+                const toggleIconTop = document.getElementById('sidebarToggleIconTop');
+                if (sidebar) sidebar.classList.add('collapsed');
+                if (layout) layout.classList.add('sidebar-collapsed');
+                if (toggleTextTop) toggleTextTop.innerText = '메뉴 열기';
+                if (toggleIconTop) toggleIconTop.innerText = '▶';
+            }
+        });
 
     </script>
 </body>
