@@ -2751,6 +2751,17 @@
                 dashBar.style.display = (phase === 'market') ? 'none' : 'flex';
             }
 
+            // URL 주소창 쿼리 스트링 실시간 동기화 (?phase=register / ?phase=vote / ?phase=market)
+            if (window.history && window.history.replaceState) {
+                try {
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('phase', phase);
+                    window.history.replaceState(null, '', url.toString());
+                } catch (e) {
+                    console.error('URL sync error:', e);
+                }
+            }
+
             const quickWingRegister = document.getElementById('quickWingRegister');
             const quickBadgeRegister = document.getElementById('quickBadgeRegister');
             const quickWingMarket = document.getElementById('quickWingMarket');
