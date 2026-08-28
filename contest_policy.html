@@ -118,20 +118,22 @@
         .btn-sidebar-inner-toggle {
             background: #f1f5f9;
             color: #64748b;
-            border: 1px solid #cbd5e1;
+            border: 1.5px solid #cbd5e1;
             border-radius: 6px;
-            padding: 3px 8px;
-            font-size: 11.5px;
-            font-weight: 800;
+            width: 26px;
+            height: 26px;
+            font-size: 11px;
+            font-weight: 900;
             cursor: pointer;
             transition: all 0.15s ease;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            justify-content: center;
         }
         .btn-sidebar-inner-toggle:hover {
             background: #e2e8f0;
             color: #0f172a;
+            border-color: #94a3b8;
         }
 
         .floating-menu-btn {
@@ -477,16 +479,66 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* ═══════ 우측 하단 고정 플로팅 TOP 버튼 ═══════ */
+        .btn-scroll-to-top {
+            position: fixed;
+            right: 28px;
+            bottom: 32px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.16);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 240;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(16px);
+        }
+        .btn-scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .btn-scroll-to-top:hover {
+            background: #2563eb;
+            border-color: #2563eb;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35);
+        }
+        .btn-scroll-to-top .top-icon {
+            font-size: 13px;
+            font-weight: 900;
+            color: #0f172a;
+            line-height: 1;
+            margin-bottom: 2px;
+            transition: color 0.2s;
+        }
+        .btn-scroll-to-top .top-text {
+            font-size: 9.5px;
+            font-weight: 900;
+            color: #475569;
+            letter-spacing: 0.5px;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .btn-scroll-to-top:hover .top-icon,
+        .btn-scroll-to-top:hover .top-text {
+            color: #ffffff;
+        }
     </style>
 </head>
 
 <body>
     <div class="top-bar">
         <div style="display:flex; align-items:center; gap:14px;">
-            <button id="btnTopSidebarToggle" class="btn-sidebar-toggle" onclick="toggleSidebar()" title="좌측 메뉴 접기/열기">
-                <span id="sidebarToggleIconTop">☰</span>
-                <span id="sidebarToggleTextTop">메뉴 접기</span>
-            </button>
             <h1>
                 <span>RO FACTORY</span>
                 <span class="ver">v4.0</span>
@@ -506,7 +558,7 @@
         <nav class="sidebar" id="sidebarNav">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; padding-left:8px;">
                 <div class="sidebar-title" style="margin-bottom:0; padding-left:0;">메뉴</div>
-                <button class="btn-sidebar-inner-toggle" onclick="toggleSidebar()" title="메뉴 접기">◀ 접기</button>
+                <button class="btn-sidebar-inner-toggle" onclick="toggleSidebar()" title="메뉴 접기">◀</button>
             </div>
             <a href="#sec-proposal" class="nav-item active">1. 발자국 콘테스트 운영 안 <span style="color:#9333ea; font-weight:900;">제안</span></a>
             <div class="nav-sub-group">
@@ -622,8 +674,8 @@
                                     </td>
                                     <td
                                         style="padding:14px 16px; border:1px solid #e2e8f0; font-size:14.5px; color:#1e1b4b; background:#faf5ff; line-height:1.7;">
-                                        <strong style="color:#4338ca;">경로별 5~10개씩 최대 30회 누적 (기존 30회 수준 충족)</strong><br>
-                                        • 일반 라그 유저: <strong>[정액제(5)+출석(최대10)+연동(5)]</strong>으로 즉시 20장 이상 확보
+                                        <strong style="color:#4338ca;">경로별 10개씩 최대 50회 누적 (계정당 최대 50장)</strong><br>
+                                        • 일반 라그 유저: <strong>[정액제(10)+출석(최대10)+연동(10)]</strong>으로 즉시 30장 이상 확보
                                     </td>
                                 </tr>
                                 <tr>
@@ -688,7 +740,7 @@
                         <!-- Guide Callout Badge -->
                         <div style="font-size:13.5px; color:#581c87; background:#faf5ff; border:1.5px solid #d8b4fe; border-left:4px solid #9333ea; padding:10px 16px; border-radius:8px; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
                             <span>💡</span>
-                            <span><strong>참여 안내</strong>: 아래 5가지 조건 중 <strong>단 1개만 만족해도 즉시 출품 자격이 부여</strong>되며(진입 장벽 완화), 다중 충족 시 <strong>티켓이 최대 30개까지 누적 지급</strong>됩니다.</span>
+                            <span><strong>참여 안내</strong>: 아래 5가지 조건 중 <strong>단 1개만 만족해도 즉시 출품 자격이 부여</strong>되며(진입 장벽 완화), 다중 충족 시 <strong>티켓이 최대 50개까지 누적 지급</strong>됩니다.</span>
                         </div>
 
                         <table
@@ -710,7 +762,7 @@
                                         이벤트 시작일 기준 <strong>정액제 잔여 일수가 활성화된 계정</strong>
                                     </td>
                                     <td style="padding:14px 16px; border:1px solid #e2e8f0; font-size:14.5px; color:#6b21a8; background:#faf5ff; text-align:center; font-weight:800; line-height:1.6;">
-                                        발자국 등록 티켓<br>(5개)
+                                        발자국 등록 티켓<br>(10개)
                                     </td>
                                     <td style="padding:14px 16px; border:1px solid #e2e8f0; font-size:14px; color:#475569; line-height:1.7; background:#ffffff;">
                                         <strong>장기 결제자(VIP) 역차별 완벽 해소</strong>: 기존 3~12개월 정액제 선결제 충성 고객에 대한 우대 정책으로 커뮤니티 불만 원천 차단 및 로열티 강화.
@@ -724,7 +776,7 @@
                                         이벤트 기간 중 <strong>겟포링 GNJOY 계정 연동 상태 유지 유저</strong>
                                     </td>
                                     <td style="padding:14px 16px; border:1px solid #e2e8f0; font-size:14.5px; color:#6b21a8; background:#faf5ff; text-align:center; font-weight:800; line-height:1.6;">
-                                        발자국 등록 티켓<br>(5개)
+                                        발자국 등록 티켓<br>(10개)
                                     </td>
                                     <td style="padding:14px 16px; border:1px solid #e2e8f0; font-size:14px; color:#475569; line-height:1.7; background:#ffffff;">
                                         <strong>겟포링 기존 회원 우대</strong>: 겟포링 이용 회원 대상 혜택 제공으로 서비스 간 연계 시너지 및 잔존율 유지.
@@ -738,7 +790,7 @@
                                         이벤트 기간 내 <strong>겟포링 신규 가입 &amp; GNJOY 연동 완료 유저</strong>
                                     </td>
                                     <td style="padding:14px 16px; border:1px solid #e2e8f0; font-size:14.5px; color:#6b21a8; background:#faf5ff; text-align:center; font-weight:800; line-height:1.6;">
-                                        발자국 등록 티켓<br>(5개)
+                                        발자국 등록 티켓<br>(10개)
                                     </td>
                                     <td style="padding:14px 16px; border:1px solid #e2e8f0; font-size:14px; color:#475569; line-height:1.7; background:#ffffff;">
                                         <strong>겟포링 신규 유입 증대</strong>: 콘테스트 참여를 계기로 미연동 유저의 겟포링 신규 가입 및 계정 연동을 강력하게 견인(크로스 플랫폼 확장).
@@ -752,7 +804,7 @@
                                         이벤트 기간 내 <strong>결제 완료 유저</strong> (카프라 포인트/정액제 무관)
                                     </td>
                                     <td style="padding:14px 16px; border:1px solid #e2e8f0; font-size:14.5px; color:#7e22ce; background:#faf5ff; text-align:center; font-weight:900; line-height:1.6;">
-                                        발자국 등록 티켓<br>(5개)
+                                        발자국 등록 티켓<br>(10개)
                                     </td>
                                     <td style="padding:14px 16px; border:1px solid #e2e8f0; font-size:14px; color:#475569; line-height:1.7; background:#ffffff;">
                                         <strong>신규 결제 명분 제공</strong>: 콘테스트 출품을 희망하는 복귀/신규 유저의 즉각적인 결제 전환 유도 및 시즌 직접 매출 견인.
@@ -881,7 +933,7 @@
                                 <tr>
                                     <td class="field" style="background:#f8fafc; font-weight:900; font-size:14.5px; color:#0f172a;">프로토 타입</td>
                                     <td style="vertical-align:top; padding:16px;">
-                                        <a href="main3.html?phase=register" target="_blank" class="btn-demo-link" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#2563eb; color:#fff; font-weight:800; font-size:14px; padding:11px 16px; border-radius:8px; text-decoration:none; width:100%; box-shadow:0 2px 8px rgba(37,99,235,0.25); margin-bottom:10px; transition:0.2s;">
+                                        <a href="main4.html?phase=register" target="_blank" class="btn-demo-link" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#2563eb; color:#fff; font-weight:800; font-size:14px; padding:11px 16px; border-radius:8px; text-decoration:none; width:100%; box-shadow:0 2px 8px rgba(37,99,235,0.25); margin-bottom:10px; transition:0.2s;">
                                             <span>접수 화면 보기 ↗</span>
                                         </a>
                                         <div style="font-size:14px; color:#475569; line-height:1.65;">
@@ -890,7 +942,7 @@
                                         </div>
                                     </td>
                                     <td style="vertical-align:top; padding:16px;">
-                                        <a href="main3.html?phase=vote" target="_blank" class="btn-demo-link" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#7e22ce; color:#fff; font-weight:800; font-size:14px; padding:11px 16px; border-radius:8px; text-decoration:none; width:100%; box-shadow:0 2px 8px rgba(126,34,206,0.25); margin-bottom:10px; transition:0.2s;">
+                                        <a href="main4.html?phase=vote" target="_blank" class="btn-demo-link" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#7e22ce; color:#fff; font-weight:800; font-size:14px; padding:11px 16px; border-radius:8px; text-decoration:none; width:100%; box-shadow:0 2px 8px rgba(126,34,206,0.25); margin-bottom:10px; transition:0.2s;">
                                             <span>투표 화면 보기 ↗</span>
                                         </a>
                                         <div style="font-size:14px; color:#475569; line-height:1.65;">
@@ -899,7 +951,7 @@
                                         </div>
                                     </td>
                                     <td style="vertical-align:top; padding:16px;">
-                                        <a href="main3.html?phase=market" target="_blank" class="btn-demo-link" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#16a34a; color:#fff; font-weight:800; font-size:14px; padding:11px 16px; border-radius:8px; text-decoration:none; width:100%; box-shadow:0 2px 8px rgba(22,163,74,0.25); margin-bottom:10px; transition:0.2s;">
+                                        <a href="main4.html?phase=market" target="_blank" class="btn-demo-link" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#16a34a; color:#fff; font-weight:800; font-size:14px; padding:11px 16px; border-radius:8px; text-decoration:none; width:100%; box-shadow:0 2px 8px rgba(22,163,74,0.25); margin-bottom:10px; transition:0.2s;">
                                             <span>마켓 화면 보기 ↗</span>
                                         </a>
                                         <div style="font-size:14px; color:#475569; line-height:1.65;">
@@ -1360,19 +1412,10 @@
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebarNav');
             const layout = document.getElementById('mainLayout');
-            const toggleTextTop = document.getElementById('sidebarToggleTextTop');
-            const toggleIconTop = document.getElementById('sidebarToggleIconTop');
             
             if (!sidebar) return;
             const isCollapsed = sidebar.classList.toggle('collapsed');
             if (layout) layout.classList.toggle('sidebar-collapsed', isCollapsed);
-            
-            if (toggleTextTop) {
-                toggleTextTop.innerText = isCollapsed ? '메뉴 열기' : '메뉴 접기';
-            }
-            if (toggleIconTop) {
-                toggleIconTop.innerText = isCollapsed ? '▶' : '☰';
-            }
             
             localStorage.setItem('contest_policy_sidebar_collapsed', isCollapsed ? 'true' : 'false');
         }
@@ -1383,16 +1426,29 @@
             if (savedState === 'true') {
                 const sidebar = document.getElementById('sidebarNav');
                 const layout = document.getElementById('mainLayout');
-                const toggleTextTop = document.getElementById('sidebarToggleTextTop');
-                const toggleIconTop = document.getElementById('sidebarToggleIconTop');
                 if (sidebar) sidebar.classList.add('collapsed');
                 if (layout) layout.classList.add('sidebar-collapsed');
-                if (toggleTextTop) toggleTextTop.innerText = '메뉴 열기';
-                if (toggleIconTop) toggleIconTop.innerText = '▶';
             }
         });
 
+        // 플로팅 TOP 버튼 스크롤 제어
+        window.addEventListener('scroll', () => {
+            const btnTop = document.getElementById('btnFloatingTop');
+            if (btnTop) {
+                if (window.scrollY > 300) {
+                    btnTop.classList.add('show');
+                } else {
+                    btnTop.classList.remove('show');
+                }
+            }
+        });
     </script>
+
+    <!-- ═══════ 우측 하단 독립 플로팅 TOP 버튼 ═══════ -->
+    <button id="btnFloatingTop" class="btn-scroll-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="페이지 최상단으로 이동" aria-label="맨 위로 가기">
+        <span class="top-icon">▲</span>
+        <span class="top-text">TOP</span>
+    </button>
 </body>
 
 </html>
