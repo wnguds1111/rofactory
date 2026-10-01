@@ -86,6 +86,9 @@
             border: 1px solid #475569; transition: all 0.2s;
         }
         .btn-spec-link:hover { background: #475569; color: #fff; }
+        /* Description 모듈: 플로팅 버튼 대신 상단 바 버튼 사용 (어드민 기획서 버튼과 겹침 방지) */
+        .btn-desc-toggle { cursor: pointer; font-family: inherit; line-height: inherit; }
+        .page-desc-btn { display: none !important; }
 
         /* ═══════ 2. 우측 플로팅 퀵 메뉴 (Floating Wing Menu) ═══════ */
         .floating-quick-wing {
@@ -1345,7 +1348,9 @@
             <button onclick="setMainSeasonPhase('register')" id="btnMainPhaseReg" class="btn-phase-toggle active-reg">① 접수 기간 모드</button>
             <button onclick="setMainSeasonPhase('vote')" id="btnMainPhaseVote" class="btn-phase-toggle">② 투표 기간 모드</button>
             <button onclick="setMainSeasonPhase('market')" id="btnMainPhaseMkt" class="btn-phase-toggle">③ 투표 종료 모드</button>
-            <a href="contest_policy.html#sec-b2c-ui" class="btn-spec-link">📋 기획 명세서</a>
+            <a href="season_policy.html" class="btn-spec-link">📋 정책서</a>
+            <a href="admin.html" class="btn-spec-link">🛠️ 어드민 기획서</a>
+            <button type="button" class="btn-spec-link btn-desc-toggle" onclick="showDynamicDescPanel(window.currentPrdPageNum)">💡 Description</button>
         </div>
     </div>
 
@@ -1399,7 +1404,7 @@
                         <div class="hero-overlay"></div>
                         <div class="hero-content">
                             <div class="slide-tag" id="mainHeroTag" style="background:rgba(37,99,235,0.4); border:1px solid rgba(147,197,253,0.5);">
-                                SEASON 1 CREATOR CONTEST
+                                CONTEST OPEN
                             </div>
                             <h1 id="mainHeroTitle">
                                 나만의 발자국을 출품하고<br>라그나로크 공식 출시의 주인공이 되세요!
@@ -1843,7 +1848,7 @@
                 if (quickBadgeMarket) quickBadgeMarket.style.display = 'none';
 
                 heroBg.className = 'hero-slide-bg hero-slide-bg-1';
-                heroTag.innerText = 'SEASON 1 CREATOR CONTEST';
+                heroTag.innerText = 'CONTEST OPEN';
                 heroTag.style.background = 'rgba(37,99,235,0.4)';
                 heroTag.style.borderColor = 'rgba(147,197,253,0.5)';
                 heroTitle.innerHTML = '나만의 발자국을 출품하고<br>라그나로크 공식 출시의 주인공이 되세요!';
@@ -2207,5 +2212,10 @@
         <span class="top-icon">▲</span>
         <span class="top-text">TOP</span>
     </button>
+
+    <!-- PRD DESCRIPTION INJECTION -->
+    <script>window.currentPrdPageNum = 6;</script>
+    <script src="description_module/desc-script.js?v=3.2"></script>
+    <!-- // PRD DESCRIPTION INJECTION -->
 </body>
 </html>

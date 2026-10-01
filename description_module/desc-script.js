@@ -21,8 +21,6 @@ if (currentScriptEl) {
 window.currentMarks = [];
 window.descPageTitle = "";
 window.descPageOverview = "";
-// 로컬 스토리지에 저장된 잠금 상태 로드 (기본값: 잠금 상태인 true)
-window.isBuilderLocked = localStorage.getItem(STORAGE_PREFIX + "desc_panel_locked") !== 'false';
 window.hasEditPermission = false;
 window.isLocalEnv = false;
 
@@ -32,6 +30,9 @@ const GITHUB_REPO = window.DescConfig.githubRepo || 'wnguds1111/rofactory';
 const GITHUB_PATH = window.DescConfig.githubPath || 'description_module/desc-data.json';
 const FALLBACK_TOKEN_PARTS = window.DescConfig.githubTokenParts || ['ghp_Xxy', 'U1Po6oKHa', 'hLJyWS8t69', 'ooIzhpch0fgT4e'];
 const JSON_URL = window.DescConfig.jsonUrl || (window.descModuleBasePath + 'description_module/desc-data.json');
+
+// 로컬 스토리지에 저장된 잠금 상태 로드 (기본값: 잠금 상태인 true) — STORAGE_PREFIX 선언 이후여야 함
+window.isBuilderLocked = localStorage.getItem(STORAGE_PREFIX + "desc_panel_locked") !== 'false';
 
 
 // 허용된 관리자 IP 목록 (사용자 IP 및 로컬/사설 네트워크 환경 포함)
@@ -163,6 +164,10 @@ function getTargetKey() {
             const activePanel = document.querySelector('.studio-main .panel.active');
             if (activePanel) key = '3-' + activePanel.id.replace('panel-', '');
         }
+    } else if (key === '6') {
+        // main4: 접수 / 투표 / 투표 종료 모드별 Description (?phase=)
+        const phase = new URLSearchParams(window.location.search).get('phase');
+        key = '6-' + (['register', 'vote', 'market'].includes(phase) ? phase : 'register');
     } else if (key === '4') {
         const p = new URLSearchParams(window.location.search);
         const status = p.get('status');

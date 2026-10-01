@@ -3,488 +3,709 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RO Factory 백오피스 – 작품 관리</title>
-    <link rel="stylesheet" href="admin.css">
+    <title>RO Factory 백오피스 – 시즌 관리</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #2f6bed;
+            --rail: #4b88f6;
+            --side-bg: #f4f6fb;
+            --line: #d9dde5;
+            --row-gap: #f5f6f9;
+            --th-bg: #eef2f8;
+            --ink: #111111;
+            --text: #222222;
+            --muted: #8a93a3;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #ffffff;
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+        }
+        button, input, select { font-family: inherit; }
+        svg { display: block; }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed; top: 0; left: 0; bottom: 0;
+            width: 368px; display: flex; flex-direction: column;
+            background: var(--side-bg);
+        }
+        .logo-row {
+            height: 110px; flex-shrink: 0;
+            display: flex; align-items: center; gap: 10px;
+            padding: 0 16px; background: #ffffff;
+        }
+        .logo-mark { width: 30px; height: 30px; }
+        .logo-word { font-size: 19px; font-weight: 900; letter-spacing: 1.5px; color: #333a46; }
+        .logo-tools { font-size: 18px; font-weight: 700; line-height: 1.35; color: var(--blue); margin-left: 4px; }
+        .lang {
+            margin-left: auto; padding-left: 14px; border-left: 1px solid #d5d9e0;
+            display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: #333;
+        }
+        .lang svg { width: 18px; height: 18px; }
+
+        .sidebar-body { flex: 1; display: flex; min-height: 0; }
+        .rail {
+            width: 100px; flex-shrink: 0; background: var(--rail);
+            border-top-right-radius: 28px; padding-top: 30px;
+            display: flex; flex-direction: column; align-items: center; gap: 18px;
+        }
+        .rail-item {
+            width: 60px; padding: 10px 0; border-radius: 10px;
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            color: #ffffff; font-size: 13px; font-weight: 700; text-decoration: none;
+        }
+        .rail-item svg { width: 22px; height: 22px; }
+        .rail-item.active { background: #ffffff; color: var(--rail); }
+
+        .menu { flex: 1; overflow-y: auto; padding: 0 20px 30px; }
+        .user-row { display: flex; align-items: center; gap: 10px; padding: 8px 2px 22px; }
+        .user-name { font-size: 16px; font-weight: 700; color: var(--ink); }
+        .btn-logout {
+            border: none; background: #a9b4c8; color: #fff; font-size: 12px; font-weight: 500;
+            padding: 4px 14px; border-radius: 20px; cursor: pointer;
+        }
+        .menu-group { margin-bottom: 20px; }
+        .menu-head {
+            height: 48px; padding: 0 20px; border-radius: 8px; background: #ffffff;
+            display: flex; align-items: center; justify-content: space-between;
+            font-size: 16px; font-weight: 700; color: var(--ink); cursor: pointer;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+        }
+        .menu-head svg { width: 18px; height: 18px; transition: transform 0.2s; }
+        .menu-group.open .menu-head { color: var(--blue); }
+        .menu-group.open .menu-head svg { transform: rotate(180deg); }
+        .menu-sub { display: none; padding: 14px 0 0 20px; }
+        .menu-group.open .menu-sub { display: block; }
+        .menu-sub a {
+            display: block; padding: 10px 0; font-size: 15px; font-weight: 500;
+            color: var(--ink); text-decoration: none;
+        }
+        .menu-sub a:hover { color: var(--blue); }
+        .menu-sub a.active { color: var(--blue); }
+
+        /* ===== MAIN ===== */
+        .main { margin-left: 368px; padding: 42px 68px 60px 80px; min-width: 0; }
+
+        .crumbs { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+        .crumb { font-size: 22px; font-weight: 700; color: var(--ink); letter-spacing: -0.3px; }
+        .crumb.link { cursor: pointer; }
+        .crumb.link:hover { text-decoration: underline; }
+        .crumb-sep {
+            width: 17px; height: 17px; border-radius: 50%; background: #cfd5df;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .crumb-sep svg { width: 11px; height: 11px; }
+
+        /* 상태 카드 */
+        .status-cards { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 22px; margin-bottom: 22px; }
+        .status-card {
+            height: 72px; border: 1px solid var(--line); border-radius: 10px; background: #fff;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+            cursor: pointer; transition: border-color 0.15s;
+        }
+        .status-card:hover { border-color: #9aa3b2; }
+        .status-card .count { font-size: 20px; font-weight: 700; color: var(--ink); line-height: 1.1; }
+        .status-card .label { font-size: 12px; color: #444; }
+        .status-card.active { background: var(--ink); border-color: var(--ink); }
+        .status-card.active .count, .status-card.active .label { color: #fff; }
+
+        /* 검색 & 액션 */
+        .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+        .search { display: flex; align-items: center; gap: 10px; }
+        .select, .input {
+            height: 48px; border: 1px solid var(--line); border-radius: 4px; background: #fff;
+            font-size: 14px; color: var(--text); padding: 0 12px; outline: none;
+        }
+        .select { width: 120px; cursor: pointer; }
+        .input { width: 260px; }
+        .input::placeholder { color: #9aa1ad; }
+        .input:focus, .select:focus { border-color: var(--blue); }
+        .btn {
+            height: 48px; padding: 0 22px; border: none; border-radius: 4px;
+            font-size: 15px; font-weight: 500; color: #fff; cursor: pointer; white-space: nowrap;
+        }
+        .btn-blue { background: var(--blue); }
+        .btn-blue:hover { background: #2559c9; }
+        .btn-black { background: var(--ink); }
+        .btn-black:hover { background: #333; }
+        .btn-gray { background: #fff; color: #333; border: 1px solid var(--line); }
+        .btn-gray:hover { border-color: #9aa3b2; }
+        .actions { display: flex; gap: 10px; }
+
+        /* 표 */
+        .table-wrap { overflow-x: auto; }
+        .table { width: 100%; border-collapse: separate; border-spacing: 0; text-align: center; }
+        .table th {
+            background: var(--th-bg); height: 60px; padding: 0 12px;
+            font-size: 14px; font-weight: 700; color: var(--ink); white-space: nowrap;
+        }
+        .table td {
+            background: #fff; height: 62px; padding: 0 12px;
+            font-size: 14px; color: var(--text); white-space: nowrap;
+            border-top: 10px solid var(--row-gap);
+        }
+        .table tbody tr:hover td { background: #fafbff; }
+        .link-detail {
+            border: none; background: none; font-size: 14px; color: var(--ink);
+            text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+        }
+        .empty { color: #9aa1ad; height: 120px !important; }
+
+        .pagination { display: flex; justify-content: center; gap: 6px; padding: 26px 0 0; }
+        .page {
+            min-width: 34px; height: 34px; padding: 0 8px; border: 1px solid var(--line); border-radius: 4px;
+            background: #fff; font-size: 13px; color: #444; cursor: pointer;
+        }
+        .page.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+        /* 작품 상세 */
+        .detail-card { display: flex; gap: 28px; background: #fff; border: 1px solid #e3e6ec; border-radius: 16px; padding: 28px; }
+        .detail-thumb {
+            position: relative; width: 220px; height: 396px; flex-shrink: 0;
+            border: 1px solid #7aa2f7; border-radius: 20px; background: #fff;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .detail-thumb img { width: 100px; height: 100px; object-fit: cover; border-radius: 2px; image-rendering: pixelated; }
+        .btn-video {
+            position: absolute; right: 12px; bottom: 12px; border: none; border-radius: 14px;
+            background: #6b6b6b; color: #fff; font-size: 12px; font-weight: 500; padding: 5px 12px; cursor: pointer;
+        }
+        .btn-video:hover { background: #555; }
+        .detail-rows { flex: 1; min-width: 0; }
+        .detail-row { display: flex; align-items: center; min-height: 44px; border-bottom: 1px solid #e3e6ec; }
+        .detail-key { width: 156px; flex-shrink: 0; font-size: 14px; color: var(--text); }
+        .detail-val { flex: 1; display: flex; align-items: center; font-size: 14px; color: var(--text); }
+        .status-pill { margin-left: auto; background: #ececec; color: var(--text); font-size: 13px; padding: 6px 22px; border-radius: 8px; }
+        .detail-actions { display: flex; justify-content: space-between; margin-top: 20px; }
+        .btn-outline-dark { background: #fff; color: var(--ink); border: 1px solid var(--ink); }
+        .btn-outline-dark:hover { background: #f5f6f9; }
+
+        /* 시즌 등록 모달 */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45);
+            display: none; align-items: center; justify-content: center; z-index: 100;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal { width: 520px; max-width: calc(100% - 32px); background: #fff; border-radius: 12px; overflow: hidden; }
+        .modal-head { display: flex; justify-content: space-between; align-items: center; padding: 22px 28px; border-bottom: 1px solid #eef0f4; }
+        .modal-head h3 { font-size: 19px; font-weight: 700; color: var(--ink); }
+        .modal-close { border: none; background: none; font-size: 20px; color: #777; cursor: pointer; }
+        .modal-body { padding: 24px 28px 8px; }
+        .form-row { margin-bottom: 20px; }
+        .form-label { display: block; font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+        .form-label em { color: #e11d48; font-style: normal; margin-left: 2px; }
+        .date-range { display: flex; align-items: center; gap: 10px; }
+        .date-range .input { width: auto; flex: 1; }
+        .form-hint { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+        .modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 28px 24px; }
+    </style>
 </head>
 <body>
 
-<!-- ===== OUTER NAV ===== -->
-<nav class="nav-outer">
-    <div class="nav-outer-logo">
-        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-    </div>
-    <a class="nav-outer-btn" href="#"><span class="icon">👤</span>MEM</a>
-    <a class="nav-outer-btn" href="#"><span class="icon">🎮</span>GAME</a>
-    <a class="nav-outer-btn" href="#"><span class="icon">💰</span>PAY</a>
-    <a class="nav-outer-btn active" href="#"><span class="icon">🌐</span>WEB</a>
-    <a class="nav-outer-btn" href="#"><span class="icon">⚙️</span>SET</a>
-</nav>
-
-<!-- ===== INNER NAV ===== -->
-<nav class="nav-inner">
-    <div class="brand-header">
-        <div class="brand-title">GRAVITY<span>Admin</span></div>
-        <div class="brand-lang">🌐 KO ▾</div>
-    </div>
-    <div class="nav-tool-label">WEB Tool</div>
-
-    <div class="menu-group">
-        <div class="menu-group-header" onclick="toggleMenu(this)">
-            <span><span class="checkbox-icon"></span>공통 관리</span>
-            <span class="arrow">▼</span>
-        </div>
-        <div class="menu-sub-list collapsed"></div>
-    </div>
-
-    <div class="menu-group">
-        <div class="menu-group-header" onclick="toggleMenu(this)">
-            <span><span class="checkbox-icon"></span>GNJOY 관리</span>
-            <span class="arrow">▼</span>
-        </div>
-        <div class="menu-sub-list collapsed"></div>
-    </div>
-
-    <div class="menu-group">
-        <div class="menu-group-header" onclick="toggleMenu(this)">
-            <span><span class="checkbox-icon"></span>ROZ</span>
-            <span class="arrow">▼</span>
-        </div>
-        <div class="menu-sub-list collapsed"></div>
-    </div>
-
-    <div class="menu-group">
-        <div class="menu-group-header open" onclick="toggleMenu(this)">
-            <span><span class="checkbox-icon"></span>RO Factory</span>
-            <span class="arrow">▼</span>
-        </div>
-        <div class="menu-sub-list expanded">
-            <a class="menu-sub-item" href="admin_banner.html">메인관리</a>
-            <a class="menu-sub-item active" href="admin.html">작품관리</a>
-            <a class="menu-sub-item" href="admin_purchase.html">구매 내역</a>
-            <a class="menu-sub-item" href="admin_tag.html">태그 관리</a>
-            <a class="menu-sub-item" href="admin_ticket.html">티켓 관리</a>
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+    <div class="logo-row">
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M27 9.5A12.5 12.5 0 1 0 28.5 18H17" fill="none" stroke="#2f6bed" stroke-width="4.2" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-word">GRAVITY</span>
+        <span class="logo-tools">Admin<br>Tools</span>
+        <div class="lang">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#9aa3b2" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            KO
+            <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5" style="width:12px;height:12px;"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
     </div>
 
-    <div class="nav-inner-footer">
-        <span class="user-name">홍길동님</span>
-        <div style="display:flex;gap:4px;">
-            <button class="btn-icon" title="프로필 수정">✏️</button>
-            <button class="btn-icon" title="로그아웃">🚪</button>
-        </div>
-    </div>
-</nav>
+    <div class="sidebar-body">
+        <nav class="rail">
+            <a class="rail-item" href="#">
+                <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7.5" r="4.5"/><path d="M3.5 21c0-4.4 3.8-7.5 8.5-7.5s8.5 3.1 8.5 7.5z"/></svg>
+                MEM
+            </a>
+            <a class="rail-item" href="#">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 6h10a5 5 0 0 1 0 10h-1.5l-2 2h-3l-2-2H7A5 5 0 0 1 7 6zm0 3v2H5v2h2v2h2v-2h2v-2H9V9zm9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm2 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
+                GAME
+            </a>
+            <a class="rail-item" href="#">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 2h6l-1.5 3h-3zM12 6c5 0 8 4.5 8 9 0 4-3 7-8 7s-8-3-8-7c0-4.5 3-9 8-9zm-.8 3.5v1.1c-1.5.3-2.4 1.3-2.4 2.5 0 1.5 1.2 2.1 2.6 2.4 1 .2 1.4.5 1.4.9 0 .5-.5.8-1.2.8-.8 0-1.4-.4-1.6-1l-1.4.4c.3 1 1.2 1.7 2.6 1.9v1.1h1.4v-1.1c1.5-.3 2.4-1.3 2.4-2.6 0-1.4-1-2.1-2.6-2.4-1-.2-1.4-.5-1.4-.9s.4-.7 1-.7c.7 0 1.1.3 1.3.8l1.4-.4c-.3-.9-1.1-1.5-2.1-1.7V9.5z"/></svg>
+                PAY
+            </a>
+            <a class="rail-item active" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                WEB
+            </a>
+            <a class="rail-item" href="#">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.1 12.9a7.3 7.3 0 0 0 0-1.8l2-1.6-2-3.4-2.4 1a7 7 0 0 0-1.6-.9L14.8 3.5h-4l-.4 2.6a7 7 0 0 0-1.6.9l-2.4-1-2 3.4 2 1.6a7.3 7.3 0 0 0 0 1.8l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 1.6.9l.4 2.6h4l.4-2.6a7 7 0 0 0 1.6-.9l2.4 1 2-3.4zM12.8 15.3a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6z"/></svg>
+                SET
+            </a>
+        </nav>
 
-<!-- ===== MAIN WORKSPACE ===== -->
-<main class="main-workspace">
-    <div class="workspace-topbar">
-        <div class="breadcrumb">
-            포털 관리 <span class="sep">›</span> RO Factory <span class="sep">›</span> <span>작품 관리</span>
-        </div>
-    </div>
-
-    <div class="workspace-content">
-        <!-- LIST VIEW -->
-        <div id="view-list">
-            <div class="page-title">작품 관리</div>
-
-            <!-- STATUS TABS -->
-            <div class="status-tabs" id="statusTabs">
-                <div class="status-tab active" onclick="switchStatus('변환중')" id="tab-변환중">
-                    <span class="tab-count">100</span>
-                    <span class="tab-label">변환 중</span>
-                </div>
-                <div class="status-tab" onclick="switchStatus('판매대기')" id="tab-판매대기">
-                    <span class="tab-count">50</span>
-                    <span class="tab-label">판매대기</span>
-                </div>
-                <div class="status-tab" onclick="switchStatus('판매중')" id="tab-판매중">
-                    <span class="tab-count">50</span>
-                    <span class="tab-label">판매 중</span>
-                </div>
-                <div class="status-tab" onclick="switchStatus('작품만료')" id="tab-작품만료">
-                    <span class="tab-count">50</span>
-                    <span class="tab-label">작품 만료</span>
-                </div>
-                <div class="status-tab" onclick="switchStatus('변환실패')" id="tab-변환실패">
-                    <span class="tab-count">100</span>
-                    <span class="tab-label">변환 실패</span>
-                </div>
-                <div class="status-tab" onclick="switchStatus('마켓삭제')" id="tab-마켓삭제">
-                    <span class="tab-count">100</span>
-                    <span class="tab-label">마켓 삭제</span>
-                </div>
+        <div class="menu">
+            <div class="user-row">
+                <span class="user-name">홍길동</span>
+                <button class="btn-logout">로그아웃</button>
             </div>
 
-            <!-- SEARCH -->
-            <div class="search-box">
-                <div class="search-row">
-                    <div class="search-label">검색 키워드</div>
-                    <select class="search-select" id="searchType">
-                        <option value="작품명">작품명</option>
-                        <option value="마켓ID">마켓ID</option>
-                        <option value="아이템ID">아이템ID</option>
-                        <option value="어카운트넘버">어카운트넘버</option>
-                    </select>
-                    <input type="text" class="search-input wide" id="searchInput" placeholder="검색어를 입력해주세요.">
-                    <button class="btn-search" onclick="doSearch()">검색</button>
+            <div class="menu-group"><div class="menu-head" onclick="toggleMenu(this)">공통 관리<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            <div class="menu-group"><div class="menu-head" onclick="toggleMenu(this)">GNJOY 관리<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            <div class="menu-group"><div class="menu-head" onclick="toggleMenu(this)">라그나로크 제로<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            <div class="menu-group open">
+                <div class="menu-head" onclick="toggleMenu(this)">RO FACTORY 관리<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="menu-sub">
+                    <a href="admin_banner.html">메인 관리</a>
+                    <a href="admin.html" class="active">시즌 관리</a>
+                    <a href="admin_purchase.html">구매 내역</a>
+                    <a href="admin_tag.html">태그 관리</a>
+                    <a href="admin_ticket.html">티켓 관리</a>
                 </div>
             </div>
+            <div class="menu-group"><div class="menu-head" onclick="toggleMenu(this)">GetPoring<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            <div class="menu-group"><div class="menu-head" onclick="toggleMenu(this)">유저 챌린지<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        </div>
+    </div>
+</aside>
 
-            <!-- TABLE SECTION -->
-            <div class="table-section">
-                <div class="table-toolbar">
-                    <span class="result-count" id="resultCount">조회 결과 : 0개</span>
-                    <div class="table-actions">
-                        <button class="btn-outline" onclick="downloadCSV()">↓ 리스트 다운로드</button>
-                        <button class="btn-danger-outline" id="btn-convert-fail" onclick="openModal('modalConvertFail')" style="display:none;">변환 실패 업데이트 (EXCEL)</button>
-                        <button class="btn-primary-outline" id="btn-sale-update" onclick="openModal('modalSaleUpdate')" style="display:none;">판매 업데이트 (EXCEL)</button>
-                    </div>
-                </div>
-                <div class="table-wrap">
-                    <table class="data-table">
-                        <thead id="tableHead"></thead>
-                        <tbody id="tableBody"></tbody>
-                    </table>
-                </div>
-                <div class="pagination" id="pagination">
-                    <div class="page-link">&#8249;</div>
-                    <div class="page-link active">1</div>
-                    <div class="page-link">2</div>
-                    <div class="page-link">3</div>
-                    <div class="page-link">&#8250;</div>
-                </div>
+<!-- ===== MAIN ===== -->
+<main class="main">
+    <div class="crumbs" id="crumbs"></div>
+
+    <!-- ① 시즌 목록 -->
+    <section id="view-seasons">
+        <div class="toolbar">
+            <div></div>
+            <div class="actions">
+                <button class="btn btn-blue" onclick="openRegister()">시즌 등록</button>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>시즌</th>
+                        <th>작품 등록 시작일</th>
+                        <th>작품 등록 종료일</th>
+                        <th>투표 시작일</th>
+                        <th>투표 종료일</th>
+                        <th>작품 수</th>
+                        <th>상세</th>
+                    </tr>
+                </thead>
+                <tbody id="seasonBody"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ② 시즌 상세 (작품 관리) -->
+    <section id="view-season" style="display:none;">
+        <div class="status-cards" id="statusCards"></div>
+
+        <div class="toolbar">
+            <div class="search">
+                <select class="select" id="searchType">
+                    <option value="name">작품명</option>
+                    <option value="marketId">마켓 ID</option>
+                    <option value="itemId">아이템 ID</option>
+                    <option value="account">어카운트 넘버</option>
+                </select>
+                <input type="text" class="input" id="searchInput" placeholder="검색어를 입력하세요." onkeydown="if (event.key === 'Enter') applyFilter()">
+                <button class="btn btn-blue" onclick="applyFilter()">검색</button>
+            </div>
+            <div class="actions">
+                <button class="btn btn-black" onclick="downloadCSV()">리스트 다운로드</button>
+                <button class="btn btn-blue" onclick="openSale()">판매 업데이트</button>
             </div>
         </div>
 
-        <!-- DETAIL VIEW -->
-        <div id="view-detail" style="display:none;">
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-                <button class="btn-outline" onclick="showList()" style="display:flex;align-items:center;gap:6px;">
-                    ← 목록
-                </button>
-                <div class="page-title" style="margin:0;">작품 상세 정보</div>
-            </div>
-
-            <div class="detail-card">
-                <div class="detail-card-body">
-                    <div class="detail-thumb" id="detailThumb">
-                        <span style="font-size:40px;">🐾</span>
-                    </div>
-                    <div class="detail-info" id="detailInfo"></div>
-                </div>
-            </div>
-
-            <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px;">
-                <button class="btn-outline" onclick="showList()">목록</button>
-            </div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>작품명</th>
+                        <th>마켓 ID</th>
+                        <th>어카운트 넘버</th>
+                        <th>아이템 ID</th>
+                        <th>투표 순위</th>
+                        <th>상태</th>
+                        <th>등록 일시</th>
+                        <th>상세</th>
+                    </tr>
+                </thead>
+                <tbody id="workBody"></tbody>
+            </table>
         </div>
-    </div>
+        <div class="pagination" id="pagination"></div>
+    </section>
+
+    <!-- ③ 작품 상세 -->
+    <section id="view-detail" style="display:none;">
+        <div class="detail-card">
+            <div class="detail-thumb">
+                <img src="images/dot_poring_footprint.png" alt="작품 썸네일">
+                <button class="btn-video" onclick="previewVideo()">비디오 미리보기</button>
+            </div>
+            <div class="detail-rows" id="detailRows"></div>
+        </div>
+        <div class="detail-actions">
+            <button class="btn btn-outline-dark" onclick="deleteFromMarket()">마켓 삭제</button>
+            <button class="btn btn-blue" onclick="showSeason()">목록</button>
+        </div>
+    </section>
 </main>
 
-<!-- ===== MODAL: 변환 실패 업데이트 ===== -->
-<div class="modal-overlay" id="modalConvertFail">
-    <div class="modal modal-md">
-        <div class="modal-header">
-            <h3>변환 실패 업데이트</h3>
-            <button class="modal-close" onclick="closeModal('modalConvertFail')">✕</button>
+<!-- ===== 시즌 등록 모달 ===== -->
+<div class="modal-overlay" id="registerModal" onclick="if (event.target === this) closeRegister()">
+    <div class="modal">
+        <div class="modal-head">
+            <h3>시즌 등록</h3>
+            <button class="modal-close" onclick="closeRegister()" aria-label="닫기">✕</button>
         </div>
         <div class="modal-body">
-            <p class="modal-desc">
-                엑셀 양식에 맞추어 <strong>작품명, 마켓ID, 어카운트넘버</strong>를 입력 후 업로드해주세요.<br>
-                <span class="warn">업로드가 완료되면 해당 작품들은 변환 실패 리스트로 이동됩니다.</span>
-            </p>
-            <div class="sample-dl-btn">
-                <button onclick="downloadSample('convert')">↓ 업로드용 샘플 파일(.csv) 다운로드</button>
+            <div class="form-row">
+                <label class="form-label">시즌</label>
+                <input type="text" class="input" id="regSeasonNo" style="width:100%;" readonly>
             </div>
-            <div class="file-drop-zone" onclick="document.getElementById('convertFile').click()">
-                <input type="file" id="convertFile" accept=".csv,.xlsx,.xls" onchange="onFileSelect(this,'convertFileName')">
-                <div class="file-drop-icon">📂</div>
-                <div class="file-drop-text">파일을 드래그하거나 클릭하여 선택해주세요</div>
-                <div class="file-drop-text" style="font-size:11px;margin-top:4px;color:#bbb;">.csv, .xls, .xlsx</div>
-                <div class="file-selected" id="convertFileName"></div>
+            <div class="form-row">
+                <label class="form-label">작품 등록 기간<em>*</em></label>
+                <div class="date-range">
+                    <input type="date" class="input" id="regStart">
+                    <span>~</span>
+                    <input type="date" class="input" id="regEnd">
+                </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn-gray" onclick="closeModal('modalConvertFail')">취소</button>
-            <button class="btn-navy" onclick="executeUpload('convert')">등록</button>
-        </div>
-    </div>
-</div>
-
-<!-- ===== MODAL: 판매 업데이트 ===== -->
-<div class="modal-overlay" id="modalSaleUpdate">
-    <div class="modal modal-md">
-        <div class="modal-header">
-            <h3>판매 업데이트</h3>
-            <button class="modal-close" onclick="closeModal('modalSaleUpdate')">✕</button>
-        </div>
-        <div class="modal-body">
-            <p class="modal-desc">
-                엑셀 양식에 맞추어 <strong>작품명, 마켓ID, 아이템ID, 어카운트넘버, 마켓 게시일</strong>을 입력 후 업로드해주세요.<br>
-                <span class="warn">업로드가 완료되면 목록의 상태가 즉각 갱신되며, 마켓 게시일 기준으로 노출됩니다.</span>
-            </p>
-            <div class="sample-dl-btn">
-                <button onclick="downloadSample('sale')">↓ 업로드용 샘플 파일(.csv) 다운로드</button>
-            </div>
-            <div class="file-drop-zone" onclick="document.getElementById('saleFile').click()">
-                <input type="file" id="saleFile" accept=".csv,.xlsx,.xls" onchange="onFileSelect(this,'saleFileName')">
-                <div class="file-drop-icon">📂</div>
-                <div class="file-drop-text">파일을 드래그하거나 클릭하여 선택해주세요</div>
-                <div class="file-drop-text" style="font-size:11px;margin-top:4px;color:#bbb;">.csv, .xls, .xlsx</div>
-                <div class="file-selected" id="saleFileName"></div>
+            <div class="form-row">
+                <label class="form-label">투표 기간<em>*</em></label>
+                <div class="date-range">
+                    <input type="date" class="input" id="voteStart">
+                    <span>~</span>
+                    <input type="date" class="input" id="voteEnd">
+                </div>
+                <p class="form-hint">투표 시작일은 작품 등록 종료일 이후여야 합니다.</p>
             </div>
         </div>
-        <div class="modal-footer">
-            <button class="btn-gray" onclick="closeModal('modalSaleUpdate')">취소</button>
-            <button class="btn-navy" onclick="executeUpload('sale')">등록</button>
+        <div class="modal-foot">
+            <button class="btn btn-gray" onclick="closeRegister()">취소</button>
+            <button class="btn btn-blue" onclick="submitRegister()">등록</button>
         </div>
     </div>
 </div>
 
 <script>
+// ===== 작품 상태 (season_policy.html 3장 기준) =====
+const STATUS = {
+    converting: '변환 중',
+    voting:     '투표 중',
+    pending:    '판매 대기',
+    selling:    '판매 중',
+    expired:    '작품 만료',
+    failed:     '변환 실패',
+    deleted:    '마켓 삭제'
+};
+const STATUS_ORDER = ['converting', 'voting', 'pending', 'selling', 'expired', 'failed', 'deleted'];
+const PAGE_SIZE = 15;
+
 // ===== MOCK DATA =====
-const mockData = {
-    변환중: [
-        { id:10, name:'다크메이지 잿빛흔적', marketId:'-', itemId:'-', account:'gravity_01', regDate:'22/03/2026 14:05', tags:['#Dark','#Cool'] },
-        { id:9, name:'골든 소드오라 발자국', marketId:'-', itemId:'-', account:'roz_user22', regDate:'19/03/2026 10:20', tags:['#Gold','#Shining'] },
-        { id:8, name:'포링 벚꽃길', marketId:'-', itemId:'-', account:'poring_fan', regDate:'18/03/2026 09:12', tags:['#Pink','#Crystal'] },
-        { id:7, name:'얼음 수정 발자국', marketId:'-', itemId:'-', account:'ice_crafter', regDate:'17/03/2026 08:30', tags:['#Crystal','#Cool'] },
-        { id:6, name:'천사의 새하얀 깃털', marketId:'-', itemId:'-', account:'angel_step', regDate:'16/03/2026 16:45', tags:['#White'] },
-    ],
-    판매대기: [
-        { id:5, name:'마녀의 뾰족 모자 길', marketId:'ASDF1234', itemId:'ITEM5678', account:'witch_maker', regDate:'15/03/2026 11:22', pendingDate:'01/04/2026 22:00', expDate:'30/06/2026', tags:['#Dark'] },
-        { id:4, name:'반짝이는 요정 가루', marketId:'ASDF1235', itemId:'ITEM5679', account:'sparkle_roz', regDate:'14/03/2026 18:05', pendingDate:'02/04/2026 12:00', expDate:'01/07/2026', tags:['#Shining'] },
-        { id:3, name:'우주 은하수 길', marketId:'ASDF1236', itemId:'ITEM5680', account:'galaxy_walk', regDate:'13/03/2026 14:00', pendingDate:'03/04/2026 10:00', expDate:'02/07/2026', tags:['#Cool'] },
-    ],
-    판매중: [
-        { id:2, name:'불타는 용암 조각', marketId:'ASDF1237', itemId:'ITEM5681', account:'lava_step', regDate:'12/03/2026 09:30', saleDate:'20/03/2026 22:00', expDate:'19/06/2026', tags:['#Dark'] },
-        { id:1, name:'기사단의 제복 발자국', marketId:'ASDF1238', itemId:'ITEM5682', account:'knight_ro', regDate:'11/03/2026 10:10', saleDate:'18/03/2026 12:00', expDate:'17/06/2026', tags:['#Cool'] },
-    ],
-    작품만료: [
-        { id:15, name:'고대 비석의 흔적', marketId:'ASDF1239', itemId:'ITEM5683', account:'ancient_ro', regDate:'01/01/2026 10:00', saleDate:'05/01/2026 12:00', expDate:'05/04/2026', tags:['#Dark'] },
-    ],
-    변환실패: [
-        { id:20, name:'천사의 새하얀 깃털 Ver.2', marketId:'-', account:'angel_step2', regDate:'16/03/2026 16:45', failDate:'17/03/2026 08:00', tags:['#White'] },
-        { id:21, name:'별빛 드래곤 꼬리', marketId:'-', account:'star_dragon', regDate:'15/03/2026 13:22', failDate:'16/03/2026 09:30', tags:['#Shining'] },
-    ],
-    마켓삭제: [
-        { id:30, name:'구름 솜사탕 발자국', marketId:'ASDF1240', itemId:'ITEM5690', account:'cloud_ro', regDate:'10/01/2026 09:00', saleDate:'15/01/2026 12:00', deleteDate:'20/03/2026', tags:['#White'] },
-    ]
-};
+const seasons = [
+    { no: 2, regStart: '2027-01-04', regEnd: '2027-02-28', voteStart: '2027-03-01', voteEnd: '2027-03-31' },
+    { no: 1, regStart: '2026-08-18', regEnd: '2026-10-31', voteStart: '2026-11-01', voteEnd: '2026-11-30' }
+];
 
-const tabStatusMap = {
-    변환중: { columns: ['번호','작품명','마켓ID','어카운트넘버','등록일시','상세'], type:'converting' },
-    판매대기: { columns: ['번호','작품명','마켓ID','아이템ID','어카운트넘버','등록일시','마켓 게시예정일','게시 만료일','상세'], type:'pending' },
-    판매중: { columns: ['번호','작품명','마켓ID','아이템ID','어카운트넘버','등록일시','마켓 게시일','게시 만료일','상세'], type:'selling' },
-    작품만료: { columns: ['번호','작품명','마켓ID','아이템ID','어카운트넘버','등록일시','마켓 게시일','게시 만료일','상세'], type:'expired' },
-    변환실패: { columns: ['번호','작품명','마켓ID','어카운트넘버','등록일시','변환 실패일','상세'], type:'failed' },
-    마켓삭제: { columns: ['번호','작품명','마켓ID','아이템ID','어카운트넘버','등록일시','마켓 게시일','마켓 삭제일','상세'], type:'deleted' }
-};
+const workNames = [
+    '크리스탈 얼음 발자국', '화염 불꽃 스텝', '벚꽃 휘날리는 분홍 발자국', '눈부신 천사의 깃털', '다크메이지의 잿빛흔적',
+    '아쿠아 마린 슬라이드', '황금빛 엘프의 궤적', '토끼의 깡총 점프 스텝', '네크로맨서의 해골 춤', '초록우산 아이의 스텝',
+    '퓨어 스노우 발걸음', '어둠의 심연의 걸음', '일렉트릭 썬더 쇼크', '에메랄드 숲의 숨결', '블루밍 로즈 페탈',
+    '코스믹 스타더스트', '용암 드래곤의 격돌', '홀리 크로스 스텝', '달콤한 캔디랜드', '포링 방울방울 버블',
+    '번개 질주 잔영', '황혼의 오로라 스텝', '심해 해파리의 빛', '사막 전갈의 발자국', '무지개빛 프리즘',
+    '고양이 젤리 발자국', '달빛 늑대의 걸음', '기계태엽 기어 스텝', '요정의 은빛가루', '단풍잎 바스락 발걸음'
+];
 
-let currentStatus = '변환중';
-let currentData = [];
-
-// ===== MENU TOGGLE =====
-function toggleMenu(header) {
-    const subList = header.nextElementSibling;
-    const isOpen = header.classList.contains('open');
-    if (isOpen) {
-        header.classList.remove('open');
-        subList.classList.remove('expanded');
-        subList.classList.add('collapsed');
-    } else {
-        header.classList.add('open');
-        subList.classList.remove('collapsed');
-        subList.classList.add('expanded');
-    }
+function pad(n) { return String(n).padStart(2, '0'); }
+function fmt(d) {
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
+function rng(seed) {
+    return () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+}
+function fakeGuid(rand) {
+    const hex = len => Array.from({ length: len }, () => Math.floor(rand() * 16).toString(16)).join('').toUpperCase();
+    return `${hex(8)}-${hex(4)}-${hex(4)}-${hex(4)}-${hex(12)}`;
 }
 
-// ===== STATUS TAB SWITCH =====
-function switchStatus(status) {
-    currentStatus = status;
-    document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById('tab-' + status).classList.add('active');
+// 시즌별 샘플 작품: 1~30위 당첨작(판매 대기·판매 중·작품 만료), 31위~ 마켓 삭제, 그 외 상태는 순위 없음
+function buildSampleWorks(season, counts) {
+    const rand = rng(season.no * 97);
+    const winners = [
+        ...Array(counts.pending).fill('pending'),
+        ...Array(counts.selling).fill('selling'),
+        ...Array(counts.expired).fill('expired')
+    ].sort(() => rand() - 0.5);
+    const rows = [];
+    winners.forEach((status, i) => rows.push({ status, rank: i + 1 }));
+    for (let i = 0; i < counts.deleted; i++) rows.push({ status: 'deleted', rank: 31 + i });
+    ['converting', 'voting', 'failed'].forEach(status => {
+        for (let i = 0; i < counts[status]; i++) rows.push({ status, rank: '-' });
+    });
 
-    // Show/hide action buttons per tab
-    document.getElementById('btn-convert-fail').style.display = (status === '변환중') ? 'block' : 'none';
-    document.getElementById('btn-sale-update').style.display = (status === '변환중' || status === '판매대기') ? 'block' : 'none';
-
-    renderTable();
+    const tagPool = ['Pretty', 'Fancy', 'Cool', 'Dark', 'Shining', 'Cute', 'Crystal'];
+    const colorPool = ['Blue', 'Pink', 'Red', 'Green', 'Yellow', 'Purple', 'White', 'Black'];
+    const regFrom = new Date(season.regStart + 'T00:00:00').getTime();
+    const regTo = new Date(season.regEnd + 'T23:59:59').getTime();
+    return rows.map((r, i) => {
+        const hasItem = typeof r.rank === 'number' && r.rank <= 30;
+        const tag1 = Math.floor(rand() * tagPool.length);
+        return {
+            id: season.no * 1000 + i + 1,
+            name: workNames[Math.floor(rand() * workNames.length)],
+            tags: [tagPool[tag1], tagPool[(tag1 + 1 + Math.floor(rand() * (tagPool.length - 1))) % tagPool.length]],
+            color: colorPool[Math.floor(rand() * colorPool.length)],
+            marketId: fakeGuid(rand),
+            account: 1000400 + Math.floor(rand() * 600),
+            itemId: hasItem ? String(500000 + season.no * 10000 + r.rank) : '-',
+            rank: r.rank,
+            status: r.status,
+            regDate: fmt(new Date(regFrom + rand() * (regTo - regFrom))),
+            saleDate: (r.status === 'selling' || r.status === 'expired') ? fmt(new Date(new Date(season.voteEnd + 'T10:00:00').getTime() + 14 * 86400000)) : '-'
+        };
+    }).sort((a, b) => b.regDate.localeCompare(a.regDate));
 }
 
-// ===== RENDER TABLE =====
-function renderTable() {
-    const config = tabStatusMap[currentStatus];
-    const data = mockData[currentStatus] || [];
-    currentData = data;
+const works = {
+    1: buildSampleWorks(seasons[1], { converting: 6, voting: 12, pending: 8, selling: 17, expired: 5, failed: 4, deleted: 20 }),
+    2: buildSampleWorks(seasons[0], { converting: 10, voting: 15, pending: 5, selling: 20, expired: 5, failed: 3, deleted: 18 })
+};
 
-    document.getElementById('resultCount').textContent = `조회 결과 : ${data.length}개`;
+let currentSeason = null;
+let currentStatus = 'all';
+let currentRows = [];
+let currentPage = 1;
 
-    // Render head
-    const thead = document.getElementById('tableHead');
-    thead.innerHTML = `<tr>${config.columns.map(c => `<th>${c}</th>`).join('')}</tr>`;
+// ===== MENU =====
+function toggleMenu(head) { head.parentElement.classList.toggle('open'); }
 
-    // Render body
-    const tbody = document.getElementById('tableBody');
-    if (data.length === 0) {
-        tbody.innerHTML = `<tr class="empty-row"><td colspan="${config.columns.length}" style="padding:50px;color:#aaa;text-align:center;">조회된 내역이 없습니다.</td></tr>`;
+// ===== BREADCRUMB =====
+const SEP = '<span class="crumb-sep"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5"><polyline points="9 6 15 12 9 18"/></svg></span>';
+function setCrumbs(items) {
+    // items: [label, onclick?]
+    document.getElementById('crumbs').innerHTML = [['포털 관리'], ['RO FACTORY 관리'], ...items]
+        .map(([label, action]) => action ? `<span class="crumb link" onclick="${action}">${label}</span>` : `<span class="crumb">${label}</span>`)
+        .join(SEP);
+}
+
+function showView(id) {
+    ['view-seasons', 'view-season', 'view-detail'].forEach(v => {
+        document.getElementById(v).style.display = v === id ? 'block' : 'none';
+    });
+    window.scrollTo(0, 0);
+}
+
+// ===== ① 시즌 목록 =====
+function renderSeasons() {
+    document.getElementById('seasonBody').innerHTML = seasons
+        .slice().sort((a, b) => b.no - a.no)
+        .map(s => `
+        <tr>
+            <td>시즌 ${s.no}</td>
+            <td>${s.regStart}</td>
+            <td>${s.regEnd}</td>
+            <td>${s.voteStart}</td>
+            <td>${s.voteEnd}</td>
+            <td>${(works[s.no] || []).length.toLocaleString()}</td>
+            <td><button class="link-detail" onclick="openSeason(${s.no})">상세</button></td>
+        </tr>`).join('');
+}
+
+function showSeasons() {
+    currentSeason = null;
+    setCrumbs([['시즌 관리']]);
+    renderSeasons();
+    showView('view-seasons');
+}
+
+// ===== 시즌 등록 =====
+function openRegister() {
+    const next = Math.max(...seasons.map(s => s.no)) + 1;
+    document.getElementById('regSeasonNo').value = `시즌 ${next}`;
+    ['regStart', 'regEnd', 'voteStart', 'voteEnd'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('registerModal').classList.add('show');
+}
+function closeRegister() { document.getElementById('registerModal').classList.remove('show'); }
+
+function submitRegister() {
+    const v = id => document.getElementById(id).value;
+    const s = { regStart: v('regStart'), regEnd: v('regEnd'), voteStart: v('voteStart'), voteEnd: v('voteEnd') };
+    if (!s.regStart || !s.regEnd || !s.voteStart || !s.voteEnd) return alert('작품 등록 기간과 투표 기간을 모두 입력해주세요.');
+    if (s.regStart > s.regEnd) return alert('작품 등록 종료일은 시작일 이후여야 합니다.');
+    if (s.voteStart <= s.regEnd) return alert('투표 시작일은 작품 등록 종료일 이후여야 합니다.');
+    if (s.voteStart > s.voteEnd) return alert('투표 종료일은 시작일 이후여야 합니다.');
+    const lastVoteEnd = seasons.map(x => x.voteEnd).sort().pop();
+    if (s.regStart <= lastVoteEnd) return alert(`작품 등록 시작일은 이전 시즌 투표 종료일(${lastVoteEnd}) 이후여야 합니다.`);
+
+    const no = Math.max(...seasons.map(x => x.no)) + 1;
+    seasons.push({ no, ...s });
+    works[no] = [];
+    closeRegister();
+    renderSeasons();
+    alert(`시즌 ${no}이(가) 등록되었습니다.`);
+}
+
+// ===== ② 시즌 상세 =====
+function openSeason(no) {
+    currentSeason = seasons.find(s => s.no === no);
+    currentStatus = 'all';
+    document.getElementById('searchInput').value = '';
+    refreshSeason();
+    showSeason();
+}
+
+function showSeason() {
+    setCrumbs([['시즌 관리', 'showSeasons()'], [`시즌 ${currentSeason.no}`]]);
+    showView('view-season');
+}
+
+function seasonWorks() { return works[currentSeason.no] || []; }
+
+function renderStatusCards() {
+    const list = seasonWorks();
+    const cards = [{ key: 'all', label: '전체', count: list.length }]
+        .concat(STATUS_ORDER.map(key => ({ key, label: STATUS[key], count: list.filter(w => w.status === key).length })));
+    document.getElementById('statusCards').innerHTML = cards.map(c => `
+        <div class="status-card ${c.key === currentStatus ? 'active' : ''}" onclick="switchStatus('${c.key}')">
+            <span class="count">${c.count.toLocaleString()}</span>
+            <span class="label">${c.label}</span>
+        </div>`).join('');
+}
+
+function switchStatus(key) {
+    currentStatus = key;
+    document.getElementById('searchInput').value = '';
+    refreshSeason();
+}
+
+function refreshSeason() {
+    renderStatusCards();
+    applyFilter();
+}
+
+function applyFilter() {
+    const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+    const field = document.getElementById('searchType').value;
+    currentRows = seasonWorks()
+        .filter(w => currentStatus === 'all' || w.status === currentStatus)
+        .filter(w => !keyword || String(w[field]).toLowerCase().includes(keyword));
+    currentPage = 1;
+    renderWorks();
+}
+
+function renderWorks() {
+    const body = document.getElementById('workBody');
+    const pg = document.getElementById('pagination');
+    if (currentRows.length === 0) {
+        body.innerHTML = `<tr><td colspan="9" class="empty">${seasonWorks().length ? '조회된 작품이 없습니다.' : '등록된 작품이 없습니다.'}</td></tr>`;
+        pg.innerHTML = '';
         return;
     }
+    const start = (currentPage - 1) * PAGE_SIZE;
+    body.innerHTML = currentRows.slice(start, start + PAGE_SIZE).map((w, i) => `
+        <tr>
+            <td>${start + i + 1}</td>
+            <td>${w.name}</td>
+            <td>${w.marketId}</td>
+            <td>${w.account}</td>
+            <td>${w.itemId}</td>
+            <td>${w.rank === '-' ? '-' : `${w.rank}위`}</td>
+            <td>${STATUS[w.status]}</td>
+            <td>${w.regDate}</td>
+            <td><button class="link-detail" onclick="showDetail(${w.id})">상세</button></td>
+        </tr>`).join('');
 
-    tbody.innerHTML = data.map((item, i) => {
-        const cells = buildCells(currentStatus, item, i + 1);
-        return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;
-    }).join('');
+    const pages = Math.ceil(currentRows.length / PAGE_SIZE);
+    pg.innerHTML = pages <= 1 ? '' : Array.from({ length: pages }, (_, i) =>
+        `<button class="page ${i + 1 === currentPage ? 'active' : ''}" onclick="goPage(${i + 1})">${i + 1}</button>`).join('');
 }
 
-function buildCells(status, item, idx) {
-    const detailBtn = `<button class="btn-detail" onclick="showDetail(${item.id})">상세</button>`;
-    switch(status) {
-        case '변환중':
-            return [idx, item.name, item.marketId, item.account, item.regDate, detailBtn];
-        case '판매대기':
-            return [idx, item.name, item.marketId, item.itemId||'-', item.account, item.regDate, item.pendingDate||'-', item.expDate||'-', detailBtn];
-        case '판매중':
-            return [idx, item.name, item.marketId, item.itemId||'-', item.account, item.regDate, item.saleDate||'-', item.expDate||'-', detailBtn];
-        case '작품만료':
-            return [idx, item.name, item.marketId, item.itemId||'-', item.account, item.regDate, item.saleDate||'-', item.expDate||'-', detailBtn];
-        case '변환실패':
-            return [idx, item.name, item.marketId, item.account, item.regDate, item.failDate||'-', detailBtn];
-        case '마켓삭제':
-            return [idx, item.name, item.marketId, item.itemId||'-', item.account, item.regDate, item.saleDate||'-', item.deleteDate||'-', detailBtn];
-        default:
-            return [idx, item.name, detailBtn];
+function goPage(p) { currentPage = p; renderWorks(); }
+
+// ===== 판매 업데이트: 판매 대기 → 판매 중 =====
+function openSale() {
+    const targets = seasonWorks().filter(w => w.status === 'pending');
+    if (targets.length === 0) {
+        alert('판매 대기 중인 작품이 없습니다.');
+        return;
     }
+    if (!confirm(`판매 개시 하시겠습니까?\n\n판매 대기 ${targets.length}개 작품이 판매 중으로 전환되며, 유저가 구매할 수 있게 됩니다.`)) return;
+
+    const stamp = fmt(new Date());
+    targets.forEach(w => { w.status = 'selling'; w.saleDate = stamp; });
+    refreshSeason();
+    alert(`판매가 개시되었습니다. (${targets.length}개 작품)`);
 }
 
-// ===== DETAIL VIEW =====
+// ===== ③ 작품 상세 =====
+let currentWork = null;
+
+// 게시 만료일: 마켓 게시일 + 90일 23:59:59 (season_policy.html 3장)
+function expireDate(saleDate) {
+    if (!saleDate || saleDate === '-') return '-';
+    const d = new Date(saleDate.replace(' ', 'T'));
+    d.setDate(d.getDate() + 90);
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} 23:59:59`;
+}
+
 function showDetail(id) {
-    const allData = Object.values(mockData).flat();
-    const item = allData.find(d => d.id === id);
-    if (!item) return;
-
-    const statusBadgeMap = {
-        변환중: '<span class="status-badge converting">변환 중</span>',
-        판매대기: '<span class="status-badge pending">판매대기</span>',
-        판매중: '<span class="status-badge selling">판매 중</span>',
-        작품만료: '<span class="status-badge expired">작품만료</span>',
-        변환실패: '<span class="status-badge failed">변환실패</span>',
-        마켓삭제: '<span class="status-badge deleted">마켓삭제</span>'
-    };
-
-    const tagsHtml = (item.tags || []).map(t => `<span class="tag-chip">${t}</span>`).join('');
-
-    document.getElementById('detailInfo').innerHTML = `
-        <div class="detail-row">
-            <div class="detail-key">작품명</div>
-            <div class="detail-val" style="display:flex;align-items:center;gap:10px;">
-                ${item.name} ${statusBadgeMap[currentStatus] || ''}
-            </div>
-        </div>
-        <div class="detail-row">
-            <div class="detail-key">태그 관리</div>
-            <div class="detail-val"><div class="tag-chips">${tagsHtml || '-'}</div></div>
-        </div>
-        <div class="detail-row">
-            <div class="detail-key">마켓 ID</div>
-            <div class="detail-val">${item.marketId || '-'}</div>
-        </div>
-        <div class="detail-row">
-            <div class="detail-key">아이템 ID</div>
-            <div class="detail-val">${item.itemId || '-'}</div>
-        </div>
-        <div class="detail-row">
-            <div class="detail-key">어카운트넘버</div>
-            <div class="detail-val">${item.account}</div>
-        </div>
-        <div class="detail-row">
-            <div class="detail-key">등록 일시</div>
-            <div class="detail-val">${item.regDate}</div>
-        </div>
-        <div class="detail-row">
-            <div class="detail-key">마켓 게시예정일</div>
-            <div class="detail-val">${item.pendingDate || item.saleDate || '-'}</div>
-        </div>
-        <div class="detail-row">
-            <div class="detail-key">게시 만료일</div>
-            <div class="detail-val">${item.expDate || '-'}</div>
-        </div>
-    `;
-
-    document.getElementById('view-list').style.display = 'none';
-    document.getElementById('view-detail').style.display = 'block';
+    const w = seasonWorks().find(x => x.id === id);
+    if (!w) return;
+    currentWork = w;
+    const rows = [
+        ['작품명', `${w.name}<span class="status-pill">${STATUS[w.status]}</span>`],
+        ['태그 관리', w.tags.join(', ')],
+        ['컬러 관리', w.color],
+        ['마켓 ID', w.marketId],
+        ['어카운트 넘버', w.account],
+        ['아이템 ID', w.itemId],
+        ['투표 순위', w.rank === '-' ? '-' : `${w.rank}위`],
+        ['등록 일시', w.regDate],
+        ['마켓 게시 예정일', w.saleDate],
+        ['게시 만료일', expireDate(w.saleDate)]
+    ];
+    document.getElementById('detailRows').innerHTML = rows.map(([k, v]) => `
+        <div class="detail-row"><div class="detail-key">${k}</div><div class="detail-val">${v}</div></div>`).join('');
+    setCrumbs([['시즌 관리', 'showSeasons()'], [`시즌 ${currentSeason.no}`, 'showSeason()'], ['작품 상세']]);
+    showView('view-detail');
 }
 
-function showList() {
-    document.getElementById('view-detail').style.display = 'none';
-    document.getElementById('view-list').style.display = 'block';
+function previewVideo() {
+    alert(`[${currentWork.name}] 비디오 미리보기\n\n실제 화면에서는 작품 영상이 재생됩니다.`);
 }
 
-// ===== SEARCH =====
-function doSearch() {
-    const keyword = document.getElementById('searchInput').value.toLowerCase();
-    const type = document.getElementById('searchType').value;
-    const raw = mockData[currentStatus] || [];
-    currentData = keyword ? raw.filter(item => (item.name||'').toLowerCase().includes(keyword) || (item.account||'').toLowerCase().includes(keyword)) : raw;
-    renderTableFromData(currentData);
+// 관리자 수동 삭제 → 마켓 삭제 (season_policy.html 7장)
+function deleteFromMarket() {
+    const w = currentWork;
+    if (w.status === 'deleted') return alert('이미 마켓 삭제된 작품입니다.');
+    if (!confirm('이 작품을 마켓에서 삭제하시겠습니까?\n\n삭제하면 마켓에서 내려가며, 이미 지급된 인게임 아이템은 회수하지 않고 발자국 이펙트만 제거됩니다.')) return;
+    w.status = 'deleted';
+    refreshSeason();
+    showDetail(w.id);
+    alert('마켓에서 삭제되었습니다.');
 }
 
-function renderTableFromData(data) {
-    const config = tabStatusMap[currentStatus];
-    document.getElementById('resultCount').textContent = `조회 결과 : ${data.length}개`;
-    const tbody = document.getElementById('tableBody');
-    if (data.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="${config.columns.length}" style="padding:50px;color:#aaa;text-align:center;">검색 결과가 없습니다.</td></tr>`;
-        return;
-    }
-    tbody.innerHTML = data.map((item, i) => {
-        const cells = buildCells(currentStatus, item, i + 1);
-        return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;
-    }).join('');
-}
-
-// ===== MODAL =====
-function openModal(id) { document.getElementById(id).classList.add('active'); }
-function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-
-function onFileSelect(input, labelId) {
-    document.getElementById(labelId).textContent = input.files[0] ? input.files[0].name : '';
-}
-
-function executeUpload(type) {
-    const fileId = type === 'convert' ? 'convertFile' : 'saleFile';
-    const file = document.getElementById(fileId).files[0];
-    if (!file) return alert('업로드할 파일을 선택해주세요.');
-    alert(`[${file.name}] 업데이트가 완료되었습니다.`);
-    closeModal(type === 'convert' ? 'modalConvertFail' : 'modalSaleUpdate');
-}
-
-function downloadSample(type) {
-    let csv = type === 'convert'
-        ? '\uFEFF작품명,마켓ID,어카운트넘버\nfoot1,ASDF1234,123456\n'
-        : '\uFEFF작품명,마켓ID,아이템ID,어카운트넘버,마켓게시일\nfoot1,ASDF1234,ITEM001,123456,2026-04-01 22:00:00\n';
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
-    a.download = `sample_${type}.csv`;
-    a.click();
-}
-
+// ===== 리스트 다운로드 =====
 function downloadCSV() {
-    const data = currentData.length ? currentData : (mockData[currentStatus] || []);
-    const esc = v => `"${String(v||'-').replace(/"/g,'""')}"`;
-    const header = ['작품명','마켓ID','어카운트넘버','등록일시'].map(esc).join(',');
-    const rows = data.map(d => [d.name,d.marketId,d.account,d.regDate].map(esc).join(',')).join('\n');
+    const esc = v => `"${String(v ?? '-').replace(/"/g, '""')}"`;
+    const header = ['작품명', '마켓 ID', '어카운트 넘버', '아이템 ID', '투표 순위', '상태', '등록 일시', '판매 개시 일시'];
+    const rows = currentRows.map(w => [w.name, w.marketId, w.account, w.itemId, w.rank, STATUS[w.status], w.regDate, w.saleDate].map(esc).join(','));
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob(['\uFEFF' + header + '\n' + rows], { type:'text/csv;charset=utf-8;' }));
-    a.download = `ro_factory_${currentStatus}_list.csv`;
+    a.href = URL.createObjectURL(new Blob(['﻿' + header.map(esc).join(',') + '\n' + rows.join('\n')], { type: 'text/csv;charset=utf-8;' }));
+    a.download = `ro_factory_season${currentSeason.no}_${currentStatus}_list.csv`;
     a.click();
 }
 
 // ===== INIT =====
-window.onload = () => {
-    switchStatus('변환중');
-};
+showSeasons();
 </script>
 </body>
 </html>
