@@ -28,22 +28,21 @@ window.DescConfig = window.DescConfig || {};
 const STORAGE_PREFIX = window.DescConfig.storagePrefix || 'rofactory_';
 const GITHUB_REPO = window.DescConfig.githubRepo || 'wnguds1111/rofactory';
 const GITHUB_PATH = window.DescConfig.githubPath || 'description_module/desc-data.json';
-const FALLBACK_TOKEN_PARTS = window.DescConfig.githubTokenParts || ['ghp_Xxy', 'U1Po6oKHa', 'hLJyWS8t69', 'ooIzhpch0fgT4e'];
 const JSON_URL = window.DescConfig.jsonUrl || (window.descModuleBasePath + 'description_module/desc-data.json');
 
 // 로컬 스토리지에 저장된 잠금 상태 로드 (기본값: 잠금 상태인 true) — STORAGE_PREFIX 선언 이후여야 함
 window.isBuilderLocked = localStorage.getItem(STORAGE_PREFIX + "desc_panel_locked") !== 'false';
 
 
-// 허용된 관리자 IP 목록 (사용자 IP 및 로컬/사설 네트워크 환경 포함)
-const ALLOWED_IPS = ['119.192.146.202', 'localhost', '127.0.0.1', '::1'];
+// 편집 허용 IP (편집은 로컬 환경 또는 이 IP에서만 가능)
+const ALLOWED_IPS = ['119.192.146.202'];
 
 // 초기 권한 확인 및 스타일 처리
 window.permissionCheckPromise = (async function initPermission() {
-    // 일단 버튼을 기본적으로 보이지 않게 처리하는 스타일 동적 삽입
+    // 편집 자물쇠·토큰 버튼은 권한이 확인되기 전까지 숨김
     const styleEl = document.createElement('style');
     styleEl.id = 'desc-edit-lock-style';
-    styleEl.innerHTML = '#lockToggleBtn { display: none !important; }';
+    styleEl.innerHTML = '#lockToggleBtn, #tokenSettingBtn { display: none !important; }';
     document.head.appendChild(styleEl);
 
     const hostname = window.location.hostname;
@@ -58,11 +57,8 @@ window.permissionCheckPromise = (async function initPermission() {
 
     window.isLocalEnv = isLocal;
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const hasEditQuery = urlParams.has('edit') || urlParams.has('admin');
-    const hasSavedToken = !!localStorage.getItem(STORAGE_PREFIX + "github_token");
-
-    if (isLocal || hasEditQuery || hasSavedToken) {
+    // ?edit 쿼리나 저장된 토큰으로는 편집 권한을 주지 않음 (IP 기준으로만 판단)
+    if (isLocal) {
         window.hasEditPermission = true;
         if (styleEl.parentNode) styleEl.parentNode.removeChild(styleEl);
         return;
@@ -421,8 +417,10 @@ function saveBuilderMarks(re_render = true) {
 }
 
 // GitHub 자동 동기화 (저장 버튼 누르면 자동 실행)
+// 🔑 버튼으로 등록한 개인 토큰이 있을 때만 동기화. 토큰이 없으면 null(건너뜀)을 반환
 async function syncToGitHub() {
-    const token = localStorage.getItem(STORAGE_PREFIX + "github_token") || FALLBACK_TOKEN_PARTS.join('');
+    const token = localStorage.getItem(STORAGE_PREFIX + "github_token");
+    if (!token) return null;
 
     const apiUrl = 'https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + GITHUB_PATH;
     const headers = { 'Authorization': 'token ' + token, 'Content-Type': 'application/json' };
@@ -765,6 +763,8 @@ async function toggleLock() {
         if (window.isLocalEnv) {
             if (localOk && githubOk) {
                 alert('✅ 저장 완료! 로컬 파일 및 GitHub에 모두 반영되었습니다.');
+            } else if (localOk && githubOk === null) {
+                alert('✅ 저장 완료! 로컬 파일(desc-data.json, 기획 MD)에 반영되었습니다.\n* 운영 사이트에 반영하려면 커밋·푸시(배포)가 필요합니다.');
             } else if (localOk && !githubOk) {
                 alert('✅ 로컬 저장 완료! (단, GitHub 동기화는 실패했습니다. 토큰을 확인해주세요.)\n* 브라우저 로컬 스토리지 캐시가 초기화되고 서버 데이터로 갱신되었습니다.');
             } else {
@@ -773,6 +773,8 @@ async function toggleLock() {
         } else {
             if (githubOk) {
                 alert('✅ 저장 완료! GitHub에 정상 반영되었습니다.\n* 브라우저 로컬 스토리지 캐시가 초기화되고 서버 데이터로 갱신되었습니다.');
+            } else if (githubOk === null) {
+                alert('ℹ️ 브라우저 임시 저장 완료!\n운영 사이트에서 파일로 저장하려면 🔑 버튼으로 본인 GitHub 토큰을 등록하거나, 로컬 서버(npm start)에서 편집해 주세요.');
             } else {
                 alert('ℹ️ 브라우저 임시 저장 완료!\n(GitHub 동기화에는 실패했으나, 현재 브라우저의 로컬 스토리지에 안전하게 보관되었습니다. GitHub 토큰을 확인해주세요.)');
             }
@@ -819,22 +821,20 @@ document.addEventListener('mouseup', function (e) {
 });
 
 window.promptGithubToken = function() {
+    // 토큰은 GitHub 저장용일 뿐 편집 권한을 주지 않음 (편집 권한은 IP 기준)
+    if (!window.hasEditPermission) {
+        alert("편집 권한이 없습니다. (지정된 관리자 IP에서만 편집할 수 있습니다)");
+        return;
+    }
     const currentToken = localStorage.getItem(STORAGE_PREFIX + "github_token") || '';
-    const token = prompt("GitHub Personal Access Token (PAT)을 입력하세요:\n(입력 시 IP 제한 없이 기획 내용을 GitHub에 직접 저장할 수 있습니다. 비워두면 토큰이 삭제됩니다.)", currentToken);
-    
+    const token = prompt("GitHub Personal Access Token (PAT)을 입력하세요:\n(입력하면 저장 시 기획 내용이 GitHub에도 반영되어 다른 브라우저에서도 보입니다. 비워두면 토큰이 삭제됩니다.)", currentToken);
+
     if (token === null) return; // 취소 버튼 클릭 시 무시
-    
+
     const trimmed = token.trim();
     if (trimmed) {
         localStorage.setItem(STORAGE_PREFIX + "github_token", trimmed);
-        window.hasEditPermission = true;
-        
-        // 잠금 토글 버튼 보이기
-        const styleEl = document.getElementById('desc-edit-lock-style');
-        if (styleEl && styleEl.parentNode) {
-            styleEl.parentNode.removeChild(styleEl);
-        }
-        alert("GitHub 토큰이 저장되었습니다. 이제 자물쇠를 풀어 편집 및 저장을 하실 수 있습니다.");
+        alert("GitHub 토큰이 저장되었습니다. 이제 저장하면 GitHub에도 반영됩니다.");
     } else {
         localStorage.removeItem(STORAGE_PREFIX + "github_token");
         alert("GitHub 토큰이 삭제되었습니다.");
