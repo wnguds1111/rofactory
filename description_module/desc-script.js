@@ -419,6 +419,7 @@ function saveBuilderMarks(re_render = true) {
 // GitHub 자동 동기화 (저장 버튼 누르면 자동 실행)
 // 🔑 버튼으로 등록한 개인 토큰이 있을 때만 동기화. 토큰이 없으면 null(건너뜀)을 반환
 async function syncToGitHub() {
+    window.lastSyncError = '';
     const token = localStorage.getItem(STORAGE_PREFIX + "github_token");
     if (!token) return null;
 
@@ -427,9 +428,13 @@ async function syncToGitHub() {
 
     try {
         const getRes = await fetch(apiUrl, { headers });
-        if (getRes.status === 401 || getRes.status === 403) {
+        if (getRes.status === 401) {
             localStorage.removeItem(STORAGE_PREFIX + "github_token");
-            alert('토큰이 만료되었습니다. 다시 저장해주세요.');
+            window.lastSyncError = '토큰이 만료되었거나 올바르지 않습니다 (HTTP 401). 🔑 버튼으로 새 토큰을 등록해 주세요.';
+            return false;
+        }
+        if (!getRes.ok) {
+            window.lastSyncError = `GitHub 파일을 읽지 못했습니다 (HTTP ${getRes.status}). 토큰의 저장소 선택에 ${GITHUB_REPO}이(가) 포함됐는지 확인해 주세요.`;
             return false;
         }
         const sha = (await getRes.json()).sha;
@@ -444,9 +449,14 @@ async function syncToGitHub() {
             window.descAllPagesData = null; // 캐시 초기화
             return true;
         }
+        const err = await putRes.json().catch(() => ({}));
+        window.lastSyncError = (putRes.status === 403 || putRes.status === 404)
+            ? `GitHub에 쓸 권한이 없습니다 (HTTP ${putRes.status}${err.message ? ': ' + err.message : ''}). 토큰 권한에서 Contents를 "Read and write"로, 저장소를 ${GITHUB_REPO}로 설정해 주세요.`
+            : `GitHub 저장 실패 (HTTP ${putRes.status}${err.message ? ': ' + err.message : ''})`;
         return false;
     } catch (e) {
         console.error('sync error:', e);
+        window.lastSyncError = 'GitHub에 연결하지 못했습니다: ' + e.message;
         return false;
     }
 }
@@ -766,7 +776,7 @@ async function toggleLock() {
             } else if (localOk && githubOk === null) {
                 alert('✅ 저장 완료! 로컬 파일(desc-data.json, 기획 MD)에 반영되었습니다.\n* 운영 사이트에 반영하려면 커밋·푸시(배포)가 필요합니다.');
             } else if (localOk && !githubOk) {
-                alert('✅ 로컬 저장 완료! (단, GitHub 동기화는 실패했습니다. 토큰을 확인해주세요.)\n* 브라우저 로컬 스토리지 캐시가 초기화되고 서버 데이터로 갱신되었습니다.');
+                alert('✅ 로컬 저장 완료! (단, GitHub 동기화는 실패했습니다.)\n\n원인: ' + (window.lastSyncError || '알 수 없음'));
             } else {
                 alert('ℹ️ 브라우저 임시 저장 완료!\n(로컬 서버가 꺼져 있거나 권한 문제로 파일 저장 및 GitHub 동기화에는 실패했으나, 현재 브라우저의 로컬 스토리지에 안전하게 보관되었습니다.)');
             }
@@ -776,7 +786,7 @@ async function toggleLock() {
             } else if (githubOk === null) {
                 alert('ℹ️ 브라우저 임시 저장 완료!\n운영 사이트에서 파일로 저장하려면 🔑 버튼으로 본인 GitHub 토큰을 등록하거나, 로컬 서버(npm start)에서 편집해 주세요.');
             } else {
-                alert('ℹ️ 브라우저 임시 저장 완료!\n(GitHub 동기화에는 실패했으나, 현재 브라우저의 로컬 스토리지에 안전하게 보관되었습니다. GitHub 토큰을 확인해주세요.)');
+                alert('ℹ️ 브라우저 임시 저장 완료! (GitHub 동기화 실패)\n현재 브라우저의 로컬 스토리지에는 보관되었습니다.\n\n원인: ' + (window.lastSyncError || '알 수 없음'));
             }
         }
     }
