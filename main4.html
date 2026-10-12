@@ -1333,6 +1333,7 @@
             .nc-section-title { font-size: 22px; }
             .hero-content { left: 24px; right: 24px; max-width: 100%; }
             .hero-content h1 { font-size: 22px; }
+            .hero-period-badge { font-size: 13px; padding: 8px 14px; white-space: nowrap; }
             .nc-schedule-item { flex-direction: column; gap: 6px; }
             .nc-schedule-dt { width: 100%; }
             .nc-schedule-section { padding: 30px 20px; }
@@ -1410,7 +1411,7 @@
                                 나만의 발자국을 출품하고<br>라그나로크 공식 출시의 주인공이 되세요!
                             </h1>
                             <div class="hero-period-badge" id="mainHeroPeriod">
-                                <span><strong>접수 기간:</strong> 2026.08.18 ~ 10.31</span>
+                                <span><strong>접수 기간:</strong> 18.08.2026 ~ 31.10.2026</span>
                             </div>
                             <div style="display:flex; align-items:center; flex-wrap:wrap; gap:10px;">
                                 <a href="register.html" id="mainHeroPrimaryCta" class="btn-hero-primary" style="background:#2563eb;">
@@ -1515,7 +1516,7 @@
                             <div class="nc-schedule-item item-recruit">
                                 <dt class="nc-schedule-dt">모집 기간</dt>
                                 <dd class="nc-schedule-dd">
-                                    2026.08.18(화) ~ 2026.10.31(토)
+                                    18.08.2026 ~ 31.10.2026
                                 </dd>
                             </div>
 
@@ -1529,14 +1530,14 @@
                             <div class="nc-schedule-item item-vote">
                                 <dt class="nc-schedule-dt">투표 기간</dt>
                                 <dd class="nc-schedule-dd">
-                                    2026.11.01(일) ~ 2026.11.30(월)
+                                    01.11.2026 ~ 30.11.2026
                                 </dd>
                             </div>
 
                             <div class="nc-schedule-item item-result">
                                 <dt class="nc-schedule-dt">결과 발표 &amp; 출시</dt>
                                 <dd class="nc-schedule-dd">
-                                    2026.12.01(화) 공식 마켓 정식 출시
+                                    01.12.2026 공식 마켓 정식 출시
                                 </dd>
                             </div>
                         </dl>
@@ -1845,11 +1846,12 @@
                 heroTitle.innerHTML = '나만의 발자국을 출품하고<br>라그나로크 공식 출시의 주인공이 되세요!';
                 if (heroPeriod) {
                     heroPeriod.style.display = 'inline-flex';
-                    heroPeriod.innerHTML = '<span><strong>접수 기간:</strong> 2026.08.18 ~ 10.31</span>';
+                    heroPeriod.innerHTML = '<span><strong>접수 기간:</strong> 18.08.2026 ~ 31.10.2026</span>';
                     heroPeriod.style.borderColor = '#60a5fa';
                     heroPeriod.style.color = '#ffffff';
                     heroPeriod.style.boxShadow = '0 4px 18px rgba(0,0,0,0.35), 0 0 16px rgba(59, 130, 246, 0.35)';
                 }
+                heroPrimary.style.display = '';
                 heroPrimary.innerHTML = '발자국 등록하기 →';
                 heroPrimary.href = 'register.html';
                 heroPrimary.onclick = null;
@@ -1870,19 +1872,12 @@
                 heroTitle.innerHTML = '게임에 출시할 발자국을<br>직접 투표해주세요!';
                 if (heroPeriod) {
                     heroPeriod.style.display = 'inline-flex';
-                    heroPeriod.innerHTML = '<span><strong>투표 기간:</strong> 2026.11.01 ~ 11.30</span>';
+                    heroPeriod.innerHTML = '<span><strong>투표 기간:</strong> 01.11.2026 ~ 30.11.2026</span>';
                     heroPeriod.style.borderColor = '#c084fc';
                     heroPeriod.style.color = '#ffffff';
                     heroPeriod.style.boxShadow = '0 4px 18px rgba(0,0,0,0.35), 0 0 16px rgba(192, 132, 252, 0.35)';
                 }
-                heroPrimary.innerHTML = '발자국 투표 →';
-                heroPrimary.href = 'javascript:void(0);';
-                heroPrimary.onclick = function(e) {
-                    if (e) e.preventDefault();
-                    scrollToVoteSection();
-                    return false;
-                };
-                heroPrimary.style.background = '#2563eb';
+                heroPrimary.style.display = 'none';
 
                 renderVoteCards();
             } else if (phase === 'market') {
@@ -1902,19 +1897,13 @@
                 if (heroPeriod) {
                     heroPeriod.style.display = 'none';
                 }
+                heroPrimary.style.display = '';
                 heroPrimary.innerHTML = '당첨작 마켓 바로가기 →';
                 heroPrimary.href = 'market.html';
                 heroPrimary.onclick = null;
                 heroPrimary.style.background = '#16a34a';
 
                 renderMarketWinners();
-            }
-        }
-
-        function scrollToVoteSection() {
-            const blk = document.getElementById('seasonVoteBlock');
-            if (blk) {
-                blk.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
