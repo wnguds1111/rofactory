@@ -1141,8 +1141,8 @@
           "depth": 1,
           "title": "투표하기 (버튼)",
           "sub": "UTC+0 기준 일 1회 투표 가능\n- 비 로그인 상태 시 Alert(\"You can vote after logging in.\")\n- 정상 투표 시 Alert(\"Voting is complete.)\n\n\n- 투표 완료 시  투표 진행한 작품 투표하기 버튼 히든처리 이후 초기화 시 다시 노출",
-          "top": 724.5,
-          "left": 389,
+          "top": 975.5,
+          "left": 502,
           "selector": ""
         }
       ]
