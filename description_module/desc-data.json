@@ -1217,6 +1217,17 @@
           "top": 83.5,
           "left": 436,
           "selector": ""
+        },
+        {
+          "id": "id_1791768521067",
+          "num": 2,
+          "label": "2",
+          "depth": 0,
+          "title": "판매 개시",
+          "sub": "- 판매 대기 상품 판매 중 변환 버튼\n- 클릭 시 Confirm(\"Would you like to start sales?\"\n   [확인] 클릭 시 판매 중으로 이동",
+          "top": 179.5,
+          "left": 1739,
+          "selector": ""
         }
       ]
     },
