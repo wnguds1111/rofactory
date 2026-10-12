@@ -84,8 +84,12 @@
             display: block; padding: 10px 0; font-size: 15px; font-weight: 500;
             color: var(--ink); text-decoration: none;
         }
-        .menu-sub a:hover { color: var(--blue); }
-        .menu-sub a.active { color: var(--blue); }
+        .menu-sub a.active { color: var(--blue); cursor: pointer; }
+        /* 프로토타입: 시즌 관리 외 메뉴는 클릭 비활성화 */
+        .rail-item, .menu-head, .btn-logout, .menu-sub a:not(.active) { cursor: default; pointer-events: none; }
+        /* Description 패널: 이 페이지 글꼴(Noto Sans KR)이 넓어 헤더 버튼이 줄바꿈되지 않게 */
+        #pageDescPanel .pdp-header button { white-space: nowrap; }
+        #pageDescPanel .pdp-header > span { font-size: 16px !important; letter-spacing: 0.5px !important; }
 
         /* ===== MAIN ===== */
         .main { margin-left: 368px; padding: 42px 68px 60px 80px; min-width: 0; }
@@ -223,23 +227,23 @@
 
     <div class="sidebar-body">
         <nav class="rail">
-            <a class="rail-item" href="#">
+            <a class="rail-item">
                 <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7.5" r="4.5"/><path d="M3.5 21c0-4.4 3.8-7.5 8.5-7.5s8.5 3.1 8.5 7.5z"/></svg>
                 MEM
             </a>
-            <a class="rail-item" href="#">
+            <a class="rail-item">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 6h10a5 5 0 0 1 0 10h-1.5l-2 2h-3l-2-2H7A5 5 0 0 1 7 6zm0 3v2H5v2h2v2h2v-2h2v-2H9V9zm9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm2 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
                 GAME
             </a>
-            <a class="rail-item" href="#">
+            <a class="rail-item">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 2h6l-1.5 3h-3zM12 6c5 0 8 4.5 8 9 0 4-3 7-8 7s-8-3-8-7c0-4.5 3-9 8-9zm-.8 3.5v1.1c-1.5.3-2.4 1.3-2.4 2.5 0 1.5 1.2 2.1 2.6 2.4 1 .2 1.4.5 1.4.9 0 .5-.5.8-1.2.8-.8 0-1.4-.4-1.6-1l-1.4.4c.3 1 1.2 1.7 2.6 1.9v1.1h1.4v-1.1c1.5-.3 2.4-1.3 2.4-2.6 0-1.4-1-2.1-2.6-2.4-1-.2-1.4-.5-1.4-.9s.4-.7 1-.7c.7 0 1.1.3 1.3.8l1.4-.4c-.3-.9-1.1-1.5-2.1-1.7V9.5z"/></svg>
                 PAY
             </a>
-            <a class="rail-item active" href="#">
+            <a class="rail-item active">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                 WEB
             </a>
-            <a class="rail-item" href="#">
+            <a class="rail-item">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.1 12.9a7.3 7.3 0 0 0 0-1.8l2-1.6-2-3.4-2.4 1a7 7 0 0 0-1.6-.9L14.8 3.5h-4l-.4 2.6a7 7 0 0 0-1.6.9l-2.4-1-2 3.4 2 1.6a7.3 7.3 0 0 0 0 1.8l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 1.6.9l.4 2.6h4l.4-2.6a7 7 0 0 0 1.6-.9l2.4 1 2-3.4zM12.8 15.3a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6z"/></svg>
                 SET
             </a>
@@ -251,21 +255,21 @@
                 <button class="btn-logout">로그아웃</button>
             </div>
 
-            <div class="menu-group"><div class="menu-head" onclick="toggleMenu(this)">공통 관리<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
-            <div class="menu-group"><div class="menu-head" onclick="toggleMenu(this)">GNJOY 관리<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
-            <div class="menu-group"><div class="menu-head" onclick="toggleMenu(this)">라그나로크 제로<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            <div class="menu-group"><div class="menu-head">공통 관리<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            <div class="menu-group"><div class="menu-head">GNJOY 관리<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            <div class="menu-group"><div class="menu-head">라그나로크 제로<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
             <div class="menu-group open">
-                <div class="menu-head" onclick="toggleMenu(this)">RO FACTORY 관리<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="menu-head">RO FACTORY 관리<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
                 <div class="menu-sub">
-                    <a href="admin_banner.html">메인 관리</a>
-                    <a href="admin.html" class="active">시즌 관리</a>
-                    <a href="admin_purchase.html">구매 내역</a>
-                    <a href="admin_tag.html">태그 관리</a>
-                    <a href="admin_ticket.html">티켓 관리</a>
+                    <a>메인 관리</a>
+                    <a href="admin.html" class="active" onclick="showSeasons(); return false;">시즌 관리</a>
+                    <a>구매 내역</a>
+                    <a>태그 관리</a>
+                    <a>티켓 관리</a>
                 </div>
             </div>
-            <div class="menu-group"><div class="menu-head" onclick="toggleMenu(this)">GetPoring<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
-            <div class="menu-group"><div class="menu-head" onclick="toggleMenu(this)">유저 챌린지<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            <div class="menu-group"><div class="menu-head">GetPoring<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+            <div class="menu-group"><div class="menu-head">유저 챌린지<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div></div>
         </div>
     </div>
 </aside>
@@ -484,8 +488,6 @@ let currentStatus = 'all';
 let currentRows = [];
 let currentPage = 1;
 
-// ===== MENU =====
-function toggleMenu(head) { head.parentElement.classList.toggle('open'); }
 
 // ===== BREADCRUMB =====
 const SEP = '<span class="crumb-sep"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5"><polyline points="9 6 15 12 9 18"/></svg></span>';
@@ -707,5 +709,10 @@ function downloadCSV() {
 // ===== INIT =====
 showSeasons();
 </script>
+
+<!-- PRD DESCRIPTION INJECTION -->
+<script>window.currentPrdPageNum = 7;</script>
+<script src="description_module/desc-script.js?v=3.4"></script>
+<!-- // PRD DESCRIPTION INJECTION -->
 </body>
 </html>

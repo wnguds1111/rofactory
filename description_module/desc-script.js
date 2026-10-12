@@ -160,6 +160,13 @@ function getTargetKey() {
             const activePanel = document.querySelector('.studio-main .panel.active');
             if (activePanel) key = '3-' + activePanel.id.replace('panel-', '');
         }
+    } else if (key === '7') {
+        // admin.html: 시즌 목록 / 시즌 상세 / 작품 상세 화면별 Description
+        const view = ['seasons', 'season', 'detail'].find(v => {
+            const el = document.getElementById('view-' + v);
+            return el && el.style.display !== 'none';
+        });
+        key = '7-' + (view || 'seasons');
     } else if (key === '6') {
         // main4: 접수 / 투표 / 투표 종료 모드별 Description (?phase=)
         const phase = new URLSearchParams(window.location.search).get('phase');
