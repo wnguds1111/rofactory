@@ -1119,8 +1119,30 @@
           "depth": 1,
           "title": "투표 기간",
           "sub": "- 투표 기간 날짜는 관리자에서 설정된 시즌 날짜에 맞춰 자동 변환",
-          "top": 409.5,
-          "left": 411,
+          "top": 432.5,
+          "left": 407,
+          "selector": ""
+        },
+        {
+          "id": "id_1791765565395",
+          "num": 2,
+          "label": "2",
+          "depth": 0,
+          "title": "투표 영역",
+          "sub": "- 득표 수에 따라 리스트 순서 노출 변경\n- 투표 순에 따라 등수 노출",
+          "top": 674.5,
+          "left": 359,
+          "selector": ""
+        },
+        {
+          "id": "id_1791765752873",
+          "num": 2,
+          "label": "2-1",
+          "depth": 1,
+          "title": "투표하기 (버튼)",
+          "sub": "UTC+0 기준 일 1회 투표 가능\n- 비 로그인 상태 시 Alert(\"You can vote after logging in.\")\n- 정상 투표 시 Alert(\"Voting is complete.)\n\n\n- 투표 완료 시  투표 진행한 작품 투표하기 버튼 히든처리 이후 초기화 시 다시 노출",
+          "top": 724.5,
+          "left": 389,
           "selector": ""
         }
       ]
